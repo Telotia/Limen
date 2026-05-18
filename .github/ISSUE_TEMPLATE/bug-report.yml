@@ -1,0 +1,57 @@
+name: Bug report
+description: Something is broken or behaves unexpectedly
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: env
+    attributes:
+      label: Where did you see this?
+      options:
+        - Local dev (bun run dev)
+        - Dev preview (limen-dev worker)
+        - Production (telotia.com)
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: URL or page
+      placeholder: "e.g. https://limen-dev.<subdomain>.workers.dev/about"
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Mobile (iOS Safari)
+        - Mobile (Android Chrome)
+        - Other / N/A
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot or screen recording

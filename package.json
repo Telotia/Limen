@@ -1,0 +1,31 @@
+{
+  "name": "limen",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Telotia website (codename: Limen)",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:dev": "cross-env LIMEN_ENV=dev astro build",
+    "build:prod": "cross-env LIMEN_ENV=prod astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "bun test",
+    "hooks:install": "git config core.hooksPath .githooks",
+    "commitlint": "commitlint --edit",
+    "cf:deploy:dev": "bun run build:dev && bunx wrangler deploy",
+    "cf:deploy:production": "bun run build:prod && bunx wrangler deploy --env production"
+  },
+  "dependencies": {
+    "astro": "^6.3.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@types/bun": "^1.3.13",
+    "@types/node": "^25.7.0",
+    "cross-env": "^7.0.3",
+    "wrangler": "^4.90.1"
+  }
+}

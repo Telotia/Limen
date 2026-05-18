@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [dev, main]
+  push:
+    branches: [dev, main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-pr-title:
+    name: Lint PR title (conventional commits)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - uses: amannn/action-semantic-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          scopes: |
+            pages
+            layouts
+            components
+            styles
+            content
+            assets
+            config
+            ci
+            deps
+            docs
+            infra
+          requireScope: true
+          subjectPattern: ^[a-z].+[^.]$
+          subjectPatternError: |
+            The PR title must start with a lower-case letter and not end with a period.
+            Format: <type>(<scope>): <subject>
+            Example: feat(pages): add about page
+
+  test-and-build:
+    name: Test and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun test
+      - run: bun run build

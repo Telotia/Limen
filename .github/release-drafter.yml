@@ -1,0 +1,47 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+
+categories:
+  - title: 'Features'
+    rules:
+      - title: '/^feat(\(.+\))?(!)?: /'
+  - title: 'Fixes'
+    rules:
+      - title: '/^fix(\(.+\))?(!)?: /'
+  - title: 'Performance'
+    rules:
+      - title: '/^perf(\(.+\))?(!)?: /'
+  - title: 'Documentation'
+    rules:
+      - title: '/^docs(\(.+\))?(!)?: /'
+  - title: 'Refactors'
+    rules:
+      - title: '/^refactor(\(.+\))?(!)?: /'
+  - title: 'Chores'
+    rules:
+      - title: '/^(chore|style|test|build|ci|revert)(\(.+\))?(!)?: /'
+
+version-resolver:
+  major:
+    title:
+      - '/^[a-z]+(\(.+\))?!: /'
+  minor:
+    title:
+      - '/^feat(\(.+\))?: /'
+  patch:
+    title:
+      - '/^(fix|perf|docs|refactor|chore|style|test|build|ci|revert)(\(.+\))?: /'
+  default: patch
+
+change-template: '- $TITLE (#$NUMBER) @$AUTHOR'
+change-title-escapes: '\<*_&'
+
+exclude-labels:
+  - 'skip-changelog'
+
+template: |
+  ## What changed in $RESOLVED_VERSION
+
+  $CHANGES
+
+  **Full diff**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION

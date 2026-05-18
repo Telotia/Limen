@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+echo "pre-push: running test suite"
+bun test
+
+echo "pre-push: building"
+bun run build

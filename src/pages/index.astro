@@ -1,0 +1,133 @@
+---
+import devStatus from '../data/dev-status.json';
+
+const limenEnv = process.env.LIMEN_ENV ?? 'dev';
+const isProd = limenEnv === 'prod';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{isProd ? 'Telotia' : 'Limen — dev'}</title>
+    <meta
+      name="description"
+      content={isProd ? 'Telotia' : 'Limen development preview'}
+    />
+    {!isProd && <meta name="robots" content="noindex,nofollow" />}
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+        line-height: 1.5;
+      }
+      main {
+        max-width: 42rem;
+        width: 100%;
+      }
+      h1 {
+        font-size: clamp(2rem, 6vw, 3rem);
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        margin: 0 0 0.5rem;
+      }
+      p.lede {
+        color: color-mix(in srgb, currentColor 60%, transparent);
+        margin: 0;
+      }
+      section.status {
+        margin-top: 3rem;
+      }
+      section.status h2 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: color-mix(in srgb, currentColor 70%, transparent);
+        margin: 0 0 1rem;
+      }
+      ul.todos {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 0.5rem;
+      }
+      li.todo {
+        display: grid;
+        grid-template-columns: 1.5rem 1fr auto;
+        gap: 0.75rem;
+        align-items: baseline;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+        border-radius: 0.375rem;
+      }
+      li.todo[data-status='done'] {
+        opacity: 0.5;
+        text-decoration: line-through;
+      }
+      li.todo .marker {
+        font-family: ui-monospace, monospace;
+      }
+      li.todo .owner {
+        font-size: 0.75rem;
+        color: color-mix(in srgb, currentColor 60%, transparent);
+        font-family: ui-monospace, monospace;
+      }
+      footer {
+        margin-top: 3rem;
+        font-size: 0.75rem;
+        color: color-mix(in srgb, currentColor 50%, transparent);
+        font-family: ui-monospace, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      {
+        isProd ? (
+          <>
+            <h1>Telotia</h1>
+            <p class="lede">Coming soon.</p>
+          </>
+        ) : (
+          <>
+            <h1>Limen — development</h1>
+            <p class="lede">
+              Telotia website. Codename: Limen. This is the dev preview;
+              the production build at telotia.com shows only "Coming soon".
+            </p>
+
+            <section class="status">
+              <h2>Development status</h2>
+              <ul class="todos">
+                {devStatus.items.map((item) => (
+                  <li class="todo" data-status={item.status}>
+                    <span class="marker">
+                      {item.status === 'done' ? '[x]' : '[ ]'}
+                    </span>
+                    <span>{item.text}</span>
+                    <span class="owner">{item.owner ?? ''}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <footer>
+              limen-dev · see CONTRIBUTING.md for the branching model, conventional commits, and human action items.
+            </footer>
+          </>
+        )
+      }
+    </main>
+  </body>
+</html>

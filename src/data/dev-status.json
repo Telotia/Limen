@@ -1,0 +1,45 @@
+{
+  "_comment": "Edit freely. Add { text, status: 'todo' | 'done', owner?: '@handle' } items. Rendered on limen-dev only.",
+  "items": [
+    {
+      "text": "Add CLOUDFLARE_API_TOKEN repo secret (Settings → Secrets and variables → Actions)",
+      "status": "todo",
+      "owner": "@mohan"
+    },
+    {
+      "text": "Add CLOUDFLARE_ACCOUNT_ID repo secret (value: f39fc97d0e872ca3c6cad23b1a7561d6)",
+      "status": "todo",
+      "owner": "@mohan"
+    },
+    {
+      "text": "Add telotia.com as a zone in Cloudflare and point DNS at the limen Worker",
+      "status": "todo",
+      "owner": "@mohan"
+    },
+    {
+      "text": "Uncomment the routes block in wrangler.jsonc once the zone exists",
+      "status": "todo",
+      "owner": "@mohan"
+    },
+    {
+      "text": "Invite the two other programmers as Telotia/Limen collaborators",
+      "status": "todo",
+      "owner": "@mohan"
+    },
+    {
+      "text": "Brand identity, typography, color system",
+      "status": "todo",
+      "owner": "tbd"
+    },
+    {
+      "text": "Content pass 1 (homepage copy)",
+      "status": "todo",
+      "owner": "tbd"
+    },
+    {
+      "text": "Replace the Coming-Soon page with the real site",
+      "status": "todo",
+      "owner": "tbd"
+    }
+  ]
+}

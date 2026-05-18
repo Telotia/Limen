@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "limen-dev",
+  "account_id": "f39fc97d0e872ca3c6cad23b1a7561d6",
+  "compatibility_date": "2026-05-18",
+  "assets": {
+    "directory": "./dist"
+  },
+  "env": {
+    "production": {
+      "name": "limen"
+      // 🚧 [HUMAN] Uncomment after telotia.com is added as a zone in this Cloudflare account
+      //            and DNS is pointed at the limen Worker. See CONTRIBUTING.md → Deployment.
+      // "routes": [
+      //   { "pattern": "telotia.com/*", "zone_name": "telotia.com" }
+      // ]
+    }
+  }
+}
