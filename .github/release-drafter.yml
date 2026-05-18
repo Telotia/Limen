@@ -1,36 +1,52 @@
 name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
 
+autolabeler:
+  - label: 'breaking'
+    title:
+      - '/^[a-z]+(\(.+\))?!: /'
+  - label: 'feature'
+    title:
+      - '/^feat(\(.+\))?: /'
+  - label: 'fix'
+    title:
+      - '/^fix(\(.+\))?: /'
+  - label: 'performance'
+    title:
+      - '/^perf(\(.+\))?: /'
+  - label: 'documentation'
+    title:
+      - '/^docs(\(.+\))?: /'
+  - label: 'refactor'
+    title:
+      - '/^refactor(\(.+\))?: /'
+  - label: 'chore'
+    title:
+      - '/^(chore|style|test|build|ci|revert)(\(.+\))?: /'
+
 categories:
+  - title: 'Breaking changes'
+    labels: ['breaking']
   - title: 'Features'
-    rules:
-      - title: '/^feat(\(.+\))?(!)?: /'
+    labels: ['feature']
   - title: 'Fixes'
-    rules:
-      - title: '/^fix(\(.+\))?(!)?: /'
+    labels: ['fix']
   - title: 'Performance'
-    rules:
-      - title: '/^perf(\(.+\))?(!)?: /'
+    labels: ['performance']
   - title: 'Documentation'
-    rules:
-      - title: '/^docs(\(.+\))?(!)?: /'
+    labels: ['documentation']
   - title: 'Refactors'
-    rules:
-      - title: '/^refactor(\(.+\))?(!)?: /'
+    labels: ['refactor']
   - title: 'Chores'
-    rules:
-      - title: '/^(chore|style|test|build|ci|revert)(\(.+\))?(!)?: /'
+    labels: ['chore']
 
 version-resolver:
   major:
-    title:
-      - '/^[a-z]+(\(.+\))?!: /'
+    labels: ['breaking']
   minor:
-    title:
-      - '/^feat(\(.+\))?: /'
+    labels: ['feature']
   patch:
-    title:
-      - '/^(fix|perf|docs|refactor|chore|style|test|build|ci|revert)(\(.+\))?: /'
+    labels: ['fix', 'performance', 'documentation', 'refactor', 'chore']
   default: patch
 
 change-template: '- $TITLE (#$NUMBER) @$AUTHOR'
