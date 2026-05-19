@@ -4,19 +4,13 @@
   "account_id": "f39fc97d0e872ca3c6cad23b1a7561d6",
   "compatibility_date": "2026-05-18",
   "workers_dev": true,
-  "routes": [
-    { "pattern": "dev.telotia.com", "custom_domain": true }
-  ],
   "assets": {
     "directory": "./dist"
   },
   "env": {
     "production": {
       "name": "limen",
-      "workers_dev": false,
-      "routes": [
-        { "pattern": "telotia.com", "custom_domain": true }
-      ]
+      "workers_dev": false
     }
   }
 }

@@ -239,6 +239,8 @@ Hotfix PRs **do** require the conventional-commit title; this fix will show up i
 | `limen-dev` | top-level config, explicitly deployed with `--env=` | `https://dev.telotia.com` and `https://limen-dev.<subdomain>.workers.dev` debugging dashboard | Push to `dev` |
 | `limen` | `--env production` in `wrangler.jsonc` | `telotia.com` Worker Custom Domain | Push to `main` (release PR merge) |
 
+`dev.telotia.com` and `telotia.com` are managed as Worker Custom Domains in the Cloudflare dashboard, not as `routes` in `wrangler.jsonc`. This keeps GitHub Actions deploy tokens scoped to Worker code deployment instead of requiring route-management permissions on every deploy.
+
 ### Build differences
 
 `LIMEN_ENV=dev` renders the dev dashboard in `src/pages/index.astro`. `LIMEN_ENV=prod` renders only "Telotia — Coming soon" with `<meta name="robots" content="noindex,nofollow">` removed (prod is indexed; dev is not).
@@ -254,6 +256,8 @@ All Worker deploys go to Cloudflare account `f39fc97d0e872ca3c6cad23b1a7561d6`. 
 
 Both are repo secrets at *Settings → Secrets and variables → Actions*.
 
+If you add or change Worker Custom Domains through Wrangler later, the token will also need zone-level `Workers Routes:Edit` for `telotia.com`. The current CI path avoids that by keeping custom domains dashboard-managed.
+
 ### Domain owner/contact information
 
 🚧 **[HUMAN]** before this is real:
@@ -264,11 +268,11 @@ Both are repo secrets at *Settings → Secrets and variables → Actions*.
 
 ### Pointing `telotia.com` at production
 
-🚧 **[HUMAN]** before production can deploy cleanly:
+Production depends on this one-time Cloudflare dashboard setup:
 
 1. Add `telotia.com` as an active zone in the Cloudflare account.
-2. Ensure the `limen` Worker Custom Domain in `wrangler.jsonc` can be created for `telotia.com`.
-3. Merge `dev` into `main`; the next prod deploy will apply the `telotia.com` custom domain binding.
+2. In `Workers & Pages` → `limen` → `Settings` → `Domains & Routes`, attach the Worker Custom Domain `telotia.com`.
+3. Keep the custom domain in Cloudflare unless you intentionally move production elsewhere. GitHub Actions deploys Worker code and smoke-tests `https://telotia.com`; it does not recreate the custom domain on every deploy.
 
 ---
 
