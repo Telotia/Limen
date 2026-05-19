@@ -27,10 +27,9 @@ jobs:
       - run: bun test
       - run: bun run build:dev
       - name: Deploy to limen-dev Worker
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --env=
+        run: bunx wrangler deploy --env=
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       - name: Smoke test dev URL
         run: bun run smoke:dev
