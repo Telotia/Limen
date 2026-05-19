@@ -11,7 +11,10 @@
     "build:prod": "cross-env LIMEN_ENV=prod astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check": "astro check",
     "test": "bun test",
+    "smoke:dev": "bun scripts/smoke-url.ts https://dev.telotia.com \"Development dashboard\"",
+    "smoke:prod": "bun scripts/smoke-url.ts https://telotia.com \"Coming soon\"",
     "hooks:install": "git config core.hooksPath .githooks",
     "commitlint": "commitlint --edit",
     "cf:deploy:dev": "bun run build:dev && bunx wrangler deploy --env=",
@@ -21,11 +24,13 @@
     "astro": "^6.3.1"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
     "@types/bun": "^1.3.13",
     "@types/node": "^25.7.0",
     "cross-env": "^7.0.3",
+    "typescript": "^6.0.3",
     "wrangler": "^4.90.1"
   }
 }

@@ -1,4 +1,4 @@
-name: Release Drafter
+name: Update draft release notes
 
 on:
   push:
@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   update-draft:
+    name: Update draft release notes
     runs-on: ubuntu-latest
     permissions:
       contents: write

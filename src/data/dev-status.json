@@ -3,22 +3,22 @@
   "items": [
     {
       "text": "Add CLOUDFLARE_API_TOKEN repo secret (Settings → Secrets and variables → Actions)",
-      "status": "todo",
+      "status": "done",
       "owner": "@mohan"
     },
     {
       "text": "Add CLOUDFLARE_ACCOUNT_ID repo secret (value: f39fc97d0e872ca3c6cad23b1a7561d6)",
-      "status": "todo",
+      "status": "done",
       "owner": "@mohan"
     },
     {
       "text": "Set Cloudflare Registrar owner/contact email for telotia.com, telotia.ca, and telotia.ai to hello@telotia.com",
-      "status": "todo",
+      "status": "done",
       "owner": "@mohan"
     },
     {
       "text": "Add telotia.com as an active Cloudflare zone for the limen production Worker custom domain",
-      "status": "todo",
+      "status": "done",
       "owner": "@mohan"
     },
     {

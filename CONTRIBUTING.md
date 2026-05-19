@@ -107,7 +107,7 @@ bun run hooks:install
 `hooks:install` points `core.hooksPath` at `.githooks/`, enabling:
 
 - **`commit-msg`** — lints your commit message via commitlint (matches what CI will check on your PR title)
-- **`pre-push`** — runs `bun test` and `bun run build` before push
+- **`pre-push`** — runs `bun run check`, `bun test`, `bun run build:dev`, and `bun run build:prod` before push
 
 If a hook ever needs bypassing (rare), use `--no-verify`. Don't make a habit of it.
 
@@ -141,8 +141,10 @@ git push -u origin feature/your-change-here
 This is the team rule. Specifically:
 
 - [ ] `bun run dev` renders without warnings in the browser console
-- [ ] `bun run build` succeeds
+- [ ] `bun run check` succeeds
 - [ ] `bun test` is green
+- [ ] `bun run build:dev` succeeds
+- [ ] `bun run build:prod` succeeds
 - [ ] You've checked the page in mobile width (DevTools → device toolbar)
 
 ---
@@ -161,12 +163,12 @@ Or open one in the UI. The PR template will load automatically. Required:
 The PR triggers:
 
 1. **PR title lint** (`amannn/action-semantic-pull-request`) — must match conventional commits with a valid scope
-2. **Test + build** (`bun install`, `bun test`, `bun run build`)
-3. **Release-drafter** updates the draft release with your PR's title
+2. **Validate** (`bun install`, `bun run check`, `bun test`, dev/prod builds, and Cloudflare deploy dry-runs)
+3. **Update draft release notes** updates the draft release with your PR's title
 
 You merge using **Squash and merge**. The squash commit message defaults to the PR title, which preserves the conventional-commit format on dev's history.
 
-After merge, the dev preview at `limen-dev.<subdomain>.workers.dev` updates within ~60 seconds.
+After merge, `Deploy dev` pushes the debug dashboard to `dev.telotia.com` and smoke-tests the URL.
 
 ---
 
@@ -186,9 +188,10 @@ When merged, the release PR uses **Merge commit** (not squash) so every individu
 
 Merging the release PR triggers `deploy-prod.yml`:
 
-1. `release-drafter` publishes the existing draft → creates the tag `vX.Y.Z` and a GitHub Release with categorized notes
-2. `bun run build:prod` builds with `LIMEN_ENV=prod` (no dev dashboard, just "Coming soon")
-3. `wrangler deploy --env production` ships the `limen` Worker
+1. `bun run check`, `bun test`, and `bun run build:prod` validate the release
+2. `wrangler deploy --env production` ships the `limen` Worker
+3. `bun run smoke:prod` checks `https://telotia.com`
+4. `release-drafter` publishes the existing draft → creates the tag `vX.Y.Z` and a GitHub Release with categorized notes
 
 The new release appears at `https://github.com/Telotia/Limen/releases` — this is your team's running record of what shipped when, and intentionally so.
 
@@ -292,13 +295,16 @@ When the real site is ready, delete this JSON file and replace the whole page.
 ```sh
 # Development
 bun run dev                          # local dev server (localhost:4321)
-bun run build                        # production-style build (no LIMEN_ENV set → dev page)
+bun run check                        # Astro type/content check
+bun run build                        # default Astro build (no LIMEN_ENV set → dev page)
 bun run build:dev                    # explicit dev build (with dashboard)
 bun run build:prod                   # explicit prod build (Coming soon only)
 bun run preview                      # preview the last build
 
 # Testing
 bun test                             # run the test suite
+bun run smoke:dev                    # smoke-test dev.telotia.com
+bun run smoke:prod                   # smoke-test telotia.com
 
 # Hooks
 bun run hooks:install                # enable .githooks/ (one-time per clone)
