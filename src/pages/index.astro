@@ -23,7 +23,7 @@ const flowSteps = [
       'Open a release PR from dev into main.',
       'Use a conventional release PR title.',
       'Merge commit into main to preserve dev history.',
-      'Main publishes a GitHub release, then deploys telotia.com.',
+      'Main deploys telotia.com, smoke-tests it, then publishes a GitHub release.',
     ],
   },
   {
@@ -40,13 +40,21 @@ const flowSteps = [
 const commandGroups = [
   {
     title: 'Local',
-    commands: ['bun install', 'bun run dev', 'bun test', 'bun run build'],
+    commands: [
+      'bun install',
+      'bun run dev',
+      'bun run check',
+      'bun test',
+      'bun run build:dev',
+      'bun run build:prod',
+    ],
   },
   {
     title: 'Cloudflare',
     commands: [
+      'bun run smoke:dev',
       'bun run cf:deploy:dev',
-      'bun run build:prod',
+      'bun run smoke:prod',
       'bunx wrangler deploy --env production --dry-run',
     ],
   },

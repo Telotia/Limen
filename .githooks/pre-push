@@ -5,7 +5,9 @@ repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
 echo "pre-push: running test suite"
+bun run check
 bun test
 
-echo "pre-push: building"
-bun run build
+echo "pre-push: building dev and production"
+bun run build:dev
+bun run build:prod

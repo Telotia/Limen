@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   release-and-deploy:
+    name: Deploy and release
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -21,24 +22,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Publish release (tag + GitHub Release with categorized notes)
-        id: release
-        uses: release-drafter/release-drafter@v6
-        with:
-          publish: true
-          commitish: main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
 
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: 1.3.14
 
       - run: bun install --frozen-lockfile
+
+      - run: bun run check
 
       - run: bun test
 
@@ -50,3 +44,15 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy --env production
+
+      - name: Smoke test production URL
+        run: bun run smoke:prod
+
+      - name: Publish release (tag + GitHub Release with categorized notes)
+        id: release
+        uses: release-drafter/release-drafter@v6
+        with:
+          publish: true
+          commitish: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
