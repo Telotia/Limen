@@ -14,7 +14,7 @@
     "test": "bun test",
     "hooks:install": "git config core.hooksPath .githooks",
     "commitlint": "commitlint --edit",
-    "cf:deploy:dev": "bun run build:dev && bunx wrangler deploy",
+    "cf:deploy:dev": "bun run build:dev && bunx wrangler deploy --env=",
     "cf:deploy:production": "bun run build:prod && bunx wrangler deploy --env production"
   },
   "dependencies": {
