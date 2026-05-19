@@ -38,8 +38,8 @@ feature/* ──PR──► dev ──release PR──► main
 | Branch | Who pushes | Merge style | Reviews required | What deploys |
 |--------|------------|-------------|------------------|--------------|
 | `feature/*` | Any developer | — | — | Nothing |
-| `dev` | Via PR only | **Squash** (one conventional commit per merge) | None (CI green required) | `limen-dev` Worker |
-| `main` | Via release PR only | **Merge commit** (preserves dev's history) | 1 approval (admin can bypass during bootstrap) | `limen` Worker + tag + GitHub Release |
+| `dev` | Via PR only | **Squash** (one conventional commit per merge) | None (CI green required) | `limen-dev` Worker debug page |
+| `main` | Via release PR only | **Merge commit** (preserves dev's history) | 1 approval (admin can bypass during bootstrap) | `limen` Worker at `telotia.com` + tag + GitHub Release |
 
 Direct push to `dev` and `main` is blocked by branch protection. Force-push and deletion are blocked on both.
 
@@ -233,8 +233,8 @@ Hotfix PRs **do** require the conventional-commit title; this fix will show up i
 
 | Worker name | Environment flag | Where it deploys | Trigger |
 |-------------|------------------|------------------|---------|
-| `limen-dev` | (default in `wrangler.jsonc`) | `https://limen-dev.<subdomain>.workers.dev` | Push to `dev` |
-| `limen` | `--env production` in `wrangler.jsonc` | (eventually `telotia.com`; currently `https://limen.<subdomain>.workers.dev`) | Push to `main` (release PR merge) |
+| `limen-dev` | top-level config, explicitly deployed with `--env=` | `https://dev.telotia.com` and `https://limen-dev.<subdomain>.workers.dev` debugging dashboard | Push to `dev` |
+| `limen` | `--env production` in `wrangler.jsonc` | `telotia.com` Worker Custom Domain | Push to `main` (release PR merge) |
 
 ### Build differences
 
@@ -251,14 +251,21 @@ All Worker deploys go to Cloudflare account `f39fc97d0e872ca3c6cad23b1a7561d6`. 
 
 Both are repo secrets at *Settings → Secrets and variables → Actions*.
 
-### Pointing `telotia.com` at production
+### Domain owner/contact information
 
 🚧 **[HUMAN]** before this is real:
 
-1. Add `telotia.com` as a zone in the Cloudflare account
-2. Point DNS at the `limen` Worker (Workers Routes will let you add the route via dashboard)
-3. Uncomment the `routes` block in `wrangler.jsonc` under `env.production`
-4. Tag a release; on next prod deploy, the route binding will be applied
+1. Set the Cloudflare Registrar owner/registrant contact email for `telotia.com`, `telotia.ca`, and `telotia.ai` to `hello@telotia.com`.
+2. Watch for Cloudflare approval emails. Email/contact changes can require approval from the current and new registrant addresses.
+3. Decide whether to opt out of the 60-day transfer lock when Cloudflare presents that option during approval.
+
+### Pointing `telotia.com` at production
+
+🚧 **[HUMAN]** before production can deploy cleanly:
+
+1. Add `telotia.com` as an active zone in the Cloudflare account.
+2. Ensure the `limen` Worker Custom Domain in `wrangler.jsonc` can be created for `telotia.com`.
+3. Merge `dev` into `main`; the next prod deploy will apply the `telotia.com` custom domain binding.
 
 ---
 
@@ -297,7 +304,7 @@ bun test                             # run the test suite
 bun run hooks:install                # enable .githooks/ (one-time per clone)
 
 # Cloudflare (rarely needed — workflows handle this)
-bun run cf:deploy:dev                # manual dev deploy (needs local wrangler login)
+bun run cf:deploy:dev                # manual dev debug-page deploy (needs local wrangler login)
 bun run cf:deploy:production         # manual prod deploy
 ```
 
@@ -340,7 +347,7 @@ These can't be automated. Grep the repo for `🚧 [HUMAN]` to find them all at o
 | Add `CLOUDFLARE_API_TOKEN` repo secret | Settings → Secrets → Actions | @mohan |
 | Add `CLOUDFLARE_ACCOUNT_ID` repo secret (value `f39fc97d0e872ca3c6cad23b1a7561d6`) | Settings → Secrets → Actions | @mohan |
 | Invite the two other programmers as repo collaborators | Settings → Collaborators and teams | @mohan |
-| Add `telotia.com` as a Cloudflare zone, point DNS at `limen` Worker | Cloudflare dashboard | @mohan |
-| Uncomment the `routes` block in `wrangler.jsonc` once the zone exists | `wrangler.jsonc` | any dev |
+| Set owner/registrant contact email for `telotia.com`, `telotia.ca`, and `telotia.ai` to `hello@telotia.com` | Cloudflare Registrar | @mohan |
+| Add `telotia.com` as an active Cloudflare zone for the `limen` Worker Custom Domain | Cloudflare dashboard | @mohan |
 | Add a `team-reviewers` group and CODEOWNERS file once there are ≥2 reviewers besides PR author | `.github/CODEOWNERS` + repo settings | @mohan |
 | **Long-term:** migrate Cloudflare ownership from personal account to a Telotia-owned account when SDPS provides one | Cloudflare dashboard | @mohan |
