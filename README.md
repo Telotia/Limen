@@ -18,7 +18,7 @@ bun run dev             # http://localhost:4321
 ## What you're shipping
 
 - **Production** → `limen` Worker → `telotia.com` (shows only "Coming soon" until launch)
-- **Dev preview** → `limen-dev` Worker → `limen-dev.<subdomain>.workers.dev` (shows the development dashboard)
+- **Dev preview** → `limen-dev` Worker → `dev.telotia.com` and `limen-dev.<subdomain>.workers.dev` (shows the debugging dashboard)
 
 Same Astro page, two builds. The `LIMEN_ENV` env var switches between them.
 

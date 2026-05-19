@@ -12,13 +12,23 @@
       "owner": "@mohan"
     },
     {
-      "text": "Add telotia.com as a zone in Cloudflare and point DNS at the limen Worker",
+      "text": "Set Cloudflare Registrar owner/contact email for telotia.com, telotia.ca, and telotia.ai to hello@telotia.com",
       "status": "todo",
       "owner": "@mohan"
     },
     {
-      "text": "Uncomment the routes block in wrangler.jsonc once the zone exists",
+      "text": "Add telotia.com as an active Cloudflare zone for the limen production Worker custom domain",
       "status": "todo",
+      "owner": "@mohan"
+    },
+    {
+      "text": "Deploy limen-dev to the Cloudflare workers.dev debug page",
+      "status": "done",
+      "owner": "@mohan"
+    },
+    {
+      "text": "Add dev.telotia.com as the custom domain for the limen-dev debug page",
+      "status": "done",
       "owner": "@mohan"
     },
     {
