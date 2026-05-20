@@ -559,18 +559,10 @@ const repos = [
       }
 
       .tel-hero::before {
-        /*
-         * Two faint repeating layers for the dim star mass — incommensurate
-         * sizes prevent obvious grid rhythm. Individual bright/cross stars
-         * come from an SVG at cover size (no tiling), giving true irregular
-         * placement for all visually distinct points.
-         */
         background:
-          /* dim base — majority of star count, spacing creates subtle variation */
           radial-gradient(circle, #ffffff06 0.22px, transparent 0.42px),
           radial-gradient(circle, #ffffff09 0.26px, transparent 0.48px),
           radial-gradient(circle, #ffffff0c 0.30px, transparent 0.54px),
-          /* individual bright + cross-stars at organic positions, no tiling */
           url('/assets/principia/stars.svg');
         background-size:
           71px 67px,
@@ -596,6 +588,10 @@ const repos = [
           10% / min(820px, 78vw) auto no-repeat;
         mask: url('/assets/principia/constellation-bg.svg') right 6% top 10% /
           min(820px, 78vw) auto no-repeat;
+      }
+
+      html[data-theme="night"] .tel-hero::after {
+        display: none;
       }
 
       .pull-id {
@@ -779,8 +775,17 @@ const repos = [
         padding: 88px 0;
       }
 
+      .tel-section::before {
+        position: absolute;
+        inset: -220px 0;
+        content: '';
+        pointer-events: none;
+        opacity: 0;
+      }
+
       .tel-container {
         position: relative;
+        z-index: 1;
         width: calc(100% - 32px);
         max-width: 1180px;
         margin: 0 auto;
@@ -1048,6 +1053,254 @@ const repos = [
         color: var(--ink-2);
         font-family: var(--font-mono);
         font-size: 13px;
+      }
+
+      .norma-download-block {
+        position: relative;
+        z-index: 1;
+        min-height: 460px;
+        margin-top: 56px;
+        overflow: hidden;
+        isolation: isolate;
+        border: 1px solid rgb(216 214 232 / 0.14);
+        border-radius: 28px;
+        background:
+          radial-gradient(circle at 78% 44%, rgba(73, 139, 255, 0.18), transparent 28rem),
+          #020308;
+        box-shadow: var(--shadow-night);
+        color: #fff;
+        cursor: none;
+      }
+
+      .norma-download-block::before {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        content: '';
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 16% 52%, rgba(0, 0, 0, 0.60), transparent 18rem),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.74) 0%, rgba(0, 0, 0, 0.28) 42%, transparent 76%);
+      }
+
+      .norma-ripple-canvas {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .norma-download-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        min-height: 460px;
+        width: min(640px, 52%);
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(34px, 6vw, 76px);
+        color: inherit;
+      }
+
+      .norma-download-content::before {
+        position: absolute;
+        inset: clamp(24px, 4.5vw, 52px) clamp(18px, 3.4vw, 40px);
+        z-index: -1;
+        content: '';
+        pointer-events: none;
+        border-radius: 22px;
+        opacity: 0;
+      }
+
+      .norma-download-title {
+        max-width: 13ch;
+        color: currentColor;
+        font-family: var(--font-sans);
+        font-size: clamp(40px, 5.6vw, 64px);
+        font-weight: 500;
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .norma-download-copy {
+        max-width: 26rem;
+        margin-top: 18px;
+        color: rgba(255, 255, 255, 0.70);
+        font-size: 15px;
+        line-height: 1.55;
+      }
+
+      .norma-download-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 30px;
+      }
+
+      .norma-download-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 24px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        font-family: var(--font-sans);
+        font-size: 15px;
+        font-weight: 520;
+        line-height: 1;
+        text-decoration: none;
+        transition:
+          transform 140ms var(--ease-paper),
+          border-color 140ms var(--ease-paper),
+          background 140ms var(--ease-paper),
+          color 140ms var(--ease-paper);
+      }
+
+      .norma-download-button:hover,
+      .norma-download-button:focus-visible {
+        transform: translateY(-1px);
+      }
+
+      .norma-download-button--primary {
+        color: #03040a;
+        background: rgba(255, 255, 255, 0.96);
+      }
+
+      .norma-download-button--secondary {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.16);
+      }
+
+      .norma-platform-note {
+        margin-top: 18px;
+        color: rgba(255, 255, 255, 0.46);
+        font-family: var(--font-mono);
+        font-size: 11px;
+      }
+
+      .norma-cursor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        width: 56px;
+        height: 66px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate3d(-999px, -999px, 0);
+        transition: opacity 120ms var(--ease-paper);
+        filter:
+          drop-shadow(0 0 8px rgba(20, 86, 255, 0.72))
+          drop-shadow(0 0 18px rgba(41, 133, 255, 0.46));
+      }
+
+      .norma-download-block[data-pointer='inside'] .norma-cursor {
+        opacity: 1;
+      }
+
+      .norma-cursor svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow: visible;
+      }
+
+      .norma-cursor-line {
+        stroke: rgba(7, 74, 255, 0.98);
+        stroke-width: 2.7;
+        stroke-linejoin: round;
+        filter:
+          drop-shadow(0 0 4px rgba(7, 74, 255, 0.88))
+          drop-shadow(0 0 10px rgba(55, 137, 255, 0.54));
+        animation: norma-line-shimmer 5.4s ease-in-out infinite;
+      }
+
+      .norma-cursor-line-glint {
+        stroke: rgba(250, 253, 255, 0.92);
+        stroke-width: 1;
+        stroke-linejoin: round;
+      }
+
+      .norma-cursor-star {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: norma-star-twinkle 4.4s ease-in-out infinite;
+      }
+
+      .norma-cursor-burst {
+        stroke: rgba(250, 253, 255, 0.98);
+        stroke-width: 1.55;
+        stroke-linecap: round;
+        transform-box: fill-box;
+        transform-origin: center;
+        filter: drop-shadow(0 0 5px rgba(19, 96, 255, 0.62));
+        animation: norma-burst-twinkle 4.4s ease-in-out infinite;
+      }
+
+      .norma-cursor-star:nth-of-type(1),
+      .norma-cursor-burst:nth-of-type(1) {
+        animation-delay: -0.2s;
+      }
+
+      .norma-cursor-star:nth-of-type(2),
+      .norma-cursor-burst:nth-of-type(2) {
+        animation-delay: -0.76s;
+      }
+
+      .norma-cursor-star:nth-of-type(3),
+      .norma-cursor-burst:nth-of-type(3) {
+        animation-delay: -1.18s;
+      }
+
+      .norma-cursor-star:nth-of-type(4),
+      .norma-cursor-burst:nth-of-type(4) {
+        animation-delay: -1.54s;
+      }
+
+      .norma-cursor-star:nth-of-type(5),
+      .norma-cursor-burst:nth-of-type(5) {
+        animation-delay: -0.42s;
+      }
+
+      @keyframes norma-star-twinkle {
+        0%,
+        100% {
+          opacity: 0.86;
+          transform: scale(0.92);
+        }
+
+        46% {
+          opacity: 1;
+          transform: scale(1.34);
+        }
+      }
+
+      @keyframes norma-burst-twinkle {
+        0%,
+        100% {
+          opacity: 0.30;
+          transform: scale(0.50) rotate(0deg);
+        }
+
+        46% {
+          opacity: 1;
+          transform: scale(1.52) rotate(8deg);
+        }
+      }
+
+      @keyframes norma-line-shimmer {
+        0%,
+        100% {
+          opacity: 0.82;
+        }
+
+        48% {
+          opacity: 1;
+        }
       }
 
       .assessment-grid {
@@ -1334,10 +1587,6 @@ const repos = [
 
       html[data-theme="night"] .tel-hero {
         min-height: calc(100vh - 58px);
-      }
-
-      html[data-theme="night"] .tel-hero::after {
-        display: none;
       }
 
       html[data-theme="night"] .tel-hero-inner {
@@ -2042,21 +2291,21 @@ const repos = [
 
       :global(.paper-watermark) {
         fill: none;
-        stroke: rgb(112 132 166 / 0.34);
-        stroke-width: 0.75;
+        stroke: rgb(112 132 166 / 0.16);
+        stroke-width: 5;
         stroke-linecap: round;
         stroke-linejoin: round;
-        stroke-dasharray: 1 18;
-        opacity: var(--watermark-opacity, 0.24);
+        opacity: var(--watermark-opacity, 0.08);
+        filter: blur(6px);
       }
 
       :global(.moon-orbit) {
         fill: none;
-        stroke: rgb(103 130 178 / 0.34);
+        stroke: rgb(103 130 178 / 0.26);
         stroke-width: 0.7;
         stroke-linecap: round;
         stroke-dasharray: 2 22;
-        opacity: var(--orbit-opacity, 0.18);
+        opacity: var(--orbit-opacity, 0.12);
       }
 
       :global(.prism-streak) {
@@ -2200,11 +2449,6 @@ const repos = [
           radial-gradient(ellipse at 82% 8%, rgba(47, 111, 168, 0.22), transparent 31rem),
           radial-gradient(ellipse at 14% 18%, rgba(16, 42, 107, 0.10), transparent 27rem),
           radial-gradient(ellipse at 68% 36%, rgba(89, 144, 192, 0.16), transparent 36rem),
-          radial-gradient(ellipse 24rem 7rem at 18% 66%, rgba(174, 190, 246, 0.16), transparent 76%),
-          radial-gradient(ellipse 34rem 8rem at 78% 72%, rgba(200, 176, 237, 0.22), transparent 74%),
-          radial-gradient(ellipse 26rem 6rem at 34% 82%, rgba(226, 190, 226, 0.20), transparent 76%),
-          radial-gradient(ellipse 32rem 8rem at 72% 88%, rgba(247, 184, 205, 0.22), transparent 76%),
-          radial-gradient(ellipse 22rem 5rem at 18% 94%, rgba(255, 218, 230, 0.18), transparent 78%),
           linear-gradient(
             180deg,
             #fbfdff 0%,
@@ -2217,29 +2461,50 @@ const repos = [
       }
 
       html[data-theme="daylight"] .tel-page::before {
-        opacity: 0.5;
+        opacity: 0.42;
         background:
           radial-gradient(circle, rgba(16, 42, 107, 0.14) 0.34px, transparent 0.82px),
           radial-gradient(circle, rgba(47, 111, 168, 0.10) 0.48px, transparent 0.94px),
-          radial-gradient(circle, rgba(200, 176, 237, 0.11) 0.42px, transparent 0.9px);
+          radial-gradient(circle, rgba(104, 132, 174, 0.08) 0.42px, transparent 0.9px);
         background-size: 118px 108px, 219px 197px, 349px 311px;
         background-position: 0 0, 61px 37px, 171px 93px;
         mix-blend-mode: multiply;
       }
 
       html[data-theme="daylight"] .tel-page::after {
-        opacity: 0.82;
+        opacity: 0.62;
         background:
-          radial-gradient(circle at 50% 16%, rgba(120, 174, 230, 0.14), transparent 26rem),
-          radial-gradient(circle at 8% 48%, rgba(47, 111, 168, 0.06), transparent 24rem),
-          radial-gradient(ellipse 30rem 6rem at 72% 60%, rgba(153, 133, 224, 0.19), transparent 72%),
-          radial-gradient(ellipse 25rem 5rem at 22% 72%, rgba(218, 171, 222, 0.17), transparent 72%),
-          radial-gradient(ellipse 34rem 7rem at 84% 82%, rgba(247, 184, 205, 0.19), transparent 74%),
-          radial-gradient(ellipse 20rem 4rem at 44% 92%, rgba(255, 207, 224, 0.17), transparent 72%),
-          linear-gradient(112deg, transparent 0 54%, rgba(179, 215, 250, 0.12) 56%, transparent 61%),
-          linear-gradient(104deg, transparent 0 64%, rgba(209, 190, 242, 0.20) 67%, transparent 72%),
-          linear-gradient(118deg, transparent 0 76%, rgba(255, 217, 228, 0.20) 79%, transparent 84%);
+          radial-gradient(ellipse at 50% 16%, rgba(120, 174, 230, 0.12), transparent 26rem),
+          radial-gradient(ellipse at 8% 48%, rgba(47, 111, 168, 0.05), transparent 24rem);
+        filter: blur(3px);
         mix-blend-mode: multiply;
+      }
+
+      html[data-theme="daylight"] #vocabulary::before,
+      html[data-theme="daylight"] #install::before,
+      html[data-theme="daylight"] #assessment::before {
+        z-index: 0;
+        opacity: 1;
+        mix-blend-mode: multiply;
+        mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 76%, transparent 100%);
+      }
+
+      html[data-theme="daylight"] #vocabulary::before {
+        background:
+          radial-gradient(ellipse 25rem 62rem at 88% 50%, rgba(154, 128, 229, 0.20), rgba(154, 128, 229, 0.09) 40%, transparent 74%),
+          radial-gradient(ellipse 16rem 52rem at 92% 52%, rgba(118, 145, 226, 0.08), transparent 78%);
+      }
+
+      html[data-theme="daylight"] #install::before {
+        background:
+          radial-gradient(ellipse 26rem 64rem at 12% 52%, rgba(237, 171, 213, 0.20), rgba(237, 171, 213, 0.09) 42%, transparent 74%),
+          radial-gradient(ellipse 17rem 54rem at 8% 54%, rgba(213, 158, 224, 0.08), transparent 78%);
+      }
+
+      html[data-theme="daylight"] #assessment::before {
+        background:
+          radial-gradient(ellipse 26rem 64rem at 88% 52%, rgba(246, 216, 146, 0.18), rgba(246, 216, 146, 0.085) 42%, transparent 74%),
+          radial-gradient(ellipse 17rem 54rem at 92% 54%, rgba(238, 194, 169, 0.07), transparent 78%);
       }
 
       html[data-theme="daylight"] .tel-nav {
@@ -2294,16 +2559,6 @@ const repos = [
         background: transparent;
       }
 
-      html[data-theme="daylight"] .tel-hero::before {
-        opacity: 0.5;
-        background:
-          radial-gradient(circle, rgba(16, 42, 107, 0.15) 0.24px, transparent 0.54px),
-          radial-gradient(circle, rgba(89, 144, 192, 0.12) 0.34px, transparent 0.68px),
-          url('/assets/principia/stars.svg');
-        background-size: 71px 67px, 131px 119px, cover;
-        background-position: 0 0, 53px 29px, center;
-        mix-blend-mode: multiply;
-      }
 
       html[data-theme="daylight"] .hero-title,
       html[data-theme="daylight"] .meta-value {
@@ -2546,6 +2801,87 @@ const repos = [
         border-right-color: rgba(16, 42, 107, 0.22);
       }
 
+      html[data-theme="daylight"] .norma-download-block {
+        color: #fff;
+        background:
+          radial-gradient(circle at 72% 34%, rgba(46, 141, 255, 0.28), transparent 26rem),
+          radial-gradient(circle at 92% 18%, rgba(218, 53, 244, 0.17), transparent 18rem),
+          #020308;
+        border-color: rgba(255, 255, 255, 0.12);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.08),
+          0 28px 70px rgba(28, 66, 128, 0.18);
+      }
+
+      html[data-theme="daylight"] .norma-download-block::before {
+        background:
+          radial-gradient(circle at 16% 52%, rgba(0, 0, 0, 0.60), transparent 18rem),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.74) 0%, rgba(0, 0, 0, 0.28) 42%, transparent 76%);
+      }
+
+      html[data-theme="daylight"] .norma-download-title {
+        color: #fff;
+        text-shadow:
+          0 1px 18px rgba(0, 0, 0, 0.42),
+          0 0 30px rgba(85, 154, 255, 0.18);
+      }
+
+      html[data-theme="daylight"] .norma-download-copy {
+        color: rgba(255, 255, 255, 0.70);
+      }
+
+      html[data-theme="daylight"] .norma-download-button--primary {
+        color: #03040a;
+        background: rgba(255, 255, 255, 0.96);
+      }
+
+      html[data-theme="daylight"] .norma-download-button--secondary {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.16);
+      }
+
+      html[data-theme="daylight"] .norma-platform-note {
+        color: rgba(255, 255, 255, 0.46);
+      }
+
+      html[data-theme="night"] .norma-download-block {
+        color: #132145;
+        background:
+          radial-gradient(circle at 72% 34%, rgba(73, 139, 255, 0.18), transparent 26rem),
+          radial-gradient(circle at 92% 18%, rgba(218, 53, 244, 0.10), transparent 18rem),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(238, 247, 255, 0.98));
+        border-color: rgba(47, 111, 168, 0.20);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.92),
+          0 28px 70px rgba(6, 11, 26, 0.22);
+      }
+
+      html[data-theme="night"] .norma-download-block::before {
+        background:
+          radial-gradient(circle at 16% 52%, rgba(255, 255, 255, 0.70), transparent 18rem),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.48) 42%, transparent 76%);
+      }
+
+      html[data-theme="night"] .norma-download-copy {
+        color: rgba(19, 33, 69, 0.68);
+      }
+
+      html[data-theme="night"] .norma-download-button--primary {
+        color: #fff;
+        background: #132145;
+      }
+
+      html[data-theme="night"] .norma-download-button--secondary {
+        color: #132145;
+        background: rgba(19, 33, 69, 0.08);
+        border-color: rgba(19, 33, 69, 0.12);
+      }
+
+      html[data-theme="night"] .norma-platform-note {
+        color: rgba(19, 33, 69, 0.48);
+      }
+
       html[data-theme="night"] .term-card,
       html[data-theme="night"] .card,
       html[data-theme="night"] .card.weak {
@@ -2763,6 +3099,22 @@ const repos = [
           min-height: 0;
         }
 
+        .norma-download-block {
+          min-height: 520px;
+          border-radius: 20px;
+        }
+
+        .norma-download-content {
+          min-height: 520px;
+          width: 100%;
+          justify-content: flex-end;
+          padding: 34px 26px;
+        }
+
+        .norma-download-title {
+          font-size: clamp(38px, 13vw, 52px);
+        }
+
         .app-workspace {
           grid-template-columns: 52px minmax(0, 1fr);
         }
@@ -2898,6 +3250,23 @@ const repos = [
         .decor-animation-circle {
           width: 160px;
           height: 160px;
+        }
+
+        .norma-download-block {
+          cursor: auto;
+        }
+
+        .norma-cursor {
+          display: none;
+        }
+
+        .norma-download-actions {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .norma-download-button {
+          width: 100%;
         }
 
         .mockup-demo-head {
@@ -3492,6 +3861,81 @@ const repos = [
                 </div>
               </aside>
             </div>
+
+            <section
+              class="norma-download-block"
+              data-norma-download
+              data-particle-src="/assets/principia/chaotic-p.svg"
+              aria-label="Download Norma for Windows"
+            >
+              <canvas class="norma-ripple-canvas" data-norma-ripple></canvas>
+              <div class="norma-download-content">
+                <h2 class="norma-download-title">Download Norma for Windows</h2>
+                <p class="norma-download-copy">
+                  Norma packages the local constellation runtime for operators
+                  who need Vivarium sessions, chamber traces, and release checks
+                  in one desktop surface.
+                </p>
+                <div class="norma-download-actions">
+                  <a class="norma-download-button norma-download-button--primary" href="https://github.com/Telotia/Principia/releases">
+                    Download for x64
+                  </a>
+                  <a class="norma-download-button norma-download-button--secondary" href="https://github.com/Telotia/Principia/releases">
+                    Download for ARM64
+                  </a>
+                </div>
+                <p class="norma-platform-note">Windows 11 / Windows 10 · macOS and Linux builds staged through Vivarium</p>
+              </div>
+              <div class="norma-cursor" data-norma-cursor aria-hidden="true">
+                <svg viewBox="60 50 150 178" fill="none" aria-hidden="true">
+                  <path class="norma-cursor-line" d="M174.38 76.12 L84.75 145.87 L117.14 208.31 L129.95 206.32 L189.11 183.08 Z" />
+                  <path class="norma-cursor-line-glint" d="M174.38 76.12 L84.75 145.87 L117.14 208.31 L129.95 206.32 L189.11 183.08 Z" />
+                  <g class="norma-cursor-stars" filter="url(#normaCursorGlow)">
+                    <g class="norma-cursor-star">
+                      <circle cx="174.38" cy="76.12" r="10.2" fill="#0B4CFF" opacity="0.64" />
+                      <circle cx="174.38" cy="76.12" r="6.1" fill="#1466FF" />
+                      <circle cx="174.38" cy="76.12" r="2.8" fill="#FFFFFF" />
+                    </g>
+                    <g class="norma-cursor-star">
+                      <circle cx="84.75" cy="145.87" r="8.7" fill="#0B4CFF" opacity="0.62" />
+                      <circle cx="84.75" cy="145.87" r="5.1" fill="#1466FF" />
+                      <circle cx="84.75" cy="145.87" r="2.4" fill="#FFFFFF" />
+                    </g>
+                    <g class="norma-cursor-star">
+                      <circle cx="189.11" cy="183.08" r="9.4" fill="#0B4CFF" opacity="0.64" />
+                      <circle cx="189.11" cy="183.08" r="5.6" fill="#1466FF" />
+                      <circle cx="189.11" cy="183.08" r="2.6" fill="#FFFFFF" />
+                    </g>
+                    <g class="norma-cursor-star">
+                      <circle cx="129.95" cy="206.32" r="7.3" fill="#0B4CFF" opacity="0.60" />
+                      <circle cx="129.95" cy="206.32" r="4.3" fill="#1466FF" />
+                      <circle cx="129.95" cy="206.32" r="2" fill="#FFFFFF" />
+                    </g>
+                    <g class="norma-cursor-star">
+                      <circle cx="117.14" cy="208.31" r="6.4" fill="#0B4CFF" opacity="0.58" />
+                      <circle cx="117.14" cy="208.31" r="3.8" fill="#1466FF" />
+                      <circle cx="117.14" cy="208.31" r="1.8" fill="#FFFFFF" />
+                    </g>
+                  </g>
+                  <g class="norma-cursor-bursts">
+                    <path class="norma-cursor-burst" d="M174.38 61.12 V91.12 M159.38 76.12 H189.38" />
+                    <path class="norma-cursor-burst" d="M84.75 130.87 V160.87 M69.75 145.87 H99.75" />
+                    <path class="norma-cursor-burst" d="M189.11 168.08 V198.08 M174.11 183.08 H204.11" />
+                    <path class="norma-cursor-burst" d="M129.95 191.32 V221.32 M114.95 206.32 H144.95" />
+                    <path class="norma-cursor-burst" d="M117.14 193.31 V223.31 M102.14 208.31 H132.14" />
+                  </g>
+                  <defs>
+                    <filter id="normaCursorGlow" x="45" y="35" width="180" height="210" color-interpolation-filters="sRGB">
+                      <feGaussianBlur stdDeviation="7" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                </svg>
+              </div>
+            </section>
           </div>
         </section>
 
@@ -3750,7 +4194,7 @@ const repos = [
                 (y + randomRange(-90, 90)).toFixed(1),
             );
             watermark.setAttribute('class', 'paper-watermark');
-            watermark.style.setProperty('--watermark-opacity', randomRange(0.11, 0.24).toFixed(2));
+            watermark.style.setProperty('--watermark-opacity', randomRange(0.035, 0.075).toFixed(2));
             constellationField.appendChild(watermark);
           }
 
@@ -4018,10 +4462,316 @@ const repos = [
         });
       }
 
+      type NormaPoint = { x: number; y: number };
+      type NormaParticle = {
+        nx: number;
+        ny: number;
+        phase: number;
+        size: number;
+        tone: number;
+        spin: number;
+      };
+
+      function createNormaRipple(canvas: HTMLCanvasElement) {
+        const block = canvas.closest('[data-norma-download]');
+        const context = canvas.getContext('2d', { alpha: true });
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        if (!(block instanceof HTMLElement) || !(context instanceof CanvasRenderingContext2D)) {
+          return { destroy() {} };
+        }
+
+        const blockElement = block;
+        const cursor = blockElement.querySelector('[data-norma-cursor]');
+        const ctx = context;
+        let frame = 0;
+        let width = 1;
+        let height = 1;
+        let dpr = 1;
+        let particles: NormaParticle[] = [];
+        let fieldSpecks: NormaParticle[] = [];
+        let pointerX = 0;
+        let pointerY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        let inside = false;
+        const startedAt = performance.now();
+        const palette = [
+          [38, 236, 238],
+          [70, 154, 255],
+          [129, 108, 255],
+          [219, 63, 244],
+        ];
+
+        function pseudo(index: number) {
+          return Math.abs(Math.sin(index * 127.13 + 17.7) * 43758.5453123) % 1;
+        }
+
+        function colorAt(tone: number, alpha: number) {
+          const span = palette.length - 1;
+          const scaled = Math.max(0, Math.min(0.999, tone)) * span;
+          const index = Math.floor(scaled);
+          const mix = scaled - index;
+          const from = palette[index];
+          const to = palette[Math.min(index + 1, palette.length - 1)];
+          const r = Math.round(from[0] + (to[0] - from[0]) * mix);
+          const g = Math.round(from[1] + (to[1] - from[1]) * mix);
+          const b = Math.round(from[2] + (to[2] - from[2]) * mix);
+          return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        }
+
+        function fallbackPoints() {
+          const points: NormaPoint[] = [];
+          for (let i = 0; i < 1500; i += 1) {
+            const t = (i / 1500) * Math.PI * 2;
+            const lobe = i % 2 === 0 ? -1 : 1;
+            const ring = (i % 5) / 5;
+            const radius = 0.22 + ring * 0.11 + Math.sin(t * 3 + ring) * 0.012;
+            points.push({
+              x: 0.5 + lobe * 0.20 + Math.cos(t) * radius * 0.78,
+              y: 0.5 + Math.sin(t) * radius * 0.56,
+            });
+          }
+          return points;
+        }
+
+        function makeParticles(points: NormaPoint[]) {
+          if (!points.length) return;
+          particles = points.map((point, index) => {
+            const nx = (point.x - 0.5) * 2.1;
+            const ny = (point.y - 0.5) * 1.65;
+            return {
+              nx,
+              ny,
+              phase: pseudo(index) * Math.PI * 2,
+              size: 0.72 + pseudo(index + 19) * 2.15,
+              tone: Math.max(0, Math.min(1, point.x * 0.84 + pseudo(index + 5) * 0.16)),
+              spin: pseudo(index + 41) * Math.PI,
+            };
+          });
+        }
+
+        function makeSpecks() {
+          const count = Math.round(Math.min(420, Math.max(140, (width * height) / 5200)));
+          fieldSpecks = Array.from({ length: count }, (_, index) => ({
+            nx: pseudo(index + 311) * 2 - 1,
+            ny: pseudo(index + 719) * 2 - 1,
+            phase: pseudo(index + 1009) * Math.PI * 2,
+            size: 0.35 + pseudo(index + 208) * 1.35,
+            tone: pseudo(index + 404),
+            spin: pseudo(index + 909) * Math.PI,
+          }));
+        }
+
+        function resize() {
+          const rect = canvas.getBoundingClientRect();
+          dpr = Math.min(2, window.devicePixelRatio || 1);
+          width = Math.max(1, rect.width);
+          height = Math.max(1, rect.height);
+          canvas.width = Math.round(width * dpr);
+          canvas.height = Math.round(height * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          if (!pointerX && !pointerY) {
+            pointerX = targetX = width * 0.68;
+            pointerY = targetY = height * 0.42;
+          }
+          makeSpecks();
+        }
+
+        function normalizeVectorPoints(rawPoints: NormaPoint[]) {
+          const minX = Math.min(...rawPoints.map((point) => point.x));
+          const maxX = Math.max(...rawPoints.map((point) => point.x));
+          const minY = Math.min(...rawPoints.map((point) => point.y));
+          const maxY = Math.max(...rawPoints.map((point) => point.y));
+          const spanX = Math.max(1, maxX - minX);
+          const spanY = Math.max(1, maxY - minY);
+          const maxPoints = 2200;
+          const normalized: NormaPoint[] = [];
+
+          for (let i = 0; i < Math.min(maxPoints, rawPoints.length); i += 1) {
+            const point = rawPoints[(i * 1543) % rawPoints.length];
+            normalized.push({
+              x: (point.x - minX) / spanX,
+              y: (point.y - minY) / spanY,
+            });
+          }
+
+          return normalized;
+        }
+
+        function parsePointPairs(points: string | null) {
+          if (!points) return [];
+          const numbers = Array.from(points.matchAll(/-?\d*\.?\d+(?:e[-+]?\d+)?/gi)).map((match) =>
+            Number.parseFloat(match[0]),
+          );
+          const parsed: NormaPoint[] = [];
+          for (let i = 0; i < numbers.length - 1; i += 2) {
+            if (Number.isFinite(numbers[i]) && Number.isFinite(numbers[i + 1])) {
+              parsed.push({ x: numbers[i], y: numbers[i + 1] });
+            }
+          }
+          return parsed;
+        }
+
+        async function sampleSvgPoints(src: string) {
+          const response = await fetch(src);
+          if (!response.ok) throw new Error('Norma SVG failed to load');
+
+          const svgText = await response.text();
+          const doc = new DOMParser().parseFromString(svgText, 'image/svg+xml');
+          const elements = Array.from(doc.querySelectorAll('.cls-1'));
+          const rawPoints: NormaPoint[] = [];
+
+          elements.forEach((element) => {
+            const tag = element.tagName.toLowerCase();
+
+            if (tag === 'circle' || tag === 'ellipse') {
+              const x = Number.parseFloat(element.getAttribute('cx') || '');
+              const y = Number.parseFloat(element.getAttribute('cy') || '');
+              if (Number.isFinite(x) && Number.isFinite(y)) rawPoints.push({ x, y });
+              return;
+            }
+
+            if (tag === 'polygon' || tag === 'polyline') {
+              const points = parsePointPairs(element.getAttribute('points'));
+              if (points.length) {
+                const center = points.reduce(
+                  (sum, point) => ({ x: sum.x + point.x, y: sum.y + point.y }),
+                  { x: 0, y: 0 },
+                );
+                rawPoints.push({ x: center.x / points.length, y: center.y / points.length });
+              }
+              return;
+            }
+
+            if (tag === 'path') {
+              const d = element.getAttribute('d') || '';
+              const move = d.match(/[Mm]\s*(-?\d*\.?\d+(?:e[-+]?\d+)?)[,\s]+(-?\d*\.?\d+(?:e[-+]?\d+)?)/i);
+              if (move) {
+                const x = Number.parseFloat(move[1]);
+                const y = Number.parseFloat(move[2]);
+                if (Number.isFinite(x) && Number.isFinite(y)) rawPoints.push({ x, y });
+              }
+            }
+          });
+
+          if (rawPoints.length < 60) {
+            throw new Error('Norma SVG vector points were not readable');
+          }
+
+          return normalizeVectorPoints(rawPoints);
+        }
+
+        function draw() {
+          const t = (performance.now() - startedAt) / 1000;
+          ctx.clearRect(0, 0, width, height);
+          const isBlackPanel = document.documentElement.getAttribute('data-theme') === 'daylight';
+          const autoX = width * (0.67 + Math.cos(t * 0.22) * 0.06);
+          const autoY = height * (0.46 + Math.sin(t * 0.28) * 0.12);
+
+          pointerX += ((inside ? targetX : autoX) - pointerX) * 0.055;
+          pointerY += ((inside ? targetY : autoY) - pointerY) * 0.055;
+
+          ctx.globalCompositeOperation = isBlackPanel ? 'lighter' : 'source-over';
+          fieldSpecks.forEach((speck, index) => {
+            const x = width * (0.5 + speck.nx * 0.58);
+            const y = height * (0.5 + speck.ny * 0.58);
+            const shimmer = 0.35 + Math.sin(t * 0.8 + speck.phase) * 0.22;
+            ctx.fillStyle = colorAt(speck.tone, (isBlackPanel ? 0.30 : 0.22) * shimmer);
+            ctx.beginPath();
+            ctx.arc(x, y, speck.size * (index % 7 === 0 ? 1.9 : 1), 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          const baseX = width * (width < 760 ? 0.58 : 0.66);
+          const baseY = height * (width < 760 ? 0.34 : 0.50);
+          const centerX = baseX + (pointerX - baseX) * 0.10;
+          const centerY = baseY + (pointerY - baseY) * 0.13;
+          const scale = Math.min(width, height) * (width < 760 ? 0.42 : 0.62);
+          const breath = 1 + Math.sin(t * 0.72) * 0.035;
+
+          particles.forEach((particle) => {
+            const x0 = centerX + particle.nx * scale * breath;
+            const y0 = centerY + particle.ny * scale * breath;
+            const dx = x0 - pointerX;
+            const dy = y0 - pointerY;
+            const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+            const wave = Math.sin(dist * 0.033 - t * 4.2 + particle.phase) * Math.exp(-dist / 520);
+            const drift = Math.sin(t * 1.15 + particle.phase) * 4.8;
+            const influence = inside ? 30 : 18;
+            const x = x0 + (dx / dist) * wave * influence + Math.cos(particle.phase + t * 0.4) * drift;
+            const y = y0 + (dy / dist) * wave * influence + Math.sin(particle.phase + t * 0.35) * drift;
+            const alpha = isBlackPanel ? 0.42 + Math.max(0, wave) * 0.35 : 0.32 + Math.max(0, wave) * 0.24;
+            const angle = Math.atan2(dy, dx) + particle.spin;
+
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            ctx.fillStyle = colorAt(particle.tone, alpha);
+            ctx.beginPath();
+            ctx.ellipse(0, 0, particle.size * (1.8 + Math.abs(wave) * 2.2), particle.size * 0.58, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          });
+
+          ctx.globalCompositeOperation = 'source-over';
+          if (!reducedMotion.matches) {
+            frame = requestAnimationFrame(draw);
+          }
+        }
+
+        function movePointer(event: PointerEvent) {
+          const rect = blockElement.getBoundingClientRect();
+          targetX = event.clientX - rect.left;
+          targetY = event.clientY - rect.top;
+          if (cursor instanceof HTMLElement) {
+            cursor.style.transform = `translate3d(${targetX - 27}px, ${targetY - 32}px, 0)`;
+          }
+        }
+
+        function enterPointer(event: PointerEvent) {
+          inside = true;
+          blockElement.dataset.pointer = 'inside';
+          movePointer(event);
+        }
+
+        function leavePointer() {
+          inside = false;
+          delete blockElement.dataset.pointer;
+        }
+
+        resize();
+        makeParticles(fallbackPoints());
+        sampleSvgPoints(blockElement.dataset.particleSrc || '/assets/principia/chaotic-p.svg')
+          .then(makeParticles)
+          .catch(() => makeParticles(fallbackPoints()));
+
+        blockElement.addEventListener('pointerenter', enterPointer);
+        blockElement.addEventListener('pointermove', movePointer);
+        blockElement.addEventListener('pointerleave', leavePointer);
+        window.addEventListener('resize', resize);
+        draw();
+
+        return {
+          destroy() {
+            cancelAnimationFrame(frame);
+            blockElement.removeEventListener('pointerenter', enterPointer);
+            blockElement.removeEventListener('pointermove', movePointer);
+            blockElement.removeEventListener('pointerleave', leavePointer);
+            window.removeEventListener('resize', resize);
+          },
+        };
+      }
+
+      const normaRippleHandles = Array.from(document.querySelectorAll('[data-norma-ripple]'))
+        .filter((canvas): canvas is HTMLCanvasElement => canvas instanceof HTMLCanvasElement)
+        .map((canvas) => createNormaRipple(canvas));
+
       window.addEventListener(
         'pagehide',
         () => {
           animationHandles.forEach((animation) => animation.destroy());
+          normaRippleHandles.forEach((animation) => animation.destroy());
         },
         { once: true },
       );

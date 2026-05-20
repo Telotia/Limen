@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 900" fill="none" aria-hidden="true">
+  <!-- moon dust: muted slate-steel, designed for light backgrounds -->
+  <!-- dim class (r 0.5–0.6) -->
+  <circle cx="83"  cy="71"  r="0.6" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="247" cy="38"  r="0.5" fill="#6878a0" fill-opacity="0.08"/>
+  <circle cx="531" cy="203" r="0.6" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="874" cy="57"  r="0.5" fill="#6878a0" fill-opacity="0.08"/>
+  <circle cx="1138" cy="311" r="0.6" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="1463" cy="82"  r="0.5" fill="#6878a0" fill-opacity="0.08"/>
+  <circle cx="1771" cy="234" r="0.6" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="1887" cy="507" r="0.5" fill="#6878a0" fill-opacity="0.07"/>
+  <circle cx="44"  cy="621" r="0.6" fill="#6878a0" fill-opacity="0.08"/>
+  <circle cx="318" cy="782" r="0.5" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="718" cy="671" r="0.6" fill="#6878a0" fill-opacity="0.08"/>
+  <circle cx="1074" cy="819" r="0.5" fill="#6878a0" fill-opacity="0.07"/>
+  <circle cx="1382" cy="731" r="0.6" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="1651" cy="858" r="0.5" fill="#6878a0" fill-opacity="0.07"/>
+  <circle cx="1812" cy="637" r="0.6" fill="#6878a0" fill-opacity="0.08"/>
+  <circle cx="181" cy="428" r="0.6" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="454" cy="519" r="0.5" fill="#6878a0" fill-opacity="0.07"/>
+  <circle cx="924" cy="468" r="0.6" fill="#6878a0" fill-opacity="0.08"/>
+  <circle cx="1228" cy="577" r="0.5" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="1568" cy="493" r="0.6" fill="#6878a0" fill-opacity="0.07"/>
+  <circle cx="94"  cy="264" r="0.5" fill="#6878a0" fill-opacity="0.08"/>
+  <circle cx="1911" cy="182" r="0.6" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="662" cy="349" r="0.5" fill="#6878a0" fill-opacity="0.07"/>
+  <circle cx="1352" cy="188" r="0.6" fill="#6878a0" fill-opacity="0.08"/>
+  <circle cx="389" cy="287" r="0.5" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="1024" cy="142" r="0.6" fill="#6878a0" fill-opacity="0.08"/>
+  <circle cx="1497" cy="551" r="0.5" fill="#6878a0" fill-opacity="0.07"/>
+  <circle cx="268" cy="638" r="0.6" fill="#6878a0" fill-opacity="0.09"/>
+  <circle cx="834" cy="763" r="0.5" fill="#6878a0" fill-opacity="0.07"/>
+  <!-- medium particles (r 0.7–0.9) -->
+  <circle cx="168" cy="187" r="0.8" fill="#7888b0" fill-opacity="0.12"/>
+  <circle cx="514" cy="347" r="0.7" fill="#7888b0" fill-opacity="0.11"/>
+  <circle cx="851" cy="122" r="0.9" fill="#7888b0" fill-opacity="0.12"/>
+  <circle cx="1186" cy="454" r="0.8" fill="#7888b0" fill-opacity="0.13"/>
+  <circle cx="1614" cy="318" r="0.7" fill="#7888b0" fill-opacity="0.11"/>
+  <circle cx="291" cy="688" r="0.8" fill="#7888b0" fill-opacity="0.12"/>
+  <circle cx="643" cy="558" r="0.7" fill="#7888b0" fill-opacity="0.11"/>
+  <circle cx="1096" cy="238" r="0.9" fill="#7888b0" fill-opacity="0.13"/>
+  <circle cx="1484" cy="664" r="0.8" fill="#7888b0" fill-opacity="0.11"/>
+  <circle cx="1724" cy="388" r="0.7" fill="#7888b0" fill-opacity="0.12"/>
+  <!-- notable particles (r 1.1–1.3) -->
+  <circle cx="424"  cy="168" r="1.2" fill="#8898b8" fill-opacity="0.14"/>
+  <circle cx="1082" cy="519" r="1.3" fill="#8898b8" fill-opacity="0.13"/>
+  <circle cx="1659" cy="198" r="1.1" fill="#8898b8" fill-opacity="0.14"/>
+  <!-- prism dispersion cluster 1: near (524, 344) -->
+  <line x1="508" y1="336" x2="522" y2="331" stroke="#a86830" stroke-width="0.8" stroke-opacity="0.12" stroke-linecap="round"/>
+  <line x1="510" y1="341" x2="524" y2="337" stroke="#88820a" stroke-width="0.8" stroke-opacity="0.11" stroke-linecap="round"/>
+  <line x1="511" y1="347" x2="525" y2="343" stroke="#1e6e38" stroke-width="0.8" stroke-opacity="0.11" stroke-linecap="round"/>
+  <line x1="512" y1="353" x2="526" y2="349" stroke="#0e6878" stroke-width="0.8" stroke-opacity="0.12" stroke-linecap="round"/>
+  <line x1="513" y1="359" x2="527" y2="355" stroke="#3e1880" stroke-width="0.8" stroke-opacity="0.11" stroke-linecap="round"/>
+  <!-- prism dispersion cluster 2: near (1448, 474) -->
+  <line x1="1436" y1="469" x2="1449" y2="465" stroke="#a05020" stroke-width="0.7" stroke-opacity="0.10" stroke-linecap="round"/>
+  <line x1="1438" y1="475" x2="1451" y2="471" stroke="#0a6060" stroke-width="0.7" stroke-opacity="0.09" stroke-linecap="round"/>
+  <line x1="1440" y1="481" x2="1453" y2="477" stroke="#381870" stroke-width="0.7" stroke-opacity="0.09" stroke-linecap="round"/>
+  <!-- faint orbital arc traces across the section -->
+  <path d="M 120 720 A 880 480 -4 0 1 1800 260"
+        stroke="#7080a4" stroke-width="0.4" stroke-opacity="0.06" fill="none"/>
+  <path d="M 80 440 A 580 320 6 0 1 1400 680"
+        stroke="#7080a4" stroke-width="0.3" stroke-opacity="0.05" fill="none"
+        stroke-dasharray="3 11"/>
+  <!-- watermark reference lines -->
+  <line x1="220"  y1="180" x2="820"  y2="112" stroke="#6878a0" stroke-width="0.3" stroke-opacity="0.07"/>
+  <line x1="1100" y1="80"  x2="1780" y2="164" stroke="#6878a0" stroke-width="0.28" stroke-opacity="0.06"/>
+  <line x1="120"  y1="580" x2="680"  y2="548" stroke="#6878a0" stroke-width="0.28" stroke-opacity="0.06"/>
+  <line x1="1240" y1="620" x2="1840" y2="580" stroke="#6878a0" stroke-width="0.28" stroke-opacity="0.06"/>
+</svg>
