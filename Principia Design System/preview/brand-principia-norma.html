@@ -1,0 +1,78 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Principia · Norma draft</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 0; background: #060B1A; color: #F4F0FF; }
+  .stage {
+    position: relative; padding: 26px 32px 24px;
+    background: radial-gradient(ellipse 110% 80% at 50% 30%, #1A2546 0%, #0A1430 55%, #060B1A 100%);
+    overflow: hidden; min-height: 280px;
+  }
+  .stage::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(#ffffff22 0.6px, transparent 0.7px);
+    background-size: 21px 21px;
+  }
+  .header { position: relative; display: flex; align-items: baseline; justify-content: space-between; }
+  .label { font-family: var(--font-sans); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #B9B2D6; }
+  .id    { font-family: var(--font-mono); font-size: 11px; color: #8A82A8; }
+  .wrap  { position: relative; display: flex; align-items: center; gap: 36px; margin-top: 8px; }
+  .mark  { width: 200px; height: 200px; flex: 0 0 200px; filter: drop-shadow(0 0 18px rgba(91, 124, 250, 0.25)); }
+  .meta  { position: relative; }
+  .meta h1 { font-family: var(--font-display); font-size: 32px; font-weight: 400; line-height: 1.05; color: #F4F0FF; letter-spacing: -.5px; margin: 0 0 6px; }
+  .meta p  { font-family: var(--font-display); font-style: italic; font-size: 15px; color: #D8D6E8; line-height: 1.5; max-width: 320px; margin: 0; text-wrap: pretty; }
+  .meta p em { color: #DEA193; font-style: italic; font-family: var(--font-display); }
+  .footer  { display: flex; gap: 18px; margin-top: 12px; font-family: var(--font-mono); font-size: 11px; color: #8A82A8; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="header">
+      <span class="label">Principia · norma constellation draft</span>
+      <span class="id">logo-principia-norma-draft.svg</span>
+    </div>
+    <div class="wrap">
+      <svg class="mark" viewBox="0 0 290 290" fill="none" aria-label="Principia mark">
+        <defs>
+          <linearGradient id="pp2" x1="0" y1="0" x2="290" y2="290" gradientUnits="userSpaceOnUse">
+            <stop offset="0"   stop-color="#25CEDB"/>
+            <stop offset="0.5" stop-color="#7E5BFF"/>
+            <stop offset="1"   stop-color="#DE5BB8"/>
+          </linearGradient>
+        </defs>
+
+        <ellipse fill="url(#pp2)" cx="86.76"  cy="211.26" rx="25.3"  ry="80.9"  transform="translate(-120.22 114.73) rotate(-42.67)"/>
+        <ellipse fill="#0A1430"   cx="90.82"  cy="208.63" rx="21.32" ry="68.15" transform="translate(-117.36 116.78) rotate(-42.67)"/>
+
+        <ellipse fill="url(#pp2)" cx="201.77" cy="211.26" rx="80.9"  ry="25.3"  transform="translate(-90.32  216.43) rotate(-47.33)"/>
+        <ellipse fill="#0A1430"   cx="197.7"  cy="208.63" rx="68.15" ry="21.32" transform="translate(-89.69  212.59) rotate(-47.33)"/>
+
+        <ellipse fill="url(#pp2)" cx="202.59" cy="87.42"  rx="25.3"  ry="80.9"  transform="translate(-5.62   160.45) rotate(-42.67)"/>
+        <ellipse fill="#0A1430"   cx="198.52" cy="90.05"  rx="21.32" ry="68.15" transform="translate(-8.48   158.39) rotate(-42.67)"/>
+
+        <ellipse fill="url(#pp2)" cx="86.76"  cy="87.42"  rx="80.9"  ry="25.3"  transform="translate(-36.32  91.96)  rotate(-47.33)"/>
+        <ellipse fill="#0A1430"   cx="90.82"  cy="90.05"  rx="68.15" ry="21.32" transform="translate(-36.95  95.8)   rotate(-47.33)"/>
+
+        <polygon fill="none" stroke="#DEA193" stroke-width="1.4" stroke-linecap="round" points="174.38,76.12 84.75,145.87 117.14,208.31 129.95,206.32 189.11,183.08 174.38,76.12"/>
+        <g fill="#DEA193">
+          <circle cx="174.38" cy="76.12"  r="4.24"/>
+          <circle cx="84.75"  cy="145.87" r="4.24"/>
+          <circle cx="189.11" cy="183.08" r="4.24"/>
+          <circle cx="129.95" cy="206.32" r="4.24"/>
+          <circle cx="117.14" cy="208.31" r="4.24"/>
+        </g>
+      </svg>
+      <div class="meta">
+        <h1>Principia</h1>
+        <p>Norma — <em>the carpenter's rule</em> — held within the cross-section of a strange attractor.</p>
+        <div class="footer">
+          <span>256 × 256</span>
+          <span>·</span>
+          <span>4 petals · 4 stars</span>
+          <span>·</span>
+          <span>cyan → violet → magenta</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>

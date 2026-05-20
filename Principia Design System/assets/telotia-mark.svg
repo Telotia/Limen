@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-label="Telotia mark">
+  
+  <g stroke="currentColor" stroke-width="1" stroke-linecap="round">
+    <line x1="12" y1="50" x2="22" y2="40"></line>
+    <line x1="22" y1="40" x2="36" y2="34"></line>
+    <line x1="36" y1="34" x2="48" y2="18"></line>
+    <line x1="36" y1="34" x2="50" y2="32"></line>
+    <line x1="48" y1="18" x2="50" y2="32"></line>
+  </g>
+  <g fill="currentColor">
+    <circle cx="12" cy="50" r="1.6"></circle>
+    <circle cx="22" cy="40" r="1.6"></circle>
+    <circle cx="36" cy="34" r="2.2"></circle>
+    <circle cx="48" cy="18" r="2.6"></circle>
+    <circle cx="50" cy="32" r="1.6"></circle>
+  </g>
+  <g fill="currentColor" opacity="0.4">
+    <circle cx="17" cy="45" r="0.7"></circle>
+    <circle cx="29" cy="37" r="0.7"></circle>
+    <circle cx="42" cy="26" r="0.7"></circle>
+  </g>
+</svg>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Color · Cosmic</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 18px 22px; }
+  .palette { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .swatch { border-radius: var(--r-3); overflow: hidden; border: 1px solid var(--rule); }
+  .swatch .chip { height: 58px; position: relative; }
+  .swatch.cosmic .chip::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(#ffffff35 0.5px, transparent 0.6px);
+    background-size: 11px 11px; background-position: 2px 3px;
+  }
+  .swatch .meta { padding: 7px 9px 9px; background: var(--paper); }
+  .swatch .name { font-family: var(--font-display); font-size: 13px; line-height: 1.05; color: var(--ink); }
+  .swatch .hex  { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); margin-top: 2px; }
+  .swatch .var  { font-family: var(--font-mono); font-size: 9px;  color: var(--ink-4); margin-top: 1px; }
+</style>
+</head>
+<body>
+  <div class="palette">
+
+    <div class="swatch cosmic"><div class="chip" style="background:#5B7CFA"></div>
+      <div class="meta"><div class="name">Nebula&nbsp;Blue</div><div class="hex">#5B7CFA</div><div class="var">--nebula-blue</div></div></div>
+
+    <div class="swatch cosmic"><div class="chip" style="background:#8FB7FF"></div>
+      <div class="meta"><div class="name">Starlight&nbsp;Blue</div><div class="hex">#8FB7FF</div><div class="var">--starlight-blue</div></div></div>
+
+    <div class="swatch cosmic"><div class="chip" style="background:#6D4BC3"></div>
+      <div class="meta"><div class="name">Cosmic&nbsp;Violet</div><div class="hex">#6D4BC3</div><div class="var">--cosmic-violet</div></div></div>
+
+    <div class="swatch cosmic"><div class="chip" style="background:#14162E"></div>
+      <div class="meta"><div class="name">Deep&nbsp;Space</div><div class="hex">#14162E</div><div class="var">--deep-space</div></div></div>
+
+    <div class="swatch cosmic"><div class="chip" style="background:#B46CFF"></div>
+      <div class="meta"><div class="name">Aurora&nbsp;Purple</div><div class="hex">#B46CFF</div><div class="var">--aurora-purple</div></div></div>
+
+    <div class="swatch cosmic"><div class="chip" style="background:#D45BA8"></div>
+      <div class="meta"><div class="name">Rose&nbsp;Nebula</div><div class="hex">#D45BA8</div><div class="var">--rose-nebula</div></div></div>
+
+    <div class="swatch cosmic"><div class="chip" style="background:#E8E6FF"></div>
+      <div class="meta"><div class="name">Star&nbsp;Dust</div><div class="hex">#E8E6FF</div><div class="var">--star-dust</div></div></div>
+
+    <div class="swatch cosmic"><div class="chip" style="background:#070812"></div>
+      <div class="meta"><div class="name">Void</div><div class="hex">#070812</div><div class="var">--void</div></div></div>
+
+  </div>
+</body></html>

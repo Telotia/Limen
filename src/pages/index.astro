@@ -1,70 +1,244 @@
 ---
-import devStatus from '../data/dev-status.json';
-
 const limenEnv = process.env.LIMEN_ENV ?? 'dev';
 const isProd = limenEnv === 'prod';
 
-const completedItems = devStatus.items.filter((item) => item.status === 'done');
-const openItems = devStatus.items.filter((item) => item.status !== 'done');
+const navItems = [
+  { label: 'Vivarium', href: '#vivarium' },
+  { label: 'Organism', href: '#organism' },
+  { label: 'Vocabulary', href: '#vocabulary' },
+];
 
-const flowSteps = [
+const heroMeta = [
+  { label: 'Language', value: 'Rust 2021 / single crate' },
+  { label: 'State', value: 'Embedded SQLite / WAL' },
+  { label: 'Sandbox', value: 'Linux landlock' },
+];
+
+const appChambers = [
+  { id: 'telos', label: 'Telos', state: 'crystallized' },
+  { id: 'inspection', label: 'Inspection', state: 'complete' },
+  { id: 'synthesis', label: 'Synthesis', state: 'active' },
+  { id: 'debate', label: 'Debate', state: 'iterate' },
+  { id: 'experiment', label: 'Experiment', state: 'apparatus' },
+  { id: 'slice', label: 'Slice', state: 'partial' },
+];
+
+const appEvents = [
   {
-    title: 'Feature work',
-    steps: [
-      'Branch from dev with feature/<short-name>.',
-      'Open a PR into dev with a conventional title.',
-      'Squash-merge after CI is green.',
-      'Merge deploys the debug dashboard to dev.telotia.com.',
-    ],
+    time: '10:42:01.412',
+    chamber: 'telos',
+    event: 'crystallize',
+    detail: 'ctx_telos_8f0a1b34 / pressure addressed',
   },
   {
-    title: 'Production release',
-    steps: [
-      'Open a release PR from dev into main.',
-      'Use a conventional release PR title.',
-      'Merge commit into main to preserve dev history.',
-      'Main deploys telotia.com, smoke-tests it, then publishes a GitHub release.',
-    ],
+    time: '10:42:14.339',
+    chamber: 'synthesis',
+    event: 'osc_check',
+    detail: 'verdict=ITERATE / role=critic',
   },
   {
-    title: 'Hotfix',
-    steps: [
-      'Branch directly from main when production is blocked.',
-      'Open the PR into main with a fix(<scope>) title.',
-      'After merge and deploy, merge main back into dev.',
-      'Use only for urgent production fixes.',
-    ],
+    time: '10:42:31.770',
+    chamber: 'slice',
+    event: 'developed',
+    detail: 'slice_a3f2b9 / verdict=Partial',
+  },
+  {
+    time: '10:42:55.218',
+    chamber: 'experiment',
+    event: 'apparatus',
+    detail: 'max_tokens / 7 calls',
+  },
+  {
+    time: '10:43:12.554',
+    chamber: 'debate',
+    event: 'osc_turn',
+    detail: 'osc=2 / role=constructor',
+  },
+  {
+    time: '10:44:02.004',
+    chamber: 'organism',
+    event: 'heartbeat',
+    detail: 'uptime=14m22s / live tail',
   },
 ];
 
-const commandGroups = [
+const appSlices = [
   {
-    title: 'Local',
-    commands: [
-      'bun install',
-      'bun run dev',
-      'bun run check',
-      'bun test',
-      'bun run build:dev',
-      'bun run build:prod',
-    ],
+    id: 'ctx_slice_a3f2b9c1',
+    title: 'A short intuition admits multiple operational readings.',
+    verdict: 'Partial',
+    chamber: 'Slice ▸ Experiment re-entry',
+    reentries: 3,
+    last: '4 min ago',
+    note: 'worker apparatus failed — max_tokens',
+    theory: 'If “hidden structure” is given an apparatus criterion (e.g. compressibility under a fixed encoder), the claim is falsifiable per encoder, but unfalsifiable in general — making the bare claim closer to a research disposition than a Theory.',
+    evidence: 'The Worker began to instantiate a compressibility probe on three sample streams but exited at max_tokens before any apparatus output landed. No fabricated numbers were promoted to evidence.',
   },
   {
-    title: 'Cloudflare',
-    commands: [
-      'bun run smoke:dev',
-      'bun run cf:deploy:dev',
-      'bun run smoke:prod',
-      'bunx wrangler deploy --env production --dry-run',
-    ],
+    id: 'ctx_slice_4d12e0',
+    title: 'Hidden structure can be legible without being deterministic.',
+    verdict: 'Proven',
+    chamber: 'Debate ▸ Experiment ▸ Slice',
+    reentries: 1,
+    last: '12 min ago',
+    note: 'settled under Critic pressure; encoder choice is explicit',
+    theory: `Under a declared encoder E and threshold τ, the claim is falsifiable per encoder given a fixed apparatus criterion — surviving the Critic’s challenge that legibility is observer-relative because the observer is named.`,
+    evidence: 'The Experiment Constructor ran zlib-9 over three reference streams and recorded the ratios verbatim. The Critic pressed on encoder choice; the Theory absorbed the pressure by making E explicit.',
+  },
+  {
+    id: 'ctx_slice_9bc717',
+    title: 'Exhaustion is not the same as refutation.',
+    verdict: 'Open',
+    chamber: 'Synthesis released',
+    reentries: 0,
+    last: 'just now',
+    note: 'Synthesis released; awaiting Debate',
+    theory: '(awaiting Debate Constructor)',
+    evidence: '(no Experiment yet)',
   },
 ];
 
-const links = [
-  { label: 'Dev dashboard', href: 'https://dev.telotia.com' },
-  { label: 'Production', href: 'https://telotia.com' },
-  { label: 'Fallback dev URL', href: 'https://limen-dev.pdec-prog.workers.dev' },
-  { label: 'Releases', href: 'https://github.com/Telotia/Limen/releases' },
+const graphNodes = [
+  { id: 'origin', x: 60, y: 110, label: 'Origin' },
+  { id: 'inspection', x: 170, y: 60, label: 'Inspection' },
+  { id: 'telos', x: 170, y: 160, label: 'Telos' },
+  { id: 'synthesis', x: 340, y: 110, label: 'Synthesis', active: true },
+  { id: 'debate', x: 510, y: 60, label: 'Debate' },
+  { id: 'experiment', x: 510, y: 160, label: 'Experiment' },
+  { id: 'slice', x: 660, y: 110, label: 'Slice' },
+  { id: 'mortality', x: 820, y: 110, label: 'Mortality', terminal: true },
+];
+
+const graphNodeById = Object.fromEntries(graphNodes.map((node) => [node.id, node]));
+
+const graphEdges = [
+  { from: 'origin', to: 'telos' },
+  { from: 'origin', to: 'inspection' },
+  { from: 'inspection', to: 'synthesis' },
+  { from: 'telos', to: 'synthesis' },
+  { from: 'synthesis', to: 'debate' },
+  { from: 'debate', to: 'experiment' },
+  { from: 'experiment', to: 'slice' },
+  { from: 'slice', to: 'synthesis', dashed: true, label: 're-entry' },
+  { from: 'synthesis', to: 'mortality', terminal: true },
+];
+
+const cycleSteps = [
+  {
+    step: 'Step 1',
+    title: 'Telos',
+    body:
+      'The Origin proposes a seed. The Critic presses it against the observed environment. The Stabilizer crystallizes the seed into a Telos Context, or rejects it. The session opens.',
+  },
+  {
+    step: 'Step 2 -> 6',
+    title: 'Slice cycle',
+    body:
+      'Synthesis releases a Slice. Debate stabilizes a Theory in its favor. Experiment engages the Theory in the workspace sandbox. Slice judges Proven, Falsified, or Partial. Partial re-enters Debate.',
+  },
+  {
+    step: 'Step 7',
+    title: 'Mortality',
+    body:
+      'When the completed Slices together exhaust the Telos productive framings, the Synthesis Stabilizer emits TELOS_CLOSED. The organism dies. Refuting one reading of the Telos does not exhaust it.',
+  },
+];
+
+const terms = [
+  {
+    term: 'Telos',
+    pos: 'noun',
+    def:
+      "The seed crystallized by the Telos Chamber. The organism's anchor. Not a deliverable; an epistemic commitment the rest of the organism is measured against.",
+  },
+  {
+    term: 'Slice',
+    pos: 'noun',
+    def:
+      'A defensible, independently investigable position about the Telos. Carries a Status: Proven, Falsified, or Partial.',
+  },
+  {
+    term: 'Crystallize',
+    pos: 'verb',
+    def:
+      'The act of writing an immutable Crystallized Context. Stabilizers crystallize; nothing else does.',
+  },
+  {
+    term: 'Constructor',
+    pos: 'role',
+    def:
+      "Proposes the chamber's output in its own voice. A worker in Inspection and Experiment; a thinker elsewhere.",
+  },
+  {
+    term: 'Critic',
+    pos: 'role',
+    def:
+      'Presses for load-bearing weaknesses. On the same team as the Constructor: both share one job, to land a sound output.',
+  },
+  {
+    term: 'Stabilizer',
+    pos: 'role',
+    def:
+      'Judges. Not advocating for any verdict. Reads the full oscillation history and commits to what the engagement honestly earned.',
+  },
+  {
+    term: 'Symbiosis',
+    pos: 'noun',
+    def:
+      "Outbound: commission another organism. Inbound: re-house another organism's closed Telos as a Perception Context.",
+  },
+  {
+    term: 'Mortality',
+    pos: 'terminal',
+    def:
+      'TELOS_CLOSED. The single declared end-state, emitted only when productive framings are exhausted. The only natural death.',
+  },
+  {
+    term: 'Apparatus',
+    pos: 'noun',
+    def:
+      'One form of evidence, not the only one. A worker may run tools inside the sandbox; reasoning-only Slices are also valid Evidence.',
+  },
+];
+
+const demonstrates = [
+  'Eight chambers on the v4 ontology, every chamber except Slice oscillating Constructor -> Critic -> Stabilizer.',
+  'LLM Critic and Stabilizer wired into the Telos chamber; no hardcoded TTY Critic.',
+  'Worker-Constructor in Inspection, probing the environment under a read-only landlock.',
+  'Symbiosis gated on an AssistantOrganism Context; no empty-Symbiosis firings.',
+  'Mortality is single-source: only the Synthesis Stabilizer emits TELOS_CLOSED.',
+];
+
+const limits = [
+  'Any Proven slice in any organism run to date.',
+  'A robust separation between meta-debate-about-Principia and engagement-with-the-Telos.',
+  'Recovery from a stalled Synthesis; the guard catches them but the scheduler keeps re-firing.',
+  'Worker token I/O ratio is heavy; no canonical prompt prefix for KV-cache reuse yet.',
+  'Falsified-vs-Partial criteria still over-commit to Falsified in observed petri-dish runs.',
+];
+
+const repos = [
+  {
+    step: 'Step 1 / Unit',
+    name: 'Assay',
+    desc:
+      'The prompt-sweep harness. Every chamber prompt is exercised here before it ever touches the kernel.',
+    href: 'https://github.com/Telotia/Assay',
+  },
+  {
+    step: 'Step 2 / Integration',
+    name: 'Vivarium',
+    desc:
+      'The control plane. Pins kernel versions per experiment, spawns kernel processes, and streams the runtime event log to a UI.',
+    href: 'https://github.com/Telotia/Vivarium',
+  },
+  {
+    step: 'Step 3 / Production',
+    name: 'Principia',
+    desc:
+      'The epistemic-being runtime. Tag-driven releases verified by both Assay and Vivarium before they ship.',
+    href: 'https://github.com/Telotia/Principia',
+  },
 ];
 ---
 
@@ -74,591 +248,2792 @@ const links = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{isProd ? 'Telotia' : 'Limen dev dashboard'}</title>
+    <title>TELOTIA / Principia</title>
     <meta
       name="description"
-      content={isProd ? 'Telotia' : 'Limen development dashboard'}
+      content="Principia is Telotia's epistemic-being runtime: one seed, eight chambers, and a record of what the engagement honestly earned."
     />
     {!isProd && <meta name="robots" content="noindex,nofollow" />}
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;450;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap');
+
       :root {
         color-scheme: light;
-        --bg: #f7f7f4;
-        --surface: #ffffff;
-        --surface-muted: #f1f4f2;
-        --ink: #17201d;
-        --muted: #62716a;
-        --border: #dce3df;
-        --green: #1d7f59;
-        --green-soft: #dff2e9;
-        --blue: #315f8c;
-        --blue-soft: #e3edf7;
-        --amber: #9c6323;
-        --amber-soft: #f7ead7;
-        --shadow: 0 18px 50px rgb(24 38 31 / 0.08);
-        font-family:
-          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-          'Segoe UI', sans-serif;
+        --paper: #F7F9FD;
+        --paper-2: #F1F5FB;
+        --paper-3: #E8EEF8;
+        --paper-edge: #CBD6E8;
+        --ink: #14203A;
+        --ink-2: #31405F;
+        --ink-3: #6A7691;
+        --ink-4: #8f98bb;
+        --rule: #CBD6E8;
+        --rule-soft: #DDE5F0;
+        --night: #0a1430;
+        --night-2: #162244;
+        --night-3: #1f3160;
+        --night-rule: #2a3656;
+        --night-ink: #f4f0ff;
+        --night-ink-2: #d8d6e8;
+        --night-ink-3: #b9b2d6;
+        --rose: #dea193;
+        --rose-soft: #b07a6a;
+        --blue: #5990c0;
+        --violet: #6d4bc3;
+        --ocean: radial-gradient(
+          ellipse 130% 90% at 50% 0%,
+          #213d6f 0%,
+          #0f1f44 45%,
+          #060d22 100%
+        );
+        --font-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+        --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont,
+          'Segoe UI', system-ui, sans-serif;
+        --font-mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace,
+          SFMono-Regular, Consolas, monospace;
+        --ease-paper: cubic-bezier(0.2, 0.6, 0.2, 1);
+        --shadow-paper: 0 1px 0 var(--paper-edge), 0 2px 8px -4px #10182f12;
+        --shadow-night: 0 18px 48px rgb(0 0 0 / 0.28);
+        /* App shell — always dark regardless of site theme */
+        --app-shell: #071025;
+        --app-rail: #0b1732;
+        --app-panel: #0f1c3a;
+        --app-panel-2: #132449;
+        --app-line: #2a3a61;
+        --app-line-soft: rgb(216 214 232 / 0.14);
+        --app-muted: #9ea8ca;
+        --app-faint: #707b9f;
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         margin: 0;
-        min-height: 100vh;
-        background:
-          linear-gradient(180deg, rgb(255 255 255 / 0.72), transparent 28rem),
-          var(--bg);
+        overflow-x: hidden;
+        background: var(--paper);
         color: var(--ink);
-        line-height: 1.5;
+        font-family: var(--font-sans);
+        font-size: 15px;
+        line-height: 1.6;
+        font-feature-settings: 'ss01', 'cv11';
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
       }
 
       a {
         color: inherit;
       }
 
-      main {
-        width: min(72rem, calc(100% - 2rem));
-        margin: 0 auto;
-        padding: 2rem 0 3rem;
-      }
-
-      .shell {
-        display: grid;
-        gap: 1.25rem;
-      }
-
-      .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 1.5rem;
-        align-items: end;
-        padding: 2rem;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        box-shadow: var(--shadow);
-      }
-
-      .eyebrow {
-        margin: 0 0 0.5rem;
-        color: var(--blue);
-        font-size: 0.8125rem;
-        font-weight: 700;
-        text-transform: uppercase;
-      }
-
+      p,
       h1,
       h2,
       h3,
-      p {
+      dl,
+      dd {
         margin: 0;
       }
 
-      h1 {
-        font-size: 2.375rem;
-        line-height: 1.1;
-        font-weight: 720;
+      img,
+      svg {
+        display: block;
       }
 
-      h2 {
-        font-size: 1.125rem;
-        line-height: 1.25;
+      .tel-page {
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 8% 32rem, rgb(89 144 192 / 0.12), transparent 22rem),
+          linear-gradient(180deg, #f6f7fb 0%, #eef1f7 100%);
       }
 
-      h3 {
-        font-size: 0.9375rem;
+      .tel-nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        color: var(--night-ink);
+        background: rgb(6 11 26 / 0.84);
+        border-bottom: 1px solid rgb(216 214 232 / 0.18);
+        backdrop-filter: blur(10px);
+        transition:
+          color 320ms var(--ease-paper),
+          background 320ms var(--ease-paper),
+          border-color 320ms var(--ease-paper);
       }
 
-      .lede {
-        max-width: 48rem;
-        margin-top: 0.75rem;
-        color: var(--muted);
+      html[data-theme="daylight"]:not([data-nav-at-hero]) .tel-nav {
+        color: var(--ink);
+        background: rgb(247 249 253 / 0.90);
+        border-bottom: 1px solid var(--rule-soft);
       }
 
-      .live-pill {
+      .tel-nav-inner {
+        width: calc(100% - 32px);
+        max-width: 1180px;
+        min-height: 58px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .brand {
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
-        min-height: 2.25rem;
-        padding: 0.5rem 0.75rem;
-        border: 1px solid #b7dbc8;
-        border-radius: 999px;
-        background: var(--green-soft);
-        color: #145f42;
-        font-size: 0.8125rem;
-        font-weight: 700;
-        white-space: nowrap;
-      }
-
-      .live-dot {
-        width: 0.5rem;
-        height: 0.5rem;
-        border-radius: 999px;
-        background: var(--green);
-      }
-
-      .metrics {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 0.75rem;
-      }
-
-      .metric {
-        min-height: 6rem;
-        padding: 1rem;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-      }
-
-      .metric strong {
-        display: block;
-        font-size: 1.5rem;
-        line-height: 1.1;
-      }
-
-      .metric span {
-        display: block;
-        margin-top: 0.35rem;
-        color: var(--muted);
-        font-size: 0.8125rem;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.25fr) minmax(19rem, 0.75fr);
-        gap: 1.25rem;
-        align-items: start;
-      }
-
-      .section {
-        padding: 1.25rem;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-      }
-
-      .section-head {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 1rem;
-      }
-
-      .section-note {
-        color: var(--muted);
-        font-size: 0.875rem;
-      }
-
-      .checklist {
-        display: grid;
-        gap: 0.625rem;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-      }
-
-      .task {
-        display: grid;
-        grid-template-columns: 1.5rem minmax(0, 1fr) auto;
-        gap: 0.75rem;
-        align-items: start;
-        padding: 0.875rem;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        background: #fcfdfc;
-      }
-
-      .task[data-status='done'] {
-        background: #f6fbf8;
-        border-color: #cbe6d8;
-      }
-
-      .checkbox {
-        position: relative;
-        width: 1.125rem;
-        height: 1.125rem;
-        margin-top: 0.125rem;
-        border: 1.5px solid #9aaba3;
-        border-radius: 4px;
-        background: var(--surface);
-      }
-
-      .task[data-status='done'] .checkbox {
-        border-color: var(--green);
-        background: var(--green);
-      }
-
-      .task[data-status='done'] .checkbox::after {
-        position: absolute;
-        left: 0.33rem;
-        top: 0.12rem;
-        width: 0.28rem;
-        height: 0.58rem;
-        border: solid white;
-        border-width: 0 0.125rem 0.125rem 0;
-        content: '';
-        transform: rotate(45deg);
-      }
-
-      .task-title {
-        display: block;
-        font-weight: 650;
-      }
-
-      .task-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-top: 0.45rem;
-      }
-
-      .tag {
-        display: inline-flex;
-        align-items: center;
-        min-height: 1.5rem;
-        padding: 0.1875rem 0.5rem;
-        border-radius: 999px;
-        background: var(--surface-muted);
-        color: var(--muted);
-        font-size: 0.75rem;
-        font-weight: 700;
-        white-space: nowrap;
-      }
-
-      .tag.done {
-        background: var(--green-soft);
-        color: #145f42;
-      }
-
-      .tag.todo {
-        background: var(--amber-soft);
-        color: var(--amber);
-      }
-
-      .owner {
-        align-self: start;
-        color: var(--muted);
-        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-        font-size: 0.75rem;
-      }
-
-      .playbook {
-        display: grid;
-        gap: 0.75rem;
-      }
-
-      .flow {
-        padding: 1rem;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        background: #fcfdfc;
-      }
-
-      .flow ol,
-      .notes {
-        padding-left: 1.15rem;
-        margin: 0.75rem 0 0;
-      }
-
-      .flow li,
-      .notes li {
-        margin-top: 0.35rem;
-        color: var(--muted);
-      }
-
-      .links {
-        display: grid;
-        gap: 0.5rem;
-      }
-
-      .link-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        min-height: 2.75rem;
-        padding: 0.65rem 0.75rem;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        background: #fcfdfc;
-        font-weight: 650;
+        gap: 10px;
+        min-width: 0;
         text-decoration: none;
       }
 
-      .link-row span {
-        color: var(--muted);
-        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-        font-size: 0.75rem;
-        font-weight: 500;
+      .brand-mark {
+        width: 22px;
+        height: 22px;
+        flex: 0 0 22px;
+        color: var(--rose);
+        background: currentColor;
+        -webkit-mask: url('/assets/principia/principia-mark.svg') center /
+          contain no-repeat;
+        mask: url('/assets/principia/principia-mark.svg') center / contain no-repeat;
       }
 
-      .command-grid {
+      .brand-name {
+        font-family: var(--font-sans);
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .brand-org {
+        padding-left: 10px;
+        border-left: 1px solid rgb(216 214 232 / 0.2);
+        color: var(--night-ink-3);
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition:
+          color 320ms var(--ease-paper),
+          border-color 320ms var(--ease-paper);
+      }
+
+      html[data-theme="daylight"]:not([data-nav-at-hero]) .brand-org {
+        border-left-color: var(--rule);
+        color: var(--ink-3);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+        margin-left: 6px;
+      }
+
+      .nav-links a,
+      .repo-link {
+        color: var(--night-ink-3);
+        font-size: 13px;
+        text-decoration: none;
+        transition:
+          color 140ms var(--ease-paper),
+          border-color 140ms var(--ease-paper);
+      }
+
+      .nav-links a:hover,
+      .repo-link:hover {
+        color: var(--night-ink);
+      }
+
+      html[data-theme="daylight"]:not([data-nav-at-hero]) .nav-links a,
+      html[data-theme="daylight"]:not([data-nav-at-hero]) .repo-link {
+        color: var(--ink-3);
+      }
+
+      html[data-theme="daylight"]:not([data-nav-at-hero]) .nav-links a:hover,
+      html[data-theme="daylight"]:not([data-nav-at-hero]) .repo-link:hover {
+        color: var(--ink);
+      }
+
+      .nav-spacer {
+        flex: 1;
+      }
+
+      .repo-link {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .theme-switcher {
+        display: flex;
+        gap: 2px;
+        align-items: center;
+        padding: 3px;
+        background: rgb(255 255 255 / 0.07);
+        border-radius: 8px;
+      }
+
+      .theme-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: 0;
+        border-radius: 5px;
+        background: transparent;
+        color: var(--night-ink-3);
+        cursor: pointer;
+        transition:
+          color 140ms var(--ease-paper),
+          background 140ms var(--ease-paper),
+          box-shadow 140ms var(--ease-paper);
+      }
+
+      .theme-btn:hover {
+        color: var(--night-ink);
+        background: rgb(255 255 255 / 0.07);
+      }
+
+      .theme-btn.is-active {
+        color: var(--night-ink);
+        background: rgb(255 255 255 / 0.11);
+      }
+
+      html[data-theme="daylight"]:not([data-nav-at-hero]) .theme-switcher {
+        background: rgb(0 0 0 / 0.06);
+      }
+
+      html[data-theme="daylight"]:not([data-nav-at-hero]) .theme-btn {
+        color: var(--ink-3);
+      }
+
+      html[data-theme="daylight"]:not([data-nav-at-hero]) .theme-btn:hover {
+        color: var(--ink);
+        background: rgb(0 0 0 / 0.05);
+      }
+
+      html[data-theme="daylight"]:not([data-nav-at-hero]) .theme-btn.is-active {
+        color: var(--ink);
+        background: var(--paper);
+        box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+      }
+
+      .tel-hero {
+        position: relative;
+        min-height: calc(100vh - 96px);
+        overflow: hidden;
+        color: var(--night-ink);
+        background:
+          /* primary violet bloom — upper right, most visible */
+          radial-gradient(circle at 72% 22%, rgba(75, 46, 131, 0.28) 0%, transparent 34%),
+          /* secondary cosmic indigo — lower center */
+          radial-gradient(circle at 38% 64%, rgba(110, 66, 193, 0.16) 0%, transparent 30%),
+          /* cool blue-violet whisper — upper left */
+          radial-gradient(circle at 18% 18%, rgba(89, 144, 192, 0.12) 0%, transparent 28%),
+          /* rose-gold atmospheric warmth — far right edge */
+          radial-gradient(circle at 95% 55%, rgba(222, 161, 147, 0.07) 0%, transparent 22%),
+          /* deep indigo field — center mass */
+          radial-gradient(ellipse 110% 70% at 50% 45%, rgba(43, 47, 128, 0.18) 0%, transparent 60%),
+          linear-gradient(180deg, #070A18 0%, #0B1028 55%, #060d22 100%);
+      }
+
+      .tel-hero::before,
+      .tel-hero::after {
+        position: absolute;
+        inset: 0;
+        content: '';
+        pointer-events: none;
+      }
+
+      .tel-hero::before {
+        /*
+         * Two faint repeating layers for the dim star mass — incommensurate
+         * sizes prevent obvious grid rhythm. Individual bright/cross stars
+         * come from an SVG at cover size (no tiling), giving true irregular
+         * placement for all visually distinct points.
+         */
+        background:
+          /* dim base — majority of star count, spacing creates subtle variation */
+          radial-gradient(circle, #ffffff06 0.22px, transparent 0.42px),
+          radial-gradient(circle, #ffffff09 0.26px, transparent 0.48px),
+          radial-gradient(circle, #ffffff0c 0.30px, transparent 0.54px),
+          /* individual bright + cross-stars at organic positions, no tiling */
+          url('/assets/principia/stars.svg');
+        background-size:
+          71px 67px,
+          113px 97px,
+          179px 163px,
+          cover;
+        background-repeat:
+          repeat,
+          repeat,
+          repeat,
+          no-repeat;
+        background-position:
+          0 0,
+          41px 13px,
+          83px 47px,
+          center;
+      }
+
+      .tel-hero::after {
+        opacity: 0.22;
+        background: var(--night-ink);
+        -webkit-mask: url('/assets/principia/constellation-bg.svg') right 6% top
+          10% / min(820px, 78vw) auto no-repeat;
+        mask: url('/assets/principia/constellation-bg.svg') right 6% top 10% /
+          min(820px, 78vw) auto no-repeat;
+      }
+
+      .pull-id {
+        position: absolute;
+        top: 28px;
+        right: max(24px, calc((100% - 1180px) / 2));
+        z-index: 2;
+        color: var(--night-ink-3);
+        font-family: var(--font-mono);
+        font-size: 11px;
+      }
+
+      .tel-hero-inner {
+        position: relative;
+        z-index: 1;
+        width: calc(100% - 32px);
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 102px 0 82px;
+      }
+
+      .hero-status,
+      .tel-label {
+        color: var(--rose);
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .hero-status {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .hero-title-row {
+        display: flex;
+        justify-content: space-between;
+        gap: clamp(22px, 4vw, 56px);
+        align-items: center;
+        margin-top: 18px;
+      }
+
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--rose);
+        box-shadow: 0 0 0 4px rgb(222 161 147 / 0.12);
+      }
+
+      .hero-title {
+        max-width: 960px;
+        margin: 0;
+        color: var(--night-ink);
+        font-family: var(--font-sans);
+        font-size: 72px;
+        font-weight: 500;
+        line-height: 1.02;
+        letter-spacing: 0.22em;
+      }
+
+      .decor-animation {
+        position: relative;
+        flex: 0 0 auto;
+        overflow: visible;         /* no container clipping — animation breathes freely */
+        background: transparent;
+        mix-blend-mode: screen;
+        pointer-events: none;
+      }
+
+      /* canvas is larger than its layout anchor and extends in all directions */
+      .decor-animation canvas {
+        position: absolute;
+        display: block;
+      }
+
+      .decor-animation-chaotic {
+        width: clamp(300px, 36vw, 440px);
+        height: clamp(180px, 21vw, 280px);
+        opacity: 0.92;
+        margin-top: -12px;
+      }
+
+      .decor-animation-chaotic canvas {
+        top: -35%;
+        left: -5%;
+        width: 136%;
+        height: 170%;
+      }
+
+      .decor-animation-circle {
+        width: clamp(180px, 20vw, 240px);
+        height: clamp(180px, 20vw, 240px);
+      }
+
+      .decor-animation-circle canvas {
+        top: -55%;
+        left: -55%;
+        width: 210%;
+        height: 210%;
+      }
+
+      .hero-thesis {
+        max-width: 940px;
+        margin-top: 20px;
+        color: var(--night-ink-2);
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 340;
+        line-height: 1.26;
+        overflow-wrap: break-word;
+        white-space: normal;
+      }
+
+      .hero-line {
+        display: block;
+      }
+
+      .hero-thesis em,
+      .section-title em,
+      .cycle dd em,
+      .assessment-note em {
+        color: var(--rose);
+        font-family: var(--font-display);
+        font-style: italic;
+      }
+
+      .hero-copy {
+        max-width: 660px;
+        margin-top: 24px;
+        color: var(--night-ink-2);
+        font-family: var(--font-display);
+        font-size: 21px;
+        font-weight: 340;
+        line-height: 1.58;
+        overflow-wrap: break-word;
+        white-space: normal;
+      }
+
+      .hero-meta {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        gap: 48px;
+        max-width: min(980px, 100%);
+        margin-top: 40px;
+      }
+
+      .hero-meta .cell {
+        padding-top: 12px;
+        border-top: 1px solid rgb(216 214 232 / 0.2);
+      }
+
+      .meta-label,
+      .term-pos,
+      .card h3,
+      .repo-step {
+        color: var(--ink-3);
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .hero-meta .meta-label {
+        color: var(--night-ink-3);
+      }
+
+      .meta-value {
+        margin-top: 5px;
+        color: var(--night-ink);
+        font-family: var(--font-display);
+        font-size: 18px;
+      }
+
+      .tel-section {
+        position: relative;
+        padding: 88px 0;
+      }
+
+      .tel-container {
+        position: relative;
+        width: calc(100% - 32px);
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .paper-section {
+        background:
+          radial-gradient(circle at 18% 16%, rgba(137, 176, 230, 0.10), transparent 28%),
+          radial-gradient(circle at 82% 72%, rgba(120, 135, 210, 0.08), transparent 30%),
+          radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.55), transparent 24%),
+          linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+      }
+
+      .paper-section.alt {
+        background:
+          radial-gradient(circle at 72% 22%, rgba(120, 135, 210, 0.09), transparent 30%),
+          radial-gradient(circle at 15% 68%, rgba(137, 176, 230, 0.08), transparent 28%),
+          radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.45), transparent 25%),
+          linear-gradient(180deg, var(--paper-2) 0%, var(--paper) 100%);
+      }
+
+      .tel-section .tel-label {
+        margin-bottom: 12px;
+        color: var(--ink-3);
+      }
+
+      .section-title {
+        max-width: 850px;
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-size: 46px;
+        font-weight: 400;
+        line-height: 1.12;
+      }
+
+      .section-lede {
+        max-width: 720px;
+        margin-top: 15px;
+        color: var(--ink-2);
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 340;
+        line-height: 1.55;
+      }
+
+      .graph-panel,
+      .install-block {
+        color: var(--night-ink);
+        background:
+          radial-gradient(circle at 8% 0%, rgb(91 124 250 / 0.12), transparent 34%),
+          var(--ocean);
+        border: 1px solid rgb(216 214 232 / 0.2);
+        box-shadow: var(--shadow-night);
+      }
+
+      .graph-panel {
+        position: relative;
+        margin-top: 38px;
+        padding: 30px;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+
+      .graph-panel::before {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(#ffffff1f 0.7px, transparent 0.8px),
+          radial-gradient(#dea19314 0.5px, transparent 0.6px);
+        background-size: 23px 23px, 13px 9px;
+        content: '';
+        pointer-events: none;
+      }
+
+      .graph-head,
+      .graph-scroll {
+        position: relative;
+      }
+
+      .graph-head {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+      }
+
+      .graph-title {
+        font-family: var(--font-display);
+        font-size: 17px;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .legend span {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        color: var(--night-ink-3);
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .swatch {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .swatch.active {
+        background: var(--rose);
+      }
+
+      .swatch.complete {
+        background: #3a4664;
+      }
+
+      .swatch.reentry {
+        background: transparent;
+        border: 1px dashed var(--night-ink-3);
+      }
+
+      .graph-scroll {
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .graph-scroll svg {
+        min-width: 760px;
+      }
+
+      .cycle {
+        display: grid;
+        grid-template-columns: 210px minmax(0, 1fr);
+        gap: 34px 28px;
+        max-width: 920px;
+        margin-top: 54px;
+      }
+
+      .cycle dt {
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-size: 23px;
+        font-weight: 420;
+      }
+
+      .cycle dt small {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--ink-3);
+        font-family: var(--font-sans);
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .cycle dd {
+        max-width: 660px;
+        color: var(--ink-2);
+      }
+
+      .vocab-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 38px;
+        overflow: hidden;
+        background: var(--rule);
+        border: 1px solid var(--rule);
+        border-radius: 8px;
+        box-shadow: var(--shadow-paper);
+      }
+
+      .term-card {
+        min-height: 190px;
+        padding: 24px 26px;
+        background: var(--paper);
+        transition: background 120ms var(--ease-paper);
+      }
+
+      .term-card:hover {
+        background: var(--paper-2);
+      }
+
+      .term-name {
+        margin-top: 7px;
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 380;
+      }
+
+      .term-def {
+        margin-top: 8px;
+        color: var(--ink-2);
+        font-size: 14px;
+        line-height: 1.56;
+      }
+
+      .tel-narrow {
+        max-width: 720px;
+      }
+
+      .install-block {
+        margin-top: 32px;
+        padding: 24px 26px 22px;
+        border-radius: 8px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        line-height: 1.75;
+      }
+
+      .install-block .prompt {
+        margin-right: 8px;
+        color: var(--night-ink-3);
+        user-select: none;
+      }
+
+      .install-block .cmd {
+        color: var(--night-ink);
+      }
+
+      .install-block .arg {
+        color: var(--rose);
+      }
+
+      .install-block .cmt {
+        color: var(--night-ink-3);
+      }
+
+      .install-gap {
+        height: 12px;
+      }
+
+      .install-meta {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 36px;
+        border-top: 1px solid var(--rule);
+      }
+
+      .install-meta .cell {
+        padding: 18px 24px 18px 0;
+        border-right: 1px solid var(--rule);
+      }
+
+      .install-meta .cell:last-child {
+        border-right: 0;
+      }
+
+      .install-meta .value {
+        margin-top: 5px;
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-size: 18px;
+      }
+
+      .install-meta .mono {
+        color: var(--ink-2);
+        font-family: var(--font-mono);
+        font-size: 13px;
+      }
+
+      .assessment-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.75rem;
+        gap: 24px;
+        margin-top: 34px;
       }
 
-      .commands {
-        padding: 1rem;
-        border: 1px solid var(--border);
+      .card {
+        padding: 23px 24px 24px;
+        background: var(--paper);
+        border: 1px solid var(--rule);
         border-radius: 8px;
-        background: #fcfdfc;
+        box-shadow: var(--shadow-paper);
       }
 
-      .commands ul {
+      .card.weak {
+        background: var(--paper);
+      }
+
+      .card h3 {
+        margin: 0 0 11px;
+      }
+
+      .card ul {
         display: grid;
-        gap: 0.5rem;
+        gap: 0;
         padding: 0;
-        margin: 0.75rem 0 0;
+        margin: 0;
         list-style: none;
       }
 
-      code {
-        display: inline-block;
-        max-width: 100%;
-        padding: 0.125rem 0.35rem;
-        overflow-wrap: anywhere;
+      .card li {
+        display: grid;
+        grid-template-columns: 18px minmax(0, 1fr);
+        gap: 10px;
+        padding: 9px 0;
+        color: var(--ink-2);
+        border-top: 1px solid var(--rule-soft);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .card li:first-child {
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .card .mark {
+        color: var(--blue);
+        font-family: var(--font-display);
+        font-style: italic;
+      }
+
+      .card.weak .mark {
+        color: var(--rose-soft);
+      }
+
+      .assessment-note {
+        max-width: 720px;
+        margin-top: 34px;
+        color: var(--ink-2);
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-style: italic;
+      }
+
+      .tel-footer {
+        position: relative;
+        overflow: hidden;
+        padding: 64px 0 36px;
+        color: var(--night-ink-3);
+        background:
+          radial-gradient(ellipse 110% 90% at 50% 100%, #0f1738 0%, #060b1a 80%),
+          #060b1a;
+      }
+
+      .tel-footer::before {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(#ffffff14 0.5px, transparent 0.7px);
+        background-size: 17px 17px;
+        content: '';
+        pointer-events: none;
+      }
+
+      .footer-inner {
+        position: relative;
+        width: calc(100% - 32px);
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .footer-inner .tel-label {
+        margin-bottom: 24px;
+        color: var(--night-ink-3);
+      }
+
+      .repo-chain {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 36px;
+      }
+
+      .repo-card {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .repo-name {
+        color: var(--night-ink);
+        font-family: var(--font-display);
+        font-size: 24px;
+      }
+
+      .repo-desc {
+        max-width: 290px;
+        color: var(--night-ink-3);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .repo-card a {
+        width: fit-content;
+        margin-top: 5px;
+        color: var(--night-ink-3);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        text-decoration: none;
+        border-bottom: 1px solid rgb(216 214 232 / 0.2);
+      }
+
+      .repo-card a:hover {
+        color: var(--night-ink);
+        border-color: var(--night-ink-3);
+      }
+
+      .footer-bottom {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        margin-top: 48px;
+        padding-top: 22px;
+        border-top: 1px solid rgb(216 214 232 / 0.18);
+      }
+
+      .footer-bottom .brand-mark {
+        width: 18px;
+        height: 18px;
+        flex-basis: 18px;
+      }
+
+      .footer-copy {
+        color: var(--night-ink-3);
+        font-family: var(--font-display);
+        font-size: 13px;
+        font-style: italic;
+      }
+
+      .footer-spacer {
+        flex: 1;
+      }
+
+      .footer-bottom a {
+        color: var(--night-ink-3);
+        font-size: 12px;
+        text-decoration: none;
+        border-bottom: 1px solid rgb(216 214 232 / 0.2);
+      }
+
+      .footer-bottom a:hover {
+        color: var(--night-ink);
+      }
+
+      /* ── Night theme vars ── */
+      html[data-theme="night"] {
+        color-scheme: dark;
+        --paper: #0a1430;
+        --paper-2: #0f1c3a;
+        --paper-3: #132449;
+        --paper-edge: #2a3a61;
+        --ink: #f4f0ff;
+        --ink-2: #d8d6e8;
+        --ink-3: #b9b2d6;
+        --ink-4: #8f98bb;
+        --rule: #2a3a61;
+        --rule-soft: rgb(216 214 232 / 0.14);
+      }
+
+      html[data-theme="night"] body {
+        background: #060d22;
+        color: var(--night-ink);
+      }
+
+      html[data-theme="night"] .tel-page {
+        background: #060d22;
+      }
+
+      html[data-theme="night"] .paper-section {
+        background:
+          url('/assets/principia/stars.svg') center / cover no-repeat,
+          radial-gradient(circle at 72% 18%, rgba(75, 46, 131, 0.20), transparent 36%),
+          radial-gradient(circle at 28% 62%, rgba(110, 66, 193, 0.10), transparent 34%),
+          radial-gradient(circle at 14% 22%, rgba(89, 144, 192, 0.08), transparent 30%),
+          linear-gradient(180deg, #070A18 0%, #0B1028 100%);
+        border-bottom: none;
+      }
+
+      html[data-theme="night"] .paper-section.alt {
+        background:
+          url('/assets/principia/stars.svg') center / cover no-repeat,
+          radial-gradient(circle at 20% 20%, rgba(110, 66, 193, 0.18), transparent 34%),
+          radial-gradient(circle at 76% 68%, rgba(75, 46, 131, 0.12), transparent 36%),
+          radial-gradient(circle at 88% 14%, rgba(89, 144, 192, 0.07), transparent 28%),
+          linear-gradient(180deg, #0B1028 0%, #070A18 100%);
+        border-bottom: none;
+      }
+
+      html[data-theme="night"] .section-title,
+      html[data-theme="night"] .cycle dt,
+      html[data-theme="night"] .term-name,
+      html[data-theme="night"] .install-meta .value,
+      html[data-theme="night"] .repo-name {
+        color: var(--night-ink);
+      }
+
+      html[data-theme="night"] .section-lede,
+      html[data-theme="night"] .cycle dd,
+      html[data-theme="night"] .term-def,
+      html[data-theme="night"] .install-meta .mono,
+      html[data-theme="night"] .card li,
+      html[data-theme="night"] .assessment-note {
+        color: var(--night-ink-2);
+      }
+
+      html[data-theme="night"] .tel-section .tel-label,
+      html[data-theme="night"] .meta-label,
+      html[data-theme="night"] .term-pos,
+      html[data-theme="night"] .card h3,
+      html[data-theme="night"] .repo-step {
+        color: var(--night-ink-3);
+      }
+
+      html[data-theme="night"] .vocab-grid,
+      html[data-theme="night"] .assessment-grid {
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+      }
+
+      html[data-theme="night"] .term-card,
+      html[data-theme="night"] .card,
+      html[data-theme="night"] .card.weak {
+        background:
+          radial-gradient(circle at 82% 18%, rgba(110, 66, 193, 0.10), transparent 34%),
+          radial-gradient(circle at 16% 80%, rgba(89, 144, 192, 0.07), transparent 30%),
+          linear-gradient(135deg, rgba(16, 42, 107, 0.48) 0%, rgba(13, 18, 42, 0.88) 100%);
+        border: 1px solid rgba(244, 240, 255, 0.09);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.05),
+          0 14px 32px rgba(0, 0, 0, 0.20);
+      }
+
+      html[data-theme="night"] .term-card:hover {
+        background:
+          radial-gradient(circle at 82% 18%, rgba(110, 66, 193, 0.14), transparent 34%),
+          radial-gradient(circle at 16% 80%, rgba(89, 144, 192, 0.10), transparent 30%),
+          linear-gradient(135deg, rgba(16, 42, 107, 0.56) 0%, rgba(13, 18, 42, 0.92) 100%);
+      }
+
+      html[data-theme="night"] .card li {
+        border-color: var(--app-line-soft);
+      }
+
+      html[data-theme="night"] .install-meta {
+        border-color: var(--app-line);
+      }
+
+      html[data-theme="night"] .install-meta .cell {
+        border-color: var(--app-line);
+      }
+
+      html[data-theme="night"] .tel-hero {
+        min-height: calc(100vh - 58px);
+      }
+
+      html[data-theme="night"] .tel-hero::after {
+        display: none;
+      }
+
+      html[data-theme="night"] .tel-hero-inner {
+        display: block;
+        padding: 78px 0 64px;
+      }
+
+      html[data-theme="night"] .hero-copy-block {
+        max-width: 1180px;
+      }
+
+      html[data-theme="night"] .hero-copy {
+        max-width: 660px;
+      }
+
+      html[data-theme="night"] .hero-meta {
+        max-width: min(980px, 100%);
+      }
+
+      .app-preview-shell {
+        position: relative;
+        z-index: 1;
+        min-height: 36rem;
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, rgb(14 26 54 / 0.94), rgb(7 16 37 / 0.96)),
+          #071025;
+        border: 1px solid var(--app-line-soft);
+        border-radius: 12px;
+        box-shadow: var(--shadow-night);
+      }
+
+      .app-preview-shell::before {
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(#ffffff16 0.6px, transparent 0.7px),
+          radial-gradient(#dea19310 0.5px, transparent 0.6px);
+        background-size: 18px 18px, 11px 13px;
+        content: '';
+        pointer-events: none;
+      }
+
+      .app-topbar,
+      .app-workspace,
+      .app-rail,
+      .app-main,
+      .app-eventlog {
+        position: relative;
+      }
+
+      .app-topbar {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 16px;
+        align-items: center;
+        min-height: 56px;
+        padding: 10px 14px;
+        background: rgb(244 240 255 / 0.035);
+        border-bottom: 1px solid var(--app-line-soft);
+      }
+
+      .app-brand {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        color: var(--night-ink);
+        font-family: var(--font-display);
+        font-size: 18px;
+      }
+
+      .session-chip {
+        justify-self: end;
+        padding: 6px 12px;
+        color: var(--night-ink-3);
+        background: rgb(244 240 255 / 0.045);
+        border: 1px solid var(--app-line-soft);
+        border-radius: 6px;
+        font-family: var(--font-mono);
+        font-size: 12px;
+      }
+
+      .chamber-button,
+      .app-icon-button {
+        border: 1px solid var(--app-line-soft);
+        color: var(--night-ink-3);
+        background: rgb(244 240 255 / 0.04);
+        font: inherit;
+        transition:
+          color 120ms var(--ease-paper),
+          background 120ms var(--ease-paper),
+          border-color 120ms var(--ease-paper);
+      }
+
+      .chamber-button.is-active {
+        color: var(--night-ink);
+        background: rgb(222 161 147 / 0.14);
+        border-color: rgb(222 161 147 / 0.44);
+      }
+
+      .app-workspace {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr) minmax(18rem, 0.55fr);
+        min-height: 31rem;
+      }
+
+      .app-rail {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        padding: 14px 8px;
+        background: rgb(6 13 34 / 0.58);
+        border-right: 1px solid var(--app-line-soft);
+      }
+
+      .chamber-button {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .chamber-glyph {
+        width: 16px;
+        height: 16px;
+        display: block;
+        flex-shrink: 0;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1;
+        stroke-linecap: round;
+      }
+
+      .app-main {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .telos-card,
+      .slice-drawer {
+        background: rgb(244 240 255 / 0.045);
+        border: 1px solid var(--app-line-soft);
+        border-radius: 8px;
+      }
+
+      .telos-card {
+        padding: 18px;
+      }
+
+      .telos-card-header {
+        display: flex;
+        gap: 14px;
+        justify-content: space-between;
+        color: var(--night-ink-3);
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+
+      .telos-card h2 {
+        max-width: 42rem;
+        margin-top: 12px;
+        color: var(--night-ink);
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 400;
+        line-height: 1.18;
+      }
+
+      .telos-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 14px;
+        color: var(--app-muted);
+        font-family: var(--font-mono);
+        font-size: 11px;
+      }
+
+      .demo-graph-panel {
+        position: relative;
+        min-height: 19rem;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 76% 26%, rgb(222 161 147 / 0.14), transparent 12rem),
+          #050a1f;
+        border: 1px solid var(--app-line-soft);
+        border-radius: 8px;
+      }
+
+      .demo-graph-panel svg {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        min-height: 19rem;
+      }
+
+      .animation-panel-label {
+        position: absolute;
+        top: 14px;
+        left: 16px;
+        z-index: 1;
+        color: var(--night-ink-3);
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+
+      .active-chamber-readout {
+        position: absolute;
+        right: 16px;
+        bottom: 14px;
+        z-index: 1;
+        color: var(--rose);
+        font-family: var(--font-mono);
+        font-size: 12px;
+      }
+
+      .slice-drawer {
+        display: grid;
+        gap: 8px;
+        padding: 12px;
+      }
+
+      /* ── Gradient-bar slice cards ── */
+      .slice-card {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba(16, 42, 107, 0.72) 0%, rgba(13, 18, 42, 0.94) 100%);
+        border: 1px solid rgba(244, 240, 255, 0.12);
+        border-radius: 8px;
+        padding: 11px 13px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 5px 10px;
+        align-items: start;
+        cursor: pointer;
+        color: #F4F0FF;
+        text-align: left;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 8px 20px rgba(0, 0, 0, 0.28);
+        transition: filter 120ms var(--ease-paper);
+      }
+
+      .slice-card:hover { filter: brightness(1.07); }
+      .slice-card[aria-selected="true"] {
+        box-shadow: 0 0 0 1.5px rgba(244, 240, 255, 0.38) inset, 0 8px 20px rgba(0, 0, 0, 0.35);
+      }
+
+      /* Gradient bar at bottom — the verdict signal */
+      .slice-card::after {
+        content: "";
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        height: 3px;
+        background: var(--slice-gradient);
+        opacity: 0.95;
+        box-shadow: 0 -6px 16px var(--slice-glow);
+      }
+
+      .slice-card--partial {
+        --slice-state: #CCA273;
+        --slice-soft: rgba(204, 162, 115, 0.16);
+        --slice-glow: rgba(204, 162, 115, 0.26);
+        --slice-gradient: linear-gradient(90deg, #102A6B 0%, #5990C0 45%, #CCA273 100%);
+      }
+      .slice-card--proven {
+        --slice-state: #5990C0;
+        --slice-soft: rgba(89, 144, 192, 0.16);
+        --slice-glow: rgba(89, 144, 192, 0.26);
+        --slice-gradient: linear-gradient(90deg, #5990C0 0%, #2F6FA8 45%, #102A6B 100%);
+      }
+      .slice-card--open {
+        --slice-state: #7E879D;
+        --slice-soft: rgba(126, 135, 157, 0.14);
+        --slice-glow: rgba(126, 135, 157, 0.20);
+        --slice-gradient: linear-gradient(90deg, #102A6B 0%, #34304F 50%, #7E879D 100%);
+      }
+      .slice-card--falsified {
+        --slice-state: #DEA193;
+        --slice-soft: rgba(222, 161, 147, 0.16);
+        --slice-glow: rgba(222, 161, 147, 0.24);
+        --slice-gradient: linear-gradient(90deg, #102A6B 0%, #6E42C1 48%, #DEA193 100%);
+      }
+
+      .slice-card-title {
+        display: block;
+        color: #F4F0FF;
+        font-family: var(--font-display);
+        font-size: 14px;
+        font-weight: 420;
+        line-height: 1.3;
+      }
+
+      .slice-card-meta {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+        font-size: 10px;
+        color: rgba(244, 240, 255, 0.58);
+        margin-top: 3px;
+      }
+
+      .slice-card-meta b { color: rgba(244, 240, 255, 0.9); font-weight: 500; }
+
+      .slice-note {
+        font-family: var(--font-display);
+        font-style: italic;
+        color: rgba(244, 240, 255, 0.72);
+      }
+
+      .slice-card-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+        padding-top: 1px;
+      }
+
+      .slice-verdict-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 2px 8px 2px 6px;
+        border-radius: 999px;
+        font-family: var(--font-sans);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        background: var(--slice-soft);
+        border: 1px solid color-mix(in srgb, var(--slice-state) 42%, transparent);
+        color: #F4F0FF;
+        white-space: nowrap;
+      }
+
+      .pill-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--slice-state);
+        flex-shrink: 0;
+      }
+
+      .app-eventlog {
+        overflow: hidden;
+        background: rgb(5 10 31 / 0.72);
+        border-left: 1px solid var(--app-line-soft);
+      }
+
+      .eventlog-head {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px;
+        color: var(--night-ink);
+        border-bottom: 1px solid var(--app-line-soft);
+        font-family: var(--font-display);
+        font-size: 18px;
+      }
+
+      .eventlog-session {
+        color: var(--night-ink-3);
+        font-family: var(--font-mono);
+        font-size: 11px;
+      }
+
+      .event-list {
+        display: grid;
+        gap: 0;
+        max-height: 28rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 6px 0;
+      }
+
+      .event-row {
+        display: grid;
+        grid-template-columns: 5.6rem minmax(0, 1fr);
+        gap: 4px 10px;
+        padding: 9px 14px;
+        color: var(--night-ink-2);
+        border-bottom: 1px solid rgb(216 214 232 / 0.07);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .event-row.is-highlighted {
+        background: rgb(222 161 147 / 0.1);
+      }
+
+      .event-time {
+        grid-row: 1 / span 2;
+        color: var(--app-faint);
+      }
+
+      .event-chamber {
+        grid-column: 2;
+        color: var(--night-ink);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .event-detail {
+        grid-column: 2;
+        color: var(--app-muted);
+        overflow-wrap: break-word;
+      }
+
+      /* ── Slice detail slide-over panel (in-app, not page-level) ── */
+      .slice-detail-overlay {
+        position: absolute;
+        top: 56px; /* sits below the app topbar */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(7, 16, 37, 0.55);
+        z-index: 200;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .slice-detail-overlay[aria-hidden="true"] {
+        display: none;
+      }
+
+      .slice-detail-panel {
+        width: min(600px, 78%);
+        height: 100%;
+        background: linear-gradient(180deg, rgba(13, 18, 42, 0.97) 0%, rgba(5, 8, 22, 0.99) 100%);
+        border-left: 1px solid rgba(244, 240, 255, 0.12);
+        box-shadow: -18px 0 42px rgba(0, 0, 0, 0.32);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slid-in 280ms cubic-bezier(0.2, 0.6, 0.2, 1);
+      }
+
+      @keyframes slid-in {
+        from { transform: translateX(20px); opacity: 0; }
+        to   { transform: none; opacity: 1; }
+      }
+
+      .slice-detail-head {
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--app-line-soft);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+
+      .slice-detail-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 10px 3px 8px;
+        border-radius: 999px;
+        font-family: var(--font-sans);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .slice-detail-pill--partial  { background:#ECDFC020; color:#CCA273; border-color:#CCA27344; }
+      .slice-detail-pill--proven   { background:#5990C020; color:#5990C0; border-color:#5990C044; }
+      .slice-detail-pill--open     { background:#7E879D20; color:#9EA8CA; border-color:#7E879D44; }
+      .slice-detail-pill--falsified{ background:#DEA19320; color:#DEA193; border-color:#DEA19344; }
+      .slice-detail-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+      .slice-detail-id {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        color: var(--night-ink);
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .slice-detail-close {
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--night-ink-3);
+        font-family: var(--font-sans);
+        font-size: 12px;
+        padding: 4px 10px;
         border-radius: 4px;
-        background: #eef3f0;
-        color: #25362f;
-        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-        font-size: 0.8125rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        flex-shrink: 0;
       }
 
-      .notice {
-        border-color: #ead3aa;
-        background: #fffaf0;
+      .slice-detail-close:hover {
+        color: var(--night-ink);
+        background: rgba(244, 240, 255, 0.06);
       }
 
-      .notice h2 {
-        color: #6f471c;
+      .slice-detail-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 18px 22px 60px;
       }
 
-      footer {
-        color: var(--muted);
-        font-size: 0.8125rem;
+      .slice-detail-label {
+        font-family: var(--font-sans);
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--night-ink-3);
+        margin: 18px 0 7px;
       }
 
-      @media (max-width: 56rem) {
-        main {
-          width: min(100% - 1rem, 72rem);
-          padding-top: 0.5rem;
+      .slice-detail-label:first-child { margin-top: 0; }
+
+      .slice-detail-quote {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 16px;
+        line-height: 1.5;
+        color: var(--night-ink);
+        padding-left: 13px;
+        border-left: 1px solid var(--night-ink-3);
+        margin: 0 0 10px;
+      }
+
+      .slice-detail-body p {
+        color: var(--night-ink-2);
+        font-size: 13px;
+        line-height: 1.6;
+        margin: 0 0 8px;
+      }
+
+      .slice-detail-kv {
+        display: grid;
+        grid-template-columns: 116px 1fr;
+        gap: 5px 14px;
+        font-size: 12px;
+      }
+
+      .slice-detail-kv dt { color: var(--night-ink-3); }
+      .slice-detail-kv dd {
+        color: var(--night-ink);
+        margin: 0;
+        font-family: var(--font-mono);
+        font-size: 11px;
+      }
+
+      .slice-detail-kv dd.sd-note {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 12px;
+      }
+
+      .slice-detail-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+      }
+
+      .slice-action-btn {
+        font-family: var(--font-sans);
+        font-size: 12px;
+        font-weight: 500;
+        padding: 5px 11px;
+        border-radius: 4px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        border: 1px solid transparent;
+        transition: background 120ms var(--ease-paper), border-color 120ms;
+      }
+
+      .slice-action-primary {
+        background: var(--rose);
+        color: #10182f;
+        border-color: var(--rose-soft);
+      }
+
+      .slice-action-secondary {
+        background: transparent;
+        color: var(--night-ink);
+        border-color: var(--night-ink-3);
+      }
+
+      .slice-action-secondary:hover { border-color: var(--night-ink); background: rgba(244, 240, 255, 0.06); }
+
+      .slice-action-quiet {
+        background: transparent;
+        color: var(--night-ink-2);
+      }
+
+      .slice-action-quiet:hover { color: var(--night-ink); background: rgba(244, 240, 255, 0.06); }
+
+      .vivarium-section {
+        padding-top: 72px;
+      }
+
+      .vivarium-frame {
+        margin-top: 34px;
+      }
+
+      .install-heading-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: clamp(28px, 7vw, 90px);
+        align-items: center;
+      }
+
+      .install-heading-copy {
+        min-width: 0;
+      }
+
+      .app-demo-block {
+        margin-top: 42px;
+      }
+
+      .mockup-demo-head {
+        display: flex;
+        gap: 18px;
+        align-items: end;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .mockup-demo-note {
+        max-width: 38rem;
+        margin: 0;
+        color: var(--ink-3);
+        font-family: var(--font-mono);
+        font-size: 11px;
+      }
+
+      @media (max-width: 900px) {
+        .tel-nav-inner {
+          gap: 16px;
         }
 
-        .hero,
-        .grid,
-        .metrics,
-        .command-grid {
+        .nav-links {
+          display: none;
+        }
+
+        .repo-link {
+          display: none;
+        }
+
+        .pull-id {
+          display: none;
+        }
+
+        .tel-hero-inner {
+          padding: 78px 0 68px;
+        }
+
+        .hero-title-row {
+          align-items: flex-start;
+        }
+
+        .decor-animation-chaotic {
+          width: clamp(220px, 34vw, 320px);
+          height: 180px;
+        }
+
+        .install-heading-row {
           grid-template-columns: 1fr;
         }
 
-        .hero {
-          padding: 1.25rem;
+        .decor-animation-circle {
+          justify-self: start;
         }
 
-        h1 {
-          font-size: 1.875rem;
+        .app-preview-shell {
+          min-height: 0;
         }
 
-        .task {
-          grid-template-columns: 1.5rem minmax(0, 1fr);
+        .app-workspace {
+          grid-template-columns: 52px minmax(0, 1fr);
         }
 
-        .owner {
-          grid-column: 2;
+        .app-eventlog {
+          grid-column: 1 / -1;
+          border-top: 1px solid var(--app-line-soft);
+          border-left: 0;
         }
 
-        .link-row {
+        .event-list {
+          max-height: 15rem;
+        }
+
+        .hero-title {
+          font-size: 54px;
+        }
+
+        .hero-thesis {
+          font-size: 22px;
+        }
+
+        .hero-meta,
+        .vocab-grid,
+        .install-meta,
+        .assessment-grid,
+        .repo-chain {
+          grid-template-columns: 1fr;
+        }
+
+        .install-meta .cell {
+          border-right: 0;
+          border-bottom: 1px solid var(--rule);
+        }
+
+        .install-meta .cell:last-child {
+          border-bottom: 0;
+        }
+
+        .cycle {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .cycle dd {
+          margin-bottom: 22px;
+        }
+
+        .footer-bottom {
           align-items: flex-start;
           flex-direction: column;
         }
       }
+
+      @media (max-width: 560px) {
+        .tel-nav-inner,
+        .tel-container,
+        .tel-hero-inner,
+        .footer-inner {
+          width: calc(100% - 24px);
+        }
+
+        .brand-org {
+          display: none;
+        }
+
+        .tel-hero {
+          min-height: calc(100vh - 80px);
+        }
+
+        .tel-hero::after {
+          opacity: 0.12;
+        }
+
+        .tel-hero-inner {
+          padding: 62px 0 56px;
+        }
+
+        .app-topbar {
+          grid-template-columns: 1fr;
+          align-items: start;
+        }
+
+        .session-chip {
+          justify-self: stretch;
+          overflow-wrap: anywhere;
+        }
+
+        .app-workspace {
+          grid-template-columns: 1fr;
+        }
+
+        .app-rail {
+          flex-direction: row;
+          justify-content: flex-start;
+          overflow-x: auto;
+          border-right: 0;
+          border-bottom: 1px solid var(--app-line-soft);
+        }
+
+        .app-main {
+          padding: 14px;
+        }
+
+        .telos-card h2 {
+          font-size: 22px;
+        }
+
+        .demo-graph-panel {
+          min-height: 17rem;
+        }
+
+        .demo-graph-panel svg {
+          min-height: 17rem;
+        }
+
+        .event-row {
+          grid-template-columns: 5.4rem minmax(0, 1fr);
+        }
+
+        .hero-title-row {
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .decor-animation-chaotic {
+          width: min(100%, 300px);
+          height: 160px;
+          margin-top: 0;
+        }
+
+        .decor-animation-circle {
+          width: 160px;
+          height: 160px;
+        }
+
+        .mockup-demo-head {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .hero-title {
+          font-size: 42px;
+        }
+
+        .hero-thesis {
+          font-size: 20px;
+          width: 100%;
+          max-width: calc(100vw - 48px);
+        }
+
+        .hero-copy,
+        .section-lede {
+          font-size: 17px;
+        }
+
+        .hero-copy {
+          width: 100%;
+          max-width: calc(100vw - 48px);
+        }
+
+        .section-title {
+          font-size: 34px;
+        }
+
+        .tel-section {
+          padding: 66px 0;
+        }
+
+        .graph-panel,
+        .install-block {
+          padding: 20px 16px;
+        }
+
+        .graph-head {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .term-card {
+          min-height: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 1ms !important;
+        }
+      }
     </style>
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        var resolved;
+        if (stored === 'night' || stored === 'daylight') {
+          resolved = stored;
+        } else {
+          resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'daylight';
+        }
+        document.documentElement.setAttribute('data-theme', resolved);
+      })();
+    </script>
   </head>
   <body>
-    <main>
-      {
-        isProd ? (
-          <>
-            <h1>Telotia</h1>
-            <p class="lede">Coming soon.</p>
-          </>
-        ) : (
-          <div class="shell">
-            <header class="hero">
-              <div>
-                <p class="eyebrow">Limen operations</p>
-                <h1>Development dashboard</h1>
-                <p class="lede">
-                  The Telotia site is live in two tracks: dev is the working
-                  dashboard for contributors, and main is the production
-                  release path for telotia.com.
+    <div class="tel-page">
+      <nav class="tel-nav" aria-label="Primary navigation">
+        <div class="tel-nav-inner">
+          <a class="brand" href="/" aria-label="Principia home">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="brand-name">TELOTIA</span>
+            <span class="brand-org">Principia · v0.1.0</span>
+          </a>
+          <div class="nav-links" aria-label="Page sections">
+            {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+          </div>
+          <span class="nav-spacer"></span>
+          <div class="theme-switcher" aria-label="Theme">
+            <button class="theme-btn" data-theme-value="daylight" title="Daylight">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <circle cx="7" cy="7" r="3" stroke="currentColor" stroke-width="1.3"/>
+                <line x1="7" y1="0.5" x2="7" y2="2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <line x1="7" y1="11.5" x2="7" y2="13.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <line x1="0.5" y1="7" x2="2.5" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <line x1="11.5" y1="7" x2="13.5" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <line x1="2.6" y1="2.6" x2="3.9" y2="3.9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <line x1="10.1" y1="10.1" x2="11.4" y2="11.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <line x1="11.4" y1="2.6" x2="10.1" y2="3.9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <line x1="3.9" y1="10.1" x2="2.6" y2="11.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button class="theme-btn" data-theme-value="night" title="Night">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M12.5 9.5A6 6 0 1 1 4.5 1.5a4.3 4.3 0 0 0 8 8z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="theme-btn" data-theme-value="system" title="System">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <rect x="1" y="2" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+                <line x1="7" y1="10" x2="7" y2="12.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <line x1="4.5" y1="12.5" x2="9.5" y2="12.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <a class="repo-link" href="https://github.com/Telotia/Principia">
+            github.com/Telotia/Principia &nearr;
+          </a>
+        </div>
+      </nav>
+
+      <main>
+        <section class="tel-hero" aria-labelledby="hero-title">
+          <div class="tel-hero-inner">
+            <div class="hero-copy-block">
+              <div class="hero-status">
+                <span class="status-dot"></span>
+                principia / v0.1.0 / alpha
+              </div>
+              <div class="hero-title-row">
+                <h1 class="hero-title" id="hero-title">TELOTIA</h1>
+                <div class="decor-animation decor-animation-chaotic" aria-hidden="true">
+                  <canvas data-decor-animation="chaotic"></canvas>
+                </div>
+              </div>
+              <p class="hero-thesis">
+                <span class="hero-line">An <em>epistemic being.</em></span>
+                <span class="hero-line">Not a coding agent.</span>
+                <span class="hero-line">There is no deliverable.</span>
+              </p>
+              <p class="hero-copy">
+                <span class="hero-line">Principia takes a single seed.</span>
+                <span class="hero-line">
+                  It lives inside that seed as an investigation.
+                </span>
+                <span class="hero-line">
+                  Each pass records what was honestly earned.
+                </span>
+                <span class="hero-line">
+                  The work ends when no productive framing is left.
+                </span>
+              </p>
+              <div class="hero-meta" aria-label="Kernel facts">
+                {
+                  heroMeta.map((item) => (
+                    <div class="cell">
+                      <div class="meta-label">{item.label}</div>
+                      <div class="meta-value">{item.value}</div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="tel-section paper-section" id="organism">
+          <div class="tel-container">
+            <div class="tel-label">The Organism</div>
+            <h2 class="section-title">
+              One seed. Eight chambers. <em>One death.</em>
+            </h2>
+            <p class="section-lede">
+              Every Chamber except Slice oscillates the same way: a Constructor
+              proposes, a Critic presses, a convergence check decides whether to
+              iterate, and a Stabilizer crystallizes what the engagement
+              honestly earned.
+            </p>
+
+            <div class="graph-panel" aria-label="Chamber graph">
+              <div class="graph-head">
+                <div class="graph-title">Chamber graph / canonical ontology v4</div>
+                <div class="legend" aria-label="Graph legend">
+                  <span><span class="swatch active"></span>active</span>
+                  <span><span class="swatch complete"></span>completed</span>
+                  <span><span class="swatch reentry"></span>re-entry</span>
+                </div>
+              </div>
+              <div class="graph-scroll">
+                <svg
+                  viewBox="0 0 900 240"
+                  preserveAspectRatio="xMidYMid meet"
+                  width="100%"
+                  height="240"
+                  role="img"
+                  aria-labelledby="graph-title"
+                >
+                  <title id="graph-title">Principia chamber graph</title>
+                  {
+                    graphEdges.map((edge) => {
+                      const from = graphNodeById[edge.from];
+                      const to = graphNodeById[edge.to];
+                      const dashed = edge.dashed || edge.terminal;
+                      const activeEdge = !dashed && (from.active || to.active);
+
+                      return (
+                        <g>
+                          <line
+                            x1={from.x}
+                            y1={from.y}
+                            x2={to.x}
+                            y2={to.y}
+                            stroke={activeEdge ? '#DEA193' : '#3A4664'}
+                            stroke-width={activeEdge ? '1.5' : '0.9'}
+                            stroke-dasharray={dashed ? '3 5' : ''}
+                            opacity={dashed ? '0.55' : '1'}
+                          />
+                          {edge.label && (
+                            <text
+                              x={(from.x + to.x) / 2 - 14}
+                              y={(from.y + to.y) / 2 - 8}
+                              font-family="Newsreader, Georgia, serif"
+                              font-style="italic"
+                              font-size="12"
+                              fill="#B0A89A"
+                            >
+                              {edge.label}
+                            </text>
+                          )}
+                        </g>
+                      );
+                    })
+                  }
+                  {
+                    graphNodes.map((node) => (
+                      <g>
+                        <circle
+                          cx={node.x}
+                          cy={node.y}
+                          r={node.active ? '14' : '10'}
+                          fill={node.active ? '#DEA193' : node.terminal ? '#0A1430' : '#162244'}
+                          stroke={node.active ? '#DEA193' : '#B0A89A'}
+                          stroke-width="0.9"
+                          stroke-dasharray={node.terminal ? '2 3' : ''}
+                        />
+                        {node.terminal && (
+                          <text
+                            x={node.x}
+                            y={node.y + 4}
+                            text-anchor="middle"
+                            font-size="11"
+                            fill="#B0A89A"
+                          >
+                            x
+                          </text>
+                        )}
+                        <text
+                          x={node.x}
+                          y={node.y < 110 ? node.y - 22 : node.y + 30}
+                          text-anchor="middle"
+                          font-family="IBM Plex Sans, system-ui, sans-serif"
+                          font-size="11"
+                          fill={node.active ? '#DEA193' : '#B0A89A'}
+                        >
+                          {node.label}
+                        </text>
+                      </g>
+                    ))
+                  }
+                </svg>
+              </div>
+            </div>
+
+            <dl class="cycle">
+              {
+                cycleSteps.map((item) => (
+                  <>
+                    <dt>
+                      <small>{item.step}</small>
+                      {item.title}
+                    </dt>
+                    <dd>{item.body}</dd>
+                  </>
+                ))
+              }
+            </dl>
+          </div>
+        </section>
+
+        <section class="tel-section paper-section alt" id="vocabulary">
+          <div class="tel-container">
+            <div class="tel-label">Vocabulary</div>
+            <h2 class="section-title">
+              Words carry their <em>ontology</em>.
+            </h2>
+            <p class="section-lede">
+              Every term below appears in the kernel prompts and canonical
+              ontology document. Use them precisely. Do not rebrand.
+            </p>
+            <div class="vocab-grid">
+              {
+                terms.map((term) => (
+                  <article class="term-card">
+                    <div class="term-pos">{term.pos}</div>
+                    <h3 class="term-name">{term.term}</h3>
+                    <p class="term-def">{term.def}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <section class="tel-section paper-section" id="install">
+          <div class="tel-container">
+            <div class="install-heading-row">
+              <div class="install-heading-copy">
+                <div class="tel-label">Install</div>
+                <h2 class="section-title">
+                  Internal team. <em>For now.</em>
+                </h2>
+                <p class="section-lede tel-narrow">
+                  Principia is not yet generally available. Inside Telotia, it is
+                  orchestrated by Vivarium, which pins kernel versions per
+                  experiment and streams the runtime event log to a UI.
                 </p>
               </div>
-              <span class="live-pill">
-                <span class="live-dot"></span>
-                dev.telotia.com live
-              </span>
-            </header>
+              <div class="decor-animation decor-animation-circle" aria-hidden="true">
+                <canvas data-decor-animation="circle"></canvas>
+              </div>
+            </div>
 
-            <section class="metrics" aria-label="Project status summary">
-              <div class="metric">
-                <strong>{completedItems.length}/{devStatus.items.length}</strong>
-                <span>setup items complete</span>
+            <div class="install-block" aria-label="Install commands">
+              <div>
+                <span class="prompt">$</span><span class="cmd">cargo install --locked </span><span class="arg">\</span>
               </div>
-              <div class="metric">
-                <strong>{openItems.length}</strong>
-                <span>open project tasks</span>
+              <div>
+                <span class="prompt">&nbsp;</span><span class="cmd">  --git https://github.com/Telotia/Principia </span><span class="arg">\</span>
               </div>
-              <div class="metric">
-                <strong>dev</strong>
-                <span>merges deploy the debug dashboard</span>
+              <div>
+                <span class="prompt">&nbsp;</span><span class="cmd">  --tag v0.1.0 </span><span class="arg">\</span>
               </div>
-              <div class="metric">
-                <strong>main</strong>
-                <span>releases deploy telotia.com</span>
+              <div>
+                <span class="prompt">&nbsp;</span><span class="cmd">  --root ~/.telotia/vivarium/bin/v0.1.0</span>
               </div>
-            </section>
+              <div class="install-gap"></div>
+              <div><span class="cmt"># scaffold .principia/ in a project</span></div>
+              <div>
+                <span class="prompt">$</span><span class="cmd">principia init </span><span class="arg">&lt;project-dir&gt;</span>
+              </div>
+              <div class="install-gap"></div>
+              <div><span class="cmt"># the main organism loop</span></div>
+              <div>
+                <span class="prompt">$</span><span class="cmd">principia run </span><span class="arg">--loop</span>
+              </div>
+            </div>
 
-            <div class="grid">
-              <section class="section">
-                <div class="section-head">
-                  <div>
-                    <h2>Setup checklist</h2>
-                    <p class="section-note">
-                      Cloudflare, GitHub, and project launch readiness.
-                    </p>
+            <div class="install-meta" aria-label="Runtime requirements">
+              <div class="cell">
+                <div class="meta-label">Required toolchain</div>
+                <div class="value">
+                  <span class="mono">stable rust / libsqlite3 / openssl</span>
+                </div>
+              </div>
+              <div class="cell">
+                <div class="meta-label">Platform</div>
+                <div class="value">Linux production / macOS / Windows dev</div>
+              </div>
+              <div class="cell">
+                <div class="meta-label">License</div>
+                <div class="value">Proprietary / Telotia</div>
+              </div>
+            </div>
+
+            <div class="app-demo-block" id="vivarium">
+              <div class="mockup-demo-head">
+                <div class="tel-label">mockup.demo</div>
+                <p class="mockup-demo-note">
+                  Interactive Vivarium surface: chamber selection, slice verdicts,
+                  and runtime log state are live in-page.
+                </p>
+              </div>
+
+              <aside class="app-preview-shell" data-vivarium-app aria-label="Interactive Vivarium console mockup">
+                <div class="app-topbar">
+                  <div class="app-brand">
+                    <span class="brand-mark" aria-hidden="true"></span>
+                    Vivarium
                   </div>
-                  <span class="tag done">{completedItems.length} done</span>
+                  <div class="session-chip">ts_2026_05_17_a3f / origin_kind=human_tty</div>
                 </div>
 
-                <ul class="checklist">
-                  {devStatus.items.map((item) => (
-                    <li class="task" data-status={item.status}>
-                      <span
-                        class="checkbox"
-                        aria-label={item.status === 'done' ? 'Done' : 'Todo'}
-                      ></span>
-                      <span>
-                        <span class="task-title">{item.text}</span>
-                        <span class="task-meta">
-                          <span
-                            class:list={[
-                              'tag',
-                              item.status === 'done' ? 'done' : 'todo',
-                            ]}
+                <div class="app-workspace">
+                  <nav class="app-rail" aria-label="Chambers">
+                    {
+                      appChambers.map((chamber) => (
+                        <button
+                          class:list={['chamber-button', chamber.id === 'synthesis' && 'is-active']}
+                          type="button"
+                          data-chamber={chamber.id}
+                          aria-label={`${chamber.label}: ${chamber.state}`}
+                          title={`${chamber.label}: ${chamber.state}`}
+                        >
+                          <svg class="chamber-glyph" aria-hidden="true">
+                            <use href={`/assets/principia/icons.svg#ch-${chamber.id}`}></use>
+                          </svg>
+                        </button>
+                      ))
+                    }
+                  </nav>
+
+                  <div class="app-main">
+                    <article class="telos-card">
+                      <div class="telos-card-header">
+                        <span>Telos context / ctx_telos_8f0a1b34</span>
+                        <span data-chamber-state>active / synthesis</span>
+                      </div>
+                      <h2 data-app-title>
+                        Most randomness has hidden structure: the question is whether the structure is operationally legible.
+                      </h2>
+                      <div class="telos-meta">
+                        <span>3 oscillations to crystallize</span>
+                        <span>started 2026-05-17 10:38:02</span>
+                        <span data-slice-readout>ctx_slice_a3f2b9c1 / Partial</span>
+                      </div>
+                    </article>
+
+                    <section class="demo-graph-panel" aria-label="Vivarium chamber graph">
+                      <div class="animation-panel-label">active chamber graph / pressure addressed</div>
+                      <svg
+                        viewBox="0 0 900 240"
+                        preserveAspectRatio="xMidYMid meet"
+                        role="img"
+                        aria-labelledby="demo-graph-title"
+                      >
+                        <title id="demo-graph-title">Vivarium chamber graph</title>
+                        {
+                          graphEdges.map((edge) => {
+                            const from = graphNodeById[edge.from];
+                            const to = graphNodeById[edge.to];
+                            const dashed = edge.dashed || edge.terminal;
+                            const activeEdge = !dashed && (from.active || to.active);
+
+                            return (
+                              <g>
+                                <line
+                                  x1={from.x}
+                                  y1={from.y}
+                                  x2={to.x}
+                                  y2={to.y}
+                                  stroke={activeEdge ? '#DEA193' : '#3A4664'}
+                                  stroke-width={activeEdge ? '1.5' : '0.9'}
+                                  stroke-dasharray={dashed ? '3 5' : ''}
+                                  opacity={dashed ? '0.55' : '1'}
+                                />
+                              </g>
+                            );
+                          })
+                        }
+                        {
+                          graphNodes.map((node) => (
+                            <g>
+                              <circle
+                                cx={node.x}
+                                cy={node.y}
+                                r={node.active ? '14' : '10'}
+                                fill={node.active ? '#DEA193' : node.terminal ? '#0A1430' : '#162244'}
+                                stroke={node.active ? '#DEA193' : '#B0A89A'}
+                                stroke-width="1.2"
+                                stroke-dasharray={node.terminal ? '2 3' : ''}
+                              />
+                              <text
+                                x={node.x}
+                                y={node.y < 110 ? node.y - 22 : node.y + 30}
+                                text-anchor="middle"
+                                font-family="IBM Plex Sans, system-ui, sans-serif"
+                                font-size="11"
+                                fill={node.active ? '#DEA193' : '#B0A89A'}
+                              >
+                                {node.label}
+                              </text>
+                            </g>
+                          ))
+                        }
+                      </svg>
+                      <div class="active-chamber-readout" data-chamber-readout>SYNTHESIS / ITERATE</div>
+                    </section>
+
+                    <div class="slice-drawer" aria-label="Slices">
+                      {
+                        appSlices.map((slice, index) => (
+                          <div
+                            class:list={['slice-card', `slice-card--${slice.verdict.toLowerCase()}`]}
+                            role="button"
+                            tabindex="0"
+                            aria-selected={index === 0 ? 'true' : 'false'}
+                            data-slice={slice.id}
+                            data-verdict={slice.verdict}
+                            data-title={slice.title}
+                            data-slice-theory={slice.theory}
+                            data-slice-evidence={slice.evidence}
+                            data-slice-chamber={slice.chamber}
+                            data-slice-reentries={String(slice.reentries)}
+                            data-slice-last={slice.last}
+                            data-slice-note={slice.note}
                           >
-                            {item.status === 'done' ? 'Done' : 'Todo'}
-                          </span>
-                        </span>
-                      </span>
-                      <span class="owner">{item.owner ?? 'unassigned'}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-
-              <aside class="section">
-                <div class="section-head">
-                  <div>
-                    <h2>Live surfaces</h2>
-                    <p class="section-note">Primary URLs for smoke tests.</p>
+                            <div class="slice-card-main">
+                              <strong class="slice-card-title">{slice.title}</strong>
+                              <div class="slice-card-meta">
+                                <span>{slice.chamber}</span>
+                                <span>·</span>
+                                <span><b>{slice.reentries}</b> re-entries</span>
+                                <span>·</span>
+                                <span>last engaged <b>{slice.last}</b></span>
+                                {slice.note && (
+                                  <>
+                                    <span>·</span>
+                                    <span class="slice-note">{slice.note}</span>
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                            <div class="slice-card-right">
+                              <span class="slice-verdict-pill">
+                                <span class="pill-dot"></span>
+                                {slice.verdict}
+                              </span>
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </div>
                   </div>
+
+                  <aside class="app-eventlog" aria-label="Runtime event log">
+                    <div class="eventlog-head">
+                      <span>runtime event log</span>
+                      <span class="eventlog-session">ts_2026_05_17_a3f</span>
+                    </div>
+                    <div class="event-list">
+                      {
+                        appEvents.map((event, index) => (
+                          <div class:list={['event-row', index === 1 && 'is-highlighted']} data-event-chamber={event.chamber}>
+                            <span class="event-time">{event.time}</span>
+                            <span class="event-chamber">{event.chamber}</span>
+                            <span class="event-detail">
+                              {event.event} / {event.detail}
+                            </span>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </aside>
                 </div>
-                <div class="links">
-                  {links.map((link) => (
-                    <a class="link-row" href={link.href}>
-                      {link.label}
-                      <span>{link.href.replace('https://', '')}</span>
-                    </a>
-                  ))}
+                <!-- Slice detail panel — constrained inside the Vivarium app frame -->
+                <div class="slice-detail-overlay" id="sliceDetailOverlay" aria-hidden="true">
+                  <aside class="slice-detail-panel" aria-label="Slice detail">
+                    <div class="slice-detail-head">
+                      <span class="slice-detail-pill" id="sliceDetailVerdict"></span>
+                      <span class="slice-detail-id" id="sliceDetailId"></span>
+                      <button class="slice-detail-close" id="sliceDetailClose">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                          <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+                        </svg>
+                        Close
+                      </button>
+                    </div>
+                    <div class="slice-detail-body">
+                      <div class="slice-detail-label">Slice Summary</div>
+                      <blockquote class="slice-detail-quote" id="sliceDetailTitle"></blockquote>
+
+                      <div class="slice-detail-label">Theory</div>
+                      <p id="sliceDetailTheory"></p>
+
+                      <div class="slice-detail-label">Evidence</div>
+                      <p id="sliceDetailEvidence"></p>
+
+                      <div class="slice-detail-label">State</div>
+                      <dl class="slice-detail-kv" id="sliceDetailState"></dl>
+
+                      <div class="slice-detail-label" style="margin-top:22px">Actions</div>
+                      <div class="slice-detail-actions">
+                        <button class="slice-action-btn slice-action-primary">&#8859; Re-enter</button>
+                        <button class="slice-action-btn slice-action-secondary">Inspect oscillation history</button>
+                        <button class="slice-action-btn slice-action-quiet" id="sliceCopyId">Copy id</button>
+                      </div>
+                    </div>
+                  </aside>
                 </div>
               </aside>
             </div>
-
-            <section class="section">
-              <div class="section-head">
-                <div>
-                  <h2>Branch and deploy playbook</h2>
-                  <p class="section-note">
-                    Use this flow for everyday work, production releases, and
-                    urgent fixes.
-                  </p>
-                </div>
-              </div>
-
-              <div class="playbook">
-                {flowSteps.map((flow) => (
-                  <article class="flow">
-                    <h3>{flow.title}</h3>
-                    <ol>
-                      {flow.steps.map((step) => (
-                        <li>{step}</li>
-                      ))}
-                    </ol>
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <section class="section">
-              <div class="section-head">
-                <div>
-                  <h2>Common commands</h2>
-                  <p class="section-note">
-                    Prefer Bun for JavaScript work and Wrangler for Cloudflare.
-                  </p>
-                </div>
-              </div>
-              <div class="command-grid">
-                {commandGroups.map((group) => (
-                  <div class="commands">
-                    <h3>{group.title}</h3>
-                    <ul>
-                      {group.commands.map((command) => (
-                        <li>
-                          <code>{command}</code>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section class="section notice">
-              <h2>Temporary Cloudflare custody</h2>
-              <ul class="notes">
-                <li>
-                  Telotia domains and Workers temporarily live in the Pdec
-                  Cloudflare account until the registrar transfer lock clears.
-                </li>
-                <li>
-                  Keep <code>pdec.prog@gmail.com</code> as a break-glass admin
-                  on the future Telotia account to avoid a Google Workspace
-                  lockout loop.
-                </li>
-                <li>
-                  GitHub Actions should use a Cloudflare token scoped to account
-                  <code>f39fc97d0e872ca3c6cad23b1a7561d6</code> and the
-                  existing dashboard-managed custom domains during the
-                  temporary period.
-                </li>
-              </ul>
-            </section>
-
-            <footer>
-              Limen is the repo codename. Telotia is the public brand. Keep PR
-              titles conventional: <code>type(scope): subject</code>.
-            </footer>
           </div>
-        )
+        </section>
+
+        <section class="tel-section paper-section alt" id="assessment">
+          <div class="tel-container">
+            <div class="tel-label">Honest assessment / v0.1.0</div>
+            <h2 class="section-title">
+              The dish runs. The frontier moves. <em>Some things it does not
+              yet demonstrate.</em>
+            </h2>
+            <p class="section-lede">
+              Every Principia release closes with this section. The limitations
+              ship alongside the wins.
+            </p>
+
+            <div class="assessment-grid">
+              <article class="card">
+                <h3>What v0.1.0 demonstrates</h3>
+                <ul>
+                  {
+                    demonstrates.map((item) => (
+                      <li>
+                        <span class="mark">+</span>
+                        <span>{item}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </article>
+
+              <article class="card weak">
+                <h3>What it does not</h3>
+                <ul>
+                  {
+                    limits.map((item) => (
+                      <li>
+                        <span class="mark">x</span>
+                        <span>{item}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </article>
+            </div>
+
+            <p class="assessment-note">
+              The next release should target progress-aware heartbeat and
+              tighter <em>Stabilizer</em> verdict criteria.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="tel-footer">
+        <div class="footer-inner">
+          <div class="tel-label">The Telotia dev-flow chain</div>
+          <div class="repo-chain">
+            {
+              repos.map((repo) => (
+                <article class="repo-card">
+                  <span class="repo-step">{repo.step}</span>
+                  <span class="repo-name">{repo.name}</span>
+                  <p class="repo-desc">{repo.desc}</p>
+                  <a href={repo.href}>{repo.href.replace('https://', '')} &nearr;</a>
+                </article>
+              ))
+            }
+          </div>
+          <div class="footer-bottom">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="footer-copy">
+              Proprietary / Telotia / Mortality is the only natural death.
+            </span>
+            <span class="footer-spacer"></span>
+            <a href="https://github.com/Telotia/Principia">Security</a>
+            <a href="https://github.com/Telotia/Principia/releases">Changelog</a>
+            <a href="https://github.com/Telotia/Principia/releases">Releasing</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var STORAGE_KEY = 'theme';
+
+        function getSystemTheme() {
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'daylight';
+        }
+
+        function applyTheme(pref) {
+          var resolved = pref === 'system' ? getSystemTheme() : pref;
+          document.documentElement.setAttribute('data-theme', resolved);
+          document.querySelectorAll('.theme-btn').forEach(function (btn) {
+            btn.classList.toggle('is-active', btn.dataset.themeValue === pref);
+          });
+          localStorage.setItem(STORAGE_KEY, pref);
+        }
+
+        document.querySelectorAll('.theme-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            applyTheme(btn.dataset.themeValue);
+          });
+        });
+
+        var stored = localStorage.getItem(STORAGE_KEY) || 'system';
+        applyTheme(stored);
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+          var pref = localStorage.getItem(STORAGE_KEY) || 'system';
+          if (pref === 'system') {
+            document.documentElement.setAttribute('data-theme', getSystemTheme());
+          }
+        });
+
+        // Scroll-aware nav: dark over hero, themed when scrolled
+        var hero = document.querySelector('.tel-hero');
+        function updateNavScroll() {
+          var threshold = hero ? hero.offsetHeight * 0.72 : 300;
+          if (window.scrollY < threshold) {
+            document.documentElement.setAttribute('data-nav-at-hero', '');
+          } else {
+            document.documentElement.removeAttribute('data-nav-at-hero');
+          }
+        }
+        updateNavScroll();
+        window.addEventListener('scroll', updateNavScroll, { passive: true });
+      })();
+    </script>
+
+    <script>
+      import { createAnimation } from '../lib/dianoetica/core/engine';
+
+      const animationHandles = Array.from(
+        document.querySelectorAll('[data-decor-animation]'),
+      )
+        .filter((canvas): canvas is HTMLCanvasElement => canvas instanceof HTMLCanvasElement)
+        .map((canvas) => {
+          const isCircle = canvas.dataset.decorAnimation === 'circle';
+
+          return createAnimation(canvas, {
+            backgroundColor: 'transparent',
+            telosPattern: isCircle ? 'circle' : 'chaotic pattern',
+            center: ({ width, height }) => ({
+              x: width * 0.5,
+              y: height * (isCircle ? 0.5 : 0.54),
+            }),
+            radius: ({ width, height }) =>
+              isCircle
+                ? Math.min(width, height) * 0.21  // canvas is 2.1× layout anchor; 0.21 ≈ visual 0.44
+                : Math.min(width, height) * 0.25, // canvas is 1.36–1.7× layout anchor; adjusted
+          });
+        });
+
+      const app = document.querySelector('[data-vivarium-app]');
+
+      if (app instanceof HTMLElement) {
+        const chamberLabels = {
+          telos: 'TELOS / CRYSTALLIZED',
+          inspection: 'INSPECTION / COMPLETE',
+          synthesis: 'SYNTHESIS / ITERATE',
+          debate: 'DEBATE / OSC-2',
+          experiment: 'EXPERIMENT / APPARATUS',
+          slice: 'SLICE / PARTIAL',
+        };
+
+        const chamberState = app.querySelector('[data-chamber-state]');
+        const chamberReadout = app.querySelector('[data-chamber-readout]');
+        const sliceReadout = app.querySelector('[data-slice-readout]');
+        const appTitle = app.querySelector('[data-app-title]');
+
+        app.querySelectorAll('[data-chamber]').forEach((button) => {
+          button.addEventListener('click', () => {
+            if (!(button instanceof HTMLButtonElement)) return;
+            const chamber = button.dataset.chamber ?? 'synthesis';
+
+            app.querySelectorAll('[data-chamber]').forEach((chamberButton) => {
+              chamberButton.classList.toggle('is-active', chamberButton === button);
+            });
+
+            app.querySelectorAll('[data-event-chamber]').forEach((row) => {
+              row.classList.toggle(
+                'is-highlighted',
+                row instanceof HTMLElement && row.dataset.eventChamber === chamber,
+              );
+            });
+
+            const label = chamberLabels[chamber as keyof typeof chamberLabels] ?? chamber;
+            if (chamberState) chamberState.textContent = label.toLowerCase();
+            if (chamberReadout) chamberReadout.textContent = label;
+          });
+        });
+
+        // Slice detail panel
+        const detailOverlay = document.getElementById('sliceDetailOverlay');
+        const detailVerdict = document.getElementById('sliceDetailVerdict');
+        const detailId = document.getElementById('sliceDetailId');
+        const detailTitle = document.getElementById('sliceDetailTitle');
+        const detailTheory = document.getElementById('sliceDetailTheory');
+        const detailEvidence = document.getElementById('sliceDetailEvidence');
+        const detailState = document.getElementById('sliceDetailState');
+        const detailClose = document.getElementById('sliceDetailClose');
+        const copyIdBtn = document.getElementById('sliceCopyId');
+
+        const verdictPillClasses: Record<string, string> = {
+          partial: 'slice-detail-pill--partial',
+          proven: 'slice-detail-pill--proven',
+          open: 'slice-detail-pill--open',
+          falsified: 'slice-detail-pill--falsified',
+        };
+
+        function openSliceDetail(el: HTMLElement) {
+          const id = el.dataset.slice ?? '';
+          const verdict = el.dataset.verdict ?? 'Open';
+          const title = el.dataset.title ?? '';
+          const theory = el.dataset.sliceTheory ?? '';
+          const evidence = el.dataset.sliceEvidence ?? '';
+          const chamber = el.dataset.sliceChamber ?? '';
+          const reentries = el.dataset.sliceReentries ?? '0';
+          const last = el.dataset.sliceLast ?? '';
+          const note = el.dataset.sliceNote ?? '';
+
+          const key = verdict.toLowerCase();
+          if (detailVerdict) {
+            detailVerdict.textContent = verdict;
+            detailVerdict.className = `slice-detail-pill ${verdictPillClasses[key] ?? ''}`;
+            const dot = document.createElement('span');
+            dot.className = 'pill-dot';
+            detailVerdict.prepend(dot);
+          }
+          if (detailId) detailId.textContent = id;
+          if (detailTitle) detailTitle.textContent = title;
+          if (detailTheory) detailTheory.textContent = theory;
+          if (detailEvidence) detailEvidence.textContent = evidence;
+          if (detailState) {
+            detailState.innerHTML = `
+              <dt>chamber</dt><dd>${chamber}</dd>
+              <dt>re-entries</dt><dd>${reentries}</dd>
+              <dt>last engaged</dt><dd>${last}</dd>
+              <dt>note</dt><dd class="sd-note">${note}</dd>
+            `;
+          }
+          if (copyIdBtn) {
+            copyIdBtn.onclick = () => navigator.clipboard?.writeText(id);
+          }
+          detailOverlay?.removeAttribute('aria-hidden');
+        }
+
+        function closeSliceDetail() {
+          detailOverlay?.setAttribute('aria-hidden', 'true');
+        }
+
+        detailClose?.addEventListener('click', closeSliceDetail);
+        detailOverlay?.addEventListener('click', (e) => {
+          if (e.target === detailOverlay) closeSliceDetail();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeSliceDetail();
+        });
+
+        app.querySelectorAll('[data-slice]').forEach((card) => {
+          const activate = () => {
+            if (!(card instanceof HTMLElement)) return;
+            const slice = card.dataset.slice ?? '';
+            const verdict = card.dataset.verdict ?? 'Open';
+            const title = card.dataset.title ?? '';
+
+            app.querySelectorAll('[data-slice]').forEach((c) => {
+              c.setAttribute('aria-selected', 'false');
+            });
+            card.setAttribute('aria-selected', 'true');
+
+            if (sliceReadout) sliceReadout.textContent = `${slice} / ${verdict}`;
+            if (appTitle && title) appTitle.textContent = title;
+
+            openSliceDetail(card);
+          };
+
+          card.addEventListener('click', activate);
+          card.addEventListener('keydown', (e) => {
+            if (e instanceof KeyboardEvent && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault();
+              activate();
+            }
+          });
+        });
       }
-    </main>
+
+      window.addEventListener(
+        'pagehide',
+        () => {
+          animationHandles.forEach((animation) => animation.destroy());
+        },
+        { once: true },
+      );
+    </script>
   </body>
 </html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Form fields</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 22px 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-family: var(--font-sans); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .input, .select, .textarea {
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    padding: 9px 11px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.4;
+    outline: none;
+    transition: border-color var(--dur-fast);
+  }
+  .input:focus, .textarea:focus { border-color: var(--ink); }
+  .input::placeholder { color: var(--ink-4); }
+  .checkbox-row { display: flex; align-items: center; gap: 8px; }
+  .check {
+    width: 14px; height: 14px; border: 1px solid var(--ink-3); background: var(--paper);
+    border-radius: 2px; display: inline-flex; align-items: center; justify-content: center;
+  }
+  .check.on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .check svg { width: 10px; height: 10px; }
+  .helper { font-family: var(--font-display); font-style: italic; font-size: 12px; color: var(--ink-3); }
+  .field-text { font-family: var(--font-sans); font-size: 13px; color: var(--ink-2); }
+  .mono-id { font-family: var(--font-mono); font-size: 12px; color: var(--ink); }
+</style>
+</head>
+<body>
+  <div class="field">
+    <label>Telos seed</label>
+    <textarea class="textarea" rows="3" placeholder="Most randomness has hidden structure.">Most randomness has hidden structure.</textarea>
+    <div class="helper">A philosophical belief, intuition, or constructive claim — not a coding task.</div>
+  </div>
+  <div class="field">
+    <label>Origin kind</label>
+    <select class="select input">
+      <option>human_tty</option><option>human_piped</option><option>thinker</option><option>instinct</option><option>external</option><option>claude_code</option>
+    </select>
+    <div class="checkbox-row" style="margin-top:6px">
+      <span class="check on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="5,12 10,17 19,7"/></svg></span>
+      <span class="field-text">Press hardest — external Origin</span>
+    </div>
+  </div>
+</body></html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Status pills</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 24px 28px; display: flex; flex-direction: column; gap: 14px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .meta { font-family: var(--font-sans); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); width: 90px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 8px; border-radius: var(--r-full); font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: .04em; border: 1px solid transparent; }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .pill--proven    { background:#D7DFC9; color:#1F3F26; border-color:#B6C2A1; }
+  .pill--falsified { background:#ECD7CE; color:#5A1A1A; border-color:#D9B4A8; }
+  .pill--partial   { background:#ECDFC0; color:#6E4A0F; border-color:#D6C28A; }
+  .pill--open      { background:#D0DAE8; color:#1B355A; border-color:#A8B9CC; }
+  .pill--closed    { background:#DDD2E5; color:#3A2A46; border-color:#B9A7C4; }
+  .pill--running   { background:var(--paper-2); color:var(--ink-2); border-color:var(--rule); }
+
+  .pill--running .dot { background: var(--proven); animation: pulse 1.2s var(--ease-paper) infinite; }
+  @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:.4 } }
+
+  .pill--label { font-family: var(--font-sans); font-weight:500; letter-spacing:.14em; text-transform: uppercase; font-size:10px; padding:3px 8px; border-radius: var(--r-2); }
+  .label--telos      { background: var(--paper-3); color: var(--ink-2); border:1px solid var(--rule); }
+  .label--inspection { background: var(--paper-3); color: var(--ink-2); border:1px solid var(--rule); }
+  .label--synthesis  { background: #E6DEEC; color: #4A3A56; border:1px solid #C9B9D2; }
+  .label--debate     { background: #DEE4EC; color: #2C4E7A; border:1px solid #B7C4D6; }
+  .label--experiment { background: #E5DCC7; color: #6E4A0F; border:1px solid #C8B98F; }
+  .label--slice      { background: #D7DFC9; color: #1F3F26; border:1px solid #B6C2A1; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="meta">Verdict</div>
+    <span class="pill pill--proven"><span class="dot" style="background:#2E5D3A"></span>Proven</span>
+    <span class="pill pill--falsified"><span class="dot" style="background:#8C2B2B"></span>Falsified</span>
+    <span class="pill pill--partial"><span class="dot" style="background:#B57B19"></span>Partial</span>
+    <span class="pill pill--open"><span class="dot" style="background:#2C4E7A"></span>Open</span>
+    <span class="pill pill--closed"><span class="dot" style="background:#4A3A56"></span>TELOS&nbsp;CLOSED</span>
+  </div>
+  <div class="row">
+    <div class="meta">Run state</div>
+    <span class="pill pill--running"><span class="dot"></span>running · osc 3/4</span>
+    <span class="pill pill--running" style="opacity:.7"><span class="dot" style="animation:none;background:var(--ink-4)"></span>stalled</span>
+    <span class="pill pill--running"><span class="dot" style="animation:none;background:var(--ink-3)"></span>completed</span>
+  </div>
+  <div class="row">
+    <div class="meta">Chamber</div>
+    <span class="pill pill--label label--telos">Telos</span>
+    <span class="pill pill--label label--inspection">Inspection</span>
+    <span class="pill pill--label label--synthesis">Synthesis</span>
+    <span class="pill pill--label label--debate">Debate</span>
+    <span class="pill pill--label label--experiment">Experiment</span>
+    <span class="pill pill--label label--slice">Slice</span>
+  </div>
+</body></html>
