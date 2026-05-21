@@ -1413,6 +1413,27 @@ const repos = [
         font-style: italic;
       }
 
+      .end-banner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .end-banner-img {
+        display: block;
+        width: clamp(320px, 44vw, 600px);
+        height: auto;
+        mix-blend-mode: multiply;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      html[data-theme="night"] .end-banner-img {
+        mix-blend-mode: screen;
+      }
+
       .tel-footer {
         position: relative;
         overflow: hidden;
@@ -3894,6 +3915,10 @@ const repos = [
           </div>
         </section>
       </main>
+
+      <div class="end-banner" aria-hidden="true">
+        <img src="/assets/principia/endtelotia.png" alt="" class="end-banner-img" />
+      </div>
 
       <footer class="tel-footer">
         <div class="footer-inner">
