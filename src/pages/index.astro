@@ -1413,35 +1413,27 @@ const repos = [
         font-style: italic;
       }
 
-      .end-banner {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-        overflow: hidden;
-      }
-
-      .end-banner-img {
-        display: block;
-        width: clamp(320px, 44vw, 600px);
-        height: auto;
-        mix-blend-mode: multiply;
-        pointer-events: none;
-        user-select: none;
-      }
-
-      html[data-theme="night"] .end-banner-img {
-        mix-blend-mode: screen;
-      }
-
       .tel-footer {
         position: relative;
         overflow: hidden;
-        padding: 64px 0 36px;
+        padding: 0 0 36px;
         color: var(--night-ink-3);
         background:
+          linear-gradient(180deg, transparent 0%, #060b1a 42%),
           radial-gradient(ellipse 110% 90% at 50% 100%, #0f1738 0%, #060b1a 80%),
           #060b1a;
+      }
+
+      .footer-bg-art {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: auto;
+        mix-blend-mode: screen;
+        filter: blur(3px) saturate(1.1);
+        pointer-events: none;
+        user-select: none;
+        margin-bottom: -12%;
       }
 
       .tel-footer::before {
@@ -1455,9 +1447,11 @@ const repos = [
 
       .footer-inner {
         position: relative;
+        z-index: 1;
         width: calc(100% - 32px);
         max-width: 1180px;
         margin: 0 auto;
+        padding: 48px 0 0;
       }
 
       .footer-inner .tel-label {
@@ -3916,11 +3910,8 @@ const repos = [
         </section>
       </main>
 
-      <div class="end-banner" aria-hidden="true">
-        <img src="/assets/principia/endtelotia.png" alt="" class="end-banner-img" />
-      </div>
-
       <footer class="tel-footer">
+        <img src="/assets/principia/endtelotia.png" alt="" class="footer-bg-art" aria-hidden="true" />
         <div class="footer-inner">
           <div class="tel-label">Get in touch</div>
           <div class="repo-chain">
