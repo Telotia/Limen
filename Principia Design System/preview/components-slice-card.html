@@ -1,0 +1,154 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Slice card · three states</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 18px 22px; background: #070812; }
+
+  .slice {
+    position: relative;
+    overflow: hidden;
+    color: #F4F0FF;
+    border: 1px solid rgba(244, 240, 255, 0.12);
+    border-radius: var(--r-3);
+    padding: 14px 18px;
+    display: grid; grid-template-columns: 1fr auto; gap: 6px 16px;
+    align-items: start;
+
+    background: linear-gradient(
+      135deg,
+      rgba(16, 42, 107, 0.72) 0%,
+      rgba(13, 18, 42, 0.94) 100%
+    );
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 12px 28px rgba(0, 0, 0, 0.28);
+  }
+  .slice + .slice { margin-top: 12px; }
+
+  /* Horizontal gradient line at the bottom — the system signal */
+  .slice::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 4px;
+    background: var(--state-gradient);
+    opacity: 0.95;
+    box-shadow: 0 -8px 22px var(--state-glow);
+  }
+
+  .slice.partial {
+    --state: #CCA273;
+    --state-soft: rgba(204, 162, 115, 0.16);
+    --state-glow: rgba(204, 162, 115, 0.26);
+    --state-gradient: linear-gradient(90deg, #102A6B 0%, #5990C0 45%, #CCA273 100%);
+  }
+  .slice.proven {
+    --state: #5990C0;
+    --state-soft: rgba(89, 144, 192, 0.16);
+    --state-glow: rgba(89, 144, 192, 0.26);
+    --state-gradient: linear-gradient(90deg, #5990C0 0%, #2F6FA8 45%, #102A6B 100%);
+  }
+  .slice.falsified {
+    --state: #DEA193;
+    --state-soft: rgba(222, 161, 147, 0.16);
+    --state-glow: rgba(222, 161, 147, 0.24);
+    --state-gradient: linear-gradient(90deg, #102A6B 0%, #6E42C1 48%, #DEA193 100%);
+  }
+
+  .slice .title {
+    font-family: var(--font-display);
+    font-size: 16px; line-height: 1.32; font-weight: 500;
+    color: #F4F0FF;
+  }
+  .slice .title em {
+    font-style: italic;
+    color: rgba(244, 240, 255, 0.84);
+  }
+
+  .slice .meta {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: rgba(244, 240, 255, 0.62);
+    margin-top: 4px;
+    letter-spacing: .02em;
+  }
+  .slice .meta b { color: rgba(244, 240, 255, 0.92); font-weight: 500; }
+  .slice .meta .note {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: rgba(244, 240, 255, 0.76);
+  }
+
+  .slice .right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .slice .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 10px 3px 8px;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    background: var(--state-soft);
+    border: 1px solid color-mix(in srgb, var(--state) 42%, transparent);
+    color: #F4F0FF;
+  }
+  .slice .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--state); }
+  .slice .id { font-family: var(--font-mono); font-size: 10px; color: rgba(244, 240, 255, 0.5); }
+</style>
+</head>
+<body>
+
+  <div class="slice partial">
+    <div>
+      <div class="title">A short intuition admits multiple operational readings — exhaustion is <em>not</em> the same as refutation.</div>
+      <div class="meta">
+        <span>Slice ▸ Experiment re-entry</span>
+        <span>·</span>
+        <span><b>3</b> re-entries</span>
+        <span>·</span>
+        <span class="note">worker apparatus failed — max_tokens</span>
+      </div>
+    </div>
+    <div class="right">
+      <span class="badge"><span class="dot"></span>Partial</span>
+      <span class="id">ctx_slice_a3f2b9c1</span>
+    </div>
+  </div>
+
+  <div class="slice proven">
+    <div>
+      <div class="title">Compressibility under a fixed encoder is a defensible apparatus criterion for legible structure.</div>
+      <div class="meta">
+        <span>Debate ▸ Experiment ▸ Slice</span>
+        <span>·</span>
+        <span><b>1</b> re-entry</span>
+        <span>·</span>
+        <span class="note">settled under Critic pressure; encoder choice is explicit</span>
+      </div>
+    </div>
+    <div class="right">
+      <span class="badge"><span class="dot"></span>Proven</span>
+      <span class="id">ctx_slice_4d12e0</span>
+    </div>
+  </div>
+
+  <div class="slice falsified">
+    <div>
+      <div class="title">Legibility-of-structure cannot be reduced to predictability without abandoning the original seed.</div>
+      <div class="meta">
+        <span>Synthesis ▸ Debate ▸ Slice</span>
+        <span>·</span>
+        <span><b>2</b> re-entries</span>
+        <span>·</span>
+        <span class="note">counter-example survived; Constructor retreated</span>
+      </div>
+    </div>
+    <div class="right">
+      <span class="badge"><span class="dot"></span>Falsified</span>
+      <span class="id">ctx_slice_71e2aa</span>
+    </div>
+  </div>
+
+</body></html>

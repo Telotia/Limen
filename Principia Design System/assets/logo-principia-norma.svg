@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<svg id="_01" data-name="01" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 290" aria-label="Principia mark — Norma in chaotic-section form">
+  <defs>
+    <linearGradient id="normaPetal" x1="0" y1="0" x2="290" y2="290" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#25CEDB"></stop>
+      <stop offset="0.5" stop-color="#7E5BFF"></stop>
+      <stop offset="1" stop-color="#DE5BB8"></stop>
+    </linearGradient>
+    
+  </defs>
+
+  
+  <ellipse class="petal" cx="86.76" cy="211.26" rx="25.3" ry="80.9" transform="translate(-120.22 114.73) rotate(-42.67)"></ellipse>
+  <ellipse class="inner" cx="90.82" cy="208.63" rx="21.32" ry="68.15" transform="translate(-117.36 116.78) rotate(-42.67)"></ellipse>
+
+  <ellipse class="petal" cx="201.77" cy="211.26" rx="80.9" ry="25.3" transform="translate(-90.32  216.43) rotate(-47.33)"></ellipse>
+  <ellipse class="inner" cx="197.7" cy="208.63" rx="68.15" ry="21.32" transform="translate(-89.69  212.59) rotate(-47.33)"></ellipse>
+
+  <ellipse class="petal" cx="202.59" cy="87.42" rx="25.3" ry="80.9" transform="translate(-5.62   160.45) rotate(-42.67)"></ellipse>
+  <ellipse class="inner" cx="198.52" cy="90.05" rx="21.32" ry="68.15" transform="translate(-8.48   158.39) rotate(-42.67)"></ellipse>
+
+  <ellipse class="petal" cx="86.76" cy="87.42" rx="80.9" ry="25.3" transform="translate(-36.32  91.96)  rotate(-47.33)"></ellipse>
+  <ellipse class="inner" cx="90.82" cy="90.05" rx="68.15" ry="21.32" transform="translate(-36.95  95.8)   rotate(-47.33)"></ellipse>
+
+  
+  <polygon class="star-line" points="174.38,76.12 84.75,145.87 117.14,208.31 129.95,206.32 189.11,183.08 174.38,76.12"></polygon>
+  <circle class="star" cx="174.38" cy="76.12" r="4.24"></circle>
+  <circle class="star" cx="84.75" cy="145.87" r="4.24"></circle>
+  <circle class="star" cx="189.11" cy="183.08" r="4.24"></circle>
+  <circle class="star" cx="129.95" cy="206.32" r="4.24"></circle>
+  <circle class="star" cx="117.14" cy="208.31" r="4.24"></circle>
+</svg>

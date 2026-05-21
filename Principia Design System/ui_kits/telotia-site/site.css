@@ -1,0 +1,299 @@
+@import url("../../colors_and_type.css");
+
+/* ────────────────────────────────────────────────────────────────────────
+   Telotia site — one world per mode. Default = deep galaxy.
+   Every section is a dark surface; the gradient steps subtly between
+   sections so the page reads as one observatory, not a stack of cards.
+   ──────────────────────────────────────────────────────────────────────── */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--deep-space);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+a { color: inherit; }
+
+.tel-page { max-width: 100%; }
+.tel-section { padding: 96px 0; position: relative; }
+.tel-container { max-width: 1180px; margin: 0 auto; padding: 0 40px; position: relative; }
+.tel-narrow { max-width: 720px; }
+
+/* Star-field overlay reusable on any section */
+.tel-stars-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(#ffffff14 0.5px, transparent 0.7px),
+    radial-gradient(#DEA1930F 0.5px, transparent 0.6px);
+  background-size: 23px 23px, 13px 9px;
+}
+
+.tel-label { font-family: var(--font-sans); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); }
+.tel-rule { border-top: 1px solid var(--rule-cosmic-soft); }
+
+/* ─── Nav ─────────────────────────────────────────────────────────────── */
+.tel-nav {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(10, 14, 32, 0.78);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule-cosmic-soft);
+  color: var(--text-main);
+}
+.tel-nav-inner {
+  max-width: 1180px; margin: 0 auto; padding: 14px 40px;
+  display: flex; align-items: center; gap: 28px;
+}
+.tel-nav .brand { display: flex; align-items: center; gap: 9px; color: var(--text-main); }
+.tel-nav .brand .wm { font-family: var(--font-display); font-size: 18px; line-height: 1; }
+.tel-nav .brand .org { font-family: var(--font-sans); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); border-left: 1px solid var(--rule-cosmic-soft); padding-left: 8px; margin-left: 2px; }
+.tel-nav .links { display: flex; gap: 24px; margin-left: 8px; }
+.tel-nav .links a { font-size: 13px; color: var(--text-3); text-decoration: none; border: none; transition: color .15s; }
+.tel-nav .links a:hover { color: var(--text-main); }
+.tel-nav .spacer { flex: 1; }
+.tel-nav .gh { font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
+.tel-nav .gh:hover { color: var(--rose); }
+
+/* ─── Hero ───────────────────────────────────────────────────────────── */
+.tel-hero {
+  background:
+    radial-gradient(ellipse 110% 90% at 50% 0%, #1F2A5C 0%, #0F1738 45%, #060B1A 100%);
+  color: var(--text-main);
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 140px;
+}
+.tel-hero .stars { position: absolute; inset: 0; pointer-events: none; color: var(--text-main); }
+.tel-hero .stars svg { width: 100%; height: 100%; display: block; }
+.tel-hero-inner { position: relative; max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+.tel-hero .eyebrow { display: flex; gap: 12px; align-items: center; color: var(--rose); font-family: var(--font-sans); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; }
+.tel-hero .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); }
+.tel-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6.4vw, 72px);
+  font-weight: 360;
+  line-height: 1.02;
+  letter-spacing: -.018em;
+  margin: 16px 0 22px;
+  color: var(--text-main);
+  max-width: 980px;
+}
+.tel-hero h1 em { font-style: italic; color: var(--rose); }
+.tel-hero .lede {
+  font-family: var(--font-display);
+  font-size: 19px;
+  line-height: 1.55;
+  font-weight: 340;
+  color: var(--text-2);
+  max-width: 620px;
+  text-wrap: pretty;
+}
+.tel-hero .meta { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 720px; }
+.tel-hero .meta .cell { border-top: 1px solid var(--rule-cosmic-soft); padding-top: 12px; }
+.tel-hero .meta .lbl { font-family: var(--font-sans); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); }
+.tel-hero .meta .val { font-family: var(--font-display); font-size: 18px; color: var(--text-main); margin-top: 4px; }
+.tel-hero .meta .val em { font-style: italic; color: var(--rose); }
+.tel-hero .pull-id { position: absolute; right: 40px; top: 40px; font-family: var(--font-mono); font-size: 11px; color: var(--text-3); letter-spacing: 0; }
+
+/* ─── Section heads ──────────────────────────────────────────────────── */
+.tel-section h2 {
+  font-family: var(--font-display);
+  font-size: 44px;
+  line-height: 1.12;
+  font-weight: 400;
+  letter-spacing: -.015em;
+  margin: 0 0 14px;
+  max-width: 820px;
+  text-wrap: balance;
+  color: var(--text-main);
+}
+.tel-section h2 em { font-style: italic; color: var(--rose); }
+.tel-section .lede {
+  font-family: var(--font-display);
+  font-size: 19px;
+  line-height: 1.55;
+  font-weight: 340;
+  color: var(--text-2);
+  max-width: 680px;
+  text-wrap: pretty;
+}
+
+/* ─── Organism section ────────────────────────────────────────────────── */
+.tel-organism {
+  background: linear-gradient(180deg, #0B1230 0%, #14162E 100%);
+  border-bottom: 1px solid var(--rule-cosmic-soft);
+  overflow: hidden;
+}
+.tel-organism::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle at 88% 8%, rgba(91, 124, 250, 0.10), transparent 32%),
+                    radial-gradient(circle at 8% 96%, rgba(180, 108, 255, 0.08), transparent 32%);
+}
+.tel-organism .graph {
+  margin-top: 36px;
+  background: radial-gradient(ellipse 100% 90% at 50% 0%, #1F2A5C 0%, #0F1738 50%, #060B1A 100%);
+  border: 1px solid var(--rule-cosmic-soft);
+  border-radius: var(--r-4);
+  padding: 32px 32px 28px;
+  color: var(--text-main);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+.tel-organism .graph::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(#ffffff1a 0.7px, transparent 0.8px),
+                    radial-gradient(#DEA19312 0.5px, transparent 0.6px);
+  background-size: 23px 23px, 13px 9px;
+}
+.tel-organism .graph .head { display: flex; justify-content: space-between; align-items: center; position: relative; margin-bottom: 12px; }
+.tel-organism .graph .head .title { font-family: var(--font-display); font-size: 16px; color: var(--text-main); }
+.tel-organism .graph .head .legend { display: flex; gap: 16px; }
+.tel-organism .graph .head .legend span { font-family: var(--font-sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-3); display: inline-flex; align-items: center; gap: 6px; }
+.tel-organism .graph .head .legend .swatch { width: 8px; height: 8px; border-radius: 50%; }
+
+.tel-organism .cycle { margin-top: 56px; display: grid; grid-template-columns: 200px 1fr; gap: 36px 24px; position: relative; }
+.tel-organism .cycle dt { font-family: var(--font-display); font-size: 22px; color: var(--text-main); font-weight: 420; }
+.tel-organism .cycle dt small { display: block; font-family: var(--font-sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-3); font-weight: 500; margin-bottom: 4px; }
+.tel-organism .cycle dd { margin: 0; font-size: 15px; line-height: 1.65; color: var(--text-2); max-width: 640px; }
+.tel-organism .cycle dd em { font-style: italic; font-family: var(--font-display); color: var(--rose); }
+
+/* ─── Vocabulary ──────────────────────────────────────────────────────── */
+.tel-vocab {
+  background: linear-gradient(180deg, #14162E 0%, #0F1230 100%);
+  border-bottom: 1px solid var(--rule-cosmic-soft);
+  overflow: hidden;
+}
+.tel-vocab::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle at 84% 24%, rgba(222, 91, 168, 0.08), transparent 30%),
+                    radial-gradient(circle at 18% 80%, rgba(89, 144, 192, 0.08), transparent 30%);
+}
+.tel-vocab .grid {
+  margin-top: 40px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--rule-cosmic-soft);
+  border: 1px solid var(--rule-cosmic-soft);
+  border-radius: var(--r-3);
+  overflow: hidden;
+  position: relative;
+}
+.tel-vocab .cell {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(91, 124, 250, 0.08), transparent 34%),
+    linear-gradient(135deg, #14182F 0%, #0E1228 100%);
+  padding: 24px 26px 24px;
+  display: flex; flex-direction: column; gap: 8px;
+  transition: background var(--dur-fast) var(--ease-press);
+}
+.tel-vocab .cell:hover {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(222, 161, 147, 0.12), transparent 34%),
+    linear-gradient(135deg, #181E3A 0%, #0F1530 100%);
+}
+.tel-vocab .cell .term { font-family: var(--font-display); font-size: 26px; font-weight: 380; color: var(--text-main); letter-spacing: -.005em; }
+.tel-vocab .cell .term em { font-style: italic; color: var(--rose); }
+.tel-vocab .cell .def { font-size: 14px; line-height: 1.55; color: var(--text-2); }
+.tel-vocab .cell .pos { font-family: var(--font-sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-3); }
+
+/* ─── Install ─────────────────────────────────────────────────────────── */
+.tel-install {
+  background: linear-gradient(180deg, #0F1230 0%, #14162E 100%);
+  border-bottom: 1px solid var(--rule-cosmic-soft);
+  overflow: hidden;
+}
+.tel-install::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle at 80% 20%, rgba(110, 75, 195, 0.08), transparent 32%);
+}
+.tel-install .block {
+  margin-top: 32px;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(91, 124, 250, 0.10), transparent 36%),
+    linear-gradient(135deg, #0B1230 0%, #060B1A 100%);
+  border: 1px solid var(--rule-cosmic-soft);
+  border-radius: var(--r-3);
+  padding: 24px 26px 22px;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+}
+.tel-install .block .prompt { color: var(--text-3); user-select: none; margin-right: 8px; }
+.tel-install .block .cmd { color: var(--text-main); }
+.tel-install .block .arg { color: var(--rose); }
+.tel-install .block .cmt { color: var(--text-4); }
+.tel-install .meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 36px; border-top: 1px solid var(--rule-cosmic-soft); }
+.tel-install .meta .cell { padding: 18px 24px 18px 0; border-right: 1px solid var(--rule-cosmic-soft); }
+.tel-install .meta .cell:last-child { border-right: 0; }
+.tel-install .meta .lbl { font-family: var(--font-sans); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); }
+.tel-install .meta .val { font-family: var(--font-display); font-size: 17px; color: var(--text-main); margin-top: 4px; }
+.tel-install .meta .val .mono { font-family: var(--font-mono); font-size: 13px; color: var(--text-2); }
+
+/* ─── Assessment ──────────────────────────────────────────────────────── */
+.tel-assess {
+  background: linear-gradient(180deg, #14162E 0%, #0B1230 100%);
+  border-top: 1px solid var(--rule-cosmic-soft);
+  border-bottom: 1px solid var(--rule-cosmic-soft);
+  overflow: hidden;
+}
+.tel-assess::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle at 92% 18%, rgba(89, 144, 192, 0.08), transparent 30%),
+                    radial-gradient(circle at 6% 84%, rgba(222, 161, 147, 0.06), transparent 30%);
+}
+.tel-assess .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 32px; position: relative; }
+.tel-assess .card {
+  background:
+    radial-gradient(circle at 12% 14%, rgba(91, 124, 250, 0.10), transparent 34%),
+    linear-gradient(135deg, #141A38 0%, #0B1230 100%);
+  border: 1px solid var(--rule-cosmic-soft);
+  border-radius: var(--r-3);
+  padding: 22px 24px 24px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+.tel-assess .card.weak {
+  background:
+    radial-gradient(circle at 12% 14%, rgba(222, 161, 147, 0.10), transparent 34%),
+    linear-gradient(135deg, #1A1838 0%, #0B1230 100%);
+}
+.tel-assess .card h3 { font-family: var(--font-sans); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); margin: 0 0 10px; font-weight: 500; }
+.tel-assess .card ul { list-style: none; padding: 0; margin: 0; }
+.tel-assess .card li { display: grid; grid-template-columns: 16px 1fr; gap: 10px; padding: 8px 0; border-top: 1px solid var(--rule-cosmic-soft); font-size: 14px; line-height: 1.55; color: var(--text-2); }
+.tel-assess .card li:first-child { border-top: 0; padding-top: 0; }
+.tel-assess .card li .mark { font-family: var(--font-display); font-style: italic; color: #5990C0; }
+.tel-assess .card.weak li .mark { color: var(--rose); }
+.tel-assess .card li b { font-weight: 500; color: var(--text-main); font-family: var(--font-display); font-style: italic; }
+
+/* ─── Footer ──────────────────────────────────────────────────────────── */
+.tel-footer {
+  background:
+    radial-gradient(ellipse 110% 90% at 50% 100%, #0F1738 0%, #060B1A 80%);
+  color: var(--text-3);
+  padding: 64px 0 36px;
+  position: relative;
+  overflow: hidden;
+}
+.tel-footer::before {
+  content:""; position: absolute; inset: 0;
+  background-image: radial-gradient(#ffffff14 0.5px, transparent 0.7px);
+  background-size: 17px 17px;
+  opacity: .8; pointer-events: none;
+}
+.tel-footer-inner { position: relative; max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+.tel-footer .chain { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; align-items: start; }
+.tel-footer .chain .step { display: flex; flex-direction: column; gap: 6px; }
+.tel-footer .chain .step .lbl { font-family: var(--font-sans); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); }
+.tel-footer .chain .step .name { font-family: var(--font-display); font-size: 22px; color: var(--text-main); }
+.tel-footer .chain .step .desc { font-size: 13px; line-height: 1.5; color: var(--text-3); max-width: 280px; }
+.tel-footer .chain .step .gh { font-family: var(--font-mono); font-size: 11px; color: var(--text-3); margin-top: 6px; }
+.tel-footer .chain .arrow { position: relative; }
+.tel-footer .bottom { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--rule-cosmic-soft); display: flex; gap: 24px; align-items: baseline; }
+.tel-footer .bottom .copy { font-family: var(--font-display); font-style: italic; color: var(--text-3); font-size: 13px; }
+.tel-footer .bottom .spacer { flex: 1; }
+.tel-footer .bottom a { color: var(--text-3); text-decoration: none; font-size: 12px; border-bottom: 1px solid var(--rule-cosmic-soft); }
+.tel-footer .bottom a:hover { color: var(--text-main); border-color: var(--text-3); }

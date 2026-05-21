@@ -1,10 +1,10 @@
 /**
  * Curated companion palette for telos's rose-gold warmth. The sub-particles
- * stay in blue/teal/lavender territory so telos remains the only warm accent,
+ * stay in blue and teal territory so telos remains the only warm accent,
  * but the colors are less neon-random than a continuous hue range.
  */
 export const COOL_HUE_MIN = 168
-export const COOL_HUE_MAX = 268
+export const COOL_HUE_MAX = 224
 export const COOL_SAT_MIN = 46
 export const COOL_SAT_MAX = 78
 export const COOL_LIGHT_MIN = 58
@@ -36,9 +36,9 @@ const SUB_PARTICLE_PALETTE: Hsl[] = [
   { h: 172, s: 52, l: 62 }, // sea-glass teal
   { h: 188, s: 66, l: 64 }, // icy cyan
   { h: 207, s: 60, l: 66 }, // dusty sapphire
-  { h: 226, s: 56, l: 68 }, // periwinkle blue
-  { h: 248, s: 50, l: 69 }, // soft wisteria
-  { h: 264, s: 48, l: 67 }, // restrained lavender
+  { h: 216, s: 56, l: 66 }, // deep sky blue
+  { h: 198, s: 58, l: 63 }, // mineral blue
+  { h: 181, s: 50, l: 61 }, // muted cyan
 ]
 
 export const pickInitialCoolColor = (): Hsl => {

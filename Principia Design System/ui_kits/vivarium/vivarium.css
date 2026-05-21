@@ -1,0 +1,386 @@
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Vivarium UI kit — shared styles                                        */
+/* ──────────────────────────────────────────────────────────────────────── */
+@import url("../../colors_and_type.css");
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-sans); font-size: 14px; }
+
+button { font: inherit; cursor: pointer; }
+
+/* ─── Layout shell ─────────────────────────────────────────────────────── */
+.viv-app {
+  display: grid;
+  grid-template-columns: 60px minmax(640px, 1fr) 380px;
+  grid-template-rows: 56px 1fr;
+  grid-template-areas:
+    "top top top"
+    "rail main log";
+  height: 100vh;
+  min-width: 1280px;
+  overflow: hidden;
+}
+
+/* ─── Top bar ──────────────────────────────────────────────────────────── */
+.viv-top {
+  grid-area: top;
+  display: flex; align-items: center; gap: 18px;
+  padding: 0 18px;
+  background:
+    radial-gradient(circle at 18% 50%, rgba(89, 144, 192, 0.14), transparent 36%),
+    radial-gradient(circle at 82% 50%, rgba(222, 161, 147, 0.08), transparent 30%),
+    linear-gradient(180deg, #F7F8FC 0%, #EEF2F8 100%);
+  border-bottom: 1px solid rgba(16, 42, 107, 0.16);
+  position: relative; z-index: 2;
+}
+.viv-brand { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.viv-brand svg { width: 22px; height: 22px; }
+.viv-brand .wm { font-family: var(--font-display); font-size: 20px; line-height: 1; letter-spacing: -.3px; }
+.viv-brand .org { font-family: var(--font-sans); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); border-left: 1px solid var(--rule); padding-left: 10px; margin-left: 4px; }
+
+.viv-session {
+  display: flex; align-items: center; gap: 10px;
+  padding: 5px 10px 5px 12px;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(89, 144, 192, 0.16), transparent 60%),
+    linear-gradient(135deg, #F7F8FC 0%, #EAF0FA 100%);
+  border: 1px solid rgba(16, 42, 107, 0.16);
+  border-radius: var(--r-2);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-press);
+}
+.viv-session:hover { border-color: rgba(222, 161, 147, 0.55); }
+.viv-session .label { font-family: var(--font-sans); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+.viv-session .id { font-family: var(--font-mono); font-size: 12px; color: var(--ink); }
+.viv-session .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--proven); }
+.viv-session .dot.running { animation: viv-pulse 1.2s var(--ease-paper) infinite; }
+@keyframes viv-pulse { 0%,100% { opacity:1 } 50% { opacity:.35 } }
+
+.viv-top .spacer { flex: 1; }
+.viv-icon-btn {
+  width: 32px; height: 32px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--r-2);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-2);
+}
+.viv-icon-btn:hover { background: var(--paper-2); color: var(--ink); }
+.viv-icon-btn svg { width: 16px; height: 16px; }
+
+/* ─── Left rail ───────────────────────────────────────────────────────── */
+.viv-rail {
+  grid-area: rail;
+  background:
+    radial-gradient(circle at 50% 14%, rgba(89, 144, 192, 0.10), transparent 40%),
+    linear-gradient(180deg, #F2F4FA 0%, #EAEEF6 100%);
+  border-right: 1px solid rgba(16, 42, 107, 0.16);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 14px 0; gap: 4px;
+}
+.viv-rail-item {
+  width: 40px; height: 40px;
+  border-radius: var(--r-2);
+  background: transparent;
+  border: 1px solid transparent;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-3);
+  position: relative;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.viv-rail-item svg { width: 22px; height: 22px; }
+.viv-rail-item:hover { background: var(--paper-3); color: var(--ink); }
+.viv-rail-item[aria-current="true"] { background: var(--ink); color: var(--paper); }
+.viv-rail-item[aria-current="true"]::before {
+  content: ""; position: absolute; left: -8px; top: 50%;
+  transform: translateY(-50%);
+  width: 3px; height: 18px; background: var(--rose); border-radius: 2px;
+}
+.viv-rail .spacer { flex: 1; }
+
+/* ─── Main column ─────────────────────────────────────────────────────── */
+.viv-main {
+  grid-area: main;
+  overflow: auto;
+  padding: 18px 22px 60px;
+}
+.viv-section { margin-bottom: 22px; }
+.viv-section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.viv-section-head h2 {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 420; line-height: 1.15;
+  letter-spacing: -.005em;
+  white-space: nowrap;
+}
+.viv-section-head .meta {
+  font-family: var(--font-sans);
+  font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: right;
+}
+
+/* ─── Telos banner ─────────────────────────────────────────────────────── */
+.viv-telos {
+  background:
+    radial-gradient(circle at 16% 14%, rgba(89, 144, 192, 0.16), transparent 38%),
+    radial-gradient(circle at 84% 22%, rgba(222, 161, 147, 0.10), transparent 32%),
+    linear-gradient(135deg, #F7F8FC 0%, #EEF2F8 100%);
+  border: 1px solid rgba(16, 42, 107, 0.16);
+  border-radius: var(--r-3);
+  padding: 16px 20px 18px;
+  display: grid; grid-template-columns: 1fr auto; gap: 8px 18px;
+  box-shadow: 0 10px 28px rgba(16, 42, 107, 0.06);
+}
+.viv-telos .label-row { display: flex; align-items: center; gap: 10px; }
+.viv-telos .label { font-family: var(--font-sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+.viv-telos .id { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); }
+.viv-telos .seed {
+  grid-column: 1 / -1;
+  font-family: var(--font-display);
+  font-size: 24px; line-height: 1.25; font-weight: 380;
+  color: var(--ink);
+  letter-spacing: -.005em;
+  text-wrap: balance;
+}
+.viv-telos .seed em { font-style: italic; color: var(--ink-2); }
+.viv-telos .meta-row { display: flex; gap: 16px; font-size: 12px; color: var(--ink-3); }
+.viv-telos .meta-row b { color: var(--ink-2); font-weight: 500; }
+.viv-telos .actions { display: flex; align-items: center; gap: 8px; }
+
+/* ─── Chamber graph card ──────────────────────────────────────────────── */
+.viv-graph {
+  background: var(--ocean);
+  background-color: var(--ocean-flat);
+  color: var(--night-ink);
+  border-radius: var(--r-3);
+  padding: 18px 20px;
+  position: relative; overflow: hidden;
+}
+.viv-graph::before {
+  content:""; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(#ffffff20 0.7px, transparent 0.8px),
+    radial-gradient(#DEA19312 0.5px, transparent 0.6px);
+  background-size: 21px 21px, 13px 9px;
+  opacity: 0.9;
+}
+.viv-graph h3 {
+  font-family: var(--font-display); font-size: 16px; font-weight: 420;
+  letter-spacing: 0; color: var(--night-ink); position: relative;
+}
+.viv-graph .sub { color: var(--night-ink-2); font-size: 12px; position: relative; }
+.viv-graph svg { width: 100%; height: 220px; display: block; position: relative; margin-top: 6px; }
+
+/* ─── Slice list ───────────────────────────────────────────────────────── */
+.viv-slice-list { display: flex; flex-direction: column; gap: 10px; }
+.viv-slice {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(16, 42, 107, 0.72) 0%,
+    rgba(13, 18, 42, 0.94) 100%
+  );
+  border: 1px solid rgba(244, 240, 255, 0.12);
+  border-radius: var(--r-3);
+  padding: 14px 18px;
+  display: grid; grid-template-columns: 1fr auto; gap: 6px 16px;
+  align-items: start;
+  cursor: pointer;
+  color: #F4F0FF;
+  transition: filter var(--dur-fast) var(--ease-press),
+              box-shadow var(--dur-fast) var(--ease-press);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 28px rgba(0, 0, 0, 0.28);
+}
+/* Horizontal gradient line at the bottom — the verdict signal */
+.viv-slice::after {
+  content: ""; position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 4px;
+  background: var(--slice-gradient);
+  opacity: 0.95;
+  box-shadow: 0 -8px 22px var(--slice-glow);
+}
+.viv-slice--partial {
+  --slice-state: #CCA273;
+  --slice-soft: rgba(204, 162, 115, 0.16);
+  --slice-glow: rgba(204, 162, 115, 0.26);
+  --slice-gradient: linear-gradient(90deg, #102A6B 0%, #5990C0 45%, #CCA273 100%);
+}
+.viv-slice--proven {
+  --slice-state: #5990C0;
+  --slice-soft: rgba(89, 144, 192, 0.16);
+  --slice-glow: rgba(89, 144, 192, 0.26);
+  --slice-gradient: linear-gradient(90deg, #5990C0 0%, #2F6FA8 45%, #102A6B 100%);
+}
+.viv-slice--falsified {
+  --slice-state: #DEA193;
+  --slice-soft: rgba(222, 161, 147, 0.16);
+  --slice-glow: rgba(222, 161, 147, 0.24);
+  --slice-gradient: linear-gradient(90deg, #102A6B 0%, #6E42C1 48%, #DEA193 100%);
+}
+.viv-slice--open {
+  --slice-state: #7E879D;
+  --slice-soft: rgba(126, 135, 157, 0.14);
+  --slice-glow: rgba(126, 135, 157, 0.20);
+  --slice-gradient: linear-gradient(90deg, #102A6B 0%, #34304F 50%, #7E879D 100%);
+}
+.viv-slice:hover { filter: brightness(1.06); }
+.viv-slice[aria-selected="true"] { box-shadow: 0 0 0 1.5px rgba(244, 240, 255, 0.45) inset, 0 12px 28px rgba(0, 0, 0, 0.35); }
+
+.viv-slice .left-rule { display: none; }
+.viv-slice .title { font-family: var(--font-display); font-size: 17px; line-height: 1.32; color: #F4F0FF; font-weight: 500; }
+.viv-slice .title em { font-style: italic; color: rgba(244, 240, 255, 0.84); }
+.viv-slice .meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: rgba(244, 240, 255, 0.62); margin-top: 4px; letter-spacing: 0.02em; }
+.viv-slice .meta b { color: rgba(244, 240, 255, 0.92); font-weight: 500; }
+.viv-slice .right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.viv-slice .id { font-family: var(--font-mono); font-size: 10px; color: rgba(244, 240, 255, 0.5); }
+
+/* ─── Pills ────────────────────────────────────────────────────────────── */
+.viv-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 9px 3px 8px;
+  border-radius: var(--r-full);
+  font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: .04em;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.viv-pill .dot { width: 6px; height: 6px; border-radius: 50%; }
+
+/* On-night verdict pills (used inside slice cards) */
+.viv-slice .viv-pill {
+  background: var(--slice-soft);
+  border: 1px solid color-mix(in srgb, var(--slice-state) 42%, transparent);
+  color: #F4F0FF;
+}
+.viv-slice .viv-pill .dot { background: var(--slice-state); }
+
+/* Pills used elsewhere keep the original light-surface treatment */
+.viv-pill--proven    { background:#D7DFC9; color:#1F3F26; border-color:#B6C2A1; }
+.viv-pill--proven    .dot { background:#2E5D3A; }
+.viv-pill--falsified { background:#ECD7CE; color:#5A1A1A; border-color:#D9B4A8; }
+.viv-pill--falsified .dot { background:#8C2B2B; }
+.viv-pill--partial   { background:#ECDFC0; color:#6E4A0F; border-color:#D6C28A; }
+.viv-pill--partial   .dot { background:#B57B19; }
+.viv-pill--open      { background:#D0DAE8; color:#1B355A; border-color:#A8B9CC; }
+.viv-pill--open      .dot { background:#2C4E7A; }
+.viv-pill--closed    { background:#DDD2E5; color:#3A2A46; border-color:#B9A7C4; }
+.viv-pill--closed    .dot { background:#4A3A56; }
+.viv-pill--running   { background:var(--paper-2); color:var(--ink-2); border-color:var(--rule); }
+.viv-pill--running   .dot { background: var(--proven); animation: viv-pulse 1.2s var(--ease-paper) infinite; }
+
+.viv-side-pill { padding-left: 8px; border-left: 3px solid var(--rule); background: transparent; border-radius: 0; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+
+/* ─── Event log (night) ───────────────────────────────────────────────── */
+.viv-log {
+  grid-area: log;
+  background: var(--ocean);
+  background-color: var(--ocean-flat);
+  color: var(--night-ink);
+  border-left: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.viv-log::before {
+  content:""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(#ffffff12 0.5px, transparent 0.7px);
+  background-size: 17px 17px;
+}
+.viv-log-head {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--night-rule);
+  display: flex; align-items: center; gap: 10px;
+  position: relative;
+}
+.viv-log-head .title { font-family: var(--font-display); font-size: 16px; font-weight: 420; }
+.viv-log-head .sub { font-family: var(--font-mono); font-size: 11px; color: var(--night-ink-2); margin-left: auto; }
+
+.viv-log-body { flex: 1; overflow: auto; padding: 8px 12px; position: relative; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; }
+.viv-log-row {
+  display: grid; grid-template-columns: 72px 14px 14px 96px 1fr; gap: 8px;
+  padding: 1px 6px; border-radius: 2px;
+}
+.viv-log-row:hover { background: #ffffff05; }
+.viv-log-row .ts { color: #8C9AB2; font-size: 11px; }
+.viv-log-row .lvl { color: var(--rose); width: 12px; font-size: 11px; }
+.viv-log-row .marker { width: 6px; height: 6px; border-radius: 50%; align-self: center; }
+.viv-log-row .chamber { color: var(--night-ink); }
+.viv-log-row .msg { color: #D8D6E8; }
+.viv-log-row .msg .em { color: var(--rose); font-style: italic; font-family: var(--font-display); font-size: 12px; }
+.viv-log-row .msg .punct { color: #6C7790; }
+.viv-log-row .msg .id { color: #8C9AB2; }
+.viv-log-row .msg .err { color: #E89A6A; font-style: italic; font-family: var(--font-display); font-size: 12px; }
+
+.viv-log-foot {
+  padding: 8px 14px;
+  border-top: 1px solid var(--night-rule);
+  display: flex; gap: 12px; align-items: center;
+  font-family: var(--font-sans); font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--night-ink-2);
+  position: relative;
+}
+.viv-log-foot .live { display: inline-flex; align-items: center; gap: 6px; color: var(--rose); }
+.viv-log-foot .live .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); animation: viv-pulse 1.2s var(--ease-paper) infinite; }
+
+/* ─── Slide-over detail ───────────────────────────────────────────────── */
+.viv-overlay {
+  position: fixed; inset: 0;
+  background: #10182f40;
+  display: flex; justify-content: flex-end;
+  z-index: 10;
+}
+.viv-detail {
+  width: 620px; height: 100%;
+  background: var(--paper);
+  border-left: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  animation: viv-slide-in 280ms var(--ease-paper);
+}
+@keyframes viv-slide-in { from { transform: translateX(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+.viv-detail-head {
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 12px;
+}
+.viv-detail-head .title { font-family: var(--font-display); font-size: 18px; font-weight: 420; }
+.viv-detail-body { flex: 1; overflow: auto; padding: 18px 24px 60px; }
+.viv-detail-body h3 { font-family: var(--font-sans); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); margin: 18px 0 8px; }
+.viv-detail-body h3:first-child { margin-top: 0; }
+.viv-detail-body p { color: var(--ink); margin: 0 0 10px; line-height: 1.6; }
+.viv-detail-body .quote {
+  font-family: var(--font-display); font-style: italic; font-size: 17px;
+  line-height: 1.5; color: var(--ink); padding-left: 14px; border-left: 1px solid var(--ink-3); margin: 4px 0 12px;
+}
+.viv-detail-body .kv { display: grid; grid-template-columns: 130px 1fr; gap: 6px 16px; font-size: 13px; }
+.viv-detail-body .kv dt { color: var(--ink-3); }
+.viv-detail-body .kv dd { color: var(--ink); margin: 0; font-family: var(--font-mono); font-size: 12px; }
+
+/* ─── Buttons ─────────────────────────────────────────────────────────── */
+.viv-btn {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 500;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--r-2);
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: background var(--dur-fast) var(--ease-press), border-color var(--dur-fast);
+  letter-spacing: 0;
+}
+.viv-btn--primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.viv-btn--primary:hover { background: #000; }
+.viv-btn--secondary { background: var(--paper); color: var(--ink); border-color: var(--ink-3); }
+.viv-btn--secondary:hover { border-color: var(--ink); background: var(--paper-2); }
+.viv-btn--quiet { background: transparent; color: var(--ink-2); }
+.viv-btn--quiet:hover { color: var(--ink); background: var(--paper-2); }
+.viv-btn--star { background: var(--rose); color: var(--ink); border-color: var(--rose-soft); }
+.viv-btn--star:hover { background: var(--rose-glow); }
+.viv-btn svg { width: 13px; height: 13px; }

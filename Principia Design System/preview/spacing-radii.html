@@ -1,0 +1,37 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Radii & Elevation</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 22px 24px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .tile { background: var(--paper-2); border: 1px solid var(--rule); padding: 14px 14px 10px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .swatch { width: 64px; height: 36px; background: var(--ink); }
+  .name { font-family: var(--font-sans); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .sub { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); }
+  /* radii */
+  .r-0 { border-radius: 0; }
+  .r-1 { border-radius: 2px; }
+  .r-2 { border-radius: 4px; }
+  .r-3 { border-radius: 8px; }
+  .r-4 { border-radius: 12px; }
+  .r-full { border-radius: 999px; }
+  /* elevation */
+  .e1 { background: var(--paper-2); box-shadow: 0 1px 0 var(--paper-edge); }
+  .e2 { background: var(--paper-2); box-shadow: 0 1px 0 var(--paper-edge), 0 2px 8px -4px #10182f22; }
+  .e3 { background: var(--paper-2); box-shadow: 0 2px 0 var(--paper-edge), 0 8px 24px -10px #10182f40; }
+  .ein { background: var(--paper-3); box-shadow: inset 0 1px 2px #10182f18; }
+  .erect { width: 80px; height: 44px; border-radius: 6px; border: 1px solid var(--rule); }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="tile"><div class="swatch r-0"></div><div class="name">Radius 0</div><div class="sub">0&nbsp;px</div></div>
+    <div class="tile"><div class="swatch r-1"></div><div class="name">Radius 1</div><div class="sub">2&nbsp;px</div></div>
+    <div class="tile"><div class="swatch r-2"></div><div class="name">Radius 2</div><div class="sub">4&nbsp;px</div></div>
+    <div class="tile"><div class="swatch r-3"></div><div class="name">Radius 3</div><div class="sub">8&nbsp;px</div></div>
+    <div class="tile"><div class="erect e1"></div><div class="name">Elev 1</div><div class="sub">page edge</div></div>
+    <div class="tile"><div class="erect e2"></div><div class="name">Elev 2</div><div class="sub">card</div></div>
+    <div class="tile"><div class="erect e3"></div><div class="name">Elev 3</div><div class="sub">overlay</div></div>
+    <div class="tile"><div class="erect ein"></div><div class="name">Inset</div><div class="sub">well</div></div>
+  </div>
+</body></html>

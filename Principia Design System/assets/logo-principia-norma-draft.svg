@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" aria-label="Principia mark — Norma constellation in chaotic-section form">
+  
+  <defs>
+    <linearGradient id="principiaPetal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#25CEDB"></stop>
+      <stop offset="0.5" stop-color="#7E5BFF"></stop>
+      <stop offset="1" stop-color="#DE5BB8"></stop>
+    </linearGradient>
+  </defs>
+
+  <g fill="url(#principiaPetal)">
+    <path d="M 128,16 C 200,16 240,56 240,128 C 200,90 170,40 128,16 Z"></path>
+    <path d="M 240,128 C 240,200 200,240 128,240 C 170,200 200,170 240,128 Z"></path>
+    <path d="M 128,240 C 56,240 16,200 16,128 C 56,170 90,200 128,240 Z"></path>
+    <path d="M 16,128 C 16,56 56,16 128,16 C 90,55 56,90 16,128 Z"></path>
+  </g>
+
+  <g stroke="#DEA193" stroke-width="1.1" stroke-linecap="round" opacity="0.95">
+    <line x1="118" y1="104" x2="148" y2="116"></line>
+    <line x1="148" y1="116" x2="138" y2="152"></line>
+    <line x1="138" y1="152" x2="108" y2="140"></line>
+    <line x1="108" y1="140" x2="118" y2="104"></line>
+  </g>
+  <g fill="#DEA193">
+    <circle cx="118" cy="104" r="2.4"></circle>
+    <circle cx="148" cy="116" r="3.0"></circle>
+    <circle cx="138" cy="152" r="2.4"></circle>
+    <circle cx="108" cy="140" r="2.2"></circle>
+  </g>
+</svg>

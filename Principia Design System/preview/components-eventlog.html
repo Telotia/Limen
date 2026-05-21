@@ -1,0 +1,34 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Event Log Row</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 18px 14px; background: var(--ocean); background-color: var(--ocean-flat); color: var(--night-ink); }
+  .log { font-family: var(--font-mono); font-size: 12px; line-height: 1.7; }
+  .row { display: grid; grid-template-columns: 78px 14px 16px 110px 1fr; gap: 10px; align-items: baseline; padding: 1px 8px; border-radius: 2px; }
+  .row:hover { background: #ffffff06; }
+  .ts { color: #8C9AB2; font-size: 11px; }
+  .lvl { color: var(--star); width: 14px; text-align: center; font-weight: 600; }
+  .marker { width: 6px; height: 6px; border-radius: 50%; align-self: center; }
+  .chamber { color: var(--night-ink); letter-spacing: .04em; }
+  .msg { color: #D8D6E8; }
+  .em { color: var(--star); font-style: italic; font-family: 'Newsreader', serif; }
+  .punct { color: #6C7790; }
+  .id { color: #8C9AB2; }
+</style>
+</head>
+<body>
+  <div class="log">
+    <div class="row"><div class="ts">10:42:01.412</div><div class="lvl">·</div><div class="marker" style="background:#DEA193"></div><div class="chamber">telos</div>
+      <div class="msg">crystallize <span class="punct">·</span> <span class="id">ctx_telos_8f0a1b</span> <span class="punct">·</span> sufficiency=<span class="em">pressure_addressed</span></div></div>
+    <div class="row"><div class="ts">10:42:03.001</div><div class="lvl">·</div><div class="marker" style="background:#A7B3CC"></div><div class="chamber">synthesis</div>
+      <div class="msg">oscillation_turn <span class="punct">·</span> osc=<span class="em">1</span> <span class="punct">·</span> role=constructor</div></div>
+    <div class="row"><div class="ts">10:42:14.339</div><div class="lvl">·</div><div class="marker" style="background:#A7B3CC"></div><div class="chamber">synthesis</div>
+      <div class="msg">oscillation_check <span class="punct">·</span> verdict=<span class="em">ITERATE</span></div></div>
+    <div class="row"><div class="ts">10:42:31.770</div><div class="lvl">·</div><div class="marker" style="background:#7AB89C"></div><div class="chamber">slice</div>
+      <div class="msg">developed <span class="punct">·</span> <span class="id">slice_a3f2b9</span> <span class="punct">·</span> verdict=<span class="em">Partial</span></div></div>
+    <div class="row"><div class="ts">10:42:55.218</div><div class="lvl" style="color:#E89A6A">!</div><div class="marker" style="background:#E89A6A"></div><div class="chamber">experiment</div>
+      <div class="msg">apparatus <span class="em">max_tokens</span> <span class="punct">·</span> tool_calls=7</div></div>
+    <div class="row"><div class="ts">10:43:02.004</div><div class="lvl">·</div><div class="marker" style="background:#8C9AB2"></div><div class="chamber">organism</div>
+      <div class="msg">heartbeat <span class="punct">·</span> uptime=14m22s</div></div>
+  </div>
+</body></html>
