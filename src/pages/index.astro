@@ -627,14 +627,14 @@ const repos = [
       }
 
       .hero-title {
-        max-width: 960px;
         margin: 0;
-        color: var(--night-ink);
-        font-family: var(--font-sans);
-        font-size: 72px;
-        font-weight: 500;
-        line-height: 1.02;
-        letter-spacing: 0.22em;
+        line-height: 1;
+      }
+
+      .hero-wordmark {
+        display: block;
+        width: clamp(280px, 42vw, 640px);
+        height: auto;
       }
 
       .decor-animation {
@@ -2604,7 +2604,6 @@ const repos = [
       }
 
 
-      html[data-theme="daylight"] .hero-title,
       html[data-theme="daylight"] .meta-value {
         color: #172449;
       }
@@ -3212,10 +3211,6 @@ const repos = [
           max-height: 15rem;
         }
 
-        .hero-title {
-          font-size: 54px;
-        }
-
         .hero-thesis {
           font-size: 34px;
           line-height: 1.12;
@@ -3482,7 +3477,15 @@ const repos = [
                 in development · private beta
               </div>
               <div class="hero-title-row">
-                <h1 class="hero-title" id="hero-title">TELOTIA</h1>
+                <h1 class="hero-title" id="hero-title">
+                  <img
+                    src="/assets/principia/telotia-wordmark.svg"
+                    alt="TELOTIA"
+                    class="hero-wordmark"
+                    width="1624"
+                    height="338"
+                  />
+                </h1>
                 <div class="decor-animation decor-animation-chaotic" aria-hidden="true">
                   <canvas data-decor-animation="chaotic"></canvas>
                 </div>
