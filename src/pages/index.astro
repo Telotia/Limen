@@ -3,241 +3,220 @@ const limenEnv = process.env.LIMEN_ENV ?? 'dev';
 const isProd = limenEnv === 'prod';
 
 const navItems = [
-  { label: 'Vivarium', href: '#vivarium' },
-  { label: 'Organism', href: '#organism' },
-  { label: 'Vocabulary', href: '#vocabulary' },
+  { label: 'How it works', href: '#how-it-works' },
+  { label: 'Showcase', href: '#showcase' },
+  { label: 'About', href: '#about' },
 ];
 
 const heroMeta = [
-  { label: 'Language', value: 'Rust 2021 / single crate' },
-  { label: 'State', value: 'Embedded SQLite / WAL' },
-  { label: 'Sandbox', value: 'Linux landlock' },
+  { label: 'Granularity', value: 'Atomic claims, not paragraphs' },
+  { label: 'Evidence base', value: 'The corpus you choose' },
+  { label: 'Verdicts', value: 'Supported / Partial / No support found' },
 ];
 
 const appChambers = [
-  { id: 'telos', label: 'Telos', state: 'crystallized' },
-  { id: 'inspection', label: 'Inspection', state: 'complete' },
-  { id: 'synthesis', label: 'Synthesis', state: 'active' },
-  { id: 'debate', label: 'Debate', state: 'iterate' },
-  { id: 'experiment', label: 'Experiment', state: 'apparatus' },
-  { id: 'slice', label: 'Slice', state: 'partial' },
+  { id: 'telos', label: 'Document', state: 'loaded' },
+  { id: 'inspection', label: 'Corpus', state: 'indexed' },
+  { id: 'synthesis', label: 'Decompose', state: 'active' },
+  { id: 'debate', label: 'Match', state: 'pending' },
+  { id: 'experiment', label: 'Grade', state: 'pending' },
+  { id: 'slice', label: 'Review', state: 'ready' },
 ];
 
 const appEvents = [
   {
     time: '10:42:01.412',
     chamber: 'telos',
-    event: 'crystallize',
-    detail: 'ctx_telos_8f0a1b34 / pressure addressed',
+    event: 'loaded',
+    detail: 'doc_paper_8f0a1b34 / 4,312 words',
   },
   {
     time: '10:42:14.339',
-    chamber: 'synthesis',
-    event: 'osc_check',
-    detail: 'verdict=ITERATE / role=critic',
+    chamber: 'inspection',
+    event: 'indexed',
+    detail: '47 papers / Concordia Design Lab / 2006–2024',
   },
   {
     time: '10:42:31.770',
-    chamber: 'slice',
-    event: 'developed',
-    detail: 'slice_a3f2b9 / verdict=Partial',
+    chamber: 'synthesis',
+    event: 'decomposed',
+    detail: '18 atomic claims extracted',
   },
   {
     time: '10:42:55.218',
-    chamber: 'experiment',
-    event: 'apparatus',
-    detail: 'max_tokens / 7 calls',
+    chamber: 'debate',
+    event: 'search',
+    detail: 'claim_5 / 3 candidate passages found',
   },
   {
     time: '10:43:12.554',
-    chamber: 'debate',
-    event: 'osc_turn',
-    detail: 'osc=2 / role=constructor',
+    chamber: 'experiment',
+    event: 'graded',
+    detail: 'verdict=Supported / Zeng 2015 §3.2',
   },
   {
     time: '10:44:02.004',
-    chamber: 'organism',
-    event: 'heartbeat',
-    detail: 'uptime=14m22s / live tail',
+    chamber: 'slice',
+    event: 'reviewed',
+    detail: '12 of 18 claims graded / 6 remaining',
   },
 ];
 
 const appSlices = [
   {
-    id: 'ctx_slice_a3f2b9c1',
-    title: 'A short intuition admits multiple operational readings.',
-    verdict: 'Partial',
-    chamber: 'Slice ▸ Experiment re-entry',
-    reentries: 3,
+    id: 'claim_a3f2b9c1',
+    title: 'Design intent can be expressed independently of implementation.',
+    verdict: 'Supported',
+    chamber: 'Decompose ▸ Grade',
+    reentries: 0,
     last: '4 min ago',
-    note: 'worker apparatus failed — max_tokens',
-    theory: 'If “hidden structure” is given an apparatus criterion (e.g. compressibility under a fixed encoder), the claim is falsifiable per encoder, but unfalsifiable in general — making the bare claim closer to a research disposition than a Theory.',
-    evidence: 'The Worker began to instantiate a compressibility probe on three sample streams but exited at max_tokens before any apparatus output landed. No fabricated numbers were promoted to evidence.',
+    note: 'two independent passages corroborate',
+    theory: 'The paper asserts that design rationale, captured at sufficient granularity, allows reconstruction of intent without the original process.',
+    evidence: 'Zeng (2015) §3.2 models design intent as a structured object separable from artifact description. Zhou & Zeng (2019) §2.1 provides a second independent encoding. Both retrieved and cited.',
   },
   {
-    id: 'ctx_slice_4d12e0',
-    title: 'Hidden structure can be legible without being deterministic.',
-    verdict: 'Proven',
-    chamber: 'Debate ▸ Experiment ▸ Slice',
+    id: 'claim_4d12e0',
+    title: 'Co-creative AI systems reduce cognitive load in early-stage ideation.',
+    verdict: 'Partial',
+    chamber: 'Decompose ▸ Grade ▸ Re-check',
     reentries: 1,
     last: '12 min ago',
-    note: 'settled under Critic pressure; encoder choice is explicit',
-    theory: `Under a declared encoder E and threshold τ, the claim is falsifiable per encoder given a fixed apparatus criterion — surviving the Critic’s challenge that legibility is observer-relative because the observer is named.`,
-    evidence: 'The Experiment Constructor ran zlib-9 over three reference streams and recorded the ratios verbatim. The Critic pressed on encoder choice; the Theory absorbed the pressure by making E explicit.',
+    note: 'supported for visual tasks; corpus silent on verbal ideation',
+    theory: 'The claim applies broadly to divergent-phase ideation. This corpus only covers one modality.',
+    evidence: 'Hua & Zeng (2022) supports the claim for sketch-based tasks. No corpus passage covers verbal or text-based modalities. Partial support graded accordingly.',
   },
   {
-    id: 'ctx_slice_9bc717',
-    title: 'Exhaustion is not the same as refutation.',
-    verdict: 'Open',
-    chamber: 'Synthesis released',
+    id: 'claim_9bc717',
+    title: 'Analogical reasoning is the primary driver of cross-domain innovation.',
+    verdict: 'No support',
+    chamber: 'Decompose ▸ Grade',
     reentries: 0,
     last: 'just now',
-    note: 'Synthesis released; awaiting Debate',
-    theory: '(awaiting Debate Constructor)',
-    evidence: '(no Experiment yet)',
+    note: 'no matching passages in this corpus',
+    theory: 'The corpus does not speak to this mechanism.',
+    evidence: '(no matching passages in this corpus — not a verdict on the claim itself)',
   },
 ];
 
 const graphNodes = [
-  { id: 'origin', x: 60, y: 110, label: 'Origin' },
-  { id: 'inspection', x: 170, y: 60, label: 'Inspection' },
-  { id: 'telos', x: 170, y: 160, label: 'Telos' },
-  { id: 'synthesis', x: 340, y: 110, label: 'Synthesis', active: true },
-  { id: 'debate', x: 510, y: 60, label: 'Debate' },
-  { id: 'experiment', x: 510, y: 160, label: 'Experiment' },
-  { id: 'slice', x: 660, y: 110, label: 'Slice' },
-  { id: 'mortality', x: 820, y: 110, label: 'Mortality', terminal: true },
+  { id: 'document', x: 60, y: 110, label: 'Document' },
+  { id: 'corpus', x: 200, y: 60, label: 'Corpus' },
+  { id: 'decompose', x: 340, y: 110, label: 'Decompose', active: true },
+  { id: 'match', x: 510, y: 60, label: 'Match' },
+  { id: 'grade', x: 510, y: 160, label: 'Grade' },
+  { id: 'cite', x: 660, y: 110, label: 'Cite' },
+  { id: 'review', x: 820, y: 110, label: 'Review', terminal: true },
 ];
 
 const graphNodeById = Object.fromEntries(graphNodes.map((node) => [node.id, node]));
 
 const graphEdges = [
-  { from: 'origin', to: 'telos' },
-  { from: 'origin', to: 'inspection' },
-  { from: 'inspection', to: 'synthesis' },
-  { from: 'telos', to: 'synthesis' },
-  { from: 'synthesis', to: 'debate' },
-  { from: 'debate', to: 'experiment' },
-  { from: 'experiment', to: 'slice' },
-  { from: 'slice', to: 'synthesis', dashed: true, label: 're-entry' },
-  { from: 'synthesis', to: 'mortality', terminal: true },
+  { from: 'document', to: 'decompose' },
+  { from: 'corpus', to: 'decompose' },
+  { from: 'decompose', to: 'match' },
+  { from: 'decompose', to: 'grade' },
+  { from: 'match', to: 'grade' },
+  { from: 'grade', to: 'cite' },
+  { from: 'cite', to: 'review', terminal: true },
+  { from: 'review', to: 'decompose', dashed: true, label: 're-check' },
 ];
 
 const cycleSteps = [
   {
     step: 'Step 1',
-    title: 'Telos',
+    title: 'Decompose',
     body:
-      'The Origin proposes a seed. The Critic presses it against the observed environment. The Stabilizer crystallizes the seed into a Telos Context, or rejects it. The session opens.',
+      'We break the document into atomic claims, down to the level where each one can be checked on its own. Not paragraphs — individual propositions, each independently verifiable.',
   },
   {
-    step: 'Step 2 -> 6',
-    title: 'Slice cycle',
+    step: 'Step 2',
+    title: 'Search the evidence',
     body:
-      'Synthesis releases a Slice. Debate stabilizes a Theory in its favor. Experiment engages the Theory in the workspace sandbox. Slice judges Proven, Falsified, or Partial. Partial re-enters Debate.',
+      'Each claim is matched against your evidence base — the corpus you supplied, not the open web. The search is scoped to what you trust and can cite.',
   },
   {
-    step: 'Step 7',
-    title: 'Mortality',
+    step: 'Step 3',
+    title: 'Grade and cite',
     body:
-      'When the completed Slices together exhaust the Telos productive framings, the Synthesis Stabilizer emits TELOS_CLOSED. The organism dies. Refuting one reading of the Telos does not exhaust it.',
+      'Every claim gets a graded verdict — Supported, Partially supported, or No support found — each linked to the exact source in your corpus. No aggregate scores, no summaries.',
   },
 ];
 
 const terms = [
   {
-    term: 'Telos',
+    term: 'Supported',
+    pos: 'verdict',
+    def:
+      'Evidence in the corpus backs the claim. The supporting passage is retrieved and cited exactly.',
+  },
+  {
+    term: 'Partially supported',
+    pos: 'verdict',
+    def:
+      'Some of the claim is backed; part is not, or only holds under specific conditions. Graded, non-binary — not collapsed to true or false.',
+  },
+  {
+    term: 'No support found',
+    pos: 'verdict',
+    def:
+      'This corpus is silent on the claim — not that the claim is wrong. Results are a starting point for a human reviewer, not a final verdict on the work.',
+  },
+  {
+    term: 'Atomic claim',
     pos: 'noun',
     def:
-      "The seed crystallized by the Telos Chamber. The organism's anchor. Not a deliverable; an epistemic commitment the rest of the organism is measured against.",
+      'A single proposition that can be checked independently. Telotia decomposes documents to this level before searching.',
   },
   {
-    term: 'Slice',
+    term: 'Evidence base',
     pos: 'noun',
     def:
-      'A defensible, independently investigable position about the Telos. Carries a Status: Proven, Falsified, or Partial.',
+      'The corpus you supply and trust. Telotia checks claims against this — not the open web. You choose what counts as evidence.',
   },
   {
-    term: 'Crystallize',
-    pos: 'verb',
-    def:
-      'The act of writing an immutable Crystallized Context. Stabilizers crystallize; nothing else does.',
-  },
-  {
-    term: 'Constructor',
-    pos: 'role',
-    def:
-      "Proposes the chamber's output in its own voice. A worker in Inspection and Experiment; a thinker elsewhere.",
-  },
-  {
-    term: 'Critic',
-    pos: 'role',
-    def:
-      'Presses for load-bearing weaknesses. On the same team as the Constructor: both share one job, to land a sound output.',
-  },
-  {
-    term: 'Stabilizer',
-    pos: 'role',
-    def:
-      'Judges. Not advocating for any verdict. Reads the full oscillation history and commits to what the engagement honestly earned.',
-  },
-  {
-    term: 'Symbiosis',
+    term: 'Decomposition',
     pos: 'noun',
     def:
-      "Outbound: commission another organism. Inbound: re-house another organism's closed Telos as a Perception Context.",
-  },
-  {
-    term: 'Mortality',
-    pos: 'terminal',
-    def:
-      'TELOS_CLOSED. The single declared end-state, emitted only when productive framings are exhausted. The only natural death.',
-  },
-  {
-    term: 'Apparatus',
-    pos: 'noun',
-    def:
-      'One form of evidence, not the only one. A worker may run tools inside the sandbox; reasoning-only Slices are also valid Evidence.',
+      'Breaking a document into its individual atomic claims, each independently checkable. The first step before any search or grading.',
   },
 ];
 
 const demonstrates = [
-  'Eight chambers on the v4 ontology, every chamber except Slice oscillating Constructor -> Critic -> Stabilizer.',
-  'LLM Critic and Stabilizer wired into the Telos chamber; no hardcoded TTY Critic.',
-  'Worker-Constructor in Inspection, probing the environment under a read-only landlock.',
-  'Symbiosis gated on an AssistantOrganism Context; no empty-Symbiosis firings.',
-  'Mortality is single-source: only the Synthesis Stabilizer emits TELOS_CLOSED.',
+  'End-to-end claim decomposition on real research documents.',
+  'Graded, non-binary verdicts: Supported, Partially supported, No support found.',
+  'Every verdict linked to the exact passage in the corpus that supports it.',
+  'The showcase runs on a fixed, citable evidence base — Concordia Design Lab publications (2006–2024).',
+  '"No support found" is distinguished from "false" — the corpus is silent, not refuting.',
 ];
 
 const limits = [
-  'Any Proven slice in any organism run to date.',
-  'A robust separation between meta-debate-about-Principia and engagement-with-the-Telos.',
-  'Recovery from a stalled Synthesis; the guard catches them but the scheduler keeps re-firing.',
-  'Worker token I/O ratio is heavy; no canonical prompt prefix for KV-cache reuse yet.',
-  'Falsified-vs-Partial criteria still over-commit to Falsified in observed petri-dish runs.',
+  'Benchmark numbers: the evaluation against SPOT / PaperBench is in progress, not yet published.',
+  'The product is not yet generally available; we are in private early access.',
+  '"Bring your own model" is under development — not yet a committed feature.',
+  'The showcase demonstrates one trusted corpus — results on other corpora may vary.',
 ];
 
 const repos = [
   {
-    step: 'Step 1 / Unit',
-    name: 'Assay',
+    step: 'Get in touch',
+    name: 'hello@telotia.com',
     desc:
-      'The prompt-sweep harness. Every chamber prompt is exercised here before it ever touches the kernel.',
-    href: 'https://github.com/Telotia/Assay',
+      'We are looking for design partners in evidence-heavy fields and collaborators who want to help define what rigorous AI claim-checking looks like.',
+    href: 'mailto:hello@telotia.com',
   },
   {
-    step: 'Step 2 / Integration',
-    name: 'Vivarium',
+    step: 'Early access',
+    name: 'Request access',
     desc:
-      'The control plane. Pins kernel versions per experiment, spawns kernel processes, and streams the runtime event log to a UI.',
-    href: 'https://github.com/Telotia/Vivarium',
+      'The product is in private beta. If your work involves validating claims against a trusted evidence base, we want to hear from you.',
+    href: 'mailto:hello@telotia.com',
   },
   {
-    step: 'Step 3 / Production',
-    name: 'Principia',
+    step: 'Evidence page',
+    name: 'Benchmark results',
     desc:
-      'The epistemic-being runtime. Tag-driven releases verified by both Assay and Vivarium before they ship.',
-    href: 'https://github.com/Telotia/Principia',
+      'We are building an open benchmark to measure how well Telotia separates supported claims from unsupported ones. Method and results will be published here — including where we fall short.',
+    href: '#',
   },
 ];
 ---
@@ -248,10 +227,10 @@ const repos = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>TELOTIA / Principia</title>
+    <title>Telotia</title>
     <meta
       name="description"
-      content="Principia is Telotia's epistemic-being runtime: one seed, eight chambers, and a record of what the engagement honestly earned."
+      content="Give Telotia a document and a body of evidence you trust. It breaks the document into its individual claims and shows you, claim by claim, what the evidence supports — and what it doesn't."
     />
     {!isProd && <meta name="robots" content="noindex,nofollow" />}
     <style>
@@ -768,6 +747,71 @@ const repos = [
         color: var(--night-ink);
         font-family: var(--font-display);
         font-size: 18px;
+      }
+
+      .hero-cta-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 36px;
+      }
+
+      .hero-cta-primary,
+      .hero-cta-secondary {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 22px;
+        border-radius: 6px;
+        font-family: var(--font-sans);
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 200ms var(--ease-paper), color 200ms var(--ease-paper);
+      }
+
+      .hero-cta-primary {
+        background: rgb(255 255 255 / 0.92);
+        color: #0a1430;
+      }
+
+      .hero-cta-primary:hover { background: #ffffff; }
+
+      .hero-cta-secondary {
+        background: rgb(255 255 255 / 0.10);
+        color: var(--night-ink);
+        border: 1px solid rgb(255 255 255 / 0.18);
+      }
+
+      .hero-cta-secondary:hover { background: rgb(255 255 255 / 0.15); }
+
+      html[data-theme="daylight"] .hero-cta-primary {
+        background: #14203a;
+        color: #f4f0ff;
+      }
+
+      html[data-theme="daylight"] .hero-cta-primary:hover { background: #1e2f52; }
+
+      html[data-theme="daylight"] .hero-cta-secondary {
+        background: transparent;
+        color: var(--ink-2);
+        border: 1px solid var(--rule);
+      }
+
+      html[data-theme="daylight"] .hero-cta-secondary:hover { background: var(--paper-3); }
+
+      .showcase-caveat {
+        margin-top: 28px;
+        padding: 16px 20px;
+        border-left: 2px solid rgb(216 214 232 / 0.22);
+        color: var(--night-ink-3);
+        font-size: 13px;
+        line-height: 1.6;
+        max-width: 640px;
+      }
+
+      html[data-theme="daylight"] .showcase-caveat {
+        border-left-color: var(--rule);
+        color: var(--ink-3);
       }
 
       .tel-section {
@@ -2481,8 +2525,8 @@ const repos = [
       }
 
       html[data-theme="daylight"] #vocabulary::before,
-      html[data-theme="daylight"] #install::before,
-      html[data-theme="daylight"] #assessment::before {
+      html[data-theme="daylight"] #showcase::before,
+      html[data-theme="daylight"] #about::before {
         z-index: 0;
         opacity: 1;
         mix-blend-mode: multiply;
@@ -2495,13 +2539,13 @@ const repos = [
           radial-gradient(ellipse 16rem 52rem at 92% 52%, rgba(118, 145, 226, 0.08), transparent 78%);
       }
 
-      html[data-theme="daylight"] #install::before {
+      html[data-theme="daylight"] #showcase::before {
         background:
           radial-gradient(ellipse 26rem 64rem at 12% 52%, rgba(237, 171, 213, 0.20), rgba(237, 171, 213, 0.09) 42%, transparent 74%),
           radial-gradient(ellipse 17rem 54rem at 8% 54%, rgba(213, 158, 224, 0.08), transparent 78%);
       }
 
-      html[data-theme="daylight"] #assessment::before {
+      html[data-theme="daylight"] #about::before {
         background:
           radial-gradient(ellipse 26rem 64rem at 88% 52%, rgba(246, 216, 146, 0.18), rgba(246, 216, 146, 0.085) 42%, transparent 74%),
           radial-gradient(ellipse 17rem 54rem at 92% 54%, rgba(238, 194, 169, 0.07), transparent 78%);
@@ -2644,30 +2688,69 @@ const repos = [
 
       html[data-theme="daylight"] .twinkle-field {
         opacity: 1;
-        mix-blend-mode: multiply;
+        mix-blend-mode: normal;
       }
 
       html[data-theme="daylight"] .constellation-field {
-        opacity: 0.72;
-        color: rgb(84 105 154 / 0.45);
-        mix-blend-mode: multiply;
+        opacity: 0.88;
+        color: rgb(198 139 30 / 0.72);
+        mix-blend-mode: normal;
       }
 
       html[data-theme="daylight"] :global(.constellation-thread),
       html[data-theme="daylight"] :global(.constellation-node) {
-        display: none;
+        display: block;
+      }
+
+      html[data-theme="daylight"] :global(.constellation-thread) {
+        stroke: rgb(198 139 30 / 0.72);
+        stroke-width: 1.05;
+        opacity: 0.36;
+        filter: drop-shadow(0 0 5px rgb(230 176 72 / 0.28));
+      }
+
+      html[data-theme="daylight"] :global(.constellation-node) {
+        fill: rgb(214 151 42 / 0.82);
+        opacity: 0.56;
+        filter: drop-shadow(0 0 6px rgb(230 176 72 / 0.36));
+      }
+
+      html[data-theme="daylight"] :global(.constellation-node.is-anchor) {
+        fill: rgb(236 174 80 / 0.96);
+        opacity: 0.74;
       }
 
       html[data-theme="daylight"] :global(.twinkle-star) {
-        opacity: 0.018 !important;
-        background: rgb(112 132 166 / 0.38);
-        box-shadow: none;
+        opacity: var(--star-mid, 0.16) !important;
+        background: rgb(207 151 46 / 0.72);
+        box-shadow:
+          0 0 calc(var(--star-glow) * 0.8) rgb(220 164 64 / 0.28),
+          0 0 calc(var(--star-glow) * 1.8) rgb(244 203 112 / 0.12);
+      }
+
+      html[data-theme="daylight"] :global(.twinkle-star.is-bright) {
+        background: rgb(248 204 112 / 0.92);
+        box-shadow:
+          0 0 calc(var(--star-glow) * 1.4) rgb(236 176 76 / 0.42),
+          0 0 calc(var(--star-glow) * 3) rgb(255 218 130 / 0.18);
+      }
+
+      html[data-theme="daylight"] :global(.twinkle-star.is-blue) {
+        background: rgb(224 170 70 / 0.70);
+        box-shadow: 0 0 calc(var(--star-glow) * 1.8) rgb(236 176 76 / 0.28);
       }
 
       html[data-theme="daylight"] :global(.twinkle-star.is-cross)::before,
       html[data-theme="daylight"] :global(.twinkle-star.is-cross)::after {
-        background: rgb(112 132 166 / 0.24);
-        box-shadow: none;
+        background: rgb(255 229 160 / 0.78);
+        box-shadow:
+          0 0 calc(var(--star-glow) * 0.9) rgb(224 164 64 / 0.38),
+          0 0 calc(var(--star-glow) * 2.3) rgb(255 218 130 / 0.16);
+      }
+
+      html[data-theme="daylight"] :global(.twinkle-star.is-glowing) {
+        opacity: var(--star-high, 0.72) !important;
+        filter: brightness(1.5);
       }
 
       html[data-theme="daylight"] :global(.moon-dust) {
@@ -3348,10 +3431,10 @@ const repos = [
       <div class="twinkle-field" data-star-field aria-hidden="true"></div>
       <nav class="tel-nav" aria-label="Primary navigation">
         <div class="tel-nav-inner">
-          <a class="brand" href="/" aria-label="Principia home">
+          <a class="brand" href="/" aria-label="Telotia home">
             <span class="brand-mark" aria-hidden="true"></span>
             <span class="brand-name">TELOTIA</span>
-            <span class="brand-org">Principia · v0.1.0</span>
+            <span class="brand-org">private beta</span>
           </a>
           <div class="nav-links" aria-label="Page sections">
             {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
@@ -3384,8 +3467,8 @@ const repos = [
               </svg>
             </button>
           </div>
-          <a class="repo-link" href="https://github.com/Telotia/Principia">
-            github.com/Telotia/Principia &nearr;
+          <a class="repo-link" href="mailto:hello@telotia.com">
+            Get in touch &nearr;
           </a>
         </div>
       </nav>
@@ -3396,7 +3479,7 @@ const repos = [
             <div class="hero-copy-block">
               <div class="hero-status">
                 <span class="status-dot"></span>
-                principia / v0.1.0 / alpha
+                in development · private beta
               </div>
               <div class="hero-title-row">
                 <h1 class="hero-title" id="hero-title">TELOTIA</h1>
@@ -3405,22 +3488,25 @@ const repos = [
                 </div>
               </div>
               <p class="hero-thesis">
-                <span class="hero-line">An <em>epistemic being.</em></span>
-                <span class="hero-line">Not a coding agent.</span>
-                <span class="hero-line">There is no deliverable.</span>
+                <span class="hero-line">Every important artifact makes claims.</span>
+                <span class="hero-line">We validate which claims <em>survive evidence.</em></span>
               </p>
               <p class="hero-copy">
-                <span class="hero-line">Principia takes a single seed.</span>
+                <span class="hero-line">Give Telotia a document and a body of evidence you trust.</span>
                 <span class="hero-line">
-                  It lives inside that seed as an investigation.
+                  It breaks the document into its individual claims
                 </span>
                 <span class="hero-line">
-                  Each pass records what was honestly earned.
+                  and shows you, claim by claim, what the evidence supports —
                 </span>
                 <span class="hero-line">
-                  The work ends when no productive framing is left.
+                  and what it doesn't.
                 </span>
               </p>
+              <div class="hero-cta-row">
+                <a class="hero-cta-primary" href="#showcase">See it run</a>
+                <a class="hero-cta-secondary" href="mailto:hello@telotia.com">Get in touch</a>
+              </div>
               <div class="hero-meta" aria-label="Kernel facts">
                 {
                   heroMeta.map((item) => (
@@ -3436,112 +3522,17 @@ const repos = [
           </div>
         </section>
 
-        <section class="tel-section paper-section" id="organism">
+        <section class="tel-section paper-section" id="how-it-works">
           <div class="tel-container">
-            <div class="tel-label">The Organism</div>
+            <div class="tel-label">How it works</div>
             <h2 class="section-title">
-              One seed. Eight chambers. <em>One death.</em>
+              Break it down. Search the evidence. <em>Grade every claim.</em>
             </h2>
             <p class="section-lede">
-              Every Chamber except Slice oscillates the same way: a Constructor
-              proposes, a Critic presses, a convergence check decides whether to
-              iterate, and a Stabilizer crystallizes what the engagement
-              honestly earned.
+              Three steps. No aggregate scores, no summaries. Each claim is
+              checked and cited on its own — against the evidence base you
+              supply, not the open web.
             </p>
-
-            <div class="graph-panel" aria-label="Chamber graph">
-              <div class="graph-head">
-                <div class="graph-title">Chamber graph / canonical ontology v4</div>
-                <div class="legend" aria-label="Graph legend">
-                  <span><span class="swatch active"></span>active</span>
-                  <span><span class="swatch complete"></span>completed</span>
-                  <span><span class="swatch reentry"></span>re-entry</span>
-                </div>
-              </div>
-              <div class="graph-scroll">
-                <svg
-                  viewBox="0 0 900 240"
-                  preserveAspectRatio="xMidYMid meet"
-                  width="100%"
-                  height="240"
-                  role="img"
-                  aria-labelledby="graph-title"
-                >
-                  <title id="graph-title">Principia chamber graph</title>
-                  {
-                    graphEdges.map((edge) => {
-                      const from = graphNodeById[edge.from];
-                      const to = graphNodeById[edge.to];
-                      const dashed = edge.dashed || edge.terminal;
-                      const activeEdge = !dashed && (from.active || to.active);
-
-                      return (
-                        <g>
-                          <line
-                            x1={from.x}
-                            y1={from.y}
-                            x2={to.x}
-                            y2={to.y}
-                            stroke={activeEdge ? '#DEA193' : '#3A4664'}
-                            stroke-width={activeEdge ? '1.5' : '0.9'}
-                            stroke-dasharray={dashed ? '3 5' : ''}
-                            opacity={dashed ? '0.55' : '1'}
-                          />
-                          {edge.label && (
-                            <text
-                              x={(from.x + to.x) / 2 - 14}
-                              y={(from.y + to.y) / 2 - 8}
-                              font-family="Newsreader, Georgia, serif"
-                              font-style="italic"
-                              font-size="12"
-                              fill="#B0A89A"
-                            >
-                              {edge.label}
-                            </text>
-                          )}
-                        </g>
-                      );
-                    })
-                  }
-                  {
-                    graphNodes.map((node) => (
-                      <g>
-                        <circle
-                          cx={node.x}
-                          cy={node.y}
-                          r={node.active ? '14' : '10'}
-                          fill={node.active ? '#DEA193' : node.terminal ? '#0A1430' : '#162244'}
-                          stroke={node.active ? '#DEA193' : '#B0A89A'}
-                          stroke-width="0.9"
-                          stroke-dasharray={node.terminal ? '2 3' : ''}
-                        />
-                        {node.terminal && (
-                          <text
-                            x={node.x}
-                            y={node.y + 4}
-                            text-anchor="middle"
-                            font-size="11"
-                            fill="#B0A89A"
-                          >
-                            x
-                          </text>
-                        )}
-                        <text
-                          x={node.x}
-                          y={node.y < 110 ? node.y - 22 : node.y + 30}
-                          text-anchor="middle"
-                          font-family="IBM Plex Sans, system-ui, sans-serif"
-                          font-size="11"
-                          fill={node.active ? '#DEA193' : '#B0A89A'}
-                        >
-                          {node.label}
-                        </text>
-                      </g>
-                    ))
-                  }
-                </svg>
-              </div>
-            </div>
 
             <dl class="cycle">
               {
@@ -3561,13 +3552,14 @@ const repos = [
 
         <section class="tel-section paper-section alt" id="vocabulary">
           <div class="tel-container">
-            <div class="tel-label">Vocabulary</div>
+            <div class="tel-label">Verdict vocabulary</div>
             <h2 class="section-title">
-              Words carry their <em>ontology</em>.
+              Three verdicts. <em>No collapse to true or false.</em>
             </h2>
             <p class="section-lede">
-              Every term below appears in the kernel prompts and canonical
-              ontology document. Use them precisely. Do not rebrand.
+              Absence of evidence is not falsehood. When the product finds no
+              support for a claim, it says "no support found in this corpus" —
+              not "false." This is both more honest and more useful.
             </p>
             <div class="vocab-grid">
               {
@@ -3583,18 +3575,20 @@ const repos = [
           </div>
         </section>
 
-        <section class="tel-section paper-section" id="install">
+        <section class="tel-section paper-section" id="showcase">
           <div class="tel-container">
             <div class="install-heading-row">
               <div class="install-heading-copy">
-                <div class="tel-label">Install</div>
+                <div class="tel-label">Live showcase</div>
                 <h2 class="section-title">
-                  Internal team. <em>For now.</em>
+                  See it on real research. <em>Real claims. Real evidence.</em>
                 </h2>
                 <p class="section-lede tel-narrow">
-                  Principia is not yet generally available. Inside Telotia, it is
-                  orchestrated by Vivarium, which pins kernel versions per
-                  experiment and streams the runtime event log to a UI.
+                  We indexed the published papers of the Concordia Design Lab —
+                  a fixed, trusted body of research. Then we dropped in an
+                  outside paper and asked: which of its claims does the lab's
+                  research actually support? Watch Telotia decompose the paper
+                  and answer, claim by claim, with citations.
                 </p>
               </div>
               <div class="decor-animation decor-animation-circle" aria-hidden="true">
@@ -3602,64 +3596,38 @@ const repos = [
               </div>
             </div>
 
-            <div class="install-block" aria-label="Install commands">
-              <div>
-                <span class="prompt">$</span><span class="cmd">cargo install --locked </span><span class="arg">\</span>
-              </div>
-              <div>
-                <span class="prompt">&nbsp;</span><span class="cmd">  --git https://github.com/Telotia/Principia </span><span class="arg">\</span>
-              </div>
-              <div>
-                <span class="prompt">&nbsp;</span><span class="cmd">  --tag v0.1.0 </span><span class="arg">\</span>
-              </div>
-              <div>
-                <span class="prompt">&nbsp;</span><span class="cmd">  --root ~/.telotia/vivarium/bin/v0.1.0</span>
-              </div>
-              <div class="install-gap"></div>
-              <div><span class="cmt"># scaffold .principia/ in a project</span></div>
-              <div>
-                <span class="prompt">$</span><span class="cmd">principia init </span><span class="arg">&lt;project-dir&gt;</span>
-              </div>
-              <div class="install-gap"></div>
-              <div><span class="cmt"># the main organism loop</span></div>
-              <div>
-                <span class="prompt">$</span><span class="cmd">principia run </span><span class="arg">--loop</span>
-              </div>
-            </div>
-
-            <div class="install-meta" aria-label="Runtime requirements">
+            <div class="install-meta" aria-label="Showcase details">
               <div class="cell">
-                <div class="meta-label">Required toolchain</div>
+                <div class="meta-label">Evidence base</div>
                 <div class="value">
-                  <span class="mono">stable rust / libsqlite3 / openssl</span>
+                  <span class="mono">Concordia Design Lab / 47 papers / 2006–2024</span>
                 </div>
               </div>
               <div class="cell">
-                <div class="meta-label">Platform</div>
-                <div class="value">Linux production / macOS / Windows dev</div>
+                <div class="meta-label">Input document</div>
+                <div class="value">External research paper, outside the lab corpus</div>
               </div>
               <div class="cell">
-                <div class="meta-label">License</div>
-                <div class="value">Proprietary / Telotia</div>
+                <div class="meta-label">Corpus note</div>
+                <div class="value">Demonstrates any document, any trusted corpus</div>
               </div>
             </div>
 
-            <div class="app-demo-block" id="vivarium">
+            <div class="app-demo-block" id="app-demo">
               <div class="mockup-demo-head">
-                <div class="tel-label">mockup.demo</div>
+                <div class="tel-label">interactive mockup</div>
                 <p class="mockup-demo-note">
-                  Interactive Vivarium surface: chamber selection, slice verdicts,
-                  and runtime log state are live in-page.
+                  Select a claim to see the graded verdict and the exact corpus passage cited as evidence.
                 </p>
               </div>
 
-              <aside class="app-preview-shell" data-vivarium-app aria-label="Interactive Vivarium console mockup">
+              <aside class="app-preview-shell" data-vivarium-app aria-label="Interactive Telotia showcase mockup">
                 <div class="app-topbar">
                   <div class="app-brand">
                     <span class="brand-mark" aria-hidden="true"></span>
-                    Vivarium
+                    Telotia
                   </div>
-                  <div class="session-chip">ts_2026_05_17_a3f / origin_kind=human_tty</div>
+                  <div class="session-chip">run_2026_05_20_showcase / concordia-design-lab</div>
                 </div>
 
                 <div class="app-workspace">
@@ -3684,28 +3652,28 @@ const repos = [
                   <div class="app-main">
                     <article class="telos-card">
                       <div class="telos-card-header">
-                        <span>Telos context / ctx_telos_8f0a1b34</span>
-                        <span data-chamber-state>active / synthesis</span>
+                        <span>Document / doc_paper_8f0a1b34</span>
+                        <span data-chamber-state>active / decompose</span>
                       </div>
                       <h2 data-app-title>
-                        Most randomness has hidden structure: the question is whether the structure is operationally legible.
+                        Which claims in this external paper are supported by the Concordia Design Lab corpus?
                       </h2>
                       <div class="telos-meta">
-                        <span>3 oscillations to crystallize</span>
-                        <span>started 2026-05-17 10:38:02</span>
-                        <span data-slice-readout>ctx_slice_a3f2b9c1 / Partial</span>
+                        <span>18 atomic claims extracted</span>
+                        <span>corpus: 47 papers / 2006–2024</span>
+                        <span data-slice-readout>claim_a3f2b9c1 / Supported</span>
                       </div>
                     </article>
 
-                    <section class="demo-graph-panel" aria-label="Vivarium chamber graph">
-                      <div class="animation-panel-label">active chamber graph / pressure addressed</div>
+                    <section class="demo-graph-panel" aria-label="Claim validation pipeline">
+                      <div class="animation-panel-label">claim pipeline / decompose active</div>
                       <svg
                         viewBox="0 0 900 240"
                         preserveAspectRatio="xMidYMid meet"
                         role="img"
                         aria-labelledby="demo-graph-title"
                       >
-                        <title id="demo-graph-title">Vivarium chamber graph</title>
+                        <title id="demo-graph-title">Claim validation pipeline</title>
                         {
                           graphEdges.map((edge) => {
                             const from = graphNodeById[edge.from];
@@ -3755,7 +3723,7 @@ const repos = [
                           ))
                         }
                       </svg>
-                      <div class="active-chamber-readout" data-chamber-readout>SYNTHESIS / ITERATE</div>
+                      <div class="active-chamber-readout" data-chamber-readout>DECOMPOSE / ACTIVE</div>
                     </section>
 
                     <div class="slice-drawer" aria-label="Slices">
@@ -3806,8 +3774,8 @@ const repos = [
 
                   <aside class="app-eventlog" aria-label="Runtime event log">
                     <div class="eventlog-head">
-                      <span>runtime event log</span>
-                      <span class="eventlog-session">ts_2026_05_17_a3f</span>
+                      <span>processing log</span>
+                      <span class="eventlog-session">run_2026_05_20_showcase</span>
                     </div>
                     <div class="event-list">
                       {
@@ -3838,13 +3806,13 @@ const repos = [
                       </button>
                     </div>
                     <div class="slice-detail-body">
-                      <div class="slice-detail-label">Slice Summary</div>
+                      <div class="slice-detail-label">Claim</div>
                       <blockquote class="slice-detail-quote" id="sliceDetailTitle"></blockquote>
 
-                      <div class="slice-detail-label">Theory</div>
+                      <div class="slice-detail-label">How we read it</div>
                       <p id="sliceDetailTheory"></p>
 
-                      <div class="slice-detail-label">Evidence</div>
+                      <div class="slice-detail-label">What the corpus says</div>
                       <p id="sliceDetailEvidence"></p>
 
                       <div class="slice-detail-label">State</div>
@@ -3852,8 +3820,8 @@ const repos = [
 
                       <div class="slice-detail-label" style="margin-top:22px">Actions</div>
                       <div class="slice-detail-actions">
-                        <button class="slice-action-btn slice-action-primary">&#8859; Re-enter</button>
-                        <button class="slice-action-btn slice-action-secondary">Inspect oscillation history</button>
+                        <button class="slice-action-btn slice-action-primary">&#8859; View source passage</button>
+                        <button class="slice-action-btn slice-action-secondary">See related claims</button>
                         <button class="slice-action-btn slice-action-quiet" id="sliceCopyId">Copy id</button>
                       </div>
                     </div>
@@ -3862,98 +3830,32 @@ const repos = [
               </aside>
             </div>
 
-            <section
-              class="norma-download-block"
-              data-norma-download
-              data-particle-src="/assets/principia/chaotic-p.svg"
-              aria-label="Download Norma for Windows"
-            >
-              <canvas class="norma-ripple-canvas" data-norma-ripple></canvas>
-              <div class="norma-download-content">
-                <h2 class="norma-download-title">Download Norma for Windows</h2>
-                <p class="norma-download-copy">
-                  Norma packages the local constellation runtime for operators
-                  who need Vivarium sessions, chamber traces, and release checks
-                  in one desktop surface.
-                </p>
-                <div class="norma-download-actions">
-                  <a class="norma-download-button norma-download-button--primary" href="https://github.com/Telotia/Principia/releases">
-                    Download for x64
-                  </a>
-                  <a class="norma-download-button norma-download-button--secondary" href="https://github.com/Telotia/Principia/releases">
-                    Download for ARM64
-                  </a>
-                </div>
-                <p class="norma-platform-note">Windows 11 / Windows 10 · macOS and Linux builds staged through Vivarium</p>
-              </div>
-              <div class="norma-cursor" data-norma-cursor aria-hidden="true">
-                <svg viewBox="60 50 150 178" fill="none" aria-hidden="true">
-                  <path class="norma-cursor-line" d="M174.38 76.12 L84.75 145.87 L117.14 208.31 L129.95 206.32 L189.11 183.08 Z" />
-                  <path class="norma-cursor-line-glint" d="M174.38 76.12 L84.75 145.87 L117.14 208.31 L129.95 206.32 L189.11 183.08 Z" />
-                  <g class="norma-cursor-stars" filter="url(#normaCursorGlow)">
-                    <g class="norma-cursor-star">
-                      <circle cx="174.38" cy="76.12" r="10.2" fill="#0B4CFF" opacity="0.64" />
-                      <circle cx="174.38" cy="76.12" r="6.1" fill="#1466FF" />
-                      <circle cx="174.38" cy="76.12" r="2.8" fill="#FFFFFF" />
-                    </g>
-                    <g class="norma-cursor-star">
-                      <circle cx="84.75" cy="145.87" r="8.7" fill="#0B4CFF" opacity="0.62" />
-                      <circle cx="84.75" cy="145.87" r="5.1" fill="#1466FF" />
-                      <circle cx="84.75" cy="145.87" r="2.4" fill="#FFFFFF" />
-                    </g>
-                    <g class="norma-cursor-star">
-                      <circle cx="189.11" cy="183.08" r="9.4" fill="#0B4CFF" opacity="0.64" />
-                      <circle cx="189.11" cy="183.08" r="5.6" fill="#1466FF" />
-                      <circle cx="189.11" cy="183.08" r="2.6" fill="#FFFFFF" />
-                    </g>
-                    <g class="norma-cursor-star">
-                      <circle cx="129.95" cy="206.32" r="7.3" fill="#0B4CFF" opacity="0.60" />
-                      <circle cx="129.95" cy="206.32" r="4.3" fill="#1466FF" />
-                      <circle cx="129.95" cy="206.32" r="2" fill="#FFFFFF" />
-                    </g>
-                    <g class="norma-cursor-star">
-                      <circle cx="117.14" cy="208.31" r="6.4" fill="#0B4CFF" opacity="0.58" />
-                      <circle cx="117.14" cy="208.31" r="3.8" fill="#1466FF" />
-                      <circle cx="117.14" cy="208.31" r="1.8" fill="#FFFFFF" />
-                    </g>
-                  </g>
-                  <g class="norma-cursor-bursts">
-                    <path class="norma-cursor-burst" d="M174.38 61.12 V91.12 M159.38 76.12 H189.38" />
-                    <path class="norma-cursor-burst" d="M84.75 130.87 V160.87 M69.75 145.87 H99.75" />
-                    <path class="norma-cursor-burst" d="M189.11 168.08 V198.08 M174.11 183.08 H204.11" />
-                    <path class="norma-cursor-burst" d="M129.95 191.32 V221.32 M114.95 206.32 H144.95" />
-                    <path class="norma-cursor-burst" d="M117.14 193.31 V223.31 M102.14 208.31 H132.14" />
-                  </g>
-                  <defs>
-                    <filter id="normaCursorGlow" x="45" y="35" width="180" height="210" color-interpolation-filters="sRGB">
-                      <feGaussianBlur stdDeviation="7" result="blur" />
-                      <feMerge>
-                        <feMergeNode in="blur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
-                </svg>
-              </div>
-            </section>
+            <div class="showcase-caveat">
+              <p>
+                Telotia checks claims against the corpus you give it.
+                "No support found" means this corpus is silent on the claim —
+                not that the claim is wrong. Results are a starting point
+                for a human reviewer, not a verdict on the work.
+              </p>
+            </div>
           </div>
         </section>
 
-        <section class="tel-section paper-section alt" id="assessment">
+        <section class="tel-section paper-section alt" id="about">
           <div class="tel-container">
-            <div class="tel-label">Honest assessment / v0.1.0</div>
+            <div class="tel-label">About</div>
             <h2 class="section-title">
-              The dish runs. The frontier moves. <em>Some things it does not
-              yet demonstrate.</em>
+              The showcase is real. The claims are real. <em>This is what it does.</em>
             </h2>
             <p class="section-lede">
-              Every Principia release closes with this section. The limitations
-              ship alongside the wins.
+              Telotia is a Montreal-based team building tools to tell apart
+              what's claimed from what's shown. The showcase runs on research
+              from the Concordia Design Lab.
             </p>
 
             <div class="assessment-grid">
               <article class="card">
-                <h3>What v0.1.0 demonstrates</h3>
+                <h3>What the showcase demonstrates</h3>
                 <ul>
                   {
                     demonstrates.map((item) => (
@@ -3967,7 +3869,7 @@ const repos = [
               </article>
 
               <article class="card weak">
-                <h3>What it does not</h3>
+                <h3>What we don't claim yet</h3>
                 <ul>
                   {
                     limits.map((item) => (
@@ -3982,8 +3884,9 @@ const repos = [
             </div>
 
             <p class="assessment-note">
-              The next release should target progress-aware heartbeat and
-              tighter <em>Stabilizer</em> verdict criteria.
+              This matters most where claims carry weight: research that builds
+              on prior work, and high-stakes documents where someone has to
+              verify what they've been handed before acting on it.
             </p>
           </div>
         </section>
@@ -3991,7 +3894,7 @@ const repos = [
 
       <footer class="tel-footer">
         <div class="footer-inner">
-          <div class="tel-label">The Telotia dev-flow chain</div>
+          <div class="tel-label">Get in touch</div>
           <div class="repo-chain">
             {
               repos.map((repo) => (
@@ -3999,7 +3902,7 @@ const repos = [
                   <span class="repo-step">{repo.step}</span>
                   <span class="repo-name">{repo.name}</span>
                   <p class="repo-desc">{repo.desc}</p>
-                  <a href={repo.href}>{repo.href.replace('https://', '')} &nearr;</a>
+                  <a href={repo.href}>{repo.href.replace('https://', '').replace('mailto:', '')} &nearr;</a>
                 </article>
               ))
             }
@@ -4007,12 +3910,10 @@ const repos = [
           <div class="footer-bottom">
             <span class="brand-mark" aria-hidden="true"></span>
             <span class="footer-copy">
-              Proprietary / Telotia / Mortality is the only natural death.
+              Telotia · Montreal · private beta
             </span>
             <span class="footer-spacer"></span>
-            <a href="https://github.com/Telotia/Principia">Security</a>
-            <a href="https://github.com/Telotia/Principia/releases">Changelog</a>
-            <a href="https://github.com/Telotia/Principia/releases">Releasing</a>
+            <a href="mailto:hello@telotia.com">hello@telotia.com</a>
           </div>
         </div>
       </footer>
