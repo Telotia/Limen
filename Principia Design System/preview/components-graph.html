@@ -1,0 +1,51 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Chamber graph</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 0; background: var(--ocean); background-color: var(--ocean-flat); color: var(--night-ink); }
+  .frame { padding: 22px 24px; position: relative; overflow: hidden; height: 240px; }
+  .frame::before {
+    content:""; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(#ffffff30 0.7px, transparent 0.8px),
+      radial-gradient(#ffffff18 0.5px, transparent 0.6px);
+    background-size: 21px 21px, 13px 9px;
+  }
+  svg { position: relative; width: 100%; height: 100%; display: block; }
+  text { font-family: 'IBM Plex Sans', sans-serif; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; fill: var(--night-ink-2); }
+  text.active { fill: var(--star); }
+  .edge { stroke: #3A4664; stroke-width: 0.8; fill: none; }
+  .edge--active { stroke: var(--star); stroke-width: 1.2; }
+  .node { fill: var(--night-2); stroke: var(--night-ink-2); stroke-width: 0.8; }
+  .node--active { fill: var(--star); stroke: var(--star); }
+  .label { font-family: 'Newsreader', serif; font-size: 11px; font-style: italic; fill: var(--night-ink-2); text-transform: none; letter-spacing: 0; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <svg viewBox="0 0 644 200" preserveAspectRatio="xMidYMid meet">
+      <!-- edges -->
+      <path class="edge" d="M50 100 L 150 60"/>
+      <path class="edge" d="M50 100 L 150 140"/>
+      <path class="edge edge--active" d="M150 60 L 280 100"/>
+      <path class="edge" d="M150 140 L 280 100"/>
+      <path class="edge edge--active" d="M280 100 L 410 60"/>
+      <path class="edge" d="M280 100 L 410 140"/>
+      <path class="edge edge--active" d="M410 60 L 540 100"/>
+      <path class="edge" d="M410 140 L 540 100"/>
+      <path class="edge" d="M540 100 L 280 100" stroke-dasharray="2 4"/>
+
+      <!-- nodes -->
+      <g><circle class="node" cx="50"  cy="100" r="7"/><text x="50"  y="80"  text-anchor="middle">Origin</text></g>
+      <g><circle class="node" cx="150" cy="60"  r="7"/><text x="150" y="42"  text-anchor="middle">Inspection</text></g>
+      <g><circle class="node" cx="150" cy="140" r="7"/><text x="150" y="160" text-anchor="middle">Telos</text></g>
+      <g><circle class="node node--active" cx="280" cy="100" r="9"/><text class="active" x="280" y="80" text-anchor="middle">Synthesis</text></g>
+      <g><circle class="node" cx="410" cy="60"  r="7"/><text x="410" y="42"  text-anchor="middle">Debate</text></g>
+      <g><circle class="node" cx="410" cy="140" r="7"/><text x="410" y="160" text-anchor="middle">Experiment</text></g>
+      <g><circle class="node" cx="540" cy="100" r="7"/><text x="540" y="80"  text-anchor="middle">Slice</text></g>
+
+      <!-- marginalia label -->
+      <text class="label" x="624" y="100" text-anchor="end">re-entry</text>
+    </svg>
+  </div>
+</body></html>

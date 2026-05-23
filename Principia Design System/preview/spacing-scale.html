@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Spacing</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 24px 28px; }
+  .scale { display: grid; grid-template-columns: 60px 1fr 60px; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); }
+  .scale + .scale { margin-top: 8px; }
+  .bar { background: var(--ink); height: 8px; border-radius: 1px; }
+  .name { font-family: var(--font-sans); font-size:11px; letter-spacing:.14em; text-transform: uppercase; color: var(--ink-3); }
+  .px { font-family: var(--font-mono); font-size:11px; color: var(--ink); text-align: right; }
+</style>
+</head>
+<body>
+  <div class="scale"><div class="name">s-1</div><div class="bar" style="width:4px"></div><div class="px">4 px</div></div>
+  <div class="scale"><div class="name">s-2</div><div class="bar" style="width:8px"></div><div class="px">8 px</div></div>
+  <div class="scale"><div class="name">s-3</div><div class="bar" style="width:12px"></div><div class="px">12 px</div></div>
+  <div class="scale"><div class="name">s-4</div><div class="bar" style="width:16px"></div><div class="px">16 px</div></div>
+  <div class="scale"><div class="name">s-6</div><div class="bar" style="width:24px"></div><div class="px">24 px</div></div>
+  <div class="scale"><div class="name">s-8</div><div class="bar" style="width:32px"></div><div class="px">32 px</div></div>
+  <div class="scale"><div class="name">s-12</div><div class="bar" style="width:48px"></div><div class="px">48 px</div></div>
+  <div class="scale"><div class="name">s-16</div><div class="bar" style="width:64px"></div><div class="px">64 px</div></div>
+  <div class="scale"><div class="name">s-24</div><div class="bar" style="width:96px"></div><div class="px">96 px</div></div>
+</body></html>

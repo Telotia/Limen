@@ -11,7 +11,7 @@ const navItems = [
 const heroMeta = [
   { label: 'Granularity', value: 'Atomic claims, not paragraphs' },
   { label: 'Evidence base', value: 'The corpus you choose' },
-  { label: 'Verdicts', value: 'Proven / Partial / Falsified' },
+  { label: 'Verdicts', value: 'Supported / Partial / Unsupported' },
 ];
 
 const appChambers = [
@@ -26,7 +26,7 @@ const appChambers = [
 const appEvents = [
   {
     time: '10:42:01.412',
-    chamber: 'telos',
+    chamber: 'document',
     event: 'loaded',
     detail: 'doc_paper_8f0a1b34 / 4,312 words',
   },
@@ -52,11 +52,11 @@ const appEvents = [
     time: '10:43:12.554',
     chamber: 'experiment',
     event: 'graded',
-    detail: 'verdict=Proven / Zeng 2015 §3.2',
+    detail: 'verdict=Supported / Zeng 2015 §3.2',
   },
   {
     time: '10:44:02.004',
-    chamber: 'slice',
+    chamber: 'review',
     event: 'reviewed',
     detail: '12 of 18 claims graded / 6 remaining',
   },
@@ -66,7 +66,7 @@ const appSlices = [
   {
     id: 'claim_a3f2b9c1',
     title: 'Design intent can be expressed independently of implementation.',
-    verdict: 'Proven',
+    verdict: 'Supported',
     chamber: 'Decompose ▸ Grade',
     reentries: 0,
     last: '4 min ago',
@@ -76,7 +76,7 @@ const appSlices = [
   },
   {
     id: 'claim_4d12e0',
-    title: 'Co-creative AI systems reduce cognitive load in early-stage ideation.',
+    title: 'Co-creative systems reduce cognitive load in early-stage ideation.',
     verdict: 'Partial',
     chamber: 'Decompose ▸ Grade ▸ Re-check',
     reentries: 1,
@@ -88,7 +88,7 @@ const appSlices = [
   {
     id: 'claim_9bc717',
     title: 'Analogical reasoning is the primary driver of cross-domain innovation.',
-    verdict: 'Falsified',
+    verdict: 'Unsupported',
     chamber: 'Decompose ▸ Grade',
     reentries: 0,
     last: 'just now',
@@ -138,13 +138,13 @@ const cycleSteps = [
     step: 'Step 3',
     title: 'Grade and cite',
     body:
-      'Every claim gets a graded verdict — Proven, Partial, or Falsified — each linked to the exact source in your corpus. No aggregate scores, no summaries.',
+      'Every claim gets a graded verdict — Supported, Partial, or Unsupported — each linked to the exact source in your corpus. No aggregate scores, no summaries.',
   },
 ];
 
 const terms = [
   {
-    term: 'Proven',
+    term: 'Supported',
     pos: 'verdict',
     def:
       'Evidence in the corpus backs the claim. The supporting passage is retrieved and cited exactly.',
@@ -156,7 +156,7 @@ const terms = [
       'Some of the claim is backed; part is not, or only holds under specific conditions. Graded, non-binary — not collapsed to true or false.',
   },
   {
-    term: 'Falsified',
+    term: 'Unsupported',
     pos: 'verdict',
     def:
       'This corpus is silent on the claim — not that the claim is wrong. Results are a starting point for a human reviewer, not a final verdict on the work.',
@@ -183,7 +183,7 @@ const terms = [
 
 const demonstrates = [
   'End-to-end claim decomposition on real research documents.',
-  'Graded, non-binary verdicts: Proven, Partial, Falsified.',
+  'Graded, non-binary verdicts: Supported, Partial, Unsupported.',
   'Every verdict linked to the exact passage in the corpus that supports it.',
   'The showcase runs on a fixed, citable evidence base — Concordia Design Lab publications (2006–2024).',
   '"No support found" is distinguished from "false" — the corpus is silent, not refuting.',
@@ -192,7 +192,7 @@ const demonstrates = [
 const limits = [
   'Benchmark numbers: the evaluation against SPOT / PaperBench is in progress, not yet published.',
   'The product is not yet generally available; we are in private early access.',
-  '"Bring your own model" is under development — not yet a committed feature.',
+  '"Customer-owned review settings" is under development — not yet a committed feature.',
   'The showcase demonstrates one trusted corpus — results on other corpora may vary.',
 ];
 
@@ -201,7 +201,7 @@ const repos = [
     step: 'Get in touch',
     name: 'hello@telotia.com',
     desc:
-      'We are looking for design partners in evidence-heavy fields and collaborators who want to help define what rigorous AI claim-checking looks like.',
+      'We are looking for design partners in evidence-heavy fields and collaborators who want to help define what rigorous claim review looks like.',
     href: 'mailto:hello@telotia.com',
   },
   {
@@ -258,7 +258,6 @@ const repos = [
         --rose: #dea193;
         --rose-soft: #b07a6a;
         --blue: #5990c0;
-        --violet: #6d4bc3;
         --ocean: radial-gradient(
           ellipse 130% 90% at 50% 0%,
           #213d6f 0%,
@@ -333,14 +332,17 @@ const repos = [
 
       .tel-page {
         min-height: 100vh;
+        padding-top: 58px;
         background:
           radial-gradient(circle at 8% 32rem, rgb(89 144 192 / 0.12), transparent 22rem),
           linear-gradient(180deg, #f6f7fb 0%, #eef1f7 100%);
       }
 
       .tel-nav {
-        position: sticky;
+        position: fixed;
         top: 0;
+        right: 0;
+        left: 0;
         z-index: 20;
         color: var(--night-ink);
         background: rgb(6 11 26 / 0.84);
@@ -382,9 +384,9 @@ const repos = [
         flex: 0 0 22px;
         color: var(--rose);
         background: currentColor;
-        -webkit-mask: url('/assets/principia/principia-mark.svg') center /
+        -webkit-mask: url('/assets/telotia/telotia-mark.svg') center /
           contain no-repeat;
-        mask: url('/assets/principia/principia-mark.svg') center / contain no-repeat;
+        mask: url('/assets/telotia/telotia-mark.svg') center / contain no-repeat;
       }
 
       .brand-name {
@@ -513,21 +515,23 @@ const repos = [
 
       .tel-hero {
         position: relative;
-        min-height: calc(100vh - 96px);
+        min-height: calc(100dvh - 58px);
+        display: grid;
+        align-items: center;
         overflow: hidden;
         color: var(--night-ink);
         background:
-          /* primary violet bloom — upper right, most visible */
-          radial-gradient(circle at 72% 22%, rgba(75, 46, 131, 0.28) 0%, transparent 34%),
+          /* primary blue bloom — upper right, most visible */
+          radial-gradient(circle at 73% 20%, rgba(21, 74, 112, 0.30) 0%, transparent 34%),
           /* secondary cosmic indigo — lower center */
-          radial-gradient(circle at 38% 64%, rgba(110, 66, 193, 0.16) 0%, transparent 30%),
-          /* cool blue-violet whisper — upper left */
-          radial-gradient(circle at 18% 18%, rgba(89, 144, 192, 0.12) 0%, transparent 28%),
+          radial-gradient(circle at 38% 64%, rgba(15, 74, 92, 0.16) 0%, transparent 30%),
+          /* pale blue whisper — upper left */
+          radial-gradient(circle at 18% 18%, rgba(89, 144, 192, 0.11) 0%, transparent 28%),
           /* rose-gold atmospheric warmth — far right edge */
           radial-gradient(circle at 95% 55%, rgba(222, 161, 147, 0.07) 0%, transparent 22%),
           /* deep indigo field — center mass */
-          radial-gradient(ellipse 110% 70% at 50% 45%, rgba(43, 47, 128, 0.18) 0%, transparent 60%),
-          linear-gradient(180deg, #070A18 0%, #0B1028 55%, #060d22 100%);
+          radial-gradient(ellipse 110% 70% at 50% 45%, rgba(10, 41, 84, 0.20) 0%, transparent 60%),
+          linear-gradient(180deg, #060a16 0%, #071225 55%, #050b1d 100%);
       }
 
       .tel-hero::before,
@@ -543,7 +547,7 @@ const repos = [
           radial-gradient(circle, #ffffff06 0.22px, transparent 0.42px),
           radial-gradient(circle, #ffffff09 0.26px, transparent 0.48px),
           radial-gradient(circle, #ffffff0c 0.30px, transparent 0.54px),
-          url('/assets/principia/stars.svg');
+          url('/assets/telotia/stars.svg');
         background-size:
           71px 67px,
           113px 97px,
@@ -564,9 +568,9 @@ const repos = [
       .tel-hero::after {
         opacity: 0.22;
         background: var(--night-ink);
-        -webkit-mask: url('/assets/principia/constellation-bg.svg') right 6% top
+        -webkit-mask: url('/assets/telotia/constellation-bg.svg') right 6% top
           10% / min(820px, 78vw) auto no-repeat;
-        mask: url('/assets/principia/constellation-bg.svg') right 6% top 10% /
+        mask: url('/assets/telotia/constellation-bg.svg') right 6% top 10% /
           min(820px, 78vw) auto no-repeat;
       }
 
@@ -590,7 +594,7 @@ const repos = [
         width: calc(100% - 32px);
         max-width: 1180px;
         margin: 0 auto;
-        padding: 102px 0 82px;
+        padding: clamp(28px, 4.6vh, 52px) 0 clamp(28px, 4.6vh, 52px);
       }
 
       .hero-status,
@@ -613,10 +617,11 @@ const repos = [
         justify-content: space-between;
         gap: clamp(22px, 4vw, 56px);
         align-items: center;
-        margin-top: 18px;
+        margin-top: clamp(22px, 3.8vh, 34px);
       }
 
       .hero-copy-block {
+        position: relative;
         padding-left: clamp(24px, 4.6vw, 78px);
       }
 
@@ -629,14 +634,90 @@ const repos = [
       }
 
       .hero-title {
+        position: relative;
+        isolation: isolate;
         margin: 0;
         line-height: 1;
       }
 
       .hero-wordmark {
+        position: relative;
+        z-index: 1;
         display: block;
-        width: clamp(280px, 42vw, 640px);
+        width: clamp(260px, 34vw, 520px);
         height: auto;
+      }
+
+      .hero-title::before,
+      .hero-title::after {
+        position: absolute;
+        display: none;
+        content: '';
+        pointer-events: none;
+      }
+
+      html[data-theme="night"] .hero-wordmark {
+        filter: none;
+        opacity: 0;
+      }
+
+      html[data-theme="night"] .hero-title::after {
+        z-index: 1;
+        inset: 0;
+        display: block;
+        background:
+          radial-gradient(ellipse 72% 92% at 48% 52%, rgb(255 254 224 / 0.98) 0%, rgb(255 235 169 / 0.98) 21%, rgb(238 180 91 / 0.96) 43%, rgb(183 126 72 / 0.88) 64%, rgb(100 185 205 / 0.56) 82%, rgb(62 109 158 / 0.35) 100%),
+          linear-gradient(105deg, #b97342 0%, #f3c37a 17%, #fff6cf 31%, #d59755 49%, #f6d28c 63%, #80d8df 78%, #b98258 100%);
+        background-blend-mode: screen, normal;
+        filter:
+          drop-shadow(0 0 2px rgb(255 250 216 / 0.46))
+          drop-shadow(0 0 10px rgb(235 184 95 / 0.35))
+          drop-shadow(0 0 22px rgb(91 194 212 / 0.12));
+        -webkit-mask-image: url('/assets/telotia/telotia-wordmark.svg');
+        mask-image: url('/assets/telotia/telotia-wordmark.svg');
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        opacity: 0.98;
+      }
+
+      html[data-theme="night"] .hero-title::before {
+        z-index: 2;
+        inset: -18% -10% -16% -5%;
+        display: block;
+        background:
+          radial-gradient(circle at 14% 34%, rgb(255 247 220 / 0.92) 0 0.9px, transparent 1.7px),
+          radial-gradient(circle at 30% 78%, rgb(239 184 88 / 0.78) 0 0.8px, transparent 1.7px),
+          radial-gradient(circle at 48% 19%, rgb(255 224 151 / 0.86) 0 1px, transparent 1.9px),
+          radial-gradient(circle at 63% 62%, rgb(255 246 218 / 0.76) 0 0.8px, transparent 1.7px),
+          radial-gradient(circle at 82% 31%, rgb(236 190 104 / 0.82) 0 0.9px, transparent 1.8px),
+          radial-gradient(circle at 93% 70%, rgb(255 237 185 / 0.68) 0 0.8px, transparent 1.8px);
+        filter:
+          drop-shadow(0 0 3px rgb(255 248 218 / 0.72))
+          drop-shadow(0 0 9px rgb(234 178 82 / 0.34));
+        mix-blend-mode: screen;
+        opacity: 0.72;
+        animation: hero-script-stars 6.8s ease-in-out infinite;
+      }
+
+      @keyframes hero-script-stars {
+        0%, 100% {
+          opacity: 0.52;
+          transform: translate3d(0, 0, 0) scale(0.98);
+        }
+
+        42% {
+          opacity: 0.86;
+          transform: translate3d(1px, -1px, 0) scale(1.03);
+        }
+
+        68% {
+          opacity: 0.64;
+          transform: translate3d(-1px, 1px, 0) scale(1);
+        }
       }
 
       .decor-animation {
@@ -655,8 +736,8 @@ const repos = [
       }
 
       .decor-animation-chaotic {
-        width: clamp(360px, 42vw, 560px);
-        height: clamp(220px, 25vw, 340px);
+        width: clamp(320px, 39vw, 520px);
+        height: clamp(180px, 21vw, 280px);
         opacity: 0.92;
         margin-top: -22px;
       }
@@ -682,10 +763,10 @@ const repos = [
 
       .hero-thesis {
         max-width: min(1040px, 100%);
-        margin-top: 34px;
+        margin-top: clamp(16px, 2.4vh, 24px);
         color: var(--night-ink-2);
         font-family: var(--font-display);
-        font-size: clamp(46px, 4.4vw, 78px);
+        font-size: clamp(38px, 4.1vw, 64px);
         font-weight: 340;
         line-height: 1.06;
         overflow-wrap: break-word;
@@ -707,14 +788,22 @@ const repos = [
 
       .hero-copy {
         max-width: 880px;
-        margin-top: 42px;
+        margin-top: 24px;
         color: var(--night-ink-2);
         font-family: var(--font-display);
-        font-size: clamp(23px, 1.6vw, 29px);
+        font-size: clamp(21px, 1.45vw, 25px);
         font-weight: 340;
-        line-height: 1.48;
+        line-height: 1.38;
         overflow-wrap: break-word;
         white-space: normal;
+      }
+
+      .hero-copy .hero-line {
+        display: inline;
+      }
+
+      .hero-copy .hero-line + .hero-line::before {
+        content: ' ';
       }
 
       .hero-meta {
@@ -722,7 +811,7 @@ const repos = [
         grid-template-columns: repeat(3, minmax(180px, 1fr));
         gap: 48px;
         max-width: min(980px, 100%);
-        margin-top: 40px;
+        margin-top: 28px;
       }
 
       .hero-meta .cell {
@@ -755,7 +844,7 @@ const repos = [
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
-        margin-top: 36px;
+        margin-top: 22px;
       }
 
       .hero-cta-primary,
@@ -1119,7 +1208,7 @@ const repos = [
           #020308;
         box-shadow: var(--shadow-night);
         color: #fff;
-        cursor: none;
+        cursor: auto;
       }
 
       .norma-download-block::before {
@@ -1140,6 +1229,81 @@ const repos = [
         width: 100%;
         height: 100%;
         display: block;
+      }
+
+      .norma-cursor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        display: none;
+        width: 44px;
+        height: 56px;
+        color: #fab184;
+        opacity: 0;
+        pointer-events: none;
+        transform:
+          translate3d(var(--norma-cursor-x, -120px), var(--norma-cursor-y, -120px), 0)
+          translate(-14px, -20px)
+          rotate(7deg);
+        transition: opacity 160ms var(--ease-paper);
+        filter:
+          drop-shadow(0 0 5px rgb(250 177 132 / 0.82))
+          drop-shadow(0 0 13px rgb(250 177 132 / 0.38));
+      }
+
+      .norma-cursor-line {
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.35;
+        opacity: 0.88;
+      }
+
+      .norma-cursor-node {
+        fill: currentColor;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: norma-cursor-twinkle 4.2s ease-in-out infinite;
+      }
+
+      .norma-cursor-node:nth-of-type(2) { animation-delay: -0.8s; }
+      .norma-cursor-node:nth-of-type(3) { animation-delay: -1.6s; }
+      .norma-cursor-node:nth-of-type(4) { animation-delay: -2.4s; }
+      .norma-cursor-node:nth-of-type(5) { animation-delay: -3.2s; }
+
+      @keyframes norma-cursor-twinkle {
+        0%, 100% {
+          opacity: 0.78;
+          transform: scale(0.9);
+        }
+
+        42% {
+          opacity: 1;
+          transform: scale(1.28);
+        }
+
+        68% {
+          opacity: 0.86;
+          transform: scale(1);
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .norma-download-block,
+        .norma-download-block a,
+        .norma-download-block button {
+          cursor: none;
+        }
+
+        .norma-cursor {
+          display: block;
+        }
+
+        .norma-download-block[data-pointer="inside"] .norma-cursor {
+          opacity: 0.96;
+        }
       }
 
       .norma-download-content {
@@ -1230,127 +1394,6 @@ const repos = [
         color: rgba(255, 255, 255, 0.46);
         font-family: var(--font-mono);
         font-size: 11px;
-      }
-
-      .norma-cursor {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 4;
-        width: 56px;
-        height: 66px;
-        opacity: 0;
-        pointer-events: none;
-        transform: translate3d(-999px, -999px, 0);
-        transition: opacity 120ms var(--ease-paper);
-        filter:
-          drop-shadow(0 0 8px rgba(20, 86, 255, 0.72))
-          drop-shadow(0 0 18px rgba(41, 133, 255, 0.46));
-      }
-
-      .norma-download-block[data-pointer='inside'] .norma-cursor {
-        opacity: 1;
-      }
-
-      .norma-cursor svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-        overflow: visible;
-      }
-
-      .norma-cursor-line {
-        stroke: rgba(7, 74, 255, 0.98);
-        stroke-width: 2.7;
-        stroke-linejoin: round;
-        filter:
-          drop-shadow(0 0 4px rgba(7, 74, 255, 0.88))
-          drop-shadow(0 0 10px rgba(55, 137, 255, 0.54));
-        animation: norma-line-shimmer 5.4s ease-in-out infinite;
-      }
-
-      .norma-cursor-line-glint {
-        stroke: rgba(250, 253, 255, 0.92);
-        stroke-width: 1;
-        stroke-linejoin: round;
-      }
-
-      .norma-cursor-star {
-        transform-box: fill-box;
-        transform-origin: center;
-        animation: norma-star-twinkle 4.4s ease-in-out infinite;
-      }
-
-      .norma-cursor-burst {
-        stroke: rgba(250, 253, 255, 0.98);
-        stroke-width: 1.55;
-        stroke-linecap: round;
-        transform-box: fill-box;
-        transform-origin: center;
-        filter: drop-shadow(0 0 5px rgba(19, 96, 255, 0.62));
-        animation: norma-burst-twinkle 4.4s ease-in-out infinite;
-      }
-
-      .norma-cursor-star:nth-of-type(1),
-      .norma-cursor-burst:nth-of-type(1) {
-        animation-delay: -0.2s;
-      }
-
-      .norma-cursor-star:nth-of-type(2),
-      .norma-cursor-burst:nth-of-type(2) {
-        animation-delay: -0.76s;
-      }
-
-      .norma-cursor-star:nth-of-type(3),
-      .norma-cursor-burst:nth-of-type(3) {
-        animation-delay: -1.18s;
-      }
-
-      .norma-cursor-star:nth-of-type(4),
-      .norma-cursor-burst:nth-of-type(4) {
-        animation-delay: -1.54s;
-      }
-
-      .norma-cursor-star:nth-of-type(5),
-      .norma-cursor-burst:nth-of-type(5) {
-        animation-delay: -0.42s;
-      }
-
-      @keyframes norma-star-twinkle {
-        0%,
-        100% {
-          opacity: 0.86;
-          transform: scale(0.92);
-        }
-
-        46% {
-          opacity: 1;
-          transform: scale(1.34);
-        }
-      }
-
-      @keyframes norma-burst-twinkle {
-        0%,
-        100% {
-          opacity: 0.30;
-          transform: scale(0.50) rotate(0deg);
-        }
-
-        46% {
-          opacity: 1;
-          transform: scale(1.52) rotate(8deg);
-        }
-      }
-
-      @keyframes norma-line-shimmer {
-        0%,
-        100% {
-          opacity: 0.82;
-        }
-
-        48% {
-          opacity: 1;
-        }
       }
 
       .assessment-grid {
@@ -1446,11 +1489,11 @@ const repos = [
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        width: min(1920px, 174vw);
+        width: min(1280px, 116vw);
         height: auto;
-        mix-blend-mode: multiply;
-        opacity: 0.78;
-        filter: blur(1.5px);
+        mix-blend-mode: normal;
+        opacity: 0.34;
+        filter: blur(0.4px) saturate(0.95);
         pointer-events: none;
       }
 
@@ -1580,9 +1623,9 @@ const repos = [
 
       html[data-theme="night"] .paper-section {
         background:
-          url('/assets/principia/stars.svg') center / cover no-repeat,
-          radial-gradient(circle at 72% 18%, rgba(75, 46, 131, 0.20), transparent 36%),
-          radial-gradient(circle at 28% 62%, rgba(110, 66, 193, 0.10), transparent 34%),
+          url('/assets/telotia/stars.svg') center / cover no-repeat,
+          radial-gradient(circle at 72% 18%, rgba(13, 70, 104, 0.24), transparent 36%),
+          radial-gradient(circle at 28% 62%, rgba(18, 88, 110, 0.12), transparent 34%),
           radial-gradient(circle at 14% 22%, rgba(89, 144, 192, 0.08), transparent 30%),
           linear-gradient(180deg, #070A18 0%, #0B1028 100%);
         border-bottom: none;
@@ -1590,9 +1633,9 @@ const repos = [
 
       html[data-theme="night"] .paper-section.alt {
         background:
-          url('/assets/principia/stars.svg') center / cover no-repeat,
-          radial-gradient(circle at 20% 20%, rgba(110, 66, 193, 0.18), transparent 34%),
-          radial-gradient(circle at 76% 68%, rgba(75, 46, 131, 0.12), transparent 36%),
+          url('/assets/telotia/stars.svg') center / cover no-repeat,
+          radial-gradient(circle at 20% 20%, rgba(12, 74, 103, 0.20), transparent 34%),
+          radial-gradient(circle at 76% 68%, rgba(25, 83, 116, 0.16), transparent 36%),
           radial-gradient(circle at 88% 14%, rgba(89, 144, 192, 0.07), transparent 28%),
           linear-gradient(180deg, #0B1028 0%, #070A18 100%);
         border-bottom: none;
@@ -1634,7 +1677,7 @@ const repos = [
       html[data-theme="night"] .card,
       html[data-theme="night"] .card.weak {
         background:
-          radial-gradient(circle at 82% 18%, rgba(110, 66, 193, 0.10), transparent 34%),
+          radial-gradient(circle at 82% 18%, rgba(29, 94, 120, 0.12), transparent 34%),
           radial-gradient(circle at 16% 80%, rgba(89, 144, 192, 0.07), transparent 30%),
           linear-gradient(135deg, rgba(16, 42, 107, 0.48) 0%, rgba(13, 18, 42, 0.88) 100%);
         border: 1px solid rgba(244, 240, 255, 0.09);
@@ -1645,7 +1688,7 @@ const repos = [
 
       html[data-theme="night"] .term-card:hover {
         background:
-          radial-gradient(circle at 82% 18%, rgba(110, 66, 193, 0.14), transparent 34%),
+          radial-gradient(circle at 82% 18%, rgba(29, 94, 120, 0.16), transparent 34%),
           radial-gradient(circle at 16% 80%, rgba(89, 144, 192, 0.10), transparent 30%),
           linear-gradient(135deg, rgba(16, 42, 107, 0.56) 0%, rgba(13, 18, 42, 0.92) 100%);
       }
@@ -1663,7 +1706,7 @@ const repos = [
       }
 
       html[data-theme="night"] .tel-hero {
-        min-height: calc(100vh - 58px);
+        min-height: calc(100dvh - 58px);
       }
 
       html[data-theme="night"] .tel-hero-inner {
@@ -1934,7 +1977,7 @@ const repos = [
         --slice-glow: rgba(204, 162, 115, 0.26);
         --slice-gradient: linear-gradient(90deg, #102A6B 0%, #5990C0 45%, #CCA273 100%);
       }
-      .slice-card--proven {
+      .slice-card--supported {
         --slice-state: #5990C0;
         --slice-soft: rgba(89, 144, 192, 0.16);
         --slice-glow: rgba(89, 144, 192, 0.26);
@@ -1946,11 +1989,11 @@ const repos = [
         --slice-glow: rgba(126, 135, 157, 0.20);
         --slice-gradient: linear-gradient(90deg, #102A6B 0%, #34304F 50%, #7E879D 100%);
       }
-      .slice-card--falsified {
+      .slice-card--unsupported {
         --slice-state: #DEA193;
         --slice-soft: rgba(222, 161, 147, 0.16);
         --slice-glow: rgba(222, 161, 147, 0.24);
-        --slice-gradient: linear-gradient(90deg, #102A6B 0%, #6E42C1 48%, #DEA193 100%);
+        --slice-gradient: linear-gradient(90deg, #102A6B 0%, #1E5E78 48%, #DEA193 100%);
       }
 
       .slice-card-title {
@@ -2138,9 +2181,9 @@ const repos = [
       }
 
       .slice-detail-pill--partial  { background:#ECDFC020; color:#CCA273; border-color:#CCA27344; }
-      .slice-detail-pill--proven   { background:#5990C020; color:#5990C0; border-color:#5990C044; }
+      .slice-detail-pill--supported { background:#5990C020; color:#5990C0; border-color:#5990C044; }
       .slice-detail-pill--open     { background:#7E879D20; color:#9EA8CA; border-color:#7E879D44; }
-      .slice-detail-pill--falsified{ background:#DEA19320; color:#DEA193; border-color:#DEA19344; }
+      .slice-detail-pill--unsupported { background:#DEA19320; color:#DEA193; border-color:#DEA19344; }
       .slice-detail-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
       .slice-detail-id {
@@ -2272,11 +2315,11 @@ const repos = [
 
       .slice-action-quiet:hover { color: var(--night-ink); background: rgba(244, 240, 255, 0.06); }
 
-      .vivarium-section {
+      .app-section {
         padding-top: 72px;
       }
 
-      .vivarium-frame {
+      .app-frame {
         margin-top: 34px;
       }
 
@@ -2396,8 +2439,8 @@ const repos = [
         stroke: rgb(132 206 231 / 0.46);
       }
 
-      :global(.prism-streak.is-violet) {
-        stroke: rgb(177 162 235 / 0.42);
+      :global(.prism-streak.is-gold) {
+        stroke: rgb(211 168 84 / 0.42);
       }
 
       :global(.prism-streak.is-rose) {
@@ -2483,10 +2526,13 @@ const repos = [
       }
 
       main,
-      .tel-nav,
       .tel-footer {
         position: relative;
         z-index: 1;
+      }
+
+      .tel-nav {
+        z-index: 20;
       }
 
       main {
@@ -2665,23 +2711,18 @@ const repos = [
 
       html[data-theme="night"] .tel-page {
         background:
-          radial-gradient(ellipse at 70% 8%, rgba(72, 38, 132, 0.48), transparent 34rem),
-          radial-gradient(ellipse at 18% 22%, rgba(16, 42, 107, 0.48), transparent 31rem),
-          radial-gradient(ellipse at 84% 38%, rgba(43, 31, 104, 0.44), transparent 38rem),
-          radial-gradient(ellipse at 24% 54%, rgba(17, 58, 107, 0.34), transparent 36rem),
-          radial-gradient(ellipse at 70% 68%, rgba(91, 62, 156, 0.32), transparent 42rem),
-          radial-gradient(ellipse at 34% 84%, rgba(10, 32, 84, 0.42), transparent 38rem),
-          radial-gradient(ellipse at 82% 94%, rgba(7, 18, 48, 0.62), transparent 36rem),
+          radial-gradient(circle at 73% 20%, rgba(21, 74, 112, 0.32) 0%, transparent 34rem),
+          radial-gradient(circle at 38% 64%, rgba(15, 74, 92, 0.18) 0%, transparent 32rem),
+          radial-gradient(circle at 18% 18%, rgba(89, 144, 192, 0.10) 0%, transparent 30rem),
+          radial-gradient(ellipse 110% 70% at 50% 45%, rgba(10, 41, 84, 0.22) 0%, transparent 62%),
           linear-gradient(
             180deg,
-            #050918 0%,
-            #08102c 16%,
-            #101542 31%,
-            #0a1f43 46%,
-            #11123c 61%,
-            #071936 76%,
-            #070d24 89%,
-            #040716 100%
+            #060a16 0%,
+            #071225 18%,
+            #07162d 34%,
+            #071225 52%,
+            #060f26 70%,
+            #050b1d 100%
           );
       }
 
@@ -2698,24 +2739,20 @@ const repos = [
       }
 
       html[data-theme="night"] .tel-page::after {
-        opacity: 0.96;
+        opacity: 0.88;
         background:
-          radial-gradient(circle at 74% 18%, rgba(109, 75, 195, 0.24), transparent 28rem),
-          radial-gradient(circle at 12% 34%, rgba(47, 111, 168, 0.18), transparent 25rem),
-          radial-gradient(circle at 58% 44%, rgba(54, 32, 120, 0.21), transparent 31rem),
-          radial-gradient(circle at 92% 62%, rgba(89, 144, 192, 0.14), transparent 25rem),
-          radial-gradient(circle at 38% 78%, rgba(109, 75, 195, 0.18), transparent 32rem),
-          radial-gradient(circle at 50% 96%, rgba(16, 42, 107, 0.28), transparent 34rem),
+          radial-gradient(circle at 72% 22%, rgba(21, 74, 112, 0.20), transparent 30rem),
+          radial-gradient(circle at 40% 66%, rgba(15, 74, 92, 0.13), transparent 34rem),
+          radial-gradient(circle at 18% 20%, rgba(89, 144, 192, 0.08), transparent 28rem),
+          radial-gradient(circle at 58% 86%, rgba(10, 41, 84, 0.18), transparent 36rem),
           linear-gradient(
             180deg,
             transparent 0%,
-            rgba(20, 34, 93, 0.10) 18%,
-            rgba(76, 49, 135, 0.13) 36%,
-            rgba(11, 43, 89, 0.12) 52%,
-            rgba(43, 31, 104, 0.13) 70%,
-            rgba(4, 8, 24, 0.30) 100%
+            rgba(7, 18, 37, 0.06) 26%,
+            rgba(7, 22, 45, 0.10) 52%,
+            rgba(5, 11, 29, 0.26) 100%
           ),
-          linear-gradient(90deg, rgba(16, 42, 107, 0.14), transparent 30%, rgba(72, 38, 132, 0.13) 62%, transparent 88%);
+          linear-gradient(90deg, rgba(16, 42, 107, 0.10), transparent 32%, rgba(21, 74, 112, 0.10) 64%, transparent 90%);
       }
 
       html[data-theme="daylight"] .twinkle-field {
@@ -2834,7 +2871,8 @@ const repos = [
 
       html[data-theme="night"] .tel-art-bridge img {
         mix-blend-mode: screen;
-        opacity: 0.75;
+        opacity: 0.52;
+        filter: blur(0.4px) saturate(1.04);
       }
 
       html[data-theme="daylight"] .tel-footer::before,
@@ -2925,7 +2963,7 @@ const repos = [
         color: #fff;
         background:
           radial-gradient(circle at 72% 34%, rgba(46, 141, 255, 0.28), transparent 26rem),
-          radial-gradient(circle at 92% 18%, rgba(218, 53, 244, 0.17), transparent 18rem),
+          radial-gradient(circle at 92% 18%, rgba(222, 161, 147, 0.16), transparent 18rem),
           #020308;
         border-color: rgba(255, 255, 255, 0.12);
         box-shadow:
@@ -2969,7 +3007,7 @@ const repos = [
         color: #132145;
         background:
           radial-gradient(circle at 72% 34%, rgba(73, 139, 255, 0.18), transparent 26rem),
-          radial-gradient(circle at 92% 18%, rgba(218, 53, 244, 0.10), transparent 18rem),
+          radial-gradient(circle at 92% 18%, rgba(222, 161, 147, 0.10), transparent 18rem),
           linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(238, 247, 255, 0.98));
         border-color: rgba(47, 111, 168, 0.20);
         box-shadow:
@@ -3191,7 +3229,7 @@ const repos = [
         }
 
         .tel-hero-inner {
-          padding: 78px 0 68px;
+          padding: 46px 0 46px;
         }
 
         .hero-copy-block {
@@ -3199,20 +3237,60 @@ const repos = [
         }
 
         .hero-title-row {
+          position: static;
+          display: block;
           align-items: flex-start;
         }
 
         .decor-animation-chaotic {
-          width: clamp(260px, 40vw, 360px);
-          height: 200px;
+          position: absolute;
+          top: clamp(96px, 18vh, 148px);
+          right: clamp(-190px, -20vw, -72px);
+          z-index: 0;
+          width: clamp(340px, 74vw, 560px);
+          height: clamp(220px, 48vw, 340px);
+          margin-top: 0;
+          opacity: 0.70;
+        }
+
+        .decor-animation-chaotic canvas {
+          top: -26%;
+          left: -20%;
+          width: 142%;
+          height: 162%;
+        }
+
+        .hero-status,
+        .hero-title,
+        .hero-thesis,
+        .hero-copy,
+        .hero-cta-row,
+        .hero-meta {
+          position: relative;
+          z-index: 2;
         }
 
         .install-heading-row {
+          position: relative;
+          display: block;
           grid-template-columns: 1fr;
+          overflow: visible;
         }
 
-        .decor-animation-circle {
-          justify-self: start;
+        .install-heading-copy {
+          position: relative;
+          z-index: 2;
+        }
+
+        .install-heading-row > .decor-animation-circle {
+          position: absolute;
+          top: clamp(120px, 22vw, 188px);
+          left: clamp(-76px, -8vw, -34px);
+          z-index: 0;
+          width: clamp(210px, 46vw, 340px);
+          height: clamp(210px, 46vw, 340px);
+          opacity: 0.58;
+          justify-self: auto;
         }
 
         .app-preview-shell {
@@ -3250,7 +3328,7 @@ const repos = [
         }
 
         .hero-thesis {
-          font-size: 34px;
+          font-size: 31px;
           line-height: 1.12;
         }
 
@@ -3299,7 +3377,7 @@ const repos = [
         }
 
         .tel-hero {
-          min-height: calc(100vh - 80px);
+          min-height: calc(100dvh - 58px);
         }
 
         .tel-hero::after {
@@ -3307,7 +3385,7 @@ const repos = [
         }
 
         .tel-hero-inner {
-          padding: 62px 0 56px;
+          padding: 32px 0 34px;
         }
 
         .app-topbar {
@@ -3353,14 +3431,16 @@ const repos = [
         }
 
         .hero-title-row {
-          flex-direction: column;
-          gap: 16px;
+          display: block;
+          gap: 0;
         }
 
         .decor-animation-chaotic {
-          width: min(100%, 300px);
-          height: 160px;
-          margin-top: 0;
+          top: clamp(46px, 8vh, 72px);
+          right: clamp(-92px, -18vw, -56px);
+          width: min(105vw, 430px);
+          height: clamp(230px, 62vw, 310px);
+          opacity: 0.56;
         }
 
         .decor-animation-circle {
@@ -3368,12 +3448,16 @@ const repos = [
           height: 160px;
         }
 
-        .norma-download-block {
-          cursor: auto;
+        .install-heading-row > .decor-animation-circle {
+          top: clamp(112px, 32vw, 168px);
+          left: clamp(-68px, -18vw, -38px);
+          width: clamp(210px, 66vw, 300px);
+          height: clamp(210px, 66vw, 300px);
+          opacity: 0.52;
         }
 
-        .norma-cursor {
-          display: none;
+        .norma-download-block {
+          cursor: auto;
         }
 
         .norma-download-actions {
@@ -3395,19 +3479,51 @@ const repos = [
         }
 
         .hero-thesis {
-          font-size: 29px;
+          font-size: 28px;
           width: 100%;
           max-width: calc(100vw - 48px);
         }
 
         .hero-copy,
         .section-lede {
-          font-size: 18px;
+          font-size: 16px;
         }
 
         .hero-copy {
           width: 100%;
           max-width: calc(100vw - 48px);
+          margin-top: 18px;
+          line-height: 1.36;
+        }
+
+        .hero-cta-row {
+          gap: 8px;
+          margin-top: 18px;
+        }
+
+        .hero-cta-primary,
+        .hero-cta-secondary {
+          padding: 8px 14px;
+          font-size: 13px;
+        }
+
+        .hero-meta {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 10px;
+          margin-top: 18px;
+        }
+
+        .hero-meta .cell {
+          padding-top: 8px;
+        }
+
+        .hero-meta .meta-label {
+          font-size: 8px;
+        }
+
+        .meta-value {
+          font-size: 12px;
+          line-height: 1.2;
         }
 
         .section-title {
@@ -3517,7 +3633,7 @@ const repos = [
               <div class="hero-title-row">
                 <h1 class="hero-title" id="hero-title">
                   <img
-                    src="/assets/principia/telotia-wordmark.svg"
+                    src="/assets/telotia/telotia-wordmark.svg"
                     alt="TELOTIA"
                     class="hero-wordmark"
                     width="1624"
@@ -3662,7 +3778,7 @@ const repos = [
                 </p>
               </div>
 
-              <aside class="app-preview-shell" data-vivarium-app aria-label="Interactive Telotia showcase mockup">
+              <aside class="app-preview-shell" data-showcase-app aria-label="Interactive Telotia showcase mockup">
                 <div class="app-topbar">
                   <div class="app-brand">
                     <span class="brand-mark" aria-hidden="true"></span>
@@ -3683,7 +3799,7 @@ const repos = [
                           title={`${chamber.label}: ${chamber.state}`}
                         >
                           <svg class="chamber-glyph" aria-hidden="true">
-                            <use href={`/assets/principia/icons.svg#ch-${chamber.id}`}></use>
+                            <use href={`/assets/telotia/icons.svg#ch-${chamber.id}`}></use>
                           </svg>
                         </button>
                       ))
@@ -3767,7 +3883,7 @@ const repos = [
                       <div class="active-chamber-readout" data-chamber-readout>DECOMPOSE / ACTIVE</div>
                     </section>
 
-                    <div class="slice-drawer" aria-label="Slices">
+                    <div class="slice-drawer" aria-label="Claim verdicts">
                       {
                         appSlices.map((slice, index) => (
                           <div
@@ -3833,7 +3949,7 @@ const repos = [
                     </div>
                   </aside>
                 </div>
-                <!-- Slice detail panel — constrained inside the Vivarium app frame -->
+                <!-- Detail panel constrained inside the app frame -->
                 <div class="slice-detail-overlay" id="sliceDetailOverlay" aria-hidden="true">
                   <aside class="slice-detail-panel" aria-label="Slice detail">
                     <div class="slice-detail-head">
@@ -3874,75 +3990,34 @@ const repos = [
             <section
               class="norma-download-block"
               data-norma-download
-              data-particle-src="/assets/principia/chaotic-p.svg"
+              data-particle-src="/assets/telotia/chaotic-p.svg"
               aria-label="Download Norma for Windows"
             >
               <canvas class="norma-ripple-canvas" data-norma-ripple></canvas>
+              <svg class="norma-cursor" viewBox="0 0 44 56" aria-hidden="true">
+                <polyline class="norma-cursor-line" points="7 24 31 7 37 39 22 49 18 45 7 24" />
+                <circle class="norma-cursor-node" cx="7" cy="24" r="3.1" />
+                <circle class="norma-cursor-node" cx="31" cy="7" r="3.3" />
+                <circle class="norma-cursor-node" cx="37" cy="39" r="3.05" />
+                <circle class="norma-cursor-node" cx="22" cy="49" r="3.15" />
+                <circle class="norma-cursor-node" cx="18" cy="45" r="2.75" />
+              </svg>
               <div class="norma-download-content">
                 <h2 class="norma-download-title">Download Norma for Windows</h2>
                 <p class="norma-download-copy">
-                  Norma packages the local constellation runtime for operators
-                  who need Vivarium sessions, chamber traces, and release checks
+                  Norma packages the local review workspace for operators
+                  who need document runs, claim traces, and release checks
                   in one desktop surface.
                 </p>
                 <div class="norma-download-actions">
-                  <a class="norma-download-button norma-download-button--primary" href="https://github.com/Telotia/Principia/releases">
+                  <a class="norma-download-button norma-download-button--primary" href="about:blank" target="_blank" rel="noreferrer">
                     Download for x64
                   </a>
-                  <a class="norma-download-button norma-download-button--secondary" href="https://github.com/Telotia/Principia/releases">
+                  <a class="norma-download-button norma-download-button--secondary" href="about:blank" target="_blank" rel="noreferrer">
                     Download for ARM64
                   </a>
                 </div>
-                <p class="norma-platform-note">Windows 11 / Windows 10 - macOS and Linux builds staged through Vivarium</p>
-              </div>
-              <div class="norma-cursor" data-norma-cursor aria-hidden="true">
-                <svg viewBox="60 50 150 178" fill="none" aria-hidden="true">
-                  <path class="norma-cursor-line" d="M174.38 76.12 L84.75 145.87 L117.14 208.31 L129.95 206.32 L189.11 183.08 Z" />
-                  <path class="norma-cursor-line-glint" d="M174.38 76.12 L84.75 145.87 L117.14 208.31 L129.95 206.32 L189.11 183.08 Z" />
-                  <g class="norma-cursor-stars" filter="url(#normaCursorGlow)">
-                    <g class="norma-cursor-star">
-                      <circle cx="174.38" cy="76.12" r="10.2" fill="#0B4CFF" opacity="0.64" />
-                      <circle cx="174.38" cy="76.12" r="6.1" fill="#1466FF" />
-                      <circle cx="174.38" cy="76.12" r="2.8" fill="#FFFFFF" />
-                    </g>
-                    <g class="norma-cursor-star">
-                      <circle cx="84.75" cy="145.87" r="8.7" fill="#0B4CFF" opacity="0.62" />
-                      <circle cx="84.75" cy="145.87" r="5.1" fill="#1466FF" />
-                      <circle cx="84.75" cy="145.87" r="2.4" fill="#FFFFFF" />
-                    </g>
-                    <g class="norma-cursor-star">
-                      <circle cx="189.11" cy="183.08" r="9.4" fill="#0B4CFF" opacity="0.64" />
-                      <circle cx="189.11" cy="183.08" r="5.6" fill="#1466FF" />
-                      <circle cx="189.11" cy="183.08" r="2.6" fill="#FFFFFF" />
-                    </g>
-                    <g class="norma-cursor-star">
-                      <circle cx="129.95" cy="206.32" r="7.3" fill="#0B4CFF" opacity="0.60" />
-                      <circle cx="129.95" cy="206.32" r="4.3" fill="#1466FF" />
-                      <circle cx="129.95" cy="206.32" r="2" fill="#FFFFFF" />
-                    </g>
-                    <g class="norma-cursor-star">
-                      <circle cx="117.14" cy="208.31" r="6.4" fill="#0B4CFF" opacity="0.58" />
-                      <circle cx="117.14" cy="208.31" r="3.8" fill="#1466FF" />
-                      <circle cx="117.14" cy="208.31" r="1.8" fill="#FFFFFF" />
-                    </g>
-                  </g>
-                  <g class="norma-cursor-bursts">
-                    <path class="norma-cursor-burst" d="M174.38 61.12 V91.12 M159.38 76.12 H189.38" />
-                    <path class="norma-cursor-burst" d="M84.75 130.87 V160.87 M69.75 145.87 H99.75" />
-                    <path class="norma-cursor-burst" d="M189.11 168.08 V198.08 M174.11 183.08 H204.11" />
-                    <path class="norma-cursor-burst" d="M129.95 191.32 V221.32 M114.95 206.32 H144.95" />
-                    <path class="norma-cursor-burst" d="M117.14 193.31 V223.31 M102.14 208.31 H132.14" />
-                  </g>
-                  <defs>
-                    <filter id="normaCursorGlow" x="45" y="35" width="180" height="210" color-interpolation-filters="sRGB">
-                      <feGaussianBlur stdDeviation="7" result="blur" />
-                      <feMerge>
-                        <feMergeNode in="blur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
-                </svg>
+                <p class="norma-platform-note">Windows 11 / Windows 10 - macOS and Linux builds staged through private beta</p>
               </div>
             </section>
 
@@ -4009,7 +4084,7 @@ const repos = [
       </main>
 
       <div class="tel-art-bridge" aria-hidden="true">
-        <img src="/assets/principia/Telotia-BG.png" alt="" />
+        <img src="/assets/telotia/moss.png" alt="" />
       </div>
 
       <footer class="tel-footer">
@@ -4139,7 +4214,7 @@ const repos = [
           var svgNS = 'http://www.w3.org/2000/svg';
           var fieldHeight = getFieldHeight();
           var fieldWidth = Math.max(window.innerWidth, document.documentElement.clientWidth);
-          var constellationCount = Math.round(Math.min(9, Math.max(4, fieldHeight / 1120)));
+          var constellationCount = Math.round(Math.min(14, Math.max(6, fieldHeight / 750)));
 
           constellationField.setAttribute('viewBox', '0 0 ' + fieldWidth + ' ' + fieldHeight);
           constellationField.setAttribute('preserveAspectRatio', 'none');
@@ -4240,7 +4315,7 @@ const repos = [
             var startY = randomRange(220, fieldHeight - 220);
             var length = randomRange(160, 320);
             var slope = randomRange(-34, 34);
-            ['is-cyan', 'is-violet', 'is-rose'].forEach(function (tone, toneIndex) {
+            ['is-cyan', 'is-gold', 'is-rose'].forEach(function (tone, toneIndex) {
               var line = document.createElementNS(svgNS, 'line');
               var offset = (toneIndex - 1) * 4;
               line.setAttribute('class', 'prism-streak ' + tone);
@@ -4349,16 +4424,16 @@ const repos = [
           });
         });
 
-      const app = document.querySelector('[data-vivarium-app]');
+      const app = document.querySelector('[data-showcase-app]');
 
       if (app instanceof HTMLElement) {
         const chamberLabels = {
-          telos: 'TELOS / CRYSTALLIZED',
-          inspection: 'INSPECTION / COMPLETE',
-          synthesis: 'SYNTHESIS / ITERATE',
-          debate: 'DEBATE / OSC-2',
-          experiment: 'EXPERIMENT / APPARATUS',
-          slice: 'SLICE / PARTIAL',
+          telos: 'DOCUMENT / LOADED',
+          inspection: 'CORPUS / INDEXED',
+          synthesis: 'CLAIMS / ACTIVE',
+          debate: 'SEARCH / PENDING',
+          experiment: 'GRADE / PENDING',
+          slice: 'REVIEW / READY',
         };
 
         const chamberState = app.querySelector('[data-chamber-state]');
@@ -4401,9 +4476,9 @@ const repos = [
 
         const verdictPillClasses: Record<string, string> = {
           partial: 'slice-detail-pill--partial',
-          proven: 'slice-detail-pill--proven',
+          supported: 'slice-detail-pill--supported',
           open: 'slice-detail-pill--open',
-          falsified: 'slice-detail-pill--falsified',
+          unsupported: 'slice-detail-pill--unsupported',
         };
 
         function openSliceDetail(el: HTMLElement) {
@@ -4503,7 +4578,6 @@ const repos = [
         }
 
         const blockElement = block;
-        const cursor = blockElement.querySelector('[data-norma-cursor]');
         const ctx = context;
         let frame = 0;
         let width = 1;
@@ -4517,18 +4591,22 @@ const repos = [
         let targetY = 0;
         let inside = false;
         const startedAt = performance.now();
-        const palette = [
-          [38, 236, 238],
-          [70, 154, 255],
-          [129, 108, 255],
-          [219, 63, 244],
+        const daylightPanelPalette = [
+          [34, 222, 248],
+          [159, 159, 195],
+          [222, 73, 121],
+        ];
+        const nightPanelPalette = [
+          [34, 222, 248],
+          [159, 159, 195],
+          [222, 73, 121],
         ];
 
         function pseudo(index: number) {
           return Math.abs(Math.sin(index * 127.13 + 17.7) * 43758.5453123) % 1;
         }
 
-        function colorAt(tone: number, alpha: number) {
+        function colorAt(tone: number, alpha: number, palette: number[][]) {
           const span = palette.length - 1;
           const scaled = Math.max(0, Math.min(0.999, tone)) * span;
           const index = Math.floor(scaled);
@@ -4687,6 +4765,7 @@ const repos = [
           const t = (performance.now() - startedAt) / 1000;
           ctx.clearRect(0, 0, width, height);
           const isBlackPanel = document.documentElement.getAttribute('data-theme') === 'daylight';
+          const activePalette = isBlackPanel ? daylightPanelPalette : nightPanelPalette;
           const autoX = width * (0.67 + Math.cos(t * 0.22) * 0.06);
           const autoY = height * (0.46 + Math.sin(t * 0.28) * 0.12);
 
@@ -4698,7 +4777,8 @@ const repos = [
             const x = width * (0.5 + speck.nx * 0.58);
             const y = height * (0.5 + speck.ny * 0.58);
             const shimmer = 0.35 + Math.sin(t * 0.8 + speck.phase) * 0.22;
-            ctx.fillStyle = colorAt(speck.tone, (isBlackPanel ? 0.30 : 0.22) * shimmer);
+            const horizontalTone = isBlackPanel ? speck.tone : Math.max(0, Math.min(1, x / width));
+            ctx.fillStyle = colorAt(horizontalTone, (isBlackPanel ? 0.30 : 0.24) * shimmer, activePalette);
             ctx.beginPath();
             ctx.arc(x, y, speck.size * (index % 7 === 0 ? 1.9 : 1), 0, Math.PI * 2);
             ctx.fill();
@@ -4728,7 +4808,7 @@ const repos = [
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate(angle);
-            ctx.fillStyle = colorAt(particle.tone, alpha);
+            ctx.fillStyle = colorAt(particle.tone, alpha, activePalette);
             ctx.beginPath();
             ctx.ellipse(0, 0, particle.size * (1.8 + Math.abs(wave) * 2.2), particle.size * 0.58, 0, 0, Math.PI * 2);
             ctx.fill();
@@ -4745,9 +4825,8 @@ const repos = [
           const rect = blockElement.getBoundingClientRect();
           targetX = event.clientX - rect.left;
           targetY = event.clientY - rect.top;
-          if (cursor instanceof HTMLElement) {
-            cursor.style.transform = `translate3d(${targetX - 27}px, ${targetY - 32}px, 0)`;
-          }
+          blockElement.style.setProperty('--norma-cursor-x', `${targetX}px`);
+          blockElement.style.setProperty('--norma-cursor-y', `${targetY}px`);
         }
 
         function enterPointer(event: PointerEvent) {
@@ -4763,7 +4842,7 @@ const repos = [
 
         resize();
         makeParticles(fallbackPoints());
-        sampleSvgPoints(blockElement.dataset.particleSrc || '/assets/principia/chaotic-p.svg')
+        sampleSvgPoints(blockElement.dataset.particleSrc || '/assets/telotia/chaotic-p.svg')
           .then(makeParticles)
           .catch(() => makeParticles(fallbackPoints()));
 
@@ -4798,116 +4877,5 @@ const repos = [
       );
     </script>
 
-    <script is:inline>
-      (function () {
-        // Inject global styles (Astro scopes <style> blocks — bypass by injecting here)
-        var styleEl = document.createElement('style');
-        styleEl.textContent = [
-          '*, *::before, *::after { cursor: none !important; }',
-          '#tel-cursor {',
-          '  position: fixed; top: -100px; left: -100px;',
-          '  width: 66px; height: 66px;',
-          '  pointer-events: none; z-index: 99999;',
-          '  transition: opacity 120ms;',
-          '}',
-          '#tel-cursor img {',
-          '  width: 100%; height: 100%;',
-          '  object-fit: contain; display: block;',
-          '  filter: brightness(1.8) saturate(1.3);',
-          '}',
-          '.tel-tail {',
-          '  position: fixed; pointer-events: none;',
-          '  z-index: 99998;',
-          '  transform: translate(-50%, -50%);',
-          '  display: block;',
-          '  transition: opacity 160ms;',
-          '}',
-        ].join('\n');
-        document.head.appendChild(styleEl);
-
-        var TAIL_COUNT = 16;
-        var CURSOR_SIZE = 66;
-        var half = CURSOR_SIZE / 2;
-        var IDLE_THRESHOLD = 120; // ms of no movement before tail fades
-
-        // --- cursor ---
-        var cursorEl = document.createElement('div');
-        cursorEl.id = 'tel-cursor';
-        var cursorImg = document.createElement('img');
-        cursorImg.src = '/assets/principia/chaotic-nobg.png';
-        cursorImg.alt = '';
-        cursorImg.setAttribute('draggable', 'false');
-        cursorEl.appendChild(cursorImg);
-        document.body.appendChild(cursorEl);
-
-        // --- tail particles ---
-        var particles = [];
-        function rng(a, b) { return a + Math.random() * (b - a); }
-
-        for (var i = 0; i < TAIL_COUNT; i++) {
-          var t = i / (TAIL_COUNT - 1);
-          var baseSize = 28 - t * 20;
-          var size = Math.max(5, baseSize + rng(-3, 3));
-          var baseOpacity = 1 - t * 0.75;
-          var pel = document.createElement('img');
-          pel.src = '/assets/principia/tail.svg';
-          pel.className = 'tel-tail';
-          pel.setAttribute('aria-hidden', 'true');
-          pel.style.width = size + 'px';
-          pel.style.height = size + 'px';
-          pel.style.opacity = '0';
-          pel.style.top = '-400px';
-          pel.style.left = '-400px';
-          document.body.appendChild(pel);
-          particles.push({ el: pel, x: -400, y: -400, baseOpacity: baseOpacity });
-        }
-
-        var mx = -400, my = -400;
-        var entered = false;
-        var lastMoveTime = 0;
-        var tailAlpha = 0; // 0=hidden, 1=full
-        cursorEl.style.opacity = '0';
-
-        document.addEventListener('mousemove', function (e) {
-          mx = e.clientX;
-          my = e.clientY;
-          lastMoveTime = Date.now();
-          if (!entered) { entered = true; cursorEl.style.opacity = '1'; }
-        });
-        document.addEventListener('mouseleave', function () {
-          entered = false;
-          cursorEl.style.opacity = '0';
-        });
-
-        function lerp(a, b, f) { return a + (b - a) * f; }
-
-        (function loop() {
-          requestAnimationFrame(loop);
-
-          // Cursor position
-          cursorEl.style.left = (mx - half) + 'px';
-          cursorEl.style.top  = (my - half) + 'px';
-
-          // Tail visibility: fade in when moving, fade out when idle
-          var isMoving = entered && (Date.now() - lastMoveTime) < IDLE_THRESHOLD;
-          var targetAlpha = isMoving ? 1 : 0;
-          tailAlpha = lerp(tailAlpha, targetAlpha, 0.12);
-
-          // Tail chain
-          var prevX = mx, prevY = my;
-          for (var j = 0; j < particles.length; j++) {
-            var p = particles[j];
-            var f = Math.max(0.02, 0.13 - j * 0.006);
-            p.x = lerp(p.x, prevX, f);
-            p.y = lerp(p.y, prevY, f);
-            p.el.style.left = p.x + 'px';
-            p.el.style.top  = p.y + 'px';
-            p.el.style.opacity = (p.baseOpacity * tailAlpha).toFixed(3);
-            prevX = p.x;
-            prevY = p.y;
-          }
-        })();
-      })();
-    </script>
   </body>
 </html>

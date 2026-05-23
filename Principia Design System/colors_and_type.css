@@ -1,0 +1,319 @@
+/* ────────────────────────────────────────────────────────────────────────
+   Principia Design System — colors_and_type.css
+   The visual substrate of an epistemic being.
+   Parchment + ink, with a constellation overhead.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ─── Web fonts (substitutions; flag to user) ────────────────────────────
+   Principia's repository ships no font files. We substitute via Google
+   Fonts.  Drop replacement TTF/WOFF2 files into /fonts and override
+   @font-face if you license proprietary type later.
+
+   Display    : Newsreader   — humanist serif with bookish italics
+   Body       : IBM Plex Sans
+   Mono       : IBM Plex Mono                                           */
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,450;0,500;0,600;1,400&display=swap");
+
+:root {
+  /* ─── Paper · moonlight star-map (light surface) ────────────────────── */
+  --paper:        #F6F7FB;   /* moonlight white — base                    */
+  --paper-2:      #EEF1F7;   /* light blue-grey — raised card             */
+  --paper-3:      #E3E8F2;   /* deeper grey-blue — inset                  */
+  --paper-edge:   #C8D0E0;   /* cool grey-blue edge                       */
+
+  /* ─── Ink · cool navy (on paper) ────────────────────────────────────── */
+  --ink:          #10182F;   /* deep navy — primary text                  */
+  --ink-2:        #27324F;   /* secondary text                            */
+  --ink-3:        #5C6680;   /* muted text                                */
+  --ink-4:        #7E879D;   /* faint text, captions                      */
+  --rule:         #C8D0E0;   /* hairline divider                          */
+  --rule-soft:    #E1E5EE;   /* softer divider                            */
+
+  /* ─── Brand accents (work in both modes) ────────────────────────────── */
+  --brand-blue:   #102A6B;   /* deep cosmic navy — brand mark              */
+  --current-blue: #5990C0;   /* the running / active blue                  */
+  --sand-gold:    #CCA273;   /* warm sand — Partial verdict highlight      */
+
+  /* ─── Night (constellation surfaces — inverse) ──────────────────────── */
+  --night:        #0A1430;   /* deep ocean — base of the radial           */
+  --night-2:      #162244;   /* mid-depth                                 */
+  --night-3:      #1F3160;   /* near-surface                              */
+  --night-rule:   #2A3656;   /* hairlines on night                        */
+  --night-ink:    #E8E2D6;   /* paper-on-night text                       */
+  --night-ink-2:  #B0A89A;   /* secondary on night                        */
+
+  /* The radial ocean gradient — the primary night surface.
+     Use behind the hero, UI shells, logo stages.                          */
+  --ocean: radial-gradient(ellipse 130% 90% at 50% 0%,
+              #213D6F 0%,
+              #0F1F44 45%,
+              #060D22 100%);
+  --ocean-flat: #0A1430;  /* fallback flat color                          */
+
+  /* Rose gold — the single accent, replaces the gold star.               */
+  --rose:        #DEA193;   /* rose gold highlight                        */
+  --rose-soft:   #B07A6A;   /* deeper rose, secondary accent              */
+  --rose-glow:   #F2C2A8;   /* lightest, for glints                       */
+  --rose-deep:   #6E3F30;   /* dark rose, for backgrounds                 */
+
+  /* ─── Cosmic palette ─ richer night accents ─────────────────────────── */
+  --void:           #070812; /* the deepest backdrop                       */
+  --deep-space:     #14162E; /* primary cosmic surface                     */
+  --nebula-blue:    #5B7CFA; /* primary cosmic accent                      */
+  --starlight-blue: #8FB7FF; /* lighter blue, for emphasis                 */
+  --cosmic-violet:  #6D4BC3; /* secondary accent                           */
+  --aurora-purple:  #B46CFF; /* highlight purple                           */
+  --rose-nebula:    #D45BA8; /* magenta accent                             */
+  --star-dust:      #E8E6FF; /* near-white text on cosmic                  */
+
+  /* ─── Cosmic text scale ─ light type for dark surfaces ──────────────── */
+  --text-main:      #F4F0FF; /* Stardust — primary text on cosmic          */
+  --text-2:         #D8D6E8; /* Moon Silver — secondary                    */
+  --text-3:         #B9B2D6; /* Mist Lavender — tertiary                   */
+  --text-4:         #8A82A8; /* Dim Nebula — placeholder / caption         */
+  --rule-cosmic:    #5B5478; /* Star Rule — dividers on cosmic             */
+  --rule-cosmic-soft: #34304F; /* Soft Void Rule — softer dividers         */
+
+  /* ─── Slice card gradients ─ one per verdict ────────────────────────── */
+  --slice-partial:   linear-gradient(135deg, #102A6B 0%, #566A82 48%, #CCA273 100%);
+  --slice-proven:    linear-gradient(135deg, #5990C0 0%, #2F6FA8 45%, #102A6B 100%);
+  --slice-falsified: linear-gradient(135deg, #102A6B 0%, #3B2B66 48%, #DEA193 100%);
+  --slice-open:      linear-gradient(135deg, #1F3160 0%, #2A3656 50%, #34304F 100%);
+
+  /* Backwards-compatible alias — `--star` still means "the night accent" */
+  --star:        var(--rose);
+  --star-soft:   var(--rose-soft);
+
+  /* ─── Verdict palette (Proven / Falsified / Partial / Open) ─────────── */
+  --proven:       #2E5D3A;   /* verified ink green                        */
+  --proven-soft:  #D7DFC9;
+  --falsified:    #8C2B2B;   /* sealing-wax red                           */
+  --falsified-soft: #ECD7CE;
+  --partial:      #B57B19;   /* amber — in-progress                       */
+  --partial-soft: #ECDFC0;
+  --open:         #2C4E7A;   /* slate blue — Open slice                   */
+  --open-soft:    #D0DAE8;
+  --mortality:    #4A3A56;   /* dusk plum — TELOS_CLOSED                  */
+
+  /* ─── Chaos accent (synthesis / dynamics) ───────────────────────────── */
+  --bloom:        #6B4A8B;   /* synthesis purple — chaotic attractors     */
+  --bloom-soft:   #DDD2E5;
+
+  /* ─── Semantic mapping ──────────────────────────────────────────────── */
+  --bg:           var(--paper);
+  --bg-raised:    var(--paper-2);
+  --bg-sunk:      var(--paper-3);
+  --fg:           var(--ink);
+  --fg-2:         var(--ink-2);
+  --fg-muted:     var(--ink-3);
+  --fg-faded:     var(--ink-4);
+  --border:       var(--rule);
+  --border-soft:  var(--rule-soft);
+  --link:         var(--ink);
+  --link-rule:    var(--ink-3);
+  --accent:       var(--star);
+
+  /* ─── Spacing (8pt grid, anchored to 4) ─────────────────────────────── */
+  --s-0:   2px;
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  20px;
+  --s-6:  24px;
+  --s-8:  32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+
+  /* ─── Radii ─ Principia is rectilinear; corners are minimal ─────────── */
+  --r-0:  0px;
+  --r-1:  2px;     /* default — page edges                                */
+  --r-2:  4px;     /* buttons, pills                                      */
+  --r-3:  8px;     /* cards                                               */
+  --r-4: 12px;     /* panels                                              */
+  --r-full: 999px; /* status dots                                         */
+
+  /* ─── Elevation (low; cool moonlight shadows) ───────────────────────── */
+  --elev-0: none;
+  --elev-1: 0 1px 0 var(--paper-edge);                          /* page  */
+  --elev-2: 0 1px 0 var(--paper-edge), 0 2px 8px -4px #10182f12; /* card */
+  --elev-3: 0 2px 0 var(--paper-edge), 0 8px 24px -10px #10182f22;
+  --inset:  inset 0 1px 0 #ffffffa0, inset 0 -1px 0 #10182f08;
+
+  /* ─── Type ──────────────────────────────────────────────────────────── */
+  --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-sans:    "IBM Plex Sans", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  /* base size */
+  --fs-body: 15px;
+  --lh-body: 1.55;
+
+  /* type scale */
+  --fs-display: 56px;   /* hero                                            */
+  --fs-h1:      40px;
+  --fs-h2:      28px;
+  --fs-h3:      22px;
+  --fs-h4:      18px;
+  --fs-h5:      15px;
+  --fs-body-lg: 17px;
+  --fs-body:    15px;
+  --fs-small:   13px;
+  --fs-micro:   11px;   /* small caps labels, marginalia                  */
+
+  /* motion */
+  --ease-paper: cubic-bezier(.2,.6,.2,1);  /* slow settle                  */
+  --ease-press: cubic-bezier(.4,0,.6,1);
+  --dur-fast:  120ms;
+  --dur-base:  200ms;
+  --dur-slow:  420ms;
+}
+
+/* ─── Page baseline ──────────────────────────────────────────────────── */
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ─── Headings (display serif) ───────────────────────────────────────── */
+.display, h1.display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 380;
+  line-height: 1.04;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+}
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 420;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 440;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+h4 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h4);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+h5 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h5);
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ─── Italics carry meaning. Display italics are stressed, not decorative. */
+em, i, .stress {
+  font-style: italic;
+  font-family: var(--font-display);
+  color: var(--ink-2);
+}
+
+/* ─── Body text ──────────────────────────────────────────────────────── */
+p { margin: 0; text-wrap: pretty; }
+.lede {
+  font-family: var(--font-display);
+  font-size: var(--fs-body-lg);
+  line-height: 1.55;
+  color: var(--ink-2);
+  font-weight: 360;
+}
+.muted     { color: var(--fg-muted); }
+.faded     { color: var(--fg-faded); }
+.body-lg   { font-size: var(--fs-body-lg); line-height: 1.6; }
+.body      { font-size: var(--fs-body); line-height: 1.55; }
+.small     { font-size: var(--fs-small); line-height: 1.5; }
+.micro     { font-size: var(--fs-micro); line-height: 1.4; }
+
+/* ─── Small-caps label — the Principia signature ─────────────────────── */
+.label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.label--ink   { color: var(--ink); }
+.label--star  { color: var(--star-soft); }
+
+/* ─── Mono ───────────────────────────────────────────────────────────── */
+code, kbd, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.93em;
+  font-feature-settings: "ss02", "zero";
+}
+.mono-id {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: -0.01em;
+}
+
+/* ─── Links ──────────────────────────────────────────────────────────── */
+a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid var(--link-rule);
+  transition: border-color var(--dur-fast) var(--ease-press),
+              color var(--dur-fast) var(--ease-press);
+}
+a:hover { border-color: var(--ink); }
+
+/* ─── Rules — Principia's hairline ───────────────────────────────────── */
+.rule       { border-top: 1px solid var(--rule); }
+.rule-soft  { border-top: 1px solid var(--rule-soft); }
+.rule-vert  { border-left: 1px solid var(--rule); }
+
+/* ─── Selection ──────────────────────────────────────────────────────── */
+::selection { background: var(--star); color: var(--ink); }
+
+/* ─── Constellation noise overlay (apply to surfaces sparingly) ──────── */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: .35;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(#10182f10 1px, transparent 1px),
+    radial-gradient(#10182f10 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+}

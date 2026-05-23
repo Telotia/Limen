@@ -1,0 +1,17 @@
+/* preview cards share these resets */
+@import url("../colors_and_type.css");
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  width: 700px;
+  overflow: hidden;
+}
+body { padding: 24px; box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
+.row { display: flex; align-items: center; gap: 16px; }
+.col { display: flex; flex-direction: column; gap: 12px; }
+.spread { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.stack-8 { display: flex; flex-direction: column; gap: 8px; }
+.stack-12 { display: flex; flex-direction: column; gap: 12px; }
+.stack-16 { display: flex; flex-direction: column; gap: 16px; }
