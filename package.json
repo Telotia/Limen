@@ -21,7 +21,8 @@
     "cf:deploy:production": "bun run build:prod && bunx wrangler deploy --env production"
   },
   "dependencies": {
-    "astro": "^6.3.1"
+    "astro": "^6.3.1",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
@@ -29,6 +30,7 @@
     "@commitlint/config-conventional": "^19.6.0",
     "@types/bun": "^1.3.13",
     "@types/node": "^25.7.0",
+    "@types/three": "^0.184.1",
     "cross-env": "^7.0.3",
     "typescript": "^6.0.3",
     "wrangler": "^4.90.1"
