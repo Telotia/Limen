@@ -53,7 +53,7 @@ jobs:
             Example: feat(pages): add about page
 
   validate:
-    name: Validate
+    name: Test and build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
