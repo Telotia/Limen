@@ -3322,7 +3322,7 @@ const contactCards = [
             detail.classList.add('is-out');
             detail.classList.remove('is-in');
 
-            crossfadeTimer = window.setTimeout(() => {
+            crossfadeTimer = setTimeout(() => {
               if (type) type.textContent = node.getAttribute('data-verdict-type') || 'verdict';
               if (title) title.textContent = node.getAttribute('data-verdict-node-title') || '';
               if (copy) copy.textContent = node.getAttribute('data-verdict-node-copy') || '';
