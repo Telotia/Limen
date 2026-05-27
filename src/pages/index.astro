@@ -1312,7 +1312,7 @@ const contactCards = [
         border: 0;
         background: transparent;
         color: var(--paper);
-        cursor: pointer;
+        cursor: default;
         pointer-events: auto;
         transform: translate(calc(var(--x) - 50%), calc(var(--y) - 50%));
       }
@@ -1407,13 +1407,13 @@ const contactCards = [
         border-radius: var(--radius-panel);
         background: rgba(244, 240, 217, 0.08);
         transition:
-          opacity 200ms var(--ease),
-          transform 200ms var(--ease);
+          opacity 420ms var(--ease),
+          transform 420ms var(--ease);
       }
 
       .verdict-detail.is-out {
         opacity: 0;
-        transform: translateY(6px);
+        transform: translateY(8px);
       }
 
       .verdict-detail.is-in {
@@ -3330,7 +3330,7 @@ const contactCards = [
               detail.classList.remove('is-out');
               detail.classList.add('is-in');
               crossfadeTimer = null;
-            }, 200);
+            }, 420);
           };
 
           nodes.forEach((node) => {
