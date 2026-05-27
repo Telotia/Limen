@@ -529,7 +529,25 @@ const contactCards = [
         position: relative;
         z-index: 2;
         display: block;
-        padding: 54px 0 42px;
+        padding: 90px 0 72px;
+      }
+
+      .hero-brand-title {
+        position: absolute;
+        top: clamp(12px, 2.4vw, 36px);
+        left: calc((100% - min(1180px, calc(100% - var(--page-gutter-total)))) / 2);
+        z-index: 1;
+        font-size: clamp(52px, 8vw, 108px);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        line-height: 1;
+        background: linear-gradient(135deg, #d8d29b 0%, #31988a 48%, #030f13 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        pointer-events: none;
+        user-select: none;
+        opacity: 0.82;
       }
 
       .hero-copy {
@@ -550,7 +568,7 @@ const contactCards = [
 
       .hero-lede {
         max-width: 640px;
-        margin: 24px 0 0;
+        margin: 40px 0 0;
         color: var(--paper-2);
         font-size: 18px;
         line-height: 1.55;
@@ -560,7 +578,7 @@ const contactCards = [
         display: flex;
         flex-wrap: wrap;
         gap: 14px;
-        margin-top: 30px;
+        margin-top: 48px;
       }
 
       .button-primary,
@@ -608,7 +626,7 @@ const contactCards = [
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 10px;
-        margin-top: 36px;
+        margin-top: 64px;
       }
 
       .data-strip .metric {
@@ -915,7 +933,7 @@ const contactCards = [
 
       .process-step:nth-child(1) .process-svg line[stroke="#31988a"] {
         stroke-dasharray: 54 18;
-        animation: process-dash 4.2s linear infinite;
+        animation: process-dash 2.4s linear infinite;
       }
 
       .process-step:nth-child(1) .process-svg circle,
@@ -923,24 +941,24 @@ const contactCards = [
       .process-step:nth-child(3) .process-svg circle {
         transform-box: fill-box;
         transform-origin: center;
-        animation: process-node-pulse 4.8s var(--ease) infinite;
+        animation: process-node-pulse 2.2s ease-in-out infinite;
       }
 
       .process-step:nth-child(2) .process-svg line {
         stroke-dasharray: 2 9;
-        animation: process-dash 5.4s linear infinite;
+        animation: process-dash 3.0s linear infinite;
       }
 
       .process-step:nth-child(2) .process-svg circle:first-child {
-        animation: process-orbit-breathe 7s var(--ease) infinite;
+        animation: process-orbit-breathe 3.2s ease-in-out infinite;
       }
 
       .process-step:nth-child(3) .process-svg line {
-        animation: process-dash 5.8s linear infinite;
+        animation: process-dash 3.4s linear infinite;
       }
 
       .process-step:nth-child(3) .process-svg circle:nth-of-type(2n) {
-        animation-delay: 600ms;
+        animation-delay: 400ms;
       }
 
       @keyframes process-dash {
@@ -948,31 +966,31 @@ const contactCards = [
           stroke-dashoffset: 0;
         }
         to {
-          stroke-dashoffset: -72;
+          stroke-dashoffset: -144;
         }
       }
 
       @keyframes process-node-pulse {
         0%,
         100% {
-          opacity: 0.78;
-          transform: scale(0.92);
+          opacity: 0.55;
+          transform: scale(0.6);
         }
-        45% {
+        50% {
           opacity: 1;
-          transform: scale(1.12);
+          transform: scale(1.55);
         }
       }
 
       @keyframes process-orbit-breathe {
         0%,
         100% {
-          opacity: 0.72;
-          transform: scale(0.96);
+          opacity: 0.5;
+          transform: scale(0.62) translateY(0px);
         }
         50% {
           opacity: 1;
-          transform: scale(1.04);
+          transform: scale(1.48) translateY(-4px);
         }
       }
 
@@ -2309,6 +2327,7 @@ const contactCards = [
       <main id="content">
         <span id="top" aria-hidden="true"></span>
         <section class="hero" aria-labelledby="hero-title">
+          <span class="hero-brand-title" aria-hidden="true">TELOTIA</span>
           <div class="hero-inner">
             <div class="hero-copy">
               <h1 class="hero-title" id="hero-title">
@@ -4116,21 +4135,21 @@ const contactCards = [
 
         function draw() {
           if (!context) return;
-          frame += reduceMotion.matches ? 0.0007 : 0.0022;
-          pointerPull += ((pointerInside ? 0.5 : 0) - pointerPull) * 0.045;
-          burst *= 0.92;
+          frame += reduceMotion.matches ? 0.0010 : 0.0058;
+          pointerPull += ((pointerInside ? 0.6 : 0) - pointerPull) * 0.048;
+          burst *= 0.91;
           context.clearRect(0, 0, width, height);
-          const centerX = width * 0.72;
-          const centerY = height * 0.43;
-          const scaleX = Math.min(width * 0.24, height * 0.66);
-          const scaleY = Math.min(height * 0.31, width * 0.16);
+          const centerX = width * 0.63;
+          const centerY = height * 0.54;
+          const scaleX = Math.min(width * 0.28, height * 0.70);
+          const scaleY = Math.min(height * 0.36, width * 0.19);
 
-          specks.forEach((speck, index) => {
+          specks.forEach((speck) => {
             const track = speck.lane % 3;
-            const layer = track === 0 ? 1.05 : track === 1 ? 0.72 : 0.44;
+            const layer = track === 0 ? 1.08 : track === 1 ? 0.76 : 0.48;
             const band = Math.floor(speck.lane / 3) - 1;
             const slow = frame + speck.phase;
-            const t = speck.t + Math.sin(slow * 0.52) * 0.018 + frame * 0.012 * speck.spin;
+            const t = speck.t + Math.sin(slow * 0.52) * 0.022 + frame * 0.016 * speck.spin;
             const sinT = Math.sin(t);
             const cosT = Math.cos(t);
             const rawX = sinT * scaleX * layer;
@@ -4139,20 +4158,20 @@ const contactCards = [
             const skew = side * 0.36;
             const tangentAngle = Math.atan2(Math.cos(2 * t) * scaleY * layer, cosT * scaleX * layer) + skew * 0.18;
             const normalAngle = tangentAngle + Math.PI / 2;
-            const lineWidth = (band * 7 + speck.offset + Math.sin(slow * 0.38) * 1.4) * (0.9 + track * 0.16);
-            const floatX = Math.cos(slow * 0.31) * (1.4 + track * 0.45);
-            const floatY = Math.sin(slow * 0.27) * (1.2 + track * 0.42);
+            const lineWidth = (band * 8 + speck.offset + Math.sin(slow * 0.38) * 2.2) * (1.0 + track * 0.18);
+            const floatX = Math.cos(slow * 0.31) * (2.2 + track * 0.55);
+            const floatY = Math.sin(slow * 0.27) * (1.8 + track * 0.52);
             let x = centerX + rawX + rawY * skew + Math.cos(normalAngle) * lineWidth + floatX;
             let y = centerY + rawY - Math.abs(rawX) * 0.08 + Math.sin(normalAngle) * lineWidth + floatY;
 
             if (pointerPull > 0.02 || burst > 0.02) {
               const dx = x - pointerX;
               const dy = y - pointerY;
-              const distance = Math.max(28, Math.hypot(dx, dy));
-              const influence = Math.min(1, 170 / distance) * (pointerPull + burst * 1.1);
-              const tangent = speck.spin * influence * 20;
-              x += (dx / distance) * influence * 24 + (-dy / distance) * tangent;
-              y += (dy / distance) * influence * 16 + (dx / distance) * tangent;
+              const distance = Math.max(22, Math.hypot(dx, dy));
+              const influence = Math.min(1, 200 / distance) * (pointerPull + burst * 1.3);
+              const tangent = speck.spin * influence * 28;
+              x += (dx / distance) * influence * 32 + (-dy / distance) * tangent;
+              y += (dy / distance) * influence * 22 + (dx / distance) * tangent;
             }
 
             const tone = speck.tone;
@@ -4162,10 +4181,10 @@ const contactCards = [
                 : tone < 6
                   ? '49, 152, 138'
                   : '255, 255, 255';
-            const alpha = (tone === 0 || tone === 7 ? 0.58 : 0.32) + pointerPull * 0.1 + burst * 0.13;
-            context.fillStyle = `rgba(${color}, ${Math.min(0.78, alpha)})`;
+            const baseAlpha = (tone === 0 || tone === 7 ? 0.68 : 0.44) + pointerPull * 0.14 + burst * 0.18;
+            context.fillStyle = `rgba(${color}, ${Math.min(0.88, baseAlpha)})`;
             context.beginPath();
-            context.ellipse(x, y, speck.size * 2.9, speck.size, tangentAngle, 0, Math.PI * 2);
+            context.ellipse(x, y, speck.size * 3.4, speck.size * 1.1, tangentAngle, 0, Math.PI * 2);
             context.fill();
           });
 
