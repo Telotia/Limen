@@ -1,16 +1,55 @@
 ---
 const navItems = [
   { label: 'Process', href: '#process' },
-  { label: 'Evidence', href: '#evidence' },
   { label: 'Workspace', href: '#workspace' },
-  { label: 'Download', href: '#download' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Demo', href: '#demo' },
+  { label: 'Research', href: '#research' },
+  { label: 'Consult', href: '#consult' },
 ];
 
-const metrics = [
-  { label: 'Atomic claims processed', value: '12,480', source: 'example review corpus' },
-  { label: 'Citations issued', value: '7,326', source: 'example review corpus' },
-  { label: 'Open-web sources used', value: '0', source: 'workspace rule' },
+const demoSteps = [
+  {
+    number: '1',
+    title: 'Load the document set',
+    copy: 'Drop in the document; Telotia extracts every atomic claim automatically.',
+  },
+  {
+    number: '2',
+    title: 'Search the trusted corpus',
+    copy: 'Each claim is matched only against the evidence you supplied - never the open web.',
+  },
+  {
+    number: '3',
+    title: 'Grade and cite',
+    copy: 'Supported, Partial, or No support found - each linked to the exact source passage.',
+  },
+];
+
+const researchEntries = [
+  {
+    kind: 'How it works',
+    title: 'Decompose, search, grade',
+    copy:
+      'We break a document into atomic claims, match each against the corpus you supplied - not the open web - and return a graded verdict linked to its source.',
+    cta: 'See the steps',
+    link: '#demo',
+  },
+  {
+    kind: 'In progress',
+    title: 'An open benchmark',
+    copy:
+      "We're building an open benchmark to measure how well Telotia separates supported claims from unsupported ones. We'll publish the method and the results here - including where we fall short.",
+    cta: 'Get in touch',
+    link: 'mailto:hello@telotia.com?subject=Telotia%20benchmark',
+  },
+  {
+    kind: 'Why a corpus',
+    title: 'Built on evidence you can check',
+    copy:
+      'The showcase runs on a fixed, trusted body of research we can stand behind - demonstrating the general capability: any document, any trusted corpus you choose.',
+    cta: 'See it run',
+    link: '#demo',
+  },
 ];
 
 const steps = [
@@ -171,30 +210,6 @@ const auditEvents = [
   { time: '09:43:02', label: 'review', detail: 'claim-027 requires reviewer note', tone: 'yellow' },
   { time: '09:44:19', label: 'source', detail: 'page citation attached', tone: 'green' },
   { time: '09:45:06', label: 'package', detail: 'proof bundle draft ready', tone: 'neutral' },
-];
-
-const contactCards = [
-  {
-    label: 'Request access',
-    title: 'Prepare a Canadian evidence package',
-    copy:
-      'Share a sample document set and the corpus you want treated as trusted evidence.',
-    link: 'mailto:hello@telotia.com',
-  },
-  {
-    label: 'Review team',
-    title: 'Discuss importer documentation',
-    copy:
-      'Use the workspace to separate claims, cite source passages, and support human review.',
-    link: 'mailto:hello@telotia.com',
-  },
-  {
-    label: 'Benchmark',
-    title: 'Inspect the verdict method',
-    copy:
-      'See how Supported, Partial, and Unsupported claims are represented before sign-off.',
-    link: '#workspace',
-  },
 ];
 ---
 
@@ -2490,6 +2505,277 @@ const contactCards = [
           transition-duration: 1ms !important;
         }
       }
+
+      /* ── Hero trust line (replaces the removed stats strip) ── */
+      .hero-trust {
+        margin-top: 30px;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        color: var(--ink-4);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .hero-trust::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green);
+        flex: none;
+      }
+
+      /* ── Demo (live showcase) ── */
+      .demo-layout {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: clamp(28px, 4vw, 56px);
+        align-items: start;
+        margin-top: 40px;
+      }
+      .demo-stage {
+        background: var(--paper);
+        border: 1px solid rgba(10, 10, 10, 0.18);
+        border-radius: var(--radius-panel);
+        padding: 22px;
+        box-shadow: 0 26px 60px -42px rgba(11, 61, 60, 0.5);
+      }
+      .demo-stage-head {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 11.5px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--rule-soft);
+      }
+      .demo-claim {
+        display: flex;
+        gap: 13px;
+        align-items: flex-start;
+        padding: 15px 2px;
+        border-bottom: 1px solid var(--rule-soft);
+      }
+      .demo-verdict {
+        flex: none;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 5px 8px;
+        border: 1px solid currentColor;
+        border-radius: 999px;
+        margin-top: 1px;
+        color: var(--paper-3);
+      }
+      .demo-claim[data-status="green"] .demo-verdict {
+        color: var(--green);
+      }
+      .demo-claim[data-status="yellow"] .demo-verdict {
+        color: var(--yellow);
+      }
+      .demo-claim-body p {
+        margin: 0;
+        font-size: 13.5px;
+        line-height: 1.5;
+        color: var(--ink-2);
+      }
+      .demo-src {
+        display: block;
+        margin-top: 5px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--ink-4);
+      }
+      .demo-stage-cta {
+        display: inline-block;
+        margin-top: 16px;
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--green-2);
+      }
+      .demo-stage-cta:hover { color: var(--green); }
+      .demo-steps {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .demo-step {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .demo-step-n {
+        flex: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid var(--green-2);
+        color: var(--green-2);
+        font-family: var(--font-mono);
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .demo-step h3 {
+        font-size: 17px;
+        font-weight: 600;
+        margin: 2px 0 0;
+      }
+      .demo-step p {
+        margin: 6px 0 0;
+        font-size: 14.5px;
+        line-height: 1.5;
+        color: var(--ink-3);
+      }
+      .demo-foot {
+        list-style: none;
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--ink-3);
+        border-left: 2px solid var(--green-soft);
+        padding-left: 14px;
+      }
+
+      /* ── Research ── */
+      .research-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+        margin-top: 40px;
+      }
+      .research-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--paper);
+        border: 1px solid rgba(10, 10, 10, 0.18);
+        border-radius: var(--radius-soft);
+        padding: 24px;
+        transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+      }
+      .research-card:hover,
+      .research-card:focus-visible {
+        border-color: var(--green);
+        transform: translateY(-2px);
+      }
+      .research-kind {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--green-2);
+      }
+      .research-card h3 {
+        font-size: 18.5px;
+        font-weight: 600;
+        line-height: 1.22;
+        margin: 14px 0 0;
+      }
+      .research-card p {
+        font-size: 14px;
+        line-height: 1.55;
+        color: var(--ink-3);
+        margin: 12px 0 18px;
+      }
+      .research-read {
+        margin-top: auto;
+        font-family: var(--font-mono);
+        font-size: 12.5px;
+        color: var(--ink);
+      }
+
+      /* ── Consult form (replaces Download) ── */
+      .consult-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(28px, 5vw, 64px);
+        align-items: start;
+        margin-top: 8px;
+      }
+      .consult-caveat {
+        margin-top: 22px;
+        font-size: 14px;
+        line-height: 1.55;
+        color: var(--ink-3);
+        max-width: 40ch;
+      }
+      .consult-secondary {
+        margin-top: 18px;
+        font-size: 14px;
+        color: var(--ink-3);
+      }
+      .consult-secondary a {
+        color: var(--green-2);
+        border-bottom: 1px solid currentColor;
+      }
+      .consult-form {
+        background: var(--paper);
+        border: 1px solid rgba(10, 10, 10, 0.18);
+        border-radius: var(--radius-panel);
+        padding: clamp(22px, 3vw, 34px);
+        box-shadow: 0 26px 60px -46px rgba(11, 61, 60, 0.45);
+      }
+      .form-field { margin-bottom: 16px; }
+      .form-field label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: var(--ink-2);
+      }
+      .form-field input,
+      .form-field textarea {
+        width: 100%;
+        font-family: var(--font-sans);
+        font-size: 14.5px;
+        color: var(--ink);
+        background: var(--bg);
+        border: 1px solid rgba(10, 10, 10, 0.18);
+        border-radius: 10px;
+        padding: 11px 13px;
+        transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+      }
+      .form-field input:focus,
+      .form-field textarea:focus {
+        outline: none;
+        border-color: var(--green);
+        box-shadow: 0 0 0 3px rgba(49, 152, 138, 0.16);
+      }
+      .cf-turnstile:not(:empty) { margin-bottom: 16px; }
+      .form-foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 6px;
+      }
+      .form-foot small {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        line-height: 1.4;
+        color: var(--ink-4);
+        max-width: 26ch;
+      }
+      .form-foot .button-primary { flex: none; }
+
+      @media (max-width: 860px) {
+        .demo-layout,
+        .research-grid,
+        .consult-layout {
+          grid-template-columns: 1fr;
+        }
+        .form-foot {
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
     </style>
   </head>
 
@@ -2506,7 +2792,7 @@ const contactCards = [
           <nav class="nav-links" aria-label="Primary navigation">
             {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
           </nav>
-          <a class="nav-action" href="mailto:hello@telotia.com">Request audit</a>
+          <a class="nav-action" href="#consult">Request a pilot</a>
           <button class="nav-burger" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-nav-overlay">
             <span></span><span></span><span></span>
           </button>
@@ -2517,7 +2803,7 @@ const contactCards = [
         <div class="mobile-nav-dropdown">
           {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
           <div class="mobile-nav-divider"></div>
-          <a href="mailto:hello@telotia.com" class="mobile-nav-cta">Request audit</a>
+          <a href="#consult" class="mobile-nav-cta">Request a pilot</a>
         </div>
       </div>
 
@@ -2534,18 +2820,10 @@ const contactCards = [
                 We turn documentation into citation-linked evidence review for teams preparing Canadian proof packages. We check the claim, not the conclusion.
               </p>
               <div class="hero-actions">
-                <a class="button-primary" href="mailto:hello@telotia.com">Request an audit</a>
-                <a class="button-secondary" href="#process">See the review flow</a>
+                <a class="button-primary" href="#consult">Request a pilot</a>
+                <a class="button-secondary" href="#demo">Watch the demo</a>
               </div>
-              <div class="data-strip" aria-label="Example review data">
-                {metrics.map((item) => (
-                  <div class="metric">
-                    <div class="metric-value" data-count-to={item.value.replace(/,/g, '')}>{item.value}</div>
-                    <div class="metric-label">{item.label}</div>
-                    <small class="metric-source">source: {item.source}</small>
-                  </div>
-                ))}
-              </div>
+              <p class="hero-trust" aria-label="Programme status">Paid pilot &middot; Montreal &middot; launching September 2026</p>
             </div>
             <div class="hero-visual" aria-hidden="true">
               <div class="hero-figure hero-model">
@@ -2887,44 +3165,122 @@ const contactCards = [
           </div>
         </section>
 
-        <section class="section" id="download" data-edge-title="Download" data-edge-side="left">
+        <section class="section" id="demo" data-edge-title="Demo" data-edge-side="left">
           <div class="section-inner">
-            <div class="download-block" data-download-block>
-              <canvas class="download-canvas" data-download-particles aria-hidden="true"></canvas>
-              <div class="download-content">
-                <h2 class="download-title">Download the review workspace for Windows</h2>
-                <p class="download-copy">
-                  Run document reviews, inspect claim traces, and prepare evidence-linked proof packages in one local desktop surface.
-                </p>
-                <div class="download-actions">
-                  <span class="download-button" aria-disabled="true" title="Private beta — request access above">Download for x64</span>
-                  <span class="download-button secondary" aria-disabled="true" title="Private beta — request access above">Download for ARM64</span>
-                </div>
-                <p class="download-note">Windows 11 / Windows 10 - macOS and Linux builds staged through private beta. Source available by request.</p>
+            <div class="section-heading">
+              <div>
+                <span class="label">See it run</span>
+                <h2 class="section-title">Watch the review happen, claim by claim.</h2>
               </div>
+              <p class="section-lede">
+                Give Telotia a document and a body of evidence you trust. It breaks the document into individual claims and shows you, claim by claim, what the evidence supports - and what it does not.
+              </p>
+            </div>
+
+            <div class="demo-layout">
+              <div class="demo-stage" aria-label="Example claim-by-claim review">
+                <div class="demo-stage-head">
+                  <span>Live review</span>
+                  <span>example corpus</span>
+                </div>
+                {claimRows.map((row) => (
+                  <div class="demo-claim" data-status={row.status}>
+                    <span class="demo-verdict">{row.verdict}</span>
+                    <div class="demo-claim-body">
+                      <p>{row.claim}</p>
+                      <span class="demo-src">{row.source}</span>
+                    </div>
+                  </div>
+                ))}
+                <a class="demo-stage-cta" href="#workspace">Open the interactive run &darr;</a>
+              </div>
+
+              <ol class="demo-steps">
+                {demoSteps.map((step) => (
+                  <li class="demo-step">
+                    <span class="demo-step-n" aria-hidden="true">{step.number}</span>
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.copy}</p>
+                    </div>
+                  </li>
+                ))}
+                <li class="demo-foot">
+                  &ldquo;No support found&rdquo; means this corpus is silent on the claim - not that the claim is wrong. Results are a starting point for a human reviewer, not a verdict on the work.
+                </li>
+              </ol>
             </div>
           </div>
         </section>
 
-        <section class="section alt" id="contact" data-edge-title="Contact" data-edge-side="right" data-edge-tone="deep">
+        <section class="section alt" id="research" data-edge-title="Research" data-edge-side="right" data-edge-tone="deep">
           <div class="section-inner">
             <div class="section-heading">
               <div>
-                <span class="label">Contact</span>
-                <h2 class="section-title">Prepare the proof before the review.</h2>
+                <span class="label">Research</span>
+                <h2 class="section-title">The method - and the benchmark we are building.</h2>
               </div>
               <p class="section-lede">
-                The workspace supports evidence review and documentation preparation. It does not grant regulatory approval or replace qualified human review.
+                A claims-validation tool should hold itself to the same standard. Here is how the review works, and how we plan to measure it - method first, numbers when they exist.
               </p>
             </div>
-            <div class="contact-grid">
-              {contactCards.map((card) => (
-                <a class="contact-card" href={card.link}>
-                  <span>{card.label}</span>
-                  <h3>{card.title}</h3>
-                  <p>{card.copy}</p>
+            <div class="research-grid">
+              {researchEntries.map((entry) => (
+                <a class="research-card" href={entry.link}>
+                  <span class="research-kind">{entry.kind}</span>
+                  <h3>{entry.title}</h3>
+                  <p>{entry.copy}</p>
+                  <span class="research-read">{entry.cta} &rarr;</span>
                 </a>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="consult" data-edge-title="Consult" data-edge-side="left">
+          <div class="section-inner">
+            <div class="consult-layout">
+              <div class="consult-copy">
+                <span class="label">Paid pilot</span>
+                <h2 class="section-title">Request a pilot.</h2>
+                <p class="section-lede">
+                  Telotia runs as a guided paid pilot - there is no public download yet. Tell us what you are preparing and we will set up a review on your own documents.
+                </p>
+                <p class="consult-caveat">
+                  Telotia supports evidence review and proof preparation. It does not grant regulatory approval or replace qualified human review.
+                </p>
+                <p class="consult-secondary">
+                  Prefer email? <a href="mailto:hello@telotia.com">hello@telotia.com</a>
+                </p>
+              </div>
+
+              <form class="consult-form" method="POST" action="/api/pilot-request">
+                {/* TODO(backend): add a Cloudflare Worker route for /api/pilot-request that
+                    verifies the Turnstile token server-side, rate-limits, then emails hello@telotia.com.
+                    To enable the widget, load https://challenges.cloudflare.com/turnstile/v0/api.js
+                    in <head> and set the real data-sitekey below. */}
+                <div class="form-field">
+                  <label for="pilot-name">Name</label>
+                  <input id="pilot-name" name="name" type="text" autocomplete="name" required />
+                </div>
+                <div class="form-field">
+                  <label for="pilot-email">Work email</label>
+                  <input id="pilot-email" name="email" type="email" autocomplete="email" required />
+                </div>
+                <div class="form-field">
+                  <label for="pilot-org">Organization</label>
+                  <input id="pilot-org" name="organization" type="text" autocomplete="organization" />
+                </div>
+                <div class="form-field">
+                  <label for="pilot-context">What evidence are you validating?</label>
+                  <input id="pilot-context" name="context" type="text" placeholder="e.g. clinical evidence for a device submission" />
+                </div>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAA_REPLACE_ME" aria-hidden="true"></div>
+                <div class="form-foot">
+                  <small>Form-gated with Cloudflare Turnstile to deter automated abuse. We reply within two business days.</small>
+                  <button class="button-primary" type="submit">Request a pilot</button>
+                </div>
+              </form>
             </div>
           </div>
         </section>
@@ -2941,8 +3297,8 @@ const contactCards = [
           </div>
           <div class="footer-links">
             <a href="mailto:hello@telotia.com">hello@telotia.com</a>
-            <a href="#process">Process</a>
-            <a href="#download">Download</a>
+            <a href="#demo">Demo</a>
+            <a href="#consult">Request a pilot</a>
           </div>
         </div>
       </footer>
@@ -4234,7 +4590,7 @@ const contactCards = [
         }
 
         function activeMode() {
-          const sections = ['#top', '#process', '#evidence', '#workspace', '#download'];
+          const sections = ['#top', '#process', '#workspace', '#demo', '#research', '#consult'];
           let nearest = 0;
           let distance = Number.POSITIVE_INFINITY;
 
