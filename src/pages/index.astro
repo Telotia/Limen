@@ -3836,6 +3836,16 @@ const auditEvents = [
             selectReviewRow(row);
           });
 
+          // Hover-to-reveal: previewing a claim on hover (as the prior backlog
+          // showcase did) makes the review surface feel interactive instead of
+          // click-only. Skip if it is already active; click/keyboard still lock
+          // an explicit selection and remain the touch/a11y path.
+          row.addEventListener('mouseenter', () => {
+            if (!row.classList.contains('is-active')) {
+              selectReviewRow(row);
+            }
+          });
+
           row.addEventListener('keydown', (event) => {
             if (event.key === 'Enter' || event.key === ' ') {
               event.preventDefault();
