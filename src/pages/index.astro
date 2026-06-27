@@ -1,7 +1,218 @@
 ---
-// Green v2 design — ported from "Telotia Site - Green v2 (archive).dc.html"
-// Static faithful port (nav/sections/footer). Interactive canvas/drawer JS (deco DCLogic) pending a vanilla port.
+const navItems = [
+  { label: 'Process', href: '#process' },
+  { label: 'Workspace', href: '#workspace' },
+  { label: 'Demo', href: '#demo' },
+  { label: 'Research', href: '#research' },
+  { label: 'Consult', href: '#consult' },
+];
+
+const demoSteps = [
+  {
+    number: '1',
+    title: 'Load the document set',
+    copy: 'Drop in the document; Telotia extracts every atomic claim automatically.',
+  },
+  {
+    number: '2',
+    title: 'Search the trusted corpus',
+    copy: 'Each claim is matched only against the evidence you supplied - never the open web.',
+  },
+  {
+    number: '3',
+    title: 'Grade and cite',
+    copy: 'Supported, Partial, or No support found - each linked to the exact source passage.',
+  },
+];
+
+const researchEntries = [
+  {
+    kind: 'How it works',
+    title: 'Decompose, search, grade',
+    copy:
+      'Telotia breaks a document into atomic claims, matches each against the corpus you supplied - not the open web - and returns a graded verdict linked to its source.',
+    cta: 'See the steps',
+    link: '#demo',
+  },
+  {
+    kind: 'In progress',
+    title: 'An open benchmark',
+    copy:
+      "An open benchmark - measuring how well Telotia separates supported claims from unsupported ones - is in progress. The method and results will be published here, including where it falls short.",
+    cta: 'Get in touch',
+    link: 'mailto:hello@telotia.com?subject=Telotia%20benchmark',
+  },
+  {
+    kind: 'Why a corpus',
+    title: 'Built on evidence you can check',
+    copy:
+      'The showcase runs on a fixed, trusted body of research that stands on its own - demonstrating the general capability: any document, any trusted corpus you choose.',
+    cta: 'See it run',
+    link: '#demo',
+  },
+];
+
+const steps = [
+  {
+    number: '01',
+    title: 'Decompose',
+    figure: 'decompose',
+    copy:
+      'Telotia breaks the document into atomic claims, down to the level where each one can be checked on its own. Not paragraphs - individual propositions, each independently verifiable.',
+  },
+  {
+    number: '02',
+    title: 'Search the evidence',
+    figure: 'corpus',
+    copy:
+      'Each claim is matched against your evidence base - the corpus you supplied, not the open web. The search is scoped to what you trust and can cite.',
+  },
+  {
+    number: '03',
+    title: 'Grade and cite',
+    figure: 'verdict',
+    copy:
+      'Every claim gets a graded verdict - Supported, Partial, or Unsupported - each linked to the exact source in your corpus. No aggregate scores, no summaries.',
+  },
+];
+
+const verdicts = [
+  {
+    key: 'supported',
+    label: 'Supported',
+    type: 'verdict',
+    copy:
+      'Evidence in the corpus backs the claim. The supporting passage is retrieved and cited exactly.',
+  },
+  {
+    key: 'partial',
+    label: 'Partial',
+    type: 'verdict',
+    copy:
+      'Some of the claim is backed; part is not, or only holds under specific conditions. Graded, non-binary - not collapsed to true or false.',
+  },
+  {
+    key: 'unsupported',
+    label: 'Unsupported',
+    type: 'verdict',
+    copy:
+      'This corpus is silent on the claim - not that the claim is wrong. Results are a starting point for a human reviewer, not a final verdict on the work.',
+  },
+];
+
+const reviewStages = [
+  { label: 'Document review', icon: 'document' },
+  { label: 'Evidence search', icon: 'search' },
+  { label: 'Verdict queue', icon: 'verdict' },
+  { label: 'Proof package', icon: 'package' },
+];
+
+const glossary = [
+  {
+    key: 'atomic-claim',
+    label: 'Atomic claim',
+    type: 'noun',
+    copy:
+      'A single proposition that can be checked independently. Telotia decomposes documents to this level before searching.',
+  },
+  {
+    key: 'evidence-base',
+    label: 'Evidence base',
+    type: 'noun',
+    copy:
+      'The corpus you supply and trust. Telotia checks claims against this - not the open web. You choose what counts as evidence.',
+  },
+  {
+    key: 'decomposition',
+    label: 'Decomposition',
+    type: 'noun',
+    copy:
+      'Breaking a document into its individual atomic claims, each independently checkable. The first step before any search or grading.',
+  },
+];
+
+const verdictNodes = [
+  ...verdicts.map((item) => ({ ...item, id: item.key, vector: item.key })),
+  ...glossary.map((item) => ({ ...item, id: item.key, vector: item.key })),
+];
+
+const spikeKeywords = [
+  'supported',
+  'partial',
+  'unsupported',
+  'atomic claim',
+  'evidence base',
+  'decomposition',
+  'trusted corpus',
+  'source passage',
+  'citation',
+  'human review',
+  'graded verdict',
+  'silent corpus',
+  'independent proposition',
+  'search scope',
+  'proof package',
+  'review trail',
+  'claim unit',
+  'cited exactly',
+  'specific condition',
+  'not a score',
+];
+
+const spikeKeywordItems = spikeKeywords.map((word, index) => {
+  const wave = Math.sin(index * 12.91) * 0.5 + 0.5;
+  const drift = Math.sin(index * 8.37 + 2.3) * 0.5 + 0.5;
+  return {
+    word,
+    x: 13 + ((index * 31) % 74) + wave * 5,
+    y: 14 + ((index * 23) % 70) + drift * 4,
+    rotation: -34 + ((index * 29) % 68),
+    delay: -(index % 9) * 0.7,
+  };
+});
+
+const claimRows = [
+  {
+    id: 'claim-018',
+    claim:
+      'The device packaging identifies the imported model and manufacturer lot.',
+    verdict: 'Supported',
+    evidence:
+      'Importer file IFU-22, page 4 lists model QX-180 and lot range A17-A19 with matching manufacturer references.',
+    source: 'IFU-22 / page 4',
+    status: 'green',
+  },
+  {
+    id: 'claim-027',
+    claim:
+      'Cleaning instructions cover high-touch surfaces after each patient use.',
+    verdict: 'Partial',
+    evidence:
+      'The manual specifies approved cleaning agents but does not define the interval for accessories in shared clinical settings.',
+    source: 'Maintenance manual / section 7.2',
+    status: 'yellow',
+  },
+  {
+    id: 'claim-041',
+    claim:
+      'The supplied corpus demonstrates bilingual labelling for all external warnings.',
+    verdict: 'Unsupported',
+    evidence:
+      'No supplied label image or packaging proof contains the French warning text for the outer carton.',
+    source: 'No cited passage',
+    status: 'neutral',
+  },
+];
+
+const auditEvents = [
+  { time: '09:42:11', label: 'document', detail: '18 atomic claims extracted', tone: 'green' },
+  { time: '09:42:38', label: 'corpus', detail: '47 supplied files indexed', tone: 'green' },
+  { time: '09:43:02', label: 'review', detail: 'claim-027 requires reviewer note', tone: 'yellow' },
+  { time: '09:44:19', label: 'source', detail: 'page citation attached', tone: 'green' },
+  { time: '09:45:06', label: 'package', detail: 'proof bundle draft ready', tone: 'neutral' },
+];
 ---
+
 <!doctype html>
 <html lang="en-CA">
   <head>
@@ -2597,483 +2808,2013 @@
           <a href="#consult" class="mobile-nav-cta">Request a pilot</a>
         </div>
       </div>
-    </div>
-  </header>
 
-  <!-- PROCESS -->
-  <section id="process" style="position:relative;padding:96px 64px;background:linear-gradient(180deg,#08120f 0%,#0a201b 100%);border-top:1px solid var(--rulesoft)">
-    <div style="position:absolute;left:24px;top:96px;writing-mode:vertical-rl;font-family:var(--fmono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--t4)">Process</div>
-    <div style="max-width:1180px;margin:0 auto">
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:48px">
-        <div>
-          <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">How it works</span>
-          <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1)">Decompose. Search. Grade.</h2>
+      <main id="content">
+        <span id="top" aria-hidden="true"></span>
+        <section class="hero" aria-labelledby="hero-title">
+          <span class="hero-brand-title" aria-hidden="true">TELOTIA</span>
+          <div class="hero-inner">
+            <div class="hero-copy">
+              <h1 class="hero-title" id="hero-title">
+                Evidence-grade audit for Canadian health-equipment imports.
+              </h1>
+              <p class="hero-lede">
+                Telotia turns documentation into citation-linked evidence review for teams preparing Canadian proof packages. It checks the claim, not the conclusion.
+              </p>
+              <div class="hero-actions">
+                <a class="button-primary" href="#consult">Request a pilot</a>
+                <a class="button-secondary" href="#demo">Watch the demo</a>
+              </div>
+              <p class="hero-trust" aria-label="Programme status">Paid pilot &middot; Montreal &middot; launching September 2026</p>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+              <div class="hero-figure hero-model">
+                <canvas class="hero-model-canvas" data-hero-models></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="process" data-edge-title="Process" data-edge-side="left">
+          <div class="section-inner">
+            <div class="section-heading">
+              <div>
+                <span class="label">How it works</span>
+                <h2 class="section-title">Decompose. Search. Grade.</h2>
+              </div>
+              <p class="section-lede">
+                From product documentation to reviewable proof, every claim is separated, searched, graded, and linked back to source evidence.
+              </p>
+            </div>
+
+            <div class="process-flow">
+              {steps.map((step) => (
+                <article class="process-step">
+                  <div class="process-figure" aria-hidden="true">
+                    {step.figure === 'decompose' && (
+                      <svg class="process-svg" viewBox="0 0 300 220">
+                        <rect x="40" y="32" width="94" height="126" fill="#ffffff" stroke="#1a1a1a" stroke-width="1" />
+                        <line x1="58" y1="60" x2="116" y2="60" stroke="#1a1a1a" stroke-width="1" />
+                        <line x1="58" y1="82" x2="116" y2="82" stroke="#1a1a1a" stroke-width="1" />
+                        <line x1="58" y1="104" x2="116" y2="104" stroke="#1a1a1a" stroke-width="1" />
+                        <line x1="58" y1="126" x2="116" y2="126" stroke="#1a1a1a" stroke-width="1" />
+                        {[0, 1, 2, 3, 4, 5].map((i) => (
+                          <g>
+                            <line x1="154" y1={54 + i * 22} x2={206 + (i % 2) * 22} y2={42 + i * 24} stroke="#31988a" stroke-width="1" opacity="0.6" />
+                            <circle cx={218 + (i % 2) * 22} cy={38 + i * 24} r="4" fill={i % 2 ? '#d8d29b' : '#31988a'} />
+                          </g>
+                        ))}
+                      </svg>
+                    )}
+                    {step.figure === 'corpus' && (
+                      <svg class="process-svg" viewBox="0 0 300 220">
+                        <circle cx="150" cy="110" r="62" fill="none" stroke="#31988a" stroke-width="1" />
+                        <circle cx="150" cy="110" r="36" fill="rgba(49,152,138,0.16)" stroke="#1e6f66" stroke-width="1" />
+                        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
+                          const angle = (i / 8) * Math.PI * 2;
+                          const x = 150 + Math.cos(angle) * 84;
+                          const y = 110 + Math.sin(angle) * 64;
+                          return (
+                            <g>
+                              <line x1="150" y1="110" x2={x} y2={y} stroke="#d8d29b" stroke-width="0.8" opacity="0.55" />
+                              <circle cx={x} cy={y} r="3.5" fill={i % 3 === 0 ? '#d8d29b' : '#31988a'} />
+                            </g>
+                          );
+                        })}
+                      </svg>
+                    )}
+                    {step.figure === 'verdict' && (
+                      <svg class="process-svg" viewBox="0 0 300 220">
+                        <circle cx="150" cy="110" r="76" fill="none" stroke="#d8d8d2" stroke-width="1" />
+                        <circle cx="150" cy="110" r="18" fill="#ffffff" stroke="#1a1a1a" stroke-width="1" />
+                        {[0, 1, 2, 3, 4, 5].map((i) => {
+                          const angle = -Math.PI / 2 + (i / 6) * Math.PI * 2;
+                          const x = 150 + Math.cos(angle) * 76;
+                          const y = 110 + Math.sin(angle) * 76;
+                          const isSupported = i < 3;
+                          const isPartial = i === 3 || i === 4;
+                          return (
+                            <g>
+                              <line
+                                x1="150"
+                                y1="110"
+                                x2={x}
+                                y2={y}
+                                stroke={isSupported ? '#31988a' : isPartial ? '#8e8b6a' : '#8a8a8a'}
+                                stroke-width="1"
+                                stroke-dasharray={isPartial ? '4 4' : i === 5 ? '2 4' : ''}
+                                opacity={i === 5 ? '0.5' : '0.85'}
+                              />
+                              <circle
+                                cx={x}
+                                cy={y}
+                                r="7"
+                                fill={isSupported ? '#31988a' : isPartial ? 'none' : '#ffffff'}
+                                stroke={isPartial ? '#d8d29b' : '#1a1a1a'}
+                                stroke-width="1"
+                              />
+                            </g>
+                          );
+                        })}
+                      </svg>
+                    )}
+                  </div>
+                  <div class="process-copy">
+                    <span class="step-number">STEP {step.number}</span>
+                    <h3>{step.title}</h3>
+                    <p>{step.copy}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="section alt" id="evidence" data-edge-title="Verdict" data-edge-side="right" data-edge-tone="deep">
+          <div class="section-inner">
+            <div class="section-heading">
+              <div>
+                <span class="label">Verdicts</span>
+                <h2 class="section-title">Three outcomes. None of them is a score.</h2>
+              </div>
+              <p class="section-lede">
+                The workspace does not collapse review into true or false. It exposes what the trusted corpus can support, what it only partly supports, and where it is silent.
+              </p>
+            </div>
+
+            <div class="verdict-layout" data-verdict-widget>
+              <div class="spike-panel" aria-label="Interactive 3D verdict spike ball">
+                <div class="spike-canvas-wrap">
+                  <canvas class="spike-canvas" data-spike-canvas></canvas>
+                </div>
+                <div class="spike-keyword-layer" aria-hidden="true">
+                  {spikeKeywordItems.map((item) => (
+                    <span
+                      class="spike-keyword"
+                      style={`--x: ${item.x}%; --y: ${item.y}%; --r: ${item.rotation}deg; --d: ${item.delay}s;`}
+                    >
+                      <span class="spike-keyword-dot" aria-hidden="true"></span>
+                      <span class="spike-keyword-text">{item.word}</span>
+                    </span>
+                  ))}
+                </div>
+                <div class="spike-label-layer" aria-label="Verdict direction endpoints">
+                  {verdictNodes.map((point) => (
+                    <button
+                      class="spike-node"
+                      type="button"
+                      aria-pressed={point.id === verdictNodes[0].id ? 'true' : 'false'}
+                      data-verdict-node
+                      data-verdict-id={point.id}
+                      data-vector={point.vector}
+                      data-verdict-key={point.key}
+                      data-verdict-node-title={point.label}
+                      data-verdict-node-copy={point.copy}
+                      data-verdict-type={point.type}
+                    >
+                      <span class="spike-dot" aria-hidden="true"></span>
+                      <span class="spike-label-text">{point.type} · {point.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div class="definition-list">
+                <article class="verdict-detail" id="supported" data-verdict-detail aria-live="polite">
+                  <span class="type" data-verdict-type>{verdicts[0].type}</span>
+                  <h3 data-verdict-title>{verdicts[0].label}</h3>
+                  <p data-verdict-copy>{verdicts[0].copy}</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="glossary" data-edge-title="Glossary" data-edge-side="left">
+          <div class="section-inner">
+            <div class="section-heading">
+              <div>
+                <span class="label">Glossary</span>
+                <h2 class="section-title">The review vocabulary stays narrow.</h2>
+              </div>
+              <p class="section-lede">
+                These terms anchor the proof package. They keep the interface precise, especially when a human reviewer needs to audit how a verdict was reached.
+              </p>
+            </div>
+            <div class="glossary-grid">
+              {glossary.map((item, index) => (
+                <article class="glossary-row">
+                  <div class="glossary-term">
+                    <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true">
+                      <circle cx="20" cy="20" r={index === 0 ? '4' : index === 1 ? '12' : '8'} fill={index === 2 ? 'none' : '#31988a'} stroke="#31988a" stroke-width="1.3" />
+                      <circle cx="20" cy="20" r="17" fill="none" stroke="#d8d29b" stroke-width="1" stroke-dasharray={index === 2 ? '2 4' : '0'} opacity="0.8" />
+                      <circle cx="29" cy="11" r="2.5" fill="#d8d29b" />
+                    </svg>
+                    <div>
+                      <span>{item.type}</span>
+                      <strong>{item.label}</strong>
+                    </div>
+                  </div>
+                  <div class="glossary-copy">
+                    <p>{item.copy}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="section dark" id="workspace" data-edge-title="Workspace" data-edge-side="right" data-edge-tone="deep">
+          <div class="section-inner">
+            <div class="section-heading">
+              <div>
+                <span class="label">Workspace</span>
+                <h2 class="section-title">Inspect each claim before sign-off.</h2>
+              </div>
+              <p class="section-lede">
+                The interactive mockup shows the review surface as document work: claim graph, verdict queue, source passage, and audit trail.
+              </p>
+            </div>
+
+            <aside class="workspace-shell" data-review-app data-active-status={claimRows[0].status} aria-label="Interactive evidence review workspace mockup">
+              <div class="workspace-topbar">
+                <div class="workspace-brand">TELOTIA REVIEW</div>
+                <div class="workspace-run">run_2026_05_25_import_package / canadian_health_equipment</div>
+                <div class="review-status"><span class="status-light"></span> human review required</div>
+              </div>
+              <div class="workspace-grid">
+                <nav class="workspace-rail" aria-label="Review stages">
+                  {reviewStages.map((stage, index) => (
+                    <button
+                      class:list={['rail-step', { 'is-active': index === 0 }]}
+                      type="button"
+                      aria-label={stage.label}
+                      aria-current={index === 0 ? 'step' : undefined}
+                      data-rail-step
+                    >
+                      {stage.icon === 'document' && (
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M7 3.5h7l3 3v14H7z" />
+                          <path d="M14 3.5v4h4" />
+                          <path d="M9.5 12h5" />
+                          <path d="M9.5 15.5h5" />
+                        </svg>
+                      )}
+                      {stage.icon === 'search' && (
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <circle cx="10.5" cy="10.5" r="4.5" />
+                          <path d="M14 14l5 5" />
+                          <path d="M4.5 18.5h4" />
+                        </svg>
+                      )}
+                      {stage.icon === 'verdict' && (
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <circle cx="12" cy="12" r="7" />
+                          <path d="M8.7 12.2l2.2 2.2 4.6-5" />
+                        </svg>
+                      )}
+                      {stage.icon === 'package' && (
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4.5 8.5 12 4l7.5 4.5v7L12 20l-7.5-4.5z" />
+                          <path d="M4.8 8.7 12 13l7.2-4.3" />
+                          <path d="M12 13v7" />
+                        </svg>
+                      )}
+                      <span class="sr-only">{stage.label}</span>
+                    </button>
+                  ))}
+                </nav>
+                <div class="workspace-main">
+                  <article class="claim-card">
+                    <div class="claim-card-header">Document review / imported equipment file</div>
+                    <h3 data-review-title>{claimRows[0].claim}</h3>
+                  </article>
+                  <section class="graph-panel" aria-label="Evidence graph">
+                    <div class="graph-label">Claim graph / citation path</div>
+                    <svg class="claim-graph" viewBox="0 0 820 240" role="img" aria-labelledby="claim-graph-title">
+                      <title id="claim-graph-title">Document claim connected to a trusted corpus and source passage</title>
+                      <line x1="112" y1="120" x2="320" y2="82" stroke="#1f2a30" stroke-width="1.2" />
+                      <line x1="112" y1="120" x2="320" y2="158" stroke="#1f2a30" stroke-width="1.2" />
+                      <line class="graph-active-edge" x1="320" y1="82" x2="504" y2="120" stroke="#31988a" stroke-width="1.3" />
+                      <line x1="320" y1="158" x2="504" y2="120" stroke="#d8d29b" stroke-width="1.1" stroke-dasharray="6 6" />
+                      <line class="graph-source-edge" x1="504" y1="120" x2="690" y2="120" stroke="#31988a" stroke-width="1.3" />
+                      <circle cx="112" cy="120" r="18" fill="#07171c" stroke="#d8d29b" stroke-width="1.2" />
+                      <circle cx="320" cy="82" r="14" fill="#07171c" stroke="#31988a" stroke-width="1.2" />
+                      <circle cx="320" cy="158" r="14" fill="#07171c" stroke="#d8d29b" stroke-width="1.2" />
+                      <circle class="graph-verdict-node" cx="504" cy="120" r="20" fill="#31988a" stroke="#31988a" stroke-width="1.2" />
+                      <circle class="graph-source-node" cx="690" cy="120" r="16" fill="#ffffff" stroke="#d8d29b" stroke-width="1.2" />
+                      <text x="112" y="166" text-anchor="middle" fill="#d8d29b" font-family="JetBrains Mono, monospace" font-size="11">claim</text>
+                      <text x="320" y="50" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="11">corpus</text>
+                      <text x="504" y="164" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="11">verdict</text>
+                      <text x="690" y="164" text-anchor="middle" fill="#d8d29b" font-family="JetBrains Mono, monospace" font-size="11">source</text>
+                    </svg>
+                  </section>
+                  <section class="queue" aria-label="Verdict queue">
+                    <div class="queue-label">Verdict queue</div>
+                    <div class="claim-list">
+                      {claimRows.map((row, index) => (
+                        <button
+                          class:list={['claim-row', { 'is-active': index === 0 }]}
+                          type="button"
+                          data-claim-row
+                          data-status={row.status}
+                          data-claim={row.claim}
+                          data-verdict={row.verdict}
+                          data-evidence={row.evidence}
+                          data-source={row.source}
+                          aria-controls="review-source-sidebar"
+                          aria-selected={index === 0 ? 'true' : 'false'}
+                        >
+                          <span>
+                            <strong>{row.claim}</strong>
+                            <small>{row.id} / {row.source}</small>
+                          </span>
+                          <span class="verdict-pill">{row.verdict}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </section>
+                </div>
+                <aside
+                  class="audit-panel"
+                  id="review-source-sidebar"
+                  data-review-sidebar
+                  data-status={claimRows[0].status}
+                  aria-label="Audit trail and source passage"
+                  aria-live="polite"
+                  tabindex="-1"
+                >
+                  <div class="audit-head">Source passage</div>
+                  <div class="evidence-detail" data-review-detail>
+                    <h3 data-review-verdict>{claimRows[0].verdict}</h3>
+                    <p data-review-evidence>{claimRows[0].evidence}</p>
+                    <span class="source-line" data-review-source>{claimRows[0].source}</span>
+                  </div>
+                  <div class="audit-head">Audit trail</div>
+                  <div class="event-list">
+                    {auditEvents.map((event) => (
+                      <div class="event-row">
+                        <span class="event-time">{event.time}</span>
+                        <span class="event-detail">
+                          <strong>{event.label}</strong>
+                          {event.detail}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </aside>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section" id="demo" data-edge-title="Demo" data-edge-side="left">
+          <div class="section-inner">
+            <div class="section-heading">
+              <div>
+                <span class="label">See it run</span>
+                <h2 class="section-title">Watch the review happen, claim by claim.</h2>
+              </div>
+              <p class="section-lede">
+                Give Telotia a document and a body of evidence you trust. It breaks the document into individual claims and shows you, claim by claim, what the evidence supports - and what it does not.
+              </p>
+            </div>
+
+            <div class="demo-layout">
+              <div class="demo-stage" aria-label="Example claim-by-claim review">
+                <div class="demo-stage-head">
+                  <span>Live review</span>
+                  <span>example corpus</span>
+                </div>
+                {claimRows.map((row) => (
+                  <div class="demo-claim" data-status={row.status}>
+                    <span class="demo-verdict">{row.verdict}</span>
+                    <div class="demo-claim-body">
+                      <p>{row.claim}</p>
+                      <span class="demo-src">{row.source}</span>
+                    </div>
+                  </div>
+                ))}
+                <a class="demo-stage-cta" href="#workspace">Open the interactive run &darr;</a>
+              </div>
+
+              <ol class="demo-steps">
+                {demoSteps.map((step) => (
+                  <li class="demo-step">
+                    <span class="demo-step-n" aria-hidden="true">{step.number}</span>
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.copy}</p>
+                    </div>
+                  </li>
+                ))}
+                <li class="demo-foot">
+                  &ldquo;No support found&rdquo; means this corpus is silent on the claim - not that the claim is wrong. Results are a starting point for a human reviewer, not a verdict on the work.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="section alt" id="research" data-edge-title="Research" data-edge-side="right" data-edge-tone="deep">
+          <div class="section-inner">
+            <div class="section-heading">
+              <div>
+                <span class="label">Research</span>
+                <h2 class="section-title">The method - and the benchmark we are building.</h2>
+              </div>
+              <p class="section-lede">
+                A claims-validation tool should hold itself to the same standard. Here is how the review works, and how it will be measured - method first, numbers when they exist.
+              </p>
+            </div>
+            <div class="research-grid">
+              {researchEntries.map((entry) => (
+                <a class="research-card" href={entry.link}>
+                  <span class="research-kind">{entry.kind}</span>
+                  <h3>{entry.title}</h3>
+                  <p>{entry.copy}</p>
+                  <span class="research-read">{entry.cta} &rarr;</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="consult" data-edge-title="Consult" data-edge-side="left">
+          <div class="section-inner">
+            <div class="consult-layout">
+              <div class="consult-copy">
+                <span class="label">Paid pilot</span>
+                <h2 class="section-title">Request a pilot.</h2>
+                <p class="section-lede">
+                  Telotia runs as a guided paid pilot - there is no public download yet. Tell us what you are preparing and we will set up a review on your own documents.
+                </p>
+                <p class="consult-caveat">
+                  Telotia supports evidence review and proof preparation. It does not grant regulatory approval or replace qualified human review.
+                </p>
+                <p class="consult-secondary">
+                  Prefer email? <a href="mailto:hello@telotia.com">hello@telotia.com</a>
+                </p>
+              </div>
+
+              <form class="consult-form" method="POST" action="/api/pilot-request">
+                {/* TODO(backend): add a Cloudflare Worker route for /api/pilot-request that
+                    verifies the Turnstile token server-side, rate-limits, then emails hello@telotia.com.
+                    To enable the widget, load https://challenges.cloudflare.com/turnstile/v0/api.js
+                    in <head> and set the real data-sitekey below. */}
+                <div class="form-field">
+                  <label for="pilot-name">Name</label>
+                  <input id="pilot-name" name="name" type="text" autocomplete="name" required />
+                </div>
+                <div class="form-field">
+                  <label for="pilot-email">Work email</label>
+                  <input id="pilot-email" name="email" type="email" autocomplete="email" required />
+                </div>
+                <div class="form-field">
+                  <label for="pilot-org">Organization</label>
+                  <input id="pilot-org" name="organization" type="text" autocomplete="organization" />
+                </div>
+                <div class="form-field">
+                  <label for="pilot-context">What evidence are you validating?</label>
+                  <input id="pilot-context" name="context" type="text" placeholder="e.g. clinical evidence for a device submission" />
+                </div>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAA_REPLACE_ME" aria-hidden="true"></div>
+                <div class="form-foot">
+                  <small>Form-gated with Cloudflare Turnstile to deter automated abuse. We reply within two business days.</small>
+                  <button class="button-primary" type="submit">Request a pilot</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <div>
+            <div class="footer-brand">TELOTIA</div>
+            <div class="footer-small">Montreal / private beta / evidence review workspace</div>
+          </div>
+          <div class="footer-small">
+            This software supports claim review and proof package preparation. It does not provide regulatory approval.
+          </div>
+          <div class="footer-links">
+            <a href="mailto:hello@telotia.com">hello@telotia.com</a>
+            <a href="#demo">Demo</a>
+            <a href="#consult">Request a pilot</a>
+          </div>
         </div>
-        <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:420px">From product documentation to reviewable proof, every claim is separated, searched, graded, and linked back to source evidence.</p>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:48px;background:var(--rulesoft);border:1px solid var(--rulesoft);border-radius:16px;overflow:hidden">
-        <article style="background:#081d18;padding:30px">
-          <svg viewBox="0 0 300 180" style="width:100%;height:auto;display:block">
-            <rect x="34" y="34" width="86" height="112" rx="2" fill="none" stroke="var(--t3)" stroke-width="1"/>
-            <line x1="50" y1="60" x2="104" y2="60" stroke="var(--t4)" stroke-width="1"/><line x1="50" y1="80" x2="104" y2="80" stroke="var(--t4)" stroke-width="1"/><line x1="50" y1="100" x2="104" y2="100" stroke="var(--t4)" stroke-width="1"/><line x1="50" y1="120" x2="86" y2="120" stroke="var(--t4)" stroke-width="1"/>
-            <line x1="120" y1="70" x2="208" y2="48" stroke="var(--teal2)" stroke-width="1" stroke-dasharray="4 5" style="animation:dashFlow 1.6s linear infinite"/><line x1="120" y1="90" x2="226" y2="88" stroke="var(--teal2)" stroke-width="1" stroke-dasharray="4 5" style="animation:dashFlow 1.6s linear infinite;animation-delay:-.5s"/><line x1="120" y1="110" x2="208" y2="132" stroke="var(--teal2)" stroke-width="1" stroke-dasharray="4 5" style="animation:dashFlow 1.6s linear infinite;animation-delay:-1s"/>
-            <circle cx="214" cy="48" r="4" fill="var(--sand)" style="animation:pulseO 2.4s ease-in-out infinite"/><circle cx="232" cy="88" r="4" fill="var(--teal)" style="animation:pulseO 2.4s ease-in-out infinite;animation-delay:-.4s"/><circle cx="214" cy="132" r="4" fill="var(--sand)" style="animation:pulseO 2.4s ease-in-out infinite;animation-delay:-.8s"/>
-            <circle cx="248" cy="62" r="3" fill="var(--teal)" style="animation:pulseO 2.4s ease-in-out infinite;animation-delay:-1.2s"/><circle cx="252" cy="112" r="3" fill="var(--sand)" style="animation:pulseO 2.4s ease-in-out infinite;animation-delay:-1.6s"/>
-          </svg>
-          <span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase">Step 01</span>
-          <h3 style="font-weight:600;font-size:23px;margin-top:10px;color:var(--t1)">Decompose</h3>
-          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Telotia breaks the document into atomic claims, down to the level where each one can be checked on its own. Not paragraphs — individual propositions, each independently verifiable.</p>
-        </article>
-        <article style="background:#081d18;padding:30px">
-          <svg viewBox="0 0 300 180" style="width:100%;height:auto;display:block">
-            <circle cx="150" cy="90" r="56" fill="none" stroke="var(--teal)" stroke-width="1"/>
-            <circle cx="150" cy="90" r="30" fill="rgba(49,152,138,.14)" stroke="var(--teal2)" stroke-width="1"/>
-            <g class="figspin" style="animation:spinSlow 52s linear infinite">
-              <g stroke-width="1" opacity=".7">
-                <line x1="150" y1="90" x2="226" y2="62" stroke="var(--sand)"/><line x1="150" y1="90" x2="232" y2="108" stroke="var(--sand)"/><line x1="150" y1="90" x2="92" y2="44" stroke="var(--sand)"/><line x1="150" y1="90" x2="74" y2="104" stroke="var(--sand)"/><line x1="150" y1="90" x2="148" y2="160" stroke="var(--sand)"/>
-              </g>
-              <circle cx="226" cy="62" r="3.5" fill="var(--sand)"/><circle cx="232" cy="108" r="3.5" fill="var(--teal)"/><circle cx="92" cy="44" r="3.5" fill="var(--teal)"/><circle cx="74" cy="104" r="3.5" fill="var(--sand)"/><circle cx="148" cy="160" r="3.5" fill="var(--teal)"/>
-            </g>
-          </svg>
-          <span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase">Step 02</span>
-          <h3 style="font-weight:600;font-size:23px;margin-top:10px;color:var(--t1)">Search the evidence</h3>
-          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Each claim is matched against your evidence base — the corpus you supplied, not the open web. The search is scoped to what you trust and can cite.</p>
-        </article>
-        <article style="background:#081d18;padding:30px">
-          <svg viewBox="0 0 300 180" style="width:100%;height:auto;display:block">
-            <circle cx="150" cy="90" r="64" fill="none" stroke="var(--rule)" stroke-width="1"/>
-            <circle cx="150" cy="90" r="15" fill="none" stroke="var(--t3)" stroke-width="1"/>
-            <g class="figspin" style="animation:spinRev 78s linear infinite">
-              <line x1="150" y1="90" x2="150" y2="26" stroke="var(--teal)" stroke-width="1"/><line x1="150" y1="90" x2="205" y2="58" stroke="var(--teal)" stroke-width="1"/><line x1="150" y1="90" x2="205" y2="122" stroke="var(--teal)" stroke-width="1"/>
-              <line x1="150" y1="90" x2="95" y2="122" stroke="var(--sand)" stroke-width="1" stroke-dasharray="4 4" style="animation:dashFlow 2s linear infinite"/><line x1="150" y1="90" x2="95" y2="58" stroke="var(--sand)" stroke-width="1" stroke-dasharray="4 4" style="animation:dashFlow 2s linear infinite;animation-delay:-.6s"/>
-              <line x1="150" y1="90" x2="150" y2="154" stroke="var(--t4)" stroke-width="1" stroke-dasharray="2 5" opacity=".6"/>
-              <circle cx="150" cy="26" r="6" fill="var(--teal)" style="animation:pulseO 2.6s ease-in-out infinite"/><circle cx="205" cy="58" r="6" fill="var(--teal)" style="animation:pulseO 2.6s ease-in-out infinite;animation-delay:-.5s"/><circle cx="205" cy="122" r="6" fill="var(--teal)" style="animation:pulseO 2.6s ease-in-out infinite;animation-delay:-1s"/>
-              <circle cx="95" cy="122" r="6" fill="none" stroke="var(--sand)" stroke-width="1.4"/><circle cx="95" cy="58" r="6" fill="none" stroke="var(--sand)" stroke-width="1.4"/>
-              <circle cx="150" cy="154" r="6" fill="none" stroke="var(--t4)" stroke-width="1.2"/>
-            </g>
-          </svg>
-          <span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase">Step 03</span>
-          <h3 style="font-weight:600;font-size:23px;margin-top:10px;color:var(--t1)">Grade and cite</h3>
-          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Every claim gets a graded verdict — Supported, Partial, or Unsupported — each linked to the exact source in your corpus. No aggregate scores, no summaries.</p>
-        </article>
-      </div>
+      </footer>
     </div>
-  </section>
 
-  <!-- VERDICT -->
-  <section id="verdict" style="position:relative;padding:96px 64px;background:linear-gradient(180deg,#0a201b 0%,#061714 100%);border-top:1px solid var(--rulesoft)">
-    <div style="position:absolute;right:24px;top:96px;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--fmono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--t4)">Verdict</div>
-    <div style="max-width:1180px;margin:0 auto">
-      <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">Verdicts</span>
-      <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1);max-width:760px">Three outcomes. None of them is a score.</h2>
-      <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:640px;margin-top:14px">The workspace does not collapse review into true or false. It exposes what the trusted corpus can support, what it only partly supports, and where it is silent.</p>
+    <script>
+      import * as THREE from 'three';
 
-      <div id="tlSpikeWrap" style="position:relative;height:440px;margin-top:40px;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:#06140f">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 50%, #0c241d 0%, #04100d 100%)"></div>
-        <canvas id="tlSpikeCanvas" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
-        <div id="tlKeywordLayer" style="position:absolute;inset:0;pointer-events:none"></div>
-        <div id="tlNodeLayer" style="position:absolute;inset:0"></div>
-        <div style="position:absolute;left:20px;bottom:16px;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Verdict space · hover a node to name it</div>
-      </div>
+      const initVerdictSpikeBall = (widget: HTMLElement) => {
+        const panel = widget.querySelector('.spike-panel');
+        const canvasWrap = widget.querySelector('.spike-canvas-wrap');
+        const canvas = widget.querySelector('[data-spike-canvas]');
+        const labelNodes = Array.from(widget.querySelectorAll('[data-verdict-node]')).filter(
+          (node): node is HTMLElement => node instanceof HTMLElement,
+        );
+        const keywordNodes = Array.from(widget.querySelectorAll('.spike-keyword')).filter(
+          (node): node is HTMLElement => node instanceof HTMLElement,
+        );
 
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px">
-        <article id="tlCard-supported" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:26px;background:radial-gradient(circle at 15% 12%,rgba(49,152,138,.1),transparent 42%),#081d18">
-          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;background:var(--teal)"></span><span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Verdict</span></div>
-          <h3 style="font-weight:600;font-size:25px;margin-top:14px;color:var(--t1)">Supported</h3>
-          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Evidence in the corpus backs the claim. The supporting passage is retrieved and cited exactly.</p>
-        </article>
-        <article id="tlCard-partial" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:26px;background:radial-gradient(circle at 15% 12%,rgba(216,178,94,.1),transparent 42%),#0e1c12">
-          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;border:1.4px solid var(--gold);background:transparent"></span><span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Verdict</span></div>
-          <h3 style="font-weight:600;font-size:25px;margin-top:14px;color:var(--t1)">Partial</h3>
-          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Some of the claim is backed; part is not, or only holds under specific conditions. Graded, non-binary — not collapsed to true or false.</p>
-        </article>
-        <article id="tlCard-unsupported" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:26px;background:#0a1813">
-          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;border:1.2px solid var(--t3);background:transparent"></span><span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Verdict</span></div>
-          <h3 style="font-weight:600;font-size:25px;margin-top:14px;color:var(--t1)">Unsupported</h3>
-          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">This corpus is silent on the claim — not that the claim is wrong. Results are a starting point for a human reviewer, not a final verdict on the work.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+        if (
+          !(panel instanceof HTMLElement) ||
+          !(canvasWrap instanceof HTMLElement) ||
+          !(canvas instanceof HTMLCanvasElement) ||
+          labelNodes.length === 0
+        ) {
+          return;
+        }
 
-  <!-- GLOSSARY -->
-  <section id="glossary" style="position:relative;min-height:920px;padding:96px 64px;background:linear-gradient(180deg,#061714 0%,#08120f 100%);border-top:1px solid var(--rulesoft)">
-    <div style="position:absolute;left:24px;top:96px;writing-mode:vertical-rl;font-family:var(--fmono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--t4)">Glossary</div>
-    <canvas id="tlGlossCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none"></canvas>
-    <div style="position:relative;z-index:1;max-width:1180px;margin:0 auto">
-      <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">Glossary</span>
-      <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1);max-width:760px">The review vocabulary stays narrow.</h2>
-      <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:660px;margin-top:14px">These terms anchor the proof package. They keep the interface precise, especially when a human reviewer needs to audit how a verdict was reached.</p>
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+        camera.position.set(0, 0, 6.9);
 
-      <div style="margin-top:40px;border-top:1px solid var(--rule)">
-        <article class="gloss" style="display:grid;grid-template-columns:280px 1fr;gap:40px;padding:26px 0;border-bottom:1px solid var(--rule)">
-          <div style="display:flex;align-items:flex-start;gap:16px">
-            <svg viewBox="0 0 40 40" width="34" height="34" style="flex-shrink:0;margin-top:2px"><circle cx="20" cy="20" r="4" fill="var(--teal)"/><circle cx="20" cy="20" r="16" fill="none" stroke="var(--rule)" stroke-width="1"/><circle cx="31" cy="11" r="2.4" fill="var(--sand)"/></svg>
-            <div><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Noun</span><strong class="gw" style="display:block;font-weight:600;font-size:21px;color:var(--t1);margin-top:3px;transition:color .2s var(--ease)">Atomic claim</strong></div>
-          </div>
-          <p style="font-size:15.5px;line-height:1.65;color:var(--t2);align-self:center">A single proposition that can be checked independently. Telotia decomposes documents to this level before searching.</p>
-        </article>
-        <article class="gloss" style="display:grid;grid-template-columns:280px 1fr;gap:40px;padding:26px 0;border-bottom:1px solid var(--rule)">
-          <div style="display:flex;align-items:flex-start;gap:16px">
-            <svg viewBox="0 0 40 40" width="34" height="34" style="flex-shrink:0;margin-top:2px"><circle cx="20" cy="20" r="12" fill="rgba(49,152,138,.18)" stroke="var(--teal)" stroke-width="1.3"/><circle cx="20" cy="20" r="16" fill="none" stroke="var(--rule)" stroke-width="1"/><circle cx="31" cy="11" r="2.4" fill="var(--sand)"/></svg>
-            <div><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Noun</span><strong class="gw" style="display:block;font-weight:600;font-size:21px;color:var(--t1);margin-top:3px;transition:color .2s var(--ease)">Evidence base</strong></div>
-          </div>
-          <p style="font-size:15.5px;line-height:1.65;color:var(--t2);align-self:center">The corpus you supply and trust. Telotia checks claims against this — not the open web. You choose what counts as evidence.</p>
-        </article>
-        <article class="gloss" style="display:grid;grid-template-columns:280px 1fr;gap:40px;padding:26px 0;border-bottom:1px solid var(--rule)">
-          <div style="display:flex;align-items:flex-start;gap:16px">
-            <svg viewBox="0 0 40 40" width="34" height="34" style="flex-shrink:0;margin-top:2px"><circle cx="20" cy="20" r="8" fill="none" stroke="var(--teal)" stroke-width="1.3"/><circle cx="20" cy="20" r="16" fill="none" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 4"/><circle cx="31" cy="11" r="2.4" fill="var(--sand)"/></svg>
-            <div><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Noun</span><strong class="gw" style="display:block;font-weight:600;font-size:21px;color:var(--t1);margin-top:3px;transition:color .2s var(--ease)">Decomposition</strong></div>
-          </div>
-          <p style="font-size:15.5px;line-height:1.65;color:var(--t2);align-self:center">Breaking a document into its individual atomic claims, each independently checkable. The first step before any search or grading.</p>
-        </article>
-      </div>
-        <div style="position:relative;z-index:1;margin-top:40px;font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)">Particles re-forming the review's working models · molecule → strand → cell → dose</div>
-    </div>
-  </section>
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.setClearColor(0x000000, 0);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-  <!-- WORKSPACE -->
-  <section id="workspace" style="position:relative;padding:96px 64px;background:linear-gradient(180deg,#08120f 0%,#061714 100%);border-top:1px solid var(--rulesoft)">
-    <div style="position:absolute;right:24px;top:96px;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--fmono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--t4)">Workspace</div>
-    <div style="max-width:1180px;margin:0 auto">
-      <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">Workspace</span>
-      <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1);max-width:760px">Inspect each claim before sign-off.</h2>
-      <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:660px;margin-top:14px">The interactive mockup shows the review surface as document work: claim graph, verdict queue, source passage, and audit trail.</p>
+        const group = new THREE.Group();
+        group.rotation.set(-0.16, 0.24, 0.02);
+        group.scale.setScalar(1.12);
+        scene.add(group);
 
-      <div id="tlWsShell" style="position:relative;margin-top:40px;border:1px solid var(--rule);border-radius:18px;overflow:hidden;background:#04100d;box-shadow:0 18px 44px rgba(0,0,0,.4)">
-        <div style="display:flex;align-items:center;gap:18px;padding:14px 20px;border-bottom:1px solid var(--rulesoft);background:rgba(8,29,24,.6)">
-          <span style="font-family:var(--fmono);font-size:12px;letter-spacing:.14em;color:var(--t1)">TELOTIA REVIEW</span>
-          <span style="font-family:var(--fmono);font-size:11px;color:var(--t4)">run_2026_05_25_import_package / canadian_health_equipment</span>
-          <span style="flex:1"></span>
-          <span style="display:inline-flex;align-items:center;gap:7px;font-family:var(--fmono);font-size:11px;color:var(--tealglow)"><span style="width:6px;height:6px;border-radius:50%;background:var(--tealglow);animation:pulseDot 1.2s var(--ease) infinite"></span>human review required</span>
-        </div>
-        <div style="display:grid;grid-template-columns:56px 1fr">
-          <nav id="tlWsRail" style="display:flex;flex-direction:column;gap:8px;padding:16px 0;align-items:center;border-right:1px solid var(--rulesoft)">
-            <button class="wrail" data-wpage="0" type="button" title="Document review" style="width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(49,152,138,.16);border:1px solid var(--teal2);color:var(--teal);cursor:pointer"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M7 3.5h7l3 3v14H7z"/><path d="M14 3.5v4h4"/><path d="M9.5 12h5"/><path d="M9.5 15.5h5"/></svg></button>
-            <button class="wrail" data-wpage="1" type="button" title="Evidence search" style="width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid transparent;color:var(--t4);cursor:pointer"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="10.5" cy="10.5" r="4.5"/><path d="M14 14l5 5"/></svg></button>
-            <button class="wrail" data-wpage="2" type="button" title="Verdict queue" style="width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid transparent;color:var(--t4);cursor:pointer"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="7"/><path d="M8.7 12.2l2.2 2.2 4.6-5"/></svg></button>
-            <button class="wrail" data-wpage="3" type="button" title="Proof package" style="width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid transparent;color:var(--t4);cursor:pointer"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4.5 8.5 12 4l7.5 4.5v7L12 20l-7.5-4.5z"/><path d="M12 13v7"/></svg></button>
-          </nav>
-          <div id="tlWsPages" style="position:relative">
-            <div data-wpage="0" style="display:grid;grid-template-columns:1fr 320px">
-          <div style="padding:22px 24px;border-right:1px solid var(--rulesoft)">
-            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Document review / imported equipment file</div>
-            <h3 id="tlWsClaimTitle" style="font-weight:600;font-size:20px;color:var(--t1);margin-top:8px;max-width:560px">The device packaging identifies the imported model and manufacturer lot.</h3>
-            <div style="margin-top:22px">
-              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-bottom:10px">Claim graph / citation path</div>
-              <svg viewBox="0 0 760 200" style="width:100%;height:auto;display:block">
-                <line x1="104" y1="100" x2="296" y2="68" stroke="var(--rule)" stroke-width="1.2"/><line x1="104" y1="100" x2="296" y2="132" stroke="var(--rule)" stroke-width="1.2"/>
-                <line id="tlEdgeTop" x1="296" y1="68" x2="468" y2="100" stroke="var(--teal)" stroke-width="1.3"/><line x1="296" y1="132" x2="468" y2="100" stroke="var(--sand)" stroke-width="1.1" stroke-dasharray="6 6"/>
-                <line id="tlEdgeSource" x1="468" y1="100" x2="644" y2="100" stroke="var(--teal)" stroke-width="1.3"/>
-                <circle cx="104" cy="100" r="17" fill="#07171c" stroke="var(--sand)" stroke-width="1.2"/>
-                <circle cx="296" cy="68" r="13" fill="#07171c" stroke="var(--teal)" stroke-width="1.2"/><circle cx="296" cy="132" r="13" fill="#07171c" stroke="var(--sand)" stroke-width="1.2"/>
-                <circle id="tlGraphVerdict" cx="468" cy="100" r="19" fill="var(--teal)" stroke="var(--teal)" stroke-width="1.2"/>
-                <circle cx="644" cy="100" r="15" fill="#0b1f1a" stroke="var(--sand)" stroke-width="1.2"/>
-                <text x="104" y="142" text-anchor="middle" fill="var(--sand)" font-family="JetBrains Mono,monospace" font-size="10">claim</text>
-                <text x="296" y="44" text-anchor="middle" fill="var(--t2)" font-family="JetBrains Mono,monospace" font-size="10">corpus</text>
-                <text x="468" y="146" text-anchor="middle" fill="var(--t2)" font-family="JetBrains Mono,monospace" font-size="10">verdict</text>
-                <text x="644" y="142" text-anchor="middle" fill="var(--sand)" font-family="JetBrains Mono,monospace" font-size="10">source</text>
-              </svg>
-            </div>
-            <div style="margin-top:20px">
-              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-bottom:10px">Verdict queue</div>
-              <div style="display:flex;flex-direction:column;gap:1px;background:var(--rulesoft);border:1px solid var(--rulesoft);border-radius:6px;overflow:hidden">
-                <div class="crow" data-ws-row data-id="claim-018" data-note="Reads as a factual identification claim — both the model and the manufacturer lot must appear together in the importer file." data-claim="The device packaging identifies the imported model and manufacturer lot." data-verdict="Supported" data-passage="Importer file IFU-22, page 4 lists model QX-180 and lot range A17–A19 with matching manufacturer references." data-source="IFU-22 / page 4" data-color="#31988a" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:rgba(49,152,138,.07)">
-                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The device packaging identifies the imported model and manufacturer lot.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-018 / IFU-22 / page 4</small></span>
-                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--teal);border:1px solid var(--teal2);border-radius:3px;padding:3px 8px">Supported</span>
-                </div>
-                <div class="crow" data-ws-row data-id="claim-027" data-note="Reads as a procedural coverage claim. It holds for the listed cleaning agents, but the interval for shared-use accessories is left unspecified." data-claim="Cleaning instructions cover high-touch surfaces after each patient use." data-verdict="Partial" data-passage="The manual specifies approved cleaning agents but does not define the interval for accessories in shared clinical settings." data-source="Maintenance manual / section 7.2" data-color="#d8b25e" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:#081d18">
-                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">Cleaning instructions cover high-touch surfaces after each patient use.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-027 / Maintenance manual / section 7.2</small></span>
-                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:3px;padding:3px 8px">Partial</span>
-                </div>
-                <div class="crow" data-ws-row data-id="claim-041" data-note="Reads as a completeness claim over every external warning — each outer carton must carry bilingual text." data-claim="The supplied corpus demonstrates bilingual labelling for all external warnings." data-verdict="Unsupported" data-passage="No supplied label image or packaging proof contains the French warning text for the outer carton." data-source="No cited passage" data-color="#9fb0a6" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:#081d18">
-                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The supplied corpus demonstrates bilingual labelling for all external warnings.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-041 / No cited passage</small></span>
-                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--t3);border:1px solid var(--rule);border-radius:3px;padding:3px 8px">Unsupported</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <aside style="padding:22px 22px;background:rgba(4,16,13,.6)">
-            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Source passage</div>
-            <h3 id="tlWsVerdict" style="font-weight:600;font-size:19px;color:var(--teal);margin-top:10px">Supported</h3>
-            <p id="tlWsPassage" style="font-size:14px;line-height:1.6;color:var(--t2);margin-top:8px">Importer file IFU-22, page 4 lists model QX-180 and lot range A17–A19 with matching manufacturer references.</p>
-            <span id="tlWsSource" style="display:inline-block;font-family:var(--fmono);font-size:11px;color:var(--gold);margin-top:10px">IFU-22 / page 4</span>
-            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:26px;padding-top:18px;border-top:1px solid var(--rulesoft)">Audit trail</div>
-            <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px">
-              <div style="display:flex;gap:12px"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4);flex-shrink:0">09:42:11</span><span style="font-size:13px;color:var(--t2)"><strong style="color:var(--t1);font-weight:500">document</strong> · 18 atomic claims extracted</span></div>
-              <div style="display:flex;gap:12px"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4);flex-shrink:0">09:42:38</span><span style="font-size:13px;color:var(--t2)"><strong style="color:var(--t1);font-weight:500">corpus</strong> · 47 supplied files indexed</span></div>
-              <div style="display:flex;gap:12px"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4);flex-shrink:0">09:43:02</span><span style="font-size:13px;color:var(--t2)"><strong style="color:var(--gold);font-weight:500">review</strong> · claim-027 requires reviewer note</span></div>
-              <div style="display:flex;gap:12px"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4);flex-shrink:0">09:44:19</span><span style="font-size:13px;color:var(--t2)"><strong style="color:var(--t1);font-weight:500">source</strong> · page citation attached</span></div>
-              <div style="display:flex;gap:12px"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4);flex-shrink:0">09:45:06</span><span style="font-size:13px;color:var(--t2)"><strong style="color:var(--t1);font-weight:500">package</strong> · proof bundle draft ready</span></div>
-            </div>
-          </aside>
-            </div>
+        scene.add(new THREE.HemisphereLight(0xf7f7f4, 0x030f13, 1.35));
+        const keyLight = new THREE.PointLight(0xd8d29b, 2.15, 12);
+        keyLight.position.set(-2.6, 2.2, 4.7);
+        scene.add(keyLight);
+        const greenLight = new THREE.PointLight(0x31988a, 2.35, 10);
+        greenLight.position.set(2.4, -2, 4.2);
+        scene.add(greenLight);
 
-            <div data-wpage="1" style="display:none;padding:22px 24px">
-              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Evidence search / scoped to supplied corpus</div>
-              <h3 style="font-weight:600;font-size:20px;color:var(--t1);margin-top:8px;max-width:640px">Each claim is matched only against the 47 files you supplied — never the open web.</h3>
-              <div style="margin-top:10px;font-family:var(--fmono);font-size:11px;color:var(--teal)">matching · claim-018 — device packaging identifies the imported model and manufacturer lot</div>
-              <div style="margin-top:22px;display:flex;flex-direction:column;gap:1px;background:var(--rulesoft);border:1px solid var(--rulesoft);border-radius:8px;overflow:hidden">
-                <div style="display:flex;align-items:center;gap:18px;padding:14px 18px;background:#081d18">
-                  <span style="flex:1;min-width:0"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">IFU-22 — Instructions for use</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">page 4 · model + lot reference</small></span>
-                  <span style="width:120px;height:4px;border-radius:2px;background:var(--rulesoft);overflow:hidden;flex-shrink:0"><span style="display:block;height:100%;width:92%;background:var(--teal)"></span></span>
-                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--fmono);font-size:11px;color:var(--teal)">match</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:18px;padding:14px 18px;background:#081d18">
-                  <span style="flex:1;min-width:0"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">TR-09 — Bench test report</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">table 2 · performance data</small></span>
-                  <span style="width:120px;height:4px;border-radius:2px;background:var(--rulesoft);overflow:hidden;flex-shrink:0"><span style="display:block;height:100%;width:78%;background:var(--teal)"></span></span>
-                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--fmono);font-size:11px;color:var(--teal)">match</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:18px;padding:14px 18px;background:#081d18">
-                  <span style="flex:1;min-width:0"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">Maintenance manual</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">section 7.2 · cleaning agents</small></span>
-                  <span style="width:120px;height:4px;border-radius:2px;background:var(--rulesoft);overflow:hidden;flex-shrink:0"><span style="display:block;height:100%;width:54%;background:var(--gold)"></span></span>
-                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--fmono);font-size:11px;color:var(--gold)">partial</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:18px;padding:14px 18px;background:#081d18">
-                  <span style="flex:1;min-width:0"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">DoC-3 — Declaration of conformity</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">indexed · no direct hit</small></span>
-                  <span style="width:120px;height:4px;border-radius:2px;background:var(--rulesoft);overflow:hidden;flex-shrink:0"><span style="display:block;height:100%;width:14%;background:var(--t3)"></span></span>
-                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--fmono);font-size:11px;color:var(--t3)">silent</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:18px;padding:14px 18px;background:#081d18">
-                  <span style="flex:1;min-width:0"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">Carton label pack — artwork</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">no French warning found</small></span>
-                  <span style="width:120px;height:4px;border-radius:2px;background:var(--rulesoft);overflow:hidden;flex-shrink:0"><span style="display:block;height:100%;width:6%;background:var(--t3)"></span></span>
-                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--fmono);font-size:11px;color:var(--t3)">no match</span>
-                </div>
-              </div>
-              <p style="margin-top:16px;font-size:13px;line-height:1.6;color:var(--t3);max-width:680px">Search is scoped to what you trust and can cite. The open web is never queried.</p>
-            </div>
+        const seeded = (index: number) => {
+          const value = Math.sin(index * 127.1 + 17.17) * 43758.5453123;
+          return value - Math.floor(value);
+        };
 
-            <div data-wpage="2" style="display:none;padding:22px 24px">
-              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Verdict queue / run summary</div>
-              <h3 style="font-weight:600;font-size:20px;color:var(--t1);margin-top:8px;max-width:620px">18 claims graded. Each links back to its source.</h3>
-              <div style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
-                <div style="border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:#081d18">
-                  <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--teal)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Supported</span></div>
-                  <div style="font-size:30px;font-weight:700;color:var(--t1);margin-top:8px">11</div>
-                </div>
-                <div style="border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:#081d18">
-                  <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;border:1.4px solid var(--gold)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Partial</span></div>
-                  <div style="font-size:30px;font-weight:700;color:var(--t1);margin-top:8px">4</div>
-                </div>
-                <div style="border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:#081d18">
-                  <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;border:1.2px solid var(--t3)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Unsupported</span></div>
-                  <div style="font-size:30px;font-weight:700;color:var(--t1);margin-top:8px">3</div>
-                </div>
-              </div>
-              <div style="margin-top:22px;display:flex;flex-direction:column;gap:1px;background:var(--rulesoft);border:1px solid var(--rulesoft);border-radius:8px;overflow:hidden">
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:#081d18">
-                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The device packaging identifies the imported model and manufacturer lot.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-018 / IFU-22 / page 4</small></span>
-                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--teal);border:1px solid var(--teal2);border-radius:3px;padding:3px 8px">Supported</span>
-                </div>
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:#081d18">
-                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">Cleaning instructions cover high-touch surfaces after each patient use.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-027 / Maintenance manual / section 7.2</small></span>
-                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:3px;padding:3px 8px">Partial</span>
-                </div>
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:#081d18">
-                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The supplied corpus demonstrates bilingual labelling for all external warnings.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-041 / No cited passage</small></span>
-                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--t3);border:1px solid var(--rule);border-radius:3px;padding:3px 8px">Unsupported</span>
-                </div>
-              </div>
-              <p style="margin-top:16px;font-size:13px;line-height:1.6;color:var(--t3);max-width:680px">“Unsupported” means the corpus is silent on the claim — not that the claim is wrong.</p>
-            </div>
+        const core = new THREE.Mesh(
+          new THREE.SphereGeometry(0.045, 24, 16),
+          new THREE.MeshStandardMaterial({
+            color: 0xd8d29b,
+            emissive: 0xd8d29b,
+            emissiveIntensity: 0.5,
+            roughness: 0.42,
+            metalness: 0.16,
+          }),
+        );
+        group.add(core);
 
-            <div data-wpage="3" style="display:none;padding:22px 24px">
-              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Proof package / draft bundle</div>
-              <h3 style="font-weight:600;font-size:20px;color:var(--t1);margin-top:8px;max-width:620px">Canadian health-equipment import — evidence bundle</h3>
-              <div style="margin-top:8px;font-family:var(--fmono);font-size:11px;color:var(--t4)">run_2026_05_25_import_package · drafted 09:45:06</div>
-              <div style="margin-top:20px;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:#081d18">
-                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:16px 18px;border-bottom:1px solid var(--rulesoft)">
-                  <span style="flex:1"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The device packaging identifies the imported model and manufacturer lot.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">cited · IFU-22 / page 4</small></span>
-                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--teal);border:1px solid var(--teal2);border-radius:3px;padding:3px 8px">Supported</span>
-                </div>
-                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:16px 18px;border-bottom:1px solid var(--rulesoft)">
-                  <span style="flex:1"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">Cleaning instructions cover high-touch surfaces after each patient use.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">cited · Maintenance manual / section 7.2 · reviewer note</small></span>
-                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:3px;padding:3px 8px">Partial</span>
-                </div>
-                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:16px 18px">
-                  <span style="flex:1"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The supplied corpus demonstrates bilingual labelling for all external warnings.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">flagged · no cited passage in corpus</small></span>
-                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--t3);border:1px solid var(--rule);border-radius:3px;padding:3px 8px">Unsupported</span>
-                </div>
-              </div>
-              <div style="margin-top:18px;display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--teal2);border-radius:10px;background:rgba(49,152,138,.08)">
-                <span style="width:7px;height:7px;border-radius:50%;background:var(--tealglow);animation:pulseDot 1.2s var(--ease) infinite;flex-shrink:0"></span>
-                <span style="font-size:13px;color:var(--t2)">Human review required before submission · proof bundle draft ready</span>
-              </div>
-              <p style="margin-top:14px;font-size:13px;line-height:1.6;color:var(--t3);max-width:680px">This bundle supports proof preparation. It does not grant regulatory approval or replace qualified human review.</p>
-            </div>
+        const rayCount = 260;
+        const rayPositions = new Float32Array(rayCount * 6);
+        const rayColors = new Float32Array(rayCount * 6);
+        const rayDirections: THREE.Vector3[] = [];
+        const rayStarts: number[] = [];
+        const rayLengths: number[] = [];
 
-            <div id="tlWsDetail" data-wpage="4" style="display:none">
-             <div style="display:grid;grid-template-columns:300px 1fr">
-              <div style="border-right:1px solid var(--rulesoft);padding:22px 20px;background:#061512">
-                <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Verdict queue</div>
-                <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
-                  <button class="dwmini" type="button" data-id="claim-018" data-claim="The device packaging identifies the imported model and manufacturer lot." data-verdict="Supported" data-passage="Importer file IFU-22, page 4 lists model QX-180 and lot range A17–A19 with matching manufacturer references." data-source="IFU-22 / page 4" data-note="Reads as a factual identification claim — both the model and the manufacturer lot must appear together in the importer file." data-color="#31988a" style="text-align:left;background:none;border:1px solid var(--rulesoft);border-radius:8px;padding:11px 12px;cursor:pointer;display:flex;flex-direction:column;gap:7px">
-                    <span style="display:flex;align-items:center;gap:7px"><span style="width:7px;height:7px;border-radius:50%;background:var(--teal)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)">Supported</span></span>
-                    <span style="font-size:12.5px;line-height:1.4;color:var(--t2)">The device packaging identifies the imported model and manufacturer lot.</span>
-                  </button>
-                  <button class="dwmini" type="button" data-id="claim-027" data-claim="Cleaning instructions cover high-touch surfaces after each patient use." data-verdict="Partial" data-passage="The manual specifies approved cleaning agents but does not define the interval for accessories in shared clinical settings." data-source="Maintenance manual / section 7.2" data-note="Reads as a procedural coverage claim. It holds for the listed cleaning agents, but the interval for shared-use accessories is left unspecified." data-color="#d8b25e" style="text-align:left;background:none;border:1px solid var(--rulesoft);border-radius:8px;padding:11px 12px;cursor:pointer;display:flex;flex-direction:column;gap:7px">
-                    <span style="display:flex;align-items:center;gap:7px"><span style="width:7px;height:7px;border-radius:50%;border:1.4px solid var(--gold)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)">Partial</span></span>
-                    <span style="font-size:12.5px;line-height:1.4;color:var(--t2)">Cleaning instructions cover high-touch surfaces after each patient use.</span>
-                  </button>
-                  <button class="dwmini" type="button" data-id="claim-041" data-claim="The supplied corpus demonstrates bilingual labelling for all external warnings." data-verdict="Unsupported" data-passage="No supplied label image or packaging proof contains the French warning text for the outer carton." data-source="No cited passage" data-note="Reads as a completeness claim over every external warning — each outer carton must carry bilingual text." data-color="#9fb0a6" style="text-align:left;background:none;border:1px solid var(--rulesoft);border-radius:8px;padding:11px 12px;cursor:pointer;display:flex;flex-direction:column;gap:7px">
-                    <span style="display:flex;align-items:center;gap:7px"><span style="width:7px;height:7px;border-radius:50%;border:1.2px solid var(--t3)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3)">Unsupported</span></span>
-                    <span style="font-size:12.5px;line-height:1.4;color:var(--t2)">The supplied corpus demonstrates bilingual labelling for all external warnings.</span>
-                  </button>
-                </div>
-              </div>
-              <div id="tlDwBody" style="padding:24px 28px">
-              <button id="tlDwBack" type="button" style="display:inline-flex;align-items:center;gap:8px;background:none;border:0;cursor:pointer;font-family:var(--fmono);font-size:12px;color:var(--t3);padding:0;margin-bottom:14px">← Back to review</button>
-              <div style="display:flex;align-items:center;gap:12px">
-                <span id="tlDwPill" style="font-family:var(--fmono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid var(--teal);border-radius:100px;padding:4px 12px">Supported</span>
-                <span id="tlDwId" style="font-family:var(--fmono);font-size:14px;color:var(--t1)">claim-018</span>
-              </div>
-              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:24px">Claim</div>
-              <p id="tlDwClaim" style="font-style:italic;font-size:18px;line-height:1.5;color:var(--t1);margin:10px 0 0;padding-left:14px;border-left:2px solid var(--teal);max-width:680px">The device packaging identifies the imported model and manufacturer lot.</p>
-              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:24px">How the claim is read</div>
-              <p id="tlDwNote" style="font-size:14.5px;line-height:1.6;color:var(--t2);margin:8px 0 0;max-width:680px"></p>
-              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:24px">What the corpus says</div>
-              <p id="tlDwCorpus" style="font-size:14.5px;line-height:1.6;color:var(--t2);margin:8px 0 0;max-width:680px"></p>
-              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:24px">State</div>
-              <div style="margin-top:10px;max-width:520px;display:flex;flex-direction:column;gap:1px;background:var(--rulesoft);border:1px solid var(--rulesoft);border-radius:8px;overflow:hidden">
-                <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 14px;background:#081d18"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4)">verdict</span><span id="tlDwVerdict" style="font-size:13px;color:var(--t1)">Supported</span></div>
-                <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 14px;background:#081d18"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4)">source</span><span id="tlDwSource" style="font-family:var(--fmono);font-size:12px;color:var(--t2)">IFU-22 / page 4</span></div>
-                <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 14px;background:#081d18"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4)">status</span><span id="tlDwStatus" style="font-size:13px;color:var(--t2)">Cited · supported by corpus</span></div>
-              </div>
-              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:24px">Actions</div>
-              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px">
-                <span class="btn-s" style="display:inline-flex;align-items:center;gap:7px;border:1px solid var(--teal2);color:var(--teal);font-size:13px;padding:9px 14px;border-radius:8px;cursor:pointer">◎ View source passage</span>
-                <span class="btn-s" style="display:inline-flex;align-items:center;gap:7px;border:1px solid var(--rule);color:var(--t2);font-size:13px;padding:9px 14px;border-radius:8px;cursor:pointer">See related claims</span>
-                <button id="tlDwCopy" type="button" style="background:none;border:1px solid var(--rule);color:var(--t2);font-family:var(--fmono);font-size:12px;padding:9px 14px;border-radius:8px;cursor:pointer">Copy id</button>
-              </div>
-              </div>
-             </div>
-            </div>
+        const green = new THREE.Color(0x31988a);
+        const paleGreen = new THREE.Color(0x83d1c6);
+        const yellow = new THREE.Color(0xd8d29b);
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        for (let index = 0; index < rayCount; index += 1) {
+          const u = (index * 0.61803398875) % 1;
+          const v = (index * 0.75487766624) % 1;
+          const theta = Math.PI * 2 * u;
+          const phi = Math.acos(2 * v - 1);
+          const direction = new THREE.Vector3(
+            Math.sin(phi) * Math.cos(theta),
+            Math.sin(phi) * Math.sin(theta),
+            Math.cos(phi),
+          ).normalize();
+          rayDirections.push(direction);
+          rayStarts.push(0.07 + seeded(index + 9) * 0.22);
+          rayLengths.push(0.58 + seeded(index + 29) * 0.82);
 
-  <!-- DEMO -->
-  <section id="demo" style="position:relative;padding:96px 64px;background:linear-gradient(180deg,#061714 0%,#0a201b 100%);border-top:1px solid var(--rulesoft)">
-    <div style="position:absolute;left:24px;top:96px;writing-mode:vertical-rl;font-family:var(--fmono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--t4)">Demo</div>
-    <div style="max-width:1180px;margin:0 auto">
-      <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">See it run</span>
-      <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1);max-width:780px">Watch the review happen, claim by claim.</h2>
-      <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:680px;margin-top:14px">Give Telotia a document and a body of evidence you trust. It breaks the document into individual claims and shows you, claim by claim, what the evidence supports — and what it does not.</p>
+          const color = index % 17 === 0 ? yellow : index % 5 === 0 ? paleGreen : green;
+          const colorOffset = index * 6;
+          rayColors[colorOffset] = color.r * 0.74;
+          rayColors[colorOffset + 1] = color.g * 0.74;
+          rayColors[colorOffset + 2] = color.b * 0.74;
+          rayColors[colorOffset + 3] = color.r;
+          rayColors[colorOffset + 4] = color.g;
+          rayColors[colorOffset + 5] = color.b;
+        }
 
-      <div style="display:grid;grid-template-columns:1.15fr .85fr;gap:36px;margin-top:44px;align-items:start">
-        <div style="border:1px solid var(--rule);border-radius:14px;overflow:hidden;background:#04100d">
-          <div style="display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--rulesoft);font-family:var(--fmono);font-size:11px;color:var(--t4)"><span style="color:var(--teal)">Live review</span><span>example corpus</span></div>
-          <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;border-bottom:1px solid var(--rulesoft)">
-            <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--teal);border:1px solid var(--teal2);border-radius:3px;padding:3px 9px">Supported</span>
-            <div><p style="font-size:14.5px;line-height:1.55;color:var(--t1)">The device packaging identifies the imported model and manufacturer lot.</p><span style="font-family:var(--fmono);font-size:11px;color:var(--t4)">IFU-22 / page 4</span></div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;border-bottom:1px solid var(--rulesoft)">
-            <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:3px;padding:3px 9px">Partial</span>
-            <div><p style="font-size:14.5px;line-height:1.55;color:var(--t1)">Cleaning instructions cover high-touch surfaces after each patient use.</p><span style="font-family:var(--fmono);font-size:11px;color:var(--t4)">Maintenance manual / section 7.2</span></div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;border-bottom:1px solid var(--rulesoft)">
-            <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--t3);border:1px solid var(--rule);border-radius:3px;padding:3px 9px">Unsupported</span>
-            <div><p style="font-size:14.5px;line-height:1.55;color:var(--t1)">The supplied corpus demonstrates bilingual labelling for all external warnings.</p><span style="font-family:var(--fmono);font-size:11px;color:var(--t4)">No cited passage</span></div>
-          </div>
-          <a class="lk" href="#workspace" style="display:block;padding:14px 18px;font-family:var(--fmono);font-size:12px;color:var(--teal)">Open the interactive run ↓</a>
-        </div>
+        const writeRays = (time: number) => {
+          for (let index = 0; index < rayCount; index += 1) {
+            const direction = rayDirections[index];
+            const shimmer = reduceMotion ? 0 : Math.sin(time * 0.00085 + index * 0.41) * 0.055;
+            const sideBend = reduceMotion ? 0 : Math.sin(time * 0.00042 + index * 0.13) * 0.026;
+            const tangent = new THREE.Vector3(-direction.y, direction.x, 0);
+            if (tangent.lengthSq() < 0.0001) tangent.set(1, 0, 0);
+            tangent.normalize();
+            const binormal = new THREE.Vector3().crossVectors(direction, tangent).normalize();
+            const start = direction
+              .clone()
+              .multiplyScalar(rayStarts[index])
+              .add(tangent.clone().multiplyScalar((seeded(index + 71) - 0.5) * 0.09))
+              .add(binormal.clone().multiplyScalar((seeded(index + 91) - 0.5) * 0.07));
+            const filamentDirection = direction
+              .clone()
+              .multiplyScalar(1.04 + seeded(index + 151) * 0.22)
+              .add(tangent.clone().multiplyScalar((seeded(index + 131) - 0.5) * 0.22))
+              .add(binormal.clone().multiplyScalar((seeded(index + 171) - 0.5) * 0.18))
+              .normalize();
+            const end = start
+              .clone()
+              .add(filamentDirection.multiplyScalar(rayLengths[index] + shimmer))
+              .add(tangent.clone().multiplyScalar(sideBend));
+            const offset = index * 6;
+            rayPositions[offset] = start.x;
+            rayPositions[offset + 1] = start.y;
+            rayPositions[offset + 2] = start.z;
+            rayPositions[offset + 3] = end.x;
+            rayPositions[offset + 4] = end.y;
+            rayPositions[offset + 5] = end.z;
+          }
+        };
 
-        <ol style="list-style:none;display:flex;flex-direction:column;gap:24px;padding:0">
-          <li style="display:flex;gap:16px"><span style="flex-shrink:0;font-family:var(--fmono);font-size:24px;font-weight:500;color:var(--gold);line-height:1.1">1</span><div><h3 style="font-weight:600;font-size:19px;color:var(--t1)">Load the document set</h3><p style="font-size:14.5px;line-height:1.6;color:var(--t2);margin-top:5px">Drop in the document; Telotia extracts every atomic claim automatically.</p></div></li>
-          <li style="display:flex;gap:16px"><span style="flex-shrink:0;font-family:var(--fmono);font-size:24px;font-weight:500;color:var(--gold);line-height:1.1">2</span><div><h3 style="font-weight:600;font-size:19px;color:var(--t1)">Search the trusted corpus</h3><p style="font-size:14.5px;line-height:1.6;color:var(--t2);margin-top:5px">Each claim is matched only against the evidence you supplied — never the open web.</p></div></li>
-          <li style="display:flex;gap:16px"><span style="flex-shrink:0;font-family:var(--fmono);font-size:24px;font-weight:500;color:var(--gold);line-height:1.1">3</span><div><h3 style="font-weight:600;font-size:19px;color:var(--t1)">Grade and cite</h3><p style="font-size:14.5px;line-height:1.6;color:var(--t2);margin-top:5px">Supported, Partial, or No support found — each linked to the exact source passage.</p></div></li>
-          <li style="border-top:1px solid var(--rule);padding-top:18px;font-size:14.5px;line-height:1.6;color:var(--t3)">“No support found” means this corpus is silent on the claim — not that the claim is wrong. Results are a starting point for a human reviewer, not a verdict on the work.</li>
-        </ol>
-      </div>
-    </div>
-  </section>
+        writeRays(0);
+        const rayGeometry = new THREE.BufferGeometry();
+        rayGeometry.setAttribute('position', new THREE.BufferAttribute(rayPositions, 3));
+        rayGeometry.setAttribute('color', new THREE.BufferAttribute(rayColors, 3));
+        const rays = new THREE.LineSegments(
+          rayGeometry,
+          new THREE.LineBasicMaterial({
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.72,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+          }),
+        );
+        group.add(rays);
 
-  <!-- RESEARCH -->
-  <section id="research" style="position:relative;padding:96px 64px;background:linear-gradient(180deg,#0a201b 0%,#08120f 100%);border-top:1px solid var(--rulesoft)">
-    <div style="position:absolute;right:24px;top:96px;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--fmono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--t4)">Research</div>
-    <div style="max-width:1180px;margin:0 auto">
-      <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">Research</span>
-      <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1);max-width:820px">The method — and the benchmark we are building.</h2>
-      <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:680px;margin-top:14px">A claims-validation tool should hold itself to the same standard. Here is how the review works, and how it will be measured — method first, numbers when they exist.</p>
+        const semanticVectors: Record<string, THREE.Vector3> = {
+          supported: new THREE.Vector3(0.58, 0.76, 0.21),
+          partial: new THREE.Vector3(-0.72, 0.28, 0.55),
+          unsupported: new THREE.Vector3(-0.26, -0.86, -0.42),
+          'atomic-claim': new THREE.Vector3(0.95, -0.18, 0.31),
+          'evidence-base': new THREE.Vector3(-0.91, -0.36, 0.2),
+          decomposition: new THREE.Vector3(0.12, 0.46, -0.88),
+        };
 
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px">
-        <a class="rcard" href="#demo" style="display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:14px;padding:26px;background:#081d18;text-decoration:none">
-          <span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">How it works</span>
-          <h3 style="font-weight:600;font-size:22px;color:var(--t1);margin-top:12px">Decompose, search, grade</h3>
-          <p style="font-size:14.5px;line-height:1.6;color:var(--t2);margin-top:10px;flex:1">Telotia breaks a document into atomic claims, matches each against the corpus you supplied — not the open web — and returns a graded verdict linked to its source.</p>
-          <span class="rarrow" style="font-family:var(--fmono);font-size:12px;color:var(--t3);margin-top:18px;transition:color .2s var(--ease)">See the steps →</span>
-        </a>
-        <a class="rcard" href="mailto:hello@telotia.com" style="display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:14px;padding:26px;background:radial-gradient(circle at 18% 12%,rgba(216,178,94,.08),transparent 42%),#0e1c12;text-decoration:none">
-          <span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">In progress</span>
-          <h3 style="font-weight:600;font-size:22px;color:var(--t1);margin-top:12px">An open benchmark</h3>
-          <p style="font-size:14.5px;line-height:1.6;color:var(--t2);margin-top:10px;flex:1">An open benchmark — measuring how well Telotia separates supported claims from unsupported ones — is in progress. The method and results will be published here, including where it falls short.</p>
-          <span class="rarrow" style="font-family:var(--fmono);font-size:12px;color:var(--t3);margin-top:18px;transition:color .2s var(--ease)">Get in touch →</span>
-        </a>
-        <a class="rcard" href="#demo" style="display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:14px;padding:26px;background:#081d18;text-decoration:none">
-          <span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">Why a corpus</span>
-          <h3 style="font-weight:600;font-size:22px;color:var(--t1);margin-top:12px">Built on evidence you can check</h3>
-          <p style="font-size:14.5px;line-height:1.6;color:var(--t2);margin-top:10px;flex:1">The showcase runs on a fixed, trusted body of research that stands on its own — demonstrating the general capability: any document, any trusted corpus you choose.</p>
-          <span class="rarrow" style="font-family:var(--fmono);font-size:12px;color:var(--t3);margin-top:18px;transition:color .2s var(--ease)">See it run →</span>
-        </a>
-      </div>
-    </div>
-  </section>
+        const colorByKey: Record<string, number> = {
+          supported: 0x31988a,
+          partial: 0xd8d29b,
+          unsupported: 0x8e8b6a,
+          'atomic-claim': 0x83d1c6,
+          'evidence-base': 0xd8d29b,
+          decomposition: 0x31988a,
+        };
 
-  <!-- CONSULT -->
-  <section id="consult" style="position:relative;padding:96px 64px;background:radial-gradient(ellipse 120% 90% at 50% 120%, #0b3d3c 0%, #0a201b 50%, #061714 100%);border-top:1px solid var(--rulesoft)">
-    <div style="position:absolute;inset:0;pointer-events:none;opacity:.4;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.5%22/></svg>')"></div>
-    <canvas id="tlConsultCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none"></canvas>
-    <div style="position:absolute;right:2%;top:8%;width:52%;height:84%;z-index:1;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 65% 45%, rgba(31,143,116,.16), transparent 72%)"></div>
-    <div style="position:relative;z-index:2;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start">
-      <div>
-        <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">Paid pilot</span>
-        <h2 style="font-weight:700;font-size:46px;line-height:1.04;letter-spacing:-.02em;margin-top:12px;color:#f8fbf9">Request a pilot.</h2>
-        <p style="font-size:19px;line-height:1.55;color:var(--t2);max-width:460px;margin-top:18px">Telotia runs as a guided paid pilot — there is no public download yet. Tell us what you are preparing and we will set up a review on your own documents.</p>
-        <p style="font-size:14px;line-height:1.6;color:var(--t3);max-width:460px;margin-top:24px;padding-left:16px;border-left:1px solid var(--gold2)">Telotia supports evidence review and proof preparation. It does not grant regulatory approval or replace qualified human review.</p>
-        <p style="font-size:14px;color:var(--t3);margin-top:24px">Prefer email? <a class="lk" href="mailto:hello@telotia.com" style="color:var(--t1);border-bottom:1px solid var(--gold2)">hello@telotia.com</a></p>
-      </div>
+        const endpoints: Array<{ node: HTMLElement; mesh: THREE.Mesh; pulse: number }> = [];
 
-      <form style="border:1px solid rgba(160,195,180,.26);border-radius:18px;padding:32px;background:rgba(10,30,24,.035);backdrop-filter:blur(9px) saturate(1.1);-webkit-backdrop-filter:blur(9px) saturate(1.1);box-shadow:0 18px 50px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.09)">
-        <div style="display:flex;flex-direction:column;gap:18px">
-          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Name</span><input class="fin" type="text" style="width:100%;background:rgba(255,255,255,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
-          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Work email</span><input class="fin" type="email" style="width:100%;background:rgba(255,255,255,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
-          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Organization</span><input class="fin" type="text" style="width:100%;background:rgba(255,255,255,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
-          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">What evidence are you validating?</span><input class="fin" type="text" placeholder="e.g. clinical evidence for a device submission" style="width:100%;background:rgba(255,255,255,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
-          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--rule);border-radius:8px;background:rgba(255,255,255,.02)">
-            <span style="width:18px;height:18px;border:1px solid var(--rule);border-radius:3px;flex-shrink:0"></span>
-            <span style="font-size:13px;color:var(--t3)">Verify you are human</span>
-            <span style="flex:1"></span>
-            <span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">Turnstile</span>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:4px">
-            <small style="font-size:12px;line-height:1.5;color:var(--t4);max-width:240px">Form-gated to deter automated abuse. We reply within two business days.</small>
-            <button class="btn-p" type="button" style="flex-shrink:0;background:var(--teal);color:#04201a;font-weight:600;font-size:15px;padding:13px 24px;border:none;border-radius:10px;cursor:pointer">Request a pilot</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </section>
+        labelNodes.forEach((node, index) => {
+          const vector = node.dataset.vector || 'supported';
+          const key = node.dataset.verdictKey || 'supported';
+          const color = colorByKey[key] || 0x31988a;
+          const direction = (semanticVectors[vector] || semanticVectors.supported).clone().normalize();
+          const endpointPosition = direction.clone().multiplyScalar(1.38 + (index % 3) * 0.035);
+          const bend = new THREE.Vector3(-direction.y, direction.x, direction.z * 0.22);
+          if (bend.lengthSq() < 0.0001) bend.set(0.18, 0.08, 0.12);
+          bend.normalize().multiplyScalar((index % 2 === 0 ? 1 : -1) * (0.18 + seeded(index + 211) * 0.16));
 
-  <!-- FOOTER -->
-  <footer style="position:relative;padding:56px 64px 36px;background:#04100d;border-top:1px solid var(--rulesoft)">
-    <div style="max-width:1180px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:40px">
-      <div>
-        <div style="font-family:var(--fmono);font-size:14px;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:var(--t1)">TELOTIA</div>
-        <div style="font-family:var(--fmono);font-size:12px;color:var(--t4);margin-top:8px">Montreal / private beta / evidence review workspace</div>
-      </div>
-      <div style="font-size:13px;line-height:1.6;color:var(--t3);max-width:380px">This software supports claim review and proof package preparation. It does not provide regulatory approval.</div>
-      <div style="display:flex;flex-direction:column;gap:9px;text-align:right">
-        <a class="lk" href="mailto:hello@telotia.com" style="font-size:13px">hello@telotia.com</a>
-        <a class="lk" href="#demo" style="font-size:13px">Demo</a>
-        <a class="lk" href="#consult" style="font-size:13px">Request a pilot</a>
-      </div>
-    </div>
-    <div style="max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid var(--rulesoft);font-family:var(--fmono);font-size:12px;color:var(--t4)">© 2026 Telotia · Evidence-grade audit for Canadian health-equipment imports.</div>
-  </footer>
+          const lineCurve = new THREE.CatmullRomCurve3([
+            direction.clone().multiplyScalar(0.06),
+            direction.clone().multiplyScalar(0.62).add(bend.clone().multiplyScalar(0.45)),
+            direction.clone().multiplyScalar(1.18).add(bend),
+            endpointPosition,
+          ]);
+          const ray = new THREE.Mesh(
+            new THREE.TubeGeometry(lineCurve, 30, key === 'unsupported' ? 0.0042 : 0.0056, 8, false),
+            new THREE.MeshStandardMaterial({
+              color,
+              emissive: color,
+              emissiveIntensity: key === 'supported' ? 0.44 : 0.32,
+              roughness: 0.5,
+              transparent: true,
+              opacity: key === 'unsupported' ? 0.60 : 0.80,
+            }),
+          );
+          group.add(ray);
 
-</body>
+          const endpoint = new THREE.Mesh(
+            new THREE.SphereGeometry(key === 'supported' ? 0.042 : 0.038, 28, 18),
+            new THREE.MeshStandardMaterial({
+              color,
+              emissive: color,
+              emissiveIntensity: key === 'supported' ? 0.62 : 0.42,
+              roughness: 0.28,
+              metalness: 0.08,
+            }),
+          );
+          endpoint.position.copy(endpointPosition);
+          group.add(endpoint);
+          endpoints.push({ node, mesh: endpoint, pulse: index * 0.9 });
+        });
+
+        const tempVector = new THREE.Vector3();
+        const keywordAnchors = keywordNodes.map((node, index) => {
+          const direction = rayDirections[(index * 13) % rayDirections.length].clone().normalize();
+          const tangent = new THREE.Vector3(-direction.y, direction.x, 0);
+          if (tangent.lengthSq() < 0.0001) tangent.set(1, 0, 0);
+          tangent.normalize();
+          const binormal = new THREE.Vector3().crossVectors(direction, tangent).normalize();
+          const anchor = direction
+            .clone()
+            .multiplyScalar(0.28 + seeded(index + 503) * 0.84)
+            .add(tangent.clone().multiplyScalar((seeded(index + 521) - 0.5) * 0.42))
+            .add(binormal.clone().multiplyScalar((seeded(index + 547) - 0.5) * 0.34));
+
+          return { node, anchor, phase: seeded(index + 601) * Math.PI * 2 };
+        });
+
+        const resize = () => {
+          const rect = canvasWrap.getBoundingClientRect();
+          const width = Math.max(1, Math.floor(rect.width));
+          const height = Math.max(1, Math.floor(rect.height));
+          camera.position.z = width < 560 ? 8.8 : 6.8;
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+          canvas.style.width = `${width}px`;
+          canvas.style.height = `${height}px`;
+          renderer.setSize(width, height, true);
+        };
+
+        const projectLabels = () => {
+          const panelRect = panel.getBoundingClientRect();
+          const canvasRect = canvas.getBoundingClientRect();
+          group.updateMatrixWorld();
+
+          endpoints.forEach(({ node, mesh }) => {
+            mesh.getWorldPosition(tempVector);
+            tempVector.project(camera);
+            const x = (tempVector.x * 0.5 + 0.5) * canvasRect.width + canvasRect.left - panelRect.left;
+            const y = (-tempVector.y * 0.5 + 0.5) * canvasRect.height + canvasRect.top - panelRect.top;
+            node.style.setProperty('--x', `${x}px`);
+            node.style.setProperty('--y', `${y}px`);
+            node.style.opacity = tempVector.z > 1 ? '0' : '1';
+          });
+
+          keywordAnchors.forEach(({ node, anchor, phase }) => {
+            const breathe = reduceMotion ? 0 : Math.sin(performance.now() * 0.00045 + phase) * 0.025;
+            tempVector.copy(anchor).multiplyScalar(1 + breathe).applyMatrix4(group.matrixWorld);
+            tempVector.project(camera);
+            const x = (tempVector.x * 0.5 + 0.5) * canvasRect.width + canvasRect.left - panelRect.left;
+            const y = (-tempVector.y * 0.5 + 0.5) * canvasRect.height + canvasRect.top - panelRect.top;
+            node.style.setProperty('--x', `${x}px`);
+            node.style.setProperty('--y', `${y}px`);
+            node.style.opacity = tempVector.z > 1 ? '0' : '';
+          });
+        };
+
+        const observer = new ResizeObserver(resize);
+        observer.observe(panel);
+        resize();
+
+        const clampRotation = (value: number) => Math.max(-1.18, Math.min(1.18, value));
+        let targetRotationX = group.rotation.x;
+        let targetRotationY = group.rotation.y;
+        let lastPointerX = 0;
+        let lastPointerY = 0;
+        let isDragging = false;
+
+        const stopDrag = (event: PointerEvent) => {
+          if (!isDragging) return;
+          isDragging = false;
+          panel.classList.remove('is-dragging');
+          if ('releasePointerCapture' in panel) {
+            panel.releasePointerCapture(event.pointerId);
+          }
+        };
+
+        panel.addEventListener('pointerdown', (event) => {
+          if ((event.target as HTMLElement | null)?.closest('[data-verdict-node]')) return;
+          isDragging = true;
+          panel.classList.add('is-dragging');
+          lastPointerX = event.clientX;
+          lastPointerY = event.clientY;
+          if ('setPointerCapture' in panel) {
+            panel.setPointerCapture(event.pointerId);
+          }
+        });
+
+        panel.addEventListener('pointermove', (event) => {
+          if (!isDragging) return;
+          const dx = event.clientX - lastPointerX;
+          const dy = event.clientY - lastPointerY;
+          lastPointerX = event.clientX;
+          lastPointerY = event.clientY;
+          targetRotationY += dx * 0.006;
+          targetRotationX = clampRotation(targetRotationX + dy * 0.006);
+        });
+
+        panel.addEventListener('pointerup', stopDrag);
+        panel.addEventListener('pointercancel', stopDrag);
+        panel.addEventListener('pointerleave', stopDrag);
+
+        let previousTime = 0;
+        const animate = (time: number) => {
+          const delta = previousTime === 0 ? 16 : Math.min(40, time - previousTime);
+          previousTime = time;
+
+          if (!reduceMotion && !isDragging) targetRotationY += delta * 0.000006;
+
+          group.rotation.x += (targetRotationX - group.rotation.x) * 0.08;
+          group.rotation.y += (targetRotationY - group.rotation.y) * 0.08;
+
+          if (!reduceMotion) {
+            writeRays(time);
+            rayGeometry.attributes.position.needsUpdate = true;
+          }
+
+          endpoints.forEach(({ mesh, pulse, node }) => {
+            const active = node.getAttribute('aria-pressed') === 'true';
+            const shimmer = reduceMotion ? 0.02 : Math.sin(time * 0.0012 + pulse) * 0.032 + 0.03;
+            const scale = 1 + shimmer + (active ? 0.12 : 0);
+            mesh.scale.setScalar(scale);
+          });
+
+          renderer.render(scene, camera);
+          projectLabels();
+          window.requestAnimationFrame(animate);
+        };
+
+        window.requestAnimationFrame(animate);
+      };
+
+      const onReady = (callback: () => void) => {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', callback, { once: true });
+          return;
+        }
+
+        callback();
+      };
+
+      onReady(() => {
+        const verdictWidget = document.querySelector('[data-verdict-widget]');
+
+        if (verdictWidget instanceof HTMLElement) {
+          const nodes = Array.from(verdictWidget.querySelectorAll('[data-verdict-node]')).filter(
+            (node): node is HTMLElement => node instanceof HTMLElement,
+          );
+          const detail = verdictWidget.querySelector('[data-verdict-detail]');
+          const type = detail?.querySelector('[data-verdict-type]');
+          const title = detail?.querySelector('[data-verdict-title]');
+          const copy = detail?.querySelector('[data-verdict-copy]');
+
+          let crossfadeTimer: ReturnType<typeof setTimeout> | null = null;
+
+          const activateNode = (node: HTMLElement) => {
+            if (!(detail instanceof HTMLElement)) return;
+            nodes.forEach((other) => other.setAttribute('aria-pressed', other === node ? 'true' : 'false'));
+
+            if (crossfadeTimer !== null) clearTimeout(crossfadeTimer);
+
+            detail.classList.add('is-out');
+            detail.classList.remove('is-in');
+
+            crossfadeTimer = setTimeout(() => {
+              if (type) type.textContent = node.getAttribute('data-verdict-type') || 'verdict';
+              if (title) title.textContent = node.getAttribute('data-verdict-node-title') || '';
+              if (copy) copy.textContent = node.getAttribute('data-verdict-node-copy') || '';
+
+              detail.classList.remove('is-out');
+              detail.classList.add('is-in');
+              crossfadeTimer = null;
+            }, 420);
+          };
+
+          nodes.forEach((node) => {
+            node.addEventListener('mouseenter', () => activateNode(node));
+            node.addEventListener('focus', () => activateNode(node));
+            node.addEventListener('click', () => activateNode(node));
+            node.addEventListener('keydown', (event) => {
+              if (!(event instanceof KeyboardEvent)) return;
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                activateNode(node);
+              }
+            });
+          });
+
+          initVerdictSpikeBall(verdictWidget);
+        }
+
+        const metricValues = Array.from(document.querySelectorAll('[data-count-to]'));
+
+        if (metricValues.length > 0) {
+          const duration = 5000;
+          const formatNumber = (value: number) => Math.round(value).toLocaleString('en-US');
+          const targets = metricValues.map((element) => Number(element.getAttribute('data-count-to') || '0'));
+          let hasRun = false;
+
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            metricValues.forEach((element) => {
+              element.textContent = '0';
+            });
+          }
+
+          const runCounters = () => {
+            if (hasRun) return;
+            hasRun = true;
+            const start = performance.now();
+
+            const tick = (now: number) => {
+              const progress = Math.min(1, (now - start) / duration);
+              const eased = 1 - Math.pow(1 - progress, 3);
+
+              metricValues.forEach((element, index) => {
+                const value = targets[index] * eased;
+                element.textContent = formatNumber(value);
+              });
+
+              if (progress < 1) {
+                window.requestAnimationFrame(tick);
+              } else {
+                metricValues.forEach((element, index) => {
+                  element.textContent = formatNumber(targets[index]);
+                });
+              }
+            };
+
+            window.requestAnimationFrame(tick);
+          };
+
+          const firstMetric = metricValues[0];
+          if ('IntersectionObserver' in window && firstMetric instanceof Element) {
+            const observer = new IntersectionObserver(
+              (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                  observer.disconnect();
+                  runCounters();
+                }
+              },
+              { threshold: 0.35 },
+            );
+            observer.observe(firstMetric);
+          } else {
+            runCounters();
+          }
+        }
+      });
+    </script>
+
+    <script>
+      const reviewApp = document.querySelector('[data-review-app]');
+
+      if (reviewApp instanceof HTMLElement) {
+        const rows = Array.from(reviewApp.querySelectorAll('[data-claim-row]')).filter(
+          (row): row is HTMLElement => row instanceof HTMLElement,
+        );
+        const railSteps = Array.from(reviewApp.querySelectorAll('[data-rail-step]'));
+        const title = reviewApp.querySelector('[data-review-title]');
+        const verdict = reviewApp.querySelector('[data-review-verdict]');
+        const evidence = reviewApp.querySelector('[data-review-evidence]');
+        const source = reviewApp.querySelector('[data-review-source]');
+        const sidebar = reviewApp.querySelector('[data-review-sidebar]');
+        const detail = reviewApp.querySelector('[data-review-detail]');
+        const narrowReview = window.matchMedia('(max-width: 980px)');
+
+        railSteps.forEach((step) => {
+          step.addEventListener('click', () => {
+            railSteps.forEach((other) => {
+              other.classList.toggle('is-active', other === step);
+              if (other === step) {
+                other.setAttribute('aria-current', 'step');
+              } else {
+                other.removeAttribute('aria-current');
+              }
+            });
+          });
+        });
+
+        const selectReviewRow = (row: HTMLElement) => {
+          const status = row.getAttribute('data-status') || 'neutral';
+
+          rows.forEach((other) => {
+            const isActive = other === row;
+            other.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            other.classList.toggle('is-active', isActive);
+          });
+
+          reviewApp.classList.add('has-selection');
+          reviewApp.setAttribute('data-active-status', status);
+
+          if (sidebar instanceof HTMLElement) {
+            sidebar.setAttribute('data-status', status);
+            sidebar.classList.add('is-active');
+          }
+
+          if (detail instanceof HTMLElement) {
+            detail.classList.add('is-updating');
+          }
+
+          window.setTimeout(() => {
+            if (title) title.textContent = row.getAttribute('data-claim') || '';
+            if (verdict) verdict.textContent = row.getAttribute('data-verdict') || '';
+            if (evidence) evidence.textContent = row.getAttribute('data-evidence') || '';
+            if (source) source.textContent = row.getAttribute('data-source') || '';
+
+            if (detail instanceof HTMLElement) {
+              detail.classList.remove('is-updating');
+            }
+
+            if (sidebar instanceof HTMLElement && narrowReview.matches) {
+              sidebar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              sidebar.focus({ preventScroll: true });
+            }
+          }, 90);
+        };
+
+        rows.forEach((row) => {
+          row.addEventListener('click', () => {
+            selectReviewRow(row);
+          });
+
+          // Hover-to-reveal: previewing a claim on hover (as the prior backlog
+          // showcase did) makes the review surface feel interactive instead of
+          // click-only. Skip if it is already active; click/keyboard still lock
+          // an explicit selection and remain the touch/a11y path.
+          row.addEventListener('mouseenter', () => {
+            if (!row.classList.contains('is-active')) {
+              selectReviewRow(row);
+            }
+          });
+
+          row.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              selectReviewRow(row);
+            }
+          });
+        });
+
+        const selectedRow = rows.find((row) => row.getAttribute('aria-selected') === 'true') ?? rows[0];
+        if (selectedRow) {
+          selectReviewRow(selectedRow);
+        }
+      }
+    </script>
+
+    <script>
+      const heroModelCanvas = document.querySelector('[data-hero-models]');
+
+      if (heroModelCanvas instanceof HTMLCanvasElement) {
+        const canvas = heroModelCanvas;
+        const context = canvas.getContext('2d');
+        const frame = canvas.closest('.hero-figure');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const particleCount = 2600;
+        const biologicalFamilies = [
+          'dna-double-helix',
+          'mitochondrion-with-cristae',
+          'nucleated-cell',
+          'phospholipid-vesicle',
+          'microtubule-cylinder',
+          'viral-capsid',
+        ];
+        const variantCount = 120;
+        const holdMs = 3200;
+        const scatterMs = 1200;
+        const assembleMs = 1900;
+        const cycleMs = holdMs + scatterMs + assembleMs;
+        const startTime = performance.now();
+        let width = 0;
+        let height = 0;
+        let animationFrame = 0;
+
+        type Point = {
+          x: number;
+          y: number;
+        };
+
+        type Variant = {
+          id: number;
+          family: number;
+          rotation: number;
+          scaleX: number;
+          scaleY: number;
+          loops: number;
+          lobes: number;
+          phase: number;
+        };
+
+        type HeroParticle = {
+          id: number;
+          seed: number;
+          x: number;
+          y: number;
+          size: number;
+          tone: number;
+        };
+
+        const particles: HeroParticle[] = Array.from({ length: particleCount }, (_, id) => ({
+          id,
+          seed: id * 12.9898 + 78.233,
+          x: 0,
+          y: 0,
+          size: 1.12 + (id % 7) * 0.16,
+          tone: id % 17 === 0 ? 2 : id % 6 === 0 ? 1 : 0,
+        }));
+
+        const variants: Variant[] = Array.from({ length: variantCount }, (_, id) => ({
+          id,
+          family: id % biologicalFamilies.length,
+          rotation: (unit(id * 17.7 + 4) - 0.5) * Math.PI * 0.45,
+          scaleX: 0.98 + unit(id * 3.3 + 8) * 0.34,
+          scaleY: 0.88 + unit(id * 5.9 + 2) * 0.32,
+          loops: 2.4 + unit(id * 9.1 + 1) * 4.6,
+          lobes: 3 + Math.floor(unit(id * 11.9 + 9) * 5),
+          phase: unit(id * 29.3 + 7) * Math.PI * 2,
+        }));
+
+        const modelSequence = (() => {
+          const sequence: number[] = [];
+          const recentIds: number[] = [];
+          const recentFamilies: number[] = [];
+          const recentLimit = Math.min(5, Math.max(1, biologicalFamilies.length - 1));
+          const sequenceLength = variantCount * 2;
+
+          for (let step = 0; step < sequenceLength; step += 1) {
+            const ordered = variants
+              .map((variant) => variant.id)
+              .sort((a, b) => unit(a * 97.31 + step * 19.13) - unit(b * 97.31 + step * 19.13));
+            const candidate =
+              ordered.find((id) => !recentIds.includes(id) && !recentFamilies.includes(variants[id].family)) ??
+              ordered.find((id) => !recentIds.includes(id)) ??
+              ordered[0];
+
+            if (typeof candidate === 'number') {
+              sequence.push(candidate);
+              recentIds.push(candidate);
+              recentFamilies.push(variants[candidate].family);
+              if (recentIds.length > 5) recentIds.shift();
+              if (recentFamilies.length > recentLimit) recentFamilies.shift();
+            }
+          }
+
+          return sequence;
+        })();
+
+        function random(seed: number) {
+          return Math.sin(seed) * 43758.5453123 % 1;
+        }
+
+        function unit(seed: number) {
+          return Math.abs(random(seed));
+        }
+
+        function easeInOut(value: number) {
+          return value < 0.5
+            ? 4 * value * value * value
+            : 1 - Math.pow(-2 * value + 2, 3) / 2;
+        }
+
+        function mix(a: number, b: number, t: number) {
+          return a + (b - a) * t;
+        }
+
+        function clamp(value: number, min: number, max: number) {
+          return Math.max(min, Math.min(max, value));
+        }
+
+        function rotate(x: number, y: number, angle: number) {
+          const cos = Math.cos(angle);
+          const sin = Math.sin(angle);
+          return {
+            x: x * cos - y * sin,
+            y: x * sin + y * cos,
+          };
+        }
+
+        function resizeHeroModel() {
+          if (!(frame instanceof HTMLElement) || !context) return;
+          const rect = frame.getBoundingClientRect();
+          const ratio = Math.min(window.devicePixelRatio || 1, 2);
+          width = Math.max(320, rect.width);
+          height = Math.max(320, rect.height);
+          canvas.width = Math.floor(width * ratio);
+          canvas.height = Math.floor(height * ratio);
+          canvas.style.width = `${width}px`;
+          canvas.style.height = `${height}px`;
+          context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        }
+
+        function variantForCycle(cycle: number) {
+          if (modelSequence.length === 0) return variants[0];
+          const sequenceIndex = ((cycle % modelSequence.length) + modelSequence.length) % modelSequence.length;
+          return variants[modelSequence[sequenceIndex] ?? 0] ?? variants[0];
+        }
+
+        function cloudCenter(cycle: number, time: number) {
+          return {
+            x: width * (0.51 + Math.sin(cycle * 1.73 + time * 0.00017) * 0.018),
+            y: height * (0.50 + Math.cos(cycle * 1.31 + time * 0.00015) * 0.016),
+          };
+        }
+
+        function organicScatterTarget(particle: HeroParticle, cycle: number, time: number): Point {
+          const minSide = Math.min(width, height);
+          const center = cloudCenter(cycle, time);
+          const seed = particle.seed + cycle * 47.13;
+          const angle = unit(seed + 1) * Math.PI * 2;
+          const radial = Math.pow(unit(seed + 5), 0.58);
+          const lobe =
+            1 +
+            Math.sin(angle * 3 + cycle * 0.7) * 0.18 +
+            Math.sin(angle * 7 + seed * 0.03) * 0.11 +
+            Math.cos(angle * 11 + cycle) * 0.06;
+          const tendril = particle.id % 19 === 0 ? 0.15 + unit(seed + 9) * 0.18 : 0;
+          const radius = minSide * (0.06 + radial * (0.32 + tendril)) * lobe;
+          const local = rotate(
+            Math.cos(angle) * radius * (1.08 + unit(cycle + 3) * 0.18),
+            Math.sin(angle) * radius * (0.70 + unit(cycle + 12) * 0.16),
+            (unit(cycle * 13.7 + 5) - 0.5) * Math.PI * 0.42,
+          );
+          const swirl = Math.sin(radial * 11 + time * 0.001 + seed) * minSide * 0.012;
+          return {
+            x: center.x + local.x + Math.cos(angle + Math.PI / 2) * swirl,
+            y: center.y + local.y + Math.sin(angle + Math.PI / 2) * swirl,
+          };
+        }
+
+        function legacyModelTarget(particle: HeroParticle, variant: Variant, time: number, boil: number): Point {
+          const minSide = Math.min(width, height);
+          const side = minSide * 1.16;
+          const cx = width * 0.52;
+          const cy = height * 0.5;
+          const id = particle.id;
+          const seed = particle.seed;
+          const angle = unit(seed) * Math.PI * 2;
+          const jitter =
+            (Math.sin(time * 0.0031 + seed) + Math.cos(time * 0.0023 + seed * 0.41)) *
+            minSide *
+            0.006 *
+            boil;
+          const family = variant.family;
+          const localAngle = angle + variant.phase;
+
+          if (family === 0) {
+            const band = id % 12;
+            const membrane = band < 5;
+            const nucleus = band === 5 || band === 6;
+            const baseRadius = nucleus
+              ? side * (0.045 + unit(seed + variant.id) * 0.07)
+              : membrane
+                ? side * (0.245 + unit(seed + 7) * 0.05)
+                : side * (0.095 + unit(seed + 3) * 0.17);
+            const edge =
+              membrane
+                ? 1 + Math.sin(localAngle * variant.lobes + variant.phase) * 0.08
+                : 1;
+            const local = rotate(
+              Math.cos(localAngle) * baseRadius * variant.scaleX * edge,
+              Math.sin(localAngle) * baseRadius * variant.scaleY * edge,
+              variant.rotation,
+            );
+            return { x: cx + local.x + jitter, y: cy + local.y + jitter * 0.4 };
+          }
+
+          if (family === 1) {
+            const strandType = id % 9;
+            const helixT = ((id * 37) % particleCount) / particleCount;
+            const turn = helixT * Math.PI * (7.2 + variant.loops * 0.7) + variant.phase;
+            const amplitude = side * (0.12 + unit(variant.id + 9) * 0.045);
+            const baseX = -width * 0.38 + helixT * width * 0.86;
+            let baseY = 0;
+            if (strandType < 6) {
+              const strand = strandType % 2;
+              const thickness = (Math.floor(strandType / 2) - 1) * side * 0.012;
+              baseY = Math.sin(turn + strand * Math.PI) * amplitude + thickness;
+            } else {
+              const bridge = unit(seed + 24);
+              const yA = Math.sin(turn) * amplitude;
+              const yB = Math.sin(turn + Math.PI) * amplitude;
+              baseY = mix(yA, yB, bridge) + (unit(seed + 31) - 0.5) * side * 0.012;
+            }
+            const rotated = rotate(baseX, baseY, variant.rotation * 0.45);
+            return { x: cx + rotated.x + jitter, y: cy + rotated.y - jitter * 0.3 };
+          }
+
+          if (family === 2) {
+            const nodeCount = 5 + Math.floor(unit(variant.id * 6.7) * 5);
+            const node = id % nodeCount;
+            const pathT = node / Math.max(1, nodeCount - 1);
+            const pathAngle = -0.8 + pathT * Math.PI * 1.65 + variant.phase * 0.2;
+            const pathRadius = side * (0.13 + Math.sin(pathT * Math.PI) * 0.18);
+            const nodeX = (pathT - 0.5) * width * 0.82;
+            const nodeY = Math.sin(pathAngle) * pathRadius * 0.55;
+            const radius = side * (0.04 + unit(variant.id + node * 19) * 0.08) * Math.sqrt(unit(seed + 3));
+            const local = rotate(
+              nodeX + Math.cos(localAngle) * radius,
+              nodeY + Math.sin(localAngle) * radius * 0.82,
+              variant.rotation,
+            );
+            return { x: cx + local.x + jitter, y: cy + local.y };
+          }
+
+          if (family === 3) {
+            const shell = id % 5 !== 0;
+            const bilayer = id % 5;
+            const radius = shell
+              ? side * (0.22 + (bilayer % 2) * 0.027 + unit(seed + 11) * 0.045)
+              : side * (0.06 + unit(seed + 12) * 0.12);
+            const ripple = 1 + Math.sin(localAngle * variant.lobes + time * 0.001 + variant.phase) * 0.075;
+            const local = rotate(
+              Math.cos(localAngle) * radius * variant.scaleX * ripple,
+              Math.sin(localAngle) * radius * variant.scaleY * ripple,
+              variant.rotation,
+            );
+            return { x: cx + local.x + jitter, y: cy + local.y + jitter * 0.2 };
+          }
+
+          if (family === 4) {
+            const branch = id % 7;
+            const branchT = unit(seed + 15);
+            const thickness = (unit(seed + 32) - 0.5) * side * 0.038;
+            const domain = branch >= 5;
+            const leftTip = { x: -side * 0.27, y: -side * 0.23 };
+            const rightTip = { x: side * 0.27, y: -side * 0.23 };
+            const hinge = { x: 0, y: -side * 0.02 };
+            const stem = { x: 0, y: side * 0.26 };
+            let x = 0;
+            let y = 0;
+            if (domain) {
+              const tip = branch === 5 ? leftTip : rightTip;
+              const r = side * (0.045 + unit(seed + 18) * 0.055);
+              x = tip.x + Math.cos(localAngle) * r;
+              y = tip.y + Math.sin(localAngle) * r * 0.8;
+            } else if (branch < 2) {
+              x = mix(stem.x, hinge.x, branchT) + thickness * 0.35;
+              y = mix(stem.y, hinge.y, branchT);
+            } else if (branch < 4) {
+              const tip = branch === 2 ? leftTip : rightTip;
+              x = mix(hinge.x, tip.x, branchT) + thickness;
+              y = mix(hinge.y, tip.y, branchT) - thickness * 0.2;
+            } else {
+              x = mix(leftTip.x, rightTip.x, branchT) * 0.35;
+              y = hinge.y + Math.sin(branchT * Math.PI) * side * 0.045;
+            }
+            const local = rotate(x, y, variant.rotation * 0.35);
+            return { x: cx + local.x + jitter, y: cy + local.y };
+          }
+
+          if (family === 5) {
+            const strand = id % 3;
+            const band = Math.floor(id / 3) % 5;
+            const helixT = ((Math.floor(id / 15) * 17 + band * 3) % Math.floor(particleCount / 15)) / Math.floor(particleCount / 15);
+            const a = helixT * Math.PI * (6.2 + variant.loops * 0.45) + variant.phase + strand * ((Math.PI * 2) / 3);
+            const thickness = (band - 2) * side * 0.0075;
+            const local = rotate(
+              -width * 0.36 + helixT * width * 0.82,
+              Math.sin(a) * side * 0.105 + thickness,
+              variant.rotation * 0.35 + 0.08,
+            );
+            return { x: cx + local.x + jitter, y: cy + local.y };
+          }
+
+          if (family === 6) {
+            const protofilament = id % 13;
+            const t = (Math.floor(id / 13) % Math.floor(particleCount / 13)) / Math.floor(particleCount / 13);
+            const tubeAngle = (protofilament / 13) * Math.PI * 2 + t * Math.PI * 2.4 + variant.phase;
+            const baseX = -width * 0.38 + t * width * 0.84;
+            const y = Math.sin(tubeAngle) * side * 0.155;
+            const depth = Math.cos(tubeAngle) * side * 0.025;
+            const local = rotate(baseX, y + depth, variant.rotation * 0.3);
+            return { x: cx + local.x + jitter, y: cy + local.y };
+          }
+
+          if (family === 7) {
+            const layer = id % 7;
+            if (layer < 3) {
+              const r = side * (0.19 + unit(seed + 6) * 0.035);
+              const bean = 1 + Math.sin(localAngle * 2 + variant.phase) * 0.18;
+              const local = rotate(
+                Math.cos(localAngle) * r * 1.42 * bean,
+                Math.sin(localAngle) * r * 0.72,
+                variant.rotation * 0.25,
+              );
+              return { x: cx + local.x + jitter, y: cy + local.y };
+            }
+            const foldT = ((Math.floor(id / 7) * 19) % Math.floor(particleCount / 7)) / Math.floor(particleCount / 7);
+            const lane = layer - 3;
+            const x = -side * 0.31 + foldT * side * 0.62;
+            const y = Math.sin(foldT * Math.PI * (5 + lane * 0.9) + variant.phase) * side * 0.075 + (lane - 1.5) * side * 0.035;
+            const local = rotate(x, y, variant.rotation * 0.25);
+            return { x: cx + local.x + jitter, y: cy + local.y };
+          }
+
+          if (family === 8) {
+            const ring = id % 9;
+            const latitude = -0.78 + (ring / 8) * 1.56;
+            const localA = angle + ring * 0.23 + variant.phase;
+            const shellR = side * (0.18 + unit(seed + 6) * 0.055);
+            const facet = 1 + Math.sin(localA * 5) * 0.035 + Math.sin(localA * 10) * 0.025;
+            const x = Math.cos(localA) * Math.cos(latitude) * shellR * 1.08 * facet;
+            const y = Math.sin(latitude) * shellR * 0.98 + Math.sin(localA) * shellR * 0.15;
+            const local = rotate(x, y, variant.rotation);
+            return { x: cx + local.x + jitter, y: cy + local.y };
+          }
+
+          if (family === 9) {
+            const loopT = ((id * 23) % particleCount) / particleCount;
+            const a = loopT * Math.PI * (3.2 + variant.loops * 0.35) + variant.phase;
+            const r = side * (0.08 + Math.sin(loopT * Math.PI) * 0.20);
+            const bead = (unit(seed + 3) - 0.5) * side * 0.025;
+            const local = rotate(
+              Math.cos(a) * r * 1.18 + bead,
+              Math.sin(a * 0.74) * r * 0.92,
+              variant.rotation * 0.7,
+            );
+            return { x: cx + local.x + jitter, y: cy + local.y };
+          }
+
+          if (family === 10) {
+            const subunit = id % 2;
+            const r = side * (0.115 + unit(seed + 4) * 0.085);
+            const offsetX = subunit === 0 ? -side * 0.115 : side * 0.12;
+            const offsetY = subunit === 0 ? -side * 0.04 : side * 0.055;
+            const local = rotate(
+              offsetX + Math.cos(localAngle) * r * (subunit === 0 ? 1.18 : 0.92),
+              offsetY + Math.sin(localAngle) * r * (subunit === 0 ? 0.78 : 1.05),
+              variant.rotation * 0.45,
+            );
+            return { x: cx + local.x + jitter, y: cy + local.y };
+          }
+
+          const vesicleCount = 6 + Math.floor(unit(variant.id + 19) * 4);
+          const vesicle = id % vesicleCount;
+          const clusterA = (vesicle / vesicleCount) * Math.PI * 2 + variant.phase;
+          const clusterR = side * (0.10 + unit(variant.id + vesicle * 7) * 0.20);
+          const centerX = Math.cos(clusterA) * clusterR * 1.25;
+          const centerY = Math.sin(clusterA) * clusterR * 0.74;
+          const localR = side * (0.028 + unit(variant.id + vesicle * 13) * 0.04);
+          const local = rotate(
+            centerX + Math.cos(localAngle) * localR,
+            centerY + Math.sin(localAngle) * localR,
+            variant.rotation * 0.5,
+          );
+          return { x: cx + local.x + jitter, y: cy + local.y };
+        }
+
+        function modelTarget(particle: HeroParticle, variant: Variant, time: number, boil: number): Point {
+          const minSide = Math.min(width, height);
+          const side = minSide * 1.26;
+          const cx = width * 0.52;
+          const cy = height * 0.5;
+          const id = particle.id;
+          const seed = particle.seed + variant.id * 31.17;
+          const angle = unit(seed) * Math.PI * 2 + variant.phase;
+          const boilJitter =
+            (Math.sin(time * 0.0021 + seed) + Math.cos(time * 0.0017 + seed * 0.31)) *
+            minSide *
+            0.0045 *
+            boil;
+          const place = (x: number, y: number, rotation = variant.rotation * 0.28) => {
+            const local = rotate(x, y, rotation);
+            return {
+              x: cx + local.x + boilJitter,
+              y: cy + local.y + boilJitter * 0.45,
+            };
+          };
+
+          if (variant.family === 0) {
+            const band = id % 12;
+            const stepCount = Math.floor(particleCount / 12);
+            const step = Math.floor(id / 12);
+            const t = ((step * 7 + band * 11) % stepCount) / stepCount;
+            const turn = t * Math.PI * (8.4 + variant.loops * 0.22) + variant.phase;
+            const amplitude = side * (0.14 + unit(variant.id + 9) * 0.035);
+            const x = (t - 0.5) * side * 0.92;
+            let y = 0;
+
+            if (band < 8) {
+              const strand = band % 2;
+              const thickness = (Math.floor(band / 2) - 1.5) * side * 0.0105;
+              y = Math.sin(turn + strand * Math.PI) * amplitude + thickness;
+            } else {
+              const rungT = unit(seed + 22);
+              y =
+                mix(Math.sin(turn) * amplitude, Math.sin(turn + Math.PI) * amplitude, rungT) +
+                (unit(seed + 28) - 0.5) * side * 0.014;
+            }
+
+            return place(x, y, variant.rotation * 0.18);
+          }
+
+          if (variant.family === 1) {
+            const layer = id % 10;
+
+            if (layer < 4) {
+              const a = angle;
+              const r = side * (0.255 + unit(seed + 6) * 0.038);
+              const bean = 1 + Math.sin(a * 2.1 + variant.phase) * 0.12 + Math.cos(a * 3.2) * 0.055;
+              return place(
+                Math.cos(a) * r * 1.42 * bean,
+                Math.sin(a) * r * 0.66,
+                variant.rotation * 0.2,
+              );
+            }
+
+            const lane = layer - 4;
+            const steps = Math.floor(particleCount / 10);
+            const t = ((Math.floor(id / 10) * 11 + lane * 5) % steps) / steps;
+            const x = (t - 0.5) * side * 0.70;
+            const y =
+              Math.sin(t * Math.PI * (5.5 + lane * 0.55) + variant.phase) * side * 0.082 +
+              (lane - 2.5) * side * 0.023;
+            return place(x, y, variant.rotation * 0.2);
+          }
+
+          if (variant.family === 2) {
+            const layer = id % 13;
+
+            if (layer < 4) {
+              const r = side * (0.255 + unit(seed + 14) * 0.052);
+              const edge = 1 + Math.sin(angle * 5 + variant.phase) * 0.055 + Math.cos(angle * 3) * 0.045;
+              return place(
+                Math.cos(angle) * r * 1.05 * edge,
+                Math.sin(angle) * r * 0.96 * edge,
+                variant.rotation * 0.22,
+              );
+            }
+
+            if (layer < 8) {
+              const r = side * (0.082 + unit(seed + 18) * 0.052);
+              return place(
+                side * 0.075 + Math.cos(angle) * r,
+                -side * 0.025 + Math.sin(angle) * r * 0.86,
+                variant.rotation * 0.22,
+              );
+            }
+
+            const organelle = layer - 8;
+            const organelleAngle = (organelle / 5) * Math.PI * 2 + variant.phase * 0.18;
+            const organelleCenterR = side * (0.10 + unit(variant.id + organelle * 17) * 0.11);
+            const localR = side * (0.018 + unit(seed + organelle) * 0.025);
+            return place(
+              Math.cos(organelleAngle) * organelleCenterR + Math.cos(angle) * localR,
+              Math.sin(organelleAngle) * organelleCenterR * 0.82 + Math.sin(angle) * localR,
+              variant.rotation * 0.22,
+            );
+          }
+
+          if (variant.family === 3) {
+            const band = id % 8;
+            const membrane = band < 6;
+            const r = membrane
+              ? side * (0.205 + (band % 3) * 0.016 + unit(seed + 11) * 0.034)
+              : side * (0.06 + unit(seed + 13) * 0.11);
+            const ripple = membrane
+              ? 1 + Math.sin(angle * (4 + variant.lobes * 0.25) + time * 0.0007) * 0.045
+              : 1;
+            return place(
+              Math.cos(angle) * r * 1.22 * ripple,
+              Math.sin(angle) * r * 0.88 * ripple,
+              variant.rotation * 0.26,
+            );
+          }
+
+          if (variant.family === 4) {
+            const protofilament = id % 13;
+            const lane = Math.floor((id % 39) / 13);
+            const steps = Math.floor(particleCount / 39);
+            const t = ((Math.floor(id / 39) * 17 + protofilament * 3) % steps) / steps;
+            const tubeAngle = (protofilament / 13) * Math.PI * 2 + t * Math.PI * 2.8 + variant.phase;
+            const taper = Math.sin(t * Math.PI);
+            const curve = Math.sin(t * Math.PI * 1.55 + variant.phase * 0.26) * side * 0.095;
+            const x =
+              (t - 0.5) * side * 0.92 +
+              Math.cos(tubeAngle) * side * 0.032 * taper +
+              Math.sin(t * Math.PI * 4.2 + variant.phase) * side * 0.012;
+            const y =
+              curve +
+              Math.sin(tubeAngle) * side * 0.075 * taper +
+              Math.cos(tubeAngle) * side * 0.018 +
+              (lane - 1) * side * 0.010;
+            return place(x, y, variant.rotation * 0.18);
+          }
+
+          const ring = id % 12;
+
+          if (ring < 10) {
+            const latitude = -0.92 + (ring / 9) * 1.84;
+            const localA = angle + ring * 0.31;
+            const shellR = side * (0.23 + unit(seed + 6) * 0.038);
+            const facet = 1 + Math.sin(localA * 5) * 0.035 + Math.sin(localA * 10) * 0.022;
+            return place(
+              Math.cos(localA) * Math.cos(latitude) * shellR * 1.08 * facet,
+              Math.sin(latitude) * shellR * 0.94 + Math.sin(localA) * shellR * 0.12,
+              variant.rotation * 0.32,
+            );
+          }
+
+          const vertex = id % 12;
+          const vertexAngle = (vertex / 12) * Math.PI * 2 + variant.phase;
+          const vertexR = side * 0.20;
+          const clusterR = side * (0.015 + unit(seed + 42) * 0.018);
+          return place(
+            Math.cos(vertexAngle) * vertexR + Math.cos(angle) * clusterR,
+            Math.sin(vertexAngle) * vertexR * 0.82 + Math.sin(angle) * clusterR,
+            variant.rotation * 0.32,
+          );
+        }
+
+        function drawFluid(now: number, phase: number) {
+          if (!context) return;
+          void now;
+          void phase;
+        }
+
+        function renderHeroModel(now: number) {
+          if (!context || width === 0 || height === 0) return;
+          const elapsed = now - startTime;
+          const cycle = Math.floor(elapsed / cycleMs);
+          const phaseMs = elapsed % cycleMs;
+          const phase = phaseMs / cycleMs;
+          const currentVariant = variantForCycle(cycle);
+          const nextVariant = variantForCycle(cycle + 1);
+
+          context.clearRect(0, 0, width, height);
+          drawFluid(now, phase);
+
+          context.save();
+          context.globalCompositeOperation = 'lighter';
+          particles.forEach((particle) => {
+            const from = modelTarget(particle, currentVariant, now, phaseMs < holdMs ? 1 : 0.18);
+            const scatter = organicScatterTarget(particle, cycle, now);
+            const to = modelTarget(particle, nextVariant, now, 0.18);
+            let x = from.x;
+            let y = from.y;
+            let scatterAmount = 0;
+
+            if (phaseMs >= holdMs && phaseMs < holdMs + scatterMs) {
+              const t = easeInOut((phaseMs - holdMs) / scatterMs);
+              x = mix(from.x, scatter.x, t);
+              y = mix(from.y, scatter.y, t);
+              scatterAmount = t;
+            } else if (phaseMs >= holdMs + scatterMs) {
+              const t = easeInOut((phaseMs - holdMs - scatterMs) / assembleMs);
+              x = mix(scatter.x, to.x, t);
+              y = mix(scatter.y, to.y, t);
+              scatterAmount = 1 - t;
+            }
+
+            particle.x += (x - particle.x) * (reduceMotion.matches ? 1 : 0.13);
+            particle.y += (y - particle.y) * (reduceMotion.matches ? 1 : 0.13);
+
+            const pulse = Math.sin(now * 0.0014 + particle.seed) * 0.08;
+            const alpha = clamp(0.38 + pulse - scatterAmount * 0.05, 0.20, 0.78);
+            const radius = particle.size + (particle.tone === 2 ? 0.24 : 0) + pulse * 0.65;
+            context.fillStyle =
+              particle.tone === 2
+                ? `rgba(216, 210, 155, ${alpha})`
+                : particle.tone === 1
+                  ? `rgba(255, 255, 255, ${alpha * 0.9})`
+                  : `rgba(49, 152, 138, ${alpha})`;
+            context.beginPath();
+            context.arc(particle.x, particle.y, Math.max(0.6, radius), 0, Math.PI * 2);
+            context.fill();
+          });
+          context.restore();
+
+          if (!reduceMotion.matches) {
+            animationFrame = window.requestAnimationFrame(renderHeroModel);
+          }
+        }
+
+        resizeHeroModel();
+        particles.forEach((particle) => {
+          const target = modelTarget(particle, variantForCycle(0), startTime, 1);
+          particle.x = target.x;
+          particle.y = target.y;
+        });
+        renderHeroModel(startTime);
+        window.addEventListener('resize', () => {
+          resizeHeroModel();
+          particles.forEach((particle) => {
+            const target = modelTarget(particle, variantForCycle(0), performance.now(), 1);
+            particle.x = target.x;
+            particle.y = target.y;
+          });
+        });
+        window.addEventListener('pagehide', () => window.cancelAnimationFrame(animationFrame));
+      }
+    </script>
+
+    <script>
+      const bioCanvas = document.querySelector('[data-bio-particles]');
+
+      if (bioCanvas instanceof HTMLCanvasElement) {
+        const canvas = bioCanvas;
+        const context = canvas.getContext('2d');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const particleCount = 1400;
+        const particles = Array.from({ length: particleCount }, (_, index) => ({
+          seed: index * 97.131,
+          x: 0,
+          y: 0,
+          size: 0.7 + (index % 7) * 0.08,
+          tone: index % 13 === 0 ? 'yellow' : index % 5 === 0 ? 'white' : 'green',
+        }));
+
+        function resizeCanvas() {
+          const ratio = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.floor(window.innerWidth * ratio);
+          canvas.height = Math.floor(window.innerHeight * ratio);
+          canvas.style.width = `${window.innerWidth}px`;
+          canvas.style.height = `${window.innerHeight}px`;
+          if (context) context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        }
+
+        function easeInOutCubic(value: number) {
+          return value < 0.5
+            ? 4 * value * value * value
+            : 1 - Math.pow(-2 * value + 2, 3) / 2;
+        }
+
+        function clamp(value: number, min: number, max: number) {
+          return Math.max(min, Math.min(max, value));
+        }
+
+        function targetFor(
+          particle: { seed: number; x: number; y: number; size: number; tone: string },
+          mode: number,
+        ) {
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+          const centerX = width * 0.66;
+          const centerY = height * 0.48;
+          const index = particle.seed;
+          const t = (index % particleCount) / particleCount;
+          const angle = t * Math.PI * 2 * 7;
+          const wave = Math.sin(t * Math.PI * 2 * 3 + index);
+
+          if (mode === 0) {
+            const radius = Math.min(width, height) * (0.16 + 0.08 * Math.sin(t * Math.PI * 18));
+            return {
+              x: centerX + Math.cos(angle) * radius,
+              y: centerY + Math.sin(angle * 0.54) * radius * 0.72 + wave * 14,
+            };
+          }
+
+          if (mode === 1) {
+            const col = index % 36;
+            const row = Math.floor(index / 36) % 38;
+            return {
+              x: width * 0.18 + col * (width * 0.0048) + wave * 6,
+              y: height * 0.22 + row * (height * 0.006) + Math.sin(index) * 4,
+            };
+          }
+
+          if (mode === 2) {
+            const radius = Math.min(width, height) * (0.12 + (index % 280) / 280 * 0.22);
+            const a = t * Math.PI * 2 * 2.4;
+            return {
+              x: width * 0.5 + Math.cos(a) * radius * 1.22,
+              y: height * 0.5 + Math.sin(a) * radius * 0.82,
+            };
+          }
+
+          if (mode === 3) {
+            const ringIndex = index % 6;
+            const a = -Math.PI / 2 + (ringIndex / 6) * Math.PI * 2;
+            const baseX = width * 0.5 + Math.cos(a) * Math.min(width, height) * 0.22;
+            const baseY = height * 0.48 + Math.sin(a) * Math.min(width, height) * 0.22;
+            const spread = 10 + (index % 70) * 0.12;
+            return {
+              x: baseX + Math.cos(index) * spread,
+              y: baseY + Math.sin(index * 1.7) * spread,
+            };
+          }
+
+          return {
+            x: width * 0.5 + Math.cos(angle) * Math.min(width, height) * 0.08,
+            y: height * 0.5 + Math.sin(angle) * Math.min(width, height) * 0.08,
+          };
+        }
+
+        function activeMode() {
+          const sections = ['#top', '#process', '#workspace', '#demo', '#research', '#consult'];
+          let nearest = 0;
+          let distance = Number.POSITIVE_INFINITY;
+
+          sections.forEach((selector, index) => {
+            const element = selector === '#top' ? document.querySelector('.hero') : document.querySelector(selector);
+            if (!element) return;
+            const rect = element.getBoundingClientRect();
+            const nextDistance = Math.abs(rect.top - window.innerHeight * 0.18);
+            if (nextDistance < distance) {
+              distance = nextDistance;
+              nearest = index;
+            }
+          });
+
+          return nearest;
+        }
+
+        function render() {
+          if (!context || reduceMotion.matches) return;
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+          const mode = activeMode();
+
+          context.clearRect(0, 0, width, height);
+          context.globalCompositeOperation = 'source-over';
+
+          particles.forEach((particle) => {
+            const target = targetFor(particle, mode);
+            particle.x += (target.x - particle.x) * 0.045;
+            particle.y += (target.y - particle.y) * 0.045;
+            const progress = easeInOutCubic(clamp(Math.abs(window.scrollY % 800) / 800, 0, 1));
+            const alphaBase = particle.tone === 'yellow' ? 0.32 : particle.tone === 'white' ? 0.28 : 0.38;
+            const alpha = alphaBase + Math.sin(progress * Math.PI + particle.seed) * 0.06;
+            context.fillStyle =
+              particle.tone === 'yellow'
+                ? `rgba(216, 210, 155, ${alpha})`
+                : particle.tone === 'white'
+                  ? `rgba(255, 255, 255, ${alpha})`
+                  : `rgba(49, 152, 138, ${alpha})`;
+            context.beginPath();
+            context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            context.fill();
+          });
+
+          window.requestAnimationFrame(render);
+        }
+
+        resizeCanvas();
+        particles.forEach((particle) => {
+          const start = targetFor(particle, 0);
+          particle.x = start.x;
+          particle.y = start.y;
+        });
+        render();
+        window.addEventListener('resize', resizeCanvas);
+      }
+    </script>
+
+    <script>
+      const downloadCanvas = document.querySelector('[data-download-particles]');
+
+      if (downloadCanvas instanceof HTMLCanvasElement) {
+        const canvas = downloadCanvas;
+        const context = canvas.getContext('2d');
+        const block = canvas.closest('[data-download-block]');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const specks = Array.from({ length: 920 }, (_, index) => ({
+          t: ((index * 0.61803398875) % 1) * Math.PI * 2,
+          lane: index % 9,
+          phase: index * 0.019,
+          seed: index * 12.9898 + 78.233,
+          size: 0.72 + (index % 5) * 0.18,
+          spin: index % 2 === 0 ? 1 : -1,
+          tone: index % 13,
+          offset: (Math.abs(Math.sin(index * 12.9898 + 78.233) * 43758.5453123 % 1) - 0.5) * 8,
+        }));
+        let width = 0;
+        let height = 0;
+        let frame = 0;
+        let pointerX = 0;
+        let pointerY = 0;
+        let pointerPull = 0;
+        let pointerInside = false;
+        let burst = 0;
+
+        function resize() {
+          if (!(block instanceof HTMLElement) || !context) return;
+          const ratio = Math.min(window.devicePixelRatio || 1, 2);
+          const rect = block.getBoundingClientRect();
+          width = rect.width;
+          height = rect.height;
+          canvas.width = Math.floor(width * ratio);
+          canvas.height = Math.floor(height * ratio);
+          canvas.style.width = `${width}px`;
+          canvas.style.height = `${height}px`;
+          context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        }
+
+        function updatePointer(event: PointerEvent) {
+          if (!(block instanceof HTMLElement)) return;
+          const rect = block.getBoundingClientRect();
+          pointerX = event.clientX - rect.left;
+          pointerY = event.clientY - rect.top;
+          pointerInside = true;
+        }
+
+        function draw() {
+          if (!context) return;
+          frame += reduceMotion.matches ? 0.0010 : 0.0058;
+          pointerPull += ((pointerInside ? 0.6 : 0) - pointerPull) * 0.048;
+          burst *= 0.91;
+          context.clearRect(0, 0, width, height);
+          const centerX = width * 0.63;
+          const centerY = height * 0.54;
+          const scaleX = Math.min(width * 0.28, height * 0.70);
+          const scaleY = Math.min(height * 0.36, width * 0.19);
+
+          specks.forEach((speck) => {
+            const track = speck.lane % 3;
+            const layer = track === 0 ? 1.08 : track === 1 ? 0.76 : 0.48;
+            const band = Math.floor(speck.lane / 3) - 1;
+            const slow = frame + speck.phase;
+            const t = speck.t + Math.sin(slow * 0.52) * 0.022 + frame * 0.016 * speck.spin;
+            const sinT = Math.sin(t);
+            const cosT = Math.cos(t);
+            const rawX = sinT * scaleX * layer;
+            const rawY = sinT * cosT * scaleY * layer;
+            const side = sinT < 0 ? -1 : 1;
+            const skew = side * 0.36;
+            const tangentAngle = Math.atan2(Math.cos(2 * t) * scaleY * layer, cosT * scaleX * layer) + skew * 0.18;
+            const normalAngle = tangentAngle + Math.PI / 2;
+            const lineWidth = (band * 8 + speck.offset + Math.sin(slow * 0.38) * 2.2) * (1.0 + track * 0.18);
+            const floatX = Math.cos(slow * 0.31) * (2.2 + track * 0.55);
+            const floatY = Math.sin(slow * 0.27) * (1.8 + track * 0.52);
+            let x = centerX + rawX + rawY * skew + Math.cos(normalAngle) * lineWidth + floatX;
+            let y = centerY + rawY - Math.abs(rawX) * 0.08 + Math.sin(normalAngle) * lineWidth + floatY;
+
+            if (pointerPull > 0.02 || burst > 0.02) {
+              const dx = x - pointerX;
+              const dy = y - pointerY;
+              const distance = Math.max(22, Math.hypot(dx, dy));
+              const influence = Math.min(1, 200 / distance) * (pointerPull + burst * 1.3);
+              const tangent = speck.spin * influence * 28;
+              x += (dx / distance) * influence * 32 + (-dy / distance) * tangent;
+              y += (dy / distance) * influence * 22 + (dx / distance) * tangent;
+            }
+
+            const tone = speck.tone;
+            const color =
+              tone === 0 || tone === 7
+                ? '216, 210, 155'
+                : tone < 6
+                  ? '49, 152, 138'
+                  : '255, 255, 255';
+            const baseAlpha = (tone === 0 || tone === 7 ? 0.68 : 0.44) + pointerPull * 0.14 + burst * 0.18;
+            context.fillStyle = `rgba(${color}, ${Math.min(0.88, baseAlpha)})`;
+            context.beginPath();
+            context.ellipse(x, y, speck.size * 3.4, speck.size * 1.1, tangentAngle, 0, Math.PI * 2);
+            context.fill();
+          });
+
+          window.requestAnimationFrame(draw);
+        }
+
+        resize();
+        draw();
+        window.addEventListener('resize', resize);
+        if (block instanceof HTMLElement) {
+          block.addEventListener('pointerenter', updatePointer);
+          block.addEventListener('pointermove', updatePointer);
+          block.addEventListener('pointerleave', () => {
+            pointerInside = false;
+          });
+          block.addEventListener('pointerdown', (event) => {
+            updatePointer(event);
+            burst = 1;
+          });
+        }
+      }
+    </script>
+
+    <script>
+      const burger = document.querySelector('.nav-burger');
+      const mobileNav = document.getElementById('mobile-nav-overlay');
+
+      if (burger && mobileNav) {
+        const closeNav = () => {
+          burger.setAttribute('aria-expanded', 'false');
+          mobileNav.setAttribute('aria-hidden', 'true');
+        };
+
+        burger.addEventListener('click', () => {
+          const open = burger.getAttribute('aria-expanded') === 'true';
+          burger.setAttribute('aria-expanded', String(!open));
+          mobileNav.setAttribute('aria-hidden', String(open));
+        });
+
+        mobileNav.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', closeNav);
+        });
+
+        const backdrop = mobileNav.querySelector('.mobile-nav-backdrop');
+        if (backdrop) backdrop.addEventListener('click', closeNav);
+
+        document.addEventListener('click', (e) => {
+          if (
+            burger.getAttribute('aria-expanded') === 'true' &&
+            !mobileNav.contains(e.target as Node) &&
+            !burger.contains(e.target as Node)
+          ) closeNav();
+        });
+      }
+    </script>
+  </body>
 </html>
