@@ -1,5 +1,4 @@
 ---
-import DevDashboard from '../components/DevDashboard.astro';
 const limenEnv = process.env.LIMEN_ENV ?? 'dev';
 const isProd = limenEnv === 'prod';
 
@@ -2800,8 +2799,8 @@ const auditEvents = [
   </head>
 
   <body>
-    {!isProd && <DevDashboard />}
-    {isProd && (<Fragment>
+    {isProd && (<main style="min-height:100dvh;display:grid;place-items:center;text-align:center;font-family:var(--font-sans,system-ui)"><div><h1 style="font-size:48px;letter-spacing:-.02em;color:#10182F">Telotia</h1><p style="color:#5C6680;margin-top:8px">Coming soon.</p></div></main>)}
+    {!isProd && (<Fragment>
     <a class="skip-link" href="#content">Skip to content</a>
     <canvas class="particle-field" data-bio-particles aria-hidden="true"></canvas>
     <div class="site-shell">
