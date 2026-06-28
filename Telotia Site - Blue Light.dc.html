@@ -126,7 +126,7 @@
   <!-- HERO -->
   <header style="position:relative;min-height:100vh;display:flex;align-items:center;padding:96px 64px;overflow:hidden">
     <canvas id="tlHeroCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.7"></canvas>
-      <div aria-hidden="true" style="position:absolute;left:0;right:0;top:46%;transform:translateY(-50%);z-index:1;pointer-events:none;text-align:center;font-family:var(--fmono);font-weight:700;font-size:clamp(120px,20vw,340px);letter-spacing:.02em;line-height:.8;color:rgba(16,24,47,.05);white-space:nowrap">TELOTIA</div>
+      <div aria-hidden="true" style="position:absolute;left:0;right:0;top:64px;z-index:1;pointer-events:none;text-align:center;font-family:var(--fmono);font-weight:700;font-size:clamp(90px,15vw,240px);letter-spacing:.02em;line-height:.8;color:rgba(16,24,47,.06);white-space:nowrap">TELOTIA</div>
     <div style="position:relative;z-index:2;max-width:1320px;width:100%;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center">
       <div>
         <div style="display:inline-flex;align-items:center;gap:11px;font-family:var(--fmono);font-size:12px;letter-spacing:.14em;color:var(--t2);border:1px solid rgba(58,124,196,.24);background:rgba(58,124,196,.06);padding:7px 14px;border-radius:100px;text-transform:uppercase">
@@ -662,15 +662,11 @@
 </div>
 
 
-<script>
-(function(){function field(c){if(!c)return;var ctx=c.getContext('2d'),w,h,pts;
-function rs(){var r=c.getBoundingClientRect();w=c.width=Math.max(1,r.width);h=c.height=Math.max(1,r.height);var n=Math.min(120,Math.max(24,Math.floor(w*h/12000)));pts=[];for(var i=0;i<n;i++)pts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.32,vy:(Math.random()-.5)*.32});}
-function dr(){ctx.clearRect(0,0,w,h);for(var i=0;i<pts.length;i++){var p=pts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;}
-for(var i=0;i<pts.length;i++)for(var j=i+1;j<pts.length;j++){var a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){ctx.strokeStyle='rgba(47,111,176,'+(0.15*(1-d/120))+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}
-for(var i=0;i<pts.length;i++){var p=pts[i];ctx.fillStyle='rgba(47,111,176,.5)';ctx.beginPath();ctx.arc(p.x,p.y,1.5,0,7);ctx.fill();}
-requestAnimationFrame(dr);}
-rs();dr();window.addEventListener('resize',rs);}
-['tlHeroCanvas','tlSpikeCanvas','tlGlossCanvas','tlConsultCanvas'].forEach(function(id){field(document.getElementById(id));});})();
-</script>
+<script src="telotia-particles.js"></script>
+<script>requestAnimationFrame(function(){if(!window.TelotiaParticles)return;var T=window.TelotiaParticles;
+var h=document.getElementById('tlHeroCanvas');if(h)T.hero(h);
+var g=document.getElementById('tlGlossCanvas');if(g)T.glossary(g);
+var c=document.getElementById('tlConsultCanvas');if(c)T.consult(c);
+var s=document.getElementById('tlSpikeCanvas');if(s)T.verdictSphere(s,{dragTarget:s.parentElement});});</script>
 </body>
 </html>
