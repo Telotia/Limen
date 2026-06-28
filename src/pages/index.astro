@@ -227,37 +227,38 @@ const auditEvents = [
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,400..600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --bg: #f4f0d9;
-        --bg-2: #eee7c6;
-        --bg-3: #ded49d;
-        --bg-deep: #030f13;
-        --bg-deep-2: #07171c;
-        --green-deep: #0b3d3c;
-        --ink: #0a0a0a;
-        --ink-2: #2a2a2a;
-        --ink-3: #5a5a5a;
-        --ink-4: #8a8a8a;
-        --paper: #ffffff;
-        --paper-2: #d8d29b;
-        --paper-3: #bdb58a;
-        --rule: #1a1a1a;
-        --rule-soft: #d8d8d2;
-        --rule-deep: #1f2a30;
-        --green: #31988a;
-        --green-2: #1e6f66;
-        --green-soft: #dbe8e5;
-        --yellow: #d8d29b;
-        --yellow-2: #897649;
-        --yellow-soft: #f2efd8;
+        --bg: #191f27;
+        --bg-2: #191f28;
+        --bg-3: #9caabf;
+        --bg-deep: #eef0f3;
+        --bg-deep-2: #eaedf1;
+        --green-deep: #e0e4e9;
+        --ink: #f2f2f2;
+        --ink-2: #e2e2e2;
+        --ink-3: #525252;
+        --ink-4: #7e7e7e;
+        --paper: #291818;
+        --paper-2: #97a6bc;
+        --paper-3: #8793a4;
+        --rule: #eaeaea;
+        --rule-soft: #1c1f24;
+        --rule-deep: #dfe4e7;
+        --green: #2a588d;
+        --green-2: #ccd3da;
+        --green-soft: #171f29;
+        --yellow: #97a6bc;
+        --yellow-2: #515d6f;
+        --yellow-soft: #191f27;
         --page-gutter-total: clamp(208px, 26vw, 336px);
         --section-max: 1180px;
         --radius-soft: 14px;
         --radius-panel: 22px;
-        --font-sans: Inter, "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+        --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+        --font-display: "Newsreader", Georgia, "Times New Roman", serif;
         --ease: cubic-bezier(0.16, 1, 0.3, 1);
       }
 
@@ -277,22 +278,22 @@ const auditEvents = [
       body {
         margin: 0;
         background:
-          radial-gradient(ellipse at 5% 14%, rgba(137, 118, 73, 0.42), transparent 34rem),
-          radial-gradient(ellipse at 95% 42%, rgba(11, 61, 60, 0.52), transparent 38rem),
-          radial-gradient(ellipse at 9% 72%, rgba(216, 210, 155, 0.30), transparent 34rem),
-          radial-gradient(ellipse at 92% 88%, rgba(49, 152, 138, 0.35), transparent 38rem),
+          radial-gradient(ellipse at 5% 14%, rgba(81,93,111,0.42), transparent 34rem),
+          radial-gradient(ellipse at 95% 42%, rgba(224,228,233,0.52), transparent 38rem),
+          radial-gradient(ellipse at 9% 72%, rgba(151,166,188,0.30), transparent 34rem),
+          radial-gradient(ellipse at 92% 88%, rgba(42,88,141,0.35), transparent 38rem),
           linear-gradient(
             180deg,
-            #061817 0%,
-            #0b3d3c 12%,
-            #897649 22%,
-            #d8d29b 34%,
-            #0b3d3c 46%,
-            #041514 58%,
-            #897649 70%,
-            #d8d29b 81%,
-            #0b3d3c 91%,
-            #030f13 100%
+            #eceff2 0%,
+            #e0e4e9 12%,
+            #515d6f 22%,
+            #97a6bc 34%,
+            #e0e4e9 46%,
+            #edf0f3 58%,
+            #515d6f 70%,
+            #97a6bc 81%,
+            #e0e4e9 91%,
+            #eef0f3 100%
           );
         background-attachment: fixed;
       }
@@ -343,8 +344,8 @@ const auditEvents = [
         content: "";
         opacity: 0.22;
         background:
-          linear-gradient(rgba(216, 210, 155, 0.035) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(49, 152, 138, 0.03) 1px, transparent 1px);
+          linear-gradient(rgba(151,166,188,0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(42,88,141,0.03) 1px, transparent 1px);
         background-size: 48px 48px;
       }
 
@@ -384,29 +385,29 @@ const auditEvents = [
         content: "";
         pointer-events: none;
         background:
-          radial-gradient(ellipse at 82% 8%, rgba(216, 210, 155, 0.18), transparent 34rem),
-          radial-gradient(ellipse at 18% 21%, rgba(49, 152, 138, 0.18), transparent 34rem),
-          radial-gradient(ellipse at 50% 36%, rgba(3, 15, 19, 0.34), transparent 52rem),
-          radial-gradient(ellipse at 78% 45%, rgba(49, 152, 138, 0.18), transparent 38rem),
-          radial-gradient(ellipse at 16% 70%, rgba(49, 152, 138, 0.20), transparent 34rem),
+          radial-gradient(ellipse at 82% 8%, rgba(151,166,188,0.18), transparent 34rem),
+          radial-gradient(ellipse at 18% 21%, rgba(42,88,141,0.18), transparent 34rem),
+          radial-gradient(ellipse at 50% 36%, rgba(238,240,243,0.34), transparent 52rem),
+          radial-gradient(ellipse at 78% 45%, rgba(42,88,141,0.18), transparent 38rem),
+          radial-gradient(ellipse at 16% 70%, rgba(42,88,141,0.20), transparent 34rem),
           linear-gradient(
             180deg,
-            rgba(3, 15, 19, 0.99) 0%,
-            rgba(11, 61, 60, 0.98) 12%,
-            rgba(137, 118, 73, 0.96) 17%,
-            rgba(216, 210, 155, 0.94) 24%,
-            rgba(11, 61, 60, 0.98) 30%,
-            rgba(3, 15, 19, 0.99) 46%,
-            rgba(11, 61, 60, 0.98) 56%,
-            rgba(137, 118, 73, 0.96) 68%,
-            rgba(216, 210, 155, 0.94) 78%,
-            rgba(11, 61, 60, 0.98) 89%,
-            rgba(3, 15, 19, 0.99) 100%
+            rgba(238,240,243,0.99) 0%,
+            rgba(224,228,233,0.98) 12%,
+            rgba(81,93,111,0.96) 17%,
+            rgba(151,166,188,0.94) 24%,
+            rgba(224,228,233,0.98) 30%,
+            rgba(238,240,243,0.99) 46%,
+            rgba(224,228,233,0.98) 56%,
+            rgba(81,93,111,0.96) 68%,
+            rgba(151,166,188,0.94) 78%,
+            rgba(224,228,233,0.98) 89%,
+            rgba(238,240,243,0.99) 100%
           );
         border-radius: clamp(36px, 6vw, 104px);
         box-shadow:
-          inset 0 0 0 1px rgba(216, 210, 155, 0.16),
-          0 28px 120px rgba(3, 15, 19, 0.34);
+          inset 0 0 0 1px rgba(151,166,188,0.16),
+          0 28px 120px rgba(238,240,243,0.34);
       }
 
       main,
@@ -422,7 +423,7 @@ const auditEvents = [
         left: 0;
         z-index: 20;
         background:
-          linear-gradient(90deg, rgba(216, 210, 155, 0.92), rgba(238, 231, 198, 0.9) 46%, rgba(49, 152, 138, 0.22));
+          linear-gradient(90deg, rgba(14,29,51,0.92) 0%, rgba(19,30,46,0.86) 40%, rgba(127,161,214,0.5) 70%, rgba(19,30,46,0.78) 90%);
         backdrop-filter: blur(16px);
       }
 
@@ -461,17 +462,17 @@ const auditEvents = [
         inset: 0;
         content: "";
         background:
-          linear-gradient(135deg, #8e8b6a 0%, #31988a 46%, #030f13 112%);
+          linear-gradient(135deg, #696f79 0%, #2a588d 46%, #eef0f3 112%);
         -webkit-mask: url("/assets/chaotic-nobg.png") center / contain no-repeat;
         mask: url("/assets/chaotic-nobg.png") center / contain no-repeat;
       }
 
       .wordmark-mark::before {
         filter:
-          drop-shadow(0 0 0.8px rgba(3, 15, 19, 0.82))
-          drop-shadow(0.7px 0 0 rgba(3, 15, 19, 0.46))
-          drop-shadow(-0.7px 0 0 rgba(49, 152, 138, 0.42))
-          drop-shadow(0 0 2.2px rgba(49, 152, 138, 0.28));
+          drop-shadow(0 0 0.8px rgba(238,240,243,0.82))
+          drop-shadow(0.7px 0 0 rgba(238,240,243,0.46))
+          drop-shadow(-0.7px 0 0 rgba(42,88,141,0.42))
+          drop-shadow(0 0 2.2px rgba(42,88,141,0.28));
       }
 
       .wordmark-mark::after {
@@ -514,7 +515,7 @@ const auditEvents = [
         inset: 0;
         backdrop-filter: blur(14px) saturate(1.3);
         -webkit-backdrop-filter: blur(14px) saturate(1.3);
-        background: rgba(3, 15, 19, 0.30);
+        background: rgba(238,240,243,0.30);
         opacity: 0;
         transition: opacity 240ms var(--ease);
       }
@@ -524,13 +525,13 @@ const auditEvents = [
         top: 60px;
         right: 12px;
         width: 210px;
-        background: rgba(244, 240, 217, 0.92);
-        border: 1px solid rgba(244, 240, 217, 0.6);
+        background: rgba(25,31,39,0.92);
+        border: 1px solid rgba(25,31,39,0.6);
         border-radius: 18px;
         padding: 8px 0;
         box-shadow:
-          0 12px 40px rgba(3, 15, 19, 0.32),
-          0 2px 8px rgba(3, 15, 19, 0.18);
+          0 12px 40px rgba(238,240,243,0.32),
+          0 2px 8px rgba(238,240,243,0.18);
         opacity: 0;
         transform: translateY(-10px) scale(0.95);
         transform-origin: top right;
@@ -543,7 +544,7 @@ const auditEvents = [
         display: flex;
         align-items: center;
         padding: 13px 20px;
-        color: rgba(3, 15, 19, 0.82);
+        color: rgba(238,240,243,0.82);
         font-size: 15px;
         font-weight: 500;
         text-decoration: none;
@@ -552,14 +553,14 @@ const auditEvents = [
 
       .mobile-nav-dropdown a:hover,
       .mobile-nav-dropdown a:focus-visible {
-        background: rgba(49, 152, 138, 0.14);
+        background: rgba(42,88,141,0.14);
         color: var(--ink);
         outline: none;
       }
 
       .mobile-nav-dropdown .mobile-nav-divider {
         height: 1px;
-        background: rgba(3, 15, 19, 0.10);
+        background: rgba(238,240,243,0.10);
         margin: 6px 0;
       }
 
@@ -574,7 +575,7 @@ const auditEvents = [
       }
 
       .mobile-nav-dropdown .mobile-nav-cta:hover {
-        background: #27877a;
+        background: #234c7b;
       }
 
       .mobile-nav[aria-hidden="false"] {
@@ -624,7 +625,7 @@ const auditEvents = [
 
       .hero {
         position: relative;
-        min-height: calc(100dvh - 66px);
+        min-height: calc(100vh - 66px); min-height: calc(100dvh - 66px);
         display: grid;
         align-items: center;
         overflow: hidden;
@@ -639,8 +640,8 @@ const auditEvents = [
         content: "";
         pointer-events: none;
         background:
-          radial-gradient(circle at 74% 44%, rgba(49, 152, 138, 0.28), transparent 24rem),
-          radial-gradient(circle at 26% 72%, rgba(216, 210, 155, 0.08), transparent 24rem);
+          radial-gradient(circle at 74% 44%, rgba(42,88,141,0.28), transparent 24rem),
+          radial-gradient(circle at 26% 72%, rgba(151,166,188,0.08), transparent 24rem);
       }
 
       .section-inner,
@@ -666,7 +667,7 @@ const auditEvents = [
         font-weight: 700;
         letter-spacing: 0.1em;
         line-height: 1;
-        background: linear-gradient(135deg, #d8d29b 0%, #31988a 48%, #030f13 100%);
+        background: linear-gradient(135deg, #97a6bc 0%, #2a588d 48%, #eef0f3 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -724,6 +725,10 @@ const auditEvents = [
       }
 
       .button-primary {
+          position: relative;
+          background: linear-gradient(135deg,#10182F,#1B2A4A) !important;
+          color:#fff !important;
+          border-color:#10182F !important;
         color: var(--ink);
         background: var(--green);
         border: 1px solid var(--green);
@@ -757,8 +762,8 @@ const auditEvents = [
       .data-strip .metric {
         padding: 17px 18px;
         border-radius: var(--radius-soft);
-        background: rgba(3, 15, 19, 0.28);
-        box-shadow: inset 0 0 0 1px rgba(216, 210, 155, 0.08);
+        background: rgba(238,240,243,0.28);
+        box-shadow: inset 0 0 0 1px rgba(151,166,188,0.08);
       }
 
       .metric-value {
@@ -811,8 +816,8 @@ const auditEvents = [
         inset: 0;
         border-radius: 43% 57% 51% 49% / 48% 43% 57% 52%;
         background:
-          radial-gradient(ellipse at 58% 45%, rgba(49, 152, 138, 0.16), transparent 46%),
-          radial-gradient(ellipse at 36% 64%, rgba(216, 210, 155, 0.045), transparent 54%);
+          radial-gradient(ellipse at 58% 45%, rgba(42,88,141,0.16), transparent 46%),
+          radial-gradient(ellipse at 36% 64%, rgba(151,166,188,0.045), transparent 54%);
         filter: blur(34px);
         opacity: 0.78;
         animation: heroFluidDrift 13s ease-in-out infinite alternate;
@@ -822,8 +827,8 @@ const auditEvents = [
         inset: 12%;
         border-radius: 56% 44% 46% 54% / 52% 60% 40% 48%;
         background:
-          radial-gradient(ellipse at 50% 48%, rgba(49, 152, 138, 0.16), transparent 42%),
-          radial-gradient(ellipse at 38% 58%, rgba(216, 210, 155, 0.07), transparent 48%);
+          radial-gradient(ellipse at 50% 48%, rgba(42,88,141,0.16), transparent 42%),
+          radial-gradient(ellipse at 38% 58%, rgba(151,166,188,0.07), transparent 48%);
         filter: blur(24px);
         opacity: 0.72;
         animation: heroFluidDrift 16s ease-in-out infinite alternate-reverse;
@@ -835,7 +840,7 @@ const auditEvents = [
         display: block;
         width: 100%;
         height: 100%;
-        filter: drop-shadow(0 0 18px rgba(49, 152, 138, 0.14));
+        filter: drop-shadow(0 0 18px rgba(42,88,141,0.14));
       }
 
       @keyframes heroFluidDrift {
@@ -868,14 +873,14 @@ const auditEvents = [
         left: clamp(30px, 4.6vw, 88px);
         z-index: 2;
         content: attr(data-edge-title);
-        color: rgba(5, 35, 34, 0.78);
+        color: rgba(233,236,240,0.78);
         font-size: clamp(46px, 4.4vw, 58px);
         font-weight: 700;
         line-height: 0.92;
         letter-spacing: 0;
         opacity: 0.82;
         pointer-events: none;
-        text-shadow: 0 1px 22px rgba(244, 240, 217, 0.22);
+        text-shadow: 0 1px 22px rgba(25,31,39,0.22);
         text-transform: none;
         writing-mode: vertical-rl;
         transform: rotate(180deg);
@@ -888,10 +893,10 @@ const auditEvents = [
       }
 
       .section[data-edge-tone="deep"]::before {
-        color: rgba(244, 240, 217, 0.62);
+        color: rgba(25,31,39,0.62);
         text-shadow:
-          0 1px 18px rgba(3, 15, 19, 0.3),
-          0 0 28px rgba(216, 210, 155, 0.12);
+          0 1px 18px rgba(238,240,243,0.3),
+          0 0 28px rgba(151,166,188,0.12);
       }
 
       .section[data-edge-title] .section-inner {
@@ -938,12 +943,12 @@ const auditEvents = [
 
       #evidence .section-lede,
       #evidence .verdict-detail p {
-        color: rgba(255, 255, 255, 0.76);
+        color: rgba(41,24,24,0.76);
       }
 
       #evidence .verdict-detail {
-        border-top-color: rgba(216, 210, 155, 0.36);
-        border-bottom-color: rgba(216, 210, 155, 0.26);
+        border-top-color: rgba(151,166,188,0.36);
+        border-bottom-color: rgba(151,166,188,0.26);
       }
 
       .section.dark {
@@ -1005,23 +1010,23 @@ const auditEvents = [
       }
 
       .section:not(.dark) .label {
-        color: rgba(244, 240, 217, 0.76);
-        text-shadow: 0 1px 16px rgba(3, 15, 19, 0.28);
+        color: rgba(25,31,39,0.76);
+        text-shadow: 0 1px 16px rgba(238,240,243,0.28);
       }
 
       .section:not(.dark) .section-title {
         color: var(--paper);
-        text-shadow: 0 2px 20px rgba(3, 15, 19, 0.26);
+        text-shadow: 0 2px 20px rgba(238,240,243,0.26);
       }
 
       .section:not(.dark) .section-lede {
-        color: rgba(244, 240, 217, 0.82);
-        text-shadow: 0 1px 16px rgba(3, 15, 19, 0.22);
+        color: rgba(25,31,39,0.82);
+        text-shadow: 0 1px 16px rgba(238,240,243,0.22);
       }
 
       #process::before,
       #glossary::before {
-        color: rgba(244, 240, 217, 0.58);
+        color: rgba(25,31,39,0.58);
       }
 
       .process-flow {
@@ -1037,12 +1042,12 @@ const auditEvents = [
         min-height: 520px;
         overflow: hidden;
         background:
-          radial-gradient(ellipse at 80% 0%, rgba(49, 152, 138, 0.10), transparent 20rem),
-          linear-gradient(180deg, rgba(244, 240, 217, 0.94), rgba(238, 231, 198, 0.92));
+          radial-gradient(ellipse at 80% 0%, rgba(42,88,141,0.10), transparent 20rem),
+          linear-gradient(180deg, rgba(25,31,39,0.94), rgba(25,31,40,0.92));
         border-radius: var(--radius-panel);
         box-shadow:
-          0 18px 48px rgba(3, 15, 19, 0.08),
-          inset 0 0 0 1px rgba(137, 118, 73, 0.12);
+          0 18px 48px rgba(238,240,243,0.08),
+          inset 0 0 0 1px rgba(81,93,111,0.12);
       }
 
       .process-figure {
@@ -1050,8 +1055,8 @@ const auditEvents = [
         display: grid;
         place-items: center;
         background:
-          radial-gradient(circle at 50% 50%, rgba(49, 152, 138, 0.10), transparent 44%),
-          rgba(222, 212, 157, 0.38);
+          radial-gradient(circle at 50% 50%, rgba(42,88,141,0.10), transparent 44%),
+          rgba(156,170,191,0.38);
       }
 
       .process-svg {
@@ -1060,7 +1065,7 @@ const auditEvents = [
         overflow: visible;
       }
 
-      .process-step:nth-child(1) .process-svg line[stroke="#31988a"] {
+      .process-step:nth-child(1) .process-svg line[stroke="#2a588d"] {
         stroke-dasharray: 54 18;
         animation: process-dash 2.4s linear infinite;
       }
@@ -1233,10 +1238,10 @@ const auditEvents = [
         width: 7px;
         height: 7px;
         border-radius: 999px;
-        background: rgba(216, 210, 155, 0.88);
+        background: rgba(151,166,188,0.88);
         box-shadow:
-          0 0 10px rgba(216, 210, 155, 0.58),
-          0 0 22px rgba(216, 210, 155, 0.26);
+          0 0 10px rgba(151,166,188,0.58),
+          0 0 22px rgba(151,166,188,0.26);
         transition:
           box-shadow 160ms var(--ease),
           transform 160ms var(--ease),
@@ -1246,21 +1251,21 @@ const auditEvents = [
       .spike-keyword-dot::after {
         position: absolute;
         inset: -5px;
-        border: 1px solid rgba(216, 210, 155, 0.28);
+        border: 1px solid rgba(151,166,188,0.28);
         border-radius: inherit;
         content: "";
         opacity: 0.58;
       }
 
       .spike-keyword:nth-child(3n + 1) .spike-keyword-dot {
-        background: rgba(49, 152, 138, 0.92);
+        background: rgba(42,88,141,0.92);
         box-shadow:
-          0 0 10px rgba(49, 152, 138, 0.62),
-          0 0 24px rgba(49, 152, 138, 0.3);
+          0 0 10px rgba(42,88,141,0.62),
+          0 0 24px rgba(42,88,141,0.3);
       }
 
       .spike-keyword:nth-child(3n + 1) .spike-keyword-dot::after {
-        border-color: rgba(49, 152, 138, 0.3);
+        border-color: rgba(42,88,141,0.3);
       }
 
       .spike-keyword-text {
@@ -1270,9 +1275,9 @@ const auditEvents = [
         min-width: max-content;
         max-width: 240px;
         padding: 7px 9px;
-        border: 1px solid rgba(216, 210, 155, 0.52);
+        border: 1px solid rgba(151,166,188,0.52);
         border-radius: 999px;
-        background: rgba(3, 15, 19, 0.94);
+        background: rgba(238,240,243,0.94);
         color: var(--paper-2);
         font-family: var(--font-mono);
         font-size: 11px;
@@ -1294,8 +1299,8 @@ const auditEvents = [
       .spike-keyword:hover .spike-keyword-dot {
         transform: scale(1.7);
         box-shadow:
-          0 0 14px rgba(216, 210, 155, 0.82),
-          0 0 30px rgba(49, 152, 138, 0.34);
+          0 0 14px rgba(151,166,188,0.82),
+          0 0 30px rgba(42,88,141,0.34);
       }
 
       .spike-keyword:hover .spike-keyword-text {
@@ -1337,7 +1342,7 @@ const auditEvents = [
         height: 4px;
         border-radius: 999px;
         background: var(--green);
-        box-shadow: 0 0 14px rgba(49, 152, 138, 0.72), 0 0 30px rgba(49, 152, 138, 0.36);
+        box-shadow: 0 0 14px rgba(42,88,141,0.72), 0 0 30px rgba(42,88,141,0.36);
         transition:
           box-shadow 180ms var(--ease),
           transform 180ms var(--ease),
@@ -1347,25 +1352,25 @@ const auditEvents = [
 
       .spike-node[data-verdict-key="partial"] .spike-dot {
         background: var(--yellow);
-        box-shadow: 0 0 14px rgba(216, 210, 155, 0.72), 0 0 30px rgba(216, 210, 155, 0.36);
+        box-shadow: 0 0 14px rgba(151,166,188,0.72), 0 0 30px rgba(151,166,188,0.36);
       }
 
       .spike-node[data-verdict-key="unsupported"] .spike-dot {
         background: var(--bg-deep);
         border: 1px solid var(--yellow-2);
-        box-shadow: 0 0 12px rgba(216, 210, 155, 0.34);
+        box-shadow: 0 0 12px rgba(151,166,188,0.34);
       }
 
       .spike-node[data-verdict-key="atomic-claim"] .spike-dot,
       .spike-node[data-verdict-key="decomposition"] .spike-dot {
         background: var(--green);
-        border: 1px solid rgba(216, 210, 155, 0.32);
-        box-shadow: 0 0 12px rgba(49, 152, 138, 0.62), 0 0 26px rgba(216, 210, 155, 0.18);
+        border: 1px solid rgba(151,166,188,0.32);
+        box-shadow: 0 0 12px rgba(42,88,141,0.62), 0 0 26px rgba(151,166,188,0.18);
       }
 
       .spike-node[data-verdict-key="evidence-base"] .spike-dot {
         background: var(--yellow);
-        box-shadow: 0 0 14px rgba(216, 210, 155, 0.62), 0 0 26px rgba(49, 152, 138, 0.24);
+        box-shadow: 0 0 14px rgba(151,166,188,0.62), 0 0 26px rgba(42,88,141,0.24);
       }
 
       .spike-label-text {
@@ -1374,9 +1379,9 @@ const auditEvents = [
         top: 50%;
         min-width: max-content;
         padding: 6px 9px;
-        border: 1px solid rgba(216, 210, 155, 0.36);
+        border: 1px solid rgba(151,166,188,0.36);
         border-radius: 999px;
-        background: rgba(3, 15, 19, 0.88);
+        background: rgba(238,240,243,0.88);
         color: var(--paper);
         font-family: var(--font-mono);
         font-size: 11px;
@@ -1400,7 +1405,7 @@ const auditEvents = [
       .spike-node:focus-visible .spike-dot,
       .spike-node[aria-pressed="true"] .spike-dot {
         transform: scale(1.34);
-        box-shadow: 0 0 18px rgba(216, 210, 155, 0.82), 0 0 36px rgba(49, 152, 138, 0.42);
+        box-shadow: 0 0 18px rgba(151,166,188,0.82), 0 0 36px rgba(42,88,141,0.42);
       }
 
       .spike-node:focus-visible {
@@ -1420,7 +1425,7 @@ const auditEvents = [
         align-content: center;
         padding: 34px;
         border-radius: var(--radius-panel);
-        background: rgba(244, 240, 217, 0.08);
+        background: rgba(25,31,39,0.08);
         transition:
           opacity 420ms var(--ease),
           transform 420ms var(--ease);
@@ -1468,10 +1473,10 @@ const auditEvents = [
         grid-template-columns: 260px minmax(0, 1fr);
         min-height: 142px;
         background:
-          radial-gradient(ellipse at 86% 50%, rgba(49, 152, 138, 0.08), transparent 24rem),
-          rgba(244, 240, 217, 0.94);
+          radial-gradient(ellipse at 86% 50%, rgba(42,88,141,0.08), transparent 24rem),
+          rgba(25,31,39,0.94);
         border-radius: var(--radius-panel);
-        box-shadow: inset 0 0 0 1px rgba(137, 118, 73, 0.12);
+        box-shadow: inset 0 0 0 1px rgba(81,93,111,0.12);
       }
 
       .glossary-term {
@@ -1520,11 +1525,11 @@ const auditEvents = [
 
       .workspace-shell {
         background: var(--bg-deep);
-        border: 1px solid rgba(216, 210, 155, 0.12);
+        border: 1px solid rgba(151,166,188,0.12);
         border-radius: var(--radius-panel);
         color: var(--paper);
         overflow: hidden;
-        box-shadow: 0 26px 80px rgba(3, 15, 19, 0.34);
+        box-shadow: 0 26px 80px rgba(238,240,243,0.34);
       }
 
       .workspace-topbar {
@@ -1534,7 +1539,7 @@ const auditEvents = [
         gap: 20px;
         align-items: center;
         padding: 0 22px;
-        background: rgba(4, 18, 22, 0.96);
+        background: rgba(237,240,243,0.96);
       }
 
       .workspace-brand {
@@ -1581,7 +1586,7 @@ const auditEvents = [
         align-items: center;
         padding: 12px;
         border-radius: var(--radius-soft);
-        background: #041216;
+        background: #edf0f3;
       }
 
       .rail-step {
@@ -1631,7 +1636,7 @@ const auditEvents = [
         padding: 24px;
         background: var(--bg-deep-2);
         border-radius: var(--radius-soft);
-        box-shadow: inset 0 0 0 1px rgba(216, 210, 155, 0.1);
+        box-shadow: inset 0 0 0 1px rgba(151,166,188,0.1);
       }
 
       .claim-card-header,
@@ -1661,10 +1666,10 @@ const auditEvents = [
         margin-top: 18px;
         padding: 22px;
         background:
-          radial-gradient(circle at 58% 44%, rgba(49, 152, 138, 0.14), transparent 13rem),
-          #041316;
+          radial-gradient(circle at 58% 44%, rgba(42,88,141,0.14), transparent 13rem),
+          #edf0f3;
         border-radius: var(--radius-soft);
-        box-shadow: inset 0 0 0 1px rgba(216, 210, 155, 0.09);
+        box-shadow: inset 0 0 0 1px rgba(151,166,188,0.09);
       }
 
       .claim-graph {
@@ -1677,7 +1682,7 @@ const auditEvents = [
         padding: 18px;
         background: var(--bg-deep-2);
         border-radius: var(--radius-soft);
-        box-shadow: inset 0 0 0 1px rgba(216, 210, 155, 0.1);
+        box-shadow: inset 0 0 0 1px rgba(151,166,188,0.1);
       }
 
       .claim-list {
@@ -1695,12 +1700,12 @@ const auditEvents = [
         align-items: start;
         padding: 14px 14px 14px 16px;
         color: var(--paper);
-        background: #05181d;
+        background: #ebeef1;
         border: 0;
         border-radius: 12px;
         box-shadow:
           inset 2px 0 0 var(--paper-3),
-          inset 0 0 0 1px rgba(216, 210, 155, 0.08);
+          inset 0 0 0 1px rgba(151,166,188,0.08);
         text-align: left;
         cursor: pointer;
         transition:
@@ -1713,24 +1718,24 @@ const auditEvents = [
       .claim-row[data-status="green"] {
         box-shadow:
           inset 2px 0 0 var(--green),
-          inset 0 0 0 1px rgba(216, 210, 155, 0.08);
+          inset 0 0 0 1px rgba(151,166,188,0.08);
       }
 
       .claim-row[data-status="yellow"] {
         box-shadow:
           inset 2px 0 0 var(--yellow-2),
-          inset 0 0 0 1px rgba(216, 210, 155, 0.08);
+          inset 0 0 0 1px rgba(151,166,188,0.08);
       }
 
       .claim-row[aria-selected="true"],
       .claim-row.is-active,
       .claim-row:hover,
       .claim-row:focus-visible {
-        background: #092129;
+        background: #e6eaee;
         box-shadow:
           inset 3px 0 0 currentColor,
-          inset 0 0 0 1px rgba(216, 210, 155, 0.16),
-          0 0 0 1px rgba(49, 152, 138, 0.08);
+          inset 0 0 0 1px rgba(151,166,188,0.16),
+          0 0 0 1px rgba(42,88,141,0.08);
         outline: 0;
       }
 
@@ -1802,7 +1807,7 @@ const auditEvents = [
       .audit-panel {
         position: relative;
         border-radius: var(--radius-soft);
-        background: #041216;
+        background: #edf0f3;
         overflow: hidden;
         transition:
           background-color 180ms var(--ease),
@@ -1827,8 +1832,8 @@ const auditEvents = [
 
       .audit-panel.is-active {
         box-shadow:
-          inset 0 0 0 1px rgba(216, 210, 155, 0.16),
-          0 0 0 1px rgba(49, 152, 138, 0.12);
+          inset 0 0 0 1px rgba(151,166,188,0.16),
+          0 0 0 1px rgba(42,88,141,0.12);
       }
 
       .audit-panel[data-status="yellow"]::before {
@@ -1847,7 +1852,7 @@ const auditEvents = [
         padding: 20px;
         margin: 0 12px 12px;
         border-radius: 12px;
-        background: rgba(216, 210, 155, 0.05);
+        background: rgba(151,166,188,0.05);
         transition:
           opacity 140ms var(--ease),
           transform 140ms var(--ease);
@@ -1921,7 +1926,7 @@ const auditEvents = [
       }
 
       .workspace-shell[data-active-status="neutral"] .graph-verdict-node {
-        fill: #07171c;
+        fill: #eaedf1;
         stroke: var(--paper-3);
       }
 
@@ -1955,7 +1960,7 @@ const auditEvents = [
         gap: 12px;
         padding: 14px 12px;
         border-radius: 12px;
-        background: rgba(216, 210, 155, 0.035);
+        background: rgba(151,166,188,0.035);
         font-family: var(--font-mono);
         font-size: 11px;
       }
@@ -1986,13 +1991,13 @@ const auditEvents = [
         align-items: center;
         padding: clamp(36px, 6vw, 72px);
         background:
-          radial-gradient(circle at 72% 44%, rgba(216, 210, 155, 0.16), transparent 22rem),
-          linear-gradient(110deg, #d8d29b 0%, #31988a 48%, #030f13 100%);
+          radial-gradient(circle at 72% 44%, rgba(151,166,188,0.16), transparent 22rem),
+          linear-gradient(110deg, #97a6bc 0%, #2a588d 48%, #eef0f3 100%);
         border-radius: var(--radius-panel);
         color: var(--paper);
         box-shadow:
-          0 28px 90px rgba(3, 15, 19, 0.28),
-          inset 0 0 0 1px rgba(216, 210, 155, 0.14);
+          0 28px 90px rgba(238,240,243,0.28),
+          inset 0 0 0 1px rgba(151,166,188,0.14);
       }
 
       .download-block::before {
@@ -2001,7 +2006,7 @@ const auditEvents = [
         z-index: 0;
         content: "";
         pointer-events: none;
-        background: linear-gradient(90deg, rgba(3, 15, 19, 0.88), rgba(3, 15, 19, 0.36) 54%, rgba(3, 15, 19, 0.72));
+        background: linear-gradient(90deg, rgba(238,240,243,0.88), rgba(238,240,243,0.36) 54%, rgba(238,240,243,0.72));
       }
 
       .download-canvas {
@@ -2064,12 +2069,12 @@ const auditEvents = [
       .download-button.secondary {
         color: var(--paper);
         background: transparent;
-        border-color: rgba(255, 255, 255, 0.36);
+        border-color: rgba(41,24,24,0.36);
       }
 
       .download-note {
         margin-top: 20px;
-        color: rgba(255, 255, 255, 0.58);
+        color: rgba(41,24,24,0.58);
         font-family: var(--font-mono);
         font-size: 11px;
         line-height: 1.55;
@@ -2086,10 +2091,10 @@ const auditEvents = [
         min-height: 240px;
         padding: 26px;
         background:
-          radial-gradient(ellipse at 100% 20%, rgba(49, 152, 138, 0.09), transparent 18rem),
-          rgba(244, 240, 217, 0.92);
+          radial-gradient(ellipse at 100% 20%, rgba(42,88,141,0.09), transparent 18rem),
+          rgba(25,31,39,0.92);
         border-radius: var(--radius-panel);
-        box-shadow: inset 0 0 0 1px rgba(137, 118, 73, 0.12);
+        box-shadow: inset 0 0 0 1px rgba(81,93,111,0.12);
         text-decoration: none;
         transition:
           box-shadow 160ms var(--ease),
@@ -2100,8 +2105,8 @@ const auditEvents = [
       .contact-card:focus-visible {
         transform: translateY(-3px);
         box-shadow:
-          inset 0 0 0 1px rgba(49, 152, 138, 0.28),
-          0 10px 32px rgba(3, 15, 19, 0.13);
+          inset 0 0 0 1px rgba(42,88,141,0.28),
+          0 10px 32px rgba(238,240,243,0.13);
         outline: none;
       }
 
@@ -2130,7 +2135,7 @@ const auditEvents = [
       }
 
       #contact .label {
-        color: rgba(216, 210, 155, 0.72);
+        color: rgba(151,166,188,0.72);
       }
 
       #contact .section-title {
@@ -2138,7 +2143,7 @@ const auditEvents = [
       }
 
       #contact .section-lede {
-        color: rgba(255, 255, 255, 0.72);
+        color: rgba(41,24,24,0.72);
       }
 
       .site-footer {
@@ -2304,7 +2309,7 @@ const auditEvents = [
           height: 40px;
           padding: 8px;
           background: transparent;
-          border: 1px solid rgba(10, 10, 10, 0.18);
+          border: 1px solid rgba(242,242,242,0.18);
           border-radius: 10px;
           cursor: pointer;
           flex-shrink: 0;
@@ -2336,7 +2341,7 @@ const auditEvents = [
         }
 
         .hero-inner {
-          min-height: calc(100dvh - 66px);
+          min-height: calc(100vh - 66px); min-height: calc(100dvh - 66px);
           padding: 80px 0 64px;
           display: flex;
           align-items: flex-start;
@@ -2536,10 +2541,10 @@ const auditEvents = [
       }
       .demo-stage {
         background: var(--paper);
-        border: 1px solid rgba(10, 10, 10, 0.18);
+        border: 1px solid rgba(242,242,242,0.18);
         border-radius: var(--radius-panel);
         padding: 22px;
-        box-shadow: 0 26px 60px -42px rgba(11, 61, 60, 0.5);
+        box-shadow: 0 26px 60px -42px rgba(224,228,233,0.5);
       }
       .demo-stage-head {
         display: flex;
@@ -2655,7 +2660,7 @@ const auditEvents = [
         display: flex;
         flex-direction: column;
         background: var(--paper);
-        border: 1px solid rgba(10, 10, 10, 0.18);
+        border: 1px solid rgba(242,242,242,0.18);
         border-radius: var(--radius-soft);
         padding: 24px;
         transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
@@ -2717,10 +2722,10 @@ const auditEvents = [
       }
       .consult-form {
         background: var(--paper);
-        border: 1px solid rgba(10, 10, 10, 0.18);
+        border: 1px solid rgba(242,242,242,0.18);
         border-radius: var(--radius-panel);
         padding: clamp(22px, 3vw, 34px);
-        box-shadow: 0 26px 60px -46px rgba(11, 61, 60, 0.45);
+        box-shadow: 0 26px 60px -46px rgba(224,228,233,0.45);
       }
       .form-field { margin-bottom: 16px; }
       .form-field label {
@@ -2737,7 +2742,7 @@ const auditEvents = [
         font-size: 14.5px;
         color: var(--ink);
         background: var(--bg);
-        border: 1px solid rgba(10, 10, 10, 0.18);
+        border: 1px solid rgba(242,242,242,0.18);
         border-radius: 10px;
         padding: 11px 13px;
         transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
@@ -2746,7 +2751,7 @@ const auditEvents = [
       .form-field textarea:focus {
         outline: none;
         border-color: var(--green);
-        box-shadow: 0 0 0 3px rgba(49, 152, 138, 0.16);
+        box-shadow: 0 0 0 3px rgba(42,88,141,0.16);
       }
       .cf-turnstile:not(:empty) { margin-bottom: 16px; }
       .form-foot {
@@ -2776,6 +2781,17 @@ const auditEvents = [
           align-items: stretch;
         }
       }
+    
+      /* ── flowing-light effects (流光) ── */
+      @property --ga { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+      .nav-action::after, .button-primary::after { content:""; position:absolute; left:8%; right:8%; bottom:-4px; height:7px; border-radius:99px;
+        background:linear-gradient(90deg,#5b8def,#5e93d0,#a78bfa,#5b8def); background-size:300% 100%;
+        filter:blur(7px); opacity:.95; animation:pilotFlow 3s linear infinite; pointer-events:none; }
+      .nav-action::before, .button-primary::before { content:""; position:absolute; left:14%; right:14%; bottom:-1px; height:2px; border-radius:99px;
+        background:linear-gradient(90deg,transparent,#7fb0ff,#83acdb,#a78bfa,transparent); background-size:200% 100%;
+        animation:pilotFlow 3s linear infinite; pointer-events:none; }
+      @keyframes pilotFlow { to { background-position:300% 0; } }
+      @keyframes gaSpin { to { --ga:360deg; } }
     </style>
   </head>
 
@@ -2853,31 +2869,31 @@ const auditEvents = [
                   <div class="process-figure" aria-hidden="true">
                     {step.figure === 'decompose' && (
                       <svg class="process-svg" viewBox="0 0 300 220">
-                        <rect x="40" y="32" width="94" height="126" fill="#ffffff" stroke="#1a1a1a" stroke-width="1" />
-                        <line x1="58" y1="60" x2="116" y2="60" stroke="#1a1a1a" stroke-width="1" />
-                        <line x1="58" y1="82" x2="116" y2="82" stroke="#1a1a1a" stroke-width="1" />
-                        <line x1="58" y1="104" x2="116" y2="104" stroke="#1a1a1a" stroke-width="1" />
-                        <line x1="58" y1="126" x2="116" y2="126" stroke="#1a1a1a" stroke-width="1" />
+                        <rect x="40" y="32" width="94" height="126" fill="#291818" stroke="#eaeaea" stroke-width="1" />
+                        <line x1="58" y1="60" x2="116" y2="60" stroke="#eaeaea" stroke-width="1" />
+                        <line x1="58" y1="82" x2="116" y2="82" stroke="#eaeaea" stroke-width="1" />
+                        <line x1="58" y1="104" x2="116" y2="104" stroke="#eaeaea" stroke-width="1" />
+                        <line x1="58" y1="126" x2="116" y2="126" stroke="#eaeaea" stroke-width="1" />
                         {[0, 1, 2, 3, 4, 5].map((i) => (
                           <g>
-                            <line x1="154" y1={54 + i * 22} x2={206 + (i % 2) * 22} y2={42 + i * 24} stroke="#31988a" stroke-width="1" opacity="0.6" />
-                            <circle cx={218 + (i % 2) * 22} cy={38 + i * 24} r="4" fill={i % 2 ? '#d8d29b' : '#31988a'} />
+                            <line x1="154" y1={54 + i * 22} x2={206 + (i % 2) * 22} y2={42 + i * 24} stroke="#2a588d" stroke-width="1" opacity="0.6" />
+                            <circle cx={218 + (i % 2) * 22} cy={38 + i * 24} r="4" fill={i % 2 ? '#97a6bc' : '#2a588d'} />
                           </g>
                         ))}
                       </svg>
                     )}
                     {step.figure === 'corpus' && (
                       <svg class="process-svg" viewBox="0 0 300 220">
-                        <circle cx="150" cy="110" r="62" fill="none" stroke="#31988a" stroke-width="1" />
-                        <circle cx="150" cy="110" r="36" fill="rgba(49,152,138,0.16)" stroke="#1e6f66" stroke-width="1" />
+                        <circle cx="150" cy="110" r="62" fill="none" stroke="#2a588d" stroke-width="1" />
+                        <circle cx="150" cy="110" r="36" fill="rgba(42,88,141,0.16)" stroke="#ccd3da" stroke-width="1" />
                         {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
                           const angle = (i / 8) * Math.PI * 2;
                           const x = 150 + Math.cos(angle) * 84;
                           const y = 110 + Math.sin(angle) * 64;
                           return (
                             <g>
-                              <line x1="150" y1="110" x2={x} y2={y} stroke="#d8d29b" stroke-width="0.8" opacity="0.55" />
-                              <circle cx={x} cy={y} r="3.5" fill={i % 3 === 0 ? '#d8d29b' : '#31988a'} />
+                              <line x1="150" y1="110" x2={x} y2={y} stroke="#97a6bc" stroke-width="0.8" opacity="0.55" />
+                              <circle cx={x} cy={y} r="3.5" fill={i % 3 === 0 ? '#97a6bc' : '#2a588d'} />
                             </g>
                           );
                         })}
@@ -2885,8 +2901,8 @@ const auditEvents = [
                     )}
                     {step.figure === 'verdict' && (
                       <svg class="process-svg" viewBox="0 0 300 220">
-                        <circle cx="150" cy="110" r="76" fill="none" stroke="#d8d8d2" stroke-width="1" />
-                        <circle cx="150" cy="110" r="18" fill="#ffffff" stroke="#1a1a1a" stroke-width="1" />
+                        <circle cx="150" cy="110" r="76" fill="none" stroke="#1c1f24" stroke-width="1" />
+                        <circle cx="150" cy="110" r="18" fill="#291818" stroke="#eaeaea" stroke-width="1" />
                         {[0, 1, 2, 3, 4, 5].map((i) => {
                           const angle = -Math.PI / 2 + (i / 6) * Math.PI * 2;
                           const x = 150 + Math.cos(angle) * 76;
@@ -2900,7 +2916,7 @@ const auditEvents = [
                                 y1="110"
                                 x2={x}
                                 y2={y}
-                                stroke={isSupported ? '#31988a' : isPartial ? '#8e8b6a' : '#8a8a8a'}
+                                stroke={isSupported ? '#2a588d' : isPartial ? '#696f79' : '#7e7e7e'}
                                 stroke-width="1"
                                 stroke-dasharray={isPartial ? '4 4' : i === 5 ? '2 4' : ''}
                                 opacity={i === 5 ? '0.5' : '0.85'}
@@ -2909,8 +2925,8 @@ const auditEvents = [
                                 cx={x}
                                 cy={y}
                                 r="7"
-                                fill={isSupported ? '#31988a' : isPartial ? 'none' : '#ffffff'}
-                                stroke={isPartial ? '#d8d29b' : '#1a1a1a'}
+                                fill={isSupported ? '#2a588d' : isPartial ? 'none' : '#291818'}
+                                stroke={isPartial ? '#97a6bc' : '#eaeaea'}
                                 stroke-width="1"
                               />
                             </g>
@@ -3005,9 +3021,9 @@ const auditEvents = [
                 <article class="glossary-row">
                   <div class="glossary-term">
                     <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true">
-                      <circle cx="20" cy="20" r={index === 0 ? '4' : index === 1 ? '12' : '8'} fill={index === 2 ? 'none' : '#31988a'} stroke="#31988a" stroke-width="1.3" />
-                      <circle cx="20" cy="20" r="17" fill="none" stroke="#d8d29b" stroke-width="1" stroke-dasharray={index === 2 ? '2 4' : '0'} opacity="0.8" />
-                      <circle cx="29" cy="11" r="2.5" fill="#d8d29b" />
+                      <circle cx="20" cy="20" r={index === 0 ? '4' : index === 1 ? '12' : '8'} fill={index === 2 ? 'none' : '#2a588d'} stroke="#2a588d" stroke-width="1.3" />
+                      <circle cx="20" cy="20" r="17" fill="none" stroke="#97a6bc" stroke-width="1" stroke-dasharray={index === 2 ? '2 4' : '0'} opacity="0.8" />
+                      <circle cx="29" cy="11" r="2.5" fill="#97a6bc" />
                     </svg>
                     <div>
                       <span>{item.type}</span>
@@ -3092,20 +3108,20 @@ const auditEvents = [
                     <div class="graph-label">Claim graph / citation path</div>
                     <svg class="claim-graph" viewBox="0 0 820 240" role="img" aria-labelledby="claim-graph-title">
                       <title id="claim-graph-title">Document claim connected to a trusted corpus and source passage</title>
-                      <line x1="112" y1="120" x2="320" y2="82" stroke="#1f2a30" stroke-width="1.2" />
-                      <line x1="112" y1="120" x2="320" y2="158" stroke="#1f2a30" stroke-width="1.2" />
-                      <line class="graph-active-edge" x1="320" y1="82" x2="504" y2="120" stroke="#31988a" stroke-width="1.3" />
-                      <line x1="320" y1="158" x2="504" y2="120" stroke="#d8d29b" stroke-width="1.1" stroke-dasharray="6 6" />
-                      <line class="graph-source-edge" x1="504" y1="120" x2="690" y2="120" stroke="#31988a" stroke-width="1.3" />
-                      <circle cx="112" cy="120" r="18" fill="#07171c" stroke="#d8d29b" stroke-width="1.2" />
-                      <circle cx="320" cy="82" r="14" fill="#07171c" stroke="#31988a" stroke-width="1.2" />
-                      <circle cx="320" cy="158" r="14" fill="#07171c" stroke="#d8d29b" stroke-width="1.2" />
-                      <circle class="graph-verdict-node" cx="504" cy="120" r="20" fill="#31988a" stroke="#31988a" stroke-width="1.2" />
-                      <circle class="graph-source-node" cx="690" cy="120" r="16" fill="#ffffff" stroke="#d8d29b" stroke-width="1.2" />
-                      <text x="112" y="166" text-anchor="middle" fill="#d8d29b" font-family="JetBrains Mono, monospace" font-size="11">claim</text>
-                      <text x="320" y="50" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="11">corpus</text>
-                      <text x="504" y="164" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="11">verdict</text>
-                      <text x="690" y="164" text-anchor="middle" fill="#d8d29b" font-family="JetBrains Mono, monospace" font-size="11">source</text>
+                      <line x1="112" y1="120" x2="320" y2="82" stroke="#dfe4e7" stroke-width="1.2" />
+                      <line x1="112" y1="120" x2="320" y2="158" stroke="#dfe4e7" stroke-width="1.2" />
+                      <line class="graph-active-edge" x1="320" y1="82" x2="504" y2="120" stroke="#2a588d" stroke-width="1.3" />
+                      <line x1="320" y1="158" x2="504" y2="120" stroke="#97a6bc" stroke-width="1.1" stroke-dasharray="6 6" />
+                      <line class="graph-source-edge" x1="504" y1="120" x2="690" y2="120" stroke="#2a588d" stroke-width="1.3" />
+                      <circle cx="112" cy="120" r="18" fill="#eaedf1" stroke="#97a6bc" stroke-width="1.2" />
+                      <circle cx="320" cy="82" r="14" fill="#eaedf1" stroke="#2a588d" stroke-width="1.2" />
+                      <circle cx="320" cy="158" r="14" fill="#eaedf1" stroke="#97a6bc" stroke-width="1.2" />
+                      <circle class="graph-verdict-node" cx="504" cy="120" r="20" fill="#2a588d" stroke="#2a588d" stroke-width="1.2" />
+                      <circle class="graph-source-node" cx="690" cy="120" r="16" fill="#291818" stroke="#97a6bc" stroke-width="1.2" />
+                      <text x="112" y="166" text-anchor="middle" fill="#97a6bc" font-family="JetBrains Mono, monospace" font-size="11">claim</text>
+                      <text x="320" y="50" text-anchor="middle" fill="#291818" font-family="JetBrains Mono, monospace" font-size="11">corpus</text>
+                      <text x="504" y="164" text-anchor="middle" fill="#291818" font-family="JetBrains Mono, monospace" font-size="11">verdict</text>
+                      <text x="690" y="164" text-anchor="middle" fill="#97a6bc" font-family="JetBrains Mono, monospace" font-size="11">source</text>
                     </svg>
                   </section>
                   <section class="queue" aria-label="Verdict queue">
