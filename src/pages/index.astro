@@ -1,4 +1,8 @@
 ---
+import DevDashboard from '../components/DevDashboard.astro';
+const limenEnv = process.env.LIMEN_ENV ?? 'dev';
+const isProd = limenEnv === 'prod';
+
 const navItems = [
   { label: 'Process', href: '#process' },
   { label: 'Workspace', href: '#workspace' },
@@ -2796,6 +2800,8 @@ const auditEvents = [
   </head>
 
   <body>
+    {!isProd && <DevDashboard />}
+    {isProd && (<Fragment>
     <a class="skip-link" href="#content">Skip to content</a>
     <canvas class="particle-field" data-bio-particles aria-hidden="true"></canvas>
     <div class="site-shell">
@@ -4832,5 +4838,6 @@ const auditEvents = [
         });
       }
     </script>
+    </Fragment>)}
   </body>
 </html>
