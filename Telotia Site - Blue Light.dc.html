@@ -72,11 +72,6 @@
   .btn-p{position:relative;background:linear-gradient(135deg,#10182F,#1B2A4A) !important;color:#fff !important;}
   @property --ga{syntax:"<angle>";initial-value:0deg;inherits:false}
   .btn-p,.btn-s{position:relative;}
-  .btn-p::after,.btn-s::after{content:"";position:absolute;inset:-2px;border-radius:inherit;padding:2px;
-    background:conic-gradient(from var(--ga),transparent 25%,#5b8def 40%,#8b5cf6 50%,#c4b5fd 55%,#5b8def 65%,transparent 80%);
-    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
-    opacity:1;transition:opacity .3s var(--ease);pointer-events:none;z-index:1;}
-  .btn-p:hover::after,.btn-s:hover::after{opacity:1;animation:gaSpin 2s linear infinite;}
   @keyframes gaSpin{to{--ga:360deg;}}
 
   .glow-wrap{position:relative;}
@@ -85,14 +80,35 @@
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
     opacity:1;transition:opacity .35s var(--ease);pointer-events:none;z-index:6;}
   .glow-wrap:hover::after{opacity:1;animation:gaSpin 2.6s linear infinite;}
+
+    @media(max-width:820px){
+      html,body{overflow-x:hidden !important}
+      [style*="max-width:1280px"]{overflow-x:hidden !important}
+      [style*="width:1180px"],[style*="width:1280px"],[style*="width:820px"],[style*="width:780px"],[style*="width:760px"],[style*="width:680px"],[style*="width:660px"],[style*="width:640px"],[style*="width:620px"],[style*="width:560px"],[style*="width:540px"],[style*="width:520px"],[style*="width:460px"],[style*="width:420px"]{max-width:100% !important;width:100% !important}
+      [style*="white-space:nowrap"]{white-space:normal !important}
+      [style*="padding:14px 64px"]{padding:12px 18px !important;flex-wrap:wrap !important;gap:14px !important}
+      [style*="padding:84px 64px"]{padding:44px 18px !important}
+      [style*="padding:96px 64px"]{padding:52px 18px !important}
+      [style*="padding:56px 64px"]{padding:36px 18px !important}
+      [style*="gap:26px;margin-left:6px"]{flex-wrap:wrap !important;gap:14px !important;margin-left:0 !important;row-gap:8px !important}
+      [style*="grid-template-columns:1.05fr .95fr"],
+      [style*="grid-template-columns:1.15fr .85fr"],
+      [style*="grid-template-columns:1fr 1fr"],
+      [style*="grid-template-columns:280px 1fr"],
+      [style*="grid-template-columns:300px 1fr"]{grid-template-columns:1fr !important;gap:28px !important}
+      [style*="font-size:60px"]{font-size:clamp(30px,8vw,40px) !important;line-height:1.1 !important}
+      [style*="font-size:46px"]{font-size:28px !important}
+      [style*="font-size:42px"]{font-size:26px !important}
+      [style*="max-width:1180px"]{max-width:100% !important}
+    }
 </style>
 
-<div style="width:1280px;font-family:var(--fsans);color:var(--t1);background:radial-gradient(125% 70% at 50% 0%, #e2e5e9 0%, #eaecef 48%, #eeeff2 100%);position:relative;overflow-x:clip">
+<div style="max-width:1280px;width:100%;margin:0 auto;font-family:var(--fsans);color:var(--t1);background:radial-gradient(125% 70% at 50% 0%, #e2e5e9 0%, #eaecef 48%, #eeeff2 100%);position:relative;overflow-x:clip">
 
   <!-- NAV -->
   <nav class="navlight" style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:30px;padding:14px 64px;background:linear-gradient(90deg,rgba(248,250,253,.86) 0%,rgba(238,242,248,.8) 38%,rgba(150,178,222,.58) 70%,rgba(238,242,248,.72) 88%,rgba(248,250,253,.8) 100%);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid rgba(40,25,25,.4);box-shadow:0 1px 0 rgba(220,224,229,.08),inset 0 1px 0 rgba(40,25,25,.5)">
     <div style="display:flex;align-items:center;gap:11px">
-      <img src="telotia-logo.svg" alt="Telotia" style="width:34px;height:34px;display:block;flex-shrink:0"/>
+      <img src="/telotia-logo.svg" alt="Telotia" style="width:34px;height:34px;display:block;flex-shrink:0"/>
       <span style="font-family:var(--fmono);font-size:14px;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:#10182F">TELOTIA</span>
     </div>
     <div style="display:flex;gap:26px;margin-left:6px">
