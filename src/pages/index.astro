@@ -1,7 +1,7 @@
 ---
-// dev.telotia.com renders the finished "Blue Light" marketing design (light medtech).
+// dev.telotia.com renders the finished "Ink (white)" marketing design (light medtech).
 // prod (telotia.com) stays "Coming soon" until launch.
-import designRaw from '../../Telotia Site - Blue Light.dc.html?raw';
+import designRaw from '../../Telotia White/index.html?raw';
 
 const limenEnv = process.env.LIMEN_ENV ?? 'dev';
 const isProd = limenEnv === 'prod';
@@ -30,17 +30,7 @@ const designHtml = bodyMatch ? bodyMatch[1] : '';
       )
     }
     {!isProd && <script is:inline src="/telotia-particles.js"></script>}
-    {!isProd && (
-      <script is:inline>
-        {`requestAnimationFrame(function(){
-          if(!window.TelotiaParticles)return;
-          var T=window.TelotiaParticles;
-          var hero=document.getElementById('tlHeroCanvas'); if(hero)T.hero(hero);
-          var gloss=document.getElementById('tlGlossCanvas'); if(gloss)T.glossary(gloss);
-          var cons=document.getElementById('tlConsultCanvas'); if(cons)T.consult(cons);
-          var spike=document.getElementById('tlSpikeCanvas'); if(spike)T.verdictSphere(spike,{dragTarget:spike.parentElement});
-        });`}
-      </script>
-    )}
+    {!isProd && <script is:inline src="/footer-assets.js"></script>}
+    {!isProd && <script is:inline src="/ink-init.js"></script>}
   </body>
 </html>
