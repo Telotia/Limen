@@ -43,6 +43,19 @@
     return 'rgba(' + r + ',' + g + ',' + b + ',' + Math.max(0, Math.min(1, a)).toFixed(3) + ')';
   }
 
+  // Run `tick` on rAF only while the canvas is on-screen — off-screen canvases pause (the perf win).
+  function gated(cv, tick) {
+    var raf = 0, vis = false, el = cv.parentElement || cv;
+    function loop() { tick(); if (vis) raf = requestAnimationFrame(loop); }
+    var io = ('IntersectionObserver' in global) ? new IntersectionObserver(function (es) {
+      var on = es[0].isIntersecting;
+      if (on && !vis) { vis = true; raf = requestAnimationFrame(loop); }
+      else if (!on) { vis = false; }
+    }, { rootMargin: '200px' }) : null;
+    if (io) io.observe(el); else { vis = true; raf = requestAnimationFrame(loop); }
+    return { stop: function () { vis = false; cancelAnimationFrame(raf); if (io) io.disconnect(); } };
+  }
+
   // ==========================================================================
   // 1. HERO — constellation: drifting nodes joined by fading proximity lines
   // ==========================================================================
@@ -79,11 +92,10 @@
         ctx.fillStyle = 'rgba(168,188,216,0.5)';
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fill();
       }
-      raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
+    var _g = gated(cv, tick);
     global.addEventListener('resize', onResize);
-    return { destroy: function () { cancelAnimationFrame(raf); global.removeEventListener('resize', onResize); } };
+    return { destroy: function () { _g.stop(); global.removeEventListener('resize', onResize); } };
   }
 
   // ==========================================================================
@@ -144,11 +156,10 @@
         ctx.fillStyle = hexA(p.c, 0.26 + tw * 0.44);
         ctx.beginPath(); ctx.arc(cx + p.x * S, cy + p.y * S, 1.4 + tw * 1.5, 0, TAU); ctx.fill();
       }
-      raf = requestAnimationFrame(draw);
     };
-    raf = requestAnimationFrame(draw);
+    var _g = gated(cv, draw);
     global.addEventListener('resize', onResize);
-    return { destroy: function () { cancelAnimationFrame(raf); global.removeEventListener('resize', onResize); } };
+    return { destroy: function () { _g.stop(); global.removeEventListener('resize', onResize); } };
   }
 
   // ==========================================================================
@@ -195,11 +206,10 @@
         ctx.fillStyle = hexA(p.col, (p.scatter ? 0.28 : 0.82) * tw);
         ctx.beginPath(); ctx.arc(x, y, p.sz, 0, 7); ctx.fill();
       }
-      raf = requestAnimationFrame(draw);
     };
-    raf = requestAnimationFrame(draw);
+    var _g = gated(cv, draw);
     global.addEventListener('resize', onResize);
-    return { destroy: function () { cancelAnimationFrame(raf); global.removeEventListener('resize', onResize); } };
+    return { destroy: function () { _g.stop(); global.removeEventListener('resize', onResize); } };
   }
 
   // ==========================================================================
@@ -254,9 +264,8 @@
         tilt += tvel; tvel *= 0.92; tilt += (0 - tilt) * 0.012;
       }
       tilt = Math.max(-1.05, Math.min(1.05, tilt));
-      raf = requestAnimationFrame(draw);
     };
-    raf = requestAnimationFrame(draw);
+    var _g = gated(cv, draw);
 
     // drag-to-spin with inertia
     const wrap = opts.dragTarget || cv.parentElement;
@@ -289,7 +298,7 @@
     global.addEventListener('resize', onResize);
     return {
       destroy: function () {
-        cancelAnimationFrame(raf);
+        _g.stop();
         global.removeEventListener('resize', onResize);
         global.removeEventListener('pointermove', onMove);
         global.removeEventListener('pointerup', onUp);

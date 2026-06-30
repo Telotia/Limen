@@ -138,12 +138,20 @@ var s=document.getElementById('tlSpikeCanvas');if(s)T.verdictSphere(s,{dragTarge
 (function(){
   var nav=document.querySelector('.navlight'); if(!nav) return;
   nav.style.transition='top .34s ease,opacity .34s ease';
+  /* floating peek logo: static img (not cloned), clears the notch; click reveals the nav */
+  var st=document.createElement('style');
+  st.textContent='.nav-peek{position:fixed;top:max(10px,env(safe-area-inset-top));left:14px;z-index:60;width:44px;height:44px;padding:6px;border:0;border-radius:50%;background:rgba(255,255,255,.42);backdrop-filter:blur(8px) saturate(1.1);-webkit-backdrop-filter:blur(8px) saturate(1.1);box-shadow:0 5px 16px -8px rgba(16,24,47,.4);opacity:0;transform:scale(.82) translateY(-6px);pointer-events:none;transition:opacity .28s ease,transform .28s ease;cursor:pointer}.nav-peek.show{opacity:1;transform:scale(1) translateY(0);pointer-events:auto}.nav-peek img{width:100%;height:100%;object-fit:contain;display:block}';
+  document.head.appendChild(st);
+  var peek=document.createElement('button'); peek.type='button'; peek.className='nav-peek'; peek.setAttribute('aria-label','Show menu');
+  peek.innerHTML='<img src="telotia-logo-cut.png" alt="">';
+  document.body.appendChild(peek);
   var hidden=false, last=0;
-  function show(){nav.style.top='0';nav.style.opacity='';nav.style.pointerEvents='';hidden=false;}
-  function hide(){nav.style.top='-120px';nav.style.opacity='0';nav.style.pointerEvents='none';hidden=true;}
+  function show(){nav.style.top='0';nav.style.opacity='';nav.style.pointerEvents='';peek.classList.remove('show');hidden=false;}
+  function hide(){nav.style.top='-120px';nav.style.opacity='0';nav.style.pointerEvents='none';peek.classList.add('show');hidden=true;}
+  peek.addEventListener('click',function(e){e.preventDefault();show();last=window.pageYOffset||document.documentElement.scrollTop||0;}); /* reveal nav + reset baseline so a later scroll-down re-hides */
   window.addEventListener('scroll',function(){
     var y=window.pageYOffset||document.documentElement.scrollTop||0;
-    if(y>last+4 && y>80){ if(!hidden) hide(); }            /* scrolling down → hide */
+    if(y>last+4 && y>80){ if(!hidden) hide(); }            /* scrolling down → hide (peek shows) */
     else if(y<last-4 || y<=80){ if(hidden) show(); }       /* scrolling up or near top → show */
     last=y;
   },{passive:true});
