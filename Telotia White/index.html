@@ -840,20 +840,13 @@ var s=document.getElementById('tlSpikeCanvas');if(s)T.verdictSphere(s,{dragTarge
 (function(){
   var nav=document.querySelector('.navlight'); if(!nav) return;
   nav.style.transition='top .34s ease,opacity .34s ease';
-  var st=document.createElement('style');
-  st.textContent='.nav-peek{position:fixed;top:9px;left:13px;z-index:40;width:40px;height:40px;padding:3px;border:none;border-radius:50%;background:transparent;opacity:0;transform:scale(.85);pointer-events:none;transition:opacity .25s ease,transform .25s ease;cursor:pointer;display:flex;align-items:center;justify-content:center}.nav-peek.show{opacity:1;transform:scale(1);pointer-events:auto}.nav-peek img{width:100%;height:100%;object-fit:contain;pointer-events:none}';
-  document.head.appendChild(st);
-  var peek=document.createElement('button'); peek.type='button'; peek.className='nav-peek'; peek.setAttribute('aria-label','Show menu');
-  var logo=nav.querySelector('img'); if(logo) peek.appendChild(logo.cloneNode(true));
-  document.body.appendChild(peek);
-  var hidden=false;
-  function show(){nav.style.top='0';nav.style.opacity='';nav.style.pointerEvents='';peek.classList.remove('show');hidden=false;}
-  function hide(){nav.style.top='-120px';nav.style.opacity='0';nav.style.pointerEvents='none';peek.classList.add('show');hidden=true;}
-  peek.addEventListener('click',function(e){e.preventDefault();show();});
-  var last=0;
+  var hidden=false, last=0;
+  function show(){nav.style.top='0';nav.style.opacity='';nav.style.pointerEvents='';hidden=false;}
+  function hide(){nav.style.top='-120px';nav.style.opacity='0';nav.style.pointerEvents='none';hidden=true;}
   window.addEventListener('scroll',function(){
     var y=window.pageYOffset||document.documentElement.scrollTop||0;
-    if(y>last && y>70){ if(!hidden) hide(); } else { if(hidden) show(); }
+    if(y>last+4 && y>80){ if(!hidden) hide(); }            /* scrolling down → hide */
+    else if(y<last-4 || y<=80){ if(hidden) show(); }       /* scrolling up or near top → show */
     last=y;
   },{passive:true});
 })();
