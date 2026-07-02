@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance · Micron Up 240%, Nvidia Up 15% — Same AI Story, Different Winner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --ink:#1c1832; --ink2:#4a4370; --muted:#726c90;
+ --violet:#7c3aed; --violet-d:#5b21b6; --line:rgba(28,23,50,.10);
+ --up:#1a8f5e; --down:#d2453c; --card:rgba(255,255,255,.72);
+ }
+ *{box-sizing:border-box}
+ html{scroll-behavior:smooth}
+ body{
+ margin:0; color:var(--ink);
+ font-family:"Inter",system-ui,sans-serif;
+ line-height:1.85; font-size:18px;
+ background-color:#f1eefb;
+ background:
+ radial-gradient(ellipse 60% 45% at 16% 18%, oklch(0.68 0.14 295 / .50) 0%, transparent 56%),
+ radial-gradient(ellipse 50% 60% at 86% 12%, oklch(0.82 0.10 200 / .38) 0%, transparent 55%),
+ radial-gradient(ellipse 55% 55% at 78% 88%, oklch(0.80 0.12 70 / .32) 0%, transparent 58%),
+ radial-gradient(ellipse 60% 50% at 22% 92%, oklch(0.74 0.11 260 / .32) 0%, transparent 58%),
+ #f1eefb;
+ background-attachment:fixed;
+ }
+ .grain{position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:soft-light;opacity:.10;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+ .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:72px 26px 120px}
+ .kicker{font-family:"Inter",sans-serif;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+ font-size:13px;color:var(--violet-d);margin-bottom:18px}
+ h1{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(30px,5.6vw,48px);line-height:1.2;
+ margin:0 0 20px;letter-spacing:-.01em}
+ .lede{font-size:21px;color:var(--ink2);font-weight:500;margin:0 0 30px}
+ .meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-family:"Inter",sans-serif;
+ font-size:13.5px;color:var(--muted);padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:14px}
+ .meta .dot{width:5px;height:5px;border-radius:50%;background:var(--violet)}
+ h2{font-family:"Fraunces",serif;font-weight:700;font-size:27px;margin:52px 0 16px;letter-spacing:-.005em;
+ display:flex;align-items:baseline;gap:12px}
+ h2 .n{font-family:"Inter",sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--violet);
+ width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;flex:none;
+ box-shadow:0 4px 14px rgba(124,58,237,.35)}
+ h3{font-size:19px;font-weight:700;margin:30px 0 8px;color:var(--ink)}
+ p{margin:0 0 18px}
+ strong{font-weight:700;color:var(--ink);background:linear-gradient(transparent 62%, rgba(124,58,237,.16) 0)}
+ .pull{font-family:"Fraunces",serif;font-weight:600;font-size:23px;line-height:1.6;color:var(--violet-d);
+ border-left:4px solid var(--violet);padding:6px 0 6px 22px;margin:30px 0}
+ .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:26px 0}
+ .stat{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+ border:1px solid rgba(255,255,255,.7);border-radius:16px;padding:20px 20px;
+ box-shadow:0 8px 30px rgba(28,23,50,.07)}
+ .stat .v{font-family:"Inter",sans-serif;font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1.1}
+ .stat .l{font-size:13.5px;color:var(--muted);margin-top:6px}
+ .stat.up .v{color:var(--up)} .stat.down .v{color:var(--down)}
+ .bb{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+ .panel{border-radius:16px;padding:22px;background:var(--card);backdrop-filter:blur(14px);
+ border:1px solid rgba(255,255,255,.7);box-shadow:0 8px 30px rgba(28,23,50,.07)}
+ .panel h4{margin:0 0 10px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+ .panel.bull h4{color:var(--up)} .panel.bear h4{color:var(--down)}
+ .panel ul{margin:0;padding-left:18px;font-size:15.5px;color:var(--ink2);line-height:1.7}
+ .panel li{margin-bottom:8px}
+ .callout{background:rgba(124,58,237,.07);border:1px solid rgba(124,58,237,.2);border-radius:16px;
+ padding:22px 24px;margin:28px 0}
+ .callout .t{font-weight:700;color:var(--violet-d);margin-bottom:6px;font-size:15px;font-family:"Inter",sans-serif;
+ letter-spacing:.04em;text-transform:uppercase}
+ .disc{font-size:13.5px;color:var(--muted);background:rgba(28,23,50,.04);border-radius:14px;padding:18px 20px;
+ margin-top:40px;line-height:1.65}
+ .src{margin-top:30px;font-size:14px;color:var(--ink2)}
+ .src a{color:var(--violet-d);text-decoration:none;border-bottom:1px solid rgba(124,58,237,.3)}
+ .src li{margin-bottom:7px}
+ footer{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);
+ font-family:"Inter",sans-serif;font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
+ table.dt{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:14.5px}
+ table.dt th,table.dt td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+ table.dt th{color:var(--muted);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+ @media(max-width:560px){.stats,.bb{grid-template-columns:1fr}.wrap{padding:50px 20px 90px}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+ <div class="kicker">Finance · Daily Deep-Dive</div>
+ <h1>Micron Up 240%, Nvidia Up 15% — Same AI Party, Different Guest of Honor</h1>
+ <p class="lede">Chipmakers just closed out their best quarter on record. The company that started this whole AI trade barely showed up to its own celebration.</p>
+ <div class="meta">
+ <span>2026-07-01</span><span class="dot"></span>
+ <span>US Equities · Semiconductors · AI Buildout</span><span class="dot"></span>
+ <span>Informational, not investment advice</span>
+ </div>
+
+ <h2><span class="n">1</span>What happened</h2>
+ <p>On June 30, US stocks closed their best first half since 2020: the Dow notched a second straight record close, ending the quarter at 52,319.20, up 8.85% for the year. But the real story that day wasn't the index — it was a split running through the chip sector itself.</p>
+ <p>The VanEck Semiconductor ETF (SMH) jumped <strong>71%</strong> in the second quarter, its best quarter since the fund launched in 2000. Break that open and it gets stranger: <strong>Micron gained roughly 240%, Intel around 216%, AMD about 186%</strong> — the three together added roughly <strong>$2 trillion</strong> in combined market value, vaulting into the top 10-to-12 most valuable US companies.</p>
+ <p>Meanwhile the stock most people credit with starting the whole AI trade, the one that's rallied hardest for three straight years — <strong>Nvidia gained only about 15%</strong> that same quarter, one of the worst performers in its own sector. The same AI story, and this time the money didn't flow to the company telling it.</p>
+ <p class="pull">"A range from 15% to 240% in one quarter isn't chip companies collectively getting stronger. It's capital chasing one keyword and handing out nearly identical rewards to businesses with wildly different fundamentals."</p>
+
+ <h2><span class="n">2</span>Why: the transmission mechanism</h2>
+ <p>The rally's root cause is a <strong>genuine supply shortage</strong>, not pure sentiment. IDC has described it as "a tsunami-like shock originating in the memory supply chain" — AI data centers need enormous volumes of high-bandwidth memory (HBM) and standard storage chips, and makers like Micron are redirecting output away from thinner-margin consumer electronics (the memory that goes into phones and PCs) toward far more profitable data-center customers.</p>
+ <p>Wafer and packaging capacity is fixed, so what goes to a data center doesn't go to a phone maker — memory prices rise across the board in a genuine zero-sum contest. Micron's own numbers prove the fundamentals are real, not just multiple expansion: revenue of $41.5 billion, up 74% quarter over quarter and 346% year over year; net income jumping from $1.89 billion to $28.24 billion, up roughly 14x; gross margin climbing from about 39% a year ago to roughly 85%.</p>
+ <p>So why didn't Nvidia keep pace? A few forces stack on top of each other:</p>
+ <p><strong>First, it had already run too far for too long.</strong> From ChatGPT's launch in November 2022 through the end of 2025, Nvidia rose roughly 1,000%, versus 75% for the S&amp;P 500 and 159% for the Philadelphia Semiconductor Index (SOX). A huge amount of money has already been made in the stock, and short-term capital naturally starts hunting for the next name.</p>
+ <p><strong>Second, its valuation had already priced in perfection.</strong> One analyst put it bluntly: Nvidia is "unfairly pricing a peak in capex that isn't in sight" — the market had already baked in the best-case scenario, leaving little room for a positive surprise.</p>
+ <p><strong>Third, a genuinely counterintuitive inversion.</strong> Nvidia's forward price-to-earnings ratio now sits at roughly 18x, the lowest since 2018 and well below its own 10-year average of 36x. Arm's forward P/E, by contrast, is above 140x, and Intel's sits around 100x. By any traditional yardstick, those two are far more expensive — Nvidia is, ironically, the cheapest name in this entire rally.</p>
+
+ <h2><span class="n">3</span>The numbers</h2>
+ <table class="dt">
+ <tr><th>Name / metric</th><th>Figure</th></tr>
+ <tr><td>Micron Q2 gain</td><td>~+240%</td></tr>
+ <tr><td>Intel Q2 gain</td><td>~+216%</td></tr>
+ <tr><td>AMD Q2 gain</td><td>~+186%</td></tr>
+ <tr><td>Nvidia Q2 gain</td><td>~+15%</td></tr>
+ <tr><td>Combined market cap added (Micron + Intel + AMD)</td><td>~$2 trillion</td></tr>
+ <tr><td>SMH semiconductor ETF Q2 gain</td><td>+71% (best quarter since 2000 launch)</td></tr>
+ <tr><td>Nvidia forward P/E</td><td>~18x (lowest since 2018; 10-yr average 36x)</td></tr>
+ <tr><td>Arm / Intel forward P/E</td><td>140x+ / ~100x</td></tr>
+ <tr><td>Micron revenue / net income, YoY</td><td>+346% / +1,398%</td></tr>
+ </table>
+
+ <h2><span class="n">4</span>Second-order effects: who gains, who loses</h2>
+ <h3>Who gains</h3>
+ <p>Shareholders in Micron, Intel and AMD, plus the capital that "missed Nvidia" and is now chasing the second tier of AI names, just caught a real catch-up rally. Cloud providers benefit indirectly too: hyperscaler capex budgets have all been revised upward this cycle — <strong>Alphabet to $185 billion (+4%), Amazon to $200 billion (+1%), Meta to $135 billion (+8%), Microsoft to $190 billion (+24%)</strong> — a sign this AI buildout cycle is still accelerating, not winding down.</p>
+ <h3>Who loses</h3>
+ <p>The most easily overlooked party is the ordinary buyer further down the consumer-electronics chain. With memory diverted toward data centers first, the storage cost inside phones and laptops is rising, and that cost eventually shows up in the price of a new device — <strong>the celebration is happening in the stock market, and the bill may eventually land on whoever's next in line to upgrade a phone or a laptop</strong>. Meanwhile, investors who concentrated their AI exposure in Nvidia alone underperformed the broader semiconductor sector this quarter, even though nothing about the company's underlying business got worse.</p>
+
+ <h2><span class="n">5</span>The strongest case on each side</h2>
+ <div class="bb">
+ <div class="panel bull">
+ <h4>▲ Bulls (a healthy broadening)</h4>
+ <ul>
+ <li>This isn't pure sentiment rotation — Micron's earnings are real and verifiable explosive growth, not a multiple being inflated.</li>
+ <li>Capex budgets rising across the board proves downstream demand hasn't peaked.</li>
+ <li>Nvidia's 18x forward P/E is historically rare cheap, which only widens the room for it to catch up.</li>
+ </ul>
+ </div>
+ <div class="panel bear">
+ <h4>▼ Bears (chasing a label, not a business)</h4>
+ <ul>
+ <li>Forward P/Es of 140x for Arm and roughly 100x for Intel are expensive by any conventional standard.</li>
+ <li>Much of this catch-up looks like "buy anything tagged AI," not valuation tied to each company's actual data-center revenue.</li>
+ <li>"Nvidia is cheap" doesn't mean "buy Nvidia" — the cheapness itself reflects the market's doubt that capex can stay this elevated.</li>
+ </ul>
+ </div>
+ </div>
+
+ <h2><span class="n">6</span>What's overlooked, and what's overstated</h2>
+ <p>The overstated line is "AI catch-up equals a healthy market." A single quarter with gains ranging from 15% to 240% isn't chip companies collectively getting stronger — it's capital rewarding businesses with wildly different fundamentals almost identically, because they share one keyword. Micron's surge has real pricing power and margin evidence behind it. Arm's and Intel's triple-digit multiples look far more like a narrative reinforcing itself.</p>
+ <p>What's overlooked is who's actually paying for this shortage. Data centers bid up memory prices, and the bill isn't just picked up by cloud providers — it also falls on phone and PC makers with weaker negotiating leverage further back in the queue, and ultimately on whoever buys the finished device. Most coverage focuses on whose stock just hit a new high; almost none asks <strong>who ends up paying that price gap</strong>.</p>
+
+ <div class="callout">
+ <div class="t">What this actually means</div>
+ <p style="margin:0">The AI buildout trade is shifting from "bet on one company" to "bet on an entire supply chain" — money is starting to flow toward the links that can actually prove they have pricing power, like memory, rather than only toward whoever told the story first and loudest. <strong>But every link in that chain is rising for a different reason</strong>: some on real profit growth, some just for sharing the same hot keyword.</p>
+ </div>
+
+ <h2><span class="n">7</span>One takeaway for you</h2>
+ <p><strong>First, "AI stock" is becoming an increasingly blunt category.</strong> A quarter where returns differ by more than tenfold within the same theme means buying anything tagged AI is getting riskier — the real question is what a company actually sells into the data-center supply chain and whether it has genuine pricing power, not whether it carries the label.</p>
+ <p><strong>Second, a valuation multiple hitting a historic low isn't automatically bad news, and it isn't automatically a buy signal either.</strong> It's more useful as a prompt to check what the market is actually worried about — here, whether capex can stay at these levels — rather than a shortcut for assuming "cheap means unfairly punished."</p>
+
+ <div class="disc">
+ <strong>Disclaimer:</strong> A synthesis of public information for learning and general reference only. Not investment advice or an offer to buy or sell any security. Figures follow official sources and may change at any time. Investing carries risk; verify independently and own your decisions.
+ </div>
+
+ <div class="src">
+ <strong>Primary sources</strong>
+ <ul>
+ <li><a href="https://www.cnbc.com/2026/06/30/ai-chip-rally-in-q2-adds-2-trillion-in-value-to-micron-intel-amd-.html">CNBC — AI chip rally in Q2 adds $2 trillion in value to Micron, Intel, AMD</a></li>
+ <li><a href="https://www.cnbc.com/2026/06/30/nvidia-mostly-sat-out-the-chip-sectors-best-quarter-ever-what-needs-to-change-.html">CNBC — Nvidia mostly sat out the chip sector's best quarter ever</a></li>
+ <li><a href="https://www.cnbc.com/2026/05/06/nvidia-is-falling-behind-as-semiconductors-surge-heres-what-analysts-say-is-going-on.html">CNBC — Nvidia is falling behind as semiconductors surge: what analysts say</a></li>
+ <li><a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-30-2026">TheStreet — U.S. indexes wrap best quarter since 2020</a></li>
+ <li><a href="https://tradersunion.com/news/financial-news/show/2536164-micron-intel-amd-ai-chip-rally/">TradersUnion — Micron, Intel, AMD add $2 trillion in AI-driven Q2 rally</a></li>
+ </ul>
+ </div>
+
+ <footer><span>Finance · Daily Deep-Dive</span><span>2026-07-01</span></footer>
+</div>
+</body>
+</html>

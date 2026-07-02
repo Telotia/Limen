@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · Migrant Mother — Dorothea Lange</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1916; --ink-soft:#3c3833; --ink-faint:#857f74;
+    --silver:#b9b4a8; --sepia:#8c7a5e; --slate:#5d6670; --bone:#e7e2d7;
+    --paper:rgba(248,245,239,.58); --line:rgba(60,55,45,.16); --void:#101010;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.005em;
+    background:#d2ccbf; min-height:100vh; overflow-x:hidden;
+  }
+  /* diffuse light field: dust grey + faint sepia + cool slate */
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 18% 10%, rgba(185,180,168,.55), transparent 60%),
+      radial-gradient(42rem 42rem at 82% 16%, rgba(140,122,94,.30), transparent 62%),
+      radial-gradient(50rem 50rem at 26% 92%, rgba(93,102,112,.26), transparent 60%),
+      radial-gradient(36rem 36rem at 86% 88%, rgba(40,38,32,.18), transparent 60%),
+      linear-gradient(160deg,#e3ded3,#d0cabd);
+    filter:blur(46px) saturate(.96); transform:scale(1.12);
+  }
+  .wrap{max-width:840px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(2.4rem,7vw,4rem);line-height:1.05;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1.05rem,2.8vw,1.45rem);color:var(--ink-soft);margin-top:8px}
+  figure{margin:34px 0 12px;border-radius:20px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(20,18,14,.6),0 2px 0 rgba(255,255,255,.35) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.03em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(20,18,14,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.7rem;
+    margin-bottom:4px;display:flex;align-items:baseline;gap:.6rem;letter-spacing:.01em}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--sepia);opacity:.95}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.08rem;line-height:1.85}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:88px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;
+    border-radius:50%;background:var(--sepia);box-shadow:0 0 0 4px rgba(140,122,94,.22)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.04em;line-height:1.9}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.9rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.06.30</div>
+    <h1>Migrant Mother</h1>
+    <div class="sub">One mother, carrying the whole Depression</div>
+  </header>
+
+  <figure>
+    <img src="source.jpg" alt="Dorothea Lange, Migrant Mother, 1936">
+    <figcaption>Dorothea Lange, <em>Migrant Mother</em>, March 1936 · 4×5 large-format silver-gelatin print · Nipomo, California · Library of Congress, Prints &amp; Photographs Division (public domain)</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">Under a flapping lean-to tent, a woman in her early thirties — already weathered far past her years — rests a hand against her chin and stares off, past the frame, at something we cannot see. Two children bury their faces in her shoulders, backs to us; the baby in her lap sleeps on, oblivious. She isn't looking at you, and she isn't begging. That <b>refusal to beg</b> is exactly what turned this single face into the face of the entire Great Depression — perhaps the most famous documentary photograph ever made.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition</h2>
+    <p>The whole picture is a stable <b>triangle — a pyramid</b>: the mother's head is the apex, her open body and the baby in her lap form the broad base. The triangle is the most stable shape in all of composition, and here it drives a silent, immovable foundation under an image otherwise full of upheaval.</p>
+    <p>The two children <b>turned away, faces hidden</b>, are the masterstroke. They act like a pair of brackets that <b>gather every line of sight inward and push it onto the mother's face.</b> She is the only person who gives us an expression — so she alone carries the weight of the family, and of the age.</p>
+    <p>Her eyes sit on the <b>upper third</b>, but her gaze leads <b>out of the frame, to the left.</b> A subject looking <i>out</i> of the picture creates an instinctive, <b>unresolved tension</b> — she is watching an unseen, uncertain future. The lone hard line is the <b>tent pole</b> angled in at the right edge: a quiet reminder of how flimsy and temporary this "home" is.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Tonal Range — the "Colour" of B&amp;W</h2>
+    <p>A black-and-white photograph has no colour, but it has <b>tone (value)</b> — and that <i>is</i> its colour scheme. The mark of a great monochrome is its <b>full tonal range</b>: a solid true black, a clean true white, and a rich ladder of greys between. This is the heart of Ansel Adams' <b>Zone System</b>, which slices the scale from black to white into eleven zones (0–X).</p>
+    <p>This print is <b>complete but restrained.</b> <b>Zone 0–I</b> pure blacks (the tent's dark, her hair) sink to the floor and give the image weight; <b>Zone V</b> middle grey is her <b>skin anchor</b> (in B&amp;W portraiture skin lands just above middle grey, the tonal pivot); <b>Zone VIII–IX</b> highlights (the baby's blanket, the sheen on her sleeve) pull the eye to the centre. The shadows hold, the highlights breathe, and the crucial thing — <b>the face stays in the midtones</b> — so every worry line reads softly, without melodrama. <b>Contrast is emotion;</b> the power runs straight up that black-to-white spine.</p>
+    <div class="palette">
+      <div class="sw" style="background:#0b0b0b;color:#cfcabf">Zone I<small>shadow / hair</small></div>
+      <div class="sw" style="background:#3a3a3a;color:#dcd8cf">Zone III<small>shadow detail</small></div>
+      <div class="sw" style="background:#7c7c7c;color:#fff">Zone V<small>skin · 18% grey</small></div>
+      <div class="sw" style="background:#b4b4b4;color:#2a2a2a">Zone VII<small>light skin / cloth</small></div>
+      <div class="sw" style="background:#ededed;color:#444">Zone IX<small>blanket / highlight</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Light</h2>
+    <p>The light is <b>soft, frontal, diffused</b> — the mother sits inside a makeshift shelter (<b>open shade</b>), with no hard direct sun, so her face carries <b>almost no harsh cast shadow.</b> This soft-and-frontal light is the kindest way to render a person: it wraps the volume of the face gently while handing over, unsparingly, every <b>furrow and texture of worry.</b></p>
+    <p>Precisely <i>because</i> there is no theatrical chiaroscuro, the picture feels <b>true, unperformed.</b> The light itself is honest — it doesn't flatter, it simply shows us a tired mother's face exactly as it is.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Technique &amp; Context</h2>
+    <p>Lange worked with a <b>4×5 large-format Graflex camera</b> on single sheet film. The big negative yields enormous resolution — you can read every stray hair and every worn-through patch of cloth. In March 1936 she pulled over at a <b>pea-pickers' camp in Nipomo, California, stayed roughly ten minutes and made six frames,</b> moving closer with each. This is the last and tightest of them.</p>
+    <p>The image carries a famous <b>retouch</b>: in the original negative a thumb of the mother's rests on the tent pole at the lower right, and it was spotted out before publication — still cited in debates over what "truth" means in documentary photography. The picture belongs to the <b>FSA</b> file; as the work of a federal employee on the job it is <b>public domain</b>, which let it be reprinted endlessly until it became an icon of its era.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Why It Moves Us · Lange</h2>
+    <p>It moves us because it <b>refuses sentiment.</b> The mother doesn't face the lens, doesn't reach out a hand — she just gazes off, in the posture of someone pushed to the edge and <b>still holding.</b> What we read is not pity but <b>dignity:</b> she bears it for seven children while the baby and the children behind her remain wholly unaware. That secular <b>"Madonna and Child"</b> composition — a quiet, modern <i>pietà</i> — lifts a documentary frame to something close to the sacred.</p>
+    <p>The woman was later identified as <b>Florence Owens Thompson</b>, a mother of Indigenous (Cherokee) heritage. She felt ambivalent about the picture all her life — it made an era unforgettable, yet froze her own hardship in place forever.</p>
+    <p><b>Dorothea Lange</b> (1895–1965) is the soul of American documentary photography. Childhood polio left her with a limp, which she said taught her <b>how to approach unnoticed and how to feel with people who suffer.</b> A respectable studio portraitist pushed onto the street by the Depression, she joined the FSA and believed the camera is "<b>a tool that teaches people how to see without a camera.</b>"</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This — B&amp;W / Monochrome Dressing</h2>
+    <ul class="tips">
+      <li><b>Shoot portraits in soft frontal light:</b> find the <b>diffused light / open shade</b> of a big window and let the face turn slightly toward it. Soft light gives volume; frontal light gives honesty — the surest route to a face that reads emotional, not posed.</li>
+      <li><b>Build on a triangle:</b> to make a frame feel <b>stable and weighty</b>, arrange the subject as a triangle — apex at the face, base in the body. A stable shape carries an "able-to-bear-it" gravity on its own.</li>
+      <li><b>Go full-tonal in B&amp;W:</b> in the edit, <b>protect one true black and one clean white</b>, and keep the <b>face in the midtones.</b> Black-and-white isn't colour desaturated — it's the world <b>translated into value.</b> See in light/dark, not red/green.</li>
+      <li><b>Same logic for monochrome outfits:</b> a black-grey-white look lives or dies on its <b>value steps</b> — true black + warm grey + bone white, well separated — then let <b>texture</b> (raw linen, cotton, satin) carve detail inside the greyscale. The elegance of an achromatic palette is all <b>value contrast + material contrast.</b></li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">ART</div>
+    Image: Dorothea Lange, <em>Migrant Mother</em>, 1936 · public domain<br>
+    Source: Library of Congress, Prints &amp; Photographs Division / Wikimedia Commons · © original author
+  </footer>
+</div>
+</body>
+</html>
