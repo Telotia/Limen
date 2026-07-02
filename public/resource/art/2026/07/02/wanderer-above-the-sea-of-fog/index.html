@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · Wanderer above the Sea of Fog — Caspar David Friedrich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1916; --ink-soft:#3c3833; --ink-faint:#857f74;
+    --silver:#b9b4a8; --sepia:#8c7a5e; --slate:#5d6670; --bone:#e7e2d7;
+    --paper:rgba(248,245,239,.60); --line:rgba(60,55,45,.16); --void:#101010;
+    --olive:#3B3A2E; --ochre:#5B4636; --fog:#9AA6A6; --ridge:#7C8A8C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.005em;
+    background:#d3d4cf; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 16% 8%, rgba(122,134,124,.20), transparent 60%),
+      radial-gradient(44rem 44rem at 86% 16%, rgba(154,166,166,.28), transparent 62%),
+      radial-gradient(42rem 42rem at 84% 90%, rgba(91,70,54,.14), transparent 60%),
+      radial-gradient(50rem 50rem at 20% 92%, rgba(59,58,46,.16), transparent 60%),
+      linear-gradient(160deg,#e6e6e0,#c9cbc4);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(2rem,6vw,3.3rem);line-height:1.12;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:8px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(20,18,14,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#dcdfd9}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(20,18,14,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.5rem;color:var(--sepia);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300;font-size:1.02rem}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.1rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.03em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;
+    border-radius:50%;background:var(--sepia);box-shadow:0 0 0 4px rgba(140,122,94,.22)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+    letter-spacing:.2em;font-size:1rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.02</div>
+    <h1>Wanderer above the Sea of Fog</h1>
+    <div class="sub">Caspar David Friedrich, c. 1817 — standing at the edge of the world, back turned to us</div>
+  </header>
+
+  <figure>
+    <img src="cover.jpg" alt="Caspar David Friedrich, Wanderer above the Sea of Fog, c. 1817">
+    <figcaption>Caspar David Friedrich, <i>Wanderer above the Sea of Fog</i> (Der Wanderer über dem Nebelmeer), c. 1817 · oil on canvas, 94.8 × 74.8 cm · German Romanticism · Hamburger Kunsthalle · Wikimedia Commons (public domain)</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">A figure seen only from behind. A sea of fog. A few rock peaks breaking the surface. No face, no plot — yet this 200-year-old painting is one of the most reposted "meaning" images on the internet today. Anyone who has ever stood on some summit of their life, staring into an unknown ahead, finds themselves in this fog.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="en">The back view, decoded</span></h2>
+    <p><b>Rückenfigur</b>: the figure faces away, placed near the visual center-left, carrying all the compositional weight while showing no expression. He isn't someone you watch looking at a view — he's a stand-in for you, looking <b>through</b> him.</p>
+    <p><b>Three depth layers:</b> jagged rock in the foreground (dark, sharp, detailed) → fog-wrapped peaks in the middle ground (progressively softer, cooler, lighter) → the farthest ridge nearly dissolving into sky. Each layer pulls the flat canvas into depth.</p>
+    <p><b>Low horizon, tall proportions:</b> the figure's head reaches barely a third of the way up the canvas, letting sky and fog claim most of the frame — the classic formula for the Sublime: a small figure set against the vast and unknowable.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color <span class="en">Depth from temperature</span></h2>
+    <p>Friedrich skips linear, vanishing-point perspective and uses <b>aerial perspective</b> instead: the near rocks are saturated, warm olive-green and ochre; distance cools and desaturates the palette step by step, until it dissolves into blue-gray fog. <b>Distance isn't drawn with lines — it's painted with temperature.</b> It's one of the simplest and most effective depth illusions in all of color theory.</p>
+    <div class="palette">
+      <div class="sw" style="background:#3B3A2E;color:#e7e2d7">Olive<small>#3B3A2E · coat</small></div>
+      <div class="sw" style="background:#5B4636;color:#e7e2d7">Ochre<small>#5B4636 · near rock</small></div>
+      <div class="sw" style="background:#9AA6A6;color:#1b1916">Fog blue<small>#9AA6A6 · midground</small></div>
+      <div class="sw" style="background:#7C8A8C;color:#e7e2d7">Ridge blue<small>#7C8A8C · distance</small></div>
+      <div class="sw" style="background:#D8DCD6;color:#555;border:1px solid #c7cbc2">Pale sky<small>#D8DCD6 · ground</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Light & Technique <span class="en">No sun, only fog</span></h2>
+    <p>There is no visible sun. The light source is <b>the fog itself</b> — diffuse, directionless, cool — casting the whole scene in a mood somewhere between dawn and overcast. The figure is a pure silhouette, backlit against the pale fog: all detail withheld, leaving only outline — turning a man into a symbol rather than a specific person.</p>
+    <p>Technically, this is German Romantic <b>glazing</b>: layer upon layer of thin paint, brushwork nearly invisible, depth built through subtle tonal shift rather than visible gesture — the opposite path from Van Gogh's urgent, visible stroke, even though both painters loved fog and night.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="en">An answer withheld</span></h2>
+    <p>The painting's real power is its <b>ambiguity</b>: is this back a conqueror who has mastered nature, or an ordinary person rendered speechless and small before it? Friedrich never answers — he hands the entire interpretation to the viewer. That's exactly why, two centuries later, it still gets printed on self-help book covers as "facing the unknown," and cited in essays on solitude and existential vertigo.</p>
+    <p>A man with no face lets the whole world see itself in him — possibly the highest form of empathic design a painting can achieve.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> The Artist <span class="en">Friedrich</span></h2>
+    <p><b>Caspar David Friedrich</b> (1774–1840) was the most important landscape painter of German Romanticism, working most of his life in Dresden. He lifted landscape painting from mere recording of nature into spiritual contemplation — ruined churches, crosses, fog, and moonlight recur throughout his work, treating nature itself as a vessel for religious experience.</p>
+    <p>Some scholars believe the back-turned figure may be a self-portrait (the red hair matches). He died in near-obscurity and poverty, forgotten until rediscovered in the early 20th century — now regarded as the definitive voice of the Romantic spirit.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="en">Color / Styling</span></h2>
+    <ul class="tips">
+      <li><b>Warm-to-cool depth grading:</b> warm brown/olive foreground, cooling through the midground, cold blue-gray in the distance — apply this to photo grading or illustration and you get instant depth and a "cinematic" feel.</li>
+      <li><b>Back-view composition:</b> to make viewers project themselves rather than just observe, shrink the figure, turn them away from camera, and center them in the frame — works for travel photos, profile shots, cover images.</li>
+      <li><b>Wear it:</b> deep olive coat + dark brown boots against a foggy blue-gray backdrop — the "quiet luxury" formula: low saturation, elevated grays, nothing loud.</li>
+      <li><b>Negative space:</b> let the fog (empty space) dominate the frame. The smaller the subject and the greater the emptiness, the stronger the emotional charge.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">Art</div>
+    Image: Caspar David Friedrich, <i>Wanderer above the Sea of Fog</i>, c. 1817 · public domain · Hamburger Kunsthalle<br>
+    Source: Wikimedia Commons · rights belong to the original author · appreciation is personal analysis
+  </footer>
+</div>
+</body>
+</html>
