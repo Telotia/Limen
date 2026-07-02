@@ -186,11 +186,14 @@
     const draw = function () {
       const w = dim.w, h = dim.h, cx = w * cxf, cy = h * cyf, S = Math.min(w * 0.56, h * 0.42) * scl;
       ctx.clearRect(0, 0, w, h);
-      frame++; if (frame % 560 === 0) cur = (cur + 1) % shapes.length;
+      // Shape hold + per-particle ease speed, tuned 2026-07-02 (was 560/0.034 ->
+      // ~18s hold + ~2.8s settle at the 30fps gate, reported as too slow/static).
+      // 280/0.06 -> ~9s hold + ~1.6s settle: noticeably livelier, still unhurried.
+      frame++; if (frame % 280 === 0) cur = (cur + 1) % shapes.length;
       const tgt = shapes[cur];
       for (let i = 0; i < N; i++) {
         const p = parts[i], t = tgt[i];
-        p.x += (t[0] - p.x) * 0.034; p.y += (t[1] - p.y) * 0.034;
+        p.x += (t[0] - p.x) * 0.06; p.y += (t[1] - p.y) * 0.06;
         const tw = 0.5 + 0.5 * Math.sin(p.tw + frame * 0.03);
         ctx.fillStyle = hexA(p.c, 0.26 + tw * 0.44);
         ctx.beginPath(); ctx.arc(cx + p.x * S, cy + p.y * S, 1.4 + tw * 1.5, 0, TAU); ctx.fill();
