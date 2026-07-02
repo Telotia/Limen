@@ -118,7 +118,7 @@
       for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
         const a = pts[i], b = pts[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
         if (d < 120) {
-          ctx.strokeStyle = 'rgba(100,177,239,' + ((1 - d / 120) * 0.26).toFixed(3) + ')';
+          ctx.strokeStyle = 'rgba(89,144,192,' + ((1 - d / 120) * 0.26).toFixed(3) + ')';
           ctx.lineWidth = 0.6;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
@@ -313,7 +313,7 @@
     let uid = 0;
     const nodes = [];        // {x,y,r,rt,col,parent,fade,front}  (x,y in WORLD space)
     const edges = [];        // {a,b,grow}
-    const MAX = 52;
+    const MAX = 42;
 
     // The graph lives in a WORLD larger than the card. A draggable camera (ox,oy)
     // pans it like a map, so nodes that grew past the frame can be brought into view.
@@ -340,9 +340,18 @@
       let bx = 0, by = 0; for (const n of L) { bx += n.x; by += n.y; } bx /= L.length; by /= L.length;
       L.sort(function (a, b) { return b.front - a.front || b.id - a.id; });     // spread from the frontier
       const parent = L[(Math.random() * Math.min(6, L.length)) | 0];
-      const away = Math.atan2(parent.y - by, parent.x - bx) + (Math.random() - 0.5) * 2.2;
-      const dist = 44 + Math.random() * 42;
-      spawnAt(parent.x + Math.cos(away) * dist, parent.y + Math.sin(away) * dist, parent);
+      // try several candidate spots, keep the one with the most clearance -> avoids overlap
+      let best = null, bestClear = -1;
+      for (let k = 0; k < 9; k++) {
+        const ang = Math.atan2(parent.y - by, parent.x - bx) + (Math.random() - 0.5) * 2.4;
+        const dist = 54 + Math.random() * 46;
+        const x = clamp(parent.x + Math.cos(ang) * dist, -padX(), dim.w + padX());
+        const y = clamp(parent.y + Math.sin(ang) * dist, -padY(), dim.h + padY());
+        let mn = 1e12;
+        for (const n of nodes) { if (n.fade) continue; const dx = n.x - x, dy = n.y - y, d = dx * dx + dy * dy; if (d < mn) mn = d; }
+        if (mn > bestClear) { bestClear = mn; best = [x, y]; }
+      }
+      spawnAt(best[0], best[1], parent);
       parent.front = Math.max(0, parent.front - 7);
     }
     function subtree(n) {
@@ -355,7 +364,7 @@
     const root = spawnAt(dim.w * 0.5, dim.h * 0.52, null); root.rt = 6;
     for (let i = 0; i < 5; i++) grow();
 
-    let hover = null, gt = 0, ft = 0;
+    let hover = null, gt = 0, ft = 0, _ph, _pox = null, _poy = null;
     // pointer state: distinguish a tap (add / falsify) from a drag (pan the camera)
     let down = false, panning = false, sx = 0, sy = 0, sox = 0, soy = 0, hitNode = null;
     function localXY(e) { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
@@ -399,7 +408,7 @@
 
     // advance the simulation one tick (shared by both renderers)
     function step() {
-      if (++gt > 32) { gt = 0; if (live().length < MAX) grow(); else { var L0 = live(); if (L0.length) falsify(L0[(Math.random() * L0.length) | 0]); } }
+      if (++gt > 60) { gt = 0; if (live().length < MAX) grow(); else { var L0 = live(); if (L0.length) falsify(L0[(Math.random() * L0.length) | 0]); } }
       if (++ft > 240) { ft = 0; var L1 = live(); if (L1.length > 10) falsify(L1[(Math.random() * L1.length) | 0]); }
       for (let i = nodes.length - 1; i >= 0; i--) {
         const n = nodes[i];
@@ -467,7 +476,17 @@
       }
     }
 
-    const draw = function () { step(); if (useGL) paintGL(); else paint2D(); };
+    const draw = function () {
+      step();
+      // idle-skip: only repaint when something actually changed (spawn/grow-in/fade,
+      // hover, or camera pan). Between spawns the graph is static -> zero canvas work.
+      let active = (hover !== _ph) || (ox !== _pox) || (oy !== _poy);
+      if (!active) { for (const n of nodes) { if (n.fade || Math.abs(n.rt - n.r) > 0.2) { active = true; break; } } }
+      if (!active) { for (const e of edges) { if (e.grow < 1) { active = true; break; } } }
+      if (!active) return;
+      _ph = hover; _pox = ox; _poy = oy;
+      if (useGL) paintGL(); else paint2D();
+    };
     var _g = gated(cv, draw);
 
     global.addEventListener('resize', onResize);
