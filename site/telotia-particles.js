@@ -264,7 +264,8 @@
     const AMBER = '#CCA273';
     const fine = !!(global.matchMedia && global.matchMedia('(pointer: fine)').matches);
     function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
-    function nodeCol() { const r = Math.random(); return r < 0.5 ? '#1F4E86' : (r < 0.85 ? '#5990C0' : '#5990C0'); }
+    // ink-wash: mostly soft tealglow + ink-gray, teal only as accent, dark rare
+    function nodeCol() { const r = Math.random(); return r < 0.5 ? '#5990C0' : (r < 0.72 ? '#7E879D' : (r < 0.92 ? '#2F6FB0' : '#1F4E86')); }
     function rgb(hex) { const n = parseInt(hex.slice(1), 16); return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; }
 
     // -- Renderer: WebGL (GPU) when available, else the 2D-canvas path (fallback). --
