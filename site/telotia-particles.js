@@ -60,10 +60,10 @@
 
   // Run `tick` on rAF only while the canvas is on-screen — off-screen canvases pause (the perf win).
   function gated(cv, tick) {
-    var raf = 0, vis = true, el = cv.parentElement || cv;
+    var raf = 0, vis = true, el = cv.parentElement || cv, last = -1e9;
     if (REDUCED) { tick(); return { stop: function () {} }; }
-    function loop() {                                   // 60fps; still freezes while scrolling (invisible, defensive)
-      if (!_scrolling) tick();
+    function loop(t) {                                  // ~30fps cap + freeze during scroll (both invisible, big CPU cut)
+      if (!_scrolling && (t || 0) - last >= 32) { last = t || 0; tick(); }
       if (vis) raf = requestAnimationFrame(loop);
     }
     raf = requestAnimationFrame(loop);                 // draw immediately; don't wait on the observer
@@ -99,7 +99,7 @@
     let dim = fit(cv), ctx = dim.ctx, raf = 0;
     const onResize = function () { dim = fit(cv); ctx = dim.ctx; };
 
-    const N = Math.max(40, Math.min(80, Math.round(dim.w / 20)));
+    const N = Math.max(28, Math.min(56, Math.round(dim.w / 28)));
     const pts = [];
     for (let i = 0; i < N; i++) pts.push({
       x: Math.random() * dim.w, y: Math.random() * dim.h,
@@ -145,7 +145,7 @@
     let dim = fit(cv), ctx = dim.ctx, raf = 0;
     const onResize = function () { dim = fit(cv); ctx = dim.ctx; };
 
-    const N = 360, TAU = Math.PI * 2;
+    const N = 260, TAU = Math.PI * 2;
     const mk = function (fn) { const a = []; for (let i = 0; i < N; i++) a.push(fn(i, i / N)); return a; };
     const rot = function (x, y, r) { return [x * Math.cos(r) - y * Math.sin(r), x * Math.sin(r) + y * Math.cos(r)]; };
 
@@ -212,12 +212,12 @@
       const w = dim.w, h = dim.h, m = Math.min(w, h);
       parts = [];
       const clusters = [
-        { x: w * 0.24, y: h * 0.48, r: m * 0.40, n: 140 },
-        { x: w * 0.10, y: h * 0.78, r: m * 0.16, n: 40 },
-        { x: w * 0.40, y: h * 0.20, r: m * 0.14, n: 55 },
-        { x: w * 0.06, y: h * 0.30, r: m * 0.12, n: 45 },
-        { x: w * 0.80, y: h * 0.44, r: m * 0.24, n: 70 },
-        { x: w * 0.92, y: h * 0.82, r: m * 0.12, n: 60 }
+        { x: w * 0.24, y: h * 0.48, r: m * 0.40, n: 96 },
+        { x: w * 0.10, y: h * 0.78, r: m * 0.16, n: 28 },
+        { x: w * 0.40, y: h * 0.20, r: m * 0.14, n: 38 },
+        { x: w * 0.06, y: h * 0.30, r: m * 0.12, n: 30 },
+        { x: w * 0.80, y: h * 0.44, r: m * 0.24, n: 48 },
+        { x: w * 0.92, y: h * 0.82, r: m * 0.12, n: 40 }
       ];
       clusters.forEach(function (c) {
         for (let i = 0; i < c.n; i++) {
@@ -227,7 +227,7 @@
           parts.push({ cx: c.x, cy: c.y, a: a, base: band, tw: Math.random() * 6.28, sp: 0.00018 + Math.random() * 0.0006, col: col, sz: 0.6 + Math.random() * 1.9 });
         }
       });
-      for (let i = 0; i < 80; i++) parts.push({ scatter: true, sx: Math.random() * w, sy: Math.random() * h, tw: Math.random() * 6.28, col: '#1F4E86', sz: 0.5 + Math.random() * 1.0 });
+      for (let i = 0; i < 50; i++) parts.push({ scatter: true, sx: Math.random() * w, sy: Math.random() * h, tw: Math.random() * 6.28, col: '#1F4E86', sz: 0.5 + Math.random() * 1.0 });
     };
     const onResize = function () { dim = fit(cv); ctx = dim.ctx; build(); };
     build();
