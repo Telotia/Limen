@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · Composition II in Red, Blue, and Yellow — Piet Mondrian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1916; --ink-soft:#3c3833; --ink-faint:#857f74;
+    --silver:#b9b4a8; --sepia:#8c7a5e; --slate:#5d6670; --bone:#e7e2d7;
+    --paper:rgba(248,245,239,.60); --line:rgba(60,55,45,.16); --void:#101010;
+    --mred:#D3122A; --mblue:#003F8E; --myellow:#F4C200;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.005em;
+    background:#d6d0c4; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 16% 10%, rgba(211,18,42,.14), transparent 60%),
+      radial-gradient(44rem 44rem at 84% 18%, rgba(0,63,142,.14), transparent 62%),
+      radial-gradient(40rem 40rem at 82% 90%, rgba(244,194,0,.16), transparent 60%),
+      radial-gradient(50rem 50rem at 24% 92%, rgba(93,102,112,.16), transparent 60%),
+      linear-gradient(160deg,#eae6dc,#d6d0c3);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(2rem,6vw,3.3rem);line-height:1.12;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:8px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(20,18,14,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#efece5}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(20,18,14,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.5rem;color:var(--sepia);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300;font-size:1.02rem}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.1rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.03em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;
+    border-radius:50%;background:var(--sepia);box-shadow:0 0 0 4px rgba(140,122,94,.22)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+    letter-spacing:.2em;font-size:1rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.01</div>
+    <h1>Composition II in Red, Blue, and Yellow</h1>
+    <div class="sub">Piet Mondrian, 1930 — painting reduced to pure balance</div>
+  </header>
+
+  <figure>
+    <img src="source.jpg" alt="Piet Mondrian, Composition II in Red, Blue, and Yellow, 1930">
+    <figcaption>Piet Mondrian, <i>Composition II in Red, Blue, and Yellow</i>, 1930 · oil on canvas, approx. 46×46 cm · De Stijl / Neoplasticism · Wikimedia Commons (public domain)</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">Three primary colors, a few black lines, and large fields of white. No sky, no figure, no story — Mondrian pared painting down until only <b>balance</b> remained. And yet it out-lasts almost everything busier: the large red top-right lands like a quiet accented beat, counterweighted by blue at the lower left, a chip of yellow at the lower right, and black lines of deliberately unequal weight. It is one of the most influential images of the 20th century — countless logos, layouts, posters, and garments still run on its grammar.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="en">Balance from asymmetry</span></h2>
+    <p>It looks simple, but it's a precision <b>weighing act</b>. The <b>red</b> in the upper right fills nearly half the canvas — the heaviest weight in the picture. Mondrian doesn't answer it with symmetry. He counterweights it with a grounded <b>blue</b> in the lower-left corner, a <b>small chip of yellow</b> lower right, and black lines of unequal thickness and spacing. This is <b>dynamic equilibrium</b>: unequal weights pulling against each other into stillness.</p>
+    <p><b>The lines aren't a grid.</b> Look closely — they vary in weight and every interval differs. The vertical sits left of center, splitting the field into a "narrow / wide" pair so it can breathe; a horizontal under the red carves off a band of white on the right. It's precisely this <b>un-evenness</b> that keeps it alive rather than a dead checkerboard.</p>
+    <p><b>White is not background.</b> The white blocks carry equal weight to the colored ones — "color without color" — holding the whole thing from collapsing. The three colors scatter along a diagonal (red top-right, blue bottom-left, yellow bottom-right), leaving broad white so the red rings louder. Inside the upper-left white square, a <b>faint pencil-sketched circle</b> still ghosts — a rare trace of the hand in an otherwise rational surface.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color <span class="en">The primaries at the limit</span></h2>
+    <p>Mondrian restricted himself to <b>red, yellow, blue + black, white, gray</b> — the most fundamental set in color theory. Primaries can't be mixed from anything else; they're the root of every other color. On the wheel the three sit 120° apart: a <b>triadic</b> relationship, the most stable <i>and</i> most tense triangle you can build.</p>
+    <p><b>Area sets the mood.</b> Red dominates yet never screams, because white fields and black borders fence it in; blue and yellow are small — a low note and a high note, struck once each. <b>Black also purifies the color</b>: the borders keep every block flat and saturated (no gradient, no brush-shadow). It's <i>simultaneous contrast</i> in reverse — the colors are kept from bleeding into each other, each sounding purely on its own.</p>
+    <div class="palette">
+      <div class="sw" style="background:#D3122A;color:#fff">Red<small>#D3122A · hero ~45%</small></div>
+      <div class="sw" style="background:#003F8E;color:#fff">Blue<small>#003F8E · low note</small></div>
+      <div class="sw" style="background:#F4C200;color:#3a2f00">Yellow<small>#F4C200 · high note</small></div>
+      <div class="sw" style="background:#1A1A1A;color:#e7e2d7">Black<small>#1A1A1A · borders</small></div>
+      <div class="sw" style="background:#F4F2ED;color:#555;border:1px solid #d8d3c8">Off-white<small>#F4F2ED · ground</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Light & Technique <span class="en">No shadow at all</span></h2>
+    <p>There is, deliberately, <b>no light and no shadow</b>. No perspective, no modeling, no depth — Mondrian saw those as personal, emotional noise. He wasn't after the light of a passing moment but a <b>universal, spiritual order</b>: the meeting of horizontal and vertical, which for him was the most basic opposition-and-harmony of the cosmos.</p>
+    <p>But it's no print. Up close, the edges of the black lines carry a slight <b>hand-made unevenness</b>, and the color blocks show the <b>matte texture</b> of oil paint — you can even read the layered underpainting. That trace of imperfection is exactly what keeps a maximally rational picture warm, and still a <i>painting</i>.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="en">Less is more, proven</span></h2>
+    <p>Because it's the ultimate proof of <b>less is more</b>. Strip everything inessential and every remaining decision has to be right: why this line here, why this red this big, why this much white. It forces you to look at <b>relationships rather than things</b> — beauty turns out to be nothing more than the exact right measure between a few lines and a few blocks.</p>
+    <p>It also proves abstraction isn't coldness. This maximally restrained language is still, a century later, the mother-motif of endless design — from the Mondrian dress to Bauhaus posters, from app icons to web grids. A true classic is <b>borrowed infinitely, yet still unmistakably itself</b>.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> The Artist <span class="en">Mondrian</span></h2>
+    <p><b>Piet Mondrian</b> (1872–1944), Dutch, the standard-bearer of Neoplasticism. He began with realist landscapes and trees, then step by step abstracted the tree into lines, and finally reduced even the lines to <b>horizontals and verticals only</b>. In 1917 he co-founded <b>De Stijl</b> with Theo van Doesburg and others, arguing that pure geometry and primary color could voice the universal harmony of the cosmos.</p>
+    <p>He lived alone and was fiercely disciplined — even his studio walls were painted in blocks of red, yellow, and blue. And he <b>loved to dance</b>, boogie-woogie above all; in his late New York years he let this strict language turn bright and syncopated, painting <i>Broadway Boogie Woogie</i>. A man who worshipped order almost religiously was, underneath, always moving to a beat.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="en">Color / Styling</span></h2>
+    <ul class="tips">
+      <li><b>The 7:2:1 area rule:</b> let white / negative space hold ~<b>70%</b>, one hero color (say red) ~<b>20%</b>, the other two ~<b>5%</b> each as accents. Never split the three evenly — Mondrian never makes red, blue, and yellow the same size, and that's the key to not looking cheap.</li>
+      <li><b>Always separate with black:</b> pure primaries fight when they touch. A <b>black (or charcoal) border</b> around each block instantly reads as intentional and premium — the cheapest "expensive" trick there is.</li>
+      <li><b>Wear it:</b> white shirt / cream as the base (70%), one <b>true-red piece</b> as the focal point (20%), blue and yellow as two small accessory hits (socks, bag, earrings). Primary-color outfits live or die on the ratio of <b>large neutral to small high-chroma</b>.</li>
+      <li><b>Web / slides:</b> use a <b>warm off-white background (never pure #FFF)</b>, unequal-width black divider lines as your grid, and color blocks only in the corners — never centered. The more white you dare to leave, the louder the color.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">Art</div>
+    Image: Piet Mondrian, <i>Composition II in Red, Blue, and Yellow</i>, 1930 · public domain<br>
+    Source: Wikimedia Commons · rights belong to the original author · appreciation is personal analysis
+  </footer>
+</div>
+</body>
+</html>
