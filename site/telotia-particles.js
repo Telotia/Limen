@@ -175,11 +175,23 @@
     });
 
     const shapes = [molecule, dna, cell, capsule];
-    const cols = ['#5990C0', '#2F6FB0', '#1F4E86'];
+    // Batched draw setup (2026-07-02): was 260 individual beginPath+arc+fill triples per
+    // frame (one canvas state change + path reset per particle -- MDN's canvas perf guide
+    // flags exactly this pattern: "batch canvas calls together" instead of many small ones).
+    // Group particles by color x a quantized twinkle-alpha level, so each frame does at most
+    // colors(4) x levels(8) = 32 beginPath/fill calls instead of 260, each drawing every
+    // particle that currently shares that fillStyle in one path. 8 alpha levels is visually
+    // indistinguishable from the old continuous alpha at this particle size (1.4-2.9px).
+    const PALETTE = ['#CCA273', '#5990C0', '#2F6FB0', '#1F4E86'];
+    const ALEVELS = 8;
+    const fillCache = PALETTE.map(function (hex) {
+      const a = []; for (let i = 0; i < ALEVELS; i++) a.push(hexA(hex, 0.26 + (i / (ALEVELS - 1)) * 0.44)); return a;
+    });
+    const buckets = PALETTE.map(function () { const b = []; for (let i = 0; i < ALEVELS; i++) b.push([]); return b; });
     const parts = [];
     for (let i = 0; i < N; i++) parts.push({
       x: Math.random() * 2 - 1, y: Math.random() * 2 - 1,
-      c: Math.random() < 0.22 ? '#CCA273' : cols[i % 3], tw: Math.random() * TAU
+      colIdx: Math.random() < 0.22 ? 0 : 1 + (i % 3), tw: Math.random() * TAU
     });
 
     let cur = 0, frame = 0;
@@ -191,12 +203,23 @@
       // 280/0.06 -> ~9s hold + ~1.6s settle: noticeably livelier, still unhurried.
       frame++; if (frame % 280 === 0) cur = (cur + 1) % shapes.length;
       const tgt = shapes[cur];
+      for (let c = 0; c < buckets.length; c++) for (let a = 0; a < ALEVELS; a++) buckets[c][a].length = 0;
       for (let i = 0; i < N; i++) {
         const p = parts[i], t = tgt[i];
         p.x += (t[0] - p.x) * 0.06; p.y += (t[1] - p.y) * 0.06;
         const tw = 0.5 + 0.5 * Math.sin(p.tw + frame * 0.03);
-        ctx.fillStyle = hexA(p.c, 0.26 + tw * 0.44);
-        ctx.beginPath(); ctx.arc(cx + p.x * S, cy + p.y * S, 1.4 + tw * 1.5, 0, TAU); ctx.fill();
+        const alv = Math.min(ALEVELS - 1, (tw * ALEVELS) | 0);
+        buckets[p.colIdx][alv].push(cx + p.x * S, cy + p.y * S, 1.4 + tw * 1.5);
+      }
+      for (let c = 0; c < buckets.length; c++) {
+        for (let a = 0; a < ALEVELS; a++) {
+          const arr = buckets[c][a];
+          if (!arr.length) continue;
+          ctx.fillStyle = fillCache[c][a];
+          ctx.beginPath();
+          for (let k = 0; k < arr.length; k += 3) { ctx.moveTo(arr[k] + arr[k + 2], arr[k + 1]); ctx.arc(arr[k], arr[k + 1], arr[k + 2], 0, TAU); }
+          ctx.fill();
+        }
       }
     };
     var _g = gated(cv, draw);
