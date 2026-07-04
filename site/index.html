@@ -168,11 +168,9 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
       <span style="font-family:var(--fmono);font-size:14px;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:#10182F">TELOTIA</span>
     </div></a>
     <div style="display:flex;gap:26px;margin-left:6px">
-      <a class="lk" href="process.html" style="font-size:13px">Process</a>
-      <a class="lk" href="workspace.html" style="font-size:13px">Workspace</a>
-      <a class="lk" href="demo.html" style="font-size:13px">Demo</a>
+      <a class="lk" href="process.html" style="font-size:13px">How it works</a>
+      <a class="lk" href="workspace.html" style="font-size:13px">Walkthrough</a>
       <a class="lk" href="research.html" style="font-size:13px">Research</a>
-      <a class="lk" href="consult.html" style="font-size:13px">Consult</a>
       <div class="nav-res">
         <a class="lk" href="/resource" style="font-size:13px">Resources</a>
         <div class="res-panel">
@@ -208,34 +206,33 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
   </nav>
 
   <!-- HERO -->
-  <header style="position:relative;min-height:100dvh;display:flex;align-items:flex-start;padding:96px 64px;overflow:hidden">
+  <header style="position:relative;padding:128px 64px 88px;overflow:hidden">
     <canvas id="tlHeroCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.7"></canvas>
-      <div class="tlMark" aria-hidden="true"><span class="tlL">T</span><span class="tlL">E</span><span class="tlL">L</span><span class="tlL">O</span><span class="tlL">T</span><span class="tlL">I</span><span class="tlL">A</span></div>
       <svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true"><defs><filter id="tlInk" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency="0.011 0.015" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
-    <div id="tlHeroGrid" style="position:relative;z-index:2;max-width:1320px;width:100%;margin:clamp(110px,12vw,180px) auto 0;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center">
+    <div id="tlHeroGrid" style="position:relative;z-index:2;max-width:1320px;width:100%;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center">
       <div>
         <div id="tlPill" style="display:inline-flex;align-items:center;gap:11px;font-family:var(--fmono);font-size:12px;letter-spacing:.14em;color:var(--t2);border:1px solid rgba(47,111,176,.24);background:rgba(47,111,176,.06);padding:7px 14px;border-radius:100px;text-transform:uppercase">
           <span style="width:7px;height:7px;border-radius:50%;background:var(--tealglow);animation:pulseDot 1.2s var(--ease) infinite"></span>
-          Paid pilot · Montreal · launching September 2026
+          Paid pilot · Montreal
         </div>
-        <h1 style="font-weight:700;font-size:60px;line-height:1.04;letter-spacing:-.025em;margin:24px 0 0;color:#0e1d33;text-wrap:balance">Evidence-grade audit for Canadian health-equipment imports.</h1>
-        <p style="font-size:19px;line-height:1.55;color:var(--t2);max-width:560px;margin-top:22px;text-wrap:pretty">Telotia turns documentation into citation-linked evidence review for teams preparing Canadian proof packages. It checks the <span style="color:#141d2d">claim</span>, not the <span style="color:#141d2d">conclusion</span>.</p>
-        <div style="display:flex;align-items:center;gap:14px;margin-top:34px">
+        <h1 style="font-weight:700;font-size:47px;line-height:1.08;letter-spacing:-.022em;margin:22px 0 0;color:#0e1d33;text-wrap:balance">Every statement in your CAPA, checked against the evidence.</h1>
+        <p style="font-size:18px;line-height:1.58;color:var(--t2);max-width:520px;margin-top:20px;text-wrap:pretty">Telotia reads the record, finds what backs each statement, and shows the gaps, with citations your auditor can follow. You still sign off; you just stop hunting for page numbers.</p>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:32px">
           <a class="btn-p" href="#consult" style="background:var(--teal);color:#e7eaed;font-weight:600;font-size:14px;padding:11px 22px;border-radius:9px;text-decoration:none;box-shadow:0 8px 24px -10px rgba(47,111,176,.55)">Request a pilot</a>
-          <a class="btn-s" href="#demo" style="border:1px solid rgba(40,25,25,.2);color:var(--t2);font-weight:500;font-size:14px;padding:11px 20px;border-radius:9px;text-decoration:none">▷ Watch the demo</a>
+          <a class="btn-s" href="#process" style="border:1px solid rgba(40,25,25,.2);color:var(--t2);font-weight:500;font-size:14px;padding:11px 20px;border-radius:9px;text-decoration:none">See how it works</a>
         </div>
-        <div style="margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:540px">
+        <div style="margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:560px">
           <div style="border-top:1px solid var(--rule);padding-top:12px">
-            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)">Input</div>
-            <div style="font-size:16px;font-weight:600;color:var(--t1);margin-top:5px">Any document set</div>
+            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)">You bring</div>
+            <div style="font-size:15px;font-weight:600;color:var(--t1);margin-top:5px">Your CAPA and your records</div>
           </div>
           <div style="border-top:1px solid var(--rule);padding-top:12px">
-            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)">Checked against</div>
-            <div style="font-size:16px;font-weight:600;color:var(--t1);margin-top:5px">A corpus <span style="color:var(--gold)">you</span> trust</div>
+            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)">We check</div>
+            <div style="font-size:15px;font-weight:600;color:var(--t1);margin-top:5px">Statement by <span style="color:var(--gold)">statement</span></div>
           </div>
           <div style="border-top:1px solid var(--rule);padding-top:12px">
-            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)">Output</div>
-            <div style="font-size:16px;font-weight:600;color:var(--t1);margin-top:5px">Graded &amp; cited</div>
+            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)">You get</div>
+            <div style="font-size:15px;font-weight:600;color:var(--t1);margin-top:5px">Cited evidence and the gaps</div>
           </div>
         </div>
       </div>
@@ -244,25 +241,29 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
         <div style="position:absolute;inset:-20% -15%;pointer-events:none;background:radial-gradient(46% 40% at 30% 24%, rgba(89,144,192,.24), transparent 66%),radial-gradient(42% 48% at 74% 64%, rgba(16,42,107,.15), transparent 70%),radial-gradient(34% 30% at 54% 94%, rgba(120,150,200,.13), transparent 72%);filter:blur(12px)"></div>
         <div class="glow-wrap" style="position:relative;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:rgba(232,234,238,.62);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 34px 70px -28px rgba(247,247,247,.7)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--rulesoft);background:rgba(231,233,237,.5)">
-            <span style="font-family:var(--fmono);font-size:11px;letter-spacing:.16em;color:var(--t1)">EVIDENCE LEDGER</span>
+            <span style="font-family:var(--fmono);font-size:11px;letter-spacing:.16em;color:var(--t1)">CAPA REVIEW</span>
             <span style="flex:1"></span>
-            <span style="display:inline-flex;align-items:center;gap:7px;font-family:var(--fmono);font-size:10px;color:var(--tealglow)"><span style="width:6px;height:6px;border-radius:50%;background:var(--tealglow);animation:pulseDot 1.2s var(--ease) infinite"></span>live</span>
+            <span style="font-family:var(--fmono);font-size:9.5px;letter-spacing:.12em;color:var(--t4);text-transform:uppercase">Illustrative · the workflow we're building</span>
           </div>
-          <div style="display:flex;justify-content:space-between;padding:10px 18px;border-bottom:1px solid var(--rulesoft);font-family:var(--fmono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)"><span>Claim</span><span>Verdict</span></div>
-          <div style="display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid var(--rulesoft)">
-            <div style="flex:1"><p style="font-size:14px;line-height:1.4;color:var(--t1)">Device packaging identifies the imported model and lot.</p><span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">IFU-22 / page 4</span></div>
-            <span style="flex-shrink:0;font-family:var(--fmono);font-size:10.5px;color:var(--teal);border:1px solid var(--teal2);border-radius:3px;padding:3px 8px">Supported</span>
+          <div style="display:flex;justify-content:space-between;padding:10px 18px;border-bottom:1px solid var(--rulesoft);font-family:var(--fmono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)"><span>Statement</span><span>Evidence</span></div>
+          <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid var(--rulesoft)">
+            <div style="flex:1"><p style="font-size:13.5px;line-height:1.4;color:var(--t1)">The CAPA identifies the affected device model and lot range.</p><span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">openFDA recall record</span></div>
+            <span style="flex-shrink:0;font-family:var(--fmono);font-size:10.5px;color:var(--teal);border:1px solid var(--teal2);border-radius:3px;padding:3px 8px">Found</span>
           </div>
-          <div style="display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid var(--rulesoft)">
-            <div style="flex:1"><p style="font-size:14px;line-height:1.4;color:var(--t1)">Cleaning covers high-touch surfaces after each use.</p><span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">Maintenance manual / §7.2</span></div>
-            <span style="flex-shrink:0;font-family:var(--fmono);font-size:10.5px;color:var(--gold);border:1px solid var(--gold2);border-radius:3px;padding:3px 8px">Partial</span>
+          <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid var(--rulesoft)">
+            <div style="flex:1"><p style="font-size:13.5px;line-height:1.4;color:var(--t1)">Corrective actions address every root cause named.</p><span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">investigation §4 · one cause open</span></div>
+            <span style="flex-shrink:0;font-family:var(--fmono);font-size:10.5px;color:var(--gold);border:1px solid var(--gold2);border-radius:3px;padding:3px 8px">Incomplete</span>
           </div>
-          <div style="display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid var(--rulesoft)">
-            <div style="flex:1"><p style="font-size:14px;line-height:1.4;color:var(--t1)">Bilingual labelling on all external warnings.</p><span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">no cited passage</span></div>
-            <span style="flex-shrink:0;font-family:var(--fmono);font-size:10.5px;color:var(--t3);border:1px solid var(--rule);border-radius:3px;padding:3px 8px">Unsupported</span>
+          <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid var(--rulesoft)">
+            <div style="flex:1"><p style="font-size:13.5px;line-height:1.4;color:var(--t1)">No comparable device failures in the prior 24 months.</p><span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">MAUDE adverse-event records</span></div>
+            <span style="flex-shrink:0;font-family:var(--fmono);font-size:10.5px;color:#9c5548;border:1px solid #d1a08f;border-radius:3px;padding:3px 8px">Conflicting</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid var(--rulesoft)">
+            <div style="flex:1"><p style="font-size:13.5px;line-height:1.4;color:var(--t1)">Design change validated under the current QMSR.</p><span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">no citation found</span></div>
+            <span style="flex-shrink:0;font-family:var(--fmono);font-size:10.5px;color:var(--t3);border:1px solid var(--rule);border-radius:3px;padding:3px 8px">None on file</span>
           </div>
           <div style="display:flex;align-items:center;gap:8px;padding:13px 18px;font-family:var(--fmono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t4)">
-            <span style="color:var(--teal)">decompose</span><span>→</span><span style="color:var(--teal)">search</span><span>→</span><span style="color:var(--teal)">grade</span><span style="flex:1"></span><span>human review</span>
+            <span style="color:var(--teal)">decompose</span><span>→</span><span style="color:var(--teal)">check</span><span>→</span><span style="color:var(--teal)">cite</span><span style="flex:1"></span><span>you sign off</span>
           </div>
         </div>
       </div>
@@ -334,9 +335,9 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
   <section id="verdict" style="position:relative;padding:96px 64px;background:transparent;border-top:1px solid var(--rulesoft)">
     <div style="position:absolute;right:24px;top:96px;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--fmono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--t4)">Verdict</div>
     <div style="max-width:1180px;margin:0 auto">
-      <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">Verdicts</span>
-      <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1);max-width:760px">Three outcomes. None of them is a score.</h2>
-      <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:640px;margin-top:14px">The workspace does not collapse review into true or false. It exposes what the trusted corpus can support, what it only partly supports, and where it is silent.</p>
+      <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">Evidence outcomes</span>
+      <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1);max-width:760px">Four outcomes. None of them a pass or fail.</h2>
+      <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:680px;margin-top:14px">Telotia never collapses a statement to true or false. It shows where the evidence backs it, where it falls short, where it conflicts, and where the record is simply silent.</p>
 
       <div id="tlSpikeWrap" class="glow-wrap" style="position:relative;height:440px;margin-top:40px;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:#eaecef">
         <div style="position:absolute;inset:0;background:radial-gradient(ellipse 68% 90% at 26% 18%, rgba(166,196,242,.38) 0%, transparent 56%), radial-gradient(ellipse 58% 78% at 84% 88%, rgba(232,169,143,.20) 0%, transparent 55%), linear-gradient(158deg, #eff3f9 0%, #e5e8ef 100%)"></div>
@@ -346,21 +347,26 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
         <div style="position:absolute;left:20px;bottom:16px;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);pointer-events:none">Verdict space · drag to pan · click empty to add · click a chain to falsify</div>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px">
-        <article id="tlCard-supported" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:26px;background:radial-gradient(circle at 15% 12%,rgba(47,111,176,.1),transparent 42%),#EEF1F7">
-          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;background:var(--teal)"></span><span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Verdict</span></div>
-          <h3 style="font-weight:600;font-size:25px;margin-top:14px;color:var(--t1)">Supported</h3>
-          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Evidence in the corpus backs the claim. The supporting passage is retrieved and cited exactly.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:20px">
+        <article id="tlCard-supported" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:22px;background:radial-gradient(circle at 15% 12%,rgba(47,111,176,.1),transparent 42%),#EEF1F7">
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;background:var(--teal)"></span><span style="font-family:var(--fmono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">supported</span></div>
+          <h3 style="font-weight:600;font-size:21px;margin-top:14px;color:var(--t1)">Found</h3>
+          <p style="font-size:14px;line-height:1.6;color:var(--t2);margin-top:10px">The evidence backs the statement. Telotia retrieves the passage and cites it exactly.</p>
         </article>
-        <article id="tlCard-partial" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:26px;background:radial-gradient(circle at 15% 12%,rgba(232,169,143,.1),transparent 42%),#e4e6eb">
-          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;border:1.4px solid var(--gold);background:transparent"></span><span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Verdict</span></div>
-          <h3 style="font-weight:600;font-size:25px;margin-top:14px;color:var(--t1)">Partial</h3>
-          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Some of the claim is backed; part is not, or only holds under specific conditions. Graded and non-binary, not collapsed to true or false.</p>
+        <article id="tlCard-partial" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:22px;background:radial-gradient(circle at 15% 12%,rgba(232,169,143,.1),transparent 42%),#e4e6eb">
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;border:1.4px solid var(--gold);background:transparent"></span><span style="font-family:var(--fmono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">partial</span></div>
+          <h3 style="font-weight:600;font-size:21px;margin-top:14px;color:var(--t1)">Incomplete</h3>
+          <p style="font-size:14px;line-height:1.6;color:var(--t2);margin-top:10px">Part is backed; part is not, or holds only under specific conditions. Graded, never collapsed to true or false.</p>
         </article>
-        <article id="tlCard-unsupported" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:26px;background:#e8eaed">
-          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;border:1.2px solid var(--t3);background:transparent"></span><span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Verdict</span></div>
-          <h3 style="font-weight:600;font-size:25px;margin-top:14px;color:var(--t1)">Unsupported</h3>
-          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">This corpus is silent on the claim, not that the claim is wrong. Results are a starting point for a human reviewer, not a final verdict on the work.</p>
+        <article id="tlCard-contradicted" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:22px;background:radial-gradient(circle at 15% 12%,rgba(222,161,147,.12),transparent 42%),#e9e6e6">
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;border:1.4px solid #cf9382;background:transparent"></span><span style="font-family:var(--fmono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">contradicted</span></div>
+          <h3 style="font-weight:600;font-size:21px;margin-top:14px;color:var(--t1)">Conflicting</h3>
+          <p style="font-size:14px;line-height:1.6;color:var(--t2);margin-top:10px">The record points the other way. Evidence in the corpus conflicts with the statement, with the citation to prove it.</p>
+        </article>
+        <article id="tlCard-unsupported" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:22px;background:#e8eaed">
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;border:1.2px solid var(--t3);background:transparent"></span><span style="font-family:var(--fmono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">unsupported</span></div>
+          <h3 style="font-weight:600;font-size:21px;margin-top:14px;color:var(--t1)">None on file</h3>
+          <p style="font-size:14px;line-height:1.6;color:var(--t2);margin-top:10px">The corpus is silent on the statement, not that it is wrong. A starting point for your reviewer, not a verdict on the work.</p>
         </article>
       </div>
     </div>
