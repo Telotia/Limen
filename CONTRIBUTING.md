@@ -356,8 +356,6 @@ These can't be automated. Grep the repo for `🚧 [HUMAN]` to find them all at o
 |------|-------|-------|
 | Add `CLOUDFLARE_API_TOKEN` repo secret | Settings → Secrets → Actions | @mohan |
 | Add `CLOUDFLARE_ACCOUNT_ID` repo secret (value `f39fc97d0e872ca3c6cad23b1a7561d6`) | Settings → Secrets → Actions | @mohan |
-| Invite the two other programmers as repo collaborators | Settings → Collaborators and teams | @mohan |
 | Set owner/registrant contact email for `telotia.com`, `telotia.ca`, and `telotia.ai` to `hello@telotia.com` | Cloudflare Registrar | @mohan |
 | Add `telotia.com` as an active Cloudflare zone for the `limen` Worker Custom Domain | Cloudflare dashboard | @mohan |
-| Add a `team-reviewers` group and CODEOWNERS file once there are ≥2 reviewers besides PR author | `.github/CODEOWNERS` + repo settings | @mohan |
 | **Long-term:** migrate Cloudflare ownership from personal account to a Telotia-owned account when SDPS provides one | Cloudflare dashboard | @mohan |
