@@ -1,0 +1,23 @@
+# .mailmap — one canonical identity per contributor.
+#
+# Collapses the many name/email combos in git history so `git shortlog`,
+# `git blame`, GitHub, and release-drafter attribute each commit to the right
+# person. Git reads this file from the repo root automatically.
+#
+# Canonical emails below use each person's known address. Swap in their real
+# @telotia.com address once confirmed (pattern: firstname.lastname@telotia.com).
+#
+# Format:  Canonical Name <canonical-email> <commit-email-to-map>
+
+# Kecheng Yao — GitHub WHYKEYSAY / whykeysay
+Kecheng Yao <whykeysay@gmail.com> <whykeysay@gmail.com>
+Kecheng Yao <whykeysay@gmail.com> <46579645+WHYKEYSAY@users.noreply.github.com>
+
+# Keying Dai — GitHub whykeyday
+# (some commits are authored under the name "Kecheng" but from whykeyday@gmail.com;
+#  attributed to Keying Dai per the whykeyday@gmail.com = Keying Dai rule)
+Keying Dai <whykeyday@gmail.com> <whykeyday@gmail.com>
+Keying Dai <whykeyday@gmail.com> <101945582+whykeyday@users.noreply.github.com>
+
+# Mohan Qiao
+Mohan Qiao <mohan.qiao@telotia.com> <pdec.prog@gmail.com>
