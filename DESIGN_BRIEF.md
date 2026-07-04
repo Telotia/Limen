@@ -7,7 +7,7 @@ Polish the Telotia public site to a premium, refined standard (the team loves ra
 
 ## 1. Product & first vertical
 Telotia = **claim-to-evidence validation**: decompose a document into individual claims → search each against a trusted evidence corpus → assign a graded verdict (**Supported / Partial / Unsupported**) with **source citations**. For high-stakes, evidence-heavy regulatory work.
-- **First product direction = healthcare-regulatory / credentialing** (anchor partner: **CAPA** — Canadian Association of Physician Assistants / PACCC certification, capa-acam.ca). Adjacent demo: health-equipment import compliance / medical-device regulatory submissions (claims need cited clinical evidence). Don't name specific regulators as customers.
+- **First product direction = medical-device / pharma regulatory quality.** First planned demo: **CAPA (Corrective and Preventive Action)** investigations — claims validated against public FDA data. Documented second vertical: AI-governance / model-risk (OSFI E-23) in financial services. Don't name specific regulators or partners as customers.
 
 ## 2. Audience (who must believe it)
 Centech evaluators, design partners in evidence-heavy/regulatory fields, prospective collaborators/advisors, research community. Sober, credible, technical — not consumer-flashy.
@@ -24,10 +24,10 @@ Centech evaluators, design partners in evidence-heavy/regulatory fields, prospec
 - One clear channel only. No pricing/login/blog/logo-wall yet.
 
 ## 5. Design system — "Principia Design System" (use these tokens; file: Limen/Principia Design System/colors_and_type.css)
-- **Light surface (lead with this — sober/institutional, suits healthcare-regulatory):** paper `#F6F7FB`, raised `#EEF1F7`, ink `#10182F` (deep navy, primary text), ink-2 `#27324F`, muted `#5C6680`, hairline `#C8D0E0`.
+- **Light surface (lead with this — sober/institutional, suits medical-device / regulated-quality):** paper `#F6F7FB`, raised `#EEF1F7`, ink `#10182F` (deep navy, primary text), ink-2 `#27324F`, muted `#5C6680`, hairline `#C8D0E0`.
 - **Brand accents:** brand-blue `#102A6B` (mark), current-blue `#5990C0` (active), sand-gold `#CCA273` (Partial highlight).
 - **Verdict colors (core to the product):** Supported = blue family (`#5990C0`→`#102A6B`); Partial = navy→sand-gold; Unsupported/Falsified = navy→rose `#DEA193`.
-- **Cosmic/constellation layer** (ocean radial, rose-gold, nebula-violet/magenta) EXISTS — **keep it SUBTLE / accent only.** For the healthcare-regulatory read it must not dominate (too poetic for a compliance buyer). Lead sober navy-on-paper.
+- **Cosmic/constellation layer** (ocean radial, rose-gold, nebula-violet/magenta) EXISTS — **keep it SUBTLE / accent only.** For the medical-device / regulated-quality read it must not dominate (too poetic for a compliance buyer). Lead sober navy-on-paper.
 - **Type:** Display = **Newsreader** (humanist serif — use only for big headlines/gravitas); Body/UI = **IBM Plex Sans**; Mono = **IBM Plex Mono**. (If serif feels too "literary" for the clinical read, keep headlines tighter / lean more on Plex Sans.)
 
 ## 6. Reference to emulate — ranger.net ("premium minimalism")
