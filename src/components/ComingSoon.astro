@@ -1,0 +1,206 @@
+---
+// Production landing (telotia.com). The full multi-page experience lives on
+// dev.telotia.com (built with LIMEN_ENV=dev); production shows this single
+// ink-wash teaser until launch. Self-contained on purpose — it does not depend
+// on the site/ bundle, so it can ship to main on its own.
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+/>
+
+<section class="cs">
+  <canvas class="cs-field" aria-hidden="true"></canvas>
+  <div class="cs-aurora" aria-hidden="true"></div>
+  <div class="cs-grain" aria-hidden="true"></div>
+
+  <div class="cs-inner">
+    <img class="cs-logo" src="/telotia-logo-cut.png" alt="Telotia" width="96" height="96" />
+    <div class="cs-word">TELOTIA</div>
+    <h1 class="cs-head">Arriving <em>September</em> 2026</h1>
+    <p class="cs-sub">Every claim, held to the evidence behind it.</p>
+    <div class="cs-rule" aria-hidden="true"></div>
+    <a class="cs-mail" href="mailto:hello@telotia.com">hello@telotia.com</a>
+  </div>
+
+  <div class="cs-foot">
+    <span>Montréal</span>
+    <span>© 2026 Telotia</span>
+  </div>
+</section>
+
+<style>
+  .cs {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    background: #f6f7fb;
+    overflow: hidden;
+    font-family: "IBM Plex Sans", "Helvetica Neue", -apple-system, sans-serif;
+  }
+  .cs-field {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .cs-aurora {
+    position: absolute;
+    inset: -20%;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(38% 42% at 26% 32%, rgba(47, 111, 176, 0.2), transparent 70%),
+      radial-gradient(34% 40% at 78% 30%, rgba(204, 162, 115, 0.16), transparent 72%),
+      radial-gradient(46% 50% at 62% 82%, rgba(89, 144, 192, 0.16), transparent 74%);
+    filter: blur(8px);
+    animation: csDrift 26s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+  .cs-grain {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+  }
+  .cs-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cs-logo {
+    height: 92px;
+    width: auto;
+    display: block;
+    animation: csFloat 7s ease-in-out infinite;
+  }
+  .cs-word {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.34em;
+    padding-left: 0.34em;
+    color: #10182f;
+    margin-top: 6px;
+  }
+  .cs-head {
+    font-family: "Newsreader", Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.04;
+    color: #10182f;
+    font-size: clamp(40px, 7vw, 74px);
+    margin-top: 30px;
+  }
+  .cs-head em {
+    font-style: italic;
+    color: #1f4e86;
+  }
+  .cs-sub {
+    font-size: clamp(16px, 2.4vw, 19px);
+    line-height: 1.55;
+    color: #5c6680;
+    margin-top: 20px;
+    max-width: 430px;
+  }
+  .cs-rule {
+    width: 60px;
+    height: 1px;
+    background: #c8d0e0;
+    margin-top: 32px;
+  }
+  .cs-mail {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 13px;
+    color: #27324f;
+    text-decoration: none;
+    margin-top: 26px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(126, 94, 46, 0.5);
+    transition:
+      color 0.18s,
+      border-color 0.18s;
+  }
+  .cs-mail:hover {
+    color: #10182f;
+    border-color: rgba(126, 94, 46, 0.9);
+  }
+  .cs-foot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 28px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: #7e879d;
+  }
+
+  @keyframes csFloat {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  @keyframes csDrift {
+    0% {
+      transform: translate3d(-3%, 0, 0) scale(1.05);
+    }
+    50% {
+      transform: translate3d(3%, -2%, 0) scale(1.12);
+    }
+    100% {
+      transform: translate3d(-3%, 0, 0) scale(1.05);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .cs-logo {
+      height: 76px;
+    }
+    .cs-foot {
+      font-size: 10px;
+      padding: 16px 18px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cs-logo,
+    .cs-aurora {
+      animation: none;
+    }
+  }
+</style>
+
+<!-- Constellation field: the same signature effect as the dev hero, so the
+     teaser and the full site read as one brand. Progressive enhancement — the
+     CSS ink-wash stands on its own if this never runs. -->
+<script is:inline src="/telotia-particles.js"></script>
+<script is:inline>
+  (function () {
+    var cv = document.querySelector(".cs-field");
+    var T = window.TelotiaParticles;
+    if (cv && T && typeof T.hero === "function") T.hero(cv);
+  })();
+</script>

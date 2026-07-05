@@ -1,4 +1,5 @@
 ---
+import ComingSoon from '../components/ComingSoon.astro';
 // Sibling of index.astro -- same multi-page ink-wash site/ bundle pattern.
 import designRaw from '../../site/consult.html?raw';
 
@@ -22,12 +23,7 @@ const designHtml = bodyMatch ? bodyMatch[1] : '';
   <body>
     {
       isProd ? (
-        <main style="min-height:100dvh;display:grid;place-items:center;text-align:center;font-family:'IBM Plex Sans',system-ui,sans-serif">
-          <div>
-            <h1 style="font-size:48px;letter-spacing:-.02em;color:#10182F;margin:0">Telotia</h1>
-            <p style="color:#5C6680;margin-top:8px">Coming soon.</p>
-          </div>
-        </main>
+        <ComingSoon />
       ) : (
         <Fragment set:html={designHtml} />
       )

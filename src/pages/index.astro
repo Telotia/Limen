@@ -1,9 +1,10 @@
 ---
+import ComingSoon from '../components/ComingSoon.astro';
 // dev.telotia.com renders the multi-page ink-wash site (site/index.html) --
 // perf-optimized (30fps cap, off-screen pause, DPR 1.5, trimmed particle
 // counts) and the current design direction. Sibling pages: process, workspace,
 // demo, research, consult (see those .astro files -- same pattern).
-// prod (telotia.com) stays "Coming soon" until launch.
+// prod (telotia.com) shows the <ComingSoon /> teaser until launch.
 import designRaw from '../../site/index.html?raw';
 
 const limenEnv = process.env.LIMEN_ENV ?? 'dev';
@@ -17,7 +18,8 @@ const designHtml = bodyMatch ? bodyMatch[1] : '';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Telotia — claim-to-evidence validation</title>
+    <title>{isProd ? 'Telotia — Arriving September 2026' : 'Telotia — claim-to-evidence validation'}</title>
+    {isProd && <meta name="description" content="Every claim, held to the evidence behind it. Arriving September 2026 — Montréal." />}
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -26,12 +28,7 @@ const designHtml = bodyMatch ? bodyMatch[1] : '';
   <body>
     {
       isProd ? (
-        <main style="min-height:100dvh;display:grid;place-items:center;text-align:center;font-family:'IBM Plex Sans',system-ui,sans-serif">
-          <div>
-            <h1 style="font-size:48px;letter-spacing:-.02em;color:#10182F;margin:0">Telotia</h1>
-            <p style="color:#5C6680;margin-top:8px">Coming soon.</p>
-          </div>
-        </main>
+        <ComingSoon />
       ) : (
         // site/index.html's own <script src="telotia-particles.js?v=8"> /
         // "footer-assets.js?v=8"> tags live inside its <body>, so they come
