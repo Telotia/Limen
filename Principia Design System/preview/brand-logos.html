@@ -1,0 +1,109 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Logos</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 24px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .tile {
+    background:
+      radial-gradient(circle at 16% 12%, rgba(89, 144, 192, 0.12), transparent 32%),
+      linear-gradient(135deg, #F6F7FB 0%, #EEF1F7 100%);
+    border: 1px solid #C8D0E0;
+    border-radius: var(--r-3);
+    padding: 22px 24px;
+    min-height: 116px;
+    display: flex; align-items: center; gap: 22px;
+    color: #10182F;
+    box-shadow: 0 10px 28px rgba(16, 42, 107, 0.06);
+  }
+  .tile--dark { background: var(--ocean); background-color: var(--ocean-flat); border-color: var(--night-rule); color: var(--night-ink); box-shadow: 0 10px 28px rgba(4, 8, 24, 0.45); }
+  .word-p { font-family: var(--font-display); font-size: 30px; letter-spacing: -.5px; line-height: 1; font-weight: 400; }
+  .word-t { font-family: var(--font-sans); font-size: 22px; letter-spacing: .22em; line-height: 1; font-weight: 500; text-transform: uppercase; }
+  .meta { font-family: var(--font-sans); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #5C6680; margin-top: 6px; }
+  .tile--dark .meta { color: var(--night-ink-2); }
+  .mark { width: 40px; height: 40px; flex: 0 0 40px; }
+</style>
+</head>
+<body>
+  <div class="grid">
+
+    <div class="tile">
+      <svg class="mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1" stroke-linecap="round">
+          <line x1="18" y1="12" x2="18" y2="52"/><line x1="18" y1="12" x2="40" y2="14"/>
+          <line x1="40" y1="14" x2="48" y2="22"/><line x1="48" y1="22" x2="44" y2="32"/>
+          <line x1="44" y1="32" x2="32" y2="34"/><line x1="32" y1="34" x2="18" y2="32"/>
+        </g>
+        <g fill="currentColor">
+          <circle cx="18" cy="12" r="2.2"/><circle cx="40" cy="14" r="1.8"/>
+          <circle cx="48" cy="22" r="2.2"/><circle cx="44" cy="32" r="1.6"/>
+          <circle cx="32" cy="34" r="1.6"/><circle cx="18" cy="32" r="2.2"/>
+          <circle cx="18" cy="52" r="2.6" fill="#DEA193"/>
+        </g>
+      </svg>
+      <div>
+        <div class="word-p">Principia</div>
+        <div class="meta">product · light</div>
+      </div>
+    </div>
+
+    <div class="tile tile--dark">
+      <svg class="mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1" stroke-linecap="round">
+          <line x1="18" y1="12" x2="18" y2="52"/><line x1="18" y1="12" x2="40" y2="14"/>
+          <line x1="40" y1="14" x2="48" y2="22"/><line x1="48" y1="22" x2="44" y2="32"/>
+          <line x1="44" y1="32" x2="32" y2="34"/><line x1="32" y1="34" x2="18" y2="32"/>
+        </g>
+        <g fill="currentColor">
+          <circle cx="18" cy="12" r="2.2"/><circle cx="40" cy="14" r="1.8"/>
+          <circle cx="48" cy="22" r="2.2"/><circle cx="44" cy="32" r="1.6"/>
+          <circle cx="32" cy="34" r="1.6"/><circle cx="18" cy="32" r="2.2"/>
+          <circle cx="18" cy="52" r="2.6" fill="#DEA193"/>
+        </g>
+      </svg>
+      <div>
+        <div class="word-p">Principia</div>
+        <div class="meta">product · night</div>
+      </div>
+    </div>
+
+    <div class="tile">
+      <svg class="mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1" stroke-linecap="round">
+          <line x1="12" y1="50" x2="22" y2="40"/><line x1="22" y1="40" x2="36" y2="34"/>
+          <line x1="36" y1="34" x2="48" y2="18"/><line x1="36" y1="34" x2="50" y2="32"/>
+          <line x1="48" y1="18" x2="50" y2="32"/>
+        </g>
+        <g fill="currentColor">
+          <circle cx="12" cy="50" r="1.6"/><circle cx="22" cy="40" r="1.6"/>
+          <circle cx="36" cy="34" r="2.2"/><circle cx="48" cy="18" r="2.6" fill="#DEA193"/>
+          <circle cx="50" cy="32" r="1.6"/>
+        </g>
+      </svg>
+      <div>
+        <div class="word-t">TELOTIA</div>
+        <div class="meta">organization · light</div>
+      </div>
+    </div>
+
+    <div class="tile tile--dark">
+      <svg class="mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1" stroke-linecap="round">
+          <line x1="12" y1="50" x2="22" y2="40"/><line x1="22" y1="40" x2="36" y2="34"/>
+          <line x1="36" y1="34" x2="48" y2="18"/><line x1="36" y1="34" x2="50" y2="32"/>
+          <line x1="48" y1="18" x2="50" y2="32"/>
+        </g>
+        <g fill="currentColor">
+          <circle cx="12" cy="50" r="1.6"/><circle cx="22" cy="40" r="1.6"/>
+          <circle cx="36" cy="34" r="2.2"/><circle cx="48" cy="18" r="2.6" fill="#DEA193"/>
+          <circle cx="50" cy="32" r="1.6"/>
+        </g>
+      </svg>
+      <div>
+        <div class="word-t">TELOTIA</div>
+        <div class="meta">organization · night</div>
+      </div>
+    </div>
+
+  </div>
+</body></html>

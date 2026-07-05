@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Telotia · Process</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#0F1F44"/>
+  <circle cx="50" cy="50" r="22" fill="none" stroke="#9FB2CE" stroke-width="3" stroke-dasharray="3 4" transform="rotate(40 50 50)"/>
+  <circle cx="32" cy="68" r="3" fill="#DEA193"/>
+  <path d="M22 30l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" fill="#C68C7C"/>
+</svg>
+</template>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,400..600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    :root{
+    --deep:#F6F7FB; --deep2:#EEF1F7; --gdeep:#E3E8F2;
+    --teal:#2F6FB0; --teal2:#1F4E86; --tealglow:#5990C0;
+    --gold:#9C7338; --sand:#CCA273; --gold2:#7E5E2E;
+    --t1:#10182F; --t2:#27324F; --t3:#5C6680; --t4:#7E879D;
+    --rule:#C8D0E0; --rulesoft:#E1E5EE;
+    --fsans:"IBM Plex Sans","Helvetica Neue",-apple-system,sans-serif;
+    --fmono:"IBM Plex Mono",ui-monospace,monospace;
+    --fdisplay:"Newsreader",Georgia,serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#F6F7FB}
+  ::selection{background:rgba(58,124,196,.32);color:#fff}
+  @keyframes auroraDrift{0%{transform:translate3d(-4%,0,0) scale(1.05)}50%{transform:translate3d(4%,-2%,0) scale(1.12)}100%{transform:translate3d(-4%,0,0) scale(1.05)}}
+  @keyframes pulseDot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(100,177,239,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(100,177,239,0)}}
+  .lk{color:var(--t3);text-decoration:none;transition:color .18s var(--ease)}
+  .lk:hover{color:var(--t1)}
+  h1,h2{font-family:var(--fdisplay) !important;font-weight:500 !important;letter-spacing:-.016em !important}
+  .btn-p{transition:background .18s var(--ease),transform .18s var(--ease)}
+  .btn-p:hover{background:var(--tealglow) !important;transform:translateY(-1px)}
+  .btn-s{transition:border-color .2s var(--ease),color .2s var(--ease)}
+  .btn-s:hover{border-color:rgba(232,169,143,.7) !important;color:var(--t1) !important}
+  .vcard{transition:border-color .2s var(--ease)}
+  .vcard:hover{border-color:var(--teal2) !important}
+  .gloss:hover .gw{color:var(--teal) !important}
+  .rcard{transition:border-color .2s var(--ease),transform .2s var(--ease)}
+  .rcard:hover{border-color:var(--teal2) !important;transform:translateY(-2px)}
+  .rcard:hover .rarrow{color:var(--teal) !important}
+  .crow{transition:background .15s var(--ease);cursor:pointer}
+  .crow:hover{background:rgba(58,124,196,.07) !important}
+  .fin{transition:border-color .2s var(--ease),background .2s var(--ease)}
+  .fin:focus{outline:none;border-color:rgba(58,124,196,.6);background:rgba(40,25,25,.04)}
+  .fin::placeholder{color:var(--t4)}
+  @keyframes floatChip{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-9px)}}
+  .vchip{position:absolute;transform:translate(-50%,-50%);font-family:var(--fmono);font-size:11px;letter-spacing:.04em;color:var(--t3);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;animation:floatChip 7s var(--ease) infinite}
+  .vchip .vcdot{width:4px;height:4px;border-radius:50%;background:var(--teal)}
+  .vnode{position:absolute;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:7px;font-family:var(--fmono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);background:rgba(234,236,239,.72);border:1px solid var(--rule);border-radius:100px;padding:5px 12px;cursor:pointer;backdrop-filter:blur(3px);transition:border-color .2s var(--ease),color .2s var(--ease),background .2s var(--ease)}
+  .vnode .vdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+  .vnode:hover{border-color:var(--teal2);color:var(--t1)}
+  .vnode.is-active{border-color:var(--gold);color:#fff;background:rgba(214,219,224,.9)}
+  @keyframes spinSlow{to{transform:rotate(360deg)}}
+  @keyframes spinRev{to{transform:rotate(-360deg)}}
+  @keyframes pulseO{0%,100%{opacity:.35}50%{opacity:1}}
+  @keyframes dashFlow{to{stroke-dashoffset:-36}}
+  @keyframes wDetailIn{from{transform:translateX(34px)}to{transform:translateX(0)}}
+  #tlDwBody{animation:wDetailIn .34s cubic-bezier(.16,1,.3,1)}
+  .figspin{transform-box:view-box;transform-origin:150px 90px}
+  .vend{position:absolute;transform:translate(-50%,-50%);background:none;border:0;padding:0;margin:0;font:inherit;cursor:pointer;line-height:0}
+  .vend .vdot2{display:block;width:9px;height:9px;border-radius:50%;box-shadow:0 0 9px rgba(100,177,239,.55);transition:transform .16s var(--ease)}
+  .vend .vend-label{position:absolute;left:50%;top:-8px;transform:translate(-50%,-100%);opacity:1;transition:opacity .16s var(--ease);pointer-events:none;font-family:var(--fmono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(234,236,239,.94);border:1px solid var(--rule);border-radius:100px;padding:4px 11px;white-space:nowrap;line-height:1.2}
+  .vend:hover .vend-label,.vend.is-active .vend-label{opacity:1}
+  .vend:hover .vdot2,.vend.is-active .vdot2{transform:scale(1.5)}
+  .navlight .lk{color:#46566e}
+  .navlight .lk:hover{color:#10182F}
+  .navlight .btn-s{color:#46566e !important;border-color:rgba(220,224,229,.22) !important}
+  .navlight .btn-s:hover{color:#10182F !important;border-color:rgba(178,124,108,.75) !important}
+
+  .btn-p{position:relative;background:linear-gradient(135deg,#10182F,#1B2A4A) !important;color:#fff !important;}
+  @property --ga{syntax:"<angle>";initial-value:0deg;inherits:false}
+  .btn-p,.btn-s{position:relative;}
+  @keyframes gaSpin{to{--ga:360deg;}}
+
+  @keyframes glowPulse{0%,100%{box-shadow:0 0 0 1px rgba(150,135,235,.07),0 16px 54px -14px rgba(120,160,235,.26),0 0 74px -8px rgba(165,140,240,.16)}50%{box-shadow:0 0 0 1px rgba(150,135,235,.11),0 20px 64px -12px rgba(120,160,235,.36),0 0 96px -6px rgba(165,140,240,.24)}}
+  .glow-wrap{position:relative;}
+  .glow-wrap::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.4px;background:conic-gradient(from var(--ga),transparent 8%,#a6c4f2 30%,#bcacf0 50%,#dbd2f8 58%,#a6c4f2 70%,transparent 92%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:gaSpin 4s linear infinite;opacity:0;transition:opacity .45s var(--ease);pointer-events:none;z-index:6;}
+  .glow-wrap:hover{animation:glowPulse 4.5s ease-in-out infinite;}
+  .glow-wrap:hover::after{opacity:.6;}
+  @media(prefers-reduced-motion:reduce){.glow-wrap:hover{animation:none;box-shadow:0 16px 54px -14px rgba(120,160,235,.3),0 0 80px -8px rgba(165,140,240,.2)}.glow-wrap::after{animation:none}}
+
+    @media(max-width:820px){
+      html,body{overflow-x:clip !important}
+      .navlight{padding:8px 18px !important;flex-wrap:wrap !important;gap:14px !important;row-gap:6px !important}
+      .navlight [style*="flex:1"]{display:none !important}
+      #tlPill{font-size:10px !important;letter-spacing:.07em !important;gap:8px !important;padding:6px 12px !important}
+      [style*="grid-template-columns:repeat(3,1fr)"][style*="gap:22px;max-width:540px"]{grid-template-columns:repeat(3,1fr) !important;gap:10px !important}
+      #tlLedgerCell{margin-top:15vh !important}
+      [style*="max-width:1280px"]{overflow-x:hidden !important}
+      [style*="width:1180px"],[style*="width:1280px"],[style*="width:820px"],[style*="width:780px"],[style*="width:760px"],[style*="width:680px"],[style*="width:660px"],[style*="width:640px"],[style*="width:620px"],[style*="width:560px"],[style*="width:540px"],[style*="width:520px"],[style*="width:460px"],[style*="width:420px"]{max-width:100% !important;width:100% !important}
+      [style*="white-space:nowrap"]{white-space:normal !important}
+      [style*="padding:14px 64px"]{padding:12px 18px !important;flex-wrap:wrap !important;gap:14px !important}
+      [style*="padding:84px 64px"]{padding:44px 18px !important}
+      [style*="padding:96px 64px"]{padding:52px 18px !important}
+      [style*="padding:56px 64px"]{padding:36px 18px !important}
+      [style*="gap:26px;margin-left:6px"]{flex-wrap:wrap !important;gap:14px !important;margin-left:0 !important;row-gap:8px !important}
+      [style*="grid-template-columns:1.05fr .95fr"],
+      [style*="grid-template-columns:1.15fr .85fr"],
+      [style*="grid-template-columns:1fr 1fr"],
+      [style*="grid-template-columns:280px 1fr"],
+      [style*="grid-template-columns:300px 1fr"],[style*="grid-template-columns:1fr 320px"],[style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr !important;gap:24px !important}
+      [style*="font-size:60px"]{font-size:clamp(30px,8vw,40px) !important;line-height:1.1 !important}
+      [style*="font-size:46px"]{font-size:28px !important}
+      [style*="font-size:42px"]{font-size:26px !important}
+      [style*="max-width:1180px"]{max-width:100% !important}
+    }
+  /* --- TELOTIA wordmark: grey by default, per-letter watercolor on hover --- */
+  .tlMark{position:absolute;left:0;right:0;top:64px;z-index:1;display:flex;justify-content:center;align-items:flex-start;gap:clamp(0px,.4vw,10px);pointer-events:none;white-space:nowrap}
+  .tlL{position:relative;font-family:var(--fmono);font-weight:700;font-size:clamp(90px,15vw,240px);line-height:.8;letter-spacing:.02em;pointer-events:auto;cursor:default;background-repeat:no-repeat;background-size:700% auto;background-position-y:center;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:rgba(16,24,47,.06);transition:-webkit-text-fill-color .55s var(--ease)}
+  .tlL:nth-child(1){background-position-x:0%}
+  .tlL:nth-child(2){background-position-x:16.6%}
+  .tlL:nth-child(3){background-position-x:33.3%}
+  .tlL:nth-child(4){background-position-x:50%}
+  .tlL:nth-child(5){background-position-x:66.6%}
+  .tlL:nth-child(6){background-position-x:83.3%}
+  .tlL:nth-child(7){background-position-x:100%}
+  .tlL::before{content:"";position:absolute;left:50%;top:52%;width:128%;height:116%;transform:translate(-50%,-50%) scale(.5);background:radial-gradient(closest-side,rgba(120,150,205,.5),rgba(120,150,205,.16) 48%,transparent 72%);filter:blur(18px);opacity:0;z-index:-1;pointer-events:none;transition:opacity .55s var(--ease),transform .8s var(--ease)}
+  .tlL:hover{background-image:url('telotia-wordmark.png');-webkit-text-fill-color:transparent}
+  .tlL:hover::before{opacity:.85;transform:translate(-50%,-50%) scale(1.18)}
+  @media(prefers-reduced-motion:reduce){.tlL,.tlL::before{transition:none}}
+section[id]{content-visibility:auto;contain-intrinsic-size:auto 760px}
+html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+
+  .nav-res{position:relative}
+  .nav-res>.lk{cursor:default}
+  .res-panel{position:absolute;top:calc(100% + 14px);left:50%;transform:translate(-50%,6px);width:min(560px,86vw);
+    background:rgba(246,247,251,.86);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);
+    border:1px solid var(--rule);border-radius:16px;box-shadow:0 30px 70px -28px rgba(16,24,47,.34),inset 0 1px 0 rgba(255,255,255,.5);
+    padding:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+    opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s var(--ease),transform .18s var(--ease),visibility .18s}
+  .nav-res:hover .res-panel,.nav-res:focus-within .res-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
+  .res-col{display:flex;flex-direction:column;gap:9px}
+  .res-col-title{font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4);
+    border-bottom:1px solid var(--rulesoft);padding-bottom:8px;margin-bottom:2px}
+  .res-item{display:flex;flex-direction:column;gap:2px;text-decoration:none;padding:4px 0}
+  .res-item-title{font-size:12.5px;line-height:1.35;color:var(--t2);transition:color .16s var(--ease);
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .res-item:hover .res-item-title{color:var(--t1)}
+  .res-item-date{font-family:var(--fmono);font-size:9.5px;color:var(--t4)}
+  .res-empty{font-size:12px;color:var(--t4);font-style:italic}
+  .res-viewall{font-family:var(--fmono);font-size:10.5px;letter-spacing:.05em;color:var(--teal);text-decoration:none;margin-top:auto;padding-top:6px}
+  .res-viewall:hover{color:var(--teal2)}
+</style>
+
+<div style="width:100%;font-family:var(--fsans);color:var(--t1);background:radial-gradient(125% 70% at 50% 0%, #FFFFFF 0%, #F6F7FB 48%, #EEF1F7 100%);position:relative;overflow-x:clip">
+
+  <img src="page-inkwash.svg" alt="" aria-hidden="true" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.62;pointer-events:none;z-index:0"/>
+
+
+
+  <!-- NAV -->
+  <nav class="navlight" style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:30px;padding:3px 64px;background:linear-gradient(90deg,rgba(248,250,253,.72) 0%,rgba(238,242,248,.66) 38%,rgba(150,178,222,.5) 70%,rgba(238,242,248,.62) 88%,rgba(248,250,253,.72) 100%);backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px);border-bottom:1px solid rgba(40,25,25,.4);box-shadow:0 1px 0 rgba(220,224,229,.08),inset 0 1px 0 rgba(40,25,25,.5)">
+    <a href="index.html" style="text-decoration:none"><div style="display:flex;align-items:center;gap:14px">
+      <img src="telotia-logo-cut.png" alt="Telotia" style="height:72px;width:auto;display:block;flex-shrink:0;margin:0 -8px;position:relative;top:0"/>
+      <span style="font-family:var(--fmono);font-size:14px;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:#10182F">TELOTIA</span>
+    </div></a>
+    <div style="display:flex;gap:26px;margin-left:6px">
+      <a class="lk" href="process.html" style="font-size:13px">Process</a>
+      <a class="lk" href="workspace.html" style="font-size:13px">Workspace</a>
+      <a class="lk" href="demo.html" style="font-size:13px">Demo</a>
+      <a class="lk" href="research.html" style="font-size:13px">Research</a>
+      <a class="lk" href="consult.html" style="font-size:13px">Consult</a>
+      <div class="nav-res">
+        <a class="lk" href="/resource" style="font-size:13px">Resources</a>
+        <div class="res-panel">
+          <div class="res-col">
+            <div class="res-col-title">Art</div>
+            <!-- RES-MENU:ART:START -->
+            <a class="res-item" href="/resource/art/2026/07/02/wanderer-above-the-sea-of-fog/"><span class="res-item-title">Wanderer above the Sea of Fog — Caspar David Friedrich</span><span class="res-item-date">Jul 2</span></a>
+            <a class="res-item" href="/resource/art/2026/07/01/mondrian-composition-red-blue-yellow/"><span class="res-item-title">Composition II in Red, Blue, and Yellow — Piet Mondrian</span><span class="res-item-date">Jul 1</span></a>
+            <a class="res-item" href="/resource/art/2026/06/30/migrant-mother/"><span class="res-item-title">Migrant Mother — Dorothea Lange</span><span class="res-item-date">Jun 30</span></a>
+            <!-- RES-MENU:ART:END -->
+            <a class="res-viewall" href="/resource/art/">All art →</a>
+          </div>
+          <div class="res-col">
+            <div class="res-col-title">Finance</div>
+            <!-- RES-MENU:FINANCE:START -->
+            <a class="res-item" href="/resource/finance/2026/07/02/meta-compute-cloud/"><span class="res-item-title">Meta Compute: One Report Repriced the AI Compute Market</span><span class="res-item-date">Jul 2</span></a>
+            <a class="res-item" href="/resource/finance/2026/07/01/chip-rally-nvidia-lag/"><span class="res-item-title">Micron Up 240%, Nvidia Up 15% — Same AI Story, Different Winner</span><span class="res-item-date">Jul 1</span></a>
+            <a class="res-item" href="/resource/finance/2026/06/30/alphabet-joins-dow/"><span class="res-item-title">A Stock&#x27;s Price Tag, Not Its Size, Just Won a Dow Seat</span><span class="res-item-date">Jun 30</span></a>
+            <!-- RES-MENU:FINANCE:END -->
+            <a class="res-viewall" href="/resource/finance/">All finance →</a>
+          </div>
+          <div class="res-col">
+            <div class="res-col-title">Research</div>
+            <span class="res-empty">Coming soon</span>
+            <div class="res-col-title" style="margin-top:10px">Aquila</div>
+            <span class="res-empty">Coming soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="flex:1"></div>
+    <a class="btn-s" href="consult.html" style="font-size:13px;color:var(--t2);text-decoration:none;border:1px solid var(--rule);border-radius:8px;padding:8px 16px">Request a pilot</a>
+  </nav>
+
+  <section id="process" style="position:relative;padding:96px 64px;background:transparent;border-top:1px solid var(--rulesoft)">
+    <div style="position:absolute;left:24px;top:96px;writing-mode:vertical-rl;font-family:var(--fmono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--t4)">Process</div>
+    <div style="max-width:1180px;margin:0 auto">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:48px">
+        <div>
+          <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">How it works</span>
+          <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1)">Decompose. Search. Grade.</h2>
+        </div>
+        <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:420px">From product documentation to reviewable proof, every claim is separated, searched, graded, and linked back to source evidence.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:48px;background:var(--rulesoft);border:1px solid var(--rulesoft);border-radius:16px;overflow:hidden">
+        <article style="background:#EEF1F7;padding:30px">
+          <svg viewBox="0 0 300 180" style="width:100%;height:auto;display:block">
+            <rect x="34" y="34" width="86" height="112" rx="2" fill="none" stroke="var(--t3)" stroke-width="1"/>
+            <line x1="50" y1="60" x2="104" y2="60" stroke="var(--t4)" stroke-width="1"/><line x1="50" y1="80" x2="104" y2="80" stroke="var(--t4)" stroke-width="1"/><line x1="50" y1="100" x2="104" y2="100" stroke="var(--t4)" stroke-width="1"/><line x1="50" y1="120" x2="86" y2="120" stroke="var(--t4)" stroke-width="1"/>
+            <line x1="120" y1="70" x2="208" y2="48" stroke="var(--teal2)" stroke-width="1" stroke-dasharray="4 5" style="animation:dashFlow 1.6s linear infinite"/><line x1="120" y1="90" x2="226" y2="88" stroke="var(--teal2)" stroke-width="1" stroke-dasharray="4 5" style="animation:dashFlow 1.6s linear infinite;animation-delay:-.5s"/><line x1="120" y1="110" x2="208" y2="132" stroke="var(--teal2)" stroke-width="1" stroke-dasharray="4 5" style="animation:dashFlow 1.6s linear infinite;animation-delay:-1s"/>
+            <circle cx="214" cy="48" r="4" fill="var(--sand)" style="animation:pulseO 2.4s ease-in-out infinite"/><circle cx="232" cy="88" r="4" fill="var(--teal)" style="animation:pulseO 2.4s ease-in-out infinite;animation-delay:-.4s"/><circle cx="214" cy="132" r="4" fill="var(--sand)" style="animation:pulseO 2.4s ease-in-out infinite;animation-delay:-.8s"/>
+            <circle cx="248" cy="62" r="3" fill="var(--teal)" style="animation:pulseO 2.4s ease-in-out infinite;animation-delay:-1.2s"/><circle cx="252" cy="112" r="3" fill="var(--sand)" style="animation:pulseO 2.4s ease-in-out infinite;animation-delay:-1.6s"/>
+          </svg>
+          <span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase">Step 01</span>
+          <h3 style="font-weight:600;font-size:23px;margin-top:10px;color:var(--t1)">Decompose</h3>
+          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Telotia breaks the document into atomic claims, down to the level where each one can be checked on its own. Not paragraphs. Individual propositions, each independently verifiable.</p>
+        </article>
+        <article style="background:#EEF1F7;padding:30px">
+          <svg viewBox="0 0 300 180" style="width:100%;height:auto;display:block">
+            <circle cx="150" cy="90" r="56" fill="none" stroke="var(--teal)" stroke-width="1"/>
+            <circle cx="150" cy="90" r="30" fill="rgba(58,124,196,.14)" stroke="var(--teal2)" stroke-width="1"/>
+            <g class="figspin" style="animation:spinSlow 52s linear infinite">
+              <g stroke-width="1" opacity=".7">
+                <line x1="150" y1="90" x2="226" y2="62" stroke="var(--sand)"/><line x1="150" y1="90" x2="232" y2="108" stroke="var(--sand)"/><line x1="150" y1="90" x2="92" y2="44" stroke="var(--sand)"/><line x1="150" y1="90" x2="74" y2="104" stroke="var(--sand)"/><line x1="150" y1="90" x2="148" y2="160" stroke="var(--sand)"/>
+              </g>
+              <circle cx="226" cy="62" r="3.5" fill="var(--sand)"/><circle cx="232" cy="108" r="3.5" fill="var(--teal)"/><circle cx="92" cy="44" r="3.5" fill="var(--teal)"/><circle cx="74" cy="104" r="3.5" fill="var(--sand)"/><circle cx="148" cy="160" r="3.5" fill="var(--teal)"/>
+            </g>
+          </svg>
+          <span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase">Step 02</span>
+          <h3 style="font-weight:600;font-size:23px;margin-top:10px;color:var(--t1)">Search the evidence</h3>
+          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Each claim is matched against your evidence base, the corpus you supplied, not the open web. The search is scoped to what you trust and can cite.</p>
+        </article>
+        <article style="background:#EEF1F7;padding:30px">
+          <svg viewBox="0 0 300 180" style="width:100%;height:auto;display:block">
+            <circle cx="150" cy="90" r="64" fill="none" stroke="var(--rule)" stroke-width="1"/>
+            <circle cx="150" cy="90" r="15" fill="none" stroke="var(--t3)" stroke-width="1"/>
+            <g class="figspin" style="animation:spinRev 78s linear infinite">
+              <line x1="150" y1="90" x2="150" y2="26" stroke="var(--teal)" stroke-width="1"/><line x1="150" y1="90" x2="205" y2="58" stroke="var(--teal)" stroke-width="1"/><line x1="150" y1="90" x2="205" y2="122" stroke="var(--teal)" stroke-width="1"/>
+              <line x1="150" y1="90" x2="95" y2="122" stroke="var(--sand)" stroke-width="1" stroke-dasharray="4 4" style="animation:dashFlow 2s linear infinite"/><line x1="150" y1="90" x2="95" y2="58" stroke="var(--sand)" stroke-width="1" stroke-dasharray="4 4" style="animation:dashFlow 2s linear infinite;animation-delay:-.6s"/>
+              <line x1="150" y1="90" x2="150" y2="154" stroke="var(--t4)" stroke-width="1" stroke-dasharray="2 5" opacity=".6"/>
+              <circle cx="150" cy="26" r="6" fill="var(--teal)" style="animation:pulseO 2.6s ease-in-out infinite"/><circle cx="205" cy="58" r="6" fill="var(--teal)" style="animation:pulseO 2.6s ease-in-out infinite;animation-delay:-.5s"/><circle cx="205" cy="122" r="6" fill="var(--teal)" style="animation:pulseO 2.6s ease-in-out infinite;animation-delay:-1s"/>
+              <circle cx="95" cy="122" r="6" fill="none" stroke="var(--sand)" stroke-width="1.4"/><circle cx="95" cy="58" r="6" fill="none" stroke="var(--sand)" stroke-width="1.4"/>
+              <circle cx="150" cy="154" r="6" fill="none" stroke="var(--t4)" stroke-width="1.2"/>
+            </g>
+          </svg>
+          <span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase">Step 03</span>
+          <h3 style="font-weight:600;font-size:23px;margin-top:10px;color:var(--t1)">Grade and cite</h3>
+          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Every claim gets a graded verdict: Supported, Partial, or Unsupported. Each linked to the exact source in your corpus. No aggregate scores, no summaries.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="position: relative; padding: 56px 64px 0; background: transparent; border-top: 1px solid var(--rulesoft); overflow: hidden; height: 200px">
+    <div style="position:relative;z-index:1;max-width:1180px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:40px">
+      <div>
+        <div style="font-family:var(--fmono);font-size:14px;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:var(--t1)">TELOTIA</div>
+        <div style="font-family:var(--fmono);font-size:12px;color:var(--t4);margin-top:8px">Montreal / private beta / evidence review workspace</div>
+      </div>
+      <div style="font-size:13px;line-height:1.6;color:var(--t3);max-width:380px">This software supports claim review and proof package preparation. It does not provide regulatory approval.</div>
+      <div style="display:flex;flex-direction:column;gap:9px;text-align:right">
+        <a class="lk" href="mailto:hello@telotia.com" style="font-size:13px">hello@telotia.com</a>
+        <a class="lk" href="demo.html" style="font-size:13px">Demo</a>
+        <a class="lk" href="consult.html" style="font-size:13px">Request a pilot</a>
+      </div>
+    </div>
+    <div style="position:relative;z-index:1;max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid var(--rulesoft);font-family:var(--fmono);font-size:12px;color:var(--t4)">© 2026 Telotia · Evidence-grade audit for Canadian health-equipment imports.</div>
+    <canvas id="tlFooterInk" aria-hidden="true" style="position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:left center;opacity:.72;mix-blend-mode:multiply;pointer-events:none;z-index:0;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 20%,rgba(0,0,0,.5) 56%,rgba(0,0,0,0) 84%);mask-image:linear-gradient(90deg,#000 0%,#000 20%,rgba(0,0,0,.5) 56%,rgba(0,0,0,0) 84%)"></canvas>
+  </footer>
+</div>
+
+
+<script src="telotia-particles.js"></script>
+<script src="footer-assets.js"></script>
+<script>requestAnimationFrame(function(){if(!window.TelotiaParticles)return;var T=window.TelotiaParticles;
+var h=document.getElementById('tlHeroCanvas');if(h)T.hero(h);
+var g=document.getElementById('tlGlossCanvas');if(g)T.glossary(g,{scale:1.15});
+var c=document.getElementById('tlConsultCanvas');if(c)T.consult(c);
+var VTERMS=['Atomic claim','Evidence base','Decomposition','Corpus','Verdict','Supported','Partial','Unsupported','Citation','Source passage','Proof package','Audit trail','Claim graph','Reviewer note','Grade','Search','Decompose','Proposition','Passage','Conformity','Declaration','Lot','Model','Bilingual label','Human review','Trusted corpus','Cite','Match','Silent','Scoped','Provenance','Coverage','Completeness','Factual claim','Procedural claim','Index','Import package','Citation path','Graded verdict','Sign-off'];
+var s=document.getElementById('tlSpikeCanvas');if(s)T.verdictSphere(s,{dragTarget:s.parentElement,labels:VTERMS});});</script>
+<script>
+(function(){
+  function hexA(hex,a){ if(!hex) return 'rgba(0,0,0,'+a+')'; var n=parseInt(hex.slice(1),16),r=(n>>16)&255,g=(n>>8)&255,b=n&255; return 'rgba('+r+','+g+','+b+','+a+')'; }
+  var rows=Array.prototype.slice.call(document.querySelectorAll('[data-ws-row]'));
+  if(!rows.length) return;
+  var railBtns=Array.prototype.slice.call(document.querySelectorAll('#tlWsRail [data-wpage]'));
+  var pages=Array.prototype.slice.call(document.querySelectorAll('#tlWsPages [data-wpage]'));
+  function setPage(idx){
+    pages.forEach(function(pg){ var a=pg.dataset.wpage===String(idx); pg.style.display=a?(pg.dataset.wpage==='0'?'grid':'block'):'none'; });
+    railBtns.forEach(function(b){ var a=b.dataset.wpage===String(idx); b.style.background=a?'rgba(58,124,196,.16)':'none'; b.style.borderColor=a?'var(--teal2)':'transparent'; b.style.color=a?'var(--teal)':'var(--t4)'; });
+  }
+  function setActive(row){
+    rows.forEach(function(r){ r.style.background = r===row ? hexA(r.dataset.color,0.1) : '#EEF1F7'; });
+    var t=document.getElementById('tlWsClaimTitle'); if(t) t.textContent=row.dataset.claim;
+    var v=document.getElementById('tlWsVerdict'); if(v){ v.textContent=row.dataset.verdict; v.style.color=row.dataset.color; }
+    var p=document.getElementById('tlWsPassage'); if(p) p.textContent=row.dataset.passage;
+    var sc=document.getElementById('tlWsSource'); if(sc) sc.textContent=row.dataset.source;
+    var col=row.dataset.color;
+    var vn=document.getElementById('tlGraphVerdict'); if(vn){ vn.setAttribute('fill',col); vn.setAttribute('stroke',col); }
+    var et=document.getElementById('tlEdgeTop'); if(et) et.setAttribute('stroke',col);
+    var es=document.getElementById('tlEdgeSource'); if(es) es.setAttribute('stroke',col);
+  }
+  var statusMap={ '#3a7cc4':'Cited · supported by corpus', '#e8a98f':'Reviewer note required', '#9fadc8':'Flagged · no cited passage' };
+  var minis=Array.prototype.slice.call(document.querySelectorAll('.dwmini'));
+  function hiMini(id){ minis.forEach(function(x){ var on=x.dataset.id===id; x.style.borderColor=on?x.dataset.color:'var(--rulesoft)'; x.style.background=on?hexA(x.dataset.color,0.08):'none'; }); }
+  function openDw(row){
+    function set(id,txt){ var e=document.getElementById(id); if(e) e.textContent=txt; }
+    var col=row.dataset.color;
+    set('tlDwId',row.dataset.id||''); set('tlDwClaim',row.dataset.claim); set('tlDwNote',row.dataset.note||'');
+    set('tlDwCorpus',row.dataset.passage); set('tlDwVerdict',row.dataset.verdict); set('tlDwSource',row.dataset.source);
+    set('tlDwStatus',statusMap[col]||'');
+    var pill=document.getElementById('tlDwPill'); if(pill){ pill.textContent=row.dataset.verdict; pill.style.color=col; pill.style.borderColor=col; }
+    var cl=document.getElementById('tlDwClaim'); if(cl) cl.style.borderLeftColor=col;
+    setPage(4); hiMini(row.dataset.id||'');
+  }
+  var backBtn=document.getElementById('tlDwBack'); if(backBtn) backBtn.onclick=function(){ setPage(0); };
+  var copyBtn=document.getElementById('tlDwCopy');
+  if(copyBtn) copyBtn.onclick=function(){ try{ navigator.clipboard.writeText((document.getElementById('tlDwId')||{}).textContent||''); copyBtn.textContent='Copied'; setTimeout(function(){ copyBtn.textContent='Copy id'; },1400); }catch(e){} };
+  rows.forEach(function(r){ r.addEventListener('click',function(){ setActive(r); openDw(r); }); });
+  minis.forEach(function(m){ m.addEventListener('click',function(){ openDw(m); }); });
+  setActive(rows[0]);
+  railBtns.forEach(function(b){ b.addEventListener('click',function(){ setPage(parseInt(b.dataset.wpage,10)); }); });
+  if(railBtns.length) setPage(0);
+})();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('tlFooterInk'); if(!cv) return;
+  var footer=cv.closest('footer'); if(!footer) return;
+  // high-res image buffer (sharp) decoupled from the coarse ripple grid
+  var IW=1200, IH=170; cv.width=IW; cv.height=IH;
+  var SW=440, SH=62;           // finer simulation lattice -> small, smooth ripples (no mosaic)
+  var ctx=cv.getContext('2d');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var R=Math.random;
+  var img=new Image(), ext=new Image(), nload=0;
+  img.onload=ext.onload=ext.onerror=function(){ if(++nload<2) return;
+    var off=document.createElement('canvas'); off.width=IW; off.height=IH;
+    var octx=off.getContext('2d');
+    octx.clearRect(0,0,IW,IH);
+    // stadium at left (cropped vertical band), aspect preserved
+    var sy=Math.round(img.height*0.24), sh=Math.round(img.height*0.62);
+    var stW=Math.round(IH*(img.width/sh));
+    octx.drawImage(img,0,sy,img.width,sh, 0,0, stW,IH);
+    // ink-wash watercolor extension (turbulence-displaced), blends with the tail and fades right
+    try{ if(ext.complete && ext.naturalWidth) octx.drawImage(ext,0,0,IW,IH); }catch(e){}
+    var src=octx.getImageData(0,0,IW,IH), sd=src.data;
+    var out=ctx.createImageData(IW,IH), od=out.data;
+    ctx.putImageData(src,0,0); if(reduce) return;
+    var cur=new Float32Array(SW*SH), prev=new Float32Array(SW*SH), damping=0.9;
+    var RAD=5, frameMod=0, active=0, lastDrop=0;
+    footer.addEventListener('pointermove',function(e){
+      var now=(window.performance&&performance.now?performance.now():Date.now());
+      if(now-lastDrop<70) return;          // throttle: at most ~14 drops/sec
+      lastDrop=now;
+      var r=cv.getBoundingClientRect();
+      var _s=Math.max(r.width/IW,r.height/IH),_oy=(r.height-IH*_s)/2;var x=(e.clientX-r.left)/_s/IW*SW|0, y=(e.clientY-r.top-_oy)/_s/IH*SH|0;
+      if(x<RAD+1||x>SW-RAD-2||y<RAD+1||y>SH-RAD-2) return;
+      var P=140, rr2=RAD*RAD+1;
+      for(var oy=-RAD;oy<=RAD;oy++)for(var ox=-RAD;ox<=RAD;ox++){
+        var dd=ox*ox+oy*oy; if(dd>RAD*RAD) continue;
+        prev[(y+oy)*SW+(x+ox)] += P*(1-dd/rr2);
+      }
+      active=240;                            // frames of live simulation after a drop
+      start();
+    });
+    var SCALE=3.6;               // displacement strength (sim units -> image px)
+    var settled=true;
+    function loop(){
+      if(!visible){ ticking=false; return; }
+      var x,y,yi,i;
+      frameMod=(frameMod+1)%2;   // step physics at half speed -> slow, calm ripple
+      if(frameMod===0 && active>0){
+        active--;
+        for(y=1;y<SH-1;y++){ yi=y*SW;
+          for(x=1;x<SW-1;x++){ i=yi+x;
+            cur[i]=(((prev[i-1]+prev[i+1]+prev[i-SW]+prev[i+SW])*0.5)-cur[i])*damping;
+          }
+        }
+        // render high-res image, displaced by the coarse field (bilinear-sampled gradient)
+        od.set(sd);
+        var fx=SW/IW, fy=SH/IH;
+        for(y=0;y<IH;y++){
+          var gy=y*fy, sy0=gy|0; if(sy0<1)sy0=1; else if(sy0>SH-2)sy0=SH-2;
+          var ty=gy-sy0;
+          for(x=0;x<IW;x++){
+            var gx=x*fx, sx0=gx|0; if(sx0<1)sx0=1; else if(sx0>SW-2)sx0=SW-2;
+            var tx=gx-sx0, b=sy0*SW+sx0;
+            // bilinear gradient of the wave field
+            var gxv=((cur[b-1]-cur[b+1])*(1-ty)+(cur[b-1+SW]-cur[b+1+SW])*ty);
+            var gyv=((cur[b-SW]-cur[b+SW])*(1-tx)+(cur[b-SW+1]-cur[b+SW+1])*tx);
+            var dx=(gxv*SCALE)|0, dy=(gyv*SCALE)|0;
+            var ix=x+dx; if(ix<0)ix=0; else if(ix>=IW)ix=IW-1;
+            var iy=y+dy; if(iy<0)iy=0; else if(iy>=IH)iy=IH-1;
+            var si=(iy*IW+ix)<<2, di=(y*IW+x)<<2;
+            var ae=gxv<0?-gxv:gxv, tint=ae*0.05; if(tint>0.5)tint=0.5;
+            var rr=sd[si],gg=sd[si+1],bb=sd[si+2],aa=sd[si+3];
+            if(tint>0.004){
+              rr=rr*(1-tint)+34*tint; gg=gg*(1-tint)+70*tint; bb=bb*(1-tint)+142*tint;
+              var na=aa+tint*235; aa=na>255?255:na;
+            }
+            od[di]=rr; od[di+1]=gg; od[di+2]=bb; od[di+3]=aa;
+          }
+        }
+        ctx.putImageData(out,0,0);
+        var t=prev; prev=cur; cur=t;
+        if(active===0){ ctx.putImageData(src,0,0); }   // settle to the crisp static image, then idle
+      }
+      if(visible && active>0) requestAnimationFrame(loop); else ticking=false;
+    }
+    var visible=true, ticking=false;
+    function start(){ if(!ticking && visible){ ticking=true; requestAnimationFrame(loop); } }
+    document.addEventListener('visibilitychange',function(){ visible=!document.hidden; if(visible && active>0) start(); });
+    start();
+  };
+  ext.src=(window.__FOOTER_INK_EXT||'footer-ink-ext.svg');
+  img.src=(window.__FOOTER_INK_IMG||'montreal-ink.png');
+})();
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('.navlight'); if(!nav) return;
+  nav.style.transition='top .34s ease,opacity .34s ease';
+  /* floating peek logo: static img (not cloned), clears the notch; click reveals the nav */
+  var st=document.createElement('style');
+  st.textContent='.nav-peek{position:fixed;top:max(10px,env(safe-area-inset-top));left:14px;z-index:60;width:44px;height:44px;padding:6px;border:0;border-radius:50%;background:rgba(255,255,255,.42);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 5px 16px -8px rgba(16,24,47,.4);opacity:0;transform:scale(.82) translateY(-6px);pointer-events:none;transition:opacity .28s ease,transform .28s ease;cursor:pointer}.nav-peek.show{opacity:1;transform:scale(1) translateY(0);pointer-events:auto}.nav-peek img{width:100%;height:100%;object-fit:contain;display:block}';
+  document.head.appendChild(st);
+  var peek=document.createElement('button'); peek.type='button'; peek.className='nav-peek'; peek.setAttribute('aria-label','Show menu');
+  peek.innerHTML='<img src="telotia-logo-cut.png" alt="">';
+  document.body.appendChild(peek);
+  var hidden=false, last=0;
+  function show(){nav.style.top='0';nav.style.opacity='';nav.style.pointerEvents='';peek.classList.remove('show');hidden=false;}
+  function hide(){nav.style.top='-120px';nav.style.opacity='0';nav.style.pointerEvents='none';peek.classList.add('show');hidden=true;}
+  peek.addEventListener('click',function(e){e.preventDefault();show();last=window.pageYOffset||document.documentElement.scrollTop||0;}); /* reveal nav + reset baseline so a later scroll-down re-hides */
+  window.addEventListener('scroll',function(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||0;
+    if(y>last+4 && y>80){ if(!hidden) hide(); }            /* scrolling down → hide (peek shows) */
+    else if(y<last-4 || y<=80){ if(hidden) show(); }       /* scrolling up or near top → show */
+    last=y;
+  },{passive:true});
+})();
+</script>
+</body>
+</html>

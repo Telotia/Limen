@@ -1,0 +1,49 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Color · Verdicts</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 22px; }
+  .palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .swatch { border-radius: var(--r-3); overflow: hidden; border: 1px solid var(--rule); }
+  .swatch .chip { height: 60px; display: flex; align-items: center; justify-content: center; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px 3px 7px; border-radius: var(--r-full); font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: .04em; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .swatch .meta { padding: 9px 10px 11px; background: var(--paper); }
+  .swatch .name { font-family: var(--font-display); font-size: 14px; color: var(--ink); }
+  .swatch .hex { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="palette">
+    <div class="swatch">
+      <div class="chip" style="background:#D7DFC9">
+        <span class="pill" style="background:#2E5D3A;color:#F4F0FF"><span class="dot" style="background:#DEA193"></span>Proven</span>
+      </div>
+      <div class="meta"><div class="name">Proven</div><div class="hex">#2E5D3A · --proven</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#ECD7CE">
+        <span class="pill" style="background:#8C2B2B;color:#F4F0FF"><span class="dot" style="background:#F4F0FF"></span>Falsified</span>
+      </div>
+      <div class="meta"><div class="name">Falsified</div><div class="hex">#8C2B2B · --falsified</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#ECDFC0">
+        <span class="pill" style="background:#B57B19;color:#F4F0FF"><span class="dot" style="background:#F4F0FF"></span>Partial</span>
+      </div>
+      <div class="meta"><div class="name">Partial</div><div class="hex">#B57B19 · --partial</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#D0DAE8">
+        <span class="pill" style="background:#2C4E7A;color:#F4F0FF"><span class="dot" style="background:#F4F0FF"></span>Open</span>
+      </div>
+      <div class="meta"><div class="name">Open</div><div class="hex">#2C4E7A · --open</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#DDD2E5">
+        <span class="pill" style="background:#4A3A56;color:#F4F0FF"><span class="dot" style="background:#F4F0FF"></span>Closed</span>
+      </div>
+      <div class="meta"><div class="name">Mortality</div><div class="hex">#4A3A56 · --mortality</div></div>
+    </div>
+  </div>
+</body></html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Type · Cosmic text scale</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 18px 22px; background: #070812; }
+  .palette { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .swatch { border-radius: var(--r-3); overflow: hidden; border: 1px solid #34304F; background: #14162E; }
+  .chip {
+    height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    background: #14162E;
+    position: relative;
+  }
+  .chip::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(#ffffff20 0.5px, transparent 0.6px);
+    background-size: 11px 11px; background-position: 2px 3px;
+  }
+  .chip .Aa {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -.5px;
+    position: relative;
+  }
+  .meta { padding: 8px 10px 10px; background: #14162E; }
+  .name { font-family: var(--font-display); font-size: 13px; line-height: 1.05; color: #F4F0FF; }
+  .hex  { font-family: var(--font-mono); font-size: 10px; color: #B9B2D6; margin-top: 2px; }
+  .var  { font-family: var(--font-mono); font-size: 9px;  color: #8A82A8; margin-top: 1px; }
+  .rule-chip {
+    height: 56px; display: flex; align-items: center; justify-content: center;
+    background: #14162E; position: relative;
+  }
+  .rule-chip .line { width: 70%; height: 1px; }
+</style>
+</head>
+<body>
+  <div class="palette">
+
+    <div class="swatch">
+      <div class="chip"><span class="Aa" style="color:#F4F0FF">Aa</span></div>
+      <div class="meta"><div class="name">Stardust</div><div class="hex">#F4F0FF</div><div class="var">--text-main</div></div>
+    </div>
+
+    <div class="swatch">
+      <div class="chip"><span class="Aa" style="color:#D8D6E8">Aa</span></div>
+      <div class="meta"><div class="name">Moon&nbsp;Silver</div><div class="hex">#D8D6E8</div><div class="var">--text-2</div></div>
+    </div>
+
+    <div class="swatch">
+      <div class="chip"><span class="Aa" style="color:#B9B2D6">Aa</span></div>
+      <div class="meta"><div class="name">Mist&nbsp;Lavender</div><div class="hex">#B9B2D6</div><div class="var">--text-3</div></div>
+    </div>
+
+    <div class="swatch">
+      <div class="chip"><span class="Aa" style="color:#8A82A8">Aa</span></div>
+      <div class="meta"><div class="name">Dim&nbsp;Nebula</div><div class="hex">#8A82A8</div><div class="var">--text-4</div></div>
+    </div>
+
+    <div class="swatch">
+      <div class="rule-chip"><span class="line" style="background:#5B5478"></span></div>
+      <div class="meta"><div class="name">Star&nbsp;Rule</div><div class="hex">#5B5478</div><div class="var">--rule-cosmic</div></div>
+    </div>
+
+    <div class="swatch">
+      <div class="rule-chip"><span class="line" style="background:#34304F"></span></div>
+      <div class="meta"><div class="name">Soft&nbsp;Void</div><div class="hex">#34304F</div><div class="var">--rule-cosmic-soft</div></div>
+    </div>
+
+  </div>
+</body></html>

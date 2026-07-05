@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Type · Mono &amp; Label</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { padding: 22px 28px; }
+  .row { display: grid; grid-template-columns: 96px 1fr; gap: 16px; align-items: baseline; }
+  .meta { font-family: var(--font-sans); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .row + .row { margin-top: 14px; }
+  .label-row { display:flex; gap: 18px; align-items:center; }
+  .label { font-family: var(--font-sans); font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); font-size: 11px; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="meta">Mono · 14</div>
+    <div style="font-family:var(--font-mono);font-size:14px;line-height:1.5;color:var(--ink)">ctx_slice_a3f2b9c1 &nbsp; status=partial &nbsp; oscillation=3/4</div>
+  </div>
+  <div class="row">
+    <div class="meta">Mono · 12</div>
+    <div style="font-family:var(--font-mono);font-size:12px;line-height:1.45;color:var(--ink-2)">cargo&nbsp;clippy&nbsp;--all-targets&nbsp;--&nbsp;-D&nbsp;warnings</div>
+  </div>
+  <div class="row">
+    <div class="meta">Label · 11</div>
+    <div class="label-row">
+      <span class="label">Chamber</span>
+      <span class="label">Telos</span>
+      <span class="label" style="color:var(--falsified)">Falsified</span>
+      <span class="label" style="color:var(--proven)">Proven</span>
+    </div>
+  </div>
+</body></html>
