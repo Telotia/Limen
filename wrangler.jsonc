@@ -4,13 +4,23 @@
   "account_id": "f39fc97d0e872ca3c6cad23b1a7561d6",
   "compatibility_date": "2026-05-18",
   "workers_dev": true,
+  "main": "worker/index.ts",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    "binding": "ASSETS"
   },
+  // Pilot leads are always logged (see `wrangler tail`). To also store them
+  // durably, create a namespace and uncomment the block below:
+  //   bunx wrangler kv namespace create PILOT_LEADS
+  // "kv_namespaces": [
+  //   { "binding": "PILOT_LEADS", "id": "PASTE_DEV_KV_NAMESPACE_ID" }
+  // ],
   "env": {
     "production": {
       "name": "limen",
       "workers_dev": false
+      // Bindings are per-environment (not inherited). Once KV is enabled,
+      // repeat "kv_namespaces" here with a separate prod namespace id.
     }
   }
 }

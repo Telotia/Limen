@@ -14,7 +14,7 @@
     "check": "astro check",
     "test": "bun test",
     "smoke:dev": "bun scripts/smoke-url.ts https://dev.telotia.com \"Request a pilot\"",
-    "smoke:prod": "bun scripts/smoke-url.ts https://telotia.com \"Coming soon\"",
+    "smoke:prod": "bun scripts/smoke-url.ts https://telotia.com \"September\"",
     "hooks:install": "git config core.hooksPath .githooks",
     "commitlint": "commitlint --edit",
     "cf:deploy:dev": "bun run build:dev && bunx wrangler deploy --env=",
