@@ -1,10 +1,16 @@
 ---
 import ComingSoon from '../components/ComingSoon.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { splitDesignHtml } from '../lib/splitDesignHtml';
 // dev.telotia.com renders the multi-page ink-wash site (site/index.html) --
 // perf-optimized (30fps cap, off-screen pause, DPR 1.5, trimmed particle
 // counts) and the current design direction. Sibling pages: process, workspace,
 // demo, research, consult (see those .astro files -- same pattern).
 // prod (telotia.com) shows the <ComingSoon /> teaser until launch.
+//
+// NAV and FOOTER are real components now (deduplicated across all 6 pages);
+// everything else is still the raw site/index.html dump.
 import designRaw from '../../site/index.html?raw';
 
 const limenEnv = process.env.LIMEN_ENV ?? 'dev';
@@ -12,6 +18,7 @@ const isProd = limenEnv === 'prod';
 
 const bodyMatch = designRaw.match(/<body[^>]*>([\s\S]*?)<\/body>/);
 const designHtml = bodyMatch ? bodyMatch[1] : '';
+const { beforeNav, betweenNavAndFooter, afterFooter } = splitDesignHtml(designHtml);
 ---
 
 <html lang="en-CA">
@@ -35,7 +42,13 @@ const designHtml = bodyMatch ? bodyMatch[1] : '';
         // along for free in designHtml -- no separate script injection needed
         // (unlike the retired single-page design, whose scripts lived outside
         // the extracted body region).
-        <Fragment set:html={designHtml} />
+        <>
+          <Fragment set:html={beforeNav} />
+          <Nav showSubnav={false} />
+          <Fragment set:html={betweenNavAndFooter} />
+          <Footer showSecondaryLinks={false} tagline="Statement-by-statement evidence for medical-device CAPA." />
+          <Fragment set:html={afterFooter} />
+        </>
       )
     }
   </body>
