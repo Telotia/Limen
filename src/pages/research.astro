@@ -1,6 +1,10 @@
 ---
 import ComingSoon from '../components/ComingSoon.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { splitDesignHtml } from '../lib/splitDesignHtml';
 // Sibling of index.astro -- same multi-page ink-wash site/ bundle pattern.
+// NAV/FOOTER are real components now; everything else is still the raw dump.
 import designRaw from '../../site/research.html?raw';
 
 const limenEnv = process.env.LIMEN_ENV ?? 'dev';
@@ -8,6 +12,7 @@ const isProd = limenEnv === 'prod';
 
 const bodyMatch = designRaw.match(/<body[^>]*>([\s\S]*?)<\/body>/);
 const designHtml = bodyMatch ? bodyMatch[1] : '';
+const { beforeNav, betweenNavAndFooter, afterFooter } = splitDesignHtml(designHtml);
 ---
 
 <html lang="en-CA">
@@ -25,7 +30,13 @@ const designHtml = bodyMatch ? bodyMatch[1] : '';
       isProd ? (
         <ComingSoon />
       ) : (
-        <Fragment set:html={designHtml} />
+        <>
+          <Fragment set:html={beforeNav} />
+          <Nav />
+          <Fragment set:html={betweenNavAndFooter} />
+          <Footer />
+          <Fragment set:html={afterFooter} />
+        </>
       )
     }
   </body>
