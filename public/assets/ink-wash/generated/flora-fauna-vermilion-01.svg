@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 900" preserveAspectRatio="xMidYMid slice">
+<defs>
+<filter id="ink-flora-fauna-0" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.0214" numOctaves="3" seed="58" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="5.7" xChannelSelector="R" yChannelSelector="G" result="disp"/><feGaussianBlur in="disp" stdDeviation="0.57"/></filter>
+<filter id="grain-0" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="58" result="noise"/><feDiffuseLighting in="noise" lighting-color="#ffffff" surfaceScale="2" result="light"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting></filter>
+</defs>
+<g filter="url(#ink-flora-fauna-0)">
+<path d="M 253.5 828.9 L 247.8 797.4 L 245.4 766.0 L 244.5 734.7 L 244.8 703.4 L 245.8 671.9 L 250.2 640.5 L 252.7 608.6 L 258.9 577.0 L 265.0 545.2 L 271.4 513.3 L 278.0 481.5 L 283.0 449.5 L 286.9 417.5 L 289.5 385.5 L 290.6 353.7 L 286.6 353.5 L 284.6 385.2 L 280.8 416.7 L 275.5 448.3 L 269.1 479.8 L 262.7 511.5 L 255.5 543.1 L 248.2 574.8 L 242.3 606.7 L 234.5 638.3 L 231.3 670.5 L 227.6 702.6 L 226.8 734.8 L 228.1 767.1 L 231.1 799.3 L 233.9 831.4 Z" fill="#a8402f" fill-opacity="0.71"/>
+<ellipse cx="267.1" cy="512.4" rx="14.1" ry="5.2" fill="#a8402f" fill-opacity="0.78" transform="rotate(-77.5 267.1 512.4)"/>
+<ellipse cx="260.3" cy="544.1" rx="25.3" ry="5.5" fill="#a8402f" fill-opacity="0.74" transform="rotate(-77.6 260.3 544.1)"/>
+<ellipse cx="253.6" cy="575.9" rx="15.1" ry="5.8" fill="#a8402f" fill-opacity="0.74" transform="rotate(-91.5 253.6 575.9)"/>
+<ellipse cx="242.4" cy="639.4" rx="15.4" ry="5.1" fill="#a8402f" fill-opacity="0.78" transform="rotate(-117.2 242.4 639.4)"/>
+<ellipse cx="247.5" cy="607.7" rx="16.8" ry="5.9" fill="#a8402f" fill-opacity="0.82" transform="rotate(-77.1 247.5 607.7)"/>
+<path d="M 491.3 830.7 L 478.7 785.8 L 465.6 741.5 L 459.2 696.3 L 454.2 651.3 L 452.2 606.0 L 453.8 560.2 L 456.4 513.9 L 461.8 467.4 L 466.4 420.6 L 470.0 373.9 L 471.8 327.4 L 469.6 281.1 L 464.3 235.2 L 455.7 189.7 L 444.4 144.5 L 440.5 145.4 L 451.0 190.7 L 458.6 236.0 L 462.8 281.6 L 463.2 327.3 L 461.2 373.3 L 456.2 419.5 L 449.7 465.9 L 444.0 512.5 L 438.0 559.1 L 435.8 605.9 L 436.2 652.5 L 440.8 698.9 L 450.7 744.6 L 459.2 790.8 L 472.0 836.1 Z" fill="#a8402f" fill-opacity="0.73"/>
+<ellipse cx="455.8" cy="466.6" rx="21.8" ry="4.6" fill="#a8402f" fill-opacity="0.54" transform="rotate(-52.0 455.8 466.6)"/>
+<ellipse cx="450.2" cy="513.2" rx="24.6" ry="3.3" fill="#a8402f" fill-opacity="0.52" transform="rotate(-63.3 450.2 513.2)"/>
+<ellipse cx="481.6" cy="833.4" rx="25.9" ry="4.5" fill="#a8402f" fill-opacity="0.59" transform="rotate(-108.4 481.6 833.4)"/>
+</g>
+</svg>

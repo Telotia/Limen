@@ -1,41 +1,20 @@
 ---
-// Deduplicated nav, previously copy-pasted verbatim across all 6 site/*.html
-// pages (byte-identical except `showSubnav` below).
-//
-// The Resources mega-menu's Art/Finance link lists are NOT hardcoded here --
-// they're live content, rewritten daily by resource-sync/sync.py, which
-// regex-edits the <!-- RES-MENU:*:START/END --> blocks directly inside each
-// site/*.html file (all 6, independently). To keep that automation working
-// unmodified, this component re-reads the same markers from site/index.html
-// at build time rather than freezing a copy -- every deploy picks up
-// whatever sync.py last wrote, exactly like the old per-page shim did.
-import navRaw from '../../site/index.html?raw';
+import { artResources, financeResources } from '../data/resource-menu';
 
 interface Props {
   showSubnav?: boolean;
 }
 const { showSubnav = true } = Astro.props;
 
-function extractMenuBlock(html: string, marker: string): string {
-  const re = new RegExp(
-    `<!-- RES-MENU:${marker}:START -->[\\s\\S]*?<!-- RES-MENU:${marker}:END -->`
-  );
-  const m = html.match(re);
-  if (!m) throw new Error(`Nav.astro: RES-MENU:${marker} block not found in site/index.html`);
-  return m[0];
-}
-
-const artBlock = extractMenuBlock(navRaw, 'ART');
-const financeBlock = extractMenuBlock(navRaw, 'FINANCE');
 ---
 
 <!-- NAV -->
-<nav class="navlight" style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:30px;padding:3px 64px;background:linear-gradient(90deg,rgba(248,250,253,.72) 0%,rgba(238,242,248,.66) 38%,rgba(150,178,222,.5) 70%,rgba(238,242,248,.62) 88%,rgba(248,250,253,.72) 100%);backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px);border-bottom:1px solid rgba(40,25,25,.4);box-shadow:0 1px 0 rgba(220,224,229,.08),inset 0 1px 0 rgba(40,25,25,.5)">
-    <a href="index.html" style="text-decoration:none"><div style="display:flex;align-items:center;gap:14px">
-      <img src="telotia-logo-cut.png" alt="Telotia" style="height:72px;width:auto;display:block;flex-shrink:0;margin:0 -8px;position:relative;top:0"/>
+<nav class="navlight" aria-label="Primary navigation" style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:28px;padding:0 64px;min-height:72px;background:linear-gradient(90deg,rgba(230,226,216,.94),rgba(246,243,236,.9) 46%,rgba(230,226,216,.94));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(23,32,29,.22);box-shadow:0 1px 0 rgba(255,255,255,.35)">
+    <a class="nav-brand" href="index.html" style="text-decoration:none"><div style="display:flex;align-items:center;gap:14px">
+      <img src="/telotia-mark-tricolor-transparent.webp" alt="Telotia" style="height:50px;width:50px;object-fit:contain;display:block;flex-shrink:0"/>
       <span style="font-family:var(--fmono);font-size:14px;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:#10182F">TELOTIA</span>
     </div></a>
-    <div style={`display:${showSubnav ? 'flex' : 'none'};gap:26px;margin-left:6px`}>
+    <div class="nav-links" style={`display:${showSubnav ? 'flex' : 'none'};gap:26px;margin-left:6px`}>
       {showSubnav && (
         <>
           <a class="lk" href="process.html" style="font-size:13px">Process</a>
@@ -50,12 +29,22 @@ const financeBlock = extractMenuBlock(navRaw, 'FINANCE');
         <div class="res-panel">
           <div class="res-col">
             <div class="res-col-title">Art</div>
-            <Fragment set:html={artBlock} />
+            {artResources.map((item) => (
+              <a class="res-item" href={item.href}>
+                <span class="res-item-title">{item.title}</span>
+                <span class="res-item-date">{item.date}</span>
+              </a>
+            ))}
             <a class="res-viewall" href="/resource/art/">All art →</a>
           </div>
           <div class="res-col">
             <div class="res-col-title">Finance</div>
-            <Fragment set:html={financeBlock} />
+            {financeResources.map((item) => (
+              <a class="res-item" href={item.href}>
+                <span class="res-item-title">{item.title}</span>
+                <span class="res-item-date">{item.date}</span>
+              </a>
+            ))}
             <a class="res-viewall" href="/resource/finance/">All finance →</a>
           </div>
           <div class="res-col">
@@ -67,6 +56,133 @@ const financeBlock = extractMenuBlock(navRaw, 'FINANCE');
         </div>
       </div>
     </div>
-    <div style="flex:1"></div>
-    <a class="btn-s" href="consult.html" style="font-size:13px;color:var(--t2);text-decoration:none;border:1px solid var(--rule);border-radius:8px;padding:8px 16px">Request a pilot</a>
+    <div class="nav-spacer" style="flex:1"></div>
+    <a class="btn-s nav-cta" href="consult.html" style="font-size:13px;color:var(--t2);text-decoration:none;border:1px solid var(--rule);border-radius:8px;padding:8px 16px">Request a pilot</a>
+    <details class="nav-mobile">
+      <summary aria-label="Open navigation">Menu</summary>
+      <div class="nav-mobile-panel">
+        <a href="process.html">Process</a>
+        <a href="workspace.html">Workspace</a>
+        <a href="demo.html">Demo</a>
+        <a href="research.html">Research</a>
+        <a href="consult.html">Consult</a>
+        <a href="/resource">Resources</a>
+        <a class="nav-mobile-cta" href="consult.html">Request a pilot</a>
+      </div>
+    </details>
   </nav>
+
+<style>
+  .nav-mobile {
+    display: none;
+    position: relative;
+    margin-left: auto;
+    font-family: var(--fmono);
+  }
+
+  .nav-mobile summary {
+    list-style: none;
+    cursor: pointer;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 8px 11px;
+    color: var(--t2);
+    font-size: 12px;
+  }
+
+  .nav-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-mobile-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    width: min(260px, calc(100vw - 32px));
+    display: grid;
+    padding: 10px;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    background: rgba(245, 243, 237, 0.97);
+    box-shadow: 0 24px 50px -24px rgba(16, 24, 47, 0.45);
+    max-height: calc(100dvh - 92px);
+    overflow-y: auto;
+  }
+
+  .nav-mobile-panel a {
+    padding: 10px 11px;
+    color: var(--t2);
+    text-decoration: none;
+    font-size: 13px;
+  }
+
+  .nav-mobile-panel a + a {
+    border-top: 1px solid var(--rulesoft);
+  }
+
+  .nav-mobile-panel .nav-mobile-cta {
+    margin-top: 6px;
+    border: 0;
+    border-radius: 7px;
+    background: var(--t1);
+    color: #fff;
+    text-align: center;
+  }
+
+  @media (max-width: 960px) {
+    .navlight {
+      height: 68px !important;
+      padding: 0 16px !important;
+      flex-wrap: nowrap !important;
+      gap: 10px !important;
+    }
+
+    .nav-brand img {
+      height: 44px !important;
+      width: 44px !important;
+    }
+
+    .nav-brand span {
+      font-size: 12px !important;
+      letter-spacing: 0.25em !important;
+    }
+
+    .nav-links,
+    .nav-cta {
+      display: none !important;
+    }
+
+    .nav-spacer {
+      display: block !important;
+    }
+
+    .nav-mobile {
+      display: block;
+    }
+
+    .nav-mobile[open] summary {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: rgba(42, 85, 165, 0.06);
+    }
+  }
+
+  @media (max-width: 420px) {
+    .navlight {
+      height: 64px !important;
+      min-height: 64px !important;
+      padding-left: max(13px, env(safe-area-inset-left)) !important;
+      padding-right: max(13px, env(safe-area-inset-right)) !important;
+    }
+
+    .nav-brand img {
+      height: 38px !important;
+      width: 38px !important;
+    }
+
+    .nav-brand span {
+      font-size: 11px !important;
+      letter-spacing: 0.22em !important;
+    }
+  }
+</style>

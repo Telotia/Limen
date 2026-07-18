@@ -1,0 +1,216 @@
+---
+import ClaimFlow from '../workspace/ClaimFlow.astro';
+---
+
+<!-- 齋 -->
+  <section id="workspace" style="position:relative;padding:96px 64px;background:transparent;border-top:1px solid var(--rulesoft)">
+    <div class="section-mark section-mark-right" style="position:absolute;right:34px;top:120px;writing-mode:vertical-rl;color:var(--t4)">齋</div>
+    <div style="max-width:1180px;margin:0 auto">
+      <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">Workspace</span>
+      <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1);max-width:760px">Inspect each claim before sign-off.</h2>
+      <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:660px;margin-top:14px">The interactive mockup shows the review surface as document work: claim graph, verdict queue, source passage, and audit trail.</p>
+
+      <div id="tlWsShell" class="workspace-window glow-wrap" data-active-tab="0" style="position:relative;margin-top:40px;border:1px solid var(--t2);border-radius:10px;overflow:hidden;background:rgba(239,238,233,.92);box-shadow:0 2px 0 var(--rule),0 18px 44px -30px rgba(23,32,29,.42)">
+        <div class="workspace-toolbar" style="display:flex;align-items:center;gap:18px;padding:14px 20px;border-bottom:1px solid var(--rulesoft);background:rgba(245,243,237,.72)">
+          <span class="window-controls" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="workspace-product" style="font-family:var(--fmono);font-size:12px;letter-spacing:.14em;color:var(--t1)">TELOTIA REVIEW</span>
+          <span class="workspace-run" style="font-family:var(--fmono);font-size:11px;color:var(--t4)">run_2026_05_25_import_package / canadian_health_equipment</span>
+          <span class="workspace-spacer" style="flex:1"></span>
+          <span class="human-review-status" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--fmono);font-size:11px;color:var(--tealglow)"><span style="width:6px;height:6px;border-radius:50%;background:var(--tealglow);animation:pulseDot 1.2s var(--ease) infinite;flex:0 0 auto"></span>human review required</span>
+        </div>
+        <div class="workspace-art" aria-hidden="true"></div>
+        <div class="workspace-window-body" style="display:grid;grid-template-columns:56px 1fr">
+          <nav id="tlWsRail" style="display:flex;flex-direction:column;gap:8px;padding:16px 0;align-items:center;border-right:1px solid var(--rulesoft)">
+            <button class="wrail" data-wpage="0" type="button" title="Document review" style="width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(47,111,176,.16);border:1px solid var(--teal2);color:var(--teal);cursor:pointer"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M7 3.5h7l3 3v14H7z"/><path d="M14 3.5v4h4"/><path d="M9.5 12h5"/><path d="M9.5 15.5h5"/></svg></button>
+            <button class="wrail" data-wpage="1" type="button" title="Evidence search" style="width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid transparent;color:var(--t4);cursor:pointer"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="10.5" cy="10.5" r="4.5"/><path d="M14 14l5 5"/></svg></button>
+            <button class="wrail" data-wpage="2" type="button" title="Verdict queue" style="width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid transparent;color:var(--t4);cursor:pointer"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="7"/><path d="M8.7 12.2l2.2 2.2 4.6-5"/></svg></button>
+            <button class="wrail" data-wpage="3" type="button" title="Proof package" style="width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid transparent;color:var(--t4);cursor:pointer"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4.5 8.5 12 4l7.5 4.5v7L12 20l-7.5-4.5z"/><path d="M12 13v7"/></svg></button>
+          </nav>
+          <div id="tlWsPages" style="position:relative;min-height:712px">
+            <div data-wpage="0" style="display:grid;grid-template-columns:1fr 320px">
+          <div style="padding:22px 24px;border-right:1px solid var(--rulesoft)">
+            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Document review / imported equipment file</div>
+            <h3 id="tlWsClaimTitle" style="font-weight:600;font-size:20px;color:var(--t1);margin-top:8px;max-width:560px">The device packaging identifies the imported model and manufacturer lot.</h3>
+            <div style="margin-top:22px">
+              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-bottom:10px">Claim graph / citation path</div>
+              <ClaimFlow />
+            </div>
+            <div style="margin-top:20px">
+              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-bottom:10px">Verdict queue</div>
+              <div style="display:flex;flex-direction:column;gap:1px;background:var(--rulesoft);border:1px solid var(--rulesoft);border-radius:6px;overflow:hidden">
+                <div class="crow" data-ws-row data-id="claim-018" data-note="Reads as a factual identification claim, both the model and the manufacturer lot must appear together in the importer file." data-claim="The device packaging identifies the imported model and manufacturer lot." data-verdict="Supported" data-passage="Importer file IFU-22, page 4 lists model QX-180 and lot range A17–A19 with matching manufacturer references." data-source="IFU-22 / page 4" data-color="#2A55A5" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:rgba(47,111,176,.07)">
+                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The device packaging identifies the imported model and manufacturer lot.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-018 / IFU-22 / page 4</small></span>
+                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--teal);border:1px solid var(--teal2);border-radius:3px;padding:3px 8px">Supported</span>
+                </div>
+                <div class="crow" data-ws-row data-id="claim-027" data-note="Reads as a procedural coverage claim. It holds for the listed cleaning agents, but the interval for shared-use accessories is left unspecified." data-claim="Cleaning instructions cover high-touch surfaces after each patient use." data-verdict="Partial" data-passage="The manual specifies approved cleaning agents but does not define the interval for accessories in shared clinical settings." data-source="Maintenance manual / section 7.2" data-color="#E3A32C" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:var(--surface-paper)">
+                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">Cleaning instructions cover high-touch surfaces after each patient use.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-027 / Maintenance manual / section 7.2</small></span>
+                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:3px;padding:3px 8px">Partial</span>
+                </div>
+                <div class="crow" data-ws-row data-id="claim-041" data-note="Reads as a completeness claim over every external warning. Each outer carton must carry bilingual text." data-claim="The supplied corpus demonstrates bilingual labelling for all external warnings." data-verdict="Unsupported" data-passage="No supplied label image or packaging proof contains the French warning text for the outer carton." data-source="No cited passage" data-color="#C13B33" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:var(--surface-paper)">
+                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The supplied corpus demonstrates bilingual labelling for all external warnings.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-041 / No cited passage</small></span>
+                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--t3);border:1px solid var(--rule);border-radius:3px;padding:3px 8px">Unsupported</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside style="padding:22px 22px;background:rgba(245,243,237,.58)">
+            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Source passage</div>
+            <h3 id="tlWsVerdict" style="font-weight:600;font-size:19px;color:var(--teal);margin-top:10px">Supported</h3>
+            <p id="tlWsPassage" style="font-size:14px;line-height:1.6;color:var(--t2);margin-top:8px">Importer file IFU-22, page 4 lists model QX-180 and lot range A17–A19 with matching manufacturer references.</p>
+            <span id="tlWsSource" style="display:inline-block;font-family:var(--fmono);font-size:11px;color:var(--gold);margin-top:10px">IFU-22 / page 4</span>
+            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:26px;padding-top:18px;border-top:1px solid var(--rulesoft)">Audit trail</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px">
+              <div style="display:flex;gap:12px"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4);flex-shrink:0">09:42:11</span><span style="font-size:13px;color:var(--t2)"><strong style="color:var(--t1);font-weight:500">document</strong> · 18 atomic claims extracted</span></div>
+              <div style="display:flex;gap:12px"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4);flex-shrink:0">09:42:38</span><span style="font-size:13px;color:var(--t2)"><strong style="color:var(--t1);font-weight:500">corpus</strong> · 47 supplied files indexed</span></div>
+              <div style="display:flex;gap:12px"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4);flex-shrink:0">09:43:02</span><span style="font-size:13px;color:var(--t2)"><strong style="color:var(--gold);font-weight:500">review</strong> · claim-027 requires reviewer note</span></div>
+              <div style="display:flex;gap:12px"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4);flex-shrink:0">09:44:19</span><span style="font-size:13px;color:var(--t2)"><strong style="color:var(--t1);font-weight:500">source</strong> · page citation attached</span></div>
+              <div style="display:flex;gap:12px"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4);flex-shrink:0">09:45:06</span><span style="font-size:13px;color:var(--t2)"><strong style="color:var(--t1);font-weight:500">package</strong> · proof bundle draft ready</span></div>
+            </div>
+          </aside>
+            </div>
+
+            <div data-wpage="1" style="display:none;padding:22px 24px">
+              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Evidence search / scoped to supplied corpus</div>
+              <h3 style="font-weight:600;font-size:20px;color:var(--t1);margin-top:8px;max-width:640px">Each claim is matched only against the 47 files you supplied, never the open web.</h3>
+              <div style="margin-top:10px;font-family:var(--fmono);font-size:11px;color:var(--teal)">matching · claim-018: device packaging identifies the imported model and manufacturer lot</div>
+              <div style="margin-top:22px;display:flex;flex-direction:column;gap:1px;background:var(--rulesoft);border:1px solid var(--rulesoft);border-radius:8px;overflow:hidden">
+                <div style="display:flex;align-items:center;gap:18px;padding:14px 18px;background:var(--surface-paper)">
+                  <span style="flex:1;min-width:0"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">IFU-22 · Instructions for use</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">page 4 · model + lot reference</small></span>
+                  <span style="width:120px;height:4px;border-radius:2px;background:var(--rulesoft);overflow:hidden;flex-shrink:0"><span style="display:block;height:100%;width:92%;background:var(--teal)"></span></span>
+                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--fmono);font-size:11px;color:var(--teal)">match</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:18px;padding:14px 18px;background:var(--surface-paper)">
+                  <span style="flex:1;min-width:0"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">TR-09 · Bench test report</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">table 2 · performance data</small></span>
+                  <span style="width:120px;height:4px;border-radius:2px;background:var(--rulesoft);overflow:hidden;flex-shrink:0"><span style="display:block;height:100%;width:78%;background:var(--teal)"></span></span>
+                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--fmono);font-size:11px;color:var(--teal)">match</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:18px;padding:14px 18px;background:var(--surface-paper)">
+                  <span style="flex:1;min-width:0"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">Maintenance manual</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">section 7.2 · cleaning agents</small></span>
+                  <span style="width:120px;height:4px;border-radius:2px;background:var(--rulesoft);overflow:hidden;flex-shrink:0"><span style="display:block;height:100%;width:54%;background:var(--gold)"></span></span>
+                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--fmono);font-size:11px;color:var(--gold)">partial</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:18px;padding:14px 18px;background:var(--surface-paper)">
+                  <span style="flex:1;min-width:0"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">DoC-3 · Declaration of conformity</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">indexed · no direct hit</small></span>
+                  <span style="width:120px;height:4px;border-radius:2px;background:var(--rulesoft);overflow:hidden;flex-shrink:0"><span style="display:block;height:100%;width:14%;background:var(--t3)"></span></span>
+                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--fmono);font-size:11px;color:var(--t3)">silent</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:18px;padding:14px 18px;background:var(--surface-paper)">
+                  <span style="flex:1;min-width:0"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">Carton label pack · artwork</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">no French warning found</small></span>
+                  <span style="width:120px;height:4px;border-radius:2px;background:var(--rulesoft);overflow:hidden;flex-shrink:0"><span style="display:block;height:100%;width:6%;background:var(--t3)"></span></span>
+                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--fmono);font-size:11px;color:var(--t3)">no match</span>
+                </div>
+              </div>
+              <p style="margin-top:16px;font-size:13px;line-height:1.6;color:var(--t3);max-width:680px">Search is scoped to what you trust and can cite. The open web is never queried.</p>
+            </div>
+
+            <div data-wpage="2" style="display:none;padding:22px 24px">
+              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Verdict queue / run summary</div>
+              <h3 style="font-weight:600;font-size:20px;color:var(--t1);margin-top:8px;max-width:620px">18 claims graded. Each links back to its source.</h3>
+              <div style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+                <div style="border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:var(--surface-paper)">
+                  <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--teal)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Supported</span></div>
+                  <div style="font-size:30px;font-weight:700;color:var(--t1);margin-top:8px">11</div>
+                </div>
+                <div style="border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:var(--surface-paper)">
+                  <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;border:1.4px solid var(--gold)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Partial</span></div>
+                  <div style="font-size:30px;font-weight:700;color:var(--t1);margin-top:8px">4</div>
+                </div>
+                <div style="border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:var(--surface-paper)">
+                  <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;border:1.2px solid var(--t3)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Unsupported</span></div>
+                  <div style="font-size:30px;font-weight:700;color:var(--t1);margin-top:8px">3</div>
+                </div>
+              </div>
+              <div style="margin-top:22px;display:flex;flex-direction:column;gap:1px;background:var(--rulesoft);border:1px solid var(--rulesoft);border-radius:8px;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:var(--surface-paper)">
+                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The device packaging identifies the imported model and manufacturer lot.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-018 / IFU-22 / page 4</small></span>
+                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--teal);border:1px solid var(--teal2);border-radius:3px;padding:3px 8px">Supported</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:var(--surface-paper)">
+                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">Cleaning instructions cover high-touch surfaces after each patient use.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-027 / Maintenance manual / section 7.2</small></span>
+                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:3px;padding:3px 8px">Partial</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;background:var(--surface-paper)">
+                  <span style="display:block"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The supplied corpus demonstrates bilingual labelling for all external warnings.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">claim-041 / No cited passage</small></span>
+                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--t3);border:1px solid var(--rule);border-radius:3px;padding:3px 8px">Unsupported</span>
+                </div>
+              </div>
+              <p style="margin-top:16px;font-size:13px;line-height:1.6;color:var(--t3);max-width:680px">“Unsupported” means the corpus is silent on the claim, not that the claim is wrong.</p>
+            </div>
+
+            <div data-wpage="3" style="display:none;padding:22px 24px">
+              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Proof package / draft bundle</div>
+              <h3 style="font-weight:600;font-size:20px;color:var(--t1);margin-top:8px;max-width:620px">Canadian health-equipment import: evidence bundle</h3>
+              <div style="margin-top:8px;font-family:var(--fmono);font-size:11px;color:var(--t4)">run_2026_05_25_import_package · drafted 09:45:06</div>
+              <div style="margin-top:20px;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface-paper)">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:16px 18px;border-bottom:1px solid var(--rulesoft)">
+                  <span style="flex:1"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The device packaging identifies the imported model and manufacturer lot.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">cited · IFU-22 / page 4</small></span>
+                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--teal);border:1px solid var(--teal2);border-radius:3px;padding:3px 8px">Supported</span>
+                </div>
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:16px 18px;border-bottom:1px solid var(--rulesoft)">
+                  <span style="flex:1"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">Cleaning instructions cover high-touch surfaces after each patient use.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">cited · Maintenance manual / section 7.2 · reviewer note</small></span>
+                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:3px;padding:3px 8px">Partial</span>
+                </div>
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:16px 18px">
+                  <span style="flex:1"><strong style="display:block;font-size:14px;color:var(--t1);font-weight:500">The supplied corpus demonstrates bilingual labelling for all external warnings.</strong><small style="font-family:var(--fmono);font-size:10px;color:var(--t4)">flagged · no cited passage in corpus</small></span>
+                  <span style="flex-shrink:0;font-family:var(--fmono);font-size:11px;color:var(--t3);border:1px solid var(--rule);border-radius:3px;padding:3px 8px">Unsupported</span>
+                </div>
+              </div>
+              <div style="margin-top:18px;display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--teal2);border-radius:10px;background:rgba(47,111,176,.08)">
+                <span style="width:7px;height:7px;border-radius:50%;background:var(--tealglow);animation:pulseDot 1.2s var(--ease) infinite;flex-shrink:0"></span>
+                <span style="font-size:13px;color:var(--t2)">Human review required before submission · proof bundle draft ready</span>
+              </div>
+              <p style="margin-top:14px;font-size:13px;line-height:1.6;color:var(--t3);max-width:680px">This bundle supports proof preparation. It does not grant regulatory approval or replace qualified human review.</p>
+            </div>
+
+            <div id="tlWsDetail" data-wpage="4" style="display:none">
+             <div style="display:grid;grid-template-columns:300px 1fr">
+              <div style="border-right:1px solid var(--rulesoft);padding:22px 20px;background:var(--surface-raised)">
+                <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)">Verdict queue</div>
+                <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
+                  <button class="dwmini" type="button" data-id="claim-018" data-claim="The device packaging identifies the imported model and manufacturer lot." data-verdict="Supported" data-passage="Importer file IFU-22, page 4 lists model QX-180 and lot range A17–A19 with matching manufacturer references." data-source="IFU-22 / page 4" data-note="Reads as a factual identification claim, both the model and the manufacturer lot must appear together in the importer file." data-color="#2A55A5" style="text-align:left;background:none;border:1px solid var(--rulesoft);border-radius:8px;padding:11px 12px;cursor:pointer;display:flex;flex-direction:column;gap:7px">
+                    <span style="display:flex;align-items:center;gap:7px"><span style="width:7px;height:7px;border-radius:50%;background:var(--teal)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)">Supported</span></span>
+                    <span style="font-size:12.5px;line-height:1.4;color:var(--t2)">The device packaging identifies the imported model and manufacturer lot.</span>
+                  </button>
+                  <button class="dwmini" type="button" data-id="claim-027" data-claim="Cleaning instructions cover high-touch surfaces after each patient use." data-verdict="Partial" data-passage="The manual specifies approved cleaning agents but does not define the interval for accessories in shared clinical settings." data-source="Maintenance manual / section 7.2" data-note="Reads as a procedural coverage claim. It holds for the listed cleaning agents, but the interval for shared-use accessories is left unspecified." data-color="#E3A32C" style="text-align:left;background:none;border:1px solid var(--rulesoft);border-radius:8px;padding:11px 12px;cursor:pointer;display:flex;flex-direction:column;gap:7px">
+                    <span style="display:flex;align-items:center;gap:7px"><span style="width:7px;height:7px;border-radius:50%;border:1.4px solid var(--gold)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)">Partial</span></span>
+                    <span style="font-size:12.5px;line-height:1.4;color:var(--t2)">Cleaning instructions cover high-touch surfaces after each patient use.</span>
+                  </button>
+                  <button class="dwmini" type="button" data-id="claim-041" data-claim="The supplied corpus demonstrates bilingual labelling for all external warnings." data-verdict="Unsupported" data-passage="No supplied label image or packaging proof contains the French warning text for the outer carton." data-source="No cited passage" data-note="Reads as a completeness claim over every external warning. Each outer carton must carry bilingual text." data-color="#C13B33" style="text-align:left;background:none;border:1px solid var(--rulesoft);border-radius:8px;padding:11px 12px;cursor:pointer;display:flex;flex-direction:column;gap:7px">
+                    <span style="display:flex;align-items:center;gap:7px"><span style="width:7px;height:7px;border-radius:50%;border:1.2px solid var(--t3)"></span><span style="font-family:var(--fmono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3)">Unsupported</span></span>
+                    <span style="font-size:12.5px;line-height:1.4;color:var(--t2)">The supplied corpus demonstrates bilingual labelling for all external warnings.</span>
+                  </button>
+                </div>
+              </div>
+              <div id="tlDwBody" style="padding:24px 28px">
+              <button id="tlDwBack" type="button" style="display:inline-flex;align-items:center;gap:8px;background:none;border:0;cursor:pointer;font-family:var(--fmono);font-size:12px;color:var(--t3);padding:0;margin-bottom:14px">← Back to review</button>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span id="tlDwPill" style="font-family:var(--fmono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid var(--teal);border-radius:100px;padding:4px 12px">Supported</span>
+                <span id="tlDwId" style="font-family:var(--fmono);font-size:14px;color:var(--t1)">claim-018</span>
+              </div>
+              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:24px">Claim</div>
+              <p id="tlDwClaim" style="font-style:italic;font-size:18px;line-height:1.5;color:var(--t1);margin:10px 0 0;padding-left:14px;border-left:2px solid var(--teal);max-width:680px">The device packaging identifies the imported model and manufacturer lot.</p>
+              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:24px">How the claim is read</div>
+              <p id="tlDwNote" style="font-size:14.5px;line-height:1.6;color:var(--t2);margin:8px 0 0;max-width:680px"></p>
+              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:24px">What the corpus says</div>
+              <p id="tlDwCorpus" style="font-size:14.5px;line-height:1.6;color:var(--t2);margin:8px 0 0;max-width:680px"></p>
+              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:24px">State</div>
+              <div style="margin-top:10px;max-width:520px;display:flex;flex-direction:column;gap:1px;background:var(--rulesoft);border:1px solid var(--rulesoft);border-radius:8px;overflow:hidden">
+                <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 14px;background:var(--surface-paper)"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4)">verdict</span><span id="tlDwVerdict" style="font-size:13px;color:var(--t1)">Supported</span></div>
+                <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 14px;background:var(--surface-paper)"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4)">source</span><span id="tlDwSource" style="font-family:var(--fmono);font-size:12px;color:var(--t2)">IFU-22 / page 4</span></div>
+                <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 14px;background:var(--surface-paper)"><span style="font-family:var(--fmono);font-size:11px;color:var(--t4)">status</span><span id="tlDwStatus" style="font-size:13px;color:var(--t2)">Cited · supported by corpus</span></div>
+              </div>
+              <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-top:24px">Actions</div>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px">
+                <span class="btn-s" style="display:inline-flex;align-items:center;gap:7px;border:1px solid var(--teal2);color:var(--teal);font-size:13px;padding:9px 14px;border-radius:8px;cursor:pointer">◎ View source passage</span>
+                <span class="btn-s" style="display:inline-flex;align-items:center;gap:7px;border:1px solid var(--rule);color:var(--t2);font-size:13px;padding:9px 14px;border-radius:8px;cursor:pointer">See related claims</span>
+                <button id="tlDwCopy" type="button" style="background:none;border:1px solid var(--rule);color:var(--t2);font-family:var(--fmono);font-size:12px;padding:9px 14px;border-radius:8px;cursor:pointer">Copy id</button>
+              </div>
+              </div>
+             </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

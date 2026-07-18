@@ -1,43 +1,8 @@
 ---
-import ComingSoon from '../components/ComingSoon.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import { splitDesignHtml } from '../lib/splitDesignHtml';
-// Sibling of index.astro -- same multi-page ink-wash site/ bundle pattern.
-// NAV/FOOTER are real components now; everything else is still the raw dump.
-import designRaw from '../../site/workspace.html?raw';
-
-const limenEnv = process.env.LIMEN_ENV ?? 'dev';
-const isProd = limenEnv === 'prod';
-
-const bodyMatch = designRaw.match(/<body[^>]*>([\s\S]*?)<\/body>/);
-const designHtml = bodyMatch ? bodyMatch[1] : '';
-const { beforeNav, betweenNavAndFooter, afterFooter } = splitDesignHtml(designHtml);
+import WorkspaceContent from '../components/pages/WorkspaceContent.astro';
+import MarketingShell from '../layouts/MarketingShell.astro';
+const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
 ---
-
-<html lang="en-CA">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Telotia · Workspace</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  </head>
-  <body>
-    {
-      isProd ? (
-        <ComingSoon />
-      ) : (
-        <>
-          <Fragment set:html={beforeNav} />
-          <Nav />
-          <Fragment set:html={betweenNavAndFooter} />
-          <Footer />
-          <Fragment set:html={afterFooter} />
-        </>
-      )
-    }
-  </body>
-</html>
+<MarketingShell isProd={isProd} title="Telotia | Workspace" description="Inspect claims, source passages, verdicts, and review notes in one workspace.">
+  <WorkspaceContent />
+</MarketingShell>

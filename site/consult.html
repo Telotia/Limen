@@ -220,21 +220,22 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
         <p style="font-size:14px;color:var(--t3);margin-top:24px">Prefer email? <a class="lk" href="mailto:hello@telotia.com" style="color:var(--t1);border-bottom:1px solid var(--gold2)">hello@telotia.com</a></p>
       </div>
 
-      <form id="tlPilotForm" novalidate class="glow-wrap" style="position:relative;border:1px solid rgba(160,180,210,.26);border-radius:18px;padding:32px;background:rgba(231,233,237,.035);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 18px 50px rgba(247,247,247,.26),inset 0 1px 0 rgba(40,25,25,.09)">
+      <form class="glow-wrap" style="position:relative;border:1px solid rgba(160,180,210,.26);border-radius:18px;padding:32px;background:rgba(231,233,237,.035);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 18px 50px rgba(247,247,247,.26),inset 0 1px 0 rgba(40,25,25,.09)">
         <div style="display:flex;flex-direction:column;gap:18px">
-          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Name</span><input class="fin" name="name" autocomplete="name" required type="text" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
-          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Work email</span><input class="fin" name="email" autocomplete="email" required type="email" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
-          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Organization</span><input class="fin" name="organization" autocomplete="organization" type="text" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
-          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">What evidence are you validating?</span><input class="fin" name="evidence" type="text" placeholder="e.g. clinical evidence for a device submission" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
-          <!-- Honeypot: hidden from people, tempting to bots. Must stay empty. -->
-          <input type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
-          <!-- Cloudflare Turnstile. appearance=interaction-only -> invisible for legit visitors; a challenge appears only when Cloudflare deems it necessary. Test sitekey always passes -- replace data-sitekey with your real key. -->
-          <div class="tlTurnstile" style="display:flex;justify-content:center"><div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light" data-size="flexible" data-appearance="interaction-only"></div></div>
+          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Name</span><input class="fin" type="text" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
+          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Work email</span><input class="fin" type="email" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
+          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Organization</span><input class="fin" type="text" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
+          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">What evidence are you validating?</span><input class="fin" type="text" placeholder="e.g. clinical evidence for a device submission" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--rule);border-radius:8px;background:rgba(40,25,25,.02)">
+            <span style="width:18px;height:18px;border:1px solid var(--rule);border-radius:3px;flex-shrink:0"></span>
+            <span style="font-size:13px;color:var(--t3)">Verify you are human</span>
+            <span style="flex:1"></span>
+            <span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">Turnstile</span>
+          </div>
           <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:4px">
             <small style="font-size:12px;line-height:1.5;color:var(--t4);max-width:240px">Form-gated to deter automated abuse. We reply within two business days.</small>
-            <button class="btn-p" type="submit" style="flex-shrink:0;background:var(--teal);color:#e7eaed;font-weight:600;font-size:15px;padding:13px 24px;border:none;border-radius:10px;cursor:pointer">Request a pilot</button>
+            <button class="btn-p" type="button" style="flex-shrink:0;background:var(--teal);color:#e7eaed;font-weight:600;font-size:15px;padding:13px 24px;border:none;border-radius:10px;cursor:pointer">Request a pilot</button>
           </div>
-          <p id="tlPilotStatus" role="status" aria-live="polite" style="display:none;margin:2px 2px 0;font-family:var(--fsans);font-size:14px;line-height:1.5"></p>
         </div>
       </form>
     </div>
@@ -428,38 +429,6 @@ var s=document.getElementById('tlSpikeCanvas');if(s)T.verdictSphere(s,{dragTarge
     else if(y<last-4 || y<=80){ if(hidden) show(); }       /* scrolling up or near top → show */
     last=y;
   },{passive:true});
-})();
-</script>
-<!-- Pilot form: Cloudflare Turnstile widget + submit handler -->
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<script>
-(function(){
-  var form=document.getElementById('tlPilotForm'); if(!form) return;
-  var statusEl=document.getElementById('tlPilotStatus');
-  var btn=form.querySelector('button[type=submit]');
-  var label=btn?btn.textContent:'';
-  function show(msg,ok){ if(!statusEl) return; statusEl.textContent=msg; statusEl.style.display='block'; statusEl.style.color=ok?'#2e7d43':'#b23b3b'; }
-  function resetTs(){ if(window.turnstile){ try{ window.turnstile.reset(); }catch(e){} } }
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    if(statusEl) statusEl.style.display='none';
-    var fd=new FormData(form);
-    if(!(fd.get('cf-turnstile-response')||'').toString().trim()){ show('Please complete the verification check.',false); return; }
-    if(btn){ btn.disabled=true; btn.textContent='Sending\u2026'; }
-    fetch('/api/pilot',{method:'POST',body:fd})
-      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok,data:j}; }); })
-      .then(function(res){
-        if(res.ok && res.data && res.data.ok){
-          form.reset(); resetTs();
-          show('Request received. We\u2019ll reply within two business days.',true);
-        } else {
-          show((res.data&&res.data.error)||'Something went wrong. Please email hello@telotia.com.',false);
-          resetTs();
-        }
-      })
-      .catch(function(){ show('Network error. Please email hello@telotia.com.',false); resetTs(); })
-      .finally(function(){ if(btn){ btn.disabled=false; btn.textContent=label; } });
-  });
 })();
 </script>
 </body>

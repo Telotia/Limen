@@ -1,0 +1,64 @@
+---
+---
+
+<!-- HERO -->
+  <header class="home-hero" style="position:relative;min-height:100dvh;display:flex;align-items:flex-start;padding:96px 64px;overflow:hidden">
+    <canvas id="tlHeroCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.7"></canvas>
+      <div class="tlMark" aria-hidden="true"><span class="tlMark-word" data-text="TELOTIA">TELOTIA</span></div>
+      <svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true"><defs><filter id="tlInk" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency="0.011 0.015" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+    <div id="tlHeroGrid" style="position:relative;z-index:2;max-width:1320px;width:100%;margin:clamp(110px,12vw,180px) auto 0;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center">
+      <div>
+        <div id="tlPill" style="display:inline-flex;align-items:center;gap:11px;font-family:var(--fmono);font-size:12px;letter-spacing:.14em;color:var(--t2);border:1px solid rgba(47,111,176,.24);background:rgba(47,111,176,.06);padding:7px 14px;border-radius:100px;text-transform:uppercase">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--tealglow);animation:pulseDot 1.2s var(--ease) infinite"></span>
+          Paid pilot · Montreal · launching September 2026
+        </div>
+        <h1 style="font-weight:700;font-size:60px;line-height:1.04;letter-spacing:-.025em;margin:24px 0 0;color:#0e1d33;text-wrap:balance">Evidence-grade audit for Canadian health-equipment imports.</h1>
+        <p style="font-size:19px;line-height:1.55;color:var(--t2);max-width:560px;margin-top:22px;text-wrap:pretty">Telotia turns documentation into citation-linked evidence review for teams preparing Canadian proof packages. It checks the <span style="color:#141d2d">claim</span>, not the <span style="color:#141d2d">conclusion</span>.</p>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:34px">
+          <a class="btn-p" href="#consult" style="background:var(--teal);color:#e7eaed;font-weight:600;font-size:14px;padding:11px 22px;border-radius:9px;text-decoration:none;box-shadow:0 8px 24px -10px rgba(47,111,176,.55)">Request a pilot</a>
+          <a class="btn-s" href="#demo" style="border:1px solid rgba(40,25,25,.2);color:var(--t2);font-weight:500;font-size:14px;padding:11px 20px;border-radius:9px;text-decoration:none">▷ Watch the demo</a>
+        </div>
+        <div style="margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:540px">
+          <div style="border-top:1px solid var(--rule);padding-top:12px">
+            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)">Input</div>
+            <div style="font-size:16px;font-weight:600;color:var(--t1);margin-top:5px">Any document set</div>
+          </div>
+          <div style="border-top:1px solid var(--rule);padding-top:12px">
+            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)">Checked against</div>
+            <div style="font-size:16px;font-weight:600;color:var(--t1);margin-top:5px">A corpus <span style="color:var(--gold)">you</span> trust</div>
+          </div>
+          <div style="border-top:1px solid var(--rule);padding-top:12px">
+            <div style="font-family:var(--fmono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)">Output</div>
+            <div style="font-size:16px;font-weight:600;color:var(--t1);margin-top:5px">Graded &amp; cited</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tlLedgerCell" style="position:relative">
+        <div style="position:absolute;inset:-20% -15%;pointer-events:none;background:radial-gradient(46% 40% at 30% 24%, rgba(89,144,192,.24), transparent 66%),radial-gradient(42% 48% at 74% 64%, rgba(16,42,107,.15), transparent 70%),radial-gradient(34% 30% at 54% 94%, rgba(120,150,200,.13), transparent 72%);filter:blur(12px)"></div>
+        <div class="glow-wrap" style="position:relative;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:rgba(232,234,238,.62);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 34px 70px -28px rgba(247,247,247,.7)">
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--rulesoft);background:rgba(231,233,237,.5)">
+            <span style="font-family:var(--fmono);font-size:11px;letter-spacing:.16em;color:var(--t1)">EVIDENCE LEDGER</span>
+            <span style="flex:1"></span>
+            <span style="display:inline-flex;align-items:center;gap:7px;font-family:var(--fmono);font-size:10px;color:var(--tealglow)"><span style="width:6px;height:6px;border-radius:50%;background:var(--tealglow);animation:pulseDot 1.2s var(--ease) infinite"></span>live</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 18px;border-bottom:1px solid var(--rulesoft);font-family:var(--fmono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--t4)"><span>Claim</span><span>Verdict</span></div>
+          <div style="display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid var(--rulesoft)">
+            <div style="flex:1"><p style="font-size:14px;line-height:1.4;color:var(--t1)">Device packaging identifies the imported model and lot.</p><span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">IFU-22 / page 4</span></div>
+            <span style="flex-shrink:0;font-family:var(--fmono);font-size:10.5px;color:var(--teal);border:1px solid var(--teal2);border-radius:3px;padding:3px 8px">Supported</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid var(--rulesoft)">
+            <div style="flex:1"><p style="font-size:14px;line-height:1.4;color:var(--t1)">Cleaning covers high-touch surfaces after each use.</p><span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">Maintenance manual / §7.2</span></div>
+            <span style="flex-shrink:0;font-family:var(--fmono);font-size:10.5px;color:var(--gold);border:1px solid var(--gold2);border-radius:3px;padding:3px 8px">Partial</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid var(--rulesoft)">
+            <div style="flex:1"><p style="font-size:14px;line-height:1.4;color:var(--t1)">Bilingual labelling on all external warnings.</p><span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">no cited passage</span></div>
+            <span style="flex-shrink:0;font-family:var(--fmono);font-size:10.5px;color:var(--t3);border:1px solid var(--rule);border-radius:3px;padding:3px 8px">Unsupported</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:13px 18px;font-family:var(--fmono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t4)">
+            <span style="color:var(--teal)">decompose</span><span>→</span><span style="color:var(--teal)">search</span><span>→</span><span style="color:var(--teal)">grade</span><span style="flex:1"></span><span>human review</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
