@@ -1,0 +1,88 @@
+---
+---
+
+<!-- Sparse ornaments on one page-length sheet. They are deliberately not
+     attached to sections, and every edge dissolves into the same paper. -->
+<div class="page-ink-scroll" aria-hidden="true">
+  <i class="page-ink page-ink-mountain"></i>
+  <i class="page-ink page-ink-bamboo"></i>
+  <i class="page-ink page-ink-water"></i>
+  <i class="page-ink page-ink-brush"></i>
+</div>
+
+<style>
+  .page-ink-scroll {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    /* The source washes carry their own paper stock. Keep the larger edge
+       gestures in SectionTitleInk, where the paper is shared and no image
+       rectangle can intrude into the reading field. */
+    display: none;
+  }
+
+  .page-ink {
+    position: absolute;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.34;
+    mix-blend-mode: darken;
+    filter: saturate(0.92) contrast(2.1) brightness(1.28);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.52) 18%, #000 42%, #000 84%, rgba(0,0,0,.18) 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.52) 18%, #000 42%, #000 84%, rgba(0,0,0,.18) 100%);
+  }
+
+  .page-ink-mountain {
+    top: 1.5%;
+    right: -2%;
+    width: min(58vw, 860px);
+    aspect-ratio: 16 / 9;
+    background-image: url('/assets/ink-wash/02-mountain-upper-left.webp');
+    clip-path: ellipse(44% 54% at 9% 22%);
+    -webkit-mask-image: radial-gradient(ellipse at 8% 22%, #000 0 16%, rgba(0,0,0,.72) 28%, rgba(0,0,0,.22) 42%, transparent 58%);
+    mask-image: radial-gradient(ellipse at 8% 22%, #000 0 16%, rgba(0,0,0,.72) 28%, rgba(0,0,0,.22) 42%, transparent 58%);
+  }
+
+  .page-ink-bamboo {
+    top: 30%;
+    left: -7%;
+    width: min(38vw, 560px);
+    aspect-ratio: 4 / 3;
+    background-image: url('/assets/ink-wash/05-bamboo-right.webp');
+    clip-path: ellipse(44% 52% at 94% 55%);
+    -webkit-mask-image: radial-gradient(ellipse at 96% 55%, #000 0 16%, rgba(0,0,0,.72) 28%, rgba(0,0,0,.22) 42%, transparent 60%);
+    mask-image: radial-gradient(ellipse at 96% 55%, #000 0 16%, rgba(0,0,0,.72) 28%, rgba(0,0,0,.22) 42%, transparent 60%);
+  }
+
+  .page-ink-water {
+    top: 58%;
+    right: -8%;
+    width: min(56vw, 860px);
+    aspect-ratio: 16 / 8;
+    background-image: url('/assets/ink-wash/08-water-left.webp');
+    clip-path: ellipse(42% 48% at 7% 64%);
+    -webkit-mask-image: radial-gradient(ellipse at 5% 64%, #000 0 15%, rgba(0,0,0,.72) 28%, rgba(0,0,0,.22) 42%, transparent 60%);
+    mask-image: radial-gradient(ellipse at 5% 64%, #000 0 15%, rgba(0,0,0,.72) 28%, rgba(0,0,0,.22) 42%, transparent 60%);
+  }
+
+  .page-ink-brush {
+    top: 84%;
+    left: -9%;
+    width: min(48vw, 720px);
+    aspect-ratio: 16 / 9;
+    background-image: url('/assets/ink-wash/03-brush-lower-left.webp');
+    clip-path: ellipse(42% 50% at 7% 86%);
+    -webkit-mask-image: radial-gradient(ellipse at 5% 86%, #000 0 15%, rgba(0,0,0,.72) 28%, rgba(0,0,0,.22) 42%, transparent 60%);
+    mask-image: radial-gradient(ellipse at 5% 86%, #000 0 15%, rgba(0,0,0,.72) 28%, rgba(0,0,0,.22) 42%, transparent 60%);
+  }
+
+  @media (max-width: 700px) {
+    .page-ink { opacity: 0.11; }
+    .page-ink-mountain,.page-ink-water { right: -42%; width: 112vw; }
+    .page-ink-bamboo,.page-ink-brush { left: -44%; width: 96vw; }
+  }
+</style>

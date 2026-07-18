@@ -1,42 +1,32 @@
 ---
-import ComingSoon from '../components/ComingSoon.astro';
-// dev.telotia.com renders the multi-page ink-wash site (site/index.html) --
-// perf-optimized (30fps cap, off-screen pause, DPR 1.5, trimmed particle
-// counts) and the current design direction. Sibling pages: process, workspace,
-// demo, research, consult (see those .astro files -- same pattern).
-// prod (telotia.com) shows the <ComingSoon /> teaser until launch.
-import designRaw from '../../site/index.html?raw';
+import Consult from '../components/home/Consult.astro';
+import Demo from '../components/home/Demo.astro';
+import Glossary from '../components/home/Glossary.astro';
+import Hero from '../components/home/Hero.astro';
+import PageInk from '../components/home/PageInk.astro';
+import Process from '../components/home/Process.astro';
+import Research from '../components/home/Research.astro';
+import Verdict from '../components/home/Verdict.astro';
+import Workspace from '../components/home/Workspace.astro';
+import MarketingShell from '../layouts/MarketingShell.astro';
 
-const limenEnv = process.env.LIMEN_ENV ?? 'dev';
-const isProd = limenEnv === 'prod';
-
-const bodyMatch = designRaw.match(/<body[^>]*>([\s\S]*?)<\/body>/);
-const designHtml = bodyMatch ? bodyMatch[1] : '';
+const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
 ---
 
-<html lang="en-CA">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{isProd ? 'Telotia — Arriving September 2026' : 'Telotia — claim-to-evidence validation'}</title>
-    {isProd && <meta name="description" content="Every claim, held to the evidence behind it. Arriving September 2026 — Montréal." />}
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  </head>
-  <body>
-    {
-      isProd ? (
-        <ComingSoon />
-      ) : (
-        // site/index.html's own <script src="telotia-particles.js?v=8"> /
-        // "footer-assets.js?v=8"> tags live inside its <body>, so they come
-        // along for free in designHtml -- no separate script injection needed
-        // (unlike the retired single-page design, whose scripts lived outside
-        // the extracted body region).
-        <Fragment set:html={designHtml} />
-      )
-    }
-  </body>
-</html>
+<MarketingShell
+  isProd={isProd}
+  title={isProd ? 'Telotia | Arriving September 2026' : 'Telotia | Claim-to-evidence validation'}
+  description={isProd
+    ? 'Every claim, held to the evidence behind it. Arriving September 2026 in Montreal.'
+    : 'Evidence-grade claim review for Canadian health-equipment imports.'}
+>
+  <PageInk />
+  <Hero />
+  <Process />
+  <Verdict />
+  <Glossary />
+  <Workspace />
+  <Demo />
+  <Research />
+  <Consult />
+</MarketingShell>

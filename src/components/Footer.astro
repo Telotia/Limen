@@ -1,0 +1,33 @@
+---
+// Shared footer for the public marketing pages. The canvas is populated lazily
+// by home-init.js and plays one water ripple cycle per pointer entry.
+interface Props {
+  showSecondaryLinks?: boolean;
+  tagline?: string;
+}
+const {
+  showSecondaryLinks = true,
+  tagline = 'Evidence-grade audit for Canadian health-equipment imports.',
+} = Astro.props;
+---
+
+<footer class="site-footer" style="position:relative;padding:56px 64px 0;border-top:1px solid var(--rule);overflow:hidden;height:200px">
+  <div style="position:relative;z-index:1;max-width:1180px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:40px">
+    <div>
+      <div style="font-family:var(--fmono);font-size:14px;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:var(--t1)">TELOTIA</div>
+      <div style="font-family:var(--fmono);font-size:12px;color:var(--t3);margin-top:8px;text-shadow:0 1px 8px rgba(230,226,216,.9)">Montreal / private beta / evidence review workspace</div>
+    </div>
+    <div style="font-size:13px;line-height:1.6;color:var(--t3);max-width:380px">This software supports claim review and proof package preparation. It does not provide regulatory approval.</div>
+    <div style="display:flex;flex-direction:column;gap:9px;text-align:right">
+      <a class="lk" href="mailto:hello@telotia.com" style="font-size:13px">hello@telotia.com</a>
+      {showSecondaryLinks && (
+        <>
+          <a class="lk" href="demo.html" style="font-size:13px">Demo</a>
+          <a class="lk" href="consult.html" style="font-size:13px">Request a pilot</a>
+        </>
+      )}
+    </div>
+  </div>
+  <div style="position:relative;z-index:1;max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid var(--rule);font-family:var(--fmono);font-size:12px;color:var(--t3);text-shadow:0 1px 8px rgba(230,226,216,.9)">© 2026 Telotia · {tagline}</div>
+  <canvas id="tlFooterInk" aria-hidden="true" style="position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:left center;opacity:.40;mix-blend-mode:multiply;pointer-events:none;z-index:0;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 18%,rgba(0,0,0,.42) 52%,rgba(0,0,0,0) 82%);mask-image:linear-gradient(90deg,#000 0%,#000 18%,rgba(0,0,0,.42) 52%,rgba(0,0,0,0) 82%)"></canvas>
+</footer>

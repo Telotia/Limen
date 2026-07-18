@@ -232,45 +232,75 @@
   // ==========================================================================
   function consult(cv) {
     if (!cv) return { destroy: function () {} };
-    let dim = fit(cv), ctx = dim.ctx, raf = 0, parts = [];
+    let dim = fit(cv), ctx = dim.ctx, blooms = [], strokes = [];
 
     const build = function () {
       const w = dim.w, h = dim.h, m = Math.min(w, h);
-      parts = [];
-      const clusters = [
-        { x: w * 0.24, y: h * 0.48, r: m * 0.40, n: 96 },
-        { x: w * 0.10, y: h * 0.78, r: m * 0.16, n: 28 },
-        { x: w * 0.40, y: h * 0.20, r: m * 0.14, n: 38 },
-        { x: w * 0.06, y: h * 0.30, r: m * 0.12, n: 30 },
-        { x: w * 0.80, y: h * 0.44, r: m * 0.24, n: 48 },
-        { x: w * 0.92, y: h * 0.82, r: m * 0.12, n: 40 }
+      blooms = [];
+      strokes = [];
+      const pools = [
+        { x: -.02, y: .30, rx: .18, ry: .25, col: '#263832', a: .095 },
+        { x: .18, y: .87, rx: .30, ry: .16, col: '#263832', a: .085 },
+        { x: .42, y: .04, rx: .19, ry: .11, col: '#2A55A5', a: .075 },
+        { x: .76, y: .18, rx: .17, ry: .12, col: '#2A55A5', a: .055 },
+        { x: .99, y: .76, rx: .16, ry: .24, col: '#263832', a: .09 },
+        { x: .93, y: .91, rx: .065, ry: .08, col: '#C13B33', a: .18 },
+        { x: .13, y: .55, rx: .055, ry: .075, col: '#E3A32C', a: .10 }
       ];
-      clusters.forEach(function (c) {
-        for (let i = 0; i < c.n; i++) {
-          const a = Math.random() * Math.PI * 2;
-          const band = c.r * (0.44 + 0.56 * Math.pow(Math.random(), 0.55));
-          const col = Math.random() < 0.24 ? '#CCA273' : (Math.random() < 0.5 ? '#5990C0' : '#1F4E86');
-          parts.push({ cx: c.x, cy: c.y, a: a, base: band, tw: Math.random() * 6.28, sp: 0.00018 + Math.random() * 0.0006, col: col, sz: 0.6 + Math.random() * 1.9 });
-        }
+      pools.forEach(function (p) {
+        const points = [];
+        for (let i = 0; i < 30; i++) points.push(.84 + Math.random() * .28);
+        blooms.push({ x:p.x*w, y:p.y*h, rx:p.rx*m, ry:p.ry*m, col:p.col, alpha:p.a, phase:Math.random()*6.28, points:points });
       });
-      for (let i = 0; i < 50; i++) parts.push({ scatter: true, sx: Math.random() * w, sy: Math.random() * h, tw: Math.random() * 6.28, col: '#1F4E86', sz: 0.5 + Math.random() * 1.0 });
+      strokes.push({x1:-.04*w,y1:.66*h,c1x:.12*w,c1y:.57*h,c2x:.28*w,c2y:.78*h,x2:.47*w,y2:.70*h,col:'#263832',width:Math.max(7,m*.013),alpha:.10,phase:.4});
+      strokes.push({x1:.58*w,y1:.08*h,c1x:.70*w,c1y:.14*h,c2x:.83*w,c2y:.06*h,x2:1.04*w,y2:.18*h,col:'#2A55A5',width:Math.max(4,m*.008),alpha:.07,phase:2.1});
+      strokes.push({x1:.82*w,y1:.96*h,c1x:.88*w,c1y:.82*h,c2x:.96*w,c2y:.90*h,x2:1.03*w,y2:.72*h,col:'#263832',width:Math.max(8,m*.015),alpha:.10,phase:4.2});
     };
     const onResize = function () { dim = fit(cv); ctx = dim.ctx; build(); };
     build();
 
     let t = 0;
-    const draw = function () {
-      const w = dim.w, h = dim.h;
-      ctx.clearRect(0, 0, w, h);
-      t += 1;
-      for (const p of parts) {
-        let x, y;
-        if (p.scatter) { x = p.sx; y = p.sy; }
-        else { const ang = p.a + t * p.sp; x = p.cx + Math.cos(ang) * p.base; y = p.cy + Math.sin(ang) * p.base * 0.92; }
-        const tw = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(p.tw + t * 0.03));
-        ctx.fillStyle = hexA(p.col, (p.scatter ? 0.28 : 0.82) * tw);
-        ctx.beginPath(); ctx.arc(x, y, p.sz, 0, 7); ctx.fill();
+    const blobPath = function (b, scale) {
+      const n = b.points.length;
+      ctx.beginPath();
+      for (let i = 0; i <= n; i++) {
+        const j = i % n, a = j / n * Math.PI * 2;
+        const wobble = b.points[j] * scale;
+        const x = b.x + Math.cos(a) * b.rx * wobble;
+        const y = b.y + Math.sin(a) * b.ry * wobble;
+        if (!i) ctx.moveTo(x,y); else ctx.lineTo(x,y);
       }
+      ctx.closePath();
+    };
+    const draw = function () {
+      ctx.clearRect(0, 0, dim.w, dim.h);
+      t += .012;
+      for (const b of blooms) {
+        const breath = 1 + Math.sin(t + b.phase) * .018;
+        for (let layer = 3; layer >= 0; layer--) {
+          blobPath(b, breath * (1 + layer * .055));
+          ctx.fillStyle = hexA(b.col, b.alpha * (layer ? .23 : .48));
+          ctx.fill();
+        }
+        blobPath(b, breath * .96);
+        ctx.strokeStyle = hexA(b.col, b.alpha * .48);
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+      for (const s of strokes) {
+        const breathe = .86 + .14 * Math.sin(t * .7 + s.phase);
+        for (let pass = 0; pass < 5; pass++) {
+          const off = (pass - 2) * Math.max(1,s.width*.14);
+          ctx.beginPath(); ctx.moveTo(s.x1,s.y1+off);
+          ctx.bezierCurveTo(s.c1x,s.c1y+off*.55,s.c2x,s.c2y-off*.35,s.x2,s.y2+off*.18);
+          ctx.strokeStyle = hexA(s.col,s.alpha*breathe*(1-pass*.11));
+          ctx.lineWidth = Math.max(.7,s.width*(1-pass*.16));
+          ctx.lineCap = 'round';
+          ctx.setLineDash(pass > 2 ? [s.width*1.7,s.width*.9] : []);
+          ctx.stroke();
+        }
+      }
+      ctx.setLineDash([]);
     };
     var _g = gated(cv, draw);
     global.addEventListener('resize', onResize);
@@ -287,20 +317,20 @@
   function verdictSphere(cv, opts) {
     if (!cv) return { destroy: function () {} };
     opts = opts || {};
-    const AMBER = '#CCA273';
+    const AMBER = '#B88423';
     const fine = !!(global.matchMedia && global.matchMedia('(pointer: fine)').matches);
     function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
-    // ink-wash: mostly soft tealglow + ink-gray, teal only as accent, dark rare
-    function nodeCol() { const r = Math.random(); return r < 0.5 ? '#5990C0' : (r < 0.72 ? '#7E879D' : (r < 0.92 ? '#2F6FB0' : '#1F4E86')); }
+    // Sumi first, mineral pigments second: blue carries evidence, red/yellow punctuate.
+    function nodeCol() { const r = Math.random(); return r < 0.66 ? '#263832' : (r < 0.88 ? '#2A55A5' : (r < 0.95 ? '#C13B33' : '#B88423')); }
     function rgb(hex) { const n = parseInt(hex.slice(1), 16); return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; }
 
     // -- Renderer: WebGL (GPU) when available, else the 2D-canvas path (fallback). --
     // Nodes = GL point-sprites with a glow fragment shader; edges = GL lines. The
     // GPU draws them in parallel so the main thread stays free (that's the win).
     const dpr = Math.min(1.5, global.devicePixelRatio || 1);
-    let glOK = false;
-    try { const _t = global.document.createElement('canvas'); glOK = !!(_t.getContext('webgl') || _t.getContext('experimental-webgl')); } catch (e) { glOK = false; }
-    let useGL = glOK && !REDUCED;
+    // The verdict graph intentionally stays 2D: layered washes need canvas
+    // gradients and irregular paths rather than luminous WebGL point sprites.
+    let useGL = false;
 
     let gl = null, ctx = null, dim = { w: 1, h: 1 };
     let pProg, lProg, pPos, pSize, pCol, lPos, lCol, maxPt = 255;
@@ -336,22 +366,115 @@
     // A claim graph that GROWS: nodes spawn and spread outward, links creep in,
     // and falsified branches turn amber and are pruned. Positions are fixed once
     // placed (no force jitter) — recursive.com-style spread, not a physics sim.
-    let uid = 0;
-    const nodes = [];        // {x,y,r,rt,col,parent,fade,front}  (x,y in WORLD space)
+    let uid = 0, seeding = true;
+    const nodes = [];        // {x,y,r,rt,col,parent,fade,front,arm,level}
     const edges = [];        // {a,b,grow}
-    const MAX = 42;
+    const blooms = [];       // transient ink diffusion born with every node/action
+    const MAX = 28;
 
-    // The graph lives in a WORLD larger than the card. A draggable camera (ox,oy)
-    // pans it like a map, so nodes that grew past the frame can be brought into view.
+    // Keep the composition inside a generous mat so no node or wash appears cut off.
     let ox = 0, oy = 0;
-    const padX = function () { return dim.w * 0.55; }, padY = function () { return dim.h * 0.7; };
-    function clampCam() { ox = clamp(ox, -padX(), padX()); oy = clamp(oy, -padY(), padY()); }
+    const safeX = function () { return Math.max(46, Math.min(72, dim.w * 0.09)); };
+    const safeTop = function () { return 52; };
+    const safeBottom = function () { return 76; };
 
-    function spawnAt(x, y, parent) {
-      const n = { id: uid++, x: clamp(x, -padX(), dim.w + padX()), y: clamp(y, -padY(), dim.h + padY()),
-        r: 0.1, rt: 2.4 + Math.random() * 4.4, col: nodeCol(), parent: parent || null, fade: 0, front: 14 };
+    function bloomAt(x, y, col, force) {
+      const lobes = [], curls = [], satellites = [], variant = (Math.random() * 4) | 0;
+      for (let i = 0; i < 20; i++) lobes.push(0.88 + Math.random() * 0.20);
+      const curlCount = variant === 1 ? 8 : (variant === 0 ? 2 : 4);
+      for (let i = 0; i < curlCount; i++) curls.push({ a: Math.random() * Math.PI * 2, d: 0.24 + Math.random() * 0.48, s: Math.random() < 0.5 ? -1 : 1 });
+      const speckCount = variant === 2 ? 6 + ((Math.random() * 5) | 0) : (variant === 3 ? 3 : 0);
+      for (let i = 0; i < speckCount; i++) satellites.push({ a: Math.random() * Math.PI * 2,
+        d: 0.72 + Math.random() * 0.74, r: 0.6 + Math.random() * 1.9, o: 0.35 + Math.random() * 0.55 });
+      blooms.push({ x: x, y: y, col: col, age: seeding ? -Math.min(0.62, blooms.length * 0.11) : 0, life: force ? 2.15 : 1.75,
+        radius: (force ? 45 : 29) + Math.random() * (force ? 13 : 15), density: 0.72 + Math.random() * 0.50,
+        sx: 0.82 + Math.random() * 0.34, sy: 0.82 + Math.random() * 0.34,
+        phase: Math.random() * Math.PI * 2, variant: variant, lobes: lobes, curls: curls, satellites: satellites });
+    }
+
+    const MIN_NODE_GAP = 30;
+    let growthPlan = [], growthCursor = 0, planPhase = Math.random() * Math.PI * 2;
+
+    function clearPosition(x, y) {
+      const minGap = Math.max(26, Math.min(MIN_NODE_GAP, Math.min(dim.w, dim.h) * 0.07));
+      const baseX = clamp(x, safeX(), dim.w - safeX()), baseY = clamp(y, safeTop(), dim.h - safeBottom());
+      let best = [baseX, baseY], bestClear = -1;
+      for (let k = 0; k < 24; k++) {
+        const ring = k === 0 ? 0 : minGap * (0.88 + Math.floor((k - 1) / 8) * 0.62);
+        const angle = k * 2.399963 + growthCursor * 0.17;
+        const px = clamp(baseX + Math.cos(angle) * ring, safeX(), dim.w - safeX());
+        const py = clamp(baseY + Math.sin(angle) * ring, safeTop(), dim.h - safeBottom());
+        let nearestGap = 1e9;
+        for (const n of nodes) {
+          if (n.fade) continue;
+          const dx = n.x - px, dy = n.y - py;
+          nearestGap = Math.min(nearestGap, Math.sqrt(dx * dx + dy * dy));
+        }
+        const score = nearestGap - ring * 0.12;
+        if (score > bestClear) { bestClear = score; best = [px, py]; }
+        if (nearestGap >= minGap) return [px, py];
+      }
+      return best;
+    }
+
+    function buildGrowthPlan() {
+      const arms = dim.w < 620 ? 5 : 7;
+      const levels = 4, cx = dim.w * 0.5, cy = dim.h * 0.51;
+      const rx = Math.max(88, Math.min(dim.w * 0.37, 250));
+      const ry = Math.max(68, Math.min(dim.h * 0.34, 180));
+      growthPlan = [];
+      for (let level = 1; level <= levels; level++) {
+        const radius = level / levels;
+        for (let arm = 0; arm < arms; arm++) {
+          const angle = planPhase + arm * Math.PI * 2 / arms + (level - 1) * 0.055;
+          const breathing = 0.94 + 0.06 * Math.sin(arm * 1.7 + level);
+          growthPlan.push({
+            x: cx + Math.cos(angle) * rx * radius * breathing,
+            y: cy + Math.sin(angle) * ry * radius,
+            arm: arm,
+            level: level
+          });
+        }
+      }
+      growthCursor = 0;
+    }
+
+    function nextGrowthTarget() {
+      if (!growthPlan.length || growthCursor >= growthPlan.length) {
+        planPhase += Math.PI / 7;
+        buildGrowthPlan();
+      }
+      return growthPlan[growthCursor++];
+    }
+
+    function parentForTarget(target, list) {
+      let parent = null, best = 1e9;
+      for (const n of list) {
+        if (target.level > 1 && (n.arm !== target.arm || n.level !== target.level - 1)) continue;
+        const dx = n.x - target.x, dy = n.y - target.y, d = dx * dx + dy * dy;
+        if (d < best) { best = d; parent = n; }
+      }
+      if (!parent) {
+        for (const n of list) {
+          const dx = n.x - target.x, dy = n.y - target.y, d = dx * dx + dy * dy;
+          if (d < best) { best = d; parent = n; }
+        }
+      }
+      return parent;
+    }
+
+    function spawnAt(x, y, parent, meta) {
+      const clear = clearPosition(x, y);
+      const n = { id: uid++, x: clear[0], y: clear[1], r: 0.1, rt: 2.4 + Math.random() * 4.4,
+        col: nodeCol(), parent: parent || null, fade: 0, front: 14,
+        arm: meta && meta.arm != null ? meta.arm : (parent ? parent.arm : -1),
+        level: meta && meta.level != null ? meta.level : (parent ? parent.level + 1 : 0) };
       nodes.push(n);
-      if (parent) edges.push({ a: parent, b: n, grow: 0 });
+      if (parent) edges.push({ a: parent, b: n, grow: 0,
+        delay: 0.10 + (seeding ? Math.min(0.62, blooms.length * 0.11) : 0),
+        speed: 0.009 + Math.random() * 0.009, bend: (Math.random() - 0.5) * 44,
+        width: 0.72 + Math.random() * 0.68, phase: Math.random() * Math.PI * 2 });
+      bloomAt(n.x, n.y, n.col, !parent);
       return n;
     }
     function nearest(x, y) {
@@ -362,37 +485,30 @@
     function live() { return nodes.filter(function (n) { return !n.fade; }); }
     function grow() {
       const L = live();
-      if (!L.length) { spawnAt(dim.w * 0.5, dim.h * 0.5, null); return; }
-      let bx = 0, by = 0; for (const n of L) { bx += n.x; by += n.y; } bx /= L.length; by /= L.length;
-      L.sort(function (a, b) { return b.front - a.front || b.id - a.id; });     // spread from the frontier
-      const parent = L[(Math.random() * Math.min(6, L.length)) | 0];
-      // try several candidate spots, keep the one with the most clearance -> avoids overlap
-      let best = null, bestClear = -1;
-      for (let k = 0; k < 9; k++) {
-        const ang = Math.atan2(parent.y - by, parent.x - bx) + (Math.random() - 0.5) * 2.4;
-        const dist = 54 + Math.random() * 46;
-        const x = clamp(parent.x + Math.cos(ang) * dist, -padX(), dim.w + padX());
-        const y = clamp(parent.y + Math.sin(ang) * dist, -padY(), dim.h + padY());
-        let mn = 1e12;
-        for (const n of nodes) { if (n.fade) continue; const dx = n.x - x, dy = n.y - y, d = dx * dx + dy * dy; if (d < mn) mn = d; }
-        if (mn > bestClear) { bestClear = mn; best = [x, y]; }
-      }
-      spawnAt(best[0], best[1], parent);
-      parent.front = Math.max(0, parent.front - 7);
+      if (!L.length) { spawnAt(dim.w * 0.5, dim.h * 0.5, null, { arm: -1, level: 0 }); return; }
+      const target = nextGrowthTarget();
+      const parent = parentForTarget(target, L);
+      spawnAt(target.x, target.y, parent, target);
+      if (parent) parent.front = Math.max(0, parent.front - 7);
     }
     function subtree(n) {
       const set = new Set([n]); let grew = true;
       while (grew) { grew = false; for (const m of nodes) if (!set.has(m) && m.parent && set.has(m.parent)) { set.add(m); grew = true; } }
       return set;
     }
-    function falsify(n) { subtree(n).forEach(function (m) { if (!m.fade) { m.fade = 0.0001; m.col = AMBER; } }); }
+    function falsify(n) {
+      bloomAt(n.x, n.y, '#C13B33', true);
+      subtree(n).forEach(function (m) { if (!m.fade) { m.fade = 0.0001; m.col = AMBER; } });
+    }
 
-    const root = spawnAt(dim.w * 0.5, dim.h * 0.52, null); root.rt = 6;
+    buildGrowthPlan();
+    const root = spawnAt(dim.w * 0.5, dim.h * 0.52, null, { arm: -1, level: 0 }); root.rt = 6; root.col = '#263832'; if (blooms[0]) blooms[0].col = root.col;
     for (let i = 0; i < 5; i++) grow();
+    seeding = false;
 
     let hover = null, gt = 0, ft = 0, _ph, _pox = null, _poy = null;
-    // pointer state: distinguish a tap (add / falsify) from a drag (pan the camera)
-    let down = false, panning = false, sx = 0, sy = 0, sox = 0, soy = 0, hitNode = null;
+    // pointer state: a short tap adds/prunes; movement cancels the action.
+    let down = false, panning = false, sx = 0, sy = 0, hitNode = null;
     function localXY(e) { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
     function hit(wx, wy) { let best = null, bd = 1e9; for (const n of nodes) { if (n.fade) continue; const r = n.rt + 11, dx = wx - n.x, dy = wy - n.y, d = dx * dx + dy * dy; if (d < r * r && d < bd) { bd = d; best = n; } } return best; }
     function onMove(e) {
@@ -400,17 +516,17 @@
       if (down) {
         const dx = xy[0] - sx, dy = xy[1] - sy;
         if (!panning && dx * dx + dy * dy > 36) panning = true;   // >6px -> it's a drag
-        if (panning) { ox = sox + dx; oy = soy + dy; clampCam(); cv.style.cursor = 'grabbing'; }
+        if (panning) cv.style.cursor = 'default';
         return;
       }
       hover = hit(xy[0] - ox, xy[1] - oy);
-      cv.style.cursor = hover ? 'pointer' : 'grab';
+      cv.style.cursor = hover ? 'pointer' : 'crosshair';
     }
     function onDown(e) {
       const xy = localXY(e);
-      down = true; panning = false; sx = xy[0]; sy = xy[1]; sox = ox; soy = oy;
+      down = true; panning = false; sx = xy[0]; sy = xy[1];
       hitNode = hit(xy[0] - ox, xy[1] - oy);
-      cv.style.cursor = hitNode ? 'pointer' : 'grabbing';
+      cv.style.cursor = hitNode ? 'pointer' : 'crosshair';
       e.preventDefault();
     }
     function onUp(e) {
@@ -420,11 +536,11 @@
         if (hitNode) falsify(hitNode);                    // tap a chain -> amber -> pruned
         else { const xy = localXY(e), wx = xy[0] - ox, wy = xy[1] - oy; spawnAt(wx, wy, nearest(wx, wy)); }
       }
-      panning = false; hitNode = null; cv.style.cursor = 'grab';
+      panning = false; hitNode = null; cv.style.cursor = 'crosshair';
     }
-    function onLeave() { if (!down) { hover = null; cv.style.cursor = 'grab'; } }
+    function onLeave() { if (!down) { hover = null; cv.style.cursor = 'crosshair'; } }
     if (fine) {
-      cv.style.cursor = 'grab';
+      cv.style.cursor = 'crosshair';
       cv.addEventListener('pointermove', onMove);
       cv.addEventListener('pointerdown', onDown);
       global.addEventListener('pointermove', onMove);
@@ -445,24 +561,125 @@
       for (let i = edges.length - 1; i >= 0; i--) {
         const e = edges[i];
         if (nodes.indexOf(e.a) < 0 || nodes.indexOf(e.b) < 0) { edges.splice(i, 1); continue; }
-        if (e.grow < 1) e.grow += 0.055;
+        if (e.delay > 0) e.delay -= 0.018;
+        else if (e.grow < 1) e.grow = Math.min(1, e.grow + e.speed);
       }
+      for (let i = blooms.length - 1; i >= 0; i--) {
+        blooms[i].age += 0.018;
+        if (blooms[i].age >= blooms[i].life) blooms.splice(i, 1);
+      }
+    }
+
+    function inkBlobPath(b, R, wobble) {
+      const count = b.lobes.length, pts = [];
+      for (let i = 0; i < count; i++) {
+        const a = b.phase + i / count * Math.PI * 2;
+        const rr = R * (b.lobes[i] + Math.sin(a * 3 + b.phase) * wobble);
+        pts.push([b.x + ox + Math.cos(a) * rr * b.sx, b.y + oy + Math.sin(a) * rr * b.sy]);
+      }
+      ctx.beginPath();
+      for (let i = 0; i < count; i++) {
+        const p = pts[i], q = pts[(i + 1) % count];
+        const mx = (p[0] + q[0]) * 0.5, my = (p[1] + q[1]) * 0.5;
+        if (!i) ctx.moveTo(mx, my); else ctx.quadraticCurveTo(p[0], p[1], mx, my);
+      }
+      ctx.closePath();
+    }
+
+    function paintBloom(b) {
+      if (b.age < 0) return;
+      const t = Math.min(1, b.age / b.life);
+      const open = 1 - Math.pow(1 - Math.min(1, t * 1.55), 3);
+      const fade = t < 0.68 ? 1 : 1 - (t - 0.68) / 0.32;
+      const R = 4 + b.radius * open;
+      const X = b.x + ox, Y = b.y + oy;
+      ctx.save();
+      ctx.globalCompositeOperation = 'multiply';
+      ctx.filter = 'blur(.45px)';
+
+      const halo = ctx.createRadialGradient(X, Y, R * 0.08, X, Y, R * 1.18);
+      halo.addColorStop(0, hexA(b.col, 0.17 * fade * b.density));
+      halo.addColorStop(0.38, hexA(b.col, 0.085 * fade * b.density));
+      halo.addColorStop(0.78, hexA(b.col, 0.026 * fade * b.density));
+      halo.addColorStop(1, hexA(b.col, 0));
+      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(X, Y, R * 1.18, 0, 7); ctx.fill();
+
+      inkBlobPath(b, R * (b.variant === 0 ? 0.92 : 0.84), b.variant === 1 ? 0.045 : 0.025);
+      ctx.fillStyle = hexA(b.col, (0.022 + (1 - t) * 0.042) * fade * b.density); ctx.fill();
+      ctx.strokeStyle = hexA(b.col, (b.variant === 3 ? 0.12 : 0.065) * fade * b.density);
+      ctx.lineWidth = Math.max(.55, R * (b.variant === 3 ? .026 : .016)); ctx.stroke();
+
+      inkBlobPath(b, R * 0.58, 0.018);
+      ctx.fillStyle = hexA(b.col, (0.030 + (1 - t) * 0.036) * fade * b.density); ctx.fill();
+
+      if (b.variant === 3) {
+        inkBlobPath(b, R * 0.70, 0.012);
+        ctx.strokeStyle = hexA(b.col, 0.055 * fade * b.density); ctx.lineWidth = Math.max(.45, R * .011); ctx.stroke();
+      }
+
+      for (let i = 0; i < b.curls.length; i++) {
+        const c = b.curls[i], rr = R * c.d, cx = X + Math.cos(c.a) * R * 0.45, cy = Y + Math.sin(c.a) * R * 0.36;
+        ctx.strokeStyle = hexA(b.col, (0.038 + i * 0.004) * fade);
+        ctx.lineWidth = Math.max(0.55, R * (0.035 - i * 0.002));
+        ctx.beginPath(); ctx.arc(cx, cy, rr, c.a - 1.55 * c.s, c.a + 1.15 * c.s, c.s < 0); ctx.stroke();
+      }
+
+      for (let i = 0; i < b.satellites.length; i++) {
+        const s = b.satellites[i], rr = R * s.d;
+        const sx = X + Math.cos(s.a) * rr * b.sx, sy = Y + Math.sin(s.a) * rr * b.sy;
+        ctx.fillStyle = hexA(b.col, 0.19 * s.o * fade * b.density);
+        ctx.beginPath(); ctx.arc(sx, sy, Math.max(.45, s.r * open), 0, 7); ctx.fill();
+      }
+
+      ctx.filter = 'none';
+      const core = ctx.createRadialGradient(X, Y, 0, X, Y, Math.max(3, R * 0.32));
+      core.addColorStop(0, hexA(b.col, 0.34 * fade * b.density));
+      core.addColorStop(0.48, hexA(b.col, 0.13 * fade * b.density));
+      core.addColorStop(1, hexA(b.col, 0));
+      ctx.fillStyle = core; ctx.beginPath(); ctx.arc(X, Y, Math.max(3, R * 0.34), 0, 7); ctx.fill();
+      ctx.restore();
     }
 
     function paint2D() {
       ctx.clearRect(0, 0, dim.w, dim.h);
+      for (const b of blooms) paintBloom(b);
       for (const e of edges) {
         const a = e.a, b = e.b, g = e.grow < 1 ? e.grow : 1;
-        const ax = a.x + ox, ay = a.y + oy, ex = ax + (b.x - a.x) * g, ey = ay + (b.y - a.y) * g;
+        if (e.delay > 0 || g <= 0) continue;
+        const ax = a.x + ox, ay = a.y + oy, bx = b.x + ox, by = b.y + oy;
+        const dx = bx - ax, dy = by - ay, len = Math.max(1, Math.sqrt(dx * dx + dy * dy));
+        const nx = -dy / len, ny = dx / len;
+        const cx = (ax + bx) * .5 + nx * e.bend, cy = (ay + by) * .5 + ny * e.bend;
         const fade = a.fade > b.fade ? a.fade : b.fade, amber = a.col === AMBER || b.col === AMBER;
-        const al = (amber ? 0.5 : 0.2) * (1 - fade);
-        ctx.strokeStyle = amber ? 'rgba(204,162,115,' + al.toFixed(3) + ')' : 'rgba(92,102,128,' + al.toFixed(3) + ')';
-        ctx.lineWidth = amber ? 1.2 : 0.8;
-        ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ex, ey); ctx.stroke();
+        const al = (amber ? 0.36 : 0.22) * (1 - fade);
+        const steps = Math.max(5, Math.ceil(24 * g));
+        ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        for (let pass = 0; pass < 3; pass++) {
+          ctx.strokeStyle = amber ? 'rgba(184,132,35,' + (al * (pass ? .30 : 1)).toFixed(3) + ')' :
+            'rgba(38,56,50,' + (al * (pass ? .28 : 1)).toFixed(3) + ')';
+          ctx.lineWidth = (amber ? 1.25 : e.width) * (pass === 0 ? 1 : (pass === 1 ? .62 : .34));
+          ctx.beginPath();
+          for (let i = 0; i <= steps; i++) {
+            const t = g * i / steps, mt = 1 - t;
+            let x = mt * mt * ax + 2 * mt * t * cx + t * t * bx;
+            let y = mt * mt * ay + 2 * mt * t * cy + t * t * by;
+            if (pass) { const rough = Math.sin(t * 29 + e.phase + pass * 1.7) * (pass === 1 ? .62 : .38); x += nx * rough; y += ny * rough; }
+            if (!i) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+        if (g < 1) {
+          const mt = 1 - g, hx = mt * mt * ax + 2 * mt * g * cx + g * g * bx, hy = mt * mt * ay + 2 * mt * g * cy + g * g * by;
+          const tip = ctx.createRadialGradient(hx, hy, 0, hx, hy, 4.5);
+          tip.addColorStop(0, amber ? 'rgba(184,132,35,.30)' : 'rgba(38,56,50,.28)');
+          tip.addColorStop(1, 'rgba(38,56,50,0)');
+          ctx.fillStyle = tip; ctx.beginPath(); ctx.arc(hx, hy, 4.5, 0, 7); ctx.fill();
+        }
+        ctx.restore();
       }
       for (const n of nodes) {
         const vis = 1 - n.fade, hot = n === hover, X = n.x + ox, Y = n.y + oy;
-        const gs = (n.r + 2) * 3.0, peak = (n.front > 4 ? 0.44 : 0.26) * vis;
+        const gs = (n.r + 2) * 2.15, peak = (n.front > 4 ? 0.20 : 0.10) * vis;
         ctx.drawImage(glowSprite(n.col, peak), X - gs, Y - gs, gs * 2, gs * 2);
         ctx.fillStyle = hexA(n.col, (n.front > 4 || hot ? 0.95 : 0.78) * vis);
         ctx.beginPath(); ctx.arc(X, Y, n.r < 0.5 ? 0.5 : n.r, 0, 7); ctx.fill();
@@ -507,6 +724,7 @@
       // idle-skip: only repaint when something actually changed (spawn/grow-in/fade,
       // hover, or camera pan). Between spawns the graph is static -> zero canvas work.
       let active = (hover !== _ph) || (ox !== _pox) || (oy !== _poy);
+      if (blooms.length) active = true;
       if (!active) { for (const n of nodes) { if (n.fade || Math.abs(n.rt - n.r) > 0.2) { active = true; break; } } }
       if (!active) { for (const e of edges) { if (e.grow < 1) { active = true; break; } } }
       if (!active) return;

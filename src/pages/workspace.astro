@@ -1,32 +1,8 @@
 ---
-import ComingSoon from '../components/ComingSoon.astro';
-// Sibling of index.astro -- same multi-page ink-wash site/ bundle pattern.
-import designRaw from '../../site/workspace.html?raw';
-
-const limenEnv = process.env.LIMEN_ENV ?? 'dev';
-const isProd = limenEnv === 'prod';
-
-const bodyMatch = designRaw.match(/<body[^>]*>([\s\S]*?)<\/body>/);
-const designHtml = bodyMatch ? bodyMatch[1] : '';
+import WorkspaceContent from '../components/pages/WorkspaceContent.astro';
+import MarketingShell from '../layouts/MarketingShell.astro';
+const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
 ---
-
-<html lang="en-CA">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Telotia · Workspace</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  </head>
-  <body>
-    {
-      isProd ? (
-        <ComingSoon />
-      ) : (
-        <Fragment set:html={designHtml} />
-      )
-    }
-  </body>
-</html>
+<MarketingShell isProd={isProd} title="Telotia | Workspace" description="Inspect claims, source passages, verdicts, and review notes in one workspace.">
+  <WorkspaceContent />
+</MarketingShell>

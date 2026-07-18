@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 900" preserveAspectRatio="xMidYMid slice">
+<defs>
+<filter id="ink-landscape-0" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.0146" numOctaves="2" seed="778" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="34.6" xChannelSelector="R" yChannelSelector="G" result="disp"/><feGaussianBlur in="disp" stdDeviation="0.64"/></filter>
+<filter id="grain-0" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="778" result="noise"/><feDiffuseLighting in="noise" lighting-color="#ffffff" surfaceScale="2" result="light"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting></filter>
+</defs>
+<g filter="url(#ink-landscape-0)">
+<path d="M 0 900 L 0.0 459.2 L 91.4 461.7 L 182.9 476.8 L 274.3 460.7 L 365.7 454.8 L 457.1 442.3 L 548.6 454.9 L 640.0 468.4 L 731.4 481.0 L 822.9 463.0 L 914.3 450.3 L 1005.7 448.9 L 1097.1 454.9 L 1188.6 470.8 L 1280.0 477.5 L 1280 900 Z" fill="#2f4d63" fill-opacity="0.75"/>
+<path d="M 0 900 L 0.0 571.8 L 91.4 580.9 L 182.9 597.9 L 274.3 613.3 L 365.7 603.6 L 457.1 582.0 L 548.6 582.9 L 640.0 573.6 L 731.4 595.3 L 822.9 613.1 L 914.3 589.2 L 1005.7 578.7 L 1097.1 581.6 L 1188.6 586.9 L 1280.0 594.6 L 1280 900 Z" fill="#2f4d63" fill-opacity="0.55"/>
+</g>
+</svg>
