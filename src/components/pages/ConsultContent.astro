@@ -1,0 +1,38 @@
+---
+---
+
+<section id="consult" style="position:relative;padding:96px 64px;background:transparent;border-top:1px solid var(--rulesoft)">
+  <div class="consult-stage">
+    <div style="position:absolute;inset:0;pointer-events:none;opacity:.4;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.5%22/></svg>')"></div>
+    <canvas id="tlConsultCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none"></canvas>
+    <div style="position:absolute;right:2%;top:8%;width:52%;height:84%;z-index:1;pointer-events:none;mix-blend-mode:multiply;background:radial-gradient(ellipse 58% 55% at 70% 35%,rgba(42,85,165,.10),transparent 70%),radial-gradient(ellipse 26% 32% at 94% 82%,rgba(193,59,51,.075),transparent 72%),radial-gradient(ellipse 24% 28% at 18% 14%,rgba(227,163,44,.065),transparent 72%)"></div>
+    <div class="consult-grid" style="position:relative;z-index:2;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start">
+      <div>
+        <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">Paid pilot</span>
+        <h2 style="font-weight:700;font-size:46px;line-height:1.04;letter-spacing:-.02em;margin-top:12px;color:#0e1d33">Request a pilot.</h2>
+        <p style="font-size:19px;line-height:1.55;color:var(--t2);max-width:460px;margin-top:18px">Telotia runs as a guided paid pilot. There is no public download yet. Tell us what you are preparing and we will set up a review on your own documents.</p>
+        <p style="font-size:14px;line-height:1.6;color:var(--t3);max-width:460px;margin-top:24px;padding-left:16px;border-left:1px solid var(--gold2)">Telotia supports evidence review and proof preparation. It does not grant regulatory approval or replace qualified human review.</p>
+        <p style="font-size:14px;color:var(--t3);margin-top:24px">Prefer email? <a class="lk" href="mailto:hello@telotia.com" style="color:var(--t1);border-bottom:1px solid var(--gold2)">hello@telotia.com</a></p>
+      </div>
+
+      <form class="glow-wrap" style="position:relative;border:1px solid rgba(160,180,210,.26);border-radius:18px;padding:32px;background:rgba(231,233,237,.035);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 18px 50px rgba(247,247,247,.26),inset 0 1px 0 rgba(40,25,25,.09)">
+        <div class="consult-form-content" style="display:flex;flex-direction:column;gap:18px">
+          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Name</span><input class="fin" type="text" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
+          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Work email</span><input class="fin" type="email" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
+          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">Organization</span><input class="fin" type="text" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
+          <label style="display:block"><span style="display:block;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">What evidence are you validating?</span><input class="fin" type="text" placeholder="e.g. clinical evidence for a device submission" style="width:100%;background:rgba(40,25,25,.02);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--fsans);font-size:15px"></label>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--rule);border-radius:8px;background:rgba(40,25,25,.02)">
+            <span style="width:18px;height:18px;border:1px solid var(--rule);border-radius:3px;flex-shrink:0"></span>
+            <span style="font-size:13px;color:var(--t3)">Verify you are human</span>
+            <span style="flex:1"></span>
+            <span style="font-family:var(--fmono);font-size:10px;color:var(--t4)">Turnstile</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:4px">
+            <small style="font-size:12px;line-height:1.5;color:var(--t4);max-width:240px">Form-gated to deter automated abuse. We reply within two business days.</small>
+            <button class="btn-p" type="button" style="flex-shrink:0;background:var(--teal);color:#e7eaed;font-weight:600;font-size:15px;padding:13px 24px;border:none;border-radius:10px;cursor:pointer">Request a pilot</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

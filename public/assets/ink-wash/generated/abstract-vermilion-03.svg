@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 900" preserveAspectRatio="xMidYMid slice">
+<defs>
+<filter id="ink-abstract-2" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.0159" numOctaves="4" seed="313" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="21.8" xChannelSelector="R" yChannelSelector="G" result="disp"/><feGaussianBlur in="disp" stdDeviation="0.69"/></filter>
+<filter id="grain-2" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="313" result="noise"/><feDiffuseLighting in="noise" lighting-color="#ffffff" surfaceScale="2" result="light"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting></filter>
+</defs>
+<g filter="url(#ink-abstract-2)">
+<path d="M 1092.1 715.5 Q 1096.7 739.7 1071.5 753.2 Q 1046.3 766.6 1037.7 791.3 Q 1029.1 816.0 991.4 822.7 Q 953.8 829.4 937.2 803.7 Q 920.6 778.1 895.8 758.9 Q 871.0 739.7 894.1 719.6 Q 917.2 699.5 943.5 692.4 Q 969.8 685.3 1000.3 672.5 Q 1030.7 659.7 1059.1 675.5 Q 1087.5 691.3 1092.1 715.5 Z" fill="#a8402f" fill-opacity="0.67"/>
+<path d="M 785.9 353.1 Q 805.6 401.3 765.4 436.3 Q 725.1 471.3 670.9 484.3 Q 616.8 497.3 543.0 497.0 Q 469.2 496.6 469.1 449.0 Q 469.0 401.3 495.5 370.7 Q 521.9 340.1 569.4 325.0 Q 616.8 309.9 691.4 307.4 Q 766.1 304.9 785.9 353.1 Z" fill="#a8402f" fill-opacity="0.36"/>
+<path d="M 1017.1 640.0 Q 1034.4 659.5 1022.8 682.6 Q 1011.2 705.7 974.6 722.2 Q 938.1 738.7 905.8 719.5 Q 873.4 700.4 842.7 679.9 Q 812.1 659.5 848.7 642.8 Q 885.2 626.1 911.7 611.8 Q 938.1 597.5 969.0 609.0 Q 999.9 620.4 1017.1 640.0 Z" fill="#a8402f" fill-opacity="0.74"/>
+<path d="M 1096.3 739.3 Q 1126.9 764.0 1107.5 802.6 Q 1088.1 841.2 1048.6 838.5 Q 1009.2 835.7 971.5 821.7 Q 933.9 807.7 953.8 773.5 Q 973.7 739.3 988.7 704.2 Q 1003.8 669.0 1034.7 691.8 Q 1065.7 714.6 1096.3 739.3 Z" fill="#a8402f" fill-opacity="0.36"/>
+</g>
+</svg>

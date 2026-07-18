@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 900" preserveAspectRatio="xMidYMid slice">
+<defs>
+<filter id="ink-abstract-1" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.0288" numOctaves="3" seed="246" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="35.2" xChannelSelector="R" yChannelSelector="G" result="disp"/><feGaussianBlur in="disp" stdDeviation="1.38"/></filter>
+<filter id="grain-1" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="246" result="noise"/><feDiffuseLighting in="noise" lighting-color="#ffffff" surfaceScale="2" result="light"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting></filter>
+</defs>
+<g filter="url(#ink-abstract-1)">
+<path d="M 424.5 488.5 Q 466.9 539.2 450.3 614.9 Q 433.8 690.6 371.3 715.7 Q 308.7 740.7 252.5 722.0 Q 196.3 703.2 175.5 647.2 Q 154.7 591.2 142.7 534.1 Q 130.6 477.0 162.2 423.5 Q 193.7 370.0 245.8 389.6 Q 297.8 409.2 340.0 423.6 Q 382.2 437.9 424.5 488.5 Z" fill="#c08a2e" fill-opacity="0.79"/>
+<path d="M 876.8 125.2 Q 891.8 194.9 846.8 228.2 Q 801.9 261.6 754.3 312.5 Q 706.8 363.5 651.8 314.0 Q 596.8 264.5 593.5 193.3 Q 590.2 122.1 659.0 118.5 Q 727.8 114.9 794.9 85.2 Q 861.9 55.5 876.8 125.2 Z" fill="#c08a2e" fill-opacity="0.58"/>
+<path d="M 963.6 674.4 Q 989.4 709.1 952.9 734.4 Q 916.4 759.7 876.7 767.2 Q 836.9 774.7 776.5 765.8 Q 716.2 756.8 731.9 714.4 Q 747.7 672.0 792.6 658.6 Q 837.5 645.2 887.7 642.5 Q 937.9 639.7 963.6 674.4 Z" fill="#c08a2e" fill-opacity="0.65"/>
+<path d="M 1098.5 711.2 Q 1119.8 733.9 1126.1 775.1 Q 1132.4 816.4 1086.2 817.9 Q 1040.0 819.5 1011.0 816.5 Q 982.1 813.6 956.8 800.2 Q 931.5 786.8 926.5 760.3 Q 921.6 733.9 910.2 696.4 Q 898.9 659.0 939.3 653.3 Q 979.8 647.7 1019.0 621.8 Q 1058.3 596.0 1067.8 642.2 Q 1077.3 688.4 1098.5 711.2 Z" fill="#c08a2e" fill-opacity="0.76"/>
+<path d="M 676.6 205.3 Q 774.1 251.0 691.6 325.9 Q 609.1 400.8 519.2 426.1 Q 429.2 451.4 409.4 351.2 Q 389.7 251.0 421.1 173.5 Q 452.4 95.9 515.8 127.7 Q 579.2 159.6 676.6 205.3 Z" fill="#c08a2e" fill-opacity="0.81"/>
+</g>
+</svg>

@@ -1,0 +1,56 @@
+---
+import ComingSoon from '../components/ComingSoon.astro';
+import Footer from '../components/Footer.astro';
+import Nav from '../components/Nav.astro';
+import SiteLayout from './SiteLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  isProd: boolean;
+}
+
+const { title, description, isProd } = Astro.props;
+---
+
+<SiteLayout title={title} description={description}>
+  {isProd ? (
+    <ComingSoon />
+  ) : (
+    <div class="site-shell">
+      <Nav />
+      <main><slot /></main>
+      <Footer />
+    </div>
+  )}
+</SiteLayout>
+
+{!isProd && <script is:inline src="/telotia-particles.js?v=11" defer></script>}
+{!isProd && <script is:inline src="/home-init.js?v=23" defer></script>}
+
+<style>
+  .site-shell {
+    width: 100%;
+    font-family: var(--fsans);
+    color: var(--t1);
+    background-color: #e6e2d8;
+    background-image:
+      linear-gradient(rgba(232,231,227,.46), rgba(232,231,227,.46)),
+      radial-gradient(ellipse at 16% 7%, rgba(255,255,255,.28), transparent 44%),
+      radial-gradient(ellipse at 82% 68%, rgba(153,137,108,.065), transparent 42%),
+      linear-gradient(112deg, rgba(255,255,255,.13), transparent 38%, rgba(126,111,88,.045)),
+      url('/assets/ink-wash/textures/xuan-paper-generated.jpg');
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat, repeat;
+    background-size: auto, 100% 100%, 100% 100%, 100% 100%, 680px 680px;
+    /* Keep the real fibre field visible. The tonal layers above it remove the
+       appearance of a repeating photograph without bleaching it into a flat fill. */
+    background-blend-mode: normal, soft-light, multiply, multiply, normal;
+    position: relative;
+    overflow-x: clip;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+  }
+</style>

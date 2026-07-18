@@ -1,0 +1,38 @@
+---
+---
+
+<!-- 斷 -->
+  <section id="verdict" style="position:relative;padding:96px 64px;background:transparent;border-top:1px solid var(--rulesoft)">
+    <div class="section-mark section-mark-right" style="position:absolute;right:34px;top:120px;writing-mode:vertical-rl;color:var(--t4)">斷</div>
+    <div style="max-width:1180px;margin:0 auto">
+      <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">Verdicts</span>
+      <h2 style="font-weight:700;font-size:42px;line-height:1.08;letter-spacing:-.02em;margin-top:12px;color:var(--t1);max-width:760px">Three outcomes. None of them is a score.</h2>
+      <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:640px;margin-top:14px">The workspace does not collapse review into true or false. It exposes what the trusted corpus can support, what it only partly supports, and where it is silent.</p>
+
+      <div id="tlSpikeWrap" class="glow-wrap" style="position:relative;height:440px;margin-top:40px;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:var(--surface-raised)">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 62% 82% at 20% 16%,rgba(42,85,165,.09),transparent 58%),radial-gradient(ellipse 52% 72% at 88% 90%,rgba(193,59,51,.045),transparent 56%),linear-gradient(158deg,#F1F0EB 0%,#E5E2D9 100%)"></div>
+        <canvas id="tlSpikeCanvas" style="position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y"></canvas>
+        <div id="tlKeywordLayer" style="position:absolute;inset:0;pointer-events:none"></div>
+        <div id="tlNodeLayer" style="position:absolute;inset:0;pointer-events:none"></div>
+        <div style="position:absolute;left:20px;bottom:16px;font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);pointer-events:none">Verdict space · click empty to grow · click a node to prune</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px">
+        <article id="tlCard-supported" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:26px;background:radial-gradient(circle at 15% 12%,rgba(47,111,176,.1),transparent 42%),var(--surface-paper)">
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;background:var(--teal)"></span><span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Verdict</span></div>
+          <h3 style="font-weight:600;font-size:25px;margin-top:14px;color:var(--t1)">Supported</h3>
+          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Evidence in the corpus backs the claim. The supporting passage is retrieved and cited exactly.</p>
+        </article>
+        <article id="tlCard-partial" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:26px;background:radial-gradient(circle at 15% 12%,rgba(232,169,143,.1),transparent 42%),var(--surface-raised)">
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;border:1.4px solid var(--gold);background:transparent"></span><span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Verdict</span></div>
+          <h3 style="font-weight:600;font-size:25px;margin-top:14px;color:var(--t1)">Partial</h3>
+          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">Some of the claim is backed; part is not, or only holds under specific conditions. Graded and non-binary, not collapsed to true or false.</p>
+        </article>
+        <article id="tlCard-unsupported" class="vcard" style="border:1px solid var(--rule);border-radius:14px;padding:26px;background:var(--surface-raised)">
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:9px;height:9px;border-radius:50%;border:1.2px solid var(--t3);background:transparent"></span><span style="font-family:var(--fmono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)">Verdict</span></div>
+          <h3 style="font-weight:600;font-size:25px;margin-top:14px;color:var(--t1)">Unsupported</h3>
+          <p style="font-size:15px;line-height:1.6;color:var(--t2);margin-top:10px">This corpus is silent on the claim, not that the claim is wrong. Results are a starting point for a human reviewer, not a final verdict on the work.</p>
+        </article>
+      </div>
+    </div>
+  </section>

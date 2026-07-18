@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 160">
+  <defs>
+    <radialGradient id="wash" cx="48%" cy="50%" rx="52%" ry="48%">
+      <stop offset="0" stop-color="white" stop-opacity=".95"/>
+      <stop offset=".34" stop-color="white" stop-opacity=".72"/>
+      <stop offset=".67" stop-color="white" stop-opacity=".30"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="edge" x="-25%" y="-35%" width="150%" height="170%">
+      <feTurbulence type="fractalNoise" baseFrequency=".021 .055" numOctaves="3" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="B"/>
+      <feGaussianBlur stdDeviation=".8"/>
+    </filter>
+  </defs>
+  <path filter="url(#edge)" fill="url(#wash)" d="M8 86C15 54 49 45 79 36c29-9 52-28 88-22 29 4 45 25 72 31 32 7 57 20 53 48-4 26-33 35-62 39-32 5-52 18-87 13-34-5-49-24-79-27-32-4-63-5-56-32Z"/>
+</svg>
