@@ -38,12 +38,34 @@
     return clip;
   }
 
-  function setWorkspaceOS(frame, os, controls) {
+  function prepareWorkspaceNativeControls(clip) {
+    var controlGroup = clip.querySelector('.window-controls');
+    if (!controlGroup) return [];
+    controlGroup.removeAttribute('aria-hidden');
+    return Array.prototype.slice.call(controlGroup.children).map(function (node) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'workspace-native-control';
+      node.replaceWith(button);
+      return button;
+    });
+  }
+
+  function setWorkspaceOS(frame, os, controls, nativeControls) {
     frame.dataset.windowOs = os;
     controls.forEach(function (button) {
       var active = button.dataset.windowOs === os;
       button.setAttribute('aria-pressed', String(active));
       button.classList.toggle('is-active', active);
+    });
+    var actions = os === 'windows' ? ['minimize', 'maximize', 'close'] : ['close', 'minimize', 'maximize'];
+    var labels = { close: 'Close TELOTIA', minimize: 'Minimize TELOTIA', maximize: 'Maximize or restore TELOTIA' };
+    nativeControls.forEach(function (button, index) {
+      var action = actions[index];
+      button.className = 'workspace-native-control window-control-' + action;
+      button.dataset.nativeWindowAction = action;
+      button.setAttribute('aria-label', labels[action]);
+      button.title = labels[action];
     });
     try { sessionStorage.setItem('telotia-window-os', os); } catch (error) {}
   }
@@ -56,6 +78,7 @@
     frame.setAttribute('aria-label', frame.getAttribute('aria-label') || spec.label);
 
     var clip = ensureClip(frame);
+    var nativeControls = spec.os ? prepareWorkspaceNativeControls(clip) : [];
     var viewport = document.createElement('div');
     viewport.className = 'ui-window-viewport';
     clip.parentNode.insertBefore(viewport, clip);
@@ -71,20 +94,20 @@
       styleGroup.className = 'ui-window-style-group';
       styleGroup.setAttribute('aria-label', 'Window style');
       var macButton = makeButton('macOS', 'Use macOS window style', 'os');
-      var windowsButton = makeButton('Windows 98', 'Use Windows 98 window style', 'os');
+      var windowsButton = makeButton('Windows', 'Use Windows window style', 'os');
       macButton.dataset.windowOs = 'mac';
-      windowsButton.dataset.windowOs = 'windows98';
+      windowsButton.dataset.windowOs = 'windows';
       styleGroup.appendChild(macButton);
       styleGroup.appendChild(windowsButton);
       toolbar.appendChild(styleGroup);
       toolbar.appendChild(document.createElement('span')).className = 'ui-window-tool-divider';
       var storedOS = 'mac';
       try { storedOS = sessionStorage.getItem('telotia-window-os') || 'mac'; } catch (error) {}
-      setWorkspaceOS(frame, storedOS === 'windows98' || storedOS === 'windows' ? 'windows98' : 'mac', [macButton, windowsButton]);
+      setWorkspaceOS(frame, storedOS === 'windows98' || storedOS === 'windows' ? 'windows' : 'mac', [macButton, windowsButton], nativeControls);
       styleGroup.addEventListener('click', function (event) {
         var button = event.target.closest('[data-window-os]');
         if (!button) return;
-        setWorkspaceOS(frame, button.dataset.windowOs, [macButton, windowsButton]);
+        setWorkspaceOS(frame, button.dataset.windowOs, [macButton, windowsButton], nativeControls);
       });
     }
 
@@ -254,6 +277,139 @@
 
     function updateFitState() {
       fit.disabled = !frame.classList.contains('has-user-window-size') && zoomIndex === 1;
+    }
+
+    if (spec.os) {
+      var launcher = document.createElement('div');
+      launcher.className = 'workspace-app-launcher';
+      launcher.tabIndex = 0;
+      launcher.hidden = true;
+      launcher.setAttribute('role', 'button');
+      launcher.setAttribute('aria-label', 'Open TELOTIA. Double-click to open.');
+      var launcherIcon = document.createElement('img');
+      launcherIcon.src = '/telotia-mark-tricolor-transparent.webp';
+      launcherIcon.alt = '';
+      launcherIcon.width = 76;
+      launcherIcon.height = 76;
+      var launcherName = document.createElement('span');
+      launcherName.textContent = 'TELOTIA';
+      var launcherHint = document.createElement('small');
+      launcherHint.textContent = 'Double-click to open';
+      launcher.appendChild(launcherIcon);
+      launcher.appendChild(launcherName);
+      launcher.appendChild(launcherHint);
+      frame.parentNode.insertBefore(launcher, frame.nextSibling);
+
+      var normalWindowState = null;
+      var closingTimer = 0;
+
+      function captureWindowState() {
+        return {
+          width: frame.style.width,
+          height: frame.style.height,
+          translate: frame.style.translate,
+          offsetX: offsetX,
+          offsetY: offsetY,
+          hasUserSize: frame.classList.contains('has-user-window-size')
+        };
+      }
+
+      function restoreWindowState() {
+        if (!normalWindowState) return;
+        frame.style.width = normalWindowState.width;
+        frame.style.height = normalWindowState.height;
+        frame.style.translate = normalWindowState.translate;
+        offsetX = normalWindowState.offsetX;
+        offsetY = normalWindowState.offsetY;
+        frame.classList.toggle('has-user-window-size', normalWindowState.hasUserSize);
+        normalWindowState = null;
+        updateFitState();
+      }
+
+      function toggleMinimize() {
+        var minimized = frame.classList.toggle('is-minimized');
+        live.textContent = minimized ? 'TELOTIA minimized to its title bar' : 'TELOTIA restored';
+      }
+
+      function toggleMaximize() {
+        if (frame.classList.contains('is-minimized')) frame.classList.remove('is-minimized');
+        if (frame.classList.contains('is-maximized')) {
+          frame.classList.remove('is-maximized');
+          restoreWindowState();
+          live.textContent = 'TELOTIA restored';
+          return;
+        }
+        normalWindowState = captureWindowState();
+        var limits = sizeLimits();
+        frame.classList.add('is-maximized', 'has-user-window-size');
+        frame.style.width = limits.maxWidth + 'px';
+        frame.style.height = Math.round(Math.max(spec.minHeight, Math.min(820, window.innerHeight - 120))) + 'px';
+        frame.style.translate = '0px 0px';
+        offsetX = 0;
+        offsetY = 0;
+        updateFitState();
+        live.textContent = 'TELOTIA maximized';
+      }
+
+      function closeWorkspace() {
+        if (closingTimer) return;
+        if (frame.classList.contains('is-maximized')) {
+          frame.classList.remove('is-maximized');
+          restoreWindowState();
+        }
+        frame.classList.remove('is-minimized');
+        frame.classList.add('is-closing');
+        closingTimer = window.setTimeout(function () {
+          frame.hidden = true;
+          frame.classList.remove('is-closing');
+          launcher.hidden = false;
+          launcher.classList.add('is-arriving');
+          launcher.focus();
+          closingTimer = 0;
+        }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 180);
+      }
+
+      function openWorkspace() {
+        if (closingTimer) {
+          clearTimeout(closingTimer);
+          closingTimer = 0;
+        }
+        launcher.hidden = true;
+        launcher.classList.remove('is-selected', 'is-arriving');
+        frame.hidden = false;
+        frame.classList.add('is-opening');
+        frame.querySelector('.workspace-toolbar').focus({ preventScroll: true });
+        window.setTimeout(function () { frame.classList.remove('is-opening'); }, 260);
+        live.textContent = 'TELOTIA opened';
+      }
+
+      nativeControls.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+          event.stopPropagation();
+          var action = button.dataset.nativeWindowAction;
+          if (action === 'minimize') toggleMinimize();
+          if (action === 'maximize') toggleMaximize();
+          if (action === 'close') closeWorkspace();
+        });
+      });
+
+      var nativeTitlebar = clip.querySelector('.workspace-toolbar');
+      if (nativeTitlebar) {
+        nativeTitlebar.tabIndex = 0;
+        nativeTitlebar.addEventListener('dblclick', function (event) {
+          if (event.target.closest('.workspace-native-control')) return;
+          toggleMaximize();
+        });
+      }
+      launcher.addEventListener('click', function () { launcher.classList.add('is-selected'); });
+      launcher.addEventListener('dblclick', openWorkspace);
+      launcher.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') openWorkspace();
+        if (event.key === ' ') {
+          event.preventDefault();
+          launcher.classList.add('is-selected');
+        }
+      });
     }
 
     resizeHandles.forEach(function (resizeHandle) {
