@@ -346,11 +346,11 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
 
 
   .nav-res{position:relative}
-  .nav-res>.lk{cursor:default}
-  .res-panel{position:absolute;top:calc(100% + 14px);left:50%;transform:translate(-50%,6px);width:min(560px,86vw);
+  .nav-res>.lk{cursor:pointer}
+  .res-panel{position:absolute;top:calc(100% + 2px);left:50%;transform:translate(-50%,6px);width:min(430px,86vw);
     background:rgba(245,243,237,.88);backdrop-filter:blur(14px) saturate(1.15);-webkit-backdrop-filter:blur(14px) saturate(1.15);
     border:1px solid var(--rule);border-radius:16px;box-shadow:0 30px 70px -28px rgba(16,24,47,.34),inset 0 1px 0 rgba(255,255,255,.5);
-    padding:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+    padding:22px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.9fr);gap:22px;
     opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s var(--ease),transform .18s var(--ease),visibility .18s}
   .nav-res:hover .res-panel,.nav-res:focus-within .res-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
   .res-col{display:flex;flex-direction:column;gap:9px}

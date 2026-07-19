@@ -1,0 +1,295 @@
+---
+---
+
+<section class="home-path" aria-labelledby="home-path-title">
+  <div class="section-mark section-mark-left" aria-hidden="true">程</div>
+  <div class="home-path-grid">
+    <div class="home-path-copy">
+      <span class="eyebrow">The proof path</span>
+      <h2 id="home-path-title">One claim. One evidence trail.</h2>
+      <p>
+        Telotia separates a document into reviewable claims, searches only the
+        evidence set you provide, then returns a graded result with its source.
+      </p>
+      <div class="home-path-actions">
+        <a class="text-link" href="process.html">Explore the process <span aria-hidden="true">→</span></a>
+        <a class="text-link text-link-muted" href="demo.html">Open the demo <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+
+    <div class="proof-ledger" aria-label="Example claim review path">
+      <div class="proof-ledger-head">
+        <span>REVIEW TRACE / IFU-22</span>
+        <span class="proof-live"><i></i> source linked</span>
+      </div>
+      <ol class="proof-steps">
+        <li>
+          <span class="proof-index">01</span>
+          <div>
+            <strong>Atomic claim</strong>
+            <p>Packaging identifies the imported model and manufacturer lot.</p>
+          </div>
+          <span class="proof-tag proof-tag-gold">extracted</span>
+        </li>
+        <li>
+          <span class="proof-index">02</span>
+          <div>
+            <strong>Trusted corpus</strong>
+            <p>Matched against 47 supplied files, never the open web.</p>
+          </div>
+          <span class="proof-tag proof-tag-blue">searched</span>
+        </li>
+        <li>
+          <span class="proof-index">03</span>
+          <div>
+            <strong>Evidence-grade result</strong>
+            <p>Supported by IFU-22, page 4, with an auditable citation.</p>
+          </div>
+          <span class="proof-tag proof-tag-red">cited</span>
+        </li>
+      </ol>
+      <div class="proof-ledger-foot">
+        <span>Human review remains in the loop.</span>
+        <a href="workspace.html">Inspect the workspace →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-path {
+    position: relative;
+    padding: clamp(76px, 8vw, 116px) 64px clamp(88px, 9vw, 132px);
+    overflow: hidden;
+  }
+
+  .home-path-grid {
+    position: relative;
+    z-index: 1;
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(280px, 0.72fr) minmax(520px, 1.28fr);
+    gap: clamp(54px, 7vw, 104px);
+    align-items: center;
+  }
+
+  .home-path-copy {
+    padding-left: 28px;
+  }
+
+  .eyebrow {
+    font-family: var(--fmono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  h2 {
+    max-width: 480px;
+    margin-top: 14px;
+    font-size: clamp(40px, 4.2vw, 58px);
+    line-height: 1.02;
+    color: var(--t1);
+    text-wrap: balance;
+  }
+
+  .home-path-copy p {
+    max-width: 470px;
+    margin-top: 22px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--t2);
+  }
+
+  .home-path-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    margin-top: 30px;
+  }
+
+  .text-link {
+    color: var(--teal2);
+    font-family: var(--fmono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+  }
+
+  .text-link span {
+    display: inline-block;
+    transition: transform 0.25s var(--ease);
+  }
+
+  .text-link:hover span {
+    transform: translateX(4px);
+  }
+
+  .text-link-muted {
+    color: var(--t3);
+  }
+
+  .proof-ledger {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(59, 70, 66, 0.23);
+    border-radius: 16px;
+    background:
+      linear-gradient(rgba(248, 247, 242, 0.91), rgba(242, 240, 233, 0.94)),
+      url('/assets/ink-wash/08-water-left.webp') left center / cover no-repeat;
+    box-shadow: 0 30px 72px -48px rgba(24, 36, 32, 0.56), inset 0 1px rgba(255,255,255,.72);
+  }
+
+  .proof-ledger::before {
+    content: "";
+    position: absolute;
+    inset: auto -8% -30% 43%;
+    height: 66%;
+    background: radial-gradient(ellipse, rgba(42, 85, 165, 0.13), transparent 69%);
+    pointer-events: none;
+  }
+
+  .proof-ledger-head,
+  .proof-ledger-foot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 18px;
+    font-family: var(--fmono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--t4);
+  }
+
+  .proof-ledger-head {
+    border-bottom: 1px solid var(--rulesoft);
+  }
+
+  .proof-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--teal);
+  }
+
+  .proof-live i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  .proof-steps {
+    position: relative;
+    list-style: none;
+  }
+
+  .proof-steps li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: center;
+    min-height: 116px;
+    padding: 22px 20px;
+  }
+
+  .proof-steps li + li {
+    border-top: 1px solid var(--rulesoft);
+  }
+
+  .proof-steps li + li::before {
+    content: "";
+    position: absolute;
+    left: 37px;
+    top: -16px;
+    width: 1px;
+    height: 30px;
+    background: linear-gradient(transparent, var(--t4));
+  }
+
+  .proof-index {
+    align-self: start;
+    padding-top: 3px;
+    font-family: var(--fmono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--t4);
+  }
+
+  .proof-steps strong {
+    display: block;
+    font-size: 16px;
+    color: var(--t1);
+  }
+
+  .proof-steps p {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--t2);
+  }
+
+  .proof-tag {
+    min-width: 74px;
+    padding: 5px 8px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    font-family: var(--fmono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  .proof-tag-gold { color: var(--gold2); }
+  .proof-tag-blue { color: var(--teal); }
+  .proof-tag-red { color: var(--vermilion); }
+
+  .proof-ledger-foot {
+    border-top: 1px solid var(--rulesoft);
+    letter-spacing: 0.02em;
+  }
+
+  .proof-ledger-foot a {
+    color: var(--teal2);
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .home-path {
+      padding: 68px 18px 78px;
+    }
+
+    .home-path-grid {
+      grid-template-columns: 1fr;
+      gap: 42px;
+    }
+
+    .home-path-copy {
+      padding-left: 36px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .proof-steps li {
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .proof-tag {
+      grid-column: 2;
+      justify-self: start;
+    }
+
+    .proof-ledger-foot {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>

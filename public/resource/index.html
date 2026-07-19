@@ -123,12 +123,12 @@ section[id]{content-visibility:auto;contain-intrinsic-size:auto 760px}
 html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 
 
-  .nav-res{position:relative}
-  .nav-res>.lk{cursor:default}
-  .res-panel{position:absolute;top:calc(100% + 14px);left:50%;transform:translate(-50%,6px);width:min(560px,86vw);
+  .nav-res{position:relative;display:flex;align-items:center;min-height:72px}
+  .nav-res>.lk{cursor:pointer}
+  .res-panel{position:absolute;top:calc(100% + 2px);left:50%;transform:translate(-50%,6px);width:min(430px,86vw);
     background:rgba(246,247,251,.86);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);
     border:1px solid var(--rule);border-radius:16px;box-shadow:0 30px 70px -28px rgba(16,24,47,.34),inset 0 1px 0 rgba(255,255,255,.5);
-    padding:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+    padding:22px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.9fr);gap:22px;
     opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s var(--ease),transform .18s var(--ease),visibility .18s}
   .nav-res:hover .res-panel,.nav-res:focus-within .res-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
   .res-col{display:flex;flex-direction:column;gap:9px}
@@ -142,6 +142,7 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
   .res-empty{font-size:12px;color:var(--t4);font-style:italic}
   .res-viewall{font-family:var(--fmono);font-size:10.5px;letter-spacing:.05em;color:var(--teal);text-decoration:none;margin-top:auto;padding-top:6px}
   .res-viewall:hover{color:var(--teal2)}
+  main>section:has(a[href*="/resource/finance/"]){display:none}
 </style>
 <nav class="navlight" style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:30px;padding:3px 64px;background:linear-gradient(90deg,rgba(248,250,253,.72) 0%,rgba(238,242,248,.66) 38%,rgba(150,178,222,.5) 70%,rgba(238,242,248,.62) 88%,rgba(248,250,253,.72) 100%);backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px);border-bottom:1px solid rgba(40,25,25,.4);box-shadow:0 1px 0 rgba(220,224,229,.08),inset 0 1px 0 rgba(40,25,25,.5)">
     <a href="/" style="text-decoration:none"><div style="display:flex;align-items:center;gap:14px">
@@ -155,7 +156,7 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
       <a class="lk" href="/research.html" style="font-size:13px">Research</a>
       <a class="lk" href="/consult.html" style="font-size:13px">Consult</a>
       <div class="nav-res">
-        <a class="lk" href="/resource" style="font-size:13px">Resources</a>
+        <a class="lk" href="/resource/index.html" style="font-size:13px">Resources</a>
         <div class="res-panel">
           <div class="res-col">
             <div class="res-col-title">Art</div>
@@ -165,15 +166,6 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
             <a class="res-item" href="/resource/art/2026/06/30/migrant-mother/"><span class="res-item-title">Migrant Mother — Dorothea Lange</span><span class="res-item-date">Jun 30</span></a>
             <!-- RES-MENU:ART:END -->
             <a class="res-viewall" href="/resource/art/">All art →</a>
-          </div>
-          <div class="res-col">
-            <div class="res-col-title">Finance</div>
-            <!-- RES-MENU:FINANCE:START -->
-            <a class="res-item" href="/resource/finance/2026/07/02/meta-compute-cloud/"><span class="res-item-title">Meta Compute: One Report Repriced the AI Compute Market</span><span class="res-item-date">Jul 2</span></a>
-            <a class="res-item" href="/resource/finance/2026/07/01/chip-rally-nvidia-lag/"><span class="res-item-title">Micron Up 240%, Nvidia Up 15% — Same AI Story, Different Winner</span><span class="res-item-date">Jul 1</span></a>
-            <a class="res-item" href="/resource/finance/2026/06/30/alphabet-joins-dow/"><span class="res-item-title">A Stock&#x27;s Price Tag, Not Its Size, Just Won a Dow Seat</span><span class="res-item-date">Jun 30</span></a>
-            <!-- RES-MENU:FINANCE:END -->
-            <a class="res-viewall" href="/resource/finance/">All finance →</a>
           </div>
           <div class="res-col">
             <div class="res-col-title">Research</div>
@@ -191,7 +183,7 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
 <body style="background:#F6F7FB">
   <main style="max-width:1040px;margin:0 auto;padding:60px 32px 120px">
     <h1 style="font-family:var(--fdisplay);font-size:38px;font-weight:500;letter-spacing:-.016em;margin-bottom:12px">Resources</h1>
-    <p style="color:var(--t3);font-size:14px;max-width:520px;margin-bottom:48px">Daily art and market appreciations, research, and product notes.</p>
+    <p style="color:var(--t3);font-size:14px;max-width:520px;margin-bottom:48px">Art appreciations, research, and product notes from the Telotia studio.</p>
     <section style="margin-bottom:56px">
         <h2 style="font-family:var(--fdisplay);font-size:22px;font-weight:500;text-transform:capitalize;margin-bottom:18px">art</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px"><a class="rcard" href="/resource/art/2026/07/02/wanderer-above-the-sea-of-fog/" style="display:block;border:1px solid var(--rule);border-radius:10px;overflow:hidden;text-decoration:none;background:#fff">
