@@ -275,13 +275,13 @@
       frame.style.removeProperty('translate');
       offsetX = 0;
       offsetY = 0;
-      frame.classList.remove('is-window-resizing', 'has-user-window-size');
+      frame.classList.remove('is-window-resizing', 'has-user-window-size', 'has-user-window-position');
       updateFitState();
       live.textContent = spec.label + ' size reset';
     }
 
     function updateFitState() {
-      fit.disabled = !frame.classList.contains('has-user-window-size') && zoomIndex === 1;
+      fit.disabled = !frame.classList.contains('has-user-window-size') && !frame.classList.contains('has-user-window-position') && zoomIndex === 1;
     }
 
     if (spec.os) {
@@ -315,7 +315,8 @@
           translate: frame.style.translate,
           offsetX: offsetX,
           offsetY: offsetY,
-          hasUserSize: frame.classList.contains('has-user-window-size')
+          hasUserSize: frame.classList.contains('has-user-window-size'),
+          hasUserPosition: frame.classList.contains('has-user-window-position')
         };
       }
 
@@ -327,6 +328,7 @@
         offsetX = normalWindowState.offsetX;
         offsetY = normalWindowState.offsetY;
         frame.classList.toggle('has-user-window-size', normalWindowState.hasUserSize);
+        frame.classList.toggle('has-user-window-position', normalWindowState.hasUserPosition);
         normalWindowState = null;
         updateFitState();
       }
@@ -402,8 +404,65 @@
       var nativeTitlebar = clip.querySelector('.workspace-toolbar');
       if (nativeTitlebar) {
         nativeTitlebar.tabIndex = 0;
+        nativeTitlebar.title = 'Drag to move. Double-click to maximize or restore.';
+        var dragState = null;
+        var suppressTitlebarDoubleClickUntil = 0;
+
+        function beginWindowDrag(event) {
+          if (event.button !== 0 || window.matchMedia('(max-width: 820px)').matches) return;
+          if (event.target.closest('button, a, input, select, textarea, [data-no-window-drag]')) return;
+          if (frame.classList.contains('is-maximized')) return;
+          event.preventDefault();
+          var rect = frame.getBoundingClientRect();
+          dragState = {
+            startX: event.clientX,
+            startY: event.clientY,
+            startLeft: rect.left,
+            startTop: rect.top,
+            startOffsetX: offsetX,
+            startOffsetY: offsetY,
+            width: rect.width,
+            moved: false
+          };
+          frame.classList.add('is-window-dragging');
+          window.addEventListener('mousemove', moveWindowDrag);
+          window.addEventListener('mouseup', endWindowDrag, { once: true });
+          window.addEventListener('blur', endWindowDrag, { once: true });
+        }
+
+        function moveWindowDrag(event) {
+          if (!dragState) return;
+          var deltaX = event.clientX - dragState.startX;
+          var deltaY = event.clientY - dragState.startY;
+          if (!dragState.moved && Math.abs(deltaX) + Math.abs(deltaY) > 3) dragState.moved = true;
+          var minLeft = 12;
+          var maxLeft = Math.max(minLeft, window.innerWidth - dragState.width - 12);
+          var minTop = 76;
+          var maxTop = Math.max(minTop, window.innerHeight - 44);
+          var targetLeft = clamp(dragState.startLeft + deltaX, minLeft, maxLeft);
+          var targetTop = clamp(dragState.startTop + deltaY, minTop, maxTop);
+          offsetX = dragState.startOffsetX + targetLeft - dragState.startLeft;
+          offsetY = dragState.startOffsetY + targetTop - dragState.startTop;
+          frame.style.translate = Math.round(offsetX) + 'px ' + Math.round(offsetY) + 'px';
+          frame.classList.add('has-user-window-position');
+          updateFitState();
+          live.textContent = 'TELOTIA moved to ' + Math.round(targetLeft) + ', ' + Math.round(targetTop);
+        }
+
+        function endWindowDrag() {
+          if (!dragState) return;
+          if (dragState.moved) suppressTitlebarDoubleClickUntil = performance.now() + 350;
+          dragState = null;
+          frame.classList.remove('is-window-dragging');
+          window.removeEventListener('mousemove', moveWindowDrag);
+          window.removeEventListener('mouseup', endWindowDrag);
+          window.removeEventListener('blur', endWindowDrag);
+        }
+
+        nativeTitlebar.addEventListener('mousedown', beginWindowDrag);
         nativeTitlebar.addEventListener('dblclick', function (event) {
           if (event.target.closest('.workspace-native-control')) return;
+          if (performance.now() < suppressTitlebarDoubleClickUntil) return;
           toggleMaximize();
         });
       }

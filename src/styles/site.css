@@ -43,6 +43,9 @@
   /* Workspace application window: ink painting first, neo-plastic geometry second. */
   .workspace-window{isolation:isolate}
   .workspace-toolbar,.workspace-window-body{position:relative;z-index:2}
+  .workspace-window .workspace-toolbar{cursor:grab;touch-action:none;user-select:none}
+  .workspace-window.is-window-dragging .workspace-toolbar{cursor:grabbing}
+  .workspace-window.is-window-dragging{will-change:translate;box-shadow:0 0 0 1px rgba(38,56,50,.28),0 30px 64px -34px rgba(38,56,50,.66) !important}
   .window-controls{display:inline-flex;gap:6px;flex:0 0 auto}
   .workspace-native-control{
     position:relative;
@@ -439,6 +442,7 @@
     .workspace-window[data-window-os="windows"] .window-controls{width:auto;margin-left:auto}
     .workspace-window[data-window-os="windows"] .workspace-native-control{width:22px;min-height:22px}
     .workspace-app-launcher{min-height:360px;margin-top:28px}
+    .workspace-window .workspace-toolbar{cursor:default;touch-action:auto}
   }
 
   @media(prefers-reduced-motion:reduce){
