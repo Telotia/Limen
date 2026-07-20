@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · The Yellow Corridor — Luis Barragán, Casa Gilardi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c1a17; --ink-soft:#3d372e; --ink-faint:#877d6c;
+    --silver:#b9b4a8; --gold:#efc22e; --blue:#1e8fb0; --magenta:#c23a4a; --bone:#efe6d3;
+    --paper:rgba(250,246,235,.62); --line:rgba(28,26,23,.16); --void:#1a1512;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.005em;
+    background:#d8d0bd; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 16% 8%, rgba(239,194,46,.32), transparent 60%),
+      radial-gradient(44rem 44rem at 88% 16%, rgba(30,143,176,.22), transparent 62%),
+      radial-gradient(42rem 42rem at 84% 90%, rgba(194,58,74,.18), transparent 60%),
+      radial-gradient(50rem 50rem at 20% 92%, rgba(74,51,36,.2), transparent 60%),
+      linear-gradient(160deg,#ece3cd,#d4cab2);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(2rem,6vw,3.3rem);line-height:1.12;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:8px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(26,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#1a1512}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(26,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.5rem;color:#b3860f;opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300;font-size:1.02rem}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.1rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.03em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;
+    border-radius:50%;background:#b3860f;box-shadow:0 0 0 4px rgba(239,194,46,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+    letter-spacing:.2em;font-size:1rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.04</div>
+    <h1>The Yellow Corridor</h1>
+    <div class="sub">Casa Gilardi — Luis Barragán, 1976, Mexico City</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Interior corridor of Casa Gilardi by Luis Barragán, yellow hallway leading to a blue pool wall and magenta screen">
+    <figcaption>Luis Barragán, interior corridor of Casa Gilardi, 1975–77, Mexico City · Photograph by Ulises00 · Wikimedia Commons (public domain)</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">A corridor dyed pure yellow leads to a doorway; beyond it, a cobalt-blue pool wall and a sliver of magenta. Nothing here is "hung on a wall," yet this hallway alone is one of the most affecting color compositions of the 20th century. Designed when Luis Barragán was 74, in what would be his final house, it turns an ordinary passage into a slow, almost devotional ritual of light and color.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="en">A tunnel, and a frame within a frame</span></h2>
+    <p><b>One-point tunnel perspective:</b> every line — walls, ceiling, floor — converges toward the doorway at the far end, pulling the eye into that glowing rectangle of color. It's the most classical tunnel composition there is, and the doorway itself becomes a frame within a frame, compressing the distant blue and red into one small, jewel-like accent.</p>
+    <p><b>A deliberate interruption in the foreground:</b> a dark red woven textile in a wood frame hangs on the left wall, next to a rounded brass lamp shade — two soft, organic, textured objects that break the corridor's otherwise rigid geometry and give the eye a place to pause before it's pulled toward the door.</p>
+    <p><b>A ribbed wall on the right:</b> a row of vertical fluted pilasters catches raking light and throws a rhythmic stripe of light and shadow across the surface, doubling down on the sense of depth — Barragán often used relief-textured walls like this to "tame" direct sunlight, turning light itself into a structural material.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color <span class="en">An entire room built on the primary triad</span></h2>
+    <p>This corridor doesn't use "three colors" — it uses the most extreme relationship on the color wheel: <b>yellow, blue, and magenta-red</b>, an almost perfectly equidistant primary triad, the theoretical maximum of color tension. But Barragán doesn't split it evenly: <b>yellow claims nearly 100% of the visible surface</b> — walls, ceiling, even the window glass itself is tinted yellow — while blue and red only appear as a narrow sliver at the far end. That ratio, one color dominating with the others reserved as a single accent, is exactly what keeps this much contrast from feeling garish. It reads as restrained, even luxurious, instead of loud.</p>
+    <p>Here's the sharper move: Barragán isn't painting a wall yellow — he's <b>dyeing the light itself</b>. The window at the corridor's end is glazed in yellow glass, so sunlight passes through yellow before it ever reaches the room. Every surface — the air, the floor's reflections, the shadows — inherits that tint. That's a fundamentally different move from painting a white-lit wall yellow: tinting the source, not just the surface, produces a far more immersive, enveloping color experience.</p>
+    <div class="palette">
+      <div class="sw" style="background:#efc22e;color:#3d2c05">Saturated yellow<small>#EFC22E · walls/light</small></div>
+      <div class="sw" style="background:#1e8fb0;color:#eef7fa">Pool cobalt blue<small>#1E8FB0 · far wall</small></div>
+      <div class="sw" style="background:#c23a4a;color:#fceef0">Magenta screen<small>#C23A4A · accent</small></div>
+      <div class="sw" style="background:#4a3324;color:#efe6d3">Dark walnut<small>#4A3324 · frame</small></div>
+      <div class="sw" style="background:#8a5a3c;color:#efe6d3">Terracotta tile<small>#8A5A3C · floor</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Light & Technique <span class="en">Light as building material</span></h2>
+    <p>Barragán's longtime friend, the painter Chucho Reyes Ferreira, was known for intensely saturated color work and was a direct influence on Barragán's late palette — the two knew each other for decades, Barragán collected his paintings, and that fearlessness about color clash migrated straight into his architecture.</p>
+    <p>The blue wall at the corridor's end is a working pool wall — by day it's constantly "re-lit" by rippling reflections off the water below. The magenta sliver in the frame is not structural; it's a <b>freestanding screen wall</b> whose only job is to hide the actual skylight behind it, so the viewer only ever sees the glow, never the mechanism producing it. It's a theatrical move: hide the machinery, show only the effect, and the light itself reads as more mysterious, as if it has no traceable source.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="en">A ritual from private to social space</span></h2>
+    <p>Barragán called his own work "emotional architecture" — he once said that any building that fails to produce serenity is a mistake. This corridor is that philosophy made physical: to walk from the bedrooms toward the living room and pool beyond, you first have to pass through a passage saturated in pure color and stripped of almost all "information" — no art on the walls, no ornament, no narrative, only color and light. That forced emptying-out is exactly what makes the sliver of blue and the dancing water light at the end feel so rich when you finally reach it — a deliberate emotional set-up, built entirely out of architecture.</p>
+    <p>The client, advertising executive Francisco Gilardi, reportedly gave Barragán only two conditions: keep the old jacaranda tree in the courtyard, and include an indoor pool. Beyond that, Barragán worked with almost no budget or programmatic constraints — the result was his final, and arguably purest, experiment in color.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> The Architect <span class="en">Luis Barragán</span></h2>
+    <p>Luis Barragán (1902–1988) was born in Guadalajara, Jalisco, Mexico. Trained as a civil engineer, he was entirely self-taught as an architect. In the 1920s and '30s he traveled through France and Spain, attended Le Corbusier's lectures in Paris, and later visited Morocco — the vernacular architecture of North Africa and the Mediterranean, with its thick walls, introverted courtyards, and sun-soaked color, became a decisive influence. In 1980 he became only the second-ever laureate of the Pritzker Architecture Prize. His own home, the Luis Barragán House and Studio, was named a UNESCO World Heritage Site in 2004. Casa Gilardi (1975–77) was his final residential design.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="en">Color / Light / Space</span></h2>
+    <ul class="tips">
+      <li><b>Let one color rule, and reserve the rest as a punctuation mark:</b> don't split strong contrasting colors evenly. Give one saturated hue 80–90% of the visual field, and let the others appear only through a small "window" — it reads as far more luxurious than an even split. Works for interiors, layout, even an outfit (one dominant saturated color, one small high-chroma accent — a bag, shoes, lips).</li>
+      <li><b>Tint the light, not just the surface:</b> for an immersive color mood, color the light source itself — tinted glass, colored gels, light filtered through colored curtains — rather than only painting the walls. Coloring the source tints everything downstream: air, shadow, reflection.</li>
+      <li><b>Frame within a frame:</b> use a doorway, window, or any natural aperture to contain a small patch of saturated color — it reads as more precious and more ceremonial than the same color spread flat across a whole surface.</li>
+      <li><b>Use texture to tame light:</b> relief, fluting, or louvered surfaces cut flat direct sunlight into a rhythmic stripe of light and shadow, giving even a static wall a sense of breath and movement.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">Art</div>
+    Image: interior corridor of Casa Gilardi, designed by Luis Barragán · Photograph by Ulises00<br>
+    Source: Wikimedia Commons · released by the photographer into the public domain · appreciation is personal analysis
+  </footer>
+</div>
+</body>
+</html>

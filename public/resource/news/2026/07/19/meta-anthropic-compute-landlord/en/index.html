@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta May Rent $10B in Compute to Anthropic · 2026-07-19</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+ --ink:#eaf0ff; --ink-soft:#aab6e0; --muted:#7e8ab0;
+ --up:#34e1a8; --down:#ff5d7e; --accent:#5ad1ff; --vio:#a98bff;
+ --glass:rgba(255,255,255,.06); --glass-line:rgba(120,150,255,.2);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ font-family:"Inter","Noto Serif SC",system-ui,sans-serif;
+ color:var(--ink); line-height:1.75; min-height:100vh;
+ background:
+ radial-gradient(46% 36% at 12% 6%, rgba(90,120,255,.32) 0%, transparent 62%),
+ radial-gradient(42% 34% at 94% 10%, rgba(170,110,255,.28) 0%, transparent 60%),
+ radial-gradient(52% 46% at 86% 96%, rgba(60,180,255,.2) 0%, transparent 62%),
+ radial-gradient(60% 50% at 8% 94%, rgba(120,90,255,.18) 0%, transparent 64%),
+ linear-gradient(165deg,#0a0f24 0%,#05060f 100%);
+ background-attachment:fixed;
+}
+.wrap{max-width:760px;margin:0 auto;padding:48px 22px 96px}
+.kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800;margin-bottom:14px}
+h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(26px,5.2vw,40px);line-height:1.28;letter-spacing:-.01em;margin-bottom:18px}
+.dek{font-size:17px;color:var(--ink-soft);max-width:64ch;margin-bottom:22px}
+.meta{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);margin-bottom:34px}
+.meta span{background:var(--glass);border:1px solid var(--glass-line);padding:5px 12px;border-radius:999px;backdrop-filter:blur(8px)}
+.glass{
+ background:var(--glass);
+ backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);
+ border:1px solid var(--glass-line);
+ border-radius:22px;
+ box-shadow:0 8px 32px -10px rgba(0,0,0,.5), inset 0 1px 0 rgba(150,180,255,.1);
+ padding:26px 28px;margin:18px 0;
+}
+h2{font-size:22px;font-weight:800;margin:8px 0 14px;display:flex;align-items:center;gap:10px}
+h2.n{font-family:"Inter";font-size:13px;font-weight:700;color:#fff;background:linear-gradient(135deg,#5ad1ff,#a98bff);width:28px;height:28px;border-radius:9px;display:grid;place-items:center;flex:none}
+p{margin:10px 0}
+.lead{font-size:16.5px}
+strong{font-weight:700;color:#fff}
+.num-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.stat{background:rgba(255,255,255,.04);border:1px solid var(--glass-line);border-radius:16px;padding:16px 18px;backdrop-filter:blur(8px)}
+.stat .v{font-family:"Inter";font-size:23px;font-weight:800;letter-spacing:-.02em}
+.stat .l{font-size:12.5px;color:var(--muted);margin-top:3px}
+.up{color:var(--up)}.down{color:var(--down)}
+.bb{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0}
+@media(max-width:560px){.bb{grid-template-columns:1fr}}
+.bull,.bear{border-radius:16px;padding:18px 20px;border:1px solid var(--glass-line);backdrop-filter:blur(8px)}
+.bull{background:linear-gradient(160deg,rgba(52,225,168,.14),rgba(255,255,255,.02))}
+.bear{background:linear-gradient(160deg,rgba(255,93,126,.14),rgba(255,255,255,.02))}
+.bull h3,.bear h3{font-size:14px;letter-spacing:.04em;margin-bottom:8px;text-transform:uppercase}
+.bull h3{color:var(--up)}.bear h3{color:var(--down)}
+ul{margin:8px 0 4px;padding-left:20px} li{margin:6px 0}
+.src{font-size:14px}.src a{color:#93c5fd;text-decoration:none;border-bottom:1px solid rgba(147,197,253,.3)}
+.src a:hover{border-bottom-color:#93c5fd}
+.disc{font-size:12.5px;color:var(--muted);border-top:1px dashed rgba(150,160,200,.25);padding-top:14px;margin-top:8px}
+.takeaway{background:linear-gradient(160deg,rgba(90,209,255,.16),rgba(169,139,255,.12));font-size:16.5px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--glass-line)}
+th{color:var(--muted);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div class="kicker">Finance · Daily Deep-Dive</div>
+ <h1>Meta May Rent $10 Billion in Compute to Rival Anthropic<br>Welcome to the AI Compute Landlord Era</h1>
+ <p class="dek">July 19, 2026. Meta is reportedly in talks to lease Anthropic up to $10 billion in AI compute over two years — even as Meta's own Llama models compete head-on with Claude. The real question isn't the size of the number. It's whether this compute-subletting business actually makes money.</p>
+ <div class="meta">
+ <span>📅 2026-07-19</span><span>🏷️ Meta · Anthropic · Compute Leasing · AI Capex</span><span>🎨 U03 Liquid Glass</span><span>⏱️ ~6 min read</span>
+ </div>
+
+ <div class="glass takeaway">
+ <strong>In one line:</strong> The New York Times reported on July 16 that Meta is in talks to lease Anthropic up to $10 billion in compute over two years — a proposal Anthropic itself raised in June. Meta competes with Anthropic's Claude through Llama, yet may become its compute landlord. It's not isolated: Anthropic has already committed tens of billions to "rival landlords" SpaceX/xAI ($40B+) and Google (~$40B) this year. The one comparable business that's had its books opened — SpaceX's compute-subletting segment — earned $800M in revenue while losing $2.5B in Q1.
+ </div>
+
+ <div class="glass">
+ <h2><span class="n">1</span>What happened</h2>
+ <p class="lead">The New York Times reported on July 16 that Meta is in talks to lease Anthropic up to $10 billion in compute over two years — a proposal Anthropic itself put forward in June. Discussions are early-stage, terms remain subject to change, and either side can exit. Meta shares closed down more than 2% the day the news broke (July 17), amid a broader tech selloff.</p>
+ <div class="num-row">
+ <div class="stat"><div class="v">$10B</div><div class="l">Potential Meta→Anthropic compute lease, over 2 years</div></div>
+ <div class="stat"><div class="v">$47B</div><div class="l">Anthropic's ARR as of ~May 2026</div></div>
+ <div class="stat"><div class="v">~80x</div><div class="l">Anthropic's actual revenue growth vs. 10x planned</div></div>
+ <div class="stat"><div class="v down">-2%+</div><div class="l">Meta share move the day the news broke</div></div>
+ </div>
+ <p>It's not Anthropic's first arrangement with a nominal competitor for capacity. In May, Anthropic struck a deal worth up to $40 billion with Elon Musk's SpaceX/xAI for the "Colossus 1" data center in Memphis — built for training Grok but running at only ~11% utilization, with 220,000+ GPUs and 300+ megawatts. Anthropic pays $1.25 billion a month through May 2029, with a 90-day exit clause. Reporting also points to a roughly $40 billion, five-year TPU deal with Google, and Amazon has committed up to $25 billion for up to 5 gigawatts of capacity.</p>
+ </div>
+
+ <div class="glass">
+ <h2><span class="n">2</span>Why — this isn't about money, it's about chip delivery speed</h2>
+ <p>The driver is that Anthropic's revenue is growing far faster than any capacity plan can account for. CEO Dario Amodei says the company planned for 10x growth and got 80x — annualized revenue went from $87 million in January 2024 to $30 billion in April 2026, then $47 billion in May, with full-year ARR now projected at $75-90 billion, while API volume is up nearly 70x year over year. Users feel it directly: reliability dips at peak hours, Pro-tier limits tighten, agentic workflows burn through allowances in hours.</p>
+ <p>What's actually scarce is never money — Anthropic just closed a $65 billion Series H, briefly touched a $965 billion valuation, and has confidentially filed for an IPO. What's scarce is how fast Nvidia's newest chips can physically arrive. So the strategy becomes: lease from whoever has idle compute, even a company building its own competing model. Musk's own comment sums up the logic: "the enemy of my enemy is a compute partner."</p>
+ </div>
+
+ <div class="glass">
+ <h2><span class="n">3</span>Who wins, who loses — the second-order effect</h2>
+ <p>Benefiting: Meta (turns AI infrastructure into a revenue line for the first time, if it closes), Anthropic (locks in scarce compute ahead of an IPO push), Nvidia (total chip demand doesn't shrink based on who owns the data center), and SpaceX/xAI (converted an 11%-utilized sunk asset into tens of billions in on-paper revenue). Exposed: Meta's own shareholders — the FT estimates a -29% return on Meta's AI infrastructure spend, the only negative figure among the big hyperscalers — plus confidence in the "AI capex always pays off" assumption, and independent cloud providers now facing uninvited new competitors.</p>
+ <table>
+ <tr><th>Metric</th><th>Value</th></tr>
+ <tr><td>Anthropic/SpaceX-xAI Colossus 1 deal, total value</td><td>$40B+ through May 2029</td></tr>
+ <tr><td>SpaceX AI-compute segment operating loss, Q1 2026</td><td>-$2.5B</td></tr>
+ <tr><td>Meta 2026 AI capex guidance</td><td>$145B</td></tr>
+ <tr><td>Estimated ROI on Meta's AI infrastructure spend (FT)</td><td>-29%</td></tr>
+ </table>
+ <div class="bb">
+ <div class="bull">
+ <h3>▲ Bulls</h3>
+ <ul>
+ <li>Early-stage, exit clauses cap the downside</li>
+ <li>Anthropic's $47-90B ARR is real, verifiable cash flow</li>
+ <li>For Meta, low-risk monetization of a sunk cost</li>
+ </ul>
+ </div>
+ <div class="bear">
+ <h3>▼ Bears</h3>
+ <ul>
+ <li>The one disclosed comparable (SpaceX) loses money</li>
+ <li>Anthropic owes huge sums to multiple "rival landlords"</li>
+ <li>One slowdown ripples through several companies' books</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <div class="glass">
+ <h2><span class="n">4</span>What the coverage is missing · a critical read</h2>
+ <p>Most reporting compresses this into "Meta could make $10 billion leasing out compute" — the standard "revenue diversification" template — while skipping the one comparable, publicly disclosed data point available: SpaceX's compute-subletting segment lost money in its first reported quarter. Nearly every headline dollar figure circulating — Meta's $10B, SpaceX/xAI's $40B, the reported $40B Google deal — is a multi-year contract's nominal total, not confirmed current-period profit. That doesn't make the deals fake; it means this compute-subletting economy hasn't yet proven its business model covers its own costs.</p>
+ <p><strong>One takeaway:</strong> next time a headline reads "Tech Giant Signs $X Billion AI Compute Deal," ask first whether that's booked revenue or a multi-year contract total, and whether the counterparty is a pure customer or also a competitor. If you hold Meta, Google, Amazon, or Nvidia, watch how tightly these mutual customer-supplier relationships are binding their income statements together — not any single headline in isolation.</p>
+ </div>
+
+ <div class="glass src">
+ <h2><span class="n">5</span>Sources</h2>
+ <p>
+ • <a href="https://www.cnbc.com/2026/07/17/anthropic-meta-ai-compute.html">CNBC — Anthropic in early talks to acquire compute power from Meta</a><br>
+ • <a href="https://finance.yahoo.com/technology/ai/articles/meta-talks-10-billion-anthropic-162927340.html">Yahoo Finance — Meta, Anthropic in talks for potential $10 billion compute lease deal</a><br>
+ • <a href="https://techcrunch.com/2026/05/20/anthropic-will-pay-xai-1-25-billion-per-month-for-compute/">TechCrunch — Anthropic will pay xAI $1.25 billion per month for compute</a><br>
+ • <a href="https://newsletter.semianalysis.com/p/meta-compute-everyone-wants-to-be">SemiAnalysis — Meta Compute: Everyone Wants To Be A Neocloud</a><br>
+ • <a href="https://wccftech.com/spacex-locks-google-into-a-920-million-per-month-compute-deal-after-anthropic-as-xai-abandons-colossus-1s-messy-gpu-mix/">Wccftech — SpaceX S-1 detail on compute-subletting segment economics</a><br>
+ • <a href="https://venturebeat.com/technology/anthropic-says-it-hit-a-30-billion-revenue-run-rate-after-crazy-80x-growth">VentureBeat — Anthropic hits $30 billion revenue run rate after 'crazy' 80x growth</a><br>
+ • <a href="https://finance.yahoo.com/markets/stocks/articles/meta-just-bumped-2026-capex-232250811.html">Yahoo Finance — Meta bumps 2026 capex forecast to $145 billion</a>
+ </p>
+ <p class="disc">This is an informational summary based on public reporting and is not investment advice. Markets carry risk; decisions should reflect your own circumstances and a licensed professional's guidance. Figures follow the original reporting and may change with the market.</p>
+ </div>
+</div>
+</body>
+</html>

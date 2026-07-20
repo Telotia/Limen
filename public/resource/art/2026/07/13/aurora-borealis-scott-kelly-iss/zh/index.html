@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 极地光幕 · 地球边缘的一夜绿焰</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eef1ef; --ink-soft:#c7ccd0; --ink-faint:#8b939a;
+    --aurora:#5cc17f; --violet:#7b2745; --rim:#3f6f9e; --frost:#b7c4cc;
+    --paper:rgba(18,22,26,.62); --line:rgba(230,238,240,.14); --void:#05060a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#07080b; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(123,39,69,.30), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(92,193,127,.20), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(63,111,158,.26), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(5,6,10,.7), transparent 60%),
+      linear-gradient(170deg,#0d0f14,#050608);
+    filter:blur(50px) saturate(1.05); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#9aa1a6;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;color:#f5f6f4;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c9cdc4;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#8b939a;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.08) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--aurora);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--aurora);box-shadow:0 0 0 4px rgba(92,193,127,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#8b939a;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:#c9cdc4;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.13</div>
+    <h1>极地光幕 · 地球边缘的一夜绿焰</h1>
+    <div class="sub">斯科特·凯利《加拿大上空的极光》(Aurora over Canada) · 国际空间站，2016年1月21日</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="从国际空间站舷窗拍摄的地球边缘：下方是被积雪覆盖的加拿大大地，中间是一道蓝色的大气边缘辉光，其上是大片翻涌的绿色极光带，顶部隐约泛出猩红色高层极光，背景是繁星点点的黑色太空">
+    <figcaption>《加拿大上空的极光》(Aurora over Canada) · 斯科特·凯利（国际空间站远征46乘组），2016年1月21日 · 尼康D4，50mm f/1.4，1/8秒，ISO 10000 · NASA地球观测影像，公有领域</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">这张照片没有三脚架、没有滤镜，只有一台贴着舷窗的尼康相机，和一位已经在太空里连续生活了三百多个日夜的宇航员。斯科特·凯利在"一年任务"（Year In Space）飞行期间，几乎每天都会把舷窗外的地球拍下来发到社交媒体——这一次，他拍到的是地球大气层本身正在发光：脚下是被积雪覆盖的加拿大，头顶是被太阳风点燃的一整条绿色光幕，再往上，还翻涌出一层他自己也未必常拍到的猩红色高层极光。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 一颗星球被压进画面下三分之一 <span class="en">Composition</span></h2>
+    <p>凯利让地球的弧线贴着画面下方三分之一处横切过去，把绝大部分画幅——从蓝色大气边缘到漆黑的星空——都留给了头顶发生的事。这是一种诚实的取景比例：从轨道高度看下去，维系全部生命的大气层，真的只是一层薄薄的光带。</p>
+    <p>画面本该是纯粹的水平分层——雪原、蓝边、绿幕、红晕、星空，一层叠一层——但极光本身并不安分：那些参差不齐、忽明忽暗的光柱像被风吹动的帘幕一样竖直向上窜动，在水平的宁静里凿出了一种真实的、正在发生的动态感。</p>
+    <p>雪原深处还有一个极小的暖橙色光点（很可能是地面的一处城镇灯光），安静地嵌在大片冷色调之中——它把"人类尺度"重新放回了画面里，让头顶那场几百公里高的宇宙级放电现象，有了一个可以对照的参照物。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 配色 · 一次没有调色的真实光谱 <span class="en">Color Theory</span></h2>
+    <p>这张照片的颜色全部来自大气物理，而非后期：绿色是100–150公里高度上的原子氧被太阳风粒子激发后释放出的557.7纳米波长光——这是极光里最常见、也最容易被拍到的颜色，一部分原因正是人眼在明视觉条件下对绿光最敏感。</p>
+    <p>顶部那层更稀薄的猩红色，来自200–400公里更高处的原子氧，需要更强的地磁扰动才会被激发，所以它总是更少见、也更容易被忽略——出现在画面最上方，恰好暗示着这是一场能量级别不低的地磁暴。而贴着地球轮廓的那道蓝色辉光，其实并不是极光本身，是低层大气对阳光的瑞利散射，是"从太空侧视"时大气层露出的自己的颜色。</p>
+    <p>把整张照片拆开看，其实是一条从冷到暖、再回到冷的五级色带——雪原灰蓝、大气边缘蓝、极光核心绿、高层猩红、深空墨黑——这条渐变本身就是一份可以直接挪用的调色方案。</p>
+    <div class="palette">
+      <div class="sw" style="background:#b7c4cc;color:#1c2226">雪原灰蓝<small>#B7C4CC · 地球表面</small></div>
+      <div class="sw" style="background:#3f6f9e;color:#eef1ef">大气边缘蓝<small>#3F6F9E · 瑞利散射</small></div>
+      <div class="sw" style="background:#5cc17f;color:#0e2016">极光核心绿<small>#5CC17F · 557.7nm氧</small></div>
+      <div class="sw" style="background:#7b2745;color:#f3e6ea">高层猩红<small>#7B2745 · 630nm氧</small></div>
+      <div class="sw" style="background:#0b0812;color:#e7e4da">深空墨黑<small>#0B0812 · 星野</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与技法 · 高感光度替代慢门的一次博弈 <span class="en">Technique</span></h2>
+    <p>极光很暗、很弥散，天然需要大光圈和慢快门去收集足够的光；可国际空间站以每秒7.66公里的速度绕地球飞行，每92分钟就是一整圈——任何偏长的曝光时间，理论上都会把地球表面拍成一道模糊的光带。这张照片的参数，正是这场博弈留下的痕迹：f/1.4大光圈、50mm标准焦段、1/8秒快门、ISO 10000。</p>
+    <p>与其靠拉长快门去妥协，凯利选择把感光度推到一万——用画面颗粒感换取相对更短的曝光时间，把轨道运动带来的拖影压到最低。这也是几乎所有国际空间站夜拍照片背后共同的技术逻辑：光源很弱、平台在动，快门永远是最后才能让步的那个变量。</p>
+    <p>ISO 10000留下的噪点在漆黑的星空区域尤其明显，但这种颗粒质感并未破坏画面，反而像是给深空又叠加了一层若有若无的"呼吸感"，让"这是从真实轨道上拍下来的"这件事变得更加可信。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 一场三百四十天任务里随手拍下的日记 <span class="en">Why It Moves Us</span></h2>
+    <p>这张照片没有任何摆拍痕迹，甚至可以说是相当"随手"——它诞生于凯利与俄罗斯宇航员米哈伊尔·科尔年科长达340天的"一年任务"期间，这是当时美国宇航员单次太空飞行的最长纪录，也是NASA为未来登陆火星做准备而设立的"双胞胎研究"的一部分：凯利在轨道上，他的同卵双胞胎兄弟马克·凯利留在地面，作为对照组接受同样的生理监测。</p>
+    <p>更打动人的，或许是凯利本人的习惯：他几乎每天都会把舷窗外的地球发到社交媒体上，任务结束时积累了上百万关注者。像这样一张照片，原本只属于极少数曾亲眼看过"地球边缘"的人，却因为这份近乎日更的分享，变成了普通人也能间接体验的"总观效应"（overview effect）——那种宇航员们反复描述的、看见大气层薄如蝉翼却托举着全部生命时，价值排序被重新洗牌的瞬间。</p>
+    <p>它安静地道出了一种尺度上的诚实：那层被人类视为理所当然的、维系一切生命的大气，从轨道回望，不过是漆黑虚空前几十公里厚的一条发光边缘。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">Background</span></h2>
+    <p>斯科特·凯利（Scott Kelly，1964年生）是前美国海军试飞员、NASA宇航员，一生四次飞入太空，其中最广为人知的，就是2015年3月至2016年3月长达340天的"一年任务"——当时美国宇航员单次在轨时间的纪录保持者。他的同卵双胞胎兄弟马克·凯利同样是宇航员（后来当选联邦参议员），两人共同参与了NASA著名的"双胞胎研究"，为未来长期深空飞行（包括登陆火星）积累人体数据。</p>
+    <p>凯利以在轨期间几乎每日在社交媒体分享地球摄影闻名，任务结束后将这些影像整理出版为摄影集《无限奇迹》(Infinite Wonder: An Astronaut's Photographs from a Year in Space, 2018)。作为NASA拍摄的作品，这张照片在美国法律下不受版权保护，属于公有领域，可自由使用。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 分层水平、以感光度换快门、留一个人的尺度 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>让环境自己分层：</b>就算没有戏剧性的主体，只要让前景、雾霭、天空这类天然层次水平叠加起来，画面立刻会获得纵深感。</li>
+      <li><b>"暗"与"动"同时出现时，先加感光度，别先拖慢快门：</b>主体很暗、平台或主体又在移动，这时候宁可牺牲一点画质换取更快的快门，也不要冒险让运动拖出虚影。</li>
+      <li><b>用竖直的纹理打破水平的静止：</b>光柱、树影、人影——任何一点不规则的竖直元素，都能让一张分层平静的照片重新"活"起来。</li>
+      <li><b>留一个能对照的"人的尺度"：</b>在宏大冷色的画面里放一个微小的暖色光点，宏大才有了可以丈量的参照，而不只是抽象的壮观。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：《加拿大上空的极光》(Aurora over Canada) · 斯科特·凯利 / NASA，国际空间站远征46乘组，2016年1月21日 · 美国政府作品，公有领域<br>
+    来源：Wikimedia Commons · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

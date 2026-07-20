@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 《戴珍珠耳环的少女》— 维米尔</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2a2620; --ink-soft:#544d40; --ink-faint:#8a8170;
+    --ultramarine:#4b6f9b; --gold:#8c7438; --lemon:#e4d29a;
+    --coral:#be5c49; --void:#1e1c15; --cream:#ece8dc; --pearl:#d7d4ca;
+    --paper:rgba(255,253,248,.55); --line:rgba(60,52,40,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#efe9df; min-height:100vh; overflow-x:hidden;
+  }
+  /* 弥散光场 */
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 82% 8%, rgba(75,111,155,.42), transparent 60%),
+      radial-gradient(40rem 40rem at 12% 26%, rgba(228,210,154,.40), transparent 62%),
+      radial-gradient(50rem 50rem at 70% 92%, rgba(140,116,56,.30), transparent 60%),
+      radial-gradient(38rem 38rem at 20% 88%, rgba(190,92,73,.20), transparent 60%),
+      linear-gradient(160deg,#f3eee4,#e7e0d2);
+    filter:blur(46px) saturate(.92); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  /* 头部 */
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  /* 大图 */
+  figure{margin:34px 0 12px;border-radius:20px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(30,28,21,.6),0 2px 0 rgba(255,255,255,.5) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  /* 玻璃卡 */
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.55);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(40,34,24,.5),0 1px 0 rgba(255,255,255,.6) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--ultramarine);opacity:.85}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  /* 色板 */
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:84px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;color:#fff;
+    font-size:.66rem;letter-spacing:.06em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.82;font-size:.6rem;display:block}
+  /* 实操要点 */
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--coral);box-shadow:0 0 0 4px rgba(190,92,73,.16)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.06.26</div>
+    <h1>戴珍珠耳环的少女</h1>
+    <div class="sub">Girl with a Pearl Earring — 北方的蒙娜丽莎 · 一束侧光里的回眸</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="约翰内斯·维米尔《戴珍珠耳环的少女》约1665年">
+    <figcaption>Johannes Vermeer，《Meisje met de parel》，约1665年，布面油画 44.5 × 39 cm · 海牙莫瑞泰斯皇家美术馆藏（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">三百多年来，她一直在转身。肩在前、脸侧转、目光却正落在你身上——像刚被唤了一声，唇微启正要开口。维米尔没有给她名字，也没有给她故事，于是每个站在画前的人，都把自己投了进去。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 <span class="en">Composition</span></h2>
+    <p>这不是一幅肖像，而是一幅 <b>tronie（头像习作）</b>——画的是一种神情、一种类型，而非某个具体的人。正因如此，匿名成了它的力量。</p>
+    <p>明亮的脸与头巾构成一块<b>发光的楔形</b>，悬浮在近乎全黑的背景里：没有房间、没有道具，所有注意力被逼向那张脸。双眼落在画面上三分之一，珍珠位于近中心，是柔和的视觉锚点；黄色垂布的斜线与肩线彼此呼应、互相平衡。那片巨大的暗不是"空"，而是会微微发光的<b>场</b>——柔、无边界，本身就承担了弥散背景的角色。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 配色与理论 <span class="en">Colour</span></h2>
+    <p>维米尔的招牌是 <b>蓝 ↔ 黄互补</b>：群青头巾对柠檬黄垂布，冷暖在头顶交锋。暖（肌肤、赭金外衣）对冷（蓝、暗底），靠<b>色温</b>拉出空间纵深。</p>
+    <p>真正的高级感来自一条法则：<b>低饱和的大色场 + 唯一一处高饱和重音</b>（嘴唇那抹珊瑚红）。明度跨度被拉到极满——亮脸压在暗底上，图地对比最强；但所有过渡都是柔的、没有硬边，这正是它"弥散般柔润"的秘密。</p>
+    <div class="palette">
+      <div class="sw" style="background:#4b6f9b">群青<small>#4B6F9B</small></div>
+      <div class="sw" style="background:#e4d29a;color:#5a4e2a">柠檬黄<small>#E4D29A</small></div>
+      <div class="sw" style="background:#8c7438">赭金<small>#8C7438</small></div>
+      <div class="sw" style="background:#e3be9e;color:#5a3c2a">暖肤<small>#E3BE9E</small></div>
+      <div class="sw" style="background:#be5c49">珊瑚唇<small>#BE5C49</small></div>
+      <div class="sw" style="background:#1e1c15">幽暗底<small>#1E1C15</small></div>
+      <div class="sw" style="background:#d7d4ca;color:#4a463c">珍珠<small>#D7D4CA</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与氛围 <span class="en">Light & Mood</span></h2>
+    <p>一束<b>单侧柔光</b>来自左上（北窗的天光），柔柔地裹住脸——边缘是软的，没有硬影，背光侧的脸融进暗里。眼里的高光、下唇一点湿润的反光，这些"湿点"让她活了过来。</p>
+    <p>而那颗珍珠，<b>根本不是"画"出来的</b>：只有两笔——上方一抹柔光，下方一点衣领的倒影。所谓珍珠的光泽，全是暗示。维米尔画的从来是<b>光</b>，不是物。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 技法与媒材 <span class="en">Technique</span></h2>
+    <p>布面油画，约 1665 年，仅 <b>44.5 × 39 cm</b>，是很小的一幅。手法以<b>罩染</b>为骨：薄而透明的层层叠加；背景原是一层光泽的深绿釉（靛蓝＋黄），历经数百年才褪成今天的黑。</p>
+    <p>头巾用的是由昂贵<b>青金石</b>研磨的群青，维米尔奢侈到连阴影里都铺着蓝；垂布用铅锡黄。高光以柔软的<b>点彩（pointillé）</b>点出，湿画法、软融过渡，几乎看不到底稿——一切都为了那种"呼吸般"的柔。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 为何动人 · 作者 <span class="en">Why · Vermeer</span></h2>
+    <p>动人的，是那一眼被定格在<b>转身的半途</b>：你说不清她是转向你，还是正要离开。是匿名——没有名字与叙事，于是人人都能投入自己。是克制——全画只给一颗珍珠、一抹唇红作亮点，其余全收着，像屏住的一口气。</p>
+    <p><b>约翰内斯·维米尔</b>（1632–1675），荷兰代尔夫特，黄金时代大师。一生作品仅约 34 件，画得极慢极精，是否用过暗箱至今存争论。他 43 岁负债早逝、长期被遗忘，直到 19 世纪才被重新发现。此作现藏海牙莫瑞泰斯皇家美术馆，曾启发崔西·雪佛兰的小说与 2003 年同名电影。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 配色 · 穿搭可借鉴 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>维米尔配色公式：</b>深群青 ＋ 柠檬/赭金 ＋ 暖中性肤色 ＋ 近黑，外加<b>唯一一抹珊瑚红</b>。</li>
+      <li><b>穿搭翻译：</b>雾蓝头巾或上衣 ＋ 驼/赭金大衣 ＋ 米白领 ＋ 一颗珍珠 ＋ 珊瑚玫瑰唇当唯一暖点；除那一点重音外，全身压低饱和。</li>
+      <li><b>为什么成立：</b>低饱和的蓝↔黄互补＝厚重而不吵；冷色大场里的一点暖＝焦点自现；近黑的"虚空"背景＝把肤色衬到发光。</li>
+      <li><b>拍人像借走：</b>单侧柔光（北窗光）＋ 纯净深色背景 ＋ 让模特越肩回眸制造"被抓拍"的瞬间感 ＋ 只留一个发光的重音。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：Johannes Vermeer《戴珍珠耳环的少女》约1665 · 公有领域<br>
+    来源：Mauritshuis, The Hague / Wikimedia Commons
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 孔雀室 · 一场用金粉写就的复仇</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eef1ef; --ink-soft:#c7ccd0; --ink-faint:#8b939a;
+    --teal:#2f6358; --gold:#c9a227; --indigo:#233a5c; --porcelain:#a9c2d9;
+    --paper:rgba(18,22,26,.62); --line:rgba(230,238,240,.14); --void:#05060a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#07080b; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(201,162,39,.22), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(47,99,88,.34), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(35,58,92,.36), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(5,6,10,.7), transparent 60%),
+      linear-gradient(170deg,#0d0f14,#050608);
+    filter:blur(50px) saturate(1.05); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#9aa1a6;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;color:#f5f6f4;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c9cdc4;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#8b939a;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.08) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#8b939a;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:#c9cdc4;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.14</div>
+    <h1>孔雀室 · 用金粉写就的一场复仇</h1>
+    <div class="sub">詹姆斯·麦克尼尔·惠斯勒《蓝金和谐曲：孔雀室》(Harmony in Blue and Gold: The Peacock Room) · 1876–1877</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="惠斯勒设计的孔雀室内部：左侧是两扇覆满描金孔雀图案的深绿色木门，右侧远墙是一幅深靛蓝底色、两只金色孔雀相对而立的巨幅壁画，墙面镶嵌着摆满青花瓷器的鎏金格架，天花板是蜂窝状的鎏金藻井，悬挂多盏西式提灯">
+    <figcaption>《蓝金和谐曲：孔雀室》(Harmony in Blue and Gold: The Peacock Room) · 詹姆斯·麦克尼尔·惠斯勒，1876–1877年 · 弗利尔美术馆（史密森尼学会），华盛顿特区 · 摄影：Neil Greentree / Smithsonian's Freer and Sackler Galleries，CC BY-SA 2.0</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">这原本只是一间伦敦豪宅的餐厅，主人只想让画家来"稍微调整一下"墙面的颜色。等房主弗雷德里克·莱兰德再次踏进这间屋子时，他看到的却是自己从中国买回的整墙青花瓷、进口的西班牙镀金皮革墙饰，全都被一层深邃的孔雀蓝绿和大片金箔孔雀羽纹重新覆盖了一遍——而在他最常坐的那面墙上，还多了一幅画着两只对峙孔雀的壁画，标题叫《艺术与金钱：这间屋子的故事》。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 一间被当作整幅画来设计的房间 <span class="en">Composition</span></h2>
+    <p>惠斯勒面对的不是一块画布，而是一间四面都要交代清楚的立体空间：左侧是两扇原本用来遮挡窗户的护窗板，他在上面画满了低头理羽、彼此靠近的孔雀；视线尽头的远墙，则留给了那幅最富戏剧性的对峙壁画；中间大片墙面，交给建筑师托马斯·杰基尔早先设计好的镀金格架，一层层摆满莱兰德收藏的康熙青花瓷器。</p>
+    <p>天花板是全屋最容易被忽略、却最见功力的部分：惠斯勒把杰基尔原本的木格吊顶整个鎏金，做出蜂巢般向四周发散的网状肋线，像是把孔雀开屏时羽毛上那一圈圈"眼斑"直接搬上了天花板——即便你没有抬头研究它的结构，也会本能地感觉到整间屋子在向你"张开"。</p>
+    <p>这是唯美主义运动（Aesthetic Movement）最典型的野心："总体艺术"（Gesamtkunstwerk）——墙面、家具、灯具、乃至瓷器的摆放节奏，全部服从同一套视觉逻辑，没有一处是可以被单独摘出来看的"装饰"。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 配色 · 孔雀蓝绿撞金，一次教科书级的珠宝色搭配 <span class="en">Color Theory</span></h2>
+    <p>整间屋子的底色是一种深邃的孔雀蓝绿（peacock blue-green）——不是纯蓝也不是纯绿，而是介于两者之间、饱和度极高的"珠宝色"（jewel tone）。惠斯勒选它，正是因为这个颜色本身就来自孔雀羽毛：孔雀的蓝绿色并非色素上色，而是羽毛微观结构对光线的干涉反射，会随视角变化而闪动——这也是为什么整面墙在不同光线角度下看起来总在"呼吸"。</p>
+    <p>真正让空间"贵气"起来的，是金箔的用法：惠斯勒没有用金色去画大面积色块，而是用它勾勒孔雀羽毛的每一根羽枝、格架的每一道线脚——金色只占很小的面积比例（目测不到全屋色彩的两成），却因为集中在轮廓线和高光位置，把深色背景一下子点亮。这是一种色彩理论里很实用的技巧：低饱和大面积的冷色打底，小面积高反光的暖色收边，比大面积混用多种颜色更容易显出"高级感"。</p>
+    <p>远墙那幅对峙壁画背景更深，偏向靛蓝——这是惠斯勒刻意做出的层次：主墙面稍浅、稍绿，故事发生的"舞台墙"更深、更蓝，让视线自然被吸向那个最富戏剧性的角落。</p>
+    <div class="palette">
+      <div class="sw" style="background:#2f6358;color:#eef1ef">孔雀绿蓝<small>#2F6358 · 主墙与藻井</small></div>
+      <div class="sw" style="background:#c9a227;color:#241c05">描金<small>#C9A227 · 羽纹与线脚</small></div>
+      <div class="sw" style="background:#233a5c;color:#eef1ef">靛蓝夜幕<small>#233A5C · 对峙壁画底色</small></div>
+      <div class="sw" style="background:#a9c2d9;color:#1c2226">青花瓷白<small>#A9C2D9 · 康熙瓷器</small></div>
+      <div class="sw" style="background:#6b4a34;color:#eef1ef">胡桃木棕<small>#6B4A34 · 地板与展台</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与技法 · 让哑光与反光互相较劲 <span class="en">Technique</span></h2>
+    <p>这间屋子的"发光"效果，靠的不是灯光本身有多亮，而是材质对比：惠斯勒把哑光的蓝绿颜料，和会随角度反光的金箔并置在同一块墙面上——同一盏吊灯打过来的光，在颜料区域会被均匀吸收，在金箔区域却会像镜子一样跳出高光。参观者每挪动一步，屋子里哪些地方"亮"、哪些地方"暗"都会跟着重新分布，这让一间静止的房间有了随人走动而变化的动态感。</p>
+    <p>这张照片本身的拍摄也在配合这种效果：摄影师尼尔·格林特里（Neil Greentree）用佳能EOS 6D、24mm镜头，f/9光圈、ISO 100、10秒长曝光拍下整个空间——小光圈保证了从近处护窗板到远处壁画都清晰在焦，超长的快门时间则让屋顶那几盏暖光提灯和四面墙的金箔反光都被完整、干净地记录下来，没有因为曝光不足而牺牲暗部的青花瓷细节。</p>
+    <p>更值得注意的是惠斯勒的"僭越"本身就是一种技法选择：杰基尔原本铺设的是一整墙价值不菲的古董镀金西班牙皮革，惠斯勒直接在这层名贵材质上覆盖颜料重新作画——某种程度上，这间屋子的视觉冲击力，是由一层被"牺牲"掉的旧装饰材料托举出来的。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 一幅画在墙上的账单 <span class="en">Why It Moves Us</span></h2>
+    <p>这间屋子最打动人的地方，从来不只是它有多美，而是它背后那场毫不掩饰的争吵。建筑师杰基尔病倒后，船运巨富弗雷德里克·莱兰德请好友惠斯勒来"稍作润色"，没想到惠斯勒直接重画了整间屋子，事后开出2000英镑的账单——在当时，这笔钱接近今天的二十万美元。莱兰德只肯付一半，还坚持按"英镑"而非画家们更习惯、暗含"专业人士溢价"的"几尼"结算——几尼与英镑之间那一先令的差价，成了整场羞辱里最刺人的细节。</p>
+    <p>惠斯勒的回应，是把这场争执画在了莱兰德每天吃饭都要看到的墙上：那幅《艺术与金钱》里，姿态强势、羽毛张开的孔雀影射莱兰德——它的胸前羽毛被画成金币与银币堆叠的样子，脚下散落着代表"先令"的金属箔片；而姿态温和、略显退让的另一只孔雀，则是惠斯勒自己。这不是一句隐晦的抱怨，而是一份被永久钉在墙上、谁来吃饭都要看一遍的"艺术家维权声明"。</p>
+    <p>更耐人寻味的是它后来的命运：莱兰德至死都不肯原谅惠斯勒，1892年去世后，美国实业家查尔斯·朗·弗利尔却在1904年买下了这整间屋子，原样拆运过海，最终捐给史密森尼学会——一场私人恩怨，变成了公众可以自由走进去参观的艺术遗产。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">Background</span></h2>
+    <p>詹姆斯·麦克尼尔·惠斯勒（James McNeill Whistler，1834–1903）出生于美国马萨诸塞州洛厄尔，成年后长居巴黎与伦敦，是唯美主义运动"为艺术而艺术"（art for art's sake）最重要的代言人之一。他最广为人知的作品是常被称作《惠斯勒的母亲》的《灰与黑的协奏曲一号》，以及一系列以"夜曲"（Nocturnes）命名的伦敦雾夜风景——都体现着他对色彩、氛围甚于叙事的偏爱，孔雀室正是这种理念被放大到整个建筑空间的极致案例。</p>
+    <p>孔雀室本身完成于1876–77年，惠斯勒（1903年逝世）与建筑师托马斯·杰基尔的原作早已进入公有领域；本文所用照片摄于弗利尔美术馆，摄影师尼尔·格林特里代表史密森尼学会"弗利尔与赛克勒美术馆"于2014年发布在Flickr，采用CC BY-SA 2.0协议授权，图片版权归摄影师与史密森尼学会所有。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 深色打底、金色收边、让展示架也参与配色 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>一深一浅，一哑一亮：</b>大面积用低饱和的深色珠宝色（孔雀蓝绿、深酒红、墨绿都可以）打底，再用小比例的金属色勾边，比堆砌多种颜色更容易显出高级感。</li>
+      <li><b>把"收纳"也算进配色方案：</b>惠斯勒把陈列瓷器的格架也刷成了同一套蓝绿+金色，让展示的物件（青花瓷）和承载它们的结构融为一体，而不是"背景板+摆件"的简单叠加。</li>
+      <li><b>用一面"叙事墙"收束视线：</b>其余墙面维持统一的装饰节奏，只在视觉终点留一处更深、更戏剧化的重点（那幅对峙壁画），能让整个空间的视线有明确的落点。</li>
+      <li><b>把情绪做进图案里，而不是写出来：</b>与其直接冲突，不如把不满编织进一个看似只是装饰的重复图案——耐看，也更持久。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：《蓝金和谐曲：孔雀室》，詹姆斯·麦克尼尔·惠斯勒 / 托马斯·杰基尔，1876–1877，原作公有领域 · 摄影：Neil Greentree，Smithsonian's Freer and Sackler Galleries，2014，CC BY-SA 2.0<br>
+    来源：Wikimedia Commons · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · Curtain of Light at the Edge of the World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eef1ef; --ink-soft:#c7ccd0; --ink-faint:#8b939a;
+    --aurora:#5cc17f; --violet:#7b2745; --rim:#3f6f9e; --frost:#b7c4cc;
+    --paper:rgba(18,22,26,.62); --line:rgba(230,238,240,.14); --void:#05060a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.01em;
+    background:#07080b; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(123,39,69,.30), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(92,193,127,.20), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(63,111,158,.26), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(5,6,10,.7), transparent 60%),
+      linear-gradient(170deg,#0d0f14,#050608);
+    filter:blur(50px) saturate(1.05); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:#9aa1a6;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Fraunces',serif;font-weight:700;color:#f5f6f4;
+    font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c9cdc4;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:#8b939a;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.03em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.08) inset;
+  }
+  .card h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.28rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--aurora);opacity:.95}
+  .card h2 .sec{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.9rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.04rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.64rem;letter-spacing:.02em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.58rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--aurora);box-shadow:0 0 0 4px rgba(92,193,127,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:#8b939a;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.04em;line-height:1.9}
+  footer .brand{font-family:'Fraunces',serif;color:#c9cdc4;
+    letter-spacing:.3em;font-size:.72rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Look · 2026.07.13</div>
+    <h1>Curtain of Light at the Edge of the World</h1>
+    <div class="sub">Scott Kelly, Aurora over Canada · International Space Station, Jan 21 2016</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="A view from the International Space Station of Earth's limb: snow-covered Canada below, a blue band of atmospheric glow above it, a wide green auroral curtain rippling above that, a faint crimson band of high-altitude aurora at the top, and a star-filled black sky beyond">
+    <figcaption>Aurora over Canada · Scott Kelly (ISS Expedition 46), January 21, 2016 · Nikon D4, 50mm, f/1.4, 1/8s, ISO 10,000 · NASA Earth observation image, public domain</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">No tripod, no filter — just a camera braced against a window, and an astronaut more than three hundred days into a mission built entirely around endurance. During his "Year In Space" flight, Scott Kelly photographed Earth from the ISS almost daily and posted the results online. This time, what he caught was the atmosphere itself glowing: snow-bound Canada underneath, a full curtain of green light ignited by the solar wind above it, and — rarer even for him — a wash of crimson high-altitude aurora rippling higher still.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="sec">A Planet Pushed to the Bottom Third</span></h2>
+    <p>Kelly lets Earth's curve cut across the lower third of the frame, giving almost the entire picture — from the blue atmospheric rim to the black field of stars — to what's happening overhead. It's an honest ratio: seen from orbit, the atmosphere that sustains every living thing really is just a thin band of light.</p>
+    <p>The frame wants to be pure horizontal strata — snowfield, blue rim, green curtain, red glow, starfield, stacked layer on layer — but the aurora refuses to sit still. Ragged, flickering pillars of light climb vertically like curtains caught in wind, cutting real motion into all that horizontal calm.</p>
+    <p>Buried in the snowfield is one tiny point of warm orange light, likely a town's glow, sitting quietly inside all that cool color. It puts a human scale back into the frame — something to measure a several-hundred-kilometer electrical event in the upper atmosphere against.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color Theory <span class="sec">A Real Spectrum, Ungraded</span></h2>
+    <p>Every color here comes from atmospheric physics, not post-processing. The green is 557.7-nanometer light released by atomic oxygen at 100–150 km altitude, excited by solar wind particles — the most common auroral color, and the easiest to photograph, partly because human eyes are most sensitive to green under normal light.</p>
+    <p>The thinner crimson band at the top comes from atomic oxygen higher up, at 200–400 km, and needs a stronger geomagnetic disturbance to excite it — which is why it's rarer and easy to miss, appearing here right at the top of the frame as a quiet signal that this was a reasonably energetic storm. The blue glow hugging Earth's limb isn't the aurora at all — it's Rayleigh-scattered sunlight in the denser lower atmosphere, the atmosphere showing its own color when viewed edge-on from space.</p>
+    <p>Pulled apart, the whole image is a five-step band running cool to warm and back to cool — snowfield grey-blue, atmospheric rim blue, auroral core green, high-altitude crimson, deep-space black. That gradient is itself a ready-made palette.</p>
+    <div class="palette">
+      <div class="sw" style="background:#b7c4cc;color:#1c2226">Snowfield grey-blue<small>#B7C4CC · Earth's surface</small></div>
+      <div class="sw" style="background:#3f6f9e;color:#eef1ef">Atmospheric rim blue<small>#3F6F9E · Rayleigh scatter</small></div>
+      <div class="sw" style="background:#5cc17f;color:#0e2016">Auroral core green<small>#5CC17F · 557.7nm oxygen</small></div>
+      <div class="sw" style="background:#7b2745;color:#f3e6ea">High-altitude crimson<small>#7B2745 · 630nm oxygen</small></div>
+      <div class="sw" style="background:#0b0812;color:#e7e4da">Deep-space black<small>#0B0812 · starfield</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique <span class="sec">Trading Shutter Speed for ISO</span></h2>
+    <p>Aurora is faint and diffuse — it naturally wants a wide aperture and a slow shutter to gather enough light. But the ISS orbits Earth at 7.66 km/s, circling the planet once every 92 minutes; any exposure that runs too long should, in theory, smear the surface into a blur. This photograph's settings are the fingerprint of that negotiation: f/1.4, a 50mm normal lens, 1/8 second, ISO 10,000.</p>
+    <p>Rather than compromise with a longer shutter, Kelly pushed the ISO to ten thousand instead — trading grain for a shorter exposure, minimizing streak from orbital motion. That's the technical logic behind almost every ISS night photograph: the light is weak, the platform is moving, and shutter speed is the last variable allowed to give.</p>
+    <p>The noise from ISO 10,000 shows most clearly in the black of the star field, but it doesn't undercut the image — if anything it adds a faint, breathing texture to deep space that makes the photograph feel more like it was actually shot from orbit.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="sec">A Diary Entry from a 340-Day Mission</span></h2>
+    <p>There's no staging here — if anything, this reads as a photo grabbed almost incidentally. It was taken during Kelly's 340-day "Year In Space" mission alongside Russian cosmonaut Mikhail Kornienko, at the time the longest single spaceflight by a NASA astronaut, flown as part of NASA's Twins Study ahead of future Mars missions: Kelly in orbit, his identical twin brother Mark Kelly on the ground as a genetic control, both monitored the same way.</p>
+    <p>What's more affecting, maybe, is Kelly's own habit: he posted Earth photographs almost daily throughout the mission, building an audience of millions by the time it ended. An image like this once belonged only to the handful of people who had actually seen the edge of the world — through that near-daily habit of sharing, it became something ordinary people could experience secondhand: the "overview effect" astronauts describe, the moment seeing an atmosphere this thin, holding up everything alive, reorders what feels like it matters.</p>
+    <p>Quietly, it makes an honest argument about scale: the atmosphere we take entirely for granted, the one sustaining every living thing, is — seen from orbit — just a few dozen kilometers of glowing edge against a plainly black void.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Background <span class="sec">The Photographer</span></h2>
+    <p>Scott Kelly (b. 1964) is a former U.S. Navy test pilot and NASA astronaut who flew four space missions, most notably the 340-day "Year In Space" mission from March 2015 to March 2016 — at the time the longest single spaceflight by a NASA astronaut. His identical twin, Mark Kelly, also an astronaut (and later a U.S. senator), stayed on Earth as part of NASA's Twins Study, gathering comparative human-body data ahead of future long-duration missions, including a crewed trip to Mars.</p>
+    <p>Kelly became known for sharing near-daily Earth photography from orbit, later collected into the 2018 book "Infinite Wonder: An Astronaut's Photographs from a Year in Space." As a NASA-produced work, this photograph carries no copyright under U.S. law and sits freely in the public domain.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="sec">Layered Horizons, ISO Over Shutter, a Human Scale</span></h2>
+    <ul class="tips">
+      <li><b>Let the environment stratify itself:</b> even without a dramatic subject, letting foreground, haze, and sky stack horizontally gives an image instant depth.</li>
+      <li><b>When dim and moving collide, raise ISO before you slow the shutter:</b> if your subject is faint and either it or your platform is in motion, give up some image quality for a faster shutter rather than risk motion blur.</li>
+      <li><b>Break horizontal calm with vertical texture:</b> a light pillar, a tree line, a figure — one irregular vertical element keeps a layered, still image from reading as static.</li>
+      <li><b>Leave one point of human scale:</b> a small warm light inside a vast cool-colored expanse gives the eye something to measure grandeur against, instead of leaving it merely abstract.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">A R T</div>
+    Image: Aurora over Canada · Scott Kelly / NASA, ISS Expedition 46, January 21, 2016 · U.S. Government work, public domain<br>
+    Source: Wikimedia Commons · Commentary and analysis are the author's own
+  </footer>
+</div>
+</body>
+</html>

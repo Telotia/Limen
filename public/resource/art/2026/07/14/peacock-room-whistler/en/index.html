@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · The Peacock Room · A Grudge Painted in Gold Leaf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eef1ef; --ink-soft:#c7ccd0; --ink-faint:#8b939a;
+    --teal:#2f6358; --gold:#c9a227; --indigo:#233a5c; --porcelain:#a9c2d9;
+    --paper:rgba(18,22,26,.62); --line:rgba(230,238,240,.14); --void:#05060a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#07080b; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(201,162,39,.22), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(47,99,88,.34), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(35,58,92,.36), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(5,6,10,.7), transparent 60%),
+      linear-gradient(170deg,#0d0f14,#050608);
+    filter:blur(50px) saturate(1.05); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#9aa1a6;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Newsreader',serif;font-weight:700;color:#f5f6f4;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c9cdc4;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#8b939a;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.08) inset;
+  }
+  .card h2{font-family:'Newsreader',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .zh{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#8b939a;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Newsreader',serif;color:#c9cdc4;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.14</div>
+    <h1>The Peacock Room, a Grudge Painted in Gold Leaf</h1>
+    <div class="sub">James McNeill Whistler, <em>Harmony in Blue and Gold: The Peacock Room</em> · 1876–1877</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Interior of Whistler's Peacock Room: gilded shutters painted with peacocks on the left, a deep indigo mural of two facing golden peacocks on the far wall, gilt lattice shelving holding blue-and-white porcelain, and a honeycombed gilded ceiling with hanging lanterns">
+    <figcaption><em>Harmony in Blue and Gold: The Peacock Room</em>, James McNeill Whistler, 1876–1877 · Freer Gallery of Art, Smithsonian Institution, Washington, D.C. · Photo: Neil Greentree / Smithsonian's Freer and Sackler Galleries, CC BY-SA 2.0</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">It started as a London dining room. The owner just wanted the painter to touch up the wall color. When shipping magnate Frederick Leyland next walked in, he found his entire collection of Chinese blue-and-white porcelain, his imported gilded Spanish leather wall covering — all of it repainted in a deep peacock blue-green and layered with gold-leaf feather patterns. And on the wall he faced every night at dinner, a new mural of two peacocks squaring off, titled <em>Art and Money; or, the Story of the Room.</em></p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="zh">构图</span></h2>
+    <p>Whistler wasn't working on a canvas — he was working on four walls that all had to answer to each other. The two shutters on the left carry peacocks with lowered heads, grooming, drawing close together. The far wall, where the eye naturally lands, holds the confrontation mural. The middle walls are handed over to architect Thomas Jeckyll's earlier gilded lattice shelving, layered floor to ceiling with Leyland's Kangxi-era (1662–1722) blue-and-white porcelain.</p>
+    <p>The ceiling is the room's quietest triumph. Whistler gilded Jeckyll's existing wood-lattice ceiling and turned it into a honeycomb of radiating ribs — as if the "eyes" on a peacock's fanned tail feathers had been lifted straight onto the roof. You don't need to study the structure to feel the room opening above you.</p>
+    <p>This is the Aesthetic Movement's central ambition — <em>Gesamtkunstwerk</em>, total artwork. Walls, furniture, lighting, even the rhythm of the porcelain display all answer to one visual logic. Nothing here can be lifted out and called mere decoration.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color Theory <span class="zh">配色</span></h2>
+    <p>The room's ground color is a deep peacock blue-green — not quite blue, not quite green, a saturated jewel tone sitting between the two. Whistler chose it because it's exactly the color of the bird itself: peacock feathers aren't pigmented blue-green, they're structurally colored, a microscopic interference effect that shifts with viewing angle. That's why the walls seem to "breathe" as light and viewpoint change.</p>
+    <p>What actually makes the room feel expensive is how sparingly the gold is used. Whistler didn't lay gold across large fields — he used it to trace individual feather barbs and shelf moldings. Gold covers a small fraction of the surface area, but because it's concentrated on outlines and highlights, it lights up the whole dark ground instantly. Low-saturation cool color as a large ground, small-area high-reflectance warm metal as the edge — that reads as far more "luxurious" than mixing several hues together.</p>
+    <p>The confrontation mural on the far wall sits on a darker, more indigo ground than the rest of the room — a deliberate layering choice that pulls the eye toward the most dramatic corner of the space.</p>
+    <div class="palette">
+      <div class="sw" style="background:#2f6358;color:#eef1ef">Peacock Teal<small>#2F6358 · walls & ceiling</small></div>
+      <div class="sw" style="background:#c9a227;color:#241c05">Gold Leaf<small>#C9A227 · feathers & trim</small></div>
+      <div class="sw" style="background:#233a5c;color:#eef1ef">Indigo Night<small>#233A5C · mural ground</small></div>
+      <div class="sw" style="background:#a9c2d9;color:#1c2226">Porcelain White<small>#A9C2D9 · Kangxi ware</small></div>
+      <div class="sw" style="background:#6b4a34;color:#eef1ef">Walnut<small>#6B4A34 · floor & bench</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique <span class="zh">光影与技法</span></h2>
+    <p>The room's sense of glow doesn't come from bright lighting — it comes from material contrast. Matte blue-green pigment sits right next to gold leaf that reflects sharply with angle. The same lamplight is absorbed evenly by the paint and thrown back as a hard highlight off the gold. As a visitor moves through the room, which surfaces read as "lit" and which as "dark" keeps redistributing — a static room that behaves like it's alive.</p>
+    <p>This photograph was made to match that effect: photographer Neil Greentree shot it on a Canon EOS 6D with a 24mm lens, f/9, ISO 100, and a 10-second exposure. The small aperture keeps everything in focus from the near shutters to the far mural; the long exposure lets the warm hanging lanterns and every wall's gold reflections register fully, without losing the porcelain detail in the shadows.</p>
+    <p>Worth noting: Whistler's own transgression was itself a technical choice. Jeckyll had already installed an expensive antique gilded Spanish leather wall covering — Whistler painted straight over it. In a sense, the room's visual force is propped up on a layer of sacrificed luxury decoration.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="zh">为何动人</span></h2>
+    <p>What makes this room unforgettable isn't just its beauty — it's the unconcealed argument behind it. When architect Thomas Jeckyll fell ill, shipping magnate Frederick Leyland asked his friend Whistler to make a few small touch-ups. Whistler repainted the entire room instead, then billed Leyland 2,000 guineas — close to $200,000 today. Leyland refused, offering half, and insisted on paying in pounds rather than guineas, the currency of gentlemen and professionals — the one-shilling difference between the two became the sharpest detail of the entire insult.</p>
+    <p>Whistler's answer was to paint the argument onto the wall Leyland faced at every meal. In <em>Art and Money</em>, the aggressive peacock with feathers spread wide is Leyland — its breast feathers rendered as stacked gold and silver coins, shillings scattered in platinum leaf at its feet. The calmer, retreating peacock is Whistler himself. This isn't a veiled complaint. It's a grievance nailed permanently to the wall, for every future dinner guest to read.</p>
+    <p>Even more striking is what happened next. Leyland never forgave Whistler and died in 1892 still estranged from him. In 1904, American industrialist Charles Lang Freer bought the entire room, had it dismantled and shipped across the Atlantic, and eventually gave it to the Smithsonian — turning a private grudge into a public inheritance anyone can walk into.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Background <span class="zh">作者背景</span></h2>
+    <p>James McNeill Whistler (1834–1903) was born in Lowell, Massachusetts, and spent his adult life in Paris and London as one of the leading voices of the Aesthetic Movement's "art for art's sake." He's best known for <em>Arrangement in Grey and Black No. 1</em> — popularly called Whistler's Mother — and his London <em>Nocturnes</em>, foggy river scenes that prize color and mood over narrative. The Peacock Room is that same instinct scaled up to an entire architectural space.</p>
+    <p>The room was completed in 1876–77; Whistler (d. 1903) and Jeckyll's original work is in the public domain. This photograph was taken at the Freer Gallery of Art and released by Smithsonian's Freer and Sackler Galleries via photographer Neil Greentree in 2014 under a CC BY-SA 2.0 license — the photograph's rights belong to the photographer and the Smithsonian.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="zh">可借鉴</span></h2>
+    <ul class="tips">
+      <li><b>One dark ground, one metallic edge:</b> cover most of the space in a low-saturation jewel tone — peacock teal, deep burgundy, bottle green — then trim with a small proportion of metallic gold. It reads as luxurious far faster than mixing multiple hues.</li>
+      <li><b>Let storage join the palette:</b> Whistler painted the display shelving the same blue-green-and-gold as the walls, so the porcelain and the structure holding it read as one thing, not "backdrop plus objects."</li>
+      <li><b>Give the eye one narrative wall:</b> keep most surfaces on a consistent rhythm, and reserve one darker, more dramatic focal point at the end of the sightline.</li>
+      <li><b>Encode the feeling into a pattern, not a statement:</b> instead of confronting someone directly, weave the grievance into what looks like ordinary ornament — it wears better, and it lasts longer.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">A R T</div>
+    Image: <em>Harmony in Blue and Gold: The Peacock Room</em>, James McNeill Whistler / Thomas Jeckyll, 1876–1877, public domain · Photo: Neil Greentree, Smithsonian's Freer and Sackler Galleries, 2014, CC BY-SA 2.0<br>
+    Source: Wikimedia Commons · Appreciation and analysis are the author's own
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 《吻》— 古斯塔夫·克里姆特</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2a2417; --ink-soft:#4a4230; --ink-faint:#8a7d5c;
+    --gold:#d4af37; --bronze:#a67c2e; --ochre:#b8860b; --champ:#e8d9a8;
+    --ruby:#b23a4b; --cobalt:#2e4a7a; --meadow:#6b8e4e; --violet:#6c5a8a;
+    --ivory:#efe6cc; --void:#171206;
+    --paper:rgba(252,248,236,.58); --line:rgba(120,90,30,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#ece3cb; min-height:100vh; overflow-x:hidden;
+  }
+  /* 弥散光场：拜占庭金 + 草地绿 + 宝石点缀 */
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 18% 10%, rgba(212,175,55,.50), transparent 60%),
+      radial-gradient(42rem 42rem at 82% 18%, rgba(166,124,46,.40), transparent 62%),
+      radial-gradient(50rem 50rem at 28% 92%, rgba(107,142,78,.30), transparent 60%),
+      radial-gradient(36rem 36rem at 86% 86%, rgba(178,58,75,.20), transparent 60%),
+      linear-gradient(160deg,#f4ecd2,#e6dabb);
+    filter:blur(46px) saturate(1.02); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:20px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(60,44,8,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.55);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(60,44,8,.45),0 1px 0 rgba(255,255,255,.6) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--bronze);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:84px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;color:#fff;
+    font-size:.66rem;letter-spacing:.06em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.82;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.22)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.06.29</div>
+    <h1>吻</h1>
+    <div class="sub">The Kiss — 两个人，熔成一根金色的柱子</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="古斯塔夫·克里姆特《吻》1907–1908年">
+    <figcaption>Gustav Klimt，《吻》（Der Kuss），1907–1908年，布面油画＋金箔银箔 180 × 180 cm · 奥地利 维也纳 美景宫美术馆藏（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">一整面闪着金光的背景里，一对恋人跪在开满花的崖边。男人俯身、捧住女子的脸；女子闭着眼，仰起头，整个人偎进他怀里。最妙的是——你几乎看不见「两个人」，他们被同一袭<b>金色长袍</b>裹成了一个轮廓，像一根矗立的、会发光的柱子。这是克里姆特「<b>黄金时期</b>」的封顶之作，也是美术史上最著名的一个吻。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 <span class="en">Composition</span></h2>
+    <p>先看画框——这是一幅罕见的<b>正方形（180×180cm，1:1）</b>。正方形天生稳定、内向、没有方向感，正好把视线锁在中央这团相拥的形体上，谁也跑不出去。</p>
+    <p>两人合成一个<b>竖直的卵形（近似花苞／光柱）</b>，被克里姆特<b>偏右上</b>地摆放——左侧和顶部留出大片金色虚空，画面因此有了「呼吸」，不死板。底部那片<b>开花的草地</b>是唯一的水平线，像基座一样稳稳托住这根金柱：一竖一横，结构就立住了。</p>
+    <p>情绪的焦点全在<b>右上角她的脸和那双手</b>：男人背对我们、脸藏住，她却把脸完全交出来。再看她的脚趾——<b>正勾在崖的边缘</b>。整幅画稳，却稳在一个悬崖上。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 配色与理论 <span class="en">Colour</span></h2>
+    <p>这幅画的主色，是<b>金</b>——而金在色彩里是个「<b>非色</b>」：它不是颜料，是会反光的金属箔，画面会随你走动而<b>明灭闪烁</b>。大面积的金（暖、亮、华贵）做底，本身是一套<b>同类色（金、古铜、赭石的暖色家族）</b>的渐变，温润不刺眼。</p>
+    <p>真正点睛的，是那一小撮<b>高饱和宝石色</b>——女子裙上的圆点花纹里藏着<b>玫红、钴蓝、草地绿、紫</b>。它们面积极小，却因为坐在大片金底上而<b>跳得发亮</b>：这就是「<b>大面积低彩度 ＋ 小面积高彩度</b>」的高级配色逻辑。绿草地与红花之间还埋了一组<b>红绿互补</b>，让底部更鲜活。</p>
+    <div class="palette">
+      <div class="sw" style="background:#d4af37;color:#4a3a08">拜占庭金<small>#D4AF37</small></div>
+      <div class="sw" style="background:#a67c2e">古铜金<small>#A67C2E</small></div>
+      <div class="sw" style="background:#b8860b">赭石金<small>#B8860B</small></div>
+      <div class="sw" style="background:#efe6cc;color:#5a4f2c">象牙<small>#EFE6CC</small></div>
+      <div class="sw" style="background:#b23a4b">她的玫红<small>#B23A4B</small></div>
+      <div class="sw" style="background:#2e4a7a">钴蓝<small>#2E4A7A</small></div>
+      <div class="sw" style="background:#6b8e4e">草地绿<small>#6B8E4E</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与气氛 <span class="en">Light & Mood</span></h2>
+    <p>这幅画几乎<b>没有传统的光影明暗</b>——金箔背景是平的、扁的，不投影、不退远。光不来自画里的某盏灯，而来自<b>金属本身的反光</b>：站在原作前，你一移动，金面就跟着流动闪烁，画是「活」的。</p>
+    <p>唯一被<b>真实塑形</b>的，是两张脸和那几只手——脸颊的红晕、指节的转折，都用油画细细画出体积。<b>扁平的装饰</b>包裹着<b>立体的血肉</b>，这一冷一热的对照，正是克里姆特的签名：金是永恒的圣光，肉是当下的温度。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 技法与象征 <span class="en">Technique & Symbol</span></h2>
+    <p><b>布面油画 ＋ 金箔银箔</b>，混合媒材，约 <b>180 × 180 cm</b>。克里姆特的父亲是<b>金器雕刻师</b>，金可以说流在他血里；1903年他两度去意大利<b>拉文纳</b>，被拜占庭教堂的<b>金底马赛克</b>震撼，从此把金箔贴满画面，开启「黄金时期」。</p>
+    <p>看两人袍子上的<b>花纹差别</b>：男人这边是<b>黑白灰的方块、矩形</b>（刚硬、几何）；女子那边是<b>彩色的圆形、椭圆、花朵</b>（柔软、有机）。方与圆、刚与柔——这是克里姆特用图案语言写的<b>阴阳两性</b>，两套纹样在拥抱里咬合成一体。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 为何动人 · 作者 <span class="en">Why · Klimt</span></h2>
+    <p>它动人，在于把「<b>爱</b>」画成了一个<b>融合</b>的瞬间：两个人不再是两个轮廓，而是一根共同发光的金柱。它<b>同时</b>是温柔的、情欲的、近乎神圣的——金底本是教堂里画圣人的待遇，他却用来画一个吻。而她脚下的<b>悬崖</b>又给这份甜加了一丝<b>悬</b>：爱是美的，也是悬在边缘的。正因这层复杂，它才没有沦为甜俗的明信片。</p>
+    <p><b>古斯塔夫·克里姆特</b>（1862–1918），奥地利人，<b>维也纳分离派</b>的灵魂人物。《吻》画于他声名与财力的顶点，未完成时就被奥地利国家收藏。画中模特一说是克里姆特本人与挚友、时装设计师<b>艾米莉·弗洛格</b>，但他本人从不解释——他说过：「想了解我，就去看我的画。」</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 配色 · 穿搭可借鉴 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>克里姆特配色公式：</b>香槟金／古铜（约60%）＋ 象牙米白（约25%）＋ <b>一种宝石色</b>做点睛（祖母绿或玫红或宝蓝，约10–15%）。记住：金做底，<b>只放一种</b>跳色。</li>
+      <li><b>穿搭翻译：</b>一身<b>香槟金缎面／米金针织</b>做大面积暖底，配象牙白，再用<b>一只宝石绿耳环或一抹玫红唇</b>当那撮高饱和点缀——金最忌花，<b>留白＋单一亮色</b>才高级。</li>
+      <li><b>妆容借走：</b>克里姆特式眼妆＝<b>暖金眼影＋自然的脸颊红晕</b>（呼应她被画得最真实的那张脸）。金属色只点在眼睑中央，靠反光「发光」，而非铺满。</li>
+      <li><b>记一条原理：</b>想让金／米这类低调底色「贵气」，靠的不是更多颜色，而是<b>大面积同类色的微妙渐变</b>＋极小面积的高饱和宝石色——克制，是奢华的底层语法。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：Gustav Klimt《吻》1907–1908 · 公有领域<br>
+    来源：Österreichische Galerie Belvedere, Vienna / Wikimedia Commons · 版权归原作者
+  </footer>
+</div>
+</body>
+</html>

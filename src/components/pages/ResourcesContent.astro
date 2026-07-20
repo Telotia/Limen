@@ -1,7 +1,60 @@
 ---
-import { artResources } from '../../data/resources';
+import catalog from '../../data/resource-catalog.json';
 
-const [featured, ...archive] = artResources;
+interface ResourceEntry {
+  kind: 'art' | 'news';
+  title: string;
+  date: string;
+  dateLabel: string;
+  folderLabel: string;
+  href: string;
+  zhHref: string;
+  image: string;
+}
+
+interface MonthGroup {
+  key: string;
+  label: string;
+  year: string;
+  entries: ResourceEntry[];
+}
+
+const entries = catalog as ResourceEntry[];
+
+const groupByMonth = (items: ResourceEntry[]): MonthGroup[] => {
+  const groups = new Map<string, ResourceEntry[]>();
+  for (const item of items) {
+    const key = item.date.slice(0, 7);
+    groups.set(key, [...(groups.get(key) ?? []), item]);
+  }
+
+  return [...groups.entries()].map(([key, monthEntries]) => {
+    const date = new Date(`${key}-01T12:00:00`);
+    return {
+      key,
+      label: date.toLocaleDateString('en-CA', { month: 'long' }),
+      year: key.slice(0, 4),
+      entries: monthEntries,
+    };
+  });
+};
+
+const collections = [
+  {
+    id: 'art',
+    eyebrow: 'Observation practice',
+    title: 'Art',
+    deck: 'One work each day, read closely through composition, material, and attention.',
+    entries: entries.filter((item) => item.kind === 'art'),
+  },
+  {
+    id: 'news',
+    eyebrow: 'Sourced daily brief',
+    title: 'News',
+    deck: 'Markets, technology, and second-order effects, filed with sources and a clear date.',
+    entries: entries.filter((item) => item.kind === 'news'),
+  },
+] as const;
 ---
 
 <section class="resources-page" aria-labelledby="resources-title">
@@ -11,123 +64,352 @@ const [featured, ...archive] = artResources;
   <header class="resources-intro">
     <div>
       <p class="resources-kicker">Telotia field notes</p>
-      <h1 id="resources-title">Resources</h1>
+      <h1 id="resources-title">Filed by time.</h1>
     </div>
-    <p class="resources-deck">Art appreciations, research, and product notes from the Telotia studio.</p>
+    <div class="resources-intro-copy">
+      <p>Art appreciations and sourced news briefings from the Telotia studio.</p>
+      <nav aria-label="Resource collections">
+        <a href="#art"><span>{String(collections[0].entries.length).padStart(2, '0')}</span> Art</a>
+        <a href="#news"><span>{String(collections[1].entries.length).padStart(2, '0')}</span> News</a>
+      </nav>
+    </div>
   </header>
 
-  <section id="art" class="resources-art" aria-labelledby="art-title">
-    <div class="resources-section-heading">
-      <p class="resources-kicker">Observation practice</p>
-      <h2 id="art-title">Art</h2>
-      <p>Studies in evidence, composition, and attention.</p>
-    </div>
+  {collections.map((collection, collectionIndex) => {
+    const [featured, ...archive] = collection.entries;
+    const months = groupByMonth(archive);
 
-    <a class="resource-feature" href={featured.href}>
-      <figure>
-        <img src={featured.image} alt={`${featured.title} by ${featured.artist}`} />
-      </figure>
-      <div class="resource-feature-copy">
-        <p class="resource-number">No. 01 / Editor's selection</p>
-        <time datetime={featured.dateTime}>{featured.date}</time>
-        <h3>{featured.title}</h3>
-        <p class="resource-artist">{featured.artist}</p>
-        <p class="resource-note">{featured.note}</p>
-        <span class="resource-action">Read the appreciation <span aria-hidden="true">→</span></span>
-      </div>
-    </a>
+    return (
+      <section id={collection.id} class:list={['resource-collection', `resource-collection-${collection.id}`]} aria-labelledby={`${collection.id}-title`}>
+        <header class="collection-heading">
+          <div>
+            <p class="resources-kicker">{collection.eyebrow}</p>
+            <h2 id={`${collection.id}-title`}>{collection.title}</h2>
+          </div>
+          <p>{collection.deck}</p>
+        </header>
 
-    <div class="resource-archive" aria-label="Art archive">
-      {archive.map((item, index) => (
-        <a class="resource-row" href={item.href}>
-          <span class="resource-row-number">{String(index + 2).padStart(2, '0')}</span>
-          <img src={item.image} alt="" loading="lazy" />
-          <span class="resource-row-copy">
-            <time datetime={item.dateTime}>{item.date}</time>
-            <strong>{item.title}</strong>
-            <span>{item.artist}</span>
-          </span>
-          <span class="resource-row-note">{item.note}</span>
-          <span class="resource-row-arrow" aria-hidden="true">↗</span>
-        </a>
-      ))}
-    </div>
-  </section>
+        {featured && (
+          <article class="resource-feature">
+            <a class="resource-feature-image" href={featured.href} aria-label={`Read ${featured.title}`}>
+              <img src={featured.image} alt="" />
+            </a>
+            <div class="resource-feature-copy">
+              <div class="resource-feature-meta">
+                <span>Latest entry</span>
+                <time datetime={featured.date}>{featured.dateLabel}</time>
+              </div>
+              <p class="resource-path"><span aria-hidden="true">⌞</span>{featured.folderLabel}</p>
+              <h3><a href={featured.href}>{featured.title}</a></h3>
+              <div class="resource-languages" aria-label="Available languages">
+                <a href={featured.href}>Read in English</a>
+                <a href={featured.zhHref} lang="zh">中文</a>
+              </div>
+            </div>
+          </article>
+        )}
 
-  <section class="resources-forthcoming" aria-labelledby="forthcoming-title">
-    <div>
-      <p class="resources-kicker">Forthcoming</p>
-      <h2 id="forthcoming-title">The library is still growing.</h2>
-    </div>
-    <div class="forthcoming-list">
-      <div>
-        <span class="forthcoming-mark forthcoming-mark-blue" aria-hidden="true"></span>
-        <h3>Research</h3>
-        <p>Methods, benchmarks, and notes on evidence review.</p>
-      </div>
-      <div>
-        <span class="forthcoming-mark forthcoming-mark-red" aria-hidden="true"></span>
-        <h3>Aquila</h3>
-        <p>Product decisions and records from work in progress.</p>
-      </div>
-    </div>
-  </section>
+        <div class="resource-archive" aria-label={`${collection.title} archive`}>
+          {months.map((month) => (
+            <details class="month-group">
+              <summary class="month-heading">
+                <p>{month.year}</p>
+                <h3 id={`${collection.id}-${month.key}`}>{month.label}</h3>
+                <span class="month-count">{month.entries.length} {month.entries.length === 1 ? 'entry' : 'entries'}</span>
+                <span class="month-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="month-entries">
+                {month.entries.map((item) => (
+                  <article class="resource-row">
+                    <time datetime={item.date}>
+                      <span>{item.date.slice(8, 10)}</span>
+                      {new Date(`${item.date}T12:00:00`).toLocaleDateString('en-CA', { weekday: 'short' })}
+                    </time>
+                    <div class="resource-row-copy">
+                      <p class="resource-path">{item.folderLabel}</p>
+                      <h4><a href={item.href}>{item.title}</a></h4>
+                    </div>
+                    <div class="resource-row-links">
+                      <a href={item.href} aria-label={`Read ${item.title} in English`}>EN</a>
+                      <a href={item.zhHref} lang="zh" aria-label={`Read ${item.title} in Chinese`}>中</a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </details>
+          ))}
+        </div>
+
+        {collectionIndex === 0 && <a class="next-collection" href="#news">Continue to News <span aria-hidden="true">↓</span></a>}
+      </section>
+    );
+  })}
+
 </section>
+
+<div class="resource-reader" role="dialog" aria-modal="true" aria-labelledby="resource-reader-title" hidden>
+  <article class="resource-reader-card">
+    <header class="resource-reader-bar">
+      <div class="resource-reader-identity">
+        <p id="resource-reader-date"></p>
+        <h2 id="resource-reader-title">Resource reader</h2>
+      </div>
+      <nav class="resource-reader-navigation" aria-label="Article navigation">
+        <button class="resource-reader-step resource-reader-older" type="button" aria-label="Read the older entry">
+          <span aria-hidden="true">←</span> Older
+        </button>
+        <button class="resource-reader-step resource-reader-newer" type="button" aria-label="Read the newer entry">
+          Newer <span aria-hidden="true">→</span>
+        </button>
+        <a class="resource-reader-direct" href="/resource.html">Open page</a>
+        <button class="resource-reader-close" type="button" aria-label="Close reader">×</button>
+      </nav>
+    </header>
+    <iframe class="resource-reader-frame" title="Resource article"></iframe>
+  </article>
+</div>
+
+<script>
+  const monthGroups = document.querySelectorAll<HTMLDetailsElement>('.month-group');
+
+  monthGroups.forEach((group) => {
+    group.addEventListener('toggle', () => {
+      if (!group.open) return;
+
+      const heading = group.querySelector<HTMLElement>('.month-heading');
+      if (!heading) return;
+
+      // Expanding a month near the footer can make the browser preserve the
+      // bottom scroll anchor and land on the oldest entry. Re-anchor to the
+      // month heading after the expanded layout has settled so the newest
+      // entry remains the first record in view.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const offset = 88;
+          const top = window.scrollY + heading.getBoundingClientRect().top - offset;
+          window.scrollTo({
+            top: Math.max(0, top),
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          });
+        });
+      });
+    });
+  });
+
+  interface ReaderEntry {
+    kind: string;
+    title: string;
+    date: string;
+    href: string;
+    zhHref: string;
+  }
+
+  const reader = document.querySelector<HTMLElement>('.resource-reader');
+  const readerFrame = reader?.querySelector<HTMLIFrameElement>('.resource-reader-frame');
+  const readerTitle = reader?.querySelector<HTMLElement>('#resource-reader-title');
+  const readerDate = reader?.querySelector<HTMLElement>('#resource-reader-date');
+  const readerDirect = reader?.querySelector<HTMLAnchorElement>('.resource-reader-direct');
+  const readerOlder = reader?.querySelector<HTMLButtonElement>('.resource-reader-older');
+  const readerNewer = reader?.querySelector<HTMLButtonElement>('.resource-reader-newer');
+  const readerClose = reader?.querySelector<HTMLButtonElement>('.resource-reader-close');
+
+  const readerEntries = [...document.querySelectorAll<HTMLElement>('.resource-feature, .resource-row')]
+    .map((article): ReaderEntry | null => {
+      const titleLink = article.querySelector<HTMLAnchorElement>('h3 a, h4 a');
+      const chineseLink = article.querySelector<HTMLAnchorElement>('.resource-languages a[lang="zh"], .resource-row-links a[lang="zh"]');
+      const date = article.querySelector<HTMLTimeElement>('time')?.dateTime;
+      const collection = article.closest<HTMLElement>('.resource-collection');
+      if (!titleLink || !chineseLink || !date || !collection?.id) return null;
+      return {
+        kind: collection.id,
+        title: titleLink.textContent?.trim() ?? 'Resource article',
+        date,
+        href: titleLink.href,
+        zhHref: chineseLink.href,
+      };
+    })
+    .filter((entry): entry is ReaderEntry => Boolean(entry));
+
+  let activeReaderEntry: ReaderEntry | null = null;
+  let activeReaderLanguage: 'en' | 'zh' = 'en';
+  let readerReturnFocus: HTMLElement | null = null;
+
+  const entriesForActiveKind = () => readerEntries.filter((entry) => entry.kind === activeReaderEntry?.kind);
+
+  const showReaderEntry = (entry: ReaderEntry, language: 'en' | 'zh' = activeReaderLanguage) => {
+    if (!reader || !readerFrame || !readerTitle || !readerDate || !readerDirect) return;
+    activeReaderEntry = entry;
+    activeReaderLanguage = language;
+    const href = language === 'zh' ? entry.zhHref : entry.href;
+    readerTitle.textContent = entry.title;
+    readerDate.textContent = `${entry.kind} · ${entry.date.replaceAll('-', ' / ')}`;
+    readerFrame.src = href;
+    readerFrame.title = entry.title;
+    readerDirect.href = href;
+
+    const siblings = entriesForActiveKind();
+    const index = siblings.indexOf(entry);
+    if (readerOlder) readerOlder.disabled = index >= siblings.length - 1;
+    if (readerNewer) readerNewer.disabled = index <= 0;
+    if (reader.hidden) {
+      readerReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      reader.hidden = false;
+      document.documentElement.classList.add('resource-reader-open');
+      readerClose?.focus();
+    }
+  };
+
+  const closeReader = () => {
+    if (!reader || reader.hidden) return;
+    reader.hidden = true;
+    document.documentElement.classList.remove('resource-reader-open');
+    if (readerFrame) readerFrame.src = 'about:blank';
+    activeReaderEntry = null;
+    readerReturnFocus?.focus();
+    readerReturnFocus = null;
+  };
+
+  const stepReader = (direction: 'older' | 'newer') => {
+    if (!activeReaderEntry) return;
+    const siblings = entriesForActiveKind();
+    const index = siblings.indexOf(activeReaderEntry);
+    const nextIndex = direction === 'older' ? index + 1 : index - 1;
+    const nextEntry = siblings[nextIndex];
+    if (nextEntry) showReaderEntry(nextEntry);
+  };
+
+  document.querySelectorAll<HTMLAnchorElement>('.resource-feature a[href*="/resource/"], .resource-row a[href*="/resource/"]')
+    .forEach((link) => {
+      link.addEventListener('click', (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const article = link.closest<HTMLElement>('.resource-feature, .resource-row');
+        const date = article?.querySelector<HTMLTimeElement>('time')?.dateTime;
+        const kind = article?.closest<HTMLElement>('.resource-collection')?.id;
+        const entry = readerEntries.find((candidate) => candidate.date === date && candidate.kind === kind);
+        if (!entry) return;
+        event.preventDefault();
+        showReaderEntry(entry, link.lang === 'zh' || link.href.includes('/zh/') ? 'zh' : 'en');
+      });
+    });
+
+  readerOlder?.addEventListener('click', () => stepReader('older'));
+  readerNewer?.addEventListener('click', () => stepReader('newer'));
+  readerClose?.addEventListener('click', closeReader);
+  reader?.addEventListener('click', (event) => {
+    if (event.target === reader) closeReader();
+  });
+
+  const bindReaderSwipe = () => {
+    const frameDocument = readerFrame?.contentDocument;
+    if (!frameDocument) return;
+    let startX = 0;
+    let startY = 0;
+    frameDocument.addEventListener('touchstart', (event) => {
+      const touch = event.changedTouches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+    }, { passive: true });
+    frameDocument.addEventListener('touchend', (event) => {
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - startX;
+      const deltaY = touch.clientY - startY;
+      if (Math.abs(deltaX) < 64 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) return;
+      stepReader(deltaX < 0 ? 'newer' : 'older');
+    }, { passive: true });
+  };
+
+  readerFrame?.addEventListener('load', bindReaderSwipe);
+  window.addEventListener('keydown', (event) => {
+    if (!reader || reader.hidden) return;
+    if (event.key === 'Escape') closeReader();
+    if (event.key === 'ArrowLeft') stepReader('older');
+    if (event.key === 'ArrowRight') stepReader('newer');
+  });
+</script>
 
 <style>
   .resources-page{position:relative;isolation:isolate;width:100%;overflow:hidden;padding:clamp(76px,8vw,118px) 64px clamp(92px,10vw,148px)}
   .resources-page>*:not(.resources-ink){position:relative;z-index:1}
   .resources-ink{position:absolute;z-index:0;display:block;pointer-events:none;background-repeat:no-repeat;background-size:contain;mix-blend-mode:multiply}
-  .resources-ink-top{width:clamp(340px,42vw,680px);height:clamp(210px,28vw,420px);top:18px;right:clamp(-210px,-10vw,-72px);background-image:url('/assets/ink-wash/05-bamboo-right.webp');background-position:right top;opacity:.18;filter:grayscale(.25) contrast(1.2)}
-  .resources-ink-bottom{width:clamp(420px,54vw,820px);height:clamp(180px,23vw,330px);left:clamp(-260px,-12vw,-100px);bottom:14px;background-image:url('/assets/ink-wash/08-water-left.webp');background-position:left bottom;opacity:.13;filter:saturate(.55) contrast(1.18)}
-  .resources-intro,.resources-art,.resources-forthcoming{width:min(1180px,100%);margin-inline:auto}
-  .resources-intro{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(280px,.68fr);align-items:end;gap:clamp(36px,7vw,104px);padding-bottom:clamp(46px,6vw,76px)}
-  .resources-kicker,.resource-number,.resource-feature time,.resource-row time,.resource-row-number{font-family:var(--fmono);text-transform:uppercase;letter-spacing:.15em}
+  .resources-ink-top{width:clamp(360px,46vw,720px);height:clamp(230px,31vw,460px);top:20px;right:clamp(-230px,-11vw,-78px);background-image:url('/assets/ink-wash/05-bamboo-right.webp');background-position:right top;opacity:.16;filter:grayscale(.18) contrast(1.18)}
+  .resources-ink-bottom{width:clamp(440px,56vw,860px);height:clamp(190px,24vw,350px);left:clamp(-270px,-13vw,-108px);bottom:18px;background-image:url('/assets/ink-wash/08-water-left.webp');background-position:left bottom;opacity:.12;filter:saturate(.6) contrast(1.16)}
+  .resources-intro,.resource-collection{width:min(1180px,100%);margin-inline:auto}
+  .resources-kicker,.resource-feature-meta,.resource-path,.month-heading p,.month-heading span,.resource-row time,.resource-row-links{font-family:var(--fmono);text-transform:uppercase;letter-spacing:.14em}
   .resources-kicker{color:var(--teal);font-size:10.5px;font-weight:500}
-  .resources-intro h1{max-width:760px;margin-top:10px;color:var(--t1);font-size:clamp(62px,9vw,124px);line-height:.82}
-  .resources-deck{max-width:450px;padding:0 0 7px 22px;border-left:1px solid rgba(193,59,51,.42);color:var(--t2);font-size:clamp(17px,1.55vw,21px);line-height:1.55}
-  .resources-art{padding-top:30px;border-top:1px solid rgba(23,32,29,.28)}
-  .resources-section-heading{display:grid;grid-template-columns:140px minmax(160px,.55fr) minmax(280px,1fr);align-items:baseline;gap:24px;padding-bottom:26px}
-  .resources-section-heading h2{color:var(--t1);font-size:clamp(32px,4vw,48px);line-height:1}
-  .resources-section-heading>p:last-child{justify-self:end;max-width:400px;color:var(--t3);font-size:14px;line-height:1.55}
-  .resource-feature{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(320px,.76fr);height:clamp(520px,52vw,660px);overflow:hidden;border:1px solid rgba(23,32,29,.22);border-radius:18px;background:rgba(248,247,242,.8);color:inherit;text-decoration:none;box-shadow:0 30px 70px -52px rgba(23,32,29,.58),inset 0 1px rgba(255,255,255,.72);transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
-  .resource-feature:hover,.resource-feature:focus-visible{border-color:rgba(42,85,165,.55);box-shadow:0 36px 82px -50px rgba(29,63,117,.48),inset 0 1px rgba(255,255,255,.8)}
-  .resource-feature:focus-visible,.resource-row:focus-visible{outline:2px solid rgba(42,85,165,.55);outline-offset:4px}
-  .resource-feature figure{min-height:100%;overflow:hidden;background:var(--surface-selected)}
-  .resource-feature img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.04);transition:transform 1.1s var(--ease),filter .5s var(--ease)}
-  .resource-feature:hover img{transform:scale(1.018);filter:saturate(.92) contrast(1.06)}
-  .resource-feature-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(34px,5vw,68px);background:radial-gradient(circle at 100% 0,rgba(227,163,44,.11),transparent 34%),linear-gradient(145deg,rgba(248,247,242,.96),rgba(238,235,226,.92))}
-  .resource-number{color:var(--vermilion);font-size:9.5px}
-  .resource-feature time,.resource-row time{display:block;color:var(--t4);font-size:9.5px}
-  .resource-feature time{margin-top:56px}
-  .resource-feature h3{margin-top:12px;color:var(--t1);font-family:var(--fdisplay);font-size:clamp(30px,3.5vw,48px);font-weight:500;line-height:1.04}
-  .resource-artist{margin-top:11px;color:var(--teal2);font-size:14px;font-weight:500}
-  .resource-note{margin-top:32px;color:var(--t2);font-size:15px;line-height:1.65}
-  .resource-action{margin-top:46px;color:var(--t1);font-family:var(--fmono);font-size:11px;letter-spacing:.035em}
-  .resource-action span{display:inline-block;margin-left:4px;color:var(--teal);transition:transform .22s var(--ease)}
-  .resource-feature:hover .resource-action span{transform:translateX(4px)}
-  .resource-archive{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(34px,6vw,84px);margin-top:clamp(48px,6vw,78px);border-top:1px solid rgba(23,32,29,.24)}
-  .resource-row{position:relative;display:grid;grid-template-columns:30px 112px minmax(0,1fr) 18px;grid-template-areas:"number image copy arrow" "number image note arrow";gap:9px 18px;align-items:start;min-height:154px;padding:22px 0;border-bottom:1px solid rgba(23,32,29,.18);color:inherit;text-decoration:none}
-  .resource-row-number{grid-area:number;padding-top:3px;color:var(--gold2);font-size:9px}
-  .resource-row img{grid-area:image;display:block;width:112px;aspect-ratio:4/3;object-fit:cover;border-radius:6px;filter:saturate(.7) contrast(1.02);transition:filter .25s var(--ease),transform .35s var(--ease)}
-  .resource-row:hover img{filter:saturate(.95) contrast(1.04);transform:translateY(-2px)}
-  .resource-row-copy{grid-area:copy;display:block;min-width:0}
-  .resource-row-copy strong{display:block;margin-top:7px;color:var(--t1);font-family:var(--fdisplay);font-size:20px;font-weight:500;line-height:1.12}
-  .resource-row-copy>span{display:block;margin-top:5px;color:var(--teal2);font-size:12px}
-  .resource-row-note{grid-area:note;color:var(--t3);font-size:12.5px;line-height:1.45}
-  .resource-row-arrow{grid-area:arrow;justify-self:end;color:var(--t4);font-size:15px;transition:color .2s var(--ease),transform .2s var(--ease)}
-  .resource-row:hover .resource-row-arrow{color:var(--teal);transform:translate(2px,-2px)}
-  .resources-forthcoming{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.25fr);gap:clamp(48px,8vw,120px);margin-top:clamp(84px,10vw,138px);padding-top:32px;border-top:1px solid rgba(23,32,29,.28)}
-  .resources-forthcoming h2{max-width:440px;margin-top:12px;color:var(--t1);font-size:clamp(34px,4.8vw,58px);line-height:1.02}
-  .forthcoming-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(23,32,29,.16);border:1px solid rgba(23,32,29,.16);border-radius:16px;overflow:hidden}
-  .forthcoming-list>div{position:relative;min-height:214px;padding:34px;overflow:hidden;background:rgba(248,247,242,.78)}
-  .forthcoming-mark{position:absolute;right:-28px;top:-32px;width:130px;height:130px;border-radius:48% 52% 55% 45%;filter:blur(8px);opacity:.16}
-  .forthcoming-mark-blue{background:var(--teal)}
-  .forthcoming-mark-red{background:var(--vermilion)}
-  .forthcoming-list h3{position:relative;color:var(--t1);font-family:var(--fdisplay);font-size:27px;font-weight:500}
-  .forthcoming-list p{position:relative;max-width:260px;margin-top:44px;color:var(--t3);font-size:14px;line-height:1.55}
-  @media(max-width:980px){.resource-feature{grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr)}.resource-archive{grid-template-columns:1fr}}
-  @media(max-width:760px){.resources-page{padding:58px 18px 90px}.resources-intro,.resources-section-heading,.resources-forthcoming{grid-template-columns:1fr}.resources-intro{gap:28px}.resources-intro h1{font-size:clamp(58px,20vw,86px)}.resources-deck{padding-left:16px}.resources-section-heading{gap:9px}.resources-section-heading>p:last-child{justify-self:start;margin-top:7px}.resource-feature{grid-template-columns:1fr;height:auto}.resource-feature img{height:auto;aspect-ratio:4/3}.resource-feature-copy{padding:30px 26px 34px}.resource-feature time{margin-top:32px}.resource-note{margin-top:22px}.resource-action{margin-top:28px}.resources-forthcoming{gap:34px}}
-  @media(max-width:520px){.resource-row{grid-template-columns:26px 86px minmax(0,1fr) 14px;grid-template-areas:"number image copy arrow" "number note note arrow";min-height:0;column-gap:12px}.resource-row img{width:86px}.resource-row-copy strong{font-size:18px}.resource-row-note{margin-top:8px}.forthcoming-list{grid-template-columns:1fr}.forthcoming-list>div{min-height:180px}}
-  @media(prefers-reduced-motion:reduce){.resource-feature,.resource-feature img,.resource-action span,.resource-row img,.resource-row-arrow{transition:none}}
+  .resources-intro{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(310px,.62fr);align-items:end;gap:clamp(38px,8vw,118px);padding-bottom:clamp(62px,8vw,102px)}
+  .resources-intro h1{max-width:780px;margin-top:14px;color:var(--t1);font-size:clamp(64px,9vw,122px);line-height:.84}
+  .resources-intro-copy{padding:0 0 8px 24px;border-left:1px solid rgba(193,59,51,.44)}
+  .resources-intro-copy>p{max-width:430px;color:var(--t2);font-size:clamp(17px,1.5vw,21px);line-height:1.55}
+  .resources-intro nav{display:flex;gap:10px;margin-top:26px}
+  .resources-intro nav a{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid rgba(23,32,29,.24);border-radius:999px;color:var(--t2);font-family:var(--fmono);font-size:10px;letter-spacing:.08em;text-decoration:none;transition:border-color .2s var(--ease),background .2s var(--ease)}
+  .resources-intro nav a:hover{border-color:rgba(42,85,165,.55);background:rgba(248,247,242,.62)}
+  .resources-intro nav span{color:var(--gold2)}
+  .resource-collection{scroll-margin-top:92px;padding-top:38px;border-top:1px solid rgba(23,32,29,.28)}
+  .resource-collection+.resource-collection{margin-top:clamp(104px,13vw,172px)}
+  .collection-heading{display:grid;grid-template-columns:minmax(260px,.82fr) minmax(300px,.72fr);align-items:end;justify-content:space-between;gap:50px;padding-bottom:30px}
+  .collection-heading h2{margin-top:8px;color:var(--t1);font-size:clamp(42px,6vw,72px);line-height:.95}
+  .collection-heading>p{justify-self:end;max-width:460px;color:var(--t3);font-size:15px;line-height:1.62}
+  .resource-feature{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(340px,.72fr);min-height:clamp(420px,43vw,560px);overflow:hidden;border:1px solid rgba(23,32,29,.22);border-radius:18px;background:rgba(248,247,242,.82);box-shadow:0 28px 66px -50px rgba(23,32,29,.62),inset 0 1px rgba(255,255,255,.74)}
+  .resource-feature-image{display:block;overflow:hidden;background:var(--surface-selected)}
+  .resource-feature-image img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.04);transition:transform 1.05s var(--ease),filter .4s var(--ease)}
+  .resource-feature-image:hover img{transform:scale(1.018);filter:saturate(.94) contrast(1.06)}
+  .resource-collection-news .resource-feature-image img{object-position:center top}
+  .resource-feature-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(34px,5vw,68px);background:radial-gradient(circle at 100% 0,rgba(227,163,44,.1),transparent 34%),linear-gradient(145deg,rgba(248,247,242,.97),rgba(238,235,226,.94))}
+  .resource-feature-meta{display:flex;justify-content:space-between;gap:16px;color:var(--t4);font-size:9px}
+  .resource-feature-meta span{color:var(--vermilion)}
+  .resource-path{overflow-wrap:anywhere;color:var(--t4);font-size:9px;line-height:1.5;text-transform:none;letter-spacing:.055em}
+  .resource-feature-copy>.resource-path{margin-top:58px}
+  .resource-feature-copy>.resource-path span{margin-right:8px;color:var(--gold2)}
+  .resource-feature h3{margin-top:15px;color:var(--t1);font-family:var(--fdisplay);font-size:clamp(28px,3vw,44px);font-weight:500;line-height:1.08}
+  .resource-feature h3 a,.resource-row h4 a{color:inherit;text-decoration:none}
+  .resource-feature h3 a:hover,.resource-row h4 a:hover{color:var(--teal)}
+  .resource-languages{display:flex;gap:20px;margin-top:42px}
+  .resource-languages a{color:var(--t2);font-family:var(--fmono);font-size:10.5px;letter-spacing:.04em;text-decoration:none;border-bottom:1px solid rgba(23,32,29,.28);padding-bottom:4px}
+  .resource-languages a:hover{color:var(--teal);border-color:var(--teal)}
+  .resource-archive{margin-top:clamp(54px,7vw,86px)}
+  .month-group{overflow-anchor:none;border-top:1px solid rgba(23,32,29,.24)}
+  .month-group:last-child{border-bottom:1px solid rgba(23,32,29,.24)}
+  .month-heading{display:grid;grid-template-columns:160px minmax(0,1fr) auto 30px;align-items:baseline;gap:clamp(26px,5vw,74px);padding:25px 0;cursor:pointer;list-style:none}
+  .month-heading::-webkit-details-marker{display:none}
+  .month-heading p,.month-heading span{color:var(--t4);font-size:9px}
+  .month-heading h3{color:var(--t1);font-family:var(--fdisplay);font-size:29px;font-weight:500}
+  .month-count{justify-self:end}
+  .month-toggle{position:relative;align-self:center;width:28px;height:28px;border:1px solid rgba(23,32,29,.23);border-radius:50%;transition:transform .25s var(--ease),border-color .2s var(--ease)}
+  .month-toggle::before,.month-toggle::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1px;background:var(--t3);transform:translate(-50%,-50%)}
+  .month-toggle::after{transform:translate(-50%,-50%) rotate(90deg)}
+  .month-heading:hover .month-toggle{border-color:rgba(42,85,165,.55)}
+  .month-group[open] .month-toggle{transform:rotate(45deg)}
+  .month-entries{min-width:0;margin-left:calc(160px + clamp(26px,5vw,74px))}
+  .month-group:not([open])>.month-entries{display:none}
+  .resource-row{display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:22px;align-items:center;min-height:128px;padding:23px 0;border-bottom:1px solid rgba(23,32,29,.17)}
+  .resource-row time{color:var(--t4);font-size:9px;text-align:center}
+  .resource-row time span{display:block;margin-bottom:4px;color:var(--t1);font-family:var(--fdisplay);font-size:32px;line-height:.9;letter-spacing:0}
+  .resource-row-copy{min-width:0}
+  .resource-row h4{max-width:720px;margin-top:7px;color:var(--t1);font-family:var(--fdisplay);font-size:clamp(20px,2.1vw,27px);font-weight:500;line-height:1.15}
+  .resource-row-links{display:flex;gap:7px;font-size:9px;letter-spacing:.08em}
+  .resource-row-links a{display:grid;place-items:center;min-width:34px;height:30px;border:1px solid rgba(23,32,29,.22);border-radius:999px;color:var(--t3);text-decoration:none;transition:color .2s var(--ease),border-color .2s var(--ease),background .2s var(--ease)}
+  .resource-row-links a:hover{color:var(--teal);border-color:rgba(42,85,165,.52);background:rgba(42,85,165,.05)}
+  .next-collection{display:flex;align-items:center;justify-content:space-between;margin-top:54px;padding:19px 0;border-top:1px solid rgba(23,32,29,.28);border-bottom:1px solid rgba(23,32,29,.28);color:var(--t2);font-family:var(--fmono);font-size:11px;letter-spacing:.08em;text-decoration:none}
+  .next-collection span{color:var(--gold2);font-size:18px;transition:transform .2s var(--ease)}
+  .next-collection:hover span{transform:translateY(3px)}
+  :global(html.resource-reader-open){overflow:hidden}
+  .resource-reader{position:fixed;z-index:1000;inset:0;display:grid;place-items:center;padding:14px;background:rgba(15,23,25,.34);backdrop-filter:blur(9px);color:var(--t1);cursor:zoom-out}
+  .resource-reader[hidden]{display:none}
+  .resource-reader-card{display:grid;grid-template-rows:auto minmax(0,1fr);width:calc(100vw - clamp(24px,5vw,96px));height:calc(100vh - clamp(24px,5vw,96px));overflow:hidden;border:1px solid rgba(23,32,29,.34);border-radius:18px;background:#f8f7f2;box-shadow:0 32px 90px rgba(11,18,20,.28);cursor:default}
+  .resource-reader-bar{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:68px;padding:10px 12px 10px 22px;border-bottom:1px solid rgba(23,32,29,.2);background:linear-gradient(90deg,#f8f7f2,rgba(232,231,227,.92))}
+  .resource-reader-identity{min-width:0}
+  .resource-reader-identity p{color:var(--gold2);font-family:var(--fmono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase}
+  .resource-reader-identity h2{overflow:hidden;margin-top:4px;color:var(--t1);font-family:var(--fdisplay);font-size:18px;font-weight:500;line-height:1.1;text-overflow:ellipsis;white-space:nowrap}
+  .resource-reader-navigation{display:flex;align-items:center;gap:7px;flex:0 0 auto}
+  .resource-reader-step,.resource-reader-close,.resource-reader-direct{display:inline-flex;align-items:center;justify-content:center;min-height:36px;border:1px solid rgba(23,32,29,.2);border-radius:999px;background:rgba(255,255,255,.55);color:var(--t2);font-family:var(--fmono);font-size:9px;letter-spacing:.04em;text-decoration:none;transition:border-color .2s var(--ease),background .2s var(--ease),color .2s var(--ease)}
+  .resource-reader-step{gap:7px;padding:0 13px}
+  .resource-reader-direct{padding:0 14px}
+  .resource-reader-close{width:36px;padding:0;font-family:var(--fbody);font-size:20px}
+  .resource-reader-step:hover:not(:disabled),.resource-reader-close:hover,.resource-reader-direct:hover{border-color:rgba(42,85,165,.55);background:#fff;color:var(--teal)}
+  .resource-reader-step:disabled{opacity:.34;cursor:not-allowed}
+  .resource-reader-frame{display:block;width:100%;height:100%;border:0;background:#f8f7f2}
+  @media(max-width:900px){.resource-feature{grid-template-columns:minmax(0,1.05fr) minmax(310px,.95fr)}.month-heading{grid-template-columns:126px minmax(0,1fr) auto 30px}.month-entries{margin-left:calc(126px + clamp(26px,5vw,74px))}}
+  @media(max-width:760px){.resources-page{padding:58px 18px 90px}.resources-intro,.collection-heading{grid-template-columns:1fr}.resources-intro{gap:28px}.resources-intro h1{font-size:clamp(58px,20vw,86px)}.resources-intro-copy{padding-left:16px}.collection-heading{gap:14px}.collection-heading>p{justify-self:start}.resource-feature{grid-template-columns:1fr;min-height:0}.resource-feature-image img{height:auto;aspect-ratio:4/3}.resource-feature-copy{padding:30px 26px 34px}.resource-feature-copy>.resource-path{margin-top:34px}.month-heading{grid-template-columns:auto minmax(0,1fr) auto 28px;gap:10px;padding:22px 0}.month-heading h3{font-size:25px}.month-count{justify-self:end}.month-entries{margin-left:0}.resource-row{grid-template-columns:48px minmax(0,1fr) auto;gap:14px;min-height:112px}.resource-row h4{font-size:21px}.resource-reader{padding:8px}.resource-reader-card{width:calc(100vw - 16px);height:calc(100vh - 16px)}.resource-reader-bar{align-items:flex-start;min-height:0;padding:10px}.resource-reader-identity{display:none}.resource-reader-navigation{width:100%}.resource-reader-step{flex:1}.resource-reader-direct{display:none}}
+  @media(max-width:480px){.resources-intro nav{flex-wrap:wrap}.resource-row{grid-template-columns:44px minmax(0,1fr);grid-template-areas:'date copy' 'date links';align-items:start}.resource-row time{grid-area:date}.resource-row-copy{grid-area:copy}.resource-row-links{grid-area:links;margin-top:3px}.resource-path{font-size:8px}.resource-row h4{font-size:19px}}
+  @media(prefers-reduced-motion:reduce){.resource-feature-image img,.next-collection span{transition:none}}
 </style>

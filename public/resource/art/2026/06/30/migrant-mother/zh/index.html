@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 《流离的母亲》— 多萝西娅·兰格</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1916; --ink-soft:#3c3833; --ink-faint:#857f74;
+    --silver:#b9b4a8; --sepia:#8c7a5e; --slate:#5d6670; --bone:#e7e2d7;
+    --paper:rgba(248,245,239,.58); --line:rgba(60,55,45,.16); --void:#101010;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#d2ccbf; min-height:100vh; overflow-x:hidden;
+  }
+  /* 弥散光场：尘土暖灰 + 微弱棕褐 + 冷石板（大萧条的尘与天） */
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 18% 10%, rgba(185,180,168,.55), transparent 60%),
+      radial-gradient(42rem 42rem at 82% 16%, rgba(140,122,94,.30), transparent 62%),
+      radial-gradient(50rem 50rem at 26% 92%, rgba(93,102,112,.26), transparent 60%),
+      radial-gradient(36rem 36rem at 86% 88%, rgba(40,38,32,.18), transparent 60%),
+      linear-gradient(160deg,#e3ded3,#d0cabd);
+    filter:blur(46px) saturate(.96); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:20px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(20,18,14,.6),0 2px 0 rgba(255,255,255,.35) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(20,18,14,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--sepia);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:88px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--sepia);box-shadow:0 0 0 4px rgba(140,122,94,.22)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.06.30</div>
+    <h1>流离的母亲</h1>
+    <div class="sub">Migrant Mother — 一个母亲，扛起整个大萧条</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="多萝西娅·兰格《流离的母亲》1936年">
+    <figcaption>Dorothea Lange,《流离的母亲》（Migrant Mother），1936年3月 · 4×5 大画幅银盐黑白 · 美国加州尼波莫 · 美国国会图书馆藏（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">一顶漏风的帐篷下，一个三十出头、却被风霜刻老了的母亲，单手撑着下巴，望向画框之外某处不可知的远方。两个孩子把脸埋进她的肩膀、背对镜头；怀里的婴儿睡着，浑然不知。她没有看你，也没有向你乞求——正是这份<b>不乞求</b>，让这张脸成了整个大萧条年代的脸。这是纪实摄影史上最著名的一张照片。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 <span class="en">Composition</span></h2>
+    <p>整张照片是一个稳稳的<b>三角形（金字塔式构图）</b>：母亲的头是塔尖，她摊开的身体和膝上的婴儿是宽阔的塔基。三角形是所有构图里<b>最稳定</b>的形状——它给这幅满是动荡与不安的画面，钉下了一个沉默而坚固的底座。</p>
+    <p>两个孩子<b>背对镜头、把脸藏起</b>，这是神来之笔：他们像两道括号，把所有视线<b>向内收拢、推向母亲的脸</b>。画面里唯一交出表情的，只有她一个人——于是她独自承担了整个家、整个时代的重量。</p>
+    <p>她的眼睛落在<b>上三分之一线</b>上（三分法），视线却引向<b>画框之外的左侧</b>——人物看向画外，天然制造出<b>悬而未决的张力</b>：她在望着一个看不见的、不确定的未来。右缘那根<b>斜插的帐篷杆</b>，是画面里唯一的硬直线，暗示着这个「家」的简陋与临时。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 影调 · 黑白里的「色彩」 <span class="en">Tonal Range</span></h2>
+    <p>黑白照片没有颜色，但它有<b>影调（明度）</b>——这就是它的「配色」。判断一张黑白片高不高级，要看它的<b>全影调范围</b>：是否同时拥有扎实的纯黑、干净的纯白，以及之间丰富的灰阶过渡。这正是安塞尔·亚当斯<b>「区域系统」（Zone System）</b>的核心：把从全黑到全白分成 0–X 共 11 个区。</p>
+    <p>这张照片影调<b>完整而克制</b>：<b>Zone 0–I 的纯黑</b>（帐篷暗处、她的发）沉到底，给画面重量；<b>Zone V 的中灰</b>是她的<b>肤色基准</b>（黑白人像里皮肤多落在中灰偏亮，是全片的「锚点」）；<b>Zone VIII–IX 的亮部</b>（婴儿襁褓、衣袖高光）把视线轻轻往中心带。深处压得住、亮处透得出气，而最关键的<b>脸留在中间调</b>——于是那些忧虑的皱纹、紧抿的嘴，全被柔和而不夸张地呈现。<b>对比即情绪</b>，它的力量正来自这条从黑到白的完整脊梁。</p>
+    <div class="palette">
+      <div class="sw" style="background:#0b0b0b;color:#cfcabf">Zone I 纯黑<small>暗处 / 发</small></div>
+      <div class="sw" style="background:#3a3a3a;color:#dcd8cf">Zone III<small>暗部细节</small></div>
+      <div class="sw" style="background:#7c7c7c;color:#fff">Zone V 中灰<small>肤色基准 18%</small></div>
+      <div class="sw" style="background:#b4b4b4;color:#2a2a2a">Zone VII<small>浅肤 / 衣纹</small></div>
+      <div class="sw" style="background:#ededed;color:#444">Zone IX<small>襁褓 / 高光</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影 <span class="en">Light</span></h2>
+    <p>光是<b>柔和的、正面的散射光</b>——母亲坐在简陋的遮棚（<b>开放阴影</b>）里，没有直射的硬太阳，所以脸上<b>几乎没有生硬的投影</b>。这种又柔又正的光，最适合刻画人：它温柔地包住面部的体积，又毫不留情地交出每一道<b>忧虑的皱纹与肌理</b>。</p>
+    <p>正因为没有戏剧化的强光强影，这张照片才显得<b>真实、不表演</b>。光本身是诚实的：它不美化，只是把一个疲惫母亲的脸，原原本本地照亮给我们看。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 技法与背景 <span class="en">Technique & Context</span></h2>
+    <p>兰格用的是一台<b>4×5 大画幅相机（Graflex）</b>，拍的是单张页片。大底片带来极高的解析力——你能看清她每一根碎发、每一处磨破的布。1936 年 3 月，她在加州尼波莫一个<b>采豆工的临时营地</b>前停车，前后<b>只待了约十分钟、拍了六张</b>，越拍越近，这张是最后、最贴近的一张。</p>
+    <p>照片后来有一处著名的<b>修版</b>：原始底片右下角的帐篷杆上，有母亲的一根拇指，发表时被修掉了——这点常被拿来讨论纪实摄影「真实」的边界。它属于美国农场安全管理局（<b>FSA</b>）的影像档案，因是联邦政府雇员的职务作品而进入<b>公有领域</b>，得以被无数次翻印、传播，最终成为时代的图腾。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 为何动人 · 作者 <span class="en">Why · Lange</span></h2>
+    <p>它动人，在于它<b>不煽情</b>。母亲没有看镜头、没有伸手乞讨，她只是望向远方、出神——那是一个被生活压到极限、却仍在<b>撑着</b>的人的姿态。我们读到的不是「可怜」，而是<b>尊严</b>：她替七个孩子扛着，而怀里的婴儿和身后的孩子全然无知。这副<b>世俗的「圣母与圣婴」</b>构图（不动声色的现代圣殇），让一张纪实照片升到了近乎宗教的庄严。</p>
+    <p>照片里的人，后来被确认是 <b>Florence Owens Thompson（弗洛伦斯·欧文斯·汤普森）</b>，一位有原住民血统的母亲。她一生对这张照片心情复杂——它让一个时代被记住，却也让她的窘迫被永远定格。</p>
+    <p><b>多萝西娅·兰格</b>（Dorothea Lange，1895–1965），美国纪实摄影的灵魂人物。她幼年因小儿麻痹留下跛足，她说这让她更懂得<b>如何不被注意地靠近、如何与受苦的人共情</b>。她本是体面的肖像摄影师，大萧条把她推上街头，加入 FSA。她相信相机是「<b>一种教人如何在没有相机时也学会观看的工具</b>」。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 黑白影像 / 单色穿搭 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>拍人像，用柔和正面光：</b>找一扇大窗的<b>散射光 / 开放阴影</b>，让人微微偏向光源——柔光给体积，正面光给诚实。这是拍出「有情绪、不做作」面孔的最稳路径。</li>
+      <li><b>构图记一个三角：</b>想让画面<b>稳、有分量</b>，把主体安排成三角形（金字塔），塔尖在脸、塔基在身体。稳定的形状，自带「扛得住」的气场。</li>
+      <li><b>黑白要「全影调」：</b>后期守住<b>一个真正的黑、一个干净的白</b>，把<b>脸留在中间调</b>。黑白不是把彩色去色，而是把世界<b>翻译成明度</b>——先学会用「亮/暗」而非「红/绿」去看。</li>
+      <li><b>单色穿搭同理：</b>黑白灰穿搭好不好看，看的也是<b>明度层次</b>——真黑 ＋ 暖灰 ＋ 米白，三档拉开；再靠<b>材质肌理</b>（粗麻、原棉、丝光）制造「灰阶」里的细节。无彩色搭配的高级感，全在<b>明度差 ＋ 质感差</b>。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：Dorothea Lange《Migrant Mother》1936 · 公有领域<br>
+    来源：Library of Congress, Prints &amp; Photographs Division / Wikimedia Commons · 版权归原作者
+  </footer>
+</div>
+</body>
+</html>

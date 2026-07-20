@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · Pillars of Creation — Hubble Space Telescope</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141b24; --ink-soft:#32404c; --ink-faint:#79838d;
+    --silver:#b9b4a8; --gold:#c98a4b; --rust:#5b2e22; --teal:#35606b; --bone:#e7e2d7;
+    --paper:rgba(248,245,239,.60); --line:rgba(20,27,36,.16); --void:#0b1622;
+    --indigo:#0e1b2a; --amber:#d69454; --starwhite:#ffe9c2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.005em;
+    background:#cfd6d6; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 16% 8%, rgba(53,96,107,.28), transparent 60%),
+      radial-gradient(44rem 44rem at 86% 16%, rgba(214,148,84,.22), transparent 62%),
+      radial-gradient(42rem 42rem at 84% 90%, rgba(91,46,34,.18), transparent 60%),
+      radial-gradient(50rem 50rem at 20% 92%, rgba(14,27,42,.24), transparent 60%),
+      linear-gradient(160deg,#dde3e2,#c1c9c8);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(2rem,6vw,3.3rem);line-height:1.12;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:8px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(11,22,34,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#0e1b2a}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(11,22,34,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.5rem;color:var(--gold);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300;font-size:1.02rem}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.1rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.03em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,138,75,.22)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+    letter-spacing:.2em;font-size:1rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.03</div>
+    <h1>Pillars of Creation</h1>
+    <div class="sub">Hubble Space Telescope — 6,500 light-years out, stars are being born in dust</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Hubble Space Telescope, Pillars of Creation, Eagle Nebula">
+    <figcaption>NASA, ESA, Hubble Heritage Team (STScI/AURA), <i>Pillars of Creation</i>, 2014 high-resolution reprocessing (original image 1995) · Eagle Nebula (M16), ~6,500 light-years away · public domain</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">Three towering columns of dark dust rise out of shadow, their edges gilded gold and rust by unseen starlight. First captured in 1995 and reprocessed in 2014, this photograph is one of the most reproduced, reposted, and referenced images in human history. It isn't a landscape — it's a nursery for new stars, a cosmic birth millions of years in the making that is still, right now, underway.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="en">A trio built for the Sublime</span></h2>
+    <p><b>Three staggered columns:</b> descending in height from left to right, forming a rhythmic, jagged skyline — a variation on the classic rule of thirds, deliberately broken to avoid symmetry and stiffness.</p>
+    <p><b>Broad base, tapering shaft:</b> each pillar narrows from a wide shadowed base toward its tip, creating strong vertical thrust that pulls the eye upward, almost against its will — the textbook formula for the Sublime: making a small viewer feel the scale of the cosmos.</p>
+    <p>Glowing gas at each tip touches the starfield like a fingertip; the deep negative space between the pillars doesn't weaken the subject — it makes it feel more solid, more massive. Those bright tips are what astronomers call <b>EGGs</b> (evaporating gaseous globules), the exact spots where new stars are first taking shape.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color <span class="en">Complementary contrast as narrative</span></h2>
+    <p>The image is built on one core <b>complementary contrast</b>: warm rust-and-gold dust pillars against a cool blue-green backdrop of ionized hydrogen and oxygen — orange-red sits directly opposite blue-green on the color wheel. That contrast makes the subject pop off the background, and it's also a genuine physical encoding: the pillars reflect warm dust-light, while the background glows blue-green where young stars' ultraviolet radiation has ionized the surrounding gas.</p>
+    <p><b>The Hubble Palette:</b> what the telescope actually captures is invisible narrow-band wavelength data (Hydrogen-alpha, [OIII], [SII], and others). Scientists assign each band to an RGB channel and composite them into one image — translating invisible data into an emotional, visible language. It isn't fabrication; it's color-as-narrative taken to its logical extreme.</p>
+    <div class="palette">
+      <div class="sw" style="background:#0e1b2a;color:#e7e2d7">Deep space<small>#0E1B2A · sky</small></div>
+      <div class="sw" style="background:#35606b;color:#e7e2d7">Ionized teal<small>#35606B · gas</small></div>
+      <div class="sw" style="background:#5b2e22;color:#e7e2d7">Dust rust<small>#5B2E22 · pillar</small></div>
+      <div class="sw" style="background:#d69454;color:#1b1916">Rim gold<small>#D69454 · edge</small></div>
+      <div class="sw" style="background:#ffe9c2;color:#555;border:1px solid #e8d9b8">Star flare<small>#FFE9C2 · points</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Light & Technique <span class="en">Rim light, layered exposures</span></h2>
+    <p><b>Rim lighting:</b> young, blazing-hot stars behind the pillars gild their edges in a halo of light while the bulk of each column stays in shadow — the exact same technique portrait photographers use to give a subject depth and volume rather than flat, frontal light.</p>
+    <p><b>Multi-band composite:</b> Hubble doesn't shoot one exposure — it captures several narrow-band frames through different filters, then layers them in post-processing. That's the same underlying logic as zone-system exposure in film, or HDR stacking in modern digital photography. The 2014 version, made by the Hubble Heritage Team with the higher-resolution Wide Field Camera 3, contains several times more detail than the 1995 original.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="en">Birth and erosion, at once</span></h2>
+    <p><b>A collapse of scale:</b> each pillar is actually several light-years tall — the tallest nearly 4 light-years — yet the composition and lighting make it read as something within reach, a sculpture you could almost touch. Translating an incomprehensible scale into something the eye can grasp is exactly what makes this image work.</p>
+    <p>This is simultaneously a <b>nursery</b> and its own <b>graveyard</b>: dense hydrogen inside the pillars is collapsing to form new stars, while the ultraviolet radiation and stellar winds from those very newborns are, at the same time, slowly eroding and dissolving the pillars themselves. Birth and dissolution happening in the same frame, at the same moment — a genuinely tragic beauty baked into the science itself. It's also why this single image ended up on more T-shirts, album covers, and textbook covers than almost any other — a case study in how science becomes visual culture.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> The Artist(s) <span class="en">Telescope and team</span></h2>
+    <p>The original 1995 version was captured by astronomers <b>Jeff Hester</b> and <b>Paul Scowen</b> using Hubble's second-generation Wide Field and Planetary Camera (WFPC2), and became iconic almost instantly. In 2014, to mark Hubble's 25th anniversary in orbit, the <b>Hubble Heritage Team</b> (STScI/AURA) re-imaged the same field with the higher-resolution Wide Field Camera 3 (WFC3) and produced the version used here.</p>
+    <p>In 2022, the James Webb Space Telescope (JWST) re-photographed the same region in near-infrared light, seeing straight through the dust to reveal even more newborn stars hidden inside the pillars — two telescopes, two ways of seeing, writing two entirely different poems about the same subject.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="en">Color / Lighting</span></h2>
+    <ul class="tips">
+      <li><b>Complementary pop:</b> warm subject against a cool background (or the reverse) is the simplest, most effective formula for making a subject read as separate from its surroundings — apply it directly to portrait or product color grading.</li>
+      <li><b>Rim light over front light:</b> put the main light source behind the subject rather than in front of it, letting detail sink into shadow while only the edges glow — it reads as far more dramatic than flat, even frontal lighting.</li>
+      <li><b>False-color as design principle:</b> for infographics or data visualization, borrow the "band = channel" logic — assign a distinct hue to each category of data so color itself carries meaning, not just decoration.</li>
+      <li><b>Staggered height composition:</b> three elements of different heights, unevenly spaced, read as far more dynamic than equal-height or single-element layouts — useful in typesetting, display design, even how you layer an outfit.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">Art</div>
+    Image: NASA, ESA, Hubble Heritage Team (STScI/AURA), <i>Pillars of Creation</i>, 2014 version (original 1995) · Eagle Nebula, M16<br>
+    Source: NASA / ESA / Wikimedia Commons · public domain, no copyright restrictions · appreciation is personal analysis
+  </footer>
+</div>
+</body>
+</html>

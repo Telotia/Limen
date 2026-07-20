@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · Several Circles · Kandinsky's Theory That Color Has a Shape</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eef1ec; --ink-soft:#c9d0c8; --ink-faint:#8b9a93;
+    --gold:#e0b23c; --cobalt:#2c4fb0; --teal:#3f8f76; --wine:#7a3a5a;
+    --paper:rgba(14,17,24,.62); --line:rgba(230,238,232,.14); --void:#05060a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#06070c; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(44,79,176,.32), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(224,178,60,.16), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(63,143,118,.28), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(5,6,10,.8), transparent 60%),
+      linear-gradient(170deg,#0c0e16,#040407);
+    filter:blur(50px) saturate(1.05); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#9aa8a0;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Newsreader',serif;font-weight:700;color:#f5f6f2;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c9cdc2;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#8b9a93;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.08) inset;
+  }
+  .card h2{font-family:'Newsreader',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .zh{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(224,178,60,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#8b9a93;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Newsreader',serif;color:#c9cdc2;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.17</div>
+    <h1>Several Circles — Kandinsky's Theory That Color Has a Shape</h1>
+    <div class="sub">Wassily Kandinsky, <em>Several Circles</em> (<em>Einige Kreise</em>) · 1926</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Kandinsky's Several Circles: against an inky, near-black background, a large cobalt-blue ring encircles a pure black core, surrounded by dozens of overlapping translucent colored disks in gold, teal, sky blue, pink, and orange, scattered like scattered stars">
+    <figcaption><em>Several Circles</em> (<em>Einige Kreise</em>), Wassily Kandinsky, 1926, oil on canvas, 140.7 × 140.3 cm · Solomon R. Guggenheim Museum, New York · Public domain, image via Wikimedia Commons</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">By 1926, at sixty, Kandinsky was teaching painting as if it were geometry. At the Bauhaus, he told his students that every color is born with its own shape and temperament: yellow is a triangle, sharp and expanding outward; red is a square, stable and grounded; blue was always meant to be a circle — the most concentric, the most inward color there is. That same year he painted an entire canvas of circles: against an ink-black field, dozens of overlapping, semi-transparent disks float like scattered fragments of a universe. He called it, plainly, <em>Several Circles</em> (<em>Einige Kreise</em>) — a name almost too modest for what may be the purest experiment of his entire color theory.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="zh">构图</span></h2>
+    <p>Kandinsky set himself an almost punishing rule for this canvas: circles only — no straight line, no triangle, no square anywhere. This wasn't a shortcut; it was a deliberate subtraction. If the shape itself never varies, what else can hold a composition together? His answer: size, position, and color. A massive cobalt-blue ring, its edge glowing with a halo of white, dominates the upper-left quadrant and encircles a pure black core — like an eclipse caught mid-motion. Around it, dozens of smaller disks, some solitary, some clustered and overlapping, thin out from center to corner, forming an asymmetrical field that still somehow holds together like gravity.</p>
+    <p>That density gradient — packed at the center, sparse at the edges — gives the canvas a clear visual weight without resorting to simple centering. The blue ring sits upper-left; a pale lavender-grey circle answers it from the lower right, and the eye keeps traveling back and forth across the near-empty dark space between them, as if watching two bodies pull at each other across a distance.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color Theory <span class="zh">配色</span></h2>
+    <p>The most rewarding thing to look for here is what happens where circles overlap. Kandinsky treats every disk as a translucent layer, so wherever two meet, their edges naturally blend into a third color: yellow laid over pink yields a sliver of warm orange; green over blue produces a deep, hazy teal. It's close to watching subtractive color mixing happen live on the canvas, rather than pre-mixed on a palette — you see the moment two colors meet, not just the result.</p>
+    <p>The whole painting rests on a strong contrast between its near-black field and its saturated disks — the darkness makes every color read brighter than it would on white. And the sharpest single clash sits mid-canvas, where the cobalt ring meets a cluster of golden-ochre circles: near-complementary colors, sitting almost opposite each other on the color wheel. Cool base, warm accent, dark ground under saturated color — it's a formula that still works in poster design or an all-black outfit with one bright piece.</p>
+    <div class="palette">
+      <div class="sw" style="background:#05060a;color:#c9d0c8">Void Black<small>#05060A · the field</small></div>
+      <div class="sw" style="background:#2c4fb0;color:#eef1ec">Cobalt Blue<small>#2C4FB0 · the main ring</small></div>
+      <div class="sw" style="background:#3f8f76;color:#eef1ec">Teal Green<small>#3F8F76 · the "eye" circle</small></div>
+      <div class="sw" style="background:#c99a34;color:#1c1408">Ochre Gold<small>#C99A34 · cluster inside the ring</small></div>
+      <div class="sw" style="background:#4bb4d6;color:#0a1c22">Sky Blue<small>#4BB4D6 · circle below the ring</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique <span class="zh">光影与技法</span></h2>
+    <p>Kandinsky wasn't scattering circles by instinct. That same year, he published <em>Point and Line to Plane</em> (1926), his theoretical treatise laying out a full system pairing shapes with colors: the triangle with yellow, because both are sharp, expanding, aggressive; the square with red, stable and heavy; the circle with blue, "concentric, inward, most capable of carrying the spiritual." The vast blue ring that dominates this canvas is close to a visual manifesto of that theory — he gave the biggest, most commanding shape in the painting to what he considered the most perfect pairing of form and color.</p>
+    <p>Kandinsky experienced synesthesia — colors triggered sound for him. He described blue as a cello or organ, deep and sustained; yellow as a trumpet, sharp and shrill; black as total silence. That's the real reason he insisted on abstraction over representation: he wasn't painting objects, he was painting the emotion and "sound" that color and shape produce on their own — the canvas functions more like a score than a window.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="zh">为何动人</span></h2>
+    <p>Kandinsky insisted, repeatedly, that this painting refers to nothing at all — not the cosmos, not an eclipse, not a cell under a microscope, only the pure relationships between circles, color, and position. And yet nearly everyone who sees it for the first time blurts out some version of "are those planets?" That gap between the artist's restraint and the viewer's instinct to project meaning is exactly what makes the painting land: it proves the human eye can't help hunting for pattern and story, even facing nothing but shapes and hue. It's almost impossible not to read the upper-right pair of concentric circles as an eye staring back at you.</p>
+    <p>Abstract art gets dismissed as "meaningless" or "anyone could do that," but this painting argues the opposite — every circle's size, position, and transparency is a calculated decision. What moves people isn't a story being told; it's proof that color and shape alone, with no story at all, can still stop you in your tracks.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Background <span class="zh">作者背景</span></h2>
+    <p>Wassily Kandinsky (1866–1944) was a Russian-born painter and one of the acknowledged pioneers of abstract art — a set of watercolors he made around 1910 is often cited as among the earliest purely abstract works in Western art history. In 1922 he joined the Bauhaus faculty, teaching color theory and "analytical drawing" until the school was shut down by the Nazi government in 1933, after which he emigrated to France for the rest of his life. <em>Several Circles</em> comes from his Bauhaus years, at the point where his theory of color and shape had fully matured.</p>
+    <p>Kandinsky has been dead for over eighty years and the painting is in the public domain. <em>Several Circles</em> is held at the Solomon R. Guggenheim Museum in New York — a collection deeply tied to his legacy, since the museum's early holdings were shaped by Hilla Rebay, a curator whose taste was formed directly by Kandinsky's own theories. The image used here comes from Wikimedia Commons' public-domain digitization.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="zh">可借鉴</span></h2>
+    <ul class="tips">
+      <li><b>Layer translucent color instead of pre-mixing it:</b> sheer fabric, glassware, gradient overlays — wherever two transparent colors overlap, the "third color" that appears reads richer than either color used flat.</li>
+      <li><b>Put saturated color on a near-black ground and let it glow:</b> a near-black field makes any bright accent read louder — one bright piece in an all-black outfit, or one saturated illustration on a dark poster, works the same way.</li>
+      <li><b>Give each color a role, not a random pick:</b> Kandinsky paired blue with the circle, yellow with the triangle. Assigning each color in a palette a deliberate job — dominant, accent, breathing room — reads more cohesive than "picking what looks nice."</li>
+      <li><b>Leave something unexplained:</b> you don't have to spell out what every element means. A little unresolved abstraction is what makes people lean in and finish the thought themselves.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">A R T</div>
+    Image: <em>Several Circles</em>, Wassily Kandinsky, 1926, public domain<br>
+    Source: Wikimedia Commons · Solomon R. Guggenheim Museum · Appreciation and analysis are the author's own
+  </footer>
+</div>
+</body>
+</html>

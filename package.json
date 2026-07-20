@@ -10,6 +10,7 @@
     "build:dev": "cross-env LIMEN_ENV=dev astro build",
     "build:prod": "cross-env LIMEN_ENV=prod astro build",
     "preview": "astro preview",
+    "resources:sync": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/sync-knowledge-resources.ps1",
     "astro": "astro",
     "check": "astro check",
     "test": "bun test",

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · The Thrush That Steals Strawberries — William Morris, 1883</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211d1a; --ink-soft:#453f37; --ink-faint:#8a8175;
+    --gold:#c9836b; --rust:#9c3a3a; --soot:#1f2b52; --slate:#6f6b3f;
+    --paper:rgba(250,250,246,.64); --line:rgba(23,21,18,.16); --void:#1f2b52;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.005em;
+    background:#c9c0ae; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(201,131,102,.42), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(156,58,58,.24), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(31,43,82,.30), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(111,107,63,.26), transparent 60%),
+      linear-gradient(160deg,#e4ddce,#c3baa4);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(2rem,6vw,3.3rem);line-height:1.12;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:8px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(23,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(23,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.5rem;color:var(--rust);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300;font-size:1.02rem}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.1rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.03em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;
+    border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(201,131,102,.3)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+    letter-spacing:.2em;font-size:1rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.07</div>
+    <h1>The Thrush That Steals Strawberries</h1>
+    <div class="sub">Strawberry Thief · William Morris, 1883</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="William Morris's Strawberry Thief pattern — coral-colored thrushes carrying strawberries in their beaks against a deep indigo ground, woven through cobalt scrollwork and roses in a mirrored, all-over repeat">
+    <figcaption>William Morris, Strawberry Thief, designed 1883, indigo-discharge printed cotton · original examples held at the Victoria and Albert Museum, London, among others · Wikimedia Commons (public domain)</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">Across a field of deep indigo cloth, thrushes carry strawberries in their beaks, weaving between honeysuckle and rose — a scene William Morris waited seasons to catch in his own garden: the very birds that kept stealing his strawberries, caught red-handed and printed straight into the fabric. Registered in 1883, this pattern is one of the rare textile designs in history that has never once gone out of production. More than 140 years later, you can still buy it, direct from Morris & Co., to hang as your own curtains.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="en">Mirrored symmetry and a fear of empty space</span></h2>
+    <p><b>Symmetry as breathing room:</b> the design mirrors across a central axis — two thrushes face each other, the strawberries beneath their feet and the roses above answering one another, unfolding like a fan. That symmetry means the repeat always finds a clean center point once it's cut and seamed into curtains or upholstery.</p>
+    <p><b>A very Victorian horror vacui:</b> Morris insisted on covering every inch of ground — vines, leaves, and blossoms layer on top of one another until almost no flat, empty color survives. That density was itself an ambition of the era's textile design: the busier the pattern, the more visibly it justified its craft and its cost.</p>
+    <p><b>Dense, but never chaotic:</b> two depths of blue keep background and foreground legible — a deep indigo ground underneath, a lighter cobalt scrollwork tracing a second layer above it — while the warm-toned thrushes and strawberries sit on their own top layer, so the eye never gets lost in the foliage.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color <span class="en">Indigo and coral, vibrating as complements</span></h2>
+    <p>The color logic here is simple: a complementary pair — indigo (cool, blue-violet) against coral and brick-red (warm, orange-red). Colors sitting directly opposite each other on the color wheel produce a "the-longer-you-look-the-brighter-it-gets" vibration, which is exactly why this cloth never reads as a flat wash of blue, even from across a room.</p>
+    <p>Morris never let the warm tones spread across the whole surface — he confined them to the thrushes' feathers, the strawberries, and a handful of flower centers. Warm color covers well under fifteen percent of the design, but because it sits against such a large field of cool color, it's the first thing the eye finds. It's the classic formula: a small area of high-saturation warmth against a large field of low-saturation cool.</p>
+    <div class="palette">
+      <div class="sw" style="background:#1f2b52;color:#e8e2d3">Indigo ground<small>#1F2B52 · cloth</small></div>
+      <div class="sw" style="background:#7c8fc4;color:#1f2b52">Cobalt scrollwork<small>#7C8FC4 · vines</small></div>
+      <div class="sw" style="background:#6f6b3f;color:#f2ead9">Olive foliage<small>#6F6B3F · leaves</small></div>
+      <div class="sw" style="background:#c9836b;color:#3d2110">Coral thrush<small>#C9836B · birds</small></div>
+      <div class="sw" style="background:#9c3a3a;color:#f2ead9">Strawberry crimson<small>#9C3A3A · fruit</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique & History <span class="en">A month to dye one length of cloth</span></h2>
+    <p>Strawberry Thief used one of the most demanding printing processes of its day: indigo-discharge printing. The whole cloth was first dyed a solid, saturated blue; carved wood blocks then applied a bleaching agent to strip color back out of the areas meant to carry other hues; further blocks then printed yellow, red, and green back in, layer by layer. Between discharging, block-printing, washing, and drying, a single length of cloth could take an entire month.</p>
+    <p>Morris spent nearly six years experimenting with the process at his Merton Abbey Workshops in Surrey before he mastered it. He was famously stubborn about using natural indigo dye, refusing the cheaper, faster synthetic aniline dyes that had already become standard by the 1880s — he considered their color "cheap and garish," unable to hold up over time.</p>
+    <p>The design came straight out of daily life: Morris grew strawberries in the garden of his Cotswolds home, Kelmscott Manor, and the thrushes kept stealing them. Rather than fight the birds, he simply drew the crime scene into the pattern — the birds' hunched, pecking posture is rendered with an almost field-notebook accuracy.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="en">A pattern that has never gone out of print</span></h2>
+    <p>Strawberry Thief is one of the rare patterns in textile history that has never once lapsed out of production since its 1883 registration — Morris & Co. still produces limited runs using the original indigo-discharge method, and the V&A holds an original example printed around 1883 (museum number T.586-1919).</p>
+    <p>What makes it move you: the cloth is static, the pattern is a repeat, the thrushes are frozen mid-gesture — and yet the vibration of complementary color, the breathing rhythm of mirrored composition, and a small, slightly mischievous story about theft give this flat surface the illusion of motion. That's the hardest trick in decorative art: faking "alive" inside a static repeat that has no timeline to tell a story in. For 140 years, from middle-class parlor curtains to today's scarves and fashion collaborations, this thrush has barely left public view — proof that a genuinely good decorative design can outlast any single trend by a century and more.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> The Artist <span class="en">William Morris</span></h2>
+    <p>William Morris (1834–1896) was an English designer, poet, printer, and early socialist activist, and the central figure of the Arts and Crafts Movement. He rejected the coarse, machine-stamped ornament that industrialization had made cheap and common, and famously argued you should "have nothing in your house that you do not know to be useful, or believe to be beautiful." In 1861 he co-founded the decorative arts firm Morris & Co., and over his lifetime designed more than fifty wallpaper and textile patterns, nearly all of them drawn from the garden he tended himself and the plants of the English countryside. He died in London in 1896; Strawberry Thief remains one of Morris & Co.'s best-selling designs to this day.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="en">Pattern / Color</span></h2>
+    <ul class="tips">
+      <li><b>A dark ground absorbs a busy pattern:</b> when a design has many elements and dense detail, give it a sufficiently dark, unified ground color (deep blue, deep green, ink black) — it instantly makes a cluttered surface read as considered rather than chaotic.</li>
+      <li><b>Reserve the complementary color for the protagonist:</b> you don't need warmth spread everywhere to make a composition memorable — pick the one or two elements you actually want remembered (a bird, a logo) and give them all the saturated warmth in the frame.</li>
+      <li><b>Mirrored symmetry is the fastest route to "considered":</b> mirror any set of elements left-to-right and the composition instantly reads as ordered and ceremonial — the same trick heraldry, religious art, and luxury logos lean on constantly.</li>
+      <li><b>Let the pattern tell one true, small story:</b> a specific scene drawn from actual observation — even something as small as "a bird stealing fruit" — gives a repeat pattern an emotional anchor that pure abstract geometry rarely earns, and it wears far better over time.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">Art</div>
+    Image: William Morris, Strawberry Thief, designed 1883, indigo-discharge printed cotton · original examples held at the Victoria and Albert Museum, London (T.586-1919), among others<br>
+    Source: Wikimedia Commons · the original design is in the public domain · appreciation is personal analysis
+  </footer>
+</div>
+</body>
+</html>

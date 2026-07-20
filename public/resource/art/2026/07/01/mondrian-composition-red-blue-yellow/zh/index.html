@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 《红、蓝、黄的构成 II》— 皮特·蒙德里安</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1916; --ink-soft:#3c3833; --ink-faint:#857f74;
+    --silver:#b9b4a8; --sepia:#8c7a5e; --slate:#5d6670; --bone:#e7e2d7;
+    --paper:rgba(248,245,239,.60); --line:rgba(60,55,45,.16); --void:#101010;
+    --mred:#D3122A; --mblue:#003F8E; --myellow:#F4C200;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#d6d0c4; min-height:100vh; overflow-x:hidden;
+  }
+  /* 弥散光场：暖纸底 + 三原色极淡的呼吸（红/蓝/黄，致敬风格派） */
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 16% 10%, rgba(211,18,42,.14), transparent 60%),
+      radial-gradient(44rem 44rem at 84% 18%, rgba(0,63,142,.14), transparent 62%),
+      radial-gradient(40rem 40rem at 82% 90%, rgba(244,194,0,.16), transparent 60%),
+      radial-gradient(50rem 50rem at 24% 92%, rgba(93,102,112,.16), transparent 60%),
+      linear-gradient(160deg,#eae6dc,#d6d0c3);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(20,18,14,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#efece5}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(20,18,14,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--sepia);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--sepia);box-shadow:0 0 0 4px rgba(140,122,94,.22)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.01</div>
+    <h1>红、蓝、黄的构成 II</h1>
+    <div class="sub">Composition II in Red, Blue, and Yellow — 把绘画删到只剩平衡</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="皮特·蒙德里安《红、蓝、黄的构成 II》1930年">
+    <figcaption>Piet Mondrian,《红、蓝、黄的构成 II》（Composition II in Red, Blue, and Yellow），1930年 · 布面油画 约46×46cm · 新造型主义 / 风格派 · Wikimedia Commons（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">只有三种原色、几根黑线和大片白。没有天空、没有人、没有故事——蒙德里安把「绘画」一路删减，删到只剩下最纯粹的<b>平衡</b>。可它偏偏比大多数塞得满满的画更耐看：右上那块大红像一记安静的重音，被左下的蓝、右下一角的黄，和粗细不一的黑线稳稳<b>顶住</b>。这是二十世纪最有影响力的一张画——今天无数的 logo、网页、海报、时装，都还在用它的语法。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 不对称里的绝对平衡 <span class="en">Composition</span></h2>
+    <p>这幅画看似简单，其实是一场精密的<b>称重游戏</b>。右上那块<b>大红</b>几乎占了整幅画的一半，是全画最重的视觉砝码。蒙德里安没有用对称去压住它，而是用<b>左下角一块沉稳的蓝</b>、<b>右下角一小片黄</b>，加上不同粗细、不同间距的黑线，把这块红「顶」住——这就是<b>动态平衡（dynamic equilibrium）</b>：用不对称的重量互相拉扯，达到静止。</p>
+    <p><b>黑线不是网格。</b>仔细看，线有粗有细、间距全不相等。左侧那条竖线偏左，把画面切成「窄—宽」两栏，制造呼吸感；红块下方的横线又把右侧分出一条白色底带。正是这些「不齐」，让画面活起来，而不是死板的棋盘格。</p>
+    <p><b>白不是背景。</b>那些白色方块和彩色块地位平等，是「没有颜色的颜色」，负责让整幅画不塌。三块颜色沿对角线散开（红右上、蓝左下、黄右下），留出大片白，红才显得更响。左上那个白格里，还隐约留着一圈<b>铅笔草稿的痕迹</b>——理性画面里难得的一点手温。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 三原色的极限实验 <span class="en">Color Theory</span></h2>
+    <p>蒙德里安只允许自己用<b>红、黄、蓝三原色 ＋ 黑、白、灰</b>。这是色彩理论里最本源的一组：三原色无法由别的颜色调出，是所有颜色的「根」。在色轮上，红蓝黄互成 120°，是一组<b>三色对峙（triadic）</b>——最稳定，也最紧张。</p>
+    <p><b>面积决定情绪。</b>红占了近一半却不刺眼，因为四周大片白与黑线把它「框住」了；蓝和黄面积很小，像一个低音、一个高音，点两下就够。<b>黑线还在提纯颜色</b>——黑色边界让每块色都显得更饱和、更平（没有渐变、没有笔触阴影）。这是「同时对比」的反用：不让颜色互相污染，而是各自纯净地发声。</p>
+    <div class="palette">
+      <div class="sw" style="background:#D3122A;color:#fff">大红<small>#D3122A · 主色 ~45%</small></div>
+      <div class="sw" style="background:#003F8E;color:#fff">钴蓝<small>#003F8E · 低音</small></div>
+      <div class="sw" style="background:#F4C200;color:#3a2f00">柠檬黄<small>#F4C200 · 高音</small></div>
+      <div class="sw" style="background:#1A1A1A;color:#e7e2d7">墨黑<small>#1A1A1A · 分隔线</small></div>
+      <div class="sw" style="background:#F4F2ED;color:#555;border:1px solid #d8d3c8">暖白<small>#F4F2ED · 留白</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与技法 <span class="en">Light & Technique</span></h2>
+    <p>这幅画<b>故意没有光影</b>。没有透视、没有明暗、没有立体感——蒙德里安认为这些都是「个人化、情绪化的干扰」。他要的不是某个瞬间的光，而是<b>普世的、精神性的秩序</b>：水平与垂直的相遇，正是他眼里宇宙最基本的对立与和谐。</p>
+    <p>但它绝不是印刷品。凑近看，黑线的边缘有手工的<b>微微不齐</b>，色块表面是油画颜料的<b>哑光肌理</b>，甚至能看到底下铺色的层次。正是这点「不完美」的人味，让一幅理性到极致的画，仍有温度、仍是「画」。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 <span class="en">Why It Moves Us</span></h2>
+    <p>因为它是「<b>少即是多</b>」的终极证明。当你把一切多余的都拿掉，剩下的每一个决定都必须是对的：这条线为什么在这里、这块红为什么这么大、这片白为什么留这么多。它逼你去看<b>「关系」而不是「东西」</b>——好看，原来可以只是几段线、几块色之间恰到好处的分寸。</p>
+    <p>它也证明了抽象不等于冷漠。这套克制到极点的语言，一百年后依然是无数设计的母题：从蒙德里安裙到包豪斯海报，从 App 图标到网页栅格。真正的经典，是<b>被无限次借用，却依然认得出是谁</b>。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者 · 蒙德里安 <span class="en">The Artist</span></h2>
+    <p><b>皮特·蒙德里安</b>（Piet Mondrian，1872–1944），荷兰人，新造型主义的旗手。他早年画的是写实的风景与树，然后一步步把树「抽象」成线，最后连线都只剩<b>水平和垂直</b>。1917 年他与凡·杜斯堡等人创立「<b>风格派</b>」（De Stijl），主张用最纯粹的几何与原色，去表达宇宙的普遍和谐。</p>
+    <p>他终身独居、极度自律，画室四壁也刷成红黄蓝的色块。生活里他<b>爱跳舞</b>，尤其痴迷布吉伍吉爵士——晚年在纽约，他把这套严整的语言变得跳跃明快，画出《百老汇布吉伍吉》。一个把「秩序」信奉到近乎宗教的人，骨子里其实一直在跟着节奏起舞。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 配色 / 穿搭 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>7:2:1 面积法则：</b>白 / 留白占约 <b>70%</b>，一个主色（如红）占 <b>20%</b>，另两色各约 <b>5%</b> 点缀。切忌三色平均——蒙德里安从不让红蓝黄一样大，这正是不俗气的关键。</li>
+      <li><b>必用黑线分隔：</b>纯原色相邻会「打架」，用<b>黑（或深灰）线</b>把每块色框住，画面立刻变高级、变克制。这是最省力的「显贵」技巧。</li>
+      <li><b>穿搭移植：</b>白衬衫 / 米色打底（70%），一件<b>正红单品</b>做焦点（20%），蓝、黄用配饰（袜子、包、耳饰）各点一下即可。原色穿搭好不好看，看的就是<b>「大面积中性 ＋ 小面积高纯」</b>的比例。</li>
+      <li><b>网页 / PPT：</b>背景用<b>暖白（别用纯白 #FFF）</b>，拿不等宽的黑色分隔线做栅格，色块只填角落、别居中。留白越敢留，颜色越响。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：Piet Mondrian《Composition II in Red, Blue, and Yellow》1930 · 公有领域<br>
+    来源：Wikimedia Commons · 版权归原作者 · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

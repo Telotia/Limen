@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 花样年华 · 一件旗袍，把暗恋穿在了身上</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#f2e9dd; --ink-soft:#d9c9b4; --ink-faint:#a3907c;
+    --gold:#e0b23c; --amber:#d9722e; --wine:#7a2e1f; --indigo:#1b2135;
+    --paper:rgba(20,14,12,.62); --line:rgba(242,233,221,.14); --void:#0c0806;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#0c0806; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(217,114,46,.32), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(224,178,60,.14), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(27,33,53,.55), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(12,8,6,.85), transparent 60%),
+      linear-gradient(170deg,#1a100a,#08050400);
+    filter:blur(50px) saturate(1.08); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#b39a80;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;color:#f7ede0;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#d9c9b4;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#a3907c;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.06) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(224,178,60,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#a3907c;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:#d9c9b4;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.18</div>
+    <h1>花样年华 · 一件旗袍，把整段暗恋都穿在了身上</h1>
+    <div class="sub">王家卫《花样年华》(In the Mood for Love) 电影海报 · 摄影/设计：夏永康 Wing Shya · 2000</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="《花样年华》电影海报：张曼玉身穿高领暗红碎花旗袍，侧身面向镜头，手轻搭在领口，背景是温暖的琥珀橙到赤陶红渐变；画面左侧梁朝伟的身影隐入靛蓝色阴影中，只露出模糊的侧脸轮廓">
+    <figcaption>《花样年华》(In the Mood for Love) 电影海报 · 摄影与平面设计：夏永康 Wing Shya · 导演：王家卫 · 主演：张曼玉、梁朝伟 · 2000年，香港 · 版权归Block 2 Pictures / Jet Tone Production所有，图片来自维基百科，用于评论与赏析</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">2000年戛纳首映前几个小时，王家卫还在剪辑室里改这部片子——他向来不写完整剧本，拍摄拖了一年多，音乐、剪辑到最后一刻都还在动。首映当天，梁朝伟凭这个角色拿下戛纳最佳男演员。而在电影正式上映之前，观众最先认识这部片子的方式，其实是这张海报：张曼玉侧身望向镜头，一只手轻轻搭在旗袍领口，梁朝伟的身影隐没在她身后的暗处，几乎认不出五官。掌镜与设计的人是夏永康（Wing Shya）——他从这部戏开始，成了王家卫此后所有电影御用的现场摄影师与美术指导，而这张照片，几乎定义了后来二十多年里全世界对"花样年华"四个字的第一印象。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 一条影子，把两个人分在两个世界 <span class="en">Composition</span></h2>
+    <p>这张海报最耐看的地方，不是人物本身，而是两人之间那条看不见却异常清晰的分割线。张曼玉被安排在画面视觉中心，侧身四十五度朝向镜头，手指停在旗袍高领附近，像是下意识地护住了什么；梁朝伟则被挤压到画面最左侧的窄条阴影里，只剩一个模糊的侧影轮廓，五官几乎完全隐去。两人明明共处一个画框、身体距离很近，构图却用光线把他们清楚地分进了两个世界——这恰恰是整部电影的视觉语法：周慕云和苏丽珍很少被安排在同一片清晰的光里，楼梯扶手、门框、出租车车窗、雨幕，一次次把两人隔开，让"靠近"和"隔绝"同时成立。</p>
+    <p>这种"近在咫尺、却分处光影两端"的处理,比让两人正面相拥更有张力——它提前告诉观众：这不是一个会轻易拥抱的爱情故事。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 配色 · 一张脸上，同时打了两种色温 <span class="en">Color Theory</span></h2>
+    <p>海报的底色是一片从琥珀橙过渡到赤陶红的暖色渐变，把张曼玉整个人都笼罩在温暖、暧昧的光里；而梁朝伟所在的画面左侧，则被压成近乎靛蓝黑的冷色阴影——同一张海报里，暖色区与冷色区几乎是互补色关系，站在色环上正正相对。这不是随手的灯光效果，而是杜可风与李屏宾在全片反复使用的招牌手法：走廊灯泡、路灯、霓虹招牌这些"现场光源"常常同时把暖光和冷光打在同一张脸上，让人物的情绪在画面里"看得见温度"。这张海报只是把这套用了整部电影的布光逻辑，浓缩进了一张静帧。</p>
+    <p>暖色给女性角色（外露、脆弱、面向观众），冷色给男性角色（隐没、克制、背向观众）——色温本身就在讲角色关系，这比任何台词都更直接。</p>
+    <div class="palette">
+      <div class="sw" style="background:#d9722e;color:#2a1408">琥珀橙<small>#D9722E · 上部背景</small></div>
+      <div class="sw" style="background:#7a2e1f;color:#f2e9dd">赤陶红<small>#7A2E1F · 下部背景</small></div>
+      <div class="sw" style="background:#1b2135;color:#f2e9dd">靛蓝夜色<small>#1B2135 · 梁朝伟侧影</small></div>
+      <div class="sw" style="background:#edE3d3;color:#3a2a1a">象牙白<small>#EDE3D3 · 旗袍领口</small></div>
+      <div class="sw" style="background:#4a1b18;color:#f2e9dd">暗玫瑰棕<small>#4A1B18 · 旗袍暗纹</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与技法 · 一件旗袍，是第二层布景 <span class="en">Technique</span></h2>
+    <p>负责美术、服装与剪辑的张叔平，为张曼玉一人做了二十多件不同的旗袍——整部电影不到两小时，几乎每换一场戏就换一件，是电影史上最著名的单人戏服系列之一。每一件的花色都经过精心计算，要么与那场戏的墙纸、窗帘"撞色"，要么刻意"融色"，让旗袍本身变成布景的延伸，而不只是穿在身上的衣服。海报里这件暗红碎花款，领口收得极高极紧，逼得演员必须收下巴、挺直背——旗袍的剪裁本身就在替角色"表演克制"：这不是一件方便动作的衣服，而是一层几乎能规定人怎么站、怎么走的"第二层皮肤"。</p>
+    <p>片中大量使用慢镜头，配上梅林茂（Umebayashi Shigeru）那段反复出现的圆舞曲主题——两人擦肩而过的楼梯、雨中并肩走过的窄巷，都被放慢成一场几乎不需要台词的舞蹈。海报的静止感，其实正是从这些被放慢的瞬间里截出来的余韵。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 全片没有一个吻，却让人念念不忘 <span class="en">Why It Moves Us</span></h2>
+    <p>《花样年华》最广为人知的一点是：两位主角之间，全片没有一场吻戏。周慕云和苏丽珍发现各自的配偶出轨后，反而越走越近，甚至一起"排练"配偶当初是怎么开始的——用扮演对方伴侣的方式，把亲密感全部转移到一场场"演习"里，唯独没有真正发生在自己身上。这张海报几乎是这整套情感逻辑的浓缩：两人共处一框，却没有对视、没有触碰，张曼玉的手停在自己的领口而不是伸向对方——那种"明明那么近，却什么都没发生"的克制，才是让人一遍遍回看这部电影的原因。</p>
+    <p>比起直接展示激情，留白和克制反而让人更想凑近去猜、去补全那些没说出口的部分——这也是这张海报即使脱离电影本身，也依然能单独打动人的原因。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">Background</span></h2>
+    <p>王家卫（1958– ），香港导演，代表作还有《重庆森林》《阿飞正传》《春光乍泄》，以从不写完整剧本、边拍边改著称——《花样年华》前后拍了一年多，配乐和剪辑一直改到2000年戛纳首映前的最后一刻，梁朝伟凭此片拿下戛纳影帝。摄影由杜可风（Christopher Doyle）与李屏宾两位摄影指导共同完成，前者是王家卫多年的老搭档，中途因故暂离剧组，后半段由李屏宾接手完成。美术、服装与剪辑均出自张叔平之手，那二十多件旗袍是他与张曼玉逐一试装定制的成果。</p>
+    <p>海报的摄影与平面设计出自夏永康（Wing Shya）之手——他也是从这部戏开始成为王家卫的御用现场摄影师与美术指导，此后又参与了《2046》等作品的视觉设计。他那种略带颗粒感、私密如情书般的影像风格，很大程度上定义了这部电影留在公众记忆里的样子。电影与海报版权归Block 2 Pictures / Jet Tone Production所有，本文所用图片来自维基百科，仅用于评论与赏析，本文分析为个人观点。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 把衣服和灯光都当成"布景" <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>同一张脸，打两种色温：</b>拍人像时试试暖光（约2700K）打正脸、冷光（约5600K）打侧背景或轮廓——这种反差比单一色温更容易拍出"故事感"。</li>
+      <li><b>高领+合身剪裁，让人自动"站直"：</b>立领、收腰的版型会强迫肩背挺直、下巴微收——不需要刻意摆姿势，穿搭本身就能带出气场。</li>
+      <li><b>让衣服的颜色去"回应"环境，而不是无视它：</b>像张叔平那样，出门前想一下今天的衣服是要跟环境"撞色"还是"融色"，比单纯"好看就行"更有设计感。</li>
+      <li><b>不给全貌，留一道影子：</b>把画面里最想强调的关系，故意藏一半在暗处——克制和留白，往往比直给更让人记住。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：《花样年华》电影海报，摄影/设计：夏永康，2000<br>
+    版权归Block 2 Pictures / Jet Tone Production所有 · 来源：维基百科（评论性使用）· 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

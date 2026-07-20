@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · The New Look, at the Water's Edge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1d22; --ink-soft:#3c4048; --ink-faint:#83878f;
+    --brass:#b08d57; --slate:#5b6570; --pewter:#6f6a5c; --charcoal:#1b1c17;
+    --paper:rgba(250,250,248,.66); --line:rgba(20,22,26,.16); --void:#0f0f0d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.01em;
+    background:#1c1c19; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 16% 10%, rgba(176,141,87,.20), transparent 60%),
+      radial-gradient(44rem 44rem at 88% 16%, rgba(91,101,112,.18), transparent 62%),
+      radial-gradient(46rem 46rem at 84% 90%, rgba(111,106,92,.28), transparent 60%),
+      radial-gradient(50rem 50rem at 14% 92%, rgba(27,28,23,.6), transparent 60%),
+      linear-gradient(160deg,#2b2b26,#111110);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:#a9a89f;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Fraunces',serif;font-weight:700;color:#f2f0ea;
+    font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c9c7bd;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.65),0 2px 0 rgba(255,255,255,.15) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:#9a998f;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.03em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.28rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--brass);opacity:.95}
+  .card h2 .sec{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.9rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.04rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.64rem;letter-spacing:.02em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.58rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--brass);box-shadow:0 0 0 4px rgba(176,141,87,.3)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:#9a998f;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.04em;line-height:1.9}
+  footer .brand{font-family:'Fraunces',serif;color:#c9c7bd;
+    letter-spacing:.3em;font-size:.72rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Look · 2026.07.12</div>
+    <h1>The New Look, at the Water's Edge</h1>
+    <div class="sub">Toni Frissell, Fashion Model, Washington, D.C. · 1949</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Black and white photograph of a model in a beaded halter-neck evening gown and elbow-length gloves, standing in profile on the steps of the Tidal Basin in Washington D.C., with the Washington Monument reflected in the water behind her under an overcast sky">
+    <figcaption>Fashion Model, Washington, D.C. · Toni Frissell, June 1949 · Gelatin silver photograph · Library of Congress, public domain</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">Four years after the war ended, a skirt was finally allowed to be extravagant again. Toni Frissell moved her studio outdoors to the Tidal Basin, dressed a model in yards of pleated satin, and set her against the Washington Monument's rippling reflection — part fashion plate, part postwar manifesto. The negative later entered the Library of Congress with the rest of Frissell's archive, making this one of the most-reproduced New Look images now in the public domain.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="sec">Two Verticals, Echoing</span></h2>
+    <p>Frissell shot square-format on a Rolleiflex twin-lens reflex and placed her model in the upper-left third of the frame, letting the vertical lines of profile, neckline, and skirt pleats echo the slender obelisk far off to the right — two upright forms, one near and one distant, forming the picture's actual skeleton.</p>
+    <p>The horizon sits low, giving two-thirds of the frame to a heavy, breathing sky; the water acts as a soft mirror, doubling the monument as a trembling reflection and bouncing back the skirt's brightest highlight too — verticality gets stated three times over.</p>
+    <p>The model isn't looking at the camera. That was unusual for period fashion photography, which favored a straight-on studio view built to show every construction detail. Frissell drops her into a real outdoor moment instead, and the picture gains a narrative the studio version never could.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color Theory <span class="sec">Speaking Entirely in Value</span></h2>
+    <p>This image gives up hue entirely and pours all its expressive weight into a single dimension: value. The satin's highlight nearly touches paper-white; the model's hair and the distant treeline drop almost to black; everything between is layered grey — sky, water, and shadowed folds of skirt.</p>
+    <p>With no color to lean on, contrast itself becomes the palette: Frissell places her two brightest passages — the skirt's highlight, a gap in the clouds — on one diagonal, and her two darkest — the hair, the dark treeline — on the other. Four extremes hold the frame in tension, so an all-grey image never reads as flat.</p>
+    <p>As a reusable value scale: satin highlight, cloud-gap grey, Tidal Basin mid-grey, treeline dark grey, near-black hair — that five-step ladder is the actual palette here.</p>
+    <div class="palette">
+      <div class="sw" style="background:#e7e3d8;color:#3a382c">Satin highlight<small>#E7E3D8 · skirt light</small></div>
+      <div class="sw" style="background:#c7c8c1;color:#3a3a35">Cloud-gap grey<small>#C7C8C1 · sky</small></div>
+      <div class="sw" style="background:#6c7069;color:#e9ebe6">Tidal Basin grey<small>#6C7069 · water</small></div>
+      <div class="sw" style="background:#33352c;color:#e5e6df">Treeline dark<small>#33352C · shoreline</small></div>
+      <div class="sw" style="background:#17150f;color:#e7e4da">Near-black hair<small>#17150F · shadow</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Silhouette & Technique <span class="sec">New Look's Architecture of Cut</span></h2>
+    <p>The half-light of early evening acts as a natural softbox: no hard shadows, no obvious direction, light spilling evenly out of an overcast sky and wrapping every fold of satin in the same soft wash. This is the natural-light fashion photography Frissell was known for — trusting real weather over a studio's rigged spotlights.</p>
+    <p>The dress itself is a direct expression of Dior's 1947 New Look: a tightly fitted bodice, a cinched natural waist, and a skirt built from yards of pleated satin. That sharp contrast — spare above, extravagant below — replaced the narrow, ration-era silhouette with sheer volume of fabric, and that volume was itself a visual statement.</p>
+    <p>The beaded plunge neckline, elbow-length satin gloves, and narrow belt make up the standard three-piece vocabulary of the era's eveningwear — every piece reinforcing the same silhouette logic: draw the eye to a cinched waist, then let it explode outward into the skirt.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="sec">A Postwar Story in One Dress</span></h2>
+    <p>Before 1947, Europe had barely emerged from textile rationing; skirts had gotten narrower and shorter out of necessity, not taste. Dior's skirt, built from a dozen-plus meters of fabric, was the first open extravagance — controversial at the time, but it landed exactly on a public hunger to have beauty back. This dress carries an entire generation's exhale.</p>
+    <p>Frissell's own career carries a parallel exhale: she was one of the American Red Cross's accredited photographers during WWII, photographing field hospitals and the faces of soldiers behind casualty reports. By 1949 her camera had turned back to silk and still water — the move from battlefield to evening gown is its own quiet biography.</p>
+    <p>It was also Frissell who pulled fashion photography out of the studio, letting models exist in real outdoor settings for the first time. A monument, a lake, an overcast sky — none of it belonged to fashion photography before this — and that shift shaped how fashion photographers worked for decades afterward.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Background <span class="sec">The Photographer</span></h2>
+    <p>Toni Frissell (1907–1988) came from a well-connected New York family and drifted into photography as a studio assistant in her twenties, quickly establishing herself at Vogue and Harper's Bazaar as one of the first photographers to shoot models in motion, outdoors, rather than posed inside a studio.</p>
+    <p>Her range went well past fashion: as a Red Cross-accredited photographer in WWII she left an extensive record of field hospitals and troops, and postwar became the first female official photographer for the United States Golf Association. In 1971 she donated nearly 340,000 negatives and prints to the Library of Congress, putting the vast majority of her life's work into the public domain — this image among them.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="sec">Five Greys, a Distant Echo, Silhouette First</span></h2>
+    <ul class="tips">
+      <li><b>With no color, build value instead:</b> try describing a scene in exactly five greys — you'll find what actually gives an image its breathing room was never hue, it was the rhythm of light and dark.</li>
+      <li><b>Give your subject a distant echo:</b> a monument, a building, a lone tree — one vertical or horizontal element that rhymes with your subject instantly turns a portrait into a composition.</li>
+      <li><b>Let silhouette choose the pieces, not the other way around:</b> decide where to cinch and where to let volume happen before you pick garments — a dress convinces through the strength of its silhouette contrast, not accumulated detail.</li>
+      <li><b>Let weather be your lighting rig:</b> overcast light diffuses evenly enough that you barely need to add any — don't pack up on a grey day, it might be the best light you'll get.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">A R T</div>
+    Image: Fashion Model, Washington, D.C. · Toni Frissell, 1949 · Library of Congress, Prints & Photographs Division (Toni Frissell Collection) · Public domain<br>
+    Source: Wikimedia Commons · Commentary and analysis are the author's own
+  </footer>
+</div>
+</body>
+</html>

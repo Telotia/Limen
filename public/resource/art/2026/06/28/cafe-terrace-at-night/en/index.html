@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art· Café Terrace at Night — Vincent van Gogh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --ink:#20242e; --ink-soft:#3c4250; --ink-faint:#7a7e8c;
+ --cobalt:#213a6b; --night:#16264a; --sky:#2c4a86; --violet:#4b5c84;
+ --saffron:#f4c430; --gold:#e0a82e; --sulphur:#cfa646;
+ --leaf:#4a7a3a; --door:#2f6b4f; --rust:#c46a2a; --cream:#ede6c8; --void:#0e1428;
+ --paper:rgba(250,248,240,.58); --line:rgba(40,40,30,.14);
+ }
+ *{box-sizing:border-box;margin:0;padding:0}
+ html{scroll-behavior:smooth}
+ body{
+ font-family:'Inter',system-ui,sans-serif;
+ color:var(--ink); line-height:1.78; letter-spacing:.005em;
+ background:#e9e4d6; min-height:100vh; overflow-x:hidden;
+ }
+.field{position:fixed;inset:0;z-index:-1;
+ background:
+ radial-gradient(46rem 46rem at 16% 12%, rgba(33,58,107,.46), transparent 60%),
+ radial-gradient(40rem 40rem at 80% 20%, rgba(244,196,48,.30), transparent 62%),
+ radial-gradient(50rem 50rem at 30% 92%, rgba(75,92,132,.34), transparent 60%),
+ radial-gradient(38rem 38rem at 84% 84%, rgba(74,122,58,.22), transparent 60%),
+ linear-gradient(160deg,#f0ead9,#e3dcca);
+ filter:blur(46px) saturate(.98); transform:scale(1.12);
+ }
+.wrap{max-width:840px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+ header{text-align:center;margin-bottom:34px}
+.kicker{font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;
+ color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+ h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+ font-size:clamp(2.2rem,6vw,3.4rem);line-height:1.1;letter-spacing:.01em}
+.sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+ font-size:clamp(1.05rem,2.6vw,1.4rem);color:var(--ink-soft);margin-top:8px}
+ figure{margin:34px 0 12px;border-radius:20px;overflow:hidden;
+ box-shadow:0 30px 70px -28px rgba(14,20,40,.62),0 2px 0 rgba(255,255,255,.4) inset;
+ background:var(--void)}
+ figure img{display:block;width:100%;height:auto}
+ figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+ margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.03em}
+.card{
+ background:var(--paper);
+ backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+ border:1px solid rgba(255,255,255,.55);
+ border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+ box-shadow:0 18px 50px -30px rgba(14,20,40,.5),0 1px 0 rgba(255,255,255,.6) inset;
+ }
+.card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.7rem;
+ margin-bottom:4px;display:flex;align-items:baseline;gap:.6rem}
+.card h2.idx{font-style:italic;font-size:1.5rem;color:var(--gold);opacity:.95}
+.card h2.zh{font-family:system-ui,sans-serif;font-weight:400;
+ font-size:.86rem;color:var(--ink-faint);margin-left:auto;letter-spacing:.04em}
+.card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+.card p b{color:var(--ink);font-weight:500}
+.lead{font-size:1.08rem}
+.palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+ gap:12px;margin-top:18px}
+.sw{border-radius:13px;height:84px;display:flex;flex-direction:column;
+ justify-content:flex-end;padding:9px 11px;color:#fff;
+ font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+ box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+.sw small{opacity:.82;font-size:.6rem;display:block}
+.tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+ color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+.tips li:first-child{border-top:none}
+.tips li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;
+ border-radius:50%;background:var(--saffron);box-shadow:0 0 0 4px rgba(244,196,48,.20)}
+.tips li b{color:var(--ink);font-weight:600}
+ footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+ font-family:'Cormorant Garamond',serif;letter-spacing:.04em;line-height:1.9}
+ footer.brand{font-family:'Inter',sans-serif;color:var(--ink-soft);
+ letter-spacing:.3em;font-size:.7rem;font-weight:600;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+ <header>
+ <div class="kicker">Art· Daily Appreciation· 2026.06.28</div>
+ <h1>Café Terrace at Night</h1>
+ <div class="sub">One lamp turns the dark into a warm colour — Vincent van Gogh, 1888</div>
+ </header>
+
+ <figure>
+ <img src="../source.jpg" alt="Vincent van Gogh, Café Terrace at Night, 1888">
+ <figcaption>Vincent van Gogh, <em>Café Terrace at Night</em> (Terrasse du café le soir), Sept 1888. Oil on canvas, 80.7 × 65.3 cm· Kröller-Müller Museum, Otterlo (Public Domain)</figcaption>
+ </figure>
+
+ <section class="card">
+ <p class="lead">A cobbled street, a café glowing under a gas lamp. The awning blazes a hot, buttery yellow that spills onto the wall and the stones; down the street the sky goes deep blue and — for the first time in his life — Van Gogh paints stars. The quietly radical move: <b>there is not a speck of black anywhere</b>. Night, here, is built entirely from blue, violet and green.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">01</span> Composition</h2>
+ <p>This is a painting that pulls you in by <b>perspective</b>. The seams of the cobblestones, the eaves, the rows of tables all <b>converge</b> down the street toward a dark alley deep in the picture — a clear one-point perspective that gives the street real depth.</p>
+ <p>The huge <b>golden awning</b> on the left is the lead: a tilted wedge of warmth that is bright, heavy and advancing. Against it, the dark blue buildings on the right sit back and steady the frame — <b>one bright, one dark; one forward, one back</b>, and the scales balance. Foreground tables and silhouettes act as a <b>repoussoir</b>, framing your view into the street; the <b>white-clad waiter</b> at the centre is the brightest vertical, the point all the warm light gathers toward. Stars overhead and the lamp below <b>rhyme</b> across the canvas.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">02</span> Colour &amp; Theory</h2>
+ <p>The engine is one <b>complementary pair: blue ↔ orange-yellow</b>. The warm gaslight (an orange family) sits directly opposite the cobalt sky on the colour wheel. Placed side by side, complements trigger <b>simultaneous contrast</b>: the yellow burns hotter for the blue, the blue deepens for the yellow — each ignites the other. This is the colour science Van Gogh absorbed from <b>Chevreul and Charles Blanc</b>, and from his hero Delacroix.</p>
+ <p>And the key line, from a letter to his sister (paraphrased): <b>“a night painting without any black — nothing but beautiful blue, violet and green.”</b> So look closely: <b>the darks are not black, they are saturated cools</b> — violet-blue in the cobbles, ink-blue down the alley, green in the door and tree. Warm (yellow/orange) covers little but pops most; cool (blue/violet/green) holds the large ground. That is the elegant rule of <b>small warm accent + large cool field</b>: restrained, yet focused.</p>
+ <div class="palette">
+ <div class="sw" style="background:#213a6b">Cobalt night<small>#213A6B</small></div>
+ <div class="sw" style="background:#16264a">Ink-blue alley<small>#16264A</small></div>
+ <div class="sw" style="background:#4b5c84">Violet cobble<small>#4B5C84</small></div>
+ <div class="sw" style="background:#f4c430;color:#5a4410">Lamp / star<small>#F4C430</small></div>
+ <div class="sw" style="background:#e0a82e;color:#4a3608">Awning gold<small>#E0A82E</small></div>
+ <div class="sw" style="background:#c46a2a">Warm rust<small>#C46A2A</small></div>
+ <div class="sw" style="background:#4a7a3a">Door / tree green<small>#4A7A3A</small></div>
+ </div>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">03</span> Light &amp; Mood</h2>
+ <p>No moon, no street-lamp close-up — the single source is <b>the gas lamp under the awning</b>. Van Gogh never paints “the light” itself; he <b>dyes</b> it onto whatever it touches: the lit wall is feverish sulphur-yellow, the floor a pale lemon-green, and everything cools toward blue as it leaves the glow. <b>Colour temperature does the work of value</b> — warmth and coolness stand in for light and shadow. That is the painting’s cleverest stroke.</p>
+ <p>The mood is therefore both <b>warm and vast</b>: human bustle close up, an endless starred sky above. This is the <b>first starry night in Van Gogh’s work</b> — the same month he painted <em>Starry Night Over the Rhône</em>, a full year before the famous <em>The Starry Night</em>. Here the sky is still calm, like a thought just lit.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">04</span> Technique &amp; Medium</h2>
+ <p>Oil on canvas, about <b>80.7 × 65.3 cm</b>, painted September 1888 on the Place du Forum in <b>Arles</b>, southern France. It was made <b>outdoors, at night, on the spot</b> — Van Gogh wrote with delight that he loved “painting the night in the very night.”</p>
+ <p>The handling is <b>impasto with directional strokes</b>: the cobbles are dragged toward the vanishing point one stroke at a time, while the sky is dotted with <b>separated touches</b> for stars and haloes — an echo of the Neo-Impressionist dot (Seurat), but looser and more impulsive. Mostly <b>pure, ungrayed colours laid side by side</b>, left for the viewer’s eye to mix at a distance — which is exactly why it still glows on a screen.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">05</span> Why It Moves Us· Van Gogh</h2>
+ <p>It moves us because it is <b>so rarely warm</b>. Van Gogh’s pictures often burn with anxiety; this one is <b>relaxed, hospitable, almost happy</b>: tables of people gathered around a lamp, conversation drifting out, the dark tamed into a warm blanket. Tiny lamplight against an enormous night — not tragic, but the temperature of <b>“someone is waiting up for you.”</b> <em>(Some scholars read the white-clad central figure ringed by roughly twelve others as a hidden “Last Supper” — a contested interpretation; Van Gogh himself never described it that way.)</em></p>
+ <p><b>Vincent van Gogh</b> (1853–1890), Dutch. Arles in 1888 was his most prolific, most luminous stretch: he rented the “Yellow House,” dreamed of an artists’ colony, and waited for Gauguin to join him in the south. In roughly fifteen months he made over two hundred works — and sold almost none in his lifetime. The café still trades in Arles today, repainted the same gold and renamed <b>“Café Van Gogh.”</b></p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">06</span> Steal This Palette</h2>
+ <ul class="tips">
+ <li><b>The formula:</b> cobalt / navy (~50%) + golden yellow / saffron (~30%) + warm rust &amp; olive-green accents (~20%) — and <b>zero black</b>.</li>
+ <li><b>Wear it:</b> let <b>navy be the “night”</b> as your large base (denim, navy knit); add one <b>saffron / mustard</b> piece as “the lamp” focal point, with camel/rust accents, olive as the bridge, and cream as the waiter’s highlight. Keep the warm small and single — that’s what makes it sing.</li>
+ <li><b>One rule for looking expensive:</b> to make a colour brighter, set its <b>complement</b> beside it (yellow by blue); to make “dark” richer, reach for <b>deep blue-violet instead of black</b> — softer, more alive.</li>
+ <li><b>For interiors:</b> warm light + cool walls = instant café depth and warmth — the same logic restaurants use when they light a cool room with warm-yellow bulbs.</li>
+ </ul>
+ </section>
+
+ <footer>
+ <div class="brand">Art</div>
+ Image: Vincent van Gogh, <em>Café Terrace at Night</em>, 1888· Public Domain<br>
+ Source: Kröller-Müller Museum, Otterlo / Wikimedia Commons· © original artist
+ </footer>
+</div>
+</body>
+</html>

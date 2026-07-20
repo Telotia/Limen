@@ -1,5 +1,5 @@
 ---
-import { artResources } from '../data/resource-menu';
+import { artResources, newsResources } from '../data/resource-menu';
 
 interface Props {
   showSubnav?: boolean;
@@ -44,10 +44,14 @@ const isCurrent = (href: string) => {
             <a class="res-viewall" href="/resource.html#art">All art →</a>
           </div>
           <div class="res-col">
-            <div class="res-col-title">Research</div>
-            <span class="res-empty">Coming soon</span>
-            <div class="res-col-title" style="margin-top:10px">Aquila</div>
-            <span class="res-empty">Coming soon</span>
+            <div class="res-col-title">News</div>
+            {newsResources.map((item) => (
+              <a class="res-item" href={item.href}>
+                <span class="res-item-title">{item.title}</span>
+                <span class="res-item-date">{item.date}</span>
+              </a>
+            ))}
+            <a class="res-viewall" href="/resource.html#news">All news →</a>
           </div>
         </div>
       </div>
@@ -62,7 +66,8 @@ const isCurrent = (href: string) => {
         <a href="demo.html">Demo</a>
         <a href="research.html">Research</a>
         <a href="consult.html">Consult</a>
-        <a href="/resource.html">Resources</a>
+        <a href="/resource.html#art">Art</a>
+        <a href="/resource.html#news">News</a>
         <a class="nav-mobile-cta" href="consult.html">Request a pilot</a>
       </div>
     </details>

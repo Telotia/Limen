@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 包豪斯的脸 — 约斯特·施密特 · 1923年展览海报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1512; --ink-soft:#3d372e; --ink-faint:#877d6c;
+    --ochre:#d9a548; --red:#c1332a; --slate:#8b9a93; --bone:#efe6d3;
+    --paper:rgba(250,246,235,.62); --line:rgba(28,26,23,.16); --void:#1a1512;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#d9cbaa; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(217,165,72,.42), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(193,51,42,.22), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(26,21,18,.24), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(139,154,147,.18), transparent 60%),
+      linear-gradient(160deg,#ecdfbc,#d3c19a);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(26,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#1a1512}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(26,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:#a3441f;opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:#a3441f;box-shadow:0 0 0 4px rgba(217,165,72,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.05</div>
+    <h1>包豪斯的脸</h1>
+    <div class="sub">国立包豪斯展览海报 — 约斯特·施密特，1923年，德国魏玛</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="约斯特·施密特设计的1923年国立包豪斯展览海报，红黑赭黄几何图形组成的斜十字构图">
+    <figcaption>约斯特·施密特（Joost Schmidt），国立包豪斯展览海报，1923年，德国魏玛 · Wikimedia Commons（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">一张只用红、黑、赭黄三种颜色的海报，把一张"脸"拆解成圆形、方块与三角，斜斜地钉在画面正中央——这是包豪斯历史上最著名的平面设计，它没有画一件家具、一栋建筑，却比任何作品都更精确地回答了"什么是包豪斯"。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 一张被拆散、又被十字钉住的脸 <span class="en">Composition</span></h2>
+    <p><b>竞赛的硬性要求</b>：这张海报是一场设计竞赛的获奖作品，规则要求必须放入奥斯卡·施莱默设计的"包豪斯徽标"（Bauhaus-Signet）——那个用最简笔画表现的侧脸/眼睛符号，是包豪斯"人—几何"哲学的浓缩。施密特把这个符号嵌进一个由圆形、半圆与方块搭成、沿对角线倾斜的"十字"结构里。</p>
+    <p><b>倾斜而非水平垂直</b>：整张海报的主轴线是一条从左下到右上的对角线——"AUSSTELLUNG"沿对角线向上爬升，"BAUHAUS"横向咬住画面中心，形成一种"将倒未倒"的动势，比任何水平构图都更有速度感。</p>
+    <p><b>用遮挡代替阴影</b>：黑色的锯齿形色块层层叠在红色圆环、赭黄底色之上，靠色块前后的遮挡关系造出纵深，而不是靠光影渐变——这是一种"版画式"的空间逻辑：不模拟光从哪来，只模拟"谁挡住了谁"。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 为了在120个火车站里被认出 <span class="en">Color Theory</span></h2>
+    <p>三原色的克制使用——红、黑（近似功能上的"冷色"）、赭黄——不是随手选的三色，而是包豪斯色彩教学的核心命题：康定斯基在包豪斯的色彩理论课上，把三原色与三种基本几何形对应起来（方=红、圆=蓝、三角=黄）。这张海报没有严格照搬这个公式，但精神一致：几何即色彩，色彩即几何。</p>
+    <p>这版海报最初被印刷张贴在德国120个火车站，作为1923年"包豪斯周"展览的巡回广告——高对比、低色彩数量不是审美偏好，而是功能要求：路人需要在几米外、几秒内认出它。</p>
+    <div class="palette">
+      <div class="sw" style="background:#d9a548;color:#3d2c05">赭黄底色<small>#D9A548 · 背景</small></div>
+      <div class="sw" style="background:#1a1512;color:#efe6d3">墨黑<small>#1A1512 · 主形</small></div>
+      <div class="sw" style="background:#c1332a;color:#fceef0">朱红<small>#C1332A · 圆环</small></div>
+      <div class="sw" style="background:#efe6d3;color:#3d372e">米白<small>#EFE6D3 · 高光</small></div>
+      <div class="sw" style="background:#8b9a93;color:#1a1512">灰蓝绿<small>#8B9A93 · 点缀</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 技法与历史 · 一场"从手工到工业"的转向宣言 <span class="en">Technique & History</span></h2>
+    <p>这张海报诞生的1923年，正是包豪斯校长瓦尔特·格罗皮乌斯提出新口号"艺术与技术：一种新的统一"（Art and Technology: A New Unity）的那一年——包豪斯正式告别约翰内斯·伊顿主导的、带神秘主义色彩的早期表现主义手工阶段，转向拥抱工业化、标准化生产。这张海报本身就是这场转向的活体证据：它不是"画"出来的，而是"设计"出来的——用几何图形、印刷字体、色彩理论这套可复制的系统语言，取代了个人手绘的随机性。</p>
+    <p>海报右上角那个小小的堆叠字母标记，是施密特本人的设计签名——与画面中心施莱默设计的"包豪斯徽标"并置，暗示着一种集体品牌与个人作者身份共存的、非常"现代"的设计伦理。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 一张脸，被拆成了永恒 <span class="en">Why It Moves Us</span></h2>
+    <p>这张海报动人的地方，恰恰在于它把"人"抽象到了几乎认不出来的程度，却又让人一眼确信"这是一张脸"——一只眼睛（红色圆环中的黑点）、一个侧脸轮廓（黑色锯齿形块面），被压缩进纯几何逻辑里，却没有失去那一点点"有人在看着你"的温度。这正是包豪斯的核心理想——"头、手、心"（head, hand, heart）的统一：艺术家的直觉、工匠的手艺、工程师的理性，三者本该是一件事，而不是三个互相对立的身份。</p>
+    <p>一百年后再看，这张海报几乎预言了此后一整个世纪的平面设计语言——从瑞士国际主义风格到今天无数科技公司的品牌识别系统，都能在这张斜切的红黑海报里找到自己的祖先。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">The Designer</span></h2>
+    <p>约斯特·施密特（Joost Schmidt，1893–1948），生于德国翁斯托夫。1919年进入包豪斯魏玛校区学习，师从约翰内斯·伊顿与奥斯卡·施莱默，最初主修木雕。1925年后留校任教，讲授字体设计课程；1928–1930年主持雕塑工坊，1928–1932年主持广告、书法与印刷平面设计系。1933年包豪斯在纳粹压力下关闭后，他继续以平面设计师身份在柏林艰难维持工作，后任教于柏林视觉艺术学院。1948年病逝于纽伦堡。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 平面设计 / 配色 / 版式 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>给强对比一个"任务"，而不只是审美：</b>这张海报的高对比不是为了好看，是为了远距离、短时间内被识别——设计前先问"它要在多远、多快的时间里被看懂"，再决定对比强度。</li>
+      <li><b>对角线比水平垂直更有能量：</b>把关键元素旋转30–45度，几乎总能让版面显得更有动势、更不"呆板"——logo、海报、封面设计都适用。</li>
+      <li><b>用遮挡制造深度，不用渐变：</b>几个不透明色块前后叠放，比渐变阴影更干净、更有"设计感"，尤其适合扁平化、几何风格的视觉系统。</li>
+      <li><b>让符号成为构图的一部分，而不是贴上去的贴纸：</b>施密特没有把包豪斯徽标"放在角落"，而是让它嵌进整个几何结构里——真正强的品牌设计，logo和版式应该是同一个系统。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：约斯特·施密特设计，1923年国立包豪斯展览海报 · 原作藏于柏林包豪斯档案馆<br>
+    来源：Wikimedia Commons · 作者1948年逝世，作品已进入公有领域 · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

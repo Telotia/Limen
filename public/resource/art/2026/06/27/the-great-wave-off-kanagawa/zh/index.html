@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 《神奈川冲浪里》— 葛飾北斎</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b2630; --ink-soft:#3c4a57; --ink-faint:#74808c;
+    --prussian:#003153; --indigo:#1e4d74; --wave:#4e82b0; --foamblue:#a7c5dd;
+    --cream:#e8dcc0; --ochre:#b58e5b; --void:#0c1c2e; --foam:#f3efe6;
+    --paper:rgba(248,251,255,.55); --line:rgba(20,40,60,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#e4ecf2; min-height:100vh; overflow-x:hidden;
+  }
+  /* 弥散光场 */
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 18% 10%, rgba(0,49,83,.40), transparent 60%),
+      radial-gradient(40rem 40rem at 84% 24%, rgba(78,130,176,.38), transparent 62%),
+      radial-gradient(50rem 50rem at 30% 92%, rgba(30,77,116,.32), transparent 60%),
+      radial-gradient(38rem 38rem at 82% 86%, rgba(181,142,91,.22), transparent 60%),
+      linear-gradient(160deg,#eef1ea,#dfe7ec);
+    filter:blur(46px) saturate(.95); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  /* 头部 */
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  /* 大图 */
+  figure{margin:34px 0 12px;border-radius:20px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(12,28,46,.6),0 2px 0 rgba(255,255,255,.5) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  /* 玻璃卡 */
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.55);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(12,28,46,.5),0 1px 0 rgba(255,255,255,.6) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--wave);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  /* 色板 */
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:84px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;color:#fff;
+    font-size:.66rem;letter-spacing:.06em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.82;font-size:.6rem;display:block}
+  /* 实操要点 */
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--ochre);box-shadow:0 0 0 4px rgba(181,142,91,.18)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.06.27</div>
+    <h1>神奈川冲浪里</h1>
+    <div class="sub">The Great Wave off Kanagawa — 崩落前一瞬的永恒</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="葛飾北斎《神奈川冲浪里》约1831年">
+    <figcaption>Katsushika Hokusai，《神奈川沖浪裏》，约1831年，浮世绘多色木版画 约25.7 × 37.9 cm · 纽约大都会艺术博物馆藏（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">一道巨浪在崩落前的那一瞬被永远停住。爪状的浪沫向天伸开，三条小船被卷进谷底，而神圣的富士山，缩成浪心里一个安静的小三角。这不是一幅画海的画，是一幅画「力量与脆弱」的画——也是全世界被复制最多的一抹蓝。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 <span class="en">Composition</span></h2>
+    <p>整幅画是一个巨大的<b>不对称三角</b>：左侧浪峰高扬、向右扑压，浪头碎成一排「鹰爪」般的白沫，像一只活物正要扑下。波谷的对角线把视线一路引向中心的<b>富士山</b>。</p>
+    <p>最妙处是一记<b>视觉押韵又错位</b>：远处富士山顶的白色三角，被近处浪沫的白色整个吞没、复制、放大。北斎用<b>强迫透视</b>，让永恒圣山缩得比一朵浪花还小。浪卷的弧线接近<b>对数螺旋</b>，浪沫碎成更小的浪、再碎成更小的——这种<b>自相似的分形</b>让静止的画面仍在翻腾。横幅、低地平线、大片留白的天空，把张力压到崩落前的最后一刻。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 配色与理论 <span class="en">Colour</span></h2>
+    <p>这幅画的灵魂是一种蓝——<b>普鲁士蓝（ベロ藍 / 柏林蓝）</b>。它是当时刚由西方经中国传入日本的<b>合成颜料</b>：比传统露草、靛蓝更鲜亮稳定、不易褪色，也更便宜。整套《富岳三十六景》正是靠这抹大胆的进口蓝做卖点。</p>
+    <p>配色逻辑＝<b>近单色蓝 ＋ 暖中性</b>：从墨蓝的浪根，到中蓝，到浪沫的浅蓝，是一组<b>同类色（analogous）</b>的层层渐变；再以暖暖的<b>米色天空、赭色船身</b>做唯一的冷暖对峙——蓝（冷）对米／赭（暖），一种克制的<b>冷暖互补</b>。渐变是手工「刷」的：木版的 <b>bokashi 晕染</b>把颜料由浓到淡擦开，浪因此有了体积。而<b>纸的本白</b>被直接当作浪沫与高光，比任何白色颜料都透气。</p>
+    <div class="palette">
+      <div class="sw" style="background:#003153">普鲁士蓝<small>#003153</small></div>
+      <div class="sw" style="background:#1e4d74">靛青<small>#1E4D74</small></div>
+      <div class="sw" style="background:#4e82b0">浪蓝<small>#4E82B0</small></div>
+      <div class="sw" style="background:#a7c5dd;color:#1b3a52">沫蓝<small>#A7C5DD</small></div>
+      <div class="sw" style="background:#e8dcc0;color:#5a4e2a">米沙天<small>#E8DCC0</small></div>
+      <div class="sw" style="background:#b58e5b">舟舷赭<small>#B58E5B</small></div>
+      <div class="sw" style="background:#0c1c2e">墨蓝底<small>#0C1C2E</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与气氛 <span class="en">Light & Mood</span></h2>
+    <p>浮世绘不靠西方的明暗法。这里没有投影、没有渐隐的暗，而是<b>平涂色块 ＋ 清晰的轮廓线（墨板）</b>。「光」藏在两处：发亮的<b>米色天空</b>，和一片片<b>纯白的浪沫</b>。</p>
+    <p>地平线附近一抹微暖，像清晨；整体却冷峻、清醒、屏息。正因为是平面化处理，浪的<b>「形」</b>被推到极致——这是设计感，而非写实感。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 技法与媒材 <span class="en">Technique</span></h2>
+    <p>这是一幅<b>锦绘（nishiki-e）多色木版画</b>，约 1831 年由西村屋与八出版。它不是一个人画的，而是<b>三方协作</b>：北斎画稿、<b>雕师</b>把轮廓与每种颜色各刻一块樱木版、<b>摺师</b>用马连一层层手拓；靠<b>见当（kentō）</b>对位记号让各色精准套准。</p>
+    <p>它本质是<b>商业量产</b>的平价印刷品——同套版印出成千上万张（版越印越磨，早期印张最锋利），因而流通极广，今天大都会、大英等众多博物馆各藏其印张。尺幅不大，约 <b>25.7 × 37.9 cm</b>。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 为何动人 · 作者 <span class="en">Why · Hokusai</span></h2>
+    <p>动人的，是那个<b>崩落前的瞬间</b>：浪悬在最高点、还没砸下，张力被拉满。是<b>对照</b>：渺小的人与船对抗排山倒海的自然，连永恒神圣的富士山都被一朵浪压成配角——这正是日本式的<b>「无常」与「物哀」</b>。它的剪影又简洁有力，全世界一眼就懂。</p>
+    <p><b>葛飾北斎</b>（1760–1849），江户人，浮世绘巨匠，自号「<b>画狂老人</b>」。一生据传作品逾三万、改名约三十次、搬家近百回；这套《富岳三十六景》是他七十出头之作，他曾说要到一百一十岁才能真正画好。此作深刻影响了西方「日本主义」——莫奈、梵高皆受其启发，也是德彪西《大海》乐谱封面的灵感。2024 年新版日元一千円纸币背面用的正是它。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 配色 · 穿搭可借鉴 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>北斎配色公式：</b>深普鲁士蓝（60%）＋ 米／燕麦色（30%）＋ 驼／赭点缀（10%），再用<b>干净的白</b>当「浪沫」高光。</li>
+      <li><b>穿搭翻译：</b>这其实就是「<b>牛仔蓝 ＋ 奶油 ＋ 驼</b>」——极好穿。想要渐变层次，就<b>同色不同明度的蓝叠穿</b>：藏青外套／中蓝针织／浅蓝衬衫，把 bokashi 渐变穿到身上。</li>
+      <li><b>为什么成立：</b>一组同类蓝＝沉静耐看不吵；一处暖中性＝冷调里有呼吸；大面积留白／白＝像浪沫一样提亮、透气。</li>
+      <li><b>设计借走：</b>近单色冷调 ＋ 唯一暖锚点，安静又有对比；像北斎那样<b>大胆留白</b>，让主形状自己说话。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：Katsushika Hokusai《神奈川冲浪里》约1831 · 公有领域<br>
+    来源：The Metropolitan Museum of Art / Wikimedia Commons · 版权归原作者
+  </footer>
+</div>
+</body>
+</html>

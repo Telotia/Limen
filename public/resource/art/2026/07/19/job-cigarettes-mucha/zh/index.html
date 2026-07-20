@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · JOB · 一缕烟，被穿成了整幅海报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#f2e9dd; --ink-soft:#d9c9b4; --ink-faint:#a3907c;
+    --gold:#c99a3f; --amber:#8f6d3e; --wine:#453a5c; --indigo:#2a2438;
+    --paper:rgba(20,16,26,.62); --line:rgba(242,233,221,.14); --void:#0e0b14;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#0e0b14; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(143,109,62,.30), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(201,154,63,.14), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(69,58,92,.60), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(14,11,20,.85), transparent 60%),
+      linear-gradient(170deg,#1c1424,#0a070e00);
+    filter:blur(50px) saturate(1.08); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#b39a80;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;color:#f7ede0;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#d9c9b4;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#a3907c;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.06) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,154,63,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#a3907c;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:#d9c9b4;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.19</div>
+    <h1>JOB · 一缕烟，被穿成了整幅海报</h1>
+    <div class="sub">阿尔丰斯·穆夰 Alphonse Mucha · 《JOB》卷烟纸广告海报 · 1896，巴黎</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="穆夰为JOB卷烟纸设计的海报：一位女子侧脸微仰、双眼半阖，指间夹着一支点燃的香烟，青灰色烟雾从她指尖升起，缠绕过她如波浪般翻卷的深色长发，最终与背景中巨大的墨绿色"JOB"字母交织在一起；背景为浓重的葡萄紫色，四周围着青铜金与灰蓝相间的锯齿马赛克花边，发间别着一簇朱红色浆果发饰">
+    <figcaption>《JOB》卷烟纸广告海报 · 阿尔丰斯·穆夰 Alphonse Mucha 绘 · 1896年 · 费迪南·尚珀努瓦 F. Champenois（巴黎）印制 · 原作已进入公有领域，图片来自维基共享资源 Wikimedia Commons，用于评论与赏析</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">1894年圣诞前夕，巴黎一家印刷厂里正缺人手赶印莎拉·伯恩哈特（Sarah Bernhardt）新戏《吉斯蒙达》(Gismonda)的海报，临时顶替上场的，是一个几乎无人知晓的捷克插画师——阿尔丰斯·穆夰（Alphonse Mucha）。海报贴上巴黎街头的第二天，伯恩哈特就派人把他请进了自己的剧院，签下六年合约。两年后，卷烟纸厂商JOB找上门来，请他再画一张海报——JOB这个名字，其实是个美丽的误会：厂主让·巴尔杜（Jean Bardou）当年只是把自己名字缩写J和B中间嵌一颗菱形装饰印在纸包上，巴黎人念着念着，就把它读成了"JOB"，厂名就这么定了下来。穆夰交出的这张海报，后来和它1898年的姊妹篇一起，成了他一生中被复制、被盗印、被路人直接从墙上撕走次数最多的作品之一。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 一缕烟，把发丝和字母缠在了一起 <span class="en">Composition</span></h2>
+    <p>整张海报几乎没有留白——女人侧脸微仰，双眼半阖，一缕青灰色的烟从她指间升起，绕着她的长发盘旋而上，最终和背景里巨大的"JOB"字母缠绕在一起，分不清哪里是发丝、哪里是烟雾、哪里是字母的笔画。这是穆夰从《吉斯蒙达》时期就开始用的手法：不给广告文字单独留一块干净的"标题区"，而是让它变成画面装饰的一部分，和人物、纹样共享同一套曲线语言。</p>
+    <p>你的视线会不自觉地跟着那缕烟，从她的手指一路爬到发梢，再绕回JOB两个字母——整张海报因此有了一种缓慢旋转的观看节奏，而不是"一眼看完"的广告。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 配色 · 一整片安静里，只留一点红 <span class="en">Color Theory</span></h2>
+    <p>底色是一种压得很沉的葡萄紫，边框用青铜金与灰蓝拼出一圈锯齿马赛克纹样——这是穆夰从拜占庭镶嵌画里借来的做法，专门用在他觉得"该有点分量"的委托上（《吉斯蒙达》海报同样用了这一招），目的是让一张贴在街头巷尾、随时会被雨水打湿的商业广告，看起来带点教堂壁画式的庄重感。JOB两个字母用了一种偏灰的墨绿色，和紫色背景是邻近色，退得很安静。</p>
+    <p>真正跳出来的，是她发间那一小簇朱红色浆果发饰——全画唯一一处高饱和度的暖色，位置几乎正打在视觉中心偏上——第一眼先勾住你的，其实是这一点红，而不是那张脸。</p>
+    <div class="palette">
+      <div class="sw" style="background:#453a5c;color:#f2e9dd">葡萄紫<small>#453A5C · 背景底色</small></div>
+      <div class="sw" style="background:#8f6d3e;color:#2a1a08">青铜金<small>#8F6D3E · 边框纹样</small></div>
+      <div class="sw" style="background:#6b7690;color:#f2e9dd">灰蓝<small>#6B7690 · 边框冷色间色</small></div>
+      <div class="sw" style="background:#4f7d6e;color:#f2e9dd">墨绿<small>#4F7D6E · "JOB"字母</small></div>
+      <div class="sw" style="background:#b23a2c;color:#f2e9dd">朱红<small>#B23A2C · 发间浆果</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与技法 · 一圈圈"鞭挞线"，缠出了整幅画 <span class="en">Technique</span></h2>
+    <p>这是一张彩色石版画（chromolithography），由穆夰长期合作的巴黎印刷商费迪南·尚珀努瓦（Ferdinand Champenois）印制——石版画需要为每一种颜色单独刻一块石版、依次套印，颜色越多工序越繁琐，穆夰几乎所有巴黎时期最出名的海报都出自尚珀努瓦之手。画面里每一片色块都是平涂的，靠深色轮廓线把发丝、烟雾、图案分割开来——这种"先勾线、再平涂"的处理，和当时刚刚传入巴黎的日本浮世绘版画如出一辙，也是劳特累克（Toulouse-Lautrec）等人同时在用的技法。</p>
+    <p>头发本身被画成一圈圈缠绕的涡卷线条，穆夰这套"抽鞭式"曲线（法语称coup de fouet，字面意思是"鞭子的一击"）后来成了整个新艺术运动（Art Nouveau）最容易被认出的视觉签名。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 先卖情绪，再卖香烟纸 <span class="en">Why It Moves Us</span></h2>
+    <p>1890年代的商业海报，大多数还是简单粗暴地把商品名和价格印得又大又直白。穆夰这张海报几乎反着来：JOB这个品牌名被织进了装饰纹样里，不细看甚至认不出那是个商标；画面真正的主角，是一个双眼微阖、神情松弛、像是刚吐出一口烟就陷入自己思绪的女人。他卖的与其说是卷烟纸，不如说是一种氛围——一种慵懒、私密、几乎带点奢侈感的片刻。</p>
+    <p>这种"先卖情绪、再卖产品"的思路，放到今天的广告业里依然成立，而在1896年，这几乎是种发明。海报贴上街头后太受欢迎，常常前脚刚贴上，后脚就被收藏者和路人直接从墙上撕走带回家——这在当年的巴黎几乎是种常态，足见这类"穆夰风格"海报在普通人眼里，早已不只是广告。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">Background</span></h2>
+    <p>阿尔丰斯·穆夰（1860–1939），生于摩拉维亚（今属捷克）。1894年圣诞前后，他偶然顶替同事，为舞台女王莎拉·伯恩哈特赶制《吉斯蒙达》海报，一夜之间从籍籍无名变成巴黎最抢手的海报画家，此后六年一直是伯恩哈特的御用设计师，同时接下大量商业委托——香烟纸、啤酒、自行车、香水，几乎无所不包，逐渐被巴黎人称作"穆夰风格"（Le Style Mucha），后世则常把这套视觉语言直接等同于整个新艺术运动。</p>
+    <p>JOB的委托方是巴尔杜家族——厂主让·巴尔杜的后人们从1895年起持续资助艺术家为品牌作画，穆夰为JOB画的两版海报（这张1896年的版本与1898年更大尺幅的姊妹篇）都极受欢迎，至今仍是收藏市场上最常出现的穆夰海报之一。晚年，穆夰放下商业委托，用近二十年时间画完二十幅巨型油画《斯拉夫史诗》(Slav Epic)，他自己认为那才是一生真正想留下的作品，而非早年为香烟纸和香水画的这些海报。此作已进入公有领域，图片来自维基共享资源（Wikimedia Commons）。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 让文字也学会"顺着曲线走" <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>用一处高饱和暖色打破大面积低饱和背景：</b>紫、金、灰蓝都很安静，只留一点朱红——先抓眼球的永远是那一点"跳色"，不是画面里最大的色块。</li>
+      <li><b>别把文字焊死在角落：</b>试着让标题、logo顺着画面里已有的曲线走一遍，而不是简单地"贴"上去，会让整张图看起来完成度更高。</li>
+      <li><b>找一条反复出现的线条，贯穿全图：</b>穆夰把烟、发丝、边框纹样都用同一种涡卷曲线处理——你也可以选一种笔触或形状，在画面、照片的好几个位置重复它，制造统一感。</li>
+      <li><b>情绪先于产品：</b>想清楚你要传达的感觉（慵懒、庄重、松弛……），再决定构图和道具，而不是反过来。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：《JOB》卷烟纸海报，阿尔丰斯·穆夰绘，1896，F. Champenois印制<br>
+    原作已进入公有领域 · 来源：维基共享资源 Wikimedia Commons · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

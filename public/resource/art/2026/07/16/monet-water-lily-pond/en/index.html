@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · The Water-Lily Pond · Monet's Green Harmony</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eef1ec; --ink-soft:#c9d0c8; --ink-faint:#8b9a93;
+    --gold:#d98fa6; --verde:#46614a; --ochre:#7f97a6; --wine:#2f4a3c;
+    --paper:rgba(16,22,20,.62); --line:rgba(230,238,232,.14); --void:#040906;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#060a08; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(217,143,166,.20), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(70,97,74,.42), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(47,74,60,.4), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(4,9,6,.7), transparent 60%),
+      linear-gradient(170deg,#0c130f,#040705);
+    filter:blur(50px) saturate(1.05); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#9aa8a0;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Newsreader',serif;font-weight:700;color:#f5f6f2;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c9cdc2;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#8b9a93;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.08) inset;
+  }
+  .card h2{font-family:'Newsreader',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .zh{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(217,143,166,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#8b9a93;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Newsreader',serif;color:#c9cdc2;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.16</div>
+    <h1>The Water-Lily Pond — Monet Turns a Garden Into One Green Chord</h1>
+    <div class="sub">Claude Monet, <em>The Water-Lily Pond</em> · 1899</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Monet's Water-Lily Pond: an arched wooden footbridge painted pale slate-blue spans the canvas, willows and layered foliage hanging above it, while below, lily pads and pink-white blooms cover the water's surface alongside the mirrored reflection of the bridge and trees, the whole painting built from shades of green">
+    <figcaption><em>The Water-Lily Pond</em>, Claude Monet, 1899, oil on canvas · National Gallery, London · Public domain, image via Wikimedia Commons</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">By 1899, Monet had stopped searching for landscapes and started building them. At Giverny, he bought a plot of low ground, diverted a stream into it, dug a pond, imported water lilies from Japan, and built a pale slate-blue wooden footbridge modeled on the ukiyo-e prints he collected. There's barely any sky in this canvas, barely any shore — just one long chord of green. Monet titled it, quite literally, <em>The Water-Lily Pond, Green Harmony</em> (<em>Le Bassin aux nymphéas, harmonie verte</em>).</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="zh">构图</span></h2>
+    <p>The most radical move here is what Monet leaves out: the horizon. A traditional landscape needs a line telling you where earth ends and sky begins; Monet erases it entirely. An arched footbridge splits the canvas top to bottom — above it, willow branches and layered foliage; below it, lily pads and the mirrored reflection of the same trees, nearly symmetrical, so you can't always tell which half is "real" and which is only water.</p>
+    <p>The vantage point is pulled low and close, as if you're leaning over the rail rather than admiring a view from a distance, and the near-square canvas is filled edge to edge with plant and water — no blank margin left to breathe in, so the eye is pulled straight into the pond.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color Theory <span class="zh">配色</span></h2>
+    <p>Monet's own French title names the logic outright: <em>harmonie verte</em>, green harmony. The whole canvas sits on one analogous color band — yellow-leaning willow green, mid moss green, blue-leaning deep pond green, and the bridge's slate blue-grey — all neighbors on the color wheel, so nothing sharp interrupts the eye.</p>
+    <p>The one accent is a scatter of pink-and-white lily blooms on the water: tiny in area, but the only warm, bright note in the whole painting, so it's exactly where your eye lands first. It's the same formula behind a lot of "quiet luxury" or Morandi-style palettes: build a large, calm base in one color family, then spend your one accent color sparingly, on purpose.</p>
+    <div class="palette">
+      <div class="sw" style="background:#7c8f4a;color:#1c2410">Willow Green<small>#7C8F4A · weeping willows</small></div>
+      <div class="sw" style="background:#5a7350;color:#eef1ec">Moss Mid-Green<small>#5A7350 · mid-ground foliage</small></div>
+      <div class="sw" style="background:#2f4a3c;color:#eef1ec">Deep Pond Green<small>#2F4A3C · water's depth</small></div>
+      <div class="sw" style="background:#7f97a6;color:#1c2410">Bridge Slate-Blue<small>#7F97A6 · the footbridge</small></div>
+      <div class="sw" style="background:#d98fa6;color:#2f1420">Water-Lily Pink<small>#D98FA6 · the blooms</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique <span class="zh">光影与技法</span></h2>
+    <p>Monet worked in Impressionism's signature broken brushwork — instead of blending paint smooth, he laid down small, differently angled strokes of color side by side and let the viewer's eye do the mixing at a distance, turning dabs into ripples, leaf-shadow, and light. That's the trick behind brushwork loose enough to look almost careless up close, yet fully legible from a few steps back.</p>
+    <p>The more consequential move is what he does to the water itself: reflection and object are painted with equal clarity, equal "realness" — you can't always separate a lily pad from a willow's shadow inside it. Art historians read this refusal to distinguish reflection from substance as an early step toward abstraction: once a painter renders a reflection as truthfully as the thing it reflects, the line between figurative and abstract starts to blur.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="zh">为何动人</span></h2>
+    <p>What's most moving here may not be on the canvas at all — it's what happened before Monet ever picked up a brush. This garden wasn't a landscape he found; it was one he designed, dug, and planted himself. He bought the land at Giverny, hired gardeners, imported lily varieties from Japan, and had this bridge built to match the ukiyo-e prints in his own collection — he built the subject before he painted it. Most painters go looking for a scene; Monet planted his in his own backyard.</p>
+    <p>Starting with this 1899 Japanese Footbridge series, he would spend the next two decades painting almost nothing but this one pond, shedding the horizon and the shoreline bit by bit, until his final years produced the vast, nearly abstract <em>Water Lilies</em> murals now at the Musée de l'Orangerie in Paris. This comparatively restrained early version is the start of that long experiment — the bridge is still there, one small anchor to the figurative, before he lets it go entirely.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Background <span class="zh">作者背景</span></h2>
+    <p>Claude Monet (1840–1926) was a French painter and a founding figure of Impressionism — the movement's very name comes from his 1872 painting <em>Impression, Sunrise</em>. In 1883 Monet settled at Giverny, and for the next four decades he kept expanding his garden and water-lily pond, which became the central subject of his late career, almost without interruption, until his death.</p>
+    <p>Monet has been dead for over ninety years and the painting is in the public domain; this <em>Water-Lily Pond</em> is held at the National Gallery, London, and the image used here comes from Wikimedia Commons' public-domain digitization.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="zh">可借鉴</span></h2>
+    <ul class="tips">
+      <li><b>Base a palette in one analogous color family, then spend a single accent on purpose:</b> a small warm note against a large cool field pulls the eye exactly where you want it — works for interiors and outfits, not just paint.</li>
+      <li><b>Cut the horizon and the composition gets more immersive:</b> let the subject fill the whole frame with no breathing room, and viewers lean in closer instead of stepping back.</li>
+      <li><b>Render reflections as sharply as the real thing:</b> shooting water, mirrors, or glass, keep both equally crisp and detailed for that real-vs-illusion tension.</li>
+      <li><b>Build the scene before you capture it:</b> if you can't find a subject you love, stage one — the way Monet built his own garden to paint.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">A R T</div>
+    Image: <em>The Water-Lily Pond</em>, Claude Monet, 1899, public domain<br>
+    Source: Wikimedia Commons · National Gallery, London · Appreciation and analysis are the author's own
+  </footer>
+</div>
+</body>
+</html>
