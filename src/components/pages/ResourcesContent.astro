@@ -1,0 +1,133 @@
+---
+import { artResources } from '../../data/resources';
+
+const [featured, ...archive] = artResources;
+---
+
+<section class="resources-page" aria-labelledby="resources-title">
+  <span class="resources-ink resources-ink-top" aria-hidden="true"></span>
+  <span class="resources-ink resources-ink-bottom" aria-hidden="true"></span>
+
+  <header class="resources-intro">
+    <div>
+      <p class="resources-kicker">Telotia field notes</p>
+      <h1 id="resources-title">Resources</h1>
+    </div>
+    <p class="resources-deck">Art appreciations, research, and product notes from the Telotia studio.</p>
+  </header>
+
+  <section id="art" class="resources-art" aria-labelledby="art-title">
+    <div class="resources-section-heading">
+      <p class="resources-kicker">Observation practice</p>
+      <h2 id="art-title">Art</h2>
+      <p>Studies in evidence, composition, and attention.</p>
+    </div>
+
+    <a class="resource-feature" href={featured.href}>
+      <figure>
+        <img src={featured.image} alt={`${featured.title} by ${featured.artist}`} />
+      </figure>
+      <div class="resource-feature-copy">
+        <p class="resource-number">No. 01 / Editor's selection</p>
+        <time datetime={featured.dateTime}>{featured.date}</time>
+        <h3>{featured.title}</h3>
+        <p class="resource-artist">{featured.artist}</p>
+        <p class="resource-note">{featured.note}</p>
+        <span class="resource-action">Read the appreciation <span aria-hidden="true">→</span></span>
+      </div>
+    </a>
+
+    <div class="resource-archive" aria-label="Art archive">
+      {archive.map((item, index) => (
+        <a class="resource-row" href={item.href}>
+          <span class="resource-row-number">{String(index + 2).padStart(2, '0')}</span>
+          <img src={item.image} alt="" loading="lazy" />
+          <span class="resource-row-copy">
+            <time datetime={item.dateTime}>{item.date}</time>
+            <strong>{item.title}</strong>
+            <span>{item.artist}</span>
+          </span>
+          <span class="resource-row-note">{item.note}</span>
+          <span class="resource-row-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="resources-forthcoming" aria-labelledby="forthcoming-title">
+    <div>
+      <p class="resources-kicker">Forthcoming</p>
+      <h2 id="forthcoming-title">The library is still growing.</h2>
+    </div>
+    <div class="forthcoming-list">
+      <div>
+        <span class="forthcoming-mark forthcoming-mark-blue" aria-hidden="true"></span>
+        <h3>Research</h3>
+        <p>Methods, benchmarks, and notes on evidence review.</p>
+      </div>
+      <div>
+        <span class="forthcoming-mark forthcoming-mark-red" aria-hidden="true"></span>
+        <h3>Aquila</h3>
+        <p>Product decisions and records from work in progress.</p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<style>
+  .resources-page{position:relative;isolation:isolate;width:100%;overflow:hidden;padding:clamp(76px,8vw,118px) 64px clamp(92px,10vw,148px)}
+  .resources-page>*:not(.resources-ink){position:relative;z-index:1}
+  .resources-ink{position:absolute;z-index:0;display:block;pointer-events:none;background-repeat:no-repeat;background-size:contain;mix-blend-mode:multiply}
+  .resources-ink-top{width:clamp(340px,42vw,680px);height:clamp(210px,28vw,420px);top:18px;right:clamp(-210px,-10vw,-72px);background-image:url('/assets/ink-wash/05-bamboo-right.webp');background-position:right top;opacity:.18;filter:grayscale(.25) contrast(1.2)}
+  .resources-ink-bottom{width:clamp(420px,54vw,820px);height:clamp(180px,23vw,330px);left:clamp(-260px,-12vw,-100px);bottom:14px;background-image:url('/assets/ink-wash/08-water-left.webp');background-position:left bottom;opacity:.13;filter:saturate(.55) contrast(1.18)}
+  .resources-intro,.resources-art,.resources-forthcoming{width:min(1180px,100%);margin-inline:auto}
+  .resources-intro{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(280px,.68fr);align-items:end;gap:clamp(36px,7vw,104px);padding-bottom:clamp(46px,6vw,76px)}
+  .resources-kicker,.resource-number,.resource-feature time,.resource-row time,.resource-row-number{font-family:var(--fmono);text-transform:uppercase;letter-spacing:.15em}
+  .resources-kicker{color:var(--teal);font-size:10.5px;font-weight:500}
+  .resources-intro h1{max-width:760px;margin-top:10px;color:var(--t1);font-size:clamp(62px,9vw,124px);line-height:.82}
+  .resources-deck{max-width:450px;padding:0 0 7px 22px;border-left:1px solid rgba(193,59,51,.42);color:var(--t2);font-size:clamp(17px,1.55vw,21px);line-height:1.55}
+  .resources-art{padding-top:30px;border-top:1px solid rgba(23,32,29,.28)}
+  .resources-section-heading{display:grid;grid-template-columns:140px minmax(160px,.55fr) minmax(280px,1fr);align-items:baseline;gap:24px;padding-bottom:26px}
+  .resources-section-heading h2{color:var(--t1);font-size:clamp(32px,4vw,48px);line-height:1}
+  .resources-section-heading>p:last-child{justify-self:end;max-width:400px;color:var(--t3);font-size:14px;line-height:1.55}
+  .resource-feature{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(320px,.76fr);height:clamp(520px,52vw,660px);overflow:hidden;border:1px solid rgba(23,32,29,.22);border-radius:18px;background:rgba(248,247,242,.8);color:inherit;text-decoration:none;box-shadow:0 30px 70px -52px rgba(23,32,29,.58),inset 0 1px rgba(255,255,255,.72);transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
+  .resource-feature:hover,.resource-feature:focus-visible{border-color:rgba(42,85,165,.55);box-shadow:0 36px 82px -50px rgba(29,63,117,.48),inset 0 1px rgba(255,255,255,.8)}
+  .resource-feature:focus-visible,.resource-row:focus-visible{outline:2px solid rgba(42,85,165,.55);outline-offset:4px}
+  .resource-feature figure{min-height:100%;overflow:hidden;background:var(--surface-selected)}
+  .resource-feature img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.04);transition:transform 1.1s var(--ease),filter .5s var(--ease)}
+  .resource-feature:hover img{transform:scale(1.018);filter:saturate(.92) contrast(1.06)}
+  .resource-feature-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(34px,5vw,68px);background:radial-gradient(circle at 100% 0,rgba(227,163,44,.11),transparent 34%),linear-gradient(145deg,rgba(248,247,242,.96),rgba(238,235,226,.92))}
+  .resource-number{color:var(--vermilion);font-size:9.5px}
+  .resource-feature time,.resource-row time{display:block;color:var(--t4);font-size:9.5px}
+  .resource-feature time{margin-top:56px}
+  .resource-feature h3{margin-top:12px;color:var(--t1);font-family:var(--fdisplay);font-size:clamp(30px,3.5vw,48px);font-weight:500;line-height:1.04}
+  .resource-artist{margin-top:11px;color:var(--teal2);font-size:14px;font-weight:500}
+  .resource-note{margin-top:32px;color:var(--t2);font-size:15px;line-height:1.65}
+  .resource-action{margin-top:46px;color:var(--t1);font-family:var(--fmono);font-size:11px;letter-spacing:.035em}
+  .resource-action span{display:inline-block;margin-left:4px;color:var(--teal);transition:transform .22s var(--ease)}
+  .resource-feature:hover .resource-action span{transform:translateX(4px)}
+  .resource-archive{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(34px,6vw,84px);margin-top:clamp(48px,6vw,78px);border-top:1px solid rgba(23,32,29,.24)}
+  .resource-row{position:relative;display:grid;grid-template-columns:30px 112px minmax(0,1fr) 18px;grid-template-areas:"number image copy arrow" "number image note arrow";gap:9px 18px;align-items:start;min-height:154px;padding:22px 0;border-bottom:1px solid rgba(23,32,29,.18);color:inherit;text-decoration:none}
+  .resource-row-number{grid-area:number;padding-top:3px;color:var(--gold2);font-size:9px}
+  .resource-row img{grid-area:image;display:block;width:112px;aspect-ratio:4/3;object-fit:cover;border-radius:6px;filter:saturate(.7) contrast(1.02);transition:filter .25s var(--ease),transform .35s var(--ease)}
+  .resource-row:hover img{filter:saturate(.95) contrast(1.04);transform:translateY(-2px)}
+  .resource-row-copy{grid-area:copy;display:block;min-width:0}
+  .resource-row-copy strong{display:block;margin-top:7px;color:var(--t1);font-family:var(--fdisplay);font-size:20px;font-weight:500;line-height:1.12}
+  .resource-row-copy>span{display:block;margin-top:5px;color:var(--teal2);font-size:12px}
+  .resource-row-note{grid-area:note;color:var(--t3);font-size:12.5px;line-height:1.45}
+  .resource-row-arrow{grid-area:arrow;justify-self:end;color:var(--t4);font-size:15px;transition:color .2s var(--ease),transform .2s var(--ease)}
+  .resource-row:hover .resource-row-arrow{color:var(--teal);transform:translate(2px,-2px)}
+  .resources-forthcoming{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.25fr);gap:clamp(48px,8vw,120px);margin-top:clamp(84px,10vw,138px);padding-top:32px;border-top:1px solid rgba(23,32,29,.28)}
+  .resources-forthcoming h2{max-width:440px;margin-top:12px;color:var(--t1);font-size:clamp(34px,4.8vw,58px);line-height:1.02}
+  .forthcoming-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(23,32,29,.16);border:1px solid rgba(23,32,29,.16);border-radius:16px;overflow:hidden}
+  .forthcoming-list>div{position:relative;min-height:214px;padding:34px;overflow:hidden;background:rgba(248,247,242,.78)}
+  .forthcoming-mark{position:absolute;right:-28px;top:-32px;width:130px;height:130px;border-radius:48% 52% 55% 45%;filter:blur(8px);opacity:.16}
+  .forthcoming-mark-blue{background:var(--teal)}
+  .forthcoming-mark-red{background:var(--vermilion)}
+  .forthcoming-list h3{position:relative;color:var(--t1);font-family:var(--fdisplay);font-size:27px;font-weight:500}
+  .forthcoming-list p{position:relative;max-width:260px;margin-top:44px;color:var(--t3);font-size:14px;line-height:1.55}
+  @media(max-width:980px){.resource-feature{grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr)}.resource-archive{grid-template-columns:1fr}}
+  @media(max-width:760px){.resources-page{padding:58px 18px 90px}.resources-intro,.resources-section-heading,.resources-forthcoming{grid-template-columns:1fr}.resources-intro{gap:28px}.resources-intro h1{font-size:clamp(58px,20vw,86px)}.resources-deck{padding-left:16px}.resources-section-heading{gap:9px}.resources-section-heading>p:last-child{justify-self:start;margin-top:7px}.resource-feature{grid-template-columns:1fr;height:auto}.resource-feature img{height:auto;aspect-ratio:4/3}.resource-feature-copy{padding:30px 26px 34px}.resource-feature time{margin-top:32px}.resource-note{margin-top:22px}.resource-action{margin-top:28px}.resources-forthcoming{gap:34px}}
+  @media(max-width:520px){.resource-row{grid-template-columns:26px 86px minmax(0,1fr) 14px;grid-template-areas:"number image copy arrow" "number note note arrow";min-height:0;column-gap:12px}.resource-row img{width:86px}.resource-row-copy strong{font-size:18px}.resource-row-note{margin-top:8px}.forthcoming-list{grid-template-columns:1fr}.forthcoming-list>div{min-height:180px}}
+  @media(prefers-reduced-motion:reduce){.resource-feature,.resource-feature img,.resource-action span,.resource-row img,.resource-row-arrow{transition:none}}
+</style>

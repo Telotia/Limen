@@ -21,21 +21,3 @@ export const artResources: ResourceMenuItem[] = [
     date: 'Jun 30',
   },
 ];
-
-export const financeResources: ResourceMenuItem[] = [
-  {
-    href: '/resource/finance/2026/07/02/meta-compute-cloud/',
-    title: 'Meta Compute: One Report Repriced the AI Compute Market',
-    date: 'Jul 2',
-  },
-  {
-    href: '/resource/finance/2026/07/01/chip-rally-nvidia-lag/',
-    title: 'Micron Up 240%, Nvidia Up 15%, Same AI Story, Different Winner',
-    date: 'Jul 1',
-  },
-  {
-    href: '/resource/finance/2026/06/30/alphabet-joins-dow/',
-    title: "A Stock's Price Tag, Not Its Size, Just Won a Dow Seat",
-    date: 'Jun 30',
-  },
-];

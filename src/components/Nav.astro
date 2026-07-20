@@ -1,31 +1,37 @@
 ---
-import { artResources, financeResources } from '../data/resource-menu';
+import { artResources } from '../data/resource-menu';
 
 interface Props {
   showSubnav?: boolean;
 }
 const { showSubnav = true } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const isCurrent = (href: string) => {
+  const normalized = href.startsWith('/') ? href : `/${href}`;
+  return currentPath === normalized || currentPath === normalized.replace('.html', '');
+};
 
 ---
 
 <!-- NAV -->
 <nav class="navlight" aria-label="Primary navigation" style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:28px;padding:0 64px;min-height:72px;background:linear-gradient(90deg,rgba(230,226,216,.94),rgba(246,243,236,.9) 46%,rgba(230,226,216,.94));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(23,32,29,.22);box-shadow:0 1px 0 rgba(255,255,255,.35)">
-    <a class="nav-brand" href="index.html" style="text-decoration:none"><div style="display:flex;align-items:center;gap:14px">
+    <a class="nav-brand" href="/" style="text-decoration:none"><div style="display:flex;align-items:center;gap:14px">
       <img src="/telotia-mark-tricolor-transparent.webp" alt="Telotia" style="height:50px;width:50px;object-fit:contain;display:block;flex-shrink:0"/>
       <span style="font-family:var(--fmono);font-size:14px;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:#10182F">TELOTIA</span>
     </div></a>
     <div class="nav-links" style={`display:${showSubnav ? 'flex' : 'none'};gap:26px;margin-left:6px`}>
       {showSubnav && (
         <>
-          <a class="lk" href="process.html" style="font-size:13px">Process</a>
-          <a class="lk" href="workspace.html" style="font-size:13px">Workspace</a>
-          <a class="lk" href="demo.html" style="font-size:13px">Demo</a>
-          <a class="lk" href="research.html" style="font-size:13px">Research</a>
-          <a class="lk" href="consult.html" style="font-size:13px">Consult</a>
+          <a class="lk nav-link" aria-current={isCurrent('process.html') ? 'page' : undefined} href="process.html">Process</a>
+          <a class="lk nav-link" aria-current={isCurrent('workspace.html') ? 'page' : undefined} href="workspace.html">Workspace</a>
+          <a class="lk nav-link" aria-current={isCurrent('demo.html') ? 'page' : undefined} href="demo.html">Demo</a>
+          <a class="lk nav-link" aria-current={isCurrent('research.html') ? 'page' : undefined} href="research.html">Research</a>
+          <a class="lk nav-link" aria-current={isCurrent('consult.html') ? 'page' : undefined} href="consult.html">Consult</a>
         </>
       )}
       <div class="nav-res">
-        <a class="lk" href="/resource" style="font-size:13px">Resources</a>
+        <a class="lk nav-link" aria-current={currentPath.startsWith('/resource') ? 'page' : undefined} href="/resource.html">Resources</a>
         <div class="res-panel">
           <div class="res-col">
             <div class="res-col-title">Art</div>
@@ -35,17 +41,7 @@ const { showSubnav = true } = Astro.props;
                 <span class="res-item-date">{item.date}</span>
               </a>
             ))}
-            <a class="res-viewall" href="/resource/art/">All art →</a>
-          </div>
-          <div class="res-col">
-            <div class="res-col-title">Finance</div>
-            {financeResources.map((item) => (
-              <a class="res-item" href={item.href}>
-                <span class="res-item-title">{item.title}</span>
-                <span class="res-item-date">{item.date}</span>
-              </a>
-            ))}
-            <a class="res-viewall" href="/resource/finance/">All finance →</a>
+            <a class="res-viewall" href="/resource.html#art">All art →</a>
           </div>
           <div class="res-col">
             <div class="res-col-title">Research</div>
@@ -66,7 +62,7 @@ const { showSubnav = true } = Astro.props;
         <a href="demo.html">Demo</a>
         <a href="research.html">Research</a>
         <a href="consult.html">Consult</a>
-        <a href="/resource">Resources</a>
+        <a href="/resource.html">Resources</a>
         <a class="nav-mobile-cta" href="consult.html">Request a pilot</a>
       </div>
     </details>
@@ -78,6 +74,38 @@ const { showSubnav = true } = Astro.props;
     position: relative;
     margin-left: auto;
     font-family: var(--fmono);
+  }
+
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 72px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .nav-link[aria-current="page"] {
+    color: var(--t1);
+  }
+
+  .nav-link[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    transform: translateX(-50%);
+    box-shadow: 0 0 0 3px rgba(42, 85, 165, 0.08);
+  }
+
+  .nav-res {
+    display: flex;
+    align-items: center;
+    min-height: 72px;
   }
 
   .nav-mobile summary {

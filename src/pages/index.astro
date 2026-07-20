@@ -1,13 +1,7 @@
 ---
-import Consult from '../components/home/Consult.astro';
-import Demo from '../components/home/Demo.astro';
-import Glossary from '../components/home/Glossary.astro';
 import Hero from '../components/home/Hero.astro';
+import HomePath from '../components/home/HomePath.astro';
 import PageInk from '../components/home/PageInk.astro';
-import Process from '../components/home/Process.astro';
-import Research from '../components/home/Research.astro';
-import Verdict from '../components/home/Verdict.astro';
-import Workspace from '../components/home/Workspace.astro';
 import MarketingShell from '../layouts/MarketingShell.astro';
 
 const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
@@ -22,11 +16,5 @@ const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
 >
   <PageInk />
   <Hero />
-  <Process />
-  <Verdict />
-  <Glossary />
-  <Workspace />
-  <Demo />
-  <Research />
-  <Consult />
+  <HomePath />
 </MarketingShell>
