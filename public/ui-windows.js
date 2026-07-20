@@ -184,12 +184,16 @@
     var pendingFrame = 0;
     var pendingSize = null;
 
-    function sizeLimits() {
-      var parent = frame.parentElement;
-      var parentWidth = parent ? parent.getBoundingClientRect().width : window.innerWidth - 32;
+    function sizeLimits(rect, xDirection) {
+      var currentRect = rect || frame.getBoundingClientRect();
+      var viewportMargin = 12;
+      var viewportWidth = Math.max(280, window.innerWidth - viewportMargin * 2);
+      var maxWidth = viewportWidth;
+      if (xDirection > 0) maxWidth = window.innerWidth - viewportMargin - currentRect.left;
+      if (xDirection < 0) maxWidth = currentRect.right - viewportMargin;
       return {
-        minWidth: Math.min(spec.minWidth, Math.max(280, parentWidth)),
-        maxWidth: Math.max(280, Math.min(parentWidth, window.innerWidth - 32)),
+        minWidth: Math.min(spec.minWidth, viewportWidth),
+        maxWidth: Math.max(280, maxWidth),
         minHeight: spec.minHeight,
         maxHeight: Math.max(spec.minHeight, Math.min(1200, window.innerHeight * 1.35))
       };
@@ -220,7 +224,8 @@
       if (window.matchMedia('(max-width: 820px)').matches) return;
       event.preventDefault();
       var rect = frame.getBoundingClientRect();
-      var limits = sizeLimits();
+      var xDirection = Number(event.currentTarget.dataset.resizeX);
+      var limits = sizeLimits(rect, xDirection);
       resizeState = {
         startX: event.clientX,
         startY: event.clientY,
@@ -228,7 +233,7 @@
         startHeight: rect.height,
         startLeft: rect.left,
         startTop: rect.top,
-        xDirection: Number(event.currentTarget.dataset.resizeX),
+        xDirection: xDirection,
         yDirection: Number(event.currentTarget.dataset.resizeY),
         limits: limits
       };
@@ -340,13 +345,14 @@
           return;
         }
         normalWindowState = captureWindowState();
-        var limits = sizeLimits();
+        var limits = sizeLimits(frame.getBoundingClientRect(), 0);
+        var rect = frame.getBoundingClientRect();
+        var targetLeft = 12;
         frame.classList.add('is-maximized', 'has-user-window-size');
         frame.style.width = limits.maxWidth + 'px';
         frame.style.height = Math.round(Math.max(spec.minHeight, Math.min(820, window.innerHeight - 120))) + 'px';
-        frame.style.translate = '0px 0px';
-        offsetX = 0;
-        offsetY = 0;
+        offsetX += targetLeft - rect.left;
+        frame.style.translate = Math.round(offsetX) + 'px ' + Math.round(offsetY) + 'px';
         updateFitState();
         live.textContent = 'TELOTIA maximized';
       }
@@ -427,7 +433,7 @@
         if ((horizontalKey && !xDirection) || (verticalKey && !yDirection)) return;
         event.preventDefault();
         var rect = frame.getBoundingClientRect();
-        var limits = sizeLimits();
+        var limits = sizeLimits(rect, xDirection);
         var step = event.shiftKey ? 8 : 24;
         var width = rect.width;
         var height = rect.height;
