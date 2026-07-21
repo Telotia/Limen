@@ -65,7 +65,9 @@ const collections = [
   <header class="resources-intro">
     <div>
       <p class="resources-kicker">Telotia field notes</p>
-      <h1 id="resources-title">Explore the archive.</h1>
+      <h1 id="resources-title" aria-label="Explore the archive.">
+        <span class="resources-type-line" aria-hidden="true"><span class="resources-typewriter" data-resource-typewriter>Explore the archive.</span><span class="resources-type-cursor"></span></span>
+      </h1>
     </div>
     <div class="resources-intro-copy">
       <p>Open today as a connected field, or return to the year, month, and day archive.</p>
@@ -181,6 +183,59 @@ const collections = [
 </div>
 
 <script>
+  const animatedResourceTitle = document.querySelector<HTMLElement>('[data-resource-typewriter]');
+  const reduceTitleMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (animatedResourceTitle && !reduceTitleMotion) {
+    const titlePhrase = 'Explore the archive';
+    let titleTimer = 0;
+    let stopTitleAnimation = false;
+
+    const waitForTitle = (duration: number) => new Promise<void>((resolve) => {
+      titleTimer = window.setTimeout(resolve, duration);
+    });
+
+    const renderTitle = (value: string) => {
+      animatedResourceTitle.textContent = value;
+    };
+
+    const playTitleSequence = async () => {
+      renderTitle('');
+      await waitForTitle(420);
+
+      while (!stopTitleAnimation) {
+        for (let index = 1; index <= titlePhrase.length; index += 1) {
+          if (stopTitleAnimation) return;
+          renderTitle(titlePhrase.slice(0, index));
+          await waitForTitle(titlePhrase[index - 1] === ' ' ? 105 : 68);
+        }
+
+        for (let cycle = 0; cycle < 3; cycle += 1) {
+          for (let dots = 1; dots <= 3; dots += 1) {
+            if (stopTitleAnimation) return;
+            renderTitle(`${titlePhrase}${'.'.repeat(dots)}`);
+            await waitForTitle(250);
+          }
+        }
+
+        await waitForTitle(760);
+        const completedTitle = `${titlePhrase}...`;
+        for (let index = completedTitle.length - 1; index >= 0; index -= 1) {
+          if (stopTitleAnimation) return;
+          renderTitle(completedTitle.slice(0, index));
+          await waitForTitle(34);
+        }
+        await waitForTitle(460);
+      }
+    };
+
+    void playTitleSequence();
+    window.addEventListener('pagehide', () => {
+      stopTitleAnimation = true;
+      window.clearTimeout(titleTimer);
+    }, { once: true });
+  }
+
   const explorerView = document.querySelector<HTMLElement>('[data-resource-explorer]');
   const archiveView = document.querySelector<HTMLElement>('[data-resource-archive]');
   const viewButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-resource-view]')];
@@ -398,8 +453,11 @@ const collections = [
   .resource-collection{width:min(1180px,100%);margin-inline:auto}
   .resources-kicker,.resource-feature-meta,.resource-path,.month-heading p,.month-heading span,.resource-row time,.resource-row-links{font-family:var(--fmono);text-transform:uppercase;letter-spacing:.14em}
   .resources-kicker{color:var(--teal);font-size:10.5px;font-weight:500}
-  .resources-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,390px);align-items:end;gap:clamp(42px,5vw,96px);padding-bottom:clamp(38px,5vw,60px)}
-  .resources-intro h1{max-width:none;margin-top:14px;color:var(--t1);font-size:clamp(64px,7vw,122px);line-height:.88}
+  .resources-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,350px);align-items:end;gap:clamp(36px,4vw,68px);padding-bottom:clamp(38px,5vw,60px)}
+  .resources-intro h1{position:relative;min-width:0;max-width:100%;overflow:clip;margin-top:14px;color:var(--t1);font-size:clamp(60px,5.9vw,104px);line-height:.9}
+  .resources-intro h1::before{content:"Explore the archive...\00a0";visibility:hidden}
+  .resources-type-line{position:absolute;inset:0;display:block;max-width:100%}
+  .resources-type-cursor{display:inline-block;width:.035em;height:.78em;margin-left:.075em;background:color-mix(in srgb,var(--teal) 78%,var(--t1));transform:translateY(.055em);animation:resources-cursor-blink .82s steps(1,end) infinite}
   .resources-intro-copy{padding:0 0 8px 24px;border-left:1px solid rgba(193,59,51,.44)}
   .resources-intro-copy>p{max-width:430px;color:var(--t2);font-size:clamp(17px,1.5vw,21px);line-height:1.55}
   .resources-intro nav{display:flex;gap:10px;margin-top:26px}
@@ -480,8 +538,10 @@ const collections = [
   .resource-reader-step:disabled{opacity:.34;cursor:not-allowed}
   .resource-reader-frame{display:block;width:100%;height:100%;border:0;background:#f8f7f2}
   @media(min-width:1280px){.resources-intro h1{white-space:nowrap}}
+  @media(max-width:1050px){.resources-intro{grid-template-columns:1fr;gap:28px}.resources-intro-copy{width:min(430px,100%)}}
   @media(max-width:900px){.resource-feature{grid-template-columns:minmax(0,1.05fr) minmax(310px,.95fr)}.month-heading{grid-template-columns:126px minmax(0,1fr) auto 30px}.month-entries{margin-left:calc(126px + clamp(26px,5vw,74px))}}
   @media(max-width:760px){.resources-page{padding:58px 18px 90px}.resources-page>.resource-view-switch{top:14px;right:18px}.resources-intro,.collection-heading{grid-template-columns:1fr}.resources-intro{gap:28px}.resources-intro h1{font-size:clamp(58px,20vw,86px)}.resources-intro-copy{padding-left:16px}.collection-heading{gap:14px}.collection-heading>p{justify-self:start}.resource-feature{grid-template-columns:1fr;min-height:0}.resource-feature-image img{height:auto;aspect-ratio:4/3}.resource-feature-copy{padding:30px 26px 34px}.resource-feature-copy>.resource-path{margin-top:34px}.month-heading{grid-template-columns:auto minmax(0,1fr) auto 28px;gap:10px;padding:22px 0}.month-heading h3{font-size:25px}.month-count{justify-self:end}.month-entries{margin-left:0}.resource-row{grid-template-columns:48px minmax(0,1fr) auto;gap:14px;min-height:112px}.resource-row h4{font-size:21px}.resource-reader{padding:76px 8px 8px}.resource-reader-card{width:calc(100vw - 16px);height:100%}.resource-reader-bar{align-items:flex-start;min-height:0;padding:10px}.resource-reader-identity{display:none}.resource-reader-navigation{width:100%}.resource-reader-step{flex:1}.resource-reader-direct{display:none}}
   @media(max-width:480px){.resources-intro nav{flex-wrap:wrap}.resource-row{grid-template-columns:44px minmax(0,1fr);grid-template-areas:'date copy' 'date links';align-items:start}.resource-row time{grid-area:date}.resource-row-copy{grid-area:copy}.resource-row-links{grid-area:links;margin-top:3px}.resource-path{font-size:8px}.resource-row h4{font-size:19px}.resource-reader{padding-top:72px}}
-  @media(prefers-reduced-motion:reduce){.resource-feature-image img,.next-collection span{transition:none}}
+  @keyframes resources-cursor-blink{0%,46%{opacity:1}47%,100%{opacity:.12}}
+  @media(prefers-reduced-motion:reduce){.resource-feature-image img,.next-collection span{transition:none}.resources-type-cursor{display:none;animation:none}}
 </style>

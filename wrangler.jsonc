@@ -9,6 +9,9 @@
     "directory": "./dist",
     "binding": "ASSETS"
   },
+  "vars": {
+    "ENVIRONMENT": "development"
+  },
   // Pilot leads are always logged (see `wrangler tail`). To also store them
   // durably, create a namespace and uncomment the block below:
   //   bunx wrangler kv namespace create PILOT_LEADS
@@ -18,7 +21,10 @@
   "env": {
     "production": {
       "name": "limen",
-      "workers_dev": false
+      "workers_dev": false,
+      "vars": {
+        "ENVIRONMENT": "production"
+      }
       // Bindings are per-environment (not inherited). Once KV is enabled,
       // repeat "kv_namespaces" here with a separate prod namespace id.
     }

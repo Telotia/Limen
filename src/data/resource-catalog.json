@@ -4,6 +4,46 @@
         "categories":  [
                            "news"
                        ],
+        "title":  "Record Leverage, Right on Cue · US Margin Debt Hits $1.53T",
+        "date":  "2026-07-21",
+        "dateLabel":  "Jul 21, 2026",
+        "folderLabel":  "2026/07/21/margin-debt-record-leverage-test",
+        "href":  "/resource/news/2026/07/21/margin-debt-record-leverage-test/en/index.html",
+        "zhHref":  "/resource/news/2026/07/21/margin-debt-record-leverage-test/zh/index.html",
+        "image":  "/resource/news/2026/07/21/margin-debt-record-leverage-test/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/21/margin-debt-record-leverage-test/en/card-1.jpg",
+                      "/resource/news/2026/07/21/margin-debt-record-leverage-test/en/card-2.jpg",
+                      "/resource/news/2026/07/21/margin-debt-record-leverage-test/en/card-3.jpg",
+                      "/resource/news/2026/07/21/margin-debt-record-leverage-test/en/card-4.jpg"
+                  ]
+    },
+    {
+        "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
+        "title":  "Las Meninas · A Room That Looks Back",
+        "date":  "2026-07-21",
+        "dateLabel":  "Jul 21, 2026",
+        "folderLabel":  "2026/07/21/las-meninas-velazquez",
+        "href":  "/resource/art/2026/07/21/las-meninas-velazquez/en/index.html",
+        "zhHref":  "/resource/art/2026/07/21/las-meninas-velazquez/zh/index.html",
+        "image":  "/resource/art/2026/07/21/las-meninas-velazquez/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/21/las-meninas-velazquez/en/card-1.jpg",
+                      "/resource/art/2026/07/21/las-meninas-velazquez/en/card-2.jpg",
+                      "/resource/art/2026/07/21/las-meninas-velazquez/en/card-3.jpg",
+                      "/resource/art/2026/07/21/las-meninas-velazquez/en/card-4.jpg",
+                      "/resource/art/2026/07/21/las-meninas-velazquez/en/card-5.jpg",
+                      "/resource/art/2026/07/21/las-meninas-velazquez/en/card-6.jpg"
+                  ]
+    },
+    {
+        "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "The Forced Buying That Didn\u0027t Hold · SpaceX Is Down 45% From Its High",
         "date":  "2026-07-20",
         "dateLabel":  "Jul 20, 2026",
@@ -16,6 +56,27 @@
                       "/resource/news/2026/07/20/spacex-squeeze-unwind/en/card-2.jpg",
                       "/resource/news/2026/07/20/spacex-squeeze-unwind/en/card-3.jpg",
                       "/resource/news/2026/07/20/spacex-squeeze-unwind/en/card-4.jpg"
+                  ]
+    },
+    {
+        "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
+        "title":  "The Child\u0027s Bath · A Circle of Care Seen from Above",
+        "date":  "2026-07-20",
+        "dateLabel":  "Jul 20, 2026",
+        "folderLabel":  "2026/07/20/the-childs-bath-mary-cassatt",
+        "href":  "/resource/art/2026/07/20/the-childs-bath-mary-cassatt/en/index.html",
+        "zhHref":  "/resource/art/2026/07/20/the-childs-bath-mary-cassatt/zh/index.html",
+        "image":  "/resource/art/2026/07/20/the-childs-bath-mary-cassatt/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/20/the-childs-bath-mary-cassatt/en/card-1.jpg",
+                      "/resource/art/2026/07/20/the-childs-bath-mary-cassatt/en/card-2.jpg",
+                      "/resource/art/2026/07/20/the-childs-bath-mary-cassatt/en/card-3.jpg",
+                      "/resource/art/2026/07/20/the-childs-bath-mary-cassatt/en/card-4.jpg",
+                      "/resource/art/2026/07/20/the-childs-bath-mary-cassatt/en/card-5.jpg",
+                      "/resource/art/2026/07/20/the-childs-bath-mary-cassatt/en/card-6.jpg"
                   ]
     },
     {

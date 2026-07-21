@@ -68,9 +68,13 @@ jobs:
       - run: bun test
       - name: Build dev
         run: bun run build:dev
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
       - name: Validate dev Cloudflare deploy
         run: bunx wrangler deploy --env= --dry-run
       - name: Build production
         run: bun run build:prod
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
       - name: Validate production Cloudflare deploy
         run: bunx wrangler deploy --env production --dry-run
