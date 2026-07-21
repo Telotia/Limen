@@ -1,4 +1,5 @@
 ---
+import VerdictField from '../interactive/VerdictField.astro';
 ---
 
 <section id="demo" style="position:relative;padding:96px 64px;background:transparent;border-top:1px solid var(--rulesoft)">
@@ -33,5 +34,7 @@
           <li style="border-top:1px solid var(--rule);padding-top:18px;font-size:14.5px;line-height:1.6;color:var(--t3)">“No support found” means this corpus is silent on the claim, not that the claim is wrong. Results are a starting point for a human reviewer, not a verdict on the work.</li>
         </ol>
       </div>
+
+      <VerdictField />
     </div>
   </section>

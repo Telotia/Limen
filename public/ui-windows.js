@@ -6,6 +6,7 @@
     { selector: '.workspace-window', key: 'workspace', label: 'Review workspace', minWidth: 560, minHeight: 320, os: true },
     { selector: '#demo .glow-wrap', key: 'demo', label: 'Interactive demo', minWidth: 420, minHeight: 280 },
     { selector: '.process-window', key: 'process', label: 'Process view', minWidth: 420, minHeight: 220 },
+    { selector: '.particle-lifecycle-panel', key: 'particle-lifecycle', label: 'Particle lifecycle', minWidth: 420, minHeight: 300 },
     { selector: '#tlSpikeWrap', key: 'verdict', label: 'Verdict space', minWidth: 360, minHeight: 220 }
   ];
 

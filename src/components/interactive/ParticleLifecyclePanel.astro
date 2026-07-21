@@ -1,0 +1,234 @@
+<section class="particle-lifecycle" aria-labelledby="particle-lifecycle-title">
+  <div class="particle-lifecycle-panel">
+    <div class="particle-lifecycle-copy">
+      <span class="particle-lifecycle-label">Particle lifecycle</span>
+      <h3 id="particle-lifecycle-title">A claim changes state before it resolves.</h3>
+      <p class="particle-lifecycle-lede">The motion exposes the sequence behind the review: claims enter, gather around a shared evidence centre, split when needed, and leave with a traceable verdict.</p>
+
+      <dl class="particle-lifecycle-states">
+        <div><dt>Enter</dt><dd>One claim arrives from the document.</dd></div>
+        <div><dt>Gather</dt><dd>Related evidence changes its path.</dd></div>
+        <div><dt>Split</dt><dd>A compound statement becomes atomic.</dd></div>
+        <div><dt>Resolve</dt><dd>The final trace keeps its source.</dd></div>
+      </dl>
+    </div>
+
+    <div class="particle-lifecycle-stage">
+      <canvas data-particle-lifecycle aria-label="Animated claim particle lifecycle"></canvas>
+      <div class="particle-lifecycle-caption" aria-hidden="true">
+        <span>Claim enters</span>
+        <span>Evidence orbit</span>
+        <span>Verdict trace</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { createAnimation } from '../../lib/dianoetica/core/engine';
+
+  const canvas = document.querySelector('[data-particle-lifecycle]');
+
+  if (canvas instanceof HTMLCanvasElement) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (reducedMotion.matches) {
+      const context = canvas.getContext('2d');
+      const drawFallback = () => {
+        if (!context) return;
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = Math.max(1, Math.round(rect.width * dpr));
+        canvas.height = Math.max(1, Math.round(rect.height * dpr));
+        context.setTransform(dpr, 0, 0, dpr, 0, 0);
+        context.clearRect(0, 0, rect.width, rect.height);
+
+        const cx = rect.width * .52;
+        const cy = rect.height * .5;
+        const radius = Math.min(rect.width, rect.height) * .25;
+        const colors = ['#2A55A5', '#C13B33', '#D3A743', '#52645d'];
+
+        context.lineWidth = 1;
+        context.strokeStyle = 'rgba(38, 56, 50, .22)';
+        context.beginPath();
+        context.arc(cx, cy, radius, 0, Math.PI * 1.62);
+        context.stroke();
+
+        colors.forEach((color, index) => {
+          const angle = -.8 + index * .82;
+          const x = cx + Math.cos(angle) * radius;
+          const y = cy + Math.sin(angle) * radius;
+          context.fillStyle = color;
+          context.beginPath();
+          context.arc(x, y, index === 2 ? 6 : 4.5, 0, Math.PI * 2);
+          context.fill();
+        });
+      };
+
+      drawFallback();
+      const observer = new ResizeObserver(drawFallback);
+      observer.observe(canvas);
+      window.addEventListener('pagehide', () => observer.disconnect(), { once: true });
+    } else {
+      const animation = createAnimation(canvas, {
+        backgroundColor: 'transparent',
+        telosPattern: 'circle',
+        center: ({ width, height }) => ({ x: width * .53, y: height * .5 }),
+        radius: ({ width, height }) => Math.min(width, height) * .29,
+      });
+
+      window.addEventListener('pagehide', () => animation.destroy(), { once: true });
+    }
+  }
+</script>
+
+<style>
+  .particle-lifecycle {
+    margin-top: 76px;
+  }
+
+  .particle-lifecycle-panel {
+    display: grid;
+    grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+    min-height: 470px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    background: rgba(246, 243, 236, .90);
+    box-shadow: 0 28px 62px -50px rgba(23, 32, 29, .62);
+  }
+
+  :global(.particle-lifecycle-panel.ui-manipulable-window) {
+    display: block;
+  }
+
+  :global(.particle-lifecycle-panel > .ui-window-viewport) {
+    min-height: inherit;
+  }
+
+  :global(.particle-lifecycle-panel > .ui-window-viewport > .ui-window-clip) {
+    display: grid;
+    grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+    min-height: inherit;
+  }
+
+  .particle-lifecycle-copy {
+    position: relative;
+    z-index: 1;
+    padding: clamp(32px, 4vw, 52px);
+    border-right: 1px solid var(--rulesoft);
+    background:
+      linear-gradient(rgba(248, 246, 240, .90), rgba(241, 239, 232, .92)),
+      url('/assets/ink-wash/07-water-bottom.webp') center / cover;
+  }
+
+  .particle-lifecycle-label {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--teal);
+    font-family: var(--fmono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .particle-lifecycle h3 {
+    color: var(--t1);
+    font-family: var(--fdisplay);
+    font-size: clamp(30px, 3.6vw, 44px);
+    font-weight: 500;
+    letter-spacing: -.02em;
+    line-height: 1.06;
+  }
+
+  .particle-lifecycle-lede {
+    margin-top: 18px;
+    color: var(--t2);
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .particle-lifecycle-states {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 24px;
+    margin-top: 34px;
+  }
+
+  .particle-lifecycle-states div {
+    min-width: 0;
+  }
+
+  .particle-lifecycle-states dt {
+    color: var(--gold2);
+    font-family: var(--fmono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .particle-lifecycle-states dd {
+    margin-top: 5px;
+    color: var(--t3);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .particle-lifecycle-stage {
+    position: relative;
+    min-width: 0;
+    min-height: 470px;
+    background:
+      radial-gradient(ellipse at 52% 48%, rgba(42, 85, 165, .10), transparent 34%),
+      radial-gradient(ellipse at 72% 70%, rgba(227, 163, 44, .075), transparent 38%),
+      linear-gradient(145deg, rgba(232, 231, 227, .52), rgba(248, 246, 240, .78));
+  }
+
+  .particle-lifecycle-stage canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .particle-lifecycle-caption {
+    position: absolute;
+    right: 22px;
+    bottom: 18px;
+    left: 22px;
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    color: var(--t3);
+    font-family: var(--fmono);
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  @media (max-width: 820px) {
+    .particle-lifecycle {
+      margin-top: 52px;
+    }
+
+    .particle-lifecycle-panel {
+      grid-template-columns: 1fr;
+    }
+
+    :global(.particle-lifecycle-panel > .ui-window-viewport > .ui-window-clip) {
+      grid-template-columns: 1fr;
+    }
+
+    .particle-lifecycle-copy {
+      border-right: 0;
+      border-bottom: 1px solid var(--rulesoft);
+    }
+
+    .particle-lifecycle-stage {
+      min-height: 390px;
+    }
+  }
+</style>
