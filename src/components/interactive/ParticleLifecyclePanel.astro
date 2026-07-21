@@ -17,7 +17,7 @@
       <canvas data-particle-lifecycle aria-label="Animated claim particle lifecycle"></canvas>
       <div class="particle-lifecycle-caption" aria-hidden="true">
         <span>Claim enters</span>
-        <span>Evidence orbit</span>
+        <span>Chaotic evidence field</span>
         <span>Verdict trace</span>
       </div>
     </div>
@@ -43,24 +43,53 @@
         context.setTransform(dpr, 0, 0, dpr, 0, 0);
         context.clearRect(0, 0, rect.width, rect.height);
 
-        const cx = rect.width * .52;
+        const cx = rect.width * .53;
         const cy = rect.height * .5;
         const radius = Math.min(rect.width, rect.height) * .25;
         const colors = ['#2A55A5', '#C13B33', '#D3A743', '#52645d'];
 
-        context.lineWidth = 1;
-        context.strokeStyle = 'rgba(38, 56, 50, .22)';
+        const raw: { x: number; y: number }[] = [];
+        let lx = .1;
+        let ly = 0;
+        let lz = 0;
+        const dt = .008;
+
+        for (let step = 0; step < 4300; step += 1) {
+          const dx = 10 * (ly - lx);
+          const dy = lx * (28 - lz) - ly;
+          const dz = lx * ly - (8 / 3) * lz;
+          lx += dx * dt;
+          ly += dy * dt;
+          lz += dz * dt;
+          if (step > 700) raw.push({ x: lx, y: lz });
+        }
+
+        const minX = Math.min(...raw.map((point) => point.x));
+        const maxX = Math.max(...raw.map((point) => point.x));
+        const minY = Math.min(...raw.map((point) => point.y));
+        const maxY = Math.max(...raw.map((point) => point.y));
+        const points = raw.map((point) => ({
+          x: cx + ((point.x - minX) / (maxX - minX) - .5) * radius * 3.15,
+          y: cy + ((point.y - minY) / (maxY - minY) - .5) * radius * 2.15,
+        }));
+
+        context.lineCap = 'round';
+        context.lineJoin = 'round';
+        context.lineWidth = 1.1;
+        context.strokeStyle = 'rgba(38, 56, 50, .21)';
         context.beginPath();
-        context.arc(cx, cy, radius, 0, Math.PI * 1.62);
+        points.forEach((point, index) => {
+          if (index === 0) context.moveTo(point.x, point.y);
+          else context.lineTo(point.x, point.y);
+        });
         context.stroke();
 
+        const markerIndexes = [.16, .38, .63, .86];
         colors.forEach((color, index) => {
-          const angle = -.8 + index * .82;
-          const x = cx + Math.cos(angle) * radius;
-          const y = cy + Math.sin(angle) * radius;
+          const point = points[Math.floor((points.length - 1) * markerIndexes[index])];
           context.fillStyle = color;
           context.beginPath();
-          context.arc(x, y, index === 2 ? 6 : 4.5, 0, Math.PI * 2);
+          context.arc(point.x, point.y, index === 2 ? 6 : 4.5, 0, Math.PI * 2);
           context.fill();
         });
       };
@@ -72,9 +101,9 @@
     } else {
       const animation = createAnimation(canvas, {
         backgroundColor: 'transparent',
-        telosPattern: 'circle',
+        telosPattern: 'chaotic pattern',
         center: ({ width, height }) => ({ x: width * .53, y: height * .5 }),
-        radius: ({ width, height }) => Math.min(width, height) * .29,
+        radius: ({ width, height }) => Math.min(width, height) * .27,
       });
 
       window.addEventListener('pagehide', () => animation.destroy(), { once: true });

@@ -205,10 +205,30 @@ function maybeFinishChaoticIntro(world: World): void {
   telos.position.y = sample.position.y
   telos.velocity.x = sample.velocity.x
   telos.velocity.y = sample.velocity.y
+  seedChaoticTrail(world, telos)
   world.bursts.push(createBurst(telos.position, telos.displayColor))
   const [subA, subB] = spawnChaoticSubParticles(telos, world)
   world.particles.push(subA, subB)
   world.cullCooldown = config.particleLifecycle.cullBaseIntervalSeconds
+}
+
+/**
+ * Give the chaotic state a faint, immediately legible history. Without this
+ * warm start the Lorenz cycle takes several minutes to reveal both lobes, so
+ * the first visible segment can be mistaken for another circular orbit.
+ */
+function seedChaoticTrail(world: World, telos: Particle): void {
+  const sampleCount = 2400
+  const cycleDuration = telosChaoticCycleDuration(world)
+  const startTime = world.telosPathTime - cycleDuration
+
+  telos.trail.clear()
+  for (let index = 0; index < sampleCount; index += 1) {
+    const progress = index / (sampleCount - 1)
+    telos.trail.append(
+      telosChaoticPathSample(world, startTime + cycleDuration * progress).position,
+    )
+  }
 }
 
 /**
