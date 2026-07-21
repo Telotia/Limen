@@ -305,11 +305,16 @@
       launcherIcon.alt = '';
       launcherIcon.width = 76;
       launcherIcon.height = 76;
+      var launcherIconShell = document.createElement('span');
+      launcherIconShell.className = 'workspace-app-icon';
+      launcherIconShell.setAttribute('aria-hidden', 'true');
+      launcherIconShell.appendChild(launcherIcon);
       var launcherName = document.createElement('span');
+      launcherName.className = 'workspace-app-name';
       launcherName.textContent = 'TELOTIA';
       var launcherHint = document.createElement('small');
       launcherHint.textContent = 'Double-click to open';
-      launcher.appendChild(launcherIcon);
+      launcher.appendChild(launcherIconShell);
       launcher.appendChild(launcherName);
       launcher.appendChild(launcherHint);
       frame.parentNode.insertBefore(launcher, frame.nextSibling);

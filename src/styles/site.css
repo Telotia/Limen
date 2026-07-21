@@ -342,20 +342,22 @@
   }
   .workspace-app-launcher[hidden]{display:none}
   .workspace-app-launcher.is-arriving{animation:workspaceLauncherIn .28s cubic-bezier(.2,.8,.2,1) both}
-  .workspace-app-launcher img{
+  .workspace-app-icon{
     width:88px;
     height:88px;
-    padding:7px;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
     border:1px solid rgba(38,56,50,.16);
     border-radius:24px;
     background:rgba(248,247,242,.88);
     box-shadow:0 18px 36px -26px rgba(23,32,29,.72),inset 0 1px rgba(255,255,255,.9);
-    object-fit:contain;
     transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease);
   }
-  .workspace-app-launcher:hover img,.workspace-app-launcher:focus-visible img{transform:translateY(-2px);box-shadow:0 22px 42px -24px rgba(23,32,29,.78),inset 0 1px rgba(255,255,255,.92)}
-  .workspace-app-launcher.is-selected img{background:rgba(42,85,165,.1);box-shadow:0 0 0 2px rgba(42,85,165,.42),0 22px 42px -24px rgba(23,32,29,.7)}
-  .workspace-app-launcher>span{font-family:var(--fmono);font-size:13px;font-weight:600;letter-spacing:.22em;color:var(--t1)}
+  .workspace-app-icon img{width:100%;height:100%;display:block;object-fit:contain;transform:scale(1.45);transform-origin:center}
+  .workspace-app-launcher:hover .workspace-app-icon,.workspace-app-launcher:focus-visible .workspace-app-icon{transform:translateY(-2px);box-shadow:0 22px 42px -24px rgba(23,32,29,.78),inset 0 1px rgba(255,255,255,.92)}
+  .workspace-app-launcher.is-selected .workspace-app-icon{background:rgba(42,85,165,.1);box-shadow:0 0 0 2px rgba(42,85,165,.42),0 22px 42px -24px rgba(23,32,29,.7)}
+  .workspace-app-name{font-family:var(--fmono);font-size:13px;font-weight:600;letter-spacing:.22em;color:var(--t1)}
   .workspace-app-launcher>small{min-height:14px;font-family:var(--fsans);font-size:11px;color:var(--t4);opacity:0;transition:opacity .16s var(--ease)}
   .workspace-app-launcher.is-selected>small,.workspace-app-launcher:focus-visible>small{opacity:1}
 
@@ -446,7 +448,7 @@
   }
 
   @media(prefers-reduced-motion:reduce){
-    .ui-window-tool-button,.ui-window-resize-handle,.workspace-app-launcher img{transition:none}
+    .ui-window-tool-button,.ui-window-resize-handle,.workspace-app-icon{transition:none}
     .workspace-window.is-closing,.workspace-window.is-opening,.workspace-app-launcher.is-arriving{animation:none}
   }
 
