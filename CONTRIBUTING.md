@@ -258,6 +258,23 @@ Both are repo secrets at *Settings → Secrets and variables → Actions*.
 
 If you add or change Worker Custom Domains through Wrangler later, the token will also need zone-level `Workers Routes:Edit` for `telotia.com`. The current CI path avoids that by keeping custom domains dashboard-managed.
 
+### Pilot form human verification
+
+The pilot form uses Cloudflare Turnstile in the browser and validates every token again in `worker/index.ts`. Development and local previews use Cloudflare's documented test keys; production never falls back to them.
+
+One-time setup:
+
+1. Create a managed Turnstile widget in Cloudflare and allow `dev.telotia.com`, `telotia.com`, and `www.telotia.com` as appropriate.
+2. Add its public site key as the GitHub Actions variable `TURNSTILE_SITE_KEY`. An environment-scoped variable named the same can override it for production.
+3. Store the matching secret directly in each Worker environment:
+
+   ```powershell
+   bunx wrangler secret put TURNSTILE_SECRET
+   bunx wrangler secret put TURNSTILE_SECRET --env production
+   ```
+
+If the production site key is absent, the form remains disabled. If the production Worker secret is absent, `/api/pilot` returns `503` and does not accept the lead. Never put the secret key in a GitHub variable, Astro public environment variable, or browser code.
+
 ### Domain owner/contact information
 
 🚧 **[HUMAN]** before this is real:

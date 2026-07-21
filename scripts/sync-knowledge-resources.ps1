@@ -71,6 +71,27 @@ function Get-HtmlTitle {
   return ($title -replace '\s+', ' ').Trim()
 }
 
+function Add-TelotiaFavicon {
+  param([Parameter(Mandatory)][string]$Html)
+
+  $faviconLinks = @'
+<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?v=8">
+'@
+
+  $htmlWithoutFavicons = [regex]::Replace(
+    $Html,
+    '(?im)^\s*<link\b(?=[^>]*\brel=["''](?:icon|shortcut icon)["''])[^>]*>\s*',
+    ''
+  )
+
+  return [regex]::Replace(
+    $htmlWithoutFavicons,
+    '(?i)(<meta\s+name=["'']viewport["''][^>]*>)',
+    "`$1`r`n$faviconLinks",
+    1
+  )
+}
+
 function Get-ResourceFolders {
   param([Parameter(Mandatory)][string]$Root)
   $yearRoot = Join-Path $Root '2026'
@@ -117,14 +138,13 @@ function Sync-Collection {
         $languageDestination = Join-Path $destination $language
         New-Item -ItemType Directory -Force -Path $languageDestination | Out-Null
         $destinationHtml = Join-Path $languageDestination 'index.html'
+        $html = [System.IO.File]::ReadAllText($sourceHtml, $utf8)
         if ($Kind -eq 'news') {
-          $html = [System.IO.File]::ReadAllText($sourceHtml, $utf8)
           $html = $html.Replace('<title>Finance', '<title>News')
           $html = $html.Replace('<div class="brand">Finance</div>', '<div class="brand">News</div>')
-          [System.IO.File]::WriteAllText($destinationHtml, $html, $utf8)
-        } else {
-          Copy-Item -LiteralPath $sourceHtml -Destination $destinationHtml -Force
         }
+        $html = Add-TelotiaFavicon -Html $html
+        [System.IO.File]::WriteAllText($destinationHtml, $html, $utf8)
       }
     }
 
@@ -199,6 +219,18 @@ $catalog = $catalog | Sort-Object { $_.date }, { $_.title } -Descending
 $catalogPath = Join-Path $RepoRoot 'src\data\resource-catalog.json'
 $catalogJson = $catalog | ConvertTo-Json -Depth 5
 [System.IO.File]::WriteAllText($catalogPath, $catalogJson + [Environment]::NewLine, $utf8)
+
+# Keep legacy article entry points and redirects on the same browser-tab brand.
+# Some older resources live outside the current en/zh sync shape, so cover the
+# complete public resource tree rather than relying on the collection loop.
+$resourcePublicRoot = Join-Path $RepoRoot 'public\resource'
+Get-ChildItem -LiteralPath $resourcePublicRoot -Recurse -Filter 'index.html' -File | ForEach-Object {
+  $html = [System.IO.File]::ReadAllText($_.FullName, $utf8)
+  $withFavicon = Add-TelotiaFavicon -Html $html
+  if ($withFavicon -ne $html) {
+    [System.IO.File]::WriteAllText($_.FullName, $withFavicon, $utf8)
+  }
+}
 
 $artCount = @($catalog | Where-Object kind -eq 'art').Count
 $newsCount = @($catalog | Where-Object kind -eq 'news').Count

@@ -26,10 +26,10 @@ const isCurrent = (href: string) => {
     <div class="nav-links" style={`display:${showSubnav ? 'flex' : 'none'};gap:26px;margin-left:6px`}>
       {showSubnav && (
         <>
+          <a class="lk nav-link" aria-current={isCurrent('research.html') ? 'page' : undefined} href="research.html">Research</a>
+          <a class="lk nav-link" aria-current={isCurrent('demo.html') ? 'page' : undefined} href="demo.html">Demo</a>
           <a class="lk nav-link" aria-current={isCurrent('process.html') ? 'page' : undefined} href="process.html">Process</a>
           <a class="lk nav-link" aria-current={isCurrent('workspace.html') ? 'page' : undefined} href="workspace.html">Workspace</a>
-          <a class="lk nav-link" aria-current={isCurrent('demo.html') ? 'page' : undefined} href="demo.html">Demo</a>
-          <a class="lk nav-link" aria-current={isCurrent('research.html') ? 'page' : undefined} href="research.html">Research</a>
           <a class="lk nav-link" aria-current={isCurrent('consult.html') ? 'page' : undefined} href="consult.html">Consult</a>
         </>
       )}
@@ -64,11 +64,12 @@ const isCurrent = (href: string) => {
     <details class="nav-mobile">
       <summary aria-label="Open navigation">Menu</summary>
       <div class="nav-mobile-panel">
+        <a href="research.html">Research</a>
+        <a href="demo.html">Demo</a>
         <a href="process.html">Process</a>
         <a href="workspace.html">Workspace</a>
-        <a href="demo.html">Demo</a>
-        <a href="research.html">Research</a>
         <a href="consult.html">Consult</a>
+        <a href="/resource.html">Resources</a>
         <a href="/resource.html#art">Art</a>
         <a href="/resource.html#news">News</a>
         <a class="nav-mobile-cta" href="consult.html">Request a pilot</a>

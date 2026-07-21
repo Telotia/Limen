@@ -1,0 +1,320 @@
+---
+const TURNSTILE_TEST_SITE_KEY = '1x00000000000000000000AA';
+const isProduction = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
+const configuredSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim();
+const turnstileSiteKey = configuredSiteKey || (isProduction ? '' : TURNSTILE_TEST_SITE_KEY);
+---
+
+<form
+  class="glow-wrap pilot-form"
+  data-pilot-form
+  data-turnstile-site-key={turnstileSiteKey}
+  action="/api/pilot"
+  method="post"
+  style="position:relative;border:1px solid rgba(160,180,210,.26);border-radius:18px;padding:32px;background:rgba(231,233,237,.035);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 18px 50px rgba(247,247,247,.26),inset 0 1px 0 rgba(40,25,25,.09)"
+>
+  <div class="consult-form-content" style="display:flex;flex-direction:column;gap:18px">
+    <label style="display:block">
+      <span class="pilot-label">Name</span>
+      <input class="fin" name="name" type="text" autocomplete="name" maxlength="200" required />
+    </label>
+    <label style="display:block">
+      <span class="pilot-label">Work email</span>
+      <input class="fin" name="email" type="email" autocomplete="email" maxlength="200" required />
+    </label>
+    <label style="display:block">
+      <span class="pilot-label">Organization</span>
+      <input class="fin" name="organization" type="text" autocomplete="organization" maxlength="200" />
+    </label>
+    <label style="display:block">
+      <span class="pilot-label">What evidence are you validating?</span>
+      <input
+        class="fin"
+        name="evidence"
+        type="text"
+        maxlength="2000"
+        placeholder="e.g. clinical evidence for a device submission"
+      />
+    </label>
+
+    <label class="pilot-honeypot" aria-hidden="true">
+      Company website
+      <input name="company_url" type="text" tabindex="-1" autocomplete="off" />
+    </label>
+
+    <div class="pilot-verification" data-turnstile-shell aria-busy="true">
+      <div data-turnstile-container></div>
+      <span class="pilot-verification-note" data-turnstile-loading>Loading secure human verification…</span>
+    </div>
+
+    <div class="pilot-submit-row">
+      <small>Protected by Cloudflare Turnstile. We reply within two business days.</small>
+      <div class="pilot-submit-actions">
+        <p class="pilot-status" data-pilot-status role="status" aria-live="polite"></p>
+        <button class="btn-p" type="submit" data-pilot-submit disabled>Request a pilot</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<style>
+  .pilot-label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--t2);
+    font-family: var(--fmono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .pilot-form .fin {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: rgba(40,25,25,.02);
+    color: var(--t1);
+    font-family: var(--fsans);
+    font-size: 15px;
+  }
+
+  .pilot-form .fin:focus-visible {
+    border-color: rgba(42,85,165,.58);
+    outline: 2px solid rgba(42,85,165,.14);
+    outline-offset: 2px;
+  }
+
+  .pilot-honeypot {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+  }
+
+  .pilot-verification {
+    min-height: 67px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border-radius: 8px;
+  }
+
+  .pilot-verification [data-turnstile-container] {
+    width: 100%;
+  }
+
+  .pilot-verification-note {
+    color: var(--t3);
+    font-size: 13px;
+  }
+
+  .pilot-submit-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 4px;
+  }
+
+  .pilot-submit-row small {
+    max-width: 250px;
+    color: var(--t4);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .pilot-submit-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .pilot-status {
+    min-height: 1.35em;
+    max-width: 260px;
+    margin: 0;
+    color: var(--t2);
+    font-size: 12px;
+    line-height: 1.35;
+    text-align: right;
+  }
+
+  .pilot-status[data-kind='error'] { color: #9e2f2a; }
+  .pilot-status[data-kind='success'] { color: #1f6657; }
+
+  .pilot-form .btn-p {
+    flex-shrink: 0;
+    padding: 13px 24px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--teal);
+    color: #e7eaed;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .pilot-form .btn-p:disabled {
+    cursor: not-allowed;
+    opacity: .48;
+  }
+
+  @media (max-width: 640px) {
+    .pilot-submit-row {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .pilot-submit-actions,
+    .pilot-status {
+      align-items: stretch;
+      max-width: none;
+      text-align: left;
+    }
+
+    .pilot-form .btn-p { width: 100%; }
+  }
+</style>
+
+<script>
+  interface TurnstileRenderOptions {
+    sitekey: string;
+    action: string;
+    theme: 'light';
+    size: 'flexible';
+    appearance: 'always';
+    callback(token: string): void;
+    'expired-callback'(): void;
+    'error-callback'(): void;
+  }
+
+  interface TurnstileApi {
+    render(container: HTMLElement, options: TurnstileRenderOptions): string;
+    reset(widgetId: string): void;
+  }
+
+  declare global {
+    interface Window {
+      turnstile?: TurnstileApi;
+      telotiaTurnstileLoader?: Promise<TurnstileApi>;
+    }
+  }
+
+  function loadTurnstile(): Promise<TurnstileApi> {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (window.telotiaTurnstileLoader) return window.telotiaTurnstileLoader;
+
+    window.telotiaTurnstileLoader = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => window.turnstile ? resolve(window.turnstile) : reject(new Error('Turnstile did not initialize.'));
+      script.onerror = () => reject(new Error('Turnstile could not be loaded.'));
+      document.head.append(script);
+    });
+
+    return window.telotiaTurnstileLoader;
+  }
+
+  function setStatus(element: HTMLElement, message: string, kind = ''): void {
+    element.textContent = message;
+    if (kind) element.dataset.kind = kind;
+    else delete element.dataset.kind;
+  }
+
+  document.querySelectorAll<HTMLFormElement>('[data-pilot-form]').forEach(async (form) => {
+    if (form.dataset.ready === 'true') return;
+    form.dataset.ready = 'true';
+
+    const siteKey = form.dataset.turnstileSiteKey ?? '';
+    const shell = form.querySelector<HTMLElement>('[data-turnstile-shell]');
+    const container = form.querySelector<HTMLElement>('[data-turnstile-container]');
+    const loading = form.querySelector<HTMLElement>('[data-turnstile-loading]');
+    const status = form.querySelector<HTMLElement>('[data-pilot-status]');
+    const submit = form.querySelector<HTMLButtonElement>('[data-pilot-submit]');
+    if (!shell || !container || !loading || !status || !submit) return;
+
+    let token = '';
+    let widgetId = '';
+    let api: TurnstileApi | undefined;
+
+    if (!siteKey) {
+      shell.ariaBusy = 'false';
+      loading.textContent = 'Human verification is not configured for this environment.';
+      setStatus(status, 'The form is temporarily unavailable. Please email hello@telotia.com.', 'error');
+      return;
+    }
+
+    try {
+      api = await loadTurnstile();
+      loading.remove();
+      shell.ariaBusy = 'false';
+      widgetId = api.render(container, {
+        sitekey: siteKey,
+        action: 'pilot_request',
+        theme: 'light',
+        size: 'flexible',
+        appearance: 'always',
+        callback(value) {
+          token = value;
+          submit.disabled = false;
+          setStatus(status, 'Human verification complete.');
+        },
+        'expired-callback'() {
+          token = '';
+          submit.disabled = true;
+          setStatus(status, 'Verification expired. Please verify again.', 'error');
+        },
+        'error-callback'() {
+          token = '';
+          submit.disabled = true;
+          setStatus(status, 'Verification could not be completed. Please try again.', 'error');
+        },
+      });
+    } catch {
+      shell.ariaBusy = 'false';
+      loading.textContent = 'Secure verification could not be loaded.';
+      setStatus(status, 'Please check your connection or email hello@telotia.com.', 'error');
+      return;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      if (!token) {
+        setStatus(status, 'Please complete the human verification.', 'error');
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = 'Sending…';
+      setStatus(status, 'Securely submitting your request…');
+
+      const data = new FormData(form);
+      data.set('cf-turnstile-response', token);
+
+      try {
+        const response = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        const result = await response.json() as { ok?: boolean; error?: string };
+        if (!response.ok || !result.ok) throw new Error(result.error || 'The request could not be submitted.');
+
+        form.reset();
+        token = '';
+        if (api && widgetId) api.reset(widgetId);
+        setStatus(status, 'Request received. We will reply within two business days.', 'success');
+      } catch (error) {
+        token = '';
+        if (api && widgetId) api.reset(widgetId);
+        setStatus(status, error instanceof Error ? error.message : 'The request could not be submitted.', 'error');
+      } finally {
+        submit.textContent = 'Request a pilot';
+        submit.disabled = true;
+      }
+    });
+  });
+</script>

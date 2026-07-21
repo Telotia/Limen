@@ -37,6 +37,8 @@ jobs:
       - run: bun test
 
       - run: bun run build:prod
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
 
       - name: Deploy to limen Worker (production)
         run: bunx wrangler deploy --env production
