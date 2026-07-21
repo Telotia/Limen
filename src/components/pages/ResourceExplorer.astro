@@ -1,7 +1,7 @@
 ---
 import catalog from '../../data/resource-catalog.json';
 
-type TopicId = 'art' | 'news' | 'science' | 'release';
+type TopicId = string;
 
 interface ResourceEntry {
   kind: TopicId;
@@ -16,50 +16,31 @@ interface ResourceEntry {
   image: string;
 }
 
-const MAX_PER_TOPIC = 10;
+const MAX_PER_TOPIC = 30;
 const entries = catalog as ResourceEntry[];
 
 const topics = [
   {
-    id: 'art', label: 'Art', note: 'RYB · visual culture', x: 23, y: 27,
+    id: 'art', label: 'Art', note: 'RYB · visual culture',
     color: '#a84d45', colors: ['#b9554d', '#d5ad4f', '#5475a2', '#263c3a'],
   },
   {
-    id: 'news', label: 'News', note: 'Ink · systems in motion', x: 74, y: 22,
+    id: 'news', label: 'News', note: 'Ink · systems in motion',
     color: '#3f617d', colors: ['#496e8b', '#8a9691', '#d4b36b', '#263c3a'],
   },
   {
-    id: 'science', label: 'Science', note: 'RGB · research and evidence', x: 70, y: 74,
+    id: 'science', label: 'Science', note: 'RGB · research and evidence',
     color: '#47735f', colors: ['#aa625c', '#5f8a6d', '#5679a8', '#263c3a'],
   },
   {
-    id: 'release', label: 'Fashion', note: 'CMYK · releases and editions', x: 29, y: 79,
+    id: 'release', label: 'Release', note: 'CMYK · releases and editions',
     color: '#9c5879', colors: ['#5b9aaa', '#a45b82', '#d3ae51', '#263c3a'],
   },
 ] as const;
 
-const topicById = new Map(topics.map((topic) => [topic.id, topic]));
+const topicById = new Map<TopicId, (typeof topics)[number]>(topics.map((topic) => [topic.id, topic]));
 
-const clusterOffsets: Record<TopicId, readonly { x: number; y: number }[]> = {
-  art: [
-    { x: -16, y: -13 }, { x: -6, y: -8 }, { x: 4, y: -18 }, { x: 12, y: -9 }, { x: 18, y: 2 },
-    { x: 9, y: 8 }, { x: 15, y: 15 }, { x: -3, y: 18 }, { x: -17, y: 10 }, { x: -11, y: -1 },
-  ],
-  news: [
-    { x: -18, y: -9 }, { x: -9, y: -16 }, { x: 2, y: -9 }, { x: 9, y: -18 }, { x: 17, y: -6 },
-    { x: 13, y: 5 }, { x: 18, y: 13 }, { x: 3, y: 16 }, { x: -8, y: 9 }, { x: -15, y: 3 },
-  ],
-  science: [
-    { x: -18, y: -7 }, { x: -10, y: -16 }, { x: 0, y: -9 }, { x: 8, y: -18 }, { x: 17, y: -8 },
-    { x: 12, y: 4 }, { x: 18, y: 13 }, { x: 4, y: 17 }, { x: -9, y: 11 }, { x: -16, y: 3 },
-  ],
-  release: [
-    { x: -17, y: -10 }, { x: -7, y: -17 }, { x: 2, y: -8 }, { x: 11, y: -17 }, { x: 18, y: -4 },
-    { x: 11, y: 7 }, { x: 16, y: 15 }, { x: 1, y: 17 }, { x: -11, y: 10 }, { x: -18, y: 2 },
-  ],
-};
-
-const nodeSizes = [62, 70, 58, 66, 74, 61, 69, 57, 72, 64] as const;
+const nodeSizes = [54, 60, 50, 57, 63, 52, 59, 49, 61, 55] as const;
 
 const entriesByTopic = new Map<TopicId, ResourceEntry[]>();
 topics.forEach((topic) => {
@@ -69,14 +50,13 @@ topics.forEach((topic) => {
   );
 });
 
-const clusterUsage: Record<TopicId, number> = { art: 0, news: 0, science: 0, release: 0 };
+const clusterUsage = Object.fromEntries(topics.map((topic) => [topic.id, 0])) as Record<TopicId, number>;
 const seenEntries = new Set<string>();
 const articleNodes: Array<ResourceEntry & {
   categories: TopicId[];
   cards: string[];
   palette: (typeof topics)[number];
   homeTopic: TopicId;
-  position: { x: number; y: number };
   size: number;
   id: string;
 }> = [];
@@ -90,8 +70,7 @@ topics.forEach((topic) => {
     const preferredHome = categories.includes(entry.kind) ? entry.kind : categories[0];
     const homeTopic = clusterUsage[preferredHome] < MAX_PER_TOPIC ? preferredHome : topic.id;
     const home = topicById.get(homeTopic) ?? topics[0];
-    const clusterIndex = clusterUsage[homeTopic] % clusterOffsets[homeTopic].length;
-    const offset = clusterOffsets[homeTopic][clusterIndex];
+    const clusterIndex = clusterUsage[homeTopic];
     clusterUsage[homeTopic] += 1;
 
     articleNodes.push({
@@ -100,8 +79,7 @@ topics.forEach((topic) => {
       cards: entry.cards?.length ? entry.cards : [entry.image],
       palette: home,
       homeTopic,
-      position: { x: home.x + offset.x, y: home.y + offset.y },
-      size: nodeSizes[clusterIndex],
+      size: nodeSizes[clusterIndex % nodeSizes.length],
       id: `resource-node-${articleNodes.length}`,
     });
   });
@@ -110,25 +88,31 @@ topics.forEach((topic) => {
 const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((category) => {
   const topic = topics.find((candidate) => candidate.id === category);
   if (!topic) return [];
-  return [{ topic: topic.id, topicX: topic.x, topicY: topic.y, color: topic.color, entry }];
+  return [{ topic: topic.id, color: topic.color, entry }];
 }));
+const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromIndex + 1).map((to) => ({
+  from: from.id,
+  to: to.id,
+})));
 ---
 
 <section class="resource-explorer" data-resource-explorer hidden aria-labelledby="resource-explorer-title">
   <h2 id="resource-explorer-title" class="resource-explorer-title">Connected resource field</h2>
 
   <div class="resource-network" data-resource-network data-focused="false">
-    <svg class="resource-network-map" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      {topics.map((topic) => (
-        <path class="resource-root-connection" d={`M 50 50 Q ${(50 + topic.x) / 2} ${(50 + topic.y) / 2 - 3} ${topic.x} ${topic.y}`} />
+    <svg class="resource-network-map" aria-hidden="true">
+      {faceConnections.map((connection) => (
+        <path class="resource-face-connection" data-from-topic={connection.from} data-to-topic={connection.to} />
       ))}
-      {connections.map((connection, index) => (
+      {topics.map((topic) => (
+        <path class="resource-root-connection" data-topic={topic.id} />
+      ))}
+      {connections.map((connection) => (
         <path
           class="resource-article-connection"
           data-topic={connection.topic}
           data-entry-id={connection.entry.id}
           style={`--connection-color:${connection.color}`}
-          d={`M ${connection.topicX} ${connection.topicY} Q ${(connection.topicX + connection.entry.position.x) / 2 + ((index % 5) - 2) * 1.15} ${(connection.topicY + connection.entry.position.y) / 2 + ((index % 3) - 1) * 1.4} ${connection.entry.position.x} ${connection.entry.position.y}`}
         />
       ))}
     </svg>
@@ -138,13 +122,14 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
       <strong>Resources</strong>
     </div>
 
-    {topics.map((topic) => (
+    {topics.map((topic, index) => (
       <button
         class="resource-hub"
         type="button"
         data-topic={topic.id}
+        data-topic-index={index}
         data-highlighted="false"
-        style={`--hub-x:${topic.x}%;--hub-y:${topic.y}%;--hub-color:${topic.color};--hub-c1:${topic.colors[0]};--hub-c2:${topic.colors[1]};--hub-c3:${topic.colors[2]};--hub-c4:${topic.colors[3]}`}
+        style={`--hub-color:${topic.color};--hub-c1:${topic.colors[0]};--hub-c2:${topic.colors[1]};--hub-c3:${topic.colors[2]};--hub-c4:${topic.colors[3]}`}
         aria-pressed="false"
       >
         <span class="resource-hub-artwork" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
@@ -162,8 +147,9 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
           data-entry-id={entry.id}
           data-topics={entry.categories.join(' ')}
           data-primary-topic={entry.homeTopic}
+          data-node-index={index}
           data-highlighted="false"
-          style={`--node-x:${entry.position.x}%;--node-y:${entry.position.y}%;--node-size:${entry.size}px;--node-delay:${index * -0.43}s;--node-accent:${entry.palette.color};--node-soft:${entry.palette.colors[1]}`}
+          style={`--node-size:${entry.size}px;--node-delay:${index * -0.43}s;--node-accent:${entry.palette.color};--node-soft:${entry.palette.colors[1]}`}
           aria-label={`Preview ${entry.title}`}
         >
           <span class="resource-node-tile">
@@ -181,7 +167,7 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
           class="resource-focus-panel"
           data-entry-id={entry.id}
           data-primary-topic={entry.homeTopic}
-          style={`--focus-x:${entry.position.x}%;--focus-y:${entry.position.y}%;--focus-accent:${entry.palette.color};--focus-c1:${entry.palette.colors[0]};--focus-c2:${entry.palette.colors[1]};--focus-c3:${entry.palette.colors[2]};--focus-c4:${entry.palette.colors[3]}`}
+          style={`--focus-x:50%;--focus-y:50%;--focus-accent:${entry.palette.color};--focus-c1:${entry.palette.colors[0]};--focus-c2:${entry.palette.colors[1]};--focus-c3:${entry.palette.colors[2]};--focus-c4:${entry.palette.colors[3]}`}
           hidden
         >
           <button class="resource-focus-close" type="button" aria-label="Return to all resource cards">×</button>
@@ -215,20 +201,285 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
 </section>
 
 <script>
+  import { Euler, Quaternion, Vector3 } from 'three';
+
   const explorer = document.querySelector<HTMLElement>('[data-resource-explorer]');
 
   if (explorer) {
     const network = explorer.querySelector<HTMLElement>('[data-resource-network]');
+    const map = explorer.querySelector<SVGSVGElement>('.resource-network-map');
     const focusLayer = explorer.querySelector<HTMLElement>('[data-resource-focus-layer]');
     const hubs = [...explorer.querySelectorAll<HTMLButtonElement>('.resource-hub')];
     const articleButtons = [...explorer.querySelectorAll<HTMLButtonElement>('.resource-article-node')];
-    const connections = [...explorer.querySelectorAll<SVGPathElement>('.resource-article-connection')];
+    const rootConnections = [...explorer.querySelectorAll<SVGPathElement>('.resource-root-connection')];
+    const faceConnections = [...explorer.querySelectorAll<SVGPathElement>('.resource-face-connection')];
+    const articleConnections = [...explorer.querySelectorAll<SVGPathElement>('.resource-article-connection')];
     const panels = [...explorer.querySelectorAll<HTMLElement>('.resource-focus-panel')];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const forward = new Vector3(0, 0, 1);
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+    const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+    const requestCompactNavigation = (reason: string) => {
+      window.dispatchEvent(new CustomEvent('telotia:navigation-collapse', { detail: { reason } }));
+    };
+
+    type Projection = { x: number; y: number; depth: number; scale: number };
+    type TopicModel = {
+      id: string;
+      normal: Vector3;
+      tangentU: Vector3;
+      tangentV: Vector3;
+      hub: HTMLButtonElement;
+      projection?: Projection;
+    };
+    type ArticleModel = {
+      id: string;
+      topics: string[];
+      homeTopic: string;
+      u: number;
+      v: number;
+      depthOffset: number;
+      button: HTMLButtonElement;
+      projection?: Projection;
+    };
+
+    const buildFaceNormals = (count: number) => {
+      if (count === 4) {
+        return [
+          new Vector3(1, 1, 1),
+          new Vector3(-1, -1, 1),
+          new Vector3(-1, 1, -1),
+          new Vector3(1, -1, -1),
+        ].map((normal) => normal.normalize());
+      }
+      if (count === 1) return [new Vector3(0, 0, 1)];
+      return Array.from({ length: count }, (_, index) => {
+        const y = 1 - (index / (count - 1)) * 2;
+        const radius = Math.sqrt(Math.max(0, 1 - y * y));
+        const theta = index * goldenAngle;
+        return new Vector3(Math.cos(theta) * radius, y, Math.sin(theta) * radius).normalize();
+      });
+    };
+
+    const refreshOrientation = new Quaternion().setFromEuler(new Euler(
+      (Math.random() - .5) * .22,
+      (Math.random() - .5) * .38,
+      (Math.random() - .5) * .12,
+    ));
+    const faceNormals = buildFaceNormals(hubs.length).map((normal) => normal.applyQuaternion(refreshOrientation));
+    const topics: TopicModel[] = hubs.map((hub, index) => {
+      const normal = faceNormals[index];
+      const helper = Math.abs(normal.y) < .82 ? new Vector3(0, 1, 0) : new Vector3(1, 0, 0);
+      const tangentU = new Vector3().crossVectors(helper, normal).normalize();
+      const tangentV = new Vector3().crossVectors(normal, tangentU).normalize();
+      return { id: hub.dataset.topic ?? `topic-${index}`, normal, tangentU, tangentV, hub };
+    });
+    const topicById = new Map(topics.map((topic) => [topic.id, topic]));
+    const visibleFaceEdges = new Set<string>();
+    if (topics.length <= 4) {
+      faceConnections.forEach((path) => visibleFaceEdges.add([
+        path.dataset.fromTopic ?? '',
+        path.dataset.toTopic ?? '',
+      ].sort().join('|')));
+    } else {
+      topics.forEach((topic) => {
+        topics
+          .filter((candidate) => candidate !== topic)
+          .sort((a, b) => b.normal.dot(topic.normal) - a.normal.dot(topic.normal))
+          .slice(0, 3)
+          .forEach((neighbor) => visibleFaceEdges.add([topic.id, neighbor.id].sort().join('|')));
+      });
+    }
+    const overviewQuaternion = new Quaternion().setFromEuler(new Euler(
+      -.24 + (Math.random() - .5) * .12,
+      .42 + (Math.random() - .5) * .2,
+      -.04 + (Math.random() - .5) * .08,
+    ));
+    const currentQuaternion = overviewQuaternion.clone();
+
+    const groupedButtons = new Map<string, HTMLButtonElement[]>();
+    articleButtons.forEach((button) => {
+      const id = button.dataset.primaryTopic ?? '';
+      groupedButtons.set(id, [...(groupedButtons.get(id) ?? []), button]);
+    });
+
+    const articles: ArticleModel[] = [];
+    groupedButtons.forEach((buttons, topicId) => {
+      const phase = Math.random() * Math.PI * 2;
+      const count = buttons.length;
+      buttons.forEach((button, index) => {
+        const radialProgress = count <= 1 ? 0 : Math.sqrt(index / Math.max(1, count - 1));
+        const radius = count <= 1 ? .34 : .27 + radialProgress * .55;
+        const angle = phase + index * goldenAngle + (Math.random() - .5) * .24;
+        const radialJitter = 1 + (Math.random() - .5) * .11;
+        articles.push({
+          id: button.dataset.entryId ?? '',
+          topics: button.dataset.topics?.split(' ').filter(Boolean) ?? [],
+          homeTopic: topicId,
+          u: Math.cos(angle) * radius * radialJitter,
+          v: Math.sin(angle) * radius * radialJitter,
+          depthOffset: (Math.random() - .5) * .045,
+          button,
+        });
+      });
+    });
+    const articleById = new Map(articles.map((article) => [article.id, article]));
+
     let activeTopic = '';
+    let focusMix = 0;
+    let turnFrame = 0;
+    let orbitFrame = 0;
     let activePanel: HTMLElement | null = null;
     let activeSlide = 0;
     let swipeStartX = 0;
     let swipeStartY = 0;
+
+    const articlePoint = (article: ArticleModel) => {
+      const planeId = activeTopic && article.topics.includes(activeTopic) ? activeTopic : article.homeTopic;
+      const topic = topicById.get(planeId) ?? topics[0];
+      const spread = activeTopic === planeId ? 1 + focusMix * .2 : 1;
+      return topic.normal.clone()
+        .multiplyScalar(.7 + article.depthOffset)
+        .addScaledVector(topic.tangentU, article.u * spread)
+        .addScaledVector(topic.tangentV, article.v * spread);
+    };
+
+    const renderNetwork = () => {
+      if (!network || !map) return;
+      const width = network.clientWidth;
+      const height = network.clientHeight;
+      if (!width || !height) return;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const spatialScale = width < 700
+        ? Math.min(width * .34, height * .29)
+        : Math.min(width * .34, height * (activeTopic ? .29 : .33));
+      const cameraDistance = 3.15;
+      map.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+      const project = (source: Vector3): Projection => {
+        const point = source.clone().applyQuaternion(currentQuaternion);
+        const perspective = cameraDistance / (cameraDistance - point.z);
+        return {
+          x: centerX + point.x * spatialScale * perspective,
+          y: centerY + point.y * spatialScale * perspective,
+          depth: point.z,
+          scale: clamp(perspective * .9, .62, 1.2),
+        };
+      };
+
+      topics.forEach((topic) => {
+        const projected = project(topic.normal.clone().multiplyScalar(.7));
+        const viewNormal = topic.normal.clone().applyQuaternion(currentQuaternion);
+        topic.projection = projected;
+        topic.hub.style.setProperty('--screen-x', `${projected.x - centerX}px`);
+        topic.hub.style.setProperty('--screen-y', `${projected.y - centerY}px`);
+        topic.hub.style.setProperty('--depth-scale', projected.scale.toFixed(3));
+        topic.hub.style.setProperty('--depth-opacity', clamp(.48 + (projected.depth + 1) * .3, .3, 1).toFixed(3));
+        topic.hub.style.setProperty('--tilt-x', `${clamp(-viewNormal.y * 18, -16, 16).toFixed(2)}deg`);
+        topic.hub.style.setProperty('--tilt-y', `${clamp(viewNormal.x * 22, -19, 19).toFixed(2)}deg`);
+        topic.hub.style.zIndex = String(20 + Math.round((projected.depth + 1) * 20));
+      });
+
+      articles.forEach((article) => {
+        const projected = project(articlePoint(article));
+        const planeId = activeTopic && article.topics.includes(activeTopic) ? activeTopic : article.homeTopic;
+        const plane = topicById.get(planeId) ?? topics[0];
+        const viewNormal = plane.normal.clone().applyQuaternion(currentQuaternion);
+        article.projection = projected;
+        const isCurrentFace = !activeTopic || article.topics.includes(activeTopic);
+        const depthOpacity = clamp(.38 + (projected.depth + 1) * .3, .24, .96) * (isCurrentFace ? 1 : .16);
+        article.button.style.setProperty('--screen-x', `${projected.x - centerX}px`);
+        article.button.style.setProperty('--screen-y', `${projected.y - centerY}px`);
+        article.button.style.setProperty('--depth-scale', projected.scale.toFixed(3));
+        article.button.style.setProperty('--depth-opacity', depthOpacity.toFixed(3));
+        article.button.style.setProperty('--depth-blur', `${clamp(-projected.depth * .32, 0, .45).toFixed(2)}px`);
+        article.button.style.setProperty('--tilt-x', `${clamp(-viewNormal.y * 21, -19, 19).toFixed(2)}deg`);
+        article.button.style.setProperty('--tilt-y', `${clamp(viewNormal.x * 25, -22, 22).toFixed(2)}deg`);
+        article.button.style.zIndex = String(30 + Math.round((projected.depth + 1) * 28));
+      });
+
+      rootConnections.forEach((path) => {
+        const topic = topicById.get(path.dataset.topic ?? '');
+        const projected = topic?.projection;
+        if (!projected) return;
+        const bend = (projected.depth * 16) + ((topics.indexOf(topic) % 2) ? 8 : -8);
+        path.setAttribute('d', `M ${centerX} ${centerY} Q ${(centerX + projected.x) / 2 + bend} ${(centerY + projected.y) / 2 - bend * .4} ${projected.x} ${projected.y}`);
+        path.style.opacity = activeTopic && topic.id !== activeTopic ? '.035' : activeTopic ? '.32' : String(clamp(.08 + (projected.depth + 1) * .05, .07, .18));
+      });
+
+      faceConnections.forEach((path) => {
+        const fromTopic = topicById.get(path.dataset.fromTopic ?? '');
+        const toTopic = topicById.get(path.dataset.toTopic ?? '');
+        const from = fromTopic?.projection;
+        const to = toTopic?.projection;
+        const key = [path.dataset.fromTopic ?? '', path.dataset.toTopic ?? ''].sort().join('|');
+        if (!from || !to || !visibleFaceEdges.has(key)) {
+          path.style.opacity = '0';
+          return;
+        }
+        path.setAttribute('d', `M ${from.x} ${from.y} L ${to.x} ${to.y}`);
+        path.style.opacity = activeTopic ? '.025' : String(clamp(.07 + (from.depth + to.depth + 2) * .025, .065, .16));
+      });
+
+      articleConnections.forEach((path, index) => {
+        const topic = topicById.get(path.dataset.topic ?? '');
+        const article = articleById.get(path.dataset.entryId ?? '');
+        const from = topic?.projection;
+        const to = article?.projection;
+        if (!from || !to) return;
+        const bend = ((index % 5) - 2) * 5 + (to.depth - from.depth) * 12;
+        path.setAttribute('d', `M ${from.x} ${from.y} Q ${(from.x + to.x) / 2 + bend} ${(from.y + to.y) / 2 - bend * .55} ${to.x} ${to.y}`);
+        path.style.opacity = activeTopic && path.dataset.topic !== activeTopic ? '.018' : activeTopic ? '.48' : String(clamp(.08 + (to.depth + 1) * .06, .07, .2));
+      });
+    };
+
+    const animateTurn = (target: Quaternion, targetMix: number) => {
+      window.cancelAnimationFrame(turnFrame);
+      window.cancelAnimationFrame(orbitFrame);
+      network?.setAttribute('data-orbiting', 'false');
+      const startQuaternion = currentQuaternion.clone();
+      const startMix = focusMix;
+      if (reduceMotion) {
+        currentQuaternion.copy(target);
+        focusMix = targetMix;
+        renderNetwork();
+        return;
+      }
+      const startedAt = performance.now();
+      const duration = 980;
+      network?.setAttribute('data-turning', 'true');
+      const tick = (now: number) => {
+        const progress = clamp((now - startedAt) / duration, 0, 1);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        currentQuaternion.slerpQuaternions(startQuaternion, target, eased);
+        focusMix = startMix + (targetMix - startMix) * eased;
+        renderNetwork();
+        if (progress < 1) turnFrame = window.requestAnimationFrame(tick);
+        else network?.setAttribute('data-turning', 'false');
+      };
+      turnFrame = window.requestAnimationFrame(tick);
+    };
+
+    const updateTopicState = (topicId: string) => {
+      activeTopic = topicId;
+      hubs.forEach((hub) => {
+        const highlighted = hub.dataset.topic === activeTopic;
+        hub.dataset.highlighted = String(highlighted);
+        hub.setAttribute('aria-pressed', String(highlighted));
+      });
+      articleButtons.forEach((button) => {
+        const highlighted = !activeTopic || (button.dataset.topics?.split(' ').includes(activeTopic) ?? false);
+        button.dataset.highlighted = String(highlighted);
+      });
+      articleConnections.forEach((connection) => {
+        connection.dataset.highlighted = String(!activeTopic || connection.dataset.topic === activeTopic);
+      });
+      if (network) {
+        network.dataset.activeTopic = activeTopic;
+        network.dataset.topicFocused = String(Boolean(activeTopic));
+      }
+    };
 
     const renderPanel = () => {
       if (!activePanel) return;
@@ -254,9 +505,12 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
     const openFocus = (entryId: string) => {
       if (!network || !focusLayer) return;
       const nextPanel = panels.find((panel) => panel.dataset.entryId === entryId);
-      if (!nextPanel) return;
+      const article = articleById.get(entryId);
+      if (!nextPanel || !article?.projection) return;
       activePanel = nextPanel;
       activeSlide = 0;
+      nextPanel.style.setProperty('--focus-x', `${(article.projection.x / network.clientWidth) * 100}%`);
+      nextPanel.style.setProperty('--focus-y', `${(article.projection.y / network.clientHeight) * 100}%`);
       panels.forEach((panel) => { panel.hidden = panel !== nextPanel; });
       articleButtons.forEach((button) => { button.dataset.selected = String(button.dataset.entryId === entryId); });
       focusLayer.hidden = false;
@@ -273,24 +527,117 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
       renderPanel();
     };
 
-    const highlightTopic = (topic: string) => {
-      activeTopic = activeTopic === topic ? '' : topic;
-      hubs.forEach((hub) => {
-        const highlighted = hub.dataset.topic === activeTopic;
-        hub.dataset.highlighted = String(highlighted);
-        hub.setAttribute('aria-pressed', String(highlighted));
-      });
-      articleButtons.forEach((button) => {
-        const highlighted = !activeTopic || (button.dataset.topics?.split(' ').includes(activeTopic) ?? false);
-        button.dataset.highlighted = String(highlighted);
-      });
-      connections.forEach((connection) => {
-        connection.dataset.highlighted = String(!activeTopic || connection.dataset.topic === activeTopic);
-      });
-      if (network) network.dataset.activeTopic = activeTopic;
+    const selectTopic = (topicId: string) => {
+      closeFocus();
+      updateTopicState(activeTopic === topicId ? '' : topicId);
+      const target = activeTopic
+        ? new Quaternion().setFromUnitVectors(topicById.get(activeTopic)?.normal.clone().normalize() ?? forward, forward)
+        : overviewQuaternion.clone();
+      animateTurn(target, activeTopic ? 1 : 0);
     };
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (network) {
+      let orbitPointerId = -1;
+      let orbitLastX = 0;
+      let orbitLastY = 0;
+      let orbitLastAt = 0;
+      let orbitVelocityX = 0;
+      let orbitVelocityY = 0;
+      let orbitDistance = 0;
+      let orbitStarted = false;
+
+      const isInteractiveTarget = (target: EventTarget | null) => target instanceof Element && Boolean(target.closest(
+        '.resource-article-node,.resource-hub,.resource-root-node,.resource-focus-layer,a,button,input,select,textarea',
+      ));
+      const applyOrbit = (deltaX: number, deltaY: number) => {
+        const sensitivity = Math.PI / Math.max(620, Math.min(network.clientWidth, network.clientHeight) * 1.65);
+        const yaw = new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), deltaX * sensitivity);
+        const pitch = new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), -deltaY * sensitivity);
+        currentQuaternion.premultiply(yaw).premultiply(pitch).normalize();
+        renderNetwork();
+      };
+      const stopOrbit = () => {
+        window.cancelAnimationFrame(orbitFrame);
+        network.dataset.orbiting = 'false';
+      };
+      const beginInertia = () => {
+        if (reduceMotion || Math.hypot(orbitVelocityX, orbitVelocityY) < .025) {
+          stopOrbit();
+          return;
+        }
+        let lastAt = performance.now();
+        const startedAt = lastAt;
+        const tick = (now: number) => {
+          const deltaTime = Math.min(32, now - lastAt);
+          lastAt = now;
+          applyOrbit(orbitVelocityX * deltaTime, orbitVelocityY * deltaTime);
+          const damping = Math.pow(.88, deltaTime / 16.67);
+          orbitVelocityX *= damping;
+          orbitVelocityY *= damping;
+          if (Math.hypot(orbitVelocityX, orbitVelocityY) > .008 && now - startedAt < 920) {
+            orbitFrame = window.requestAnimationFrame(tick);
+          } else {
+            stopOrbit();
+          }
+        };
+        network.dataset.orbiting = 'true';
+        orbitFrame = window.requestAnimationFrame(tick);
+      };
+
+      network.addEventListener('pointerdown', (event) => {
+        if (event.button === 0) requestCompactNavigation('resource-panel-interaction');
+        if (event.button !== 0 || activePanel || isInteractiveTarget(event.target)) return;
+        stopOrbit();
+        window.cancelAnimationFrame(turnFrame);
+        network.dataset.turning = 'false';
+        orbitPointerId = event.pointerId;
+        orbitLastX = event.clientX;
+        orbitLastY = event.clientY;
+        orbitLastAt = performance.now();
+        orbitVelocityX = 0;
+        orbitVelocityY = 0;
+        orbitDistance = 0;
+        orbitStarted = false;
+        network.setPointerCapture(event.pointerId);
+      });
+      network.addEventListener('pointermove', (event) => {
+        if (event.pointerId !== orbitPointerId || !network.hasPointerCapture(event.pointerId)) return;
+        const now = performance.now();
+        const deltaX = event.clientX - orbitLastX;
+        const deltaY = event.clientY - orbitLastY;
+        orbitDistance += Math.hypot(deltaX, deltaY);
+        orbitLastX = event.clientX;
+        orbitLastY = event.clientY;
+        const deltaTime = Math.max(8, now - orbitLastAt);
+        orbitLastAt = now;
+        if (orbitDistance < 4) return;
+        event.preventDefault();
+        if (!orbitStarted) {
+          orbitStarted = true;
+          closeFocus();
+          updateTopicState('');
+          focusMix = 0;
+          network.dataset.orbiting = 'true';
+        }
+        orbitVelocityX = orbitVelocityX * .58 + (deltaX / deltaTime) * .42;
+        orbitVelocityY = orbitVelocityY * .58 + (deltaY / deltaTime) * .42;
+        applyOrbit(deltaX, deltaY);
+      });
+      const releaseOrbit = (event: PointerEvent) => {
+        if (event.pointerId !== orbitPointerId) return;
+        orbitPointerId = -1;
+        if (network.hasPointerCapture(event.pointerId)) network.releasePointerCapture(event.pointerId);
+        if (orbitStarted) beginInertia();
+        else stopOrbit();
+      };
+      network.addEventListener('pointerup', releaseOrbit);
+      network.addEventListener('pointercancel', (event) => {
+        if (event.pointerId !== orbitPointerId) return;
+        orbitPointerId = -1;
+        stopOrbit();
+      });
+      network.addEventListener('click', () => requestCompactNavigation('resource-panel-activation'));
+    }
 
     articleButtons.forEach((button) => {
       let pointerId = -1;
@@ -306,7 +653,6 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
         button.style.setProperty('--drag-r', `${rotation.toFixed(2)}deg`);
         button.style.setProperty('--pull-scale', scale.toFixed(3));
       };
-
       const settle = () => {
         window.clearTimeout(settleTimer);
         button.dataset.dragging = 'false';
@@ -325,7 +671,6 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
         button.style.transition = 'none';
         button.setPointerCapture(event.pointerId);
       });
-
       button.addEventListener('pointermove', (event) => {
         if (event.pointerId !== pointerId || !button.hasPointerCapture(event.pointerId)) return;
         const rawX = event.clientX - startX;
@@ -335,7 +680,6 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
         event.preventDefault();
         moved = true;
         button.dataset.dragging = 'true';
-
         const limit = Math.min(56, Math.max(38, (network?.clientWidth ?? 840) * .045));
         const resistedDistance = limit * Math.tanh(distance / (limit * .78));
         const ratio = resistedDistance / distance;
@@ -344,17 +688,14 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
         const tension = resistedDistance / limit;
         setPull(pullX, pullY, (pullX / limit) * 1.65, 1 + tension * .025);
       });
-
       const releasePointer = (event: PointerEvent) => {
         if (event.pointerId !== pointerId) return;
         suppressClick = moved;
         pointerId = -1;
         settle();
       };
-
       button.addEventListener('pointerup', releasePointer);
       button.addEventListener('pointercancel', releasePointer);
-
       button.addEventListener('click', () => {
         if (suppressClick) {
           suppressClick = false;
@@ -373,7 +714,8 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
         }, 230);
       });
     });
-    hubs.forEach((hub) => hub.addEventListener('click', () => highlightTopic(hub.dataset.topic ?? '')));
+
+    hubs.forEach((hub) => hub.addEventListener('click', () => selectTopic(hub.dataset.topic ?? '')));
     panels.forEach((panel) => {
       panel.querySelector<HTMLButtonElement>('.resource-focus-close')?.addEventListener('click', closeFocus);
       panel.querySelector<HTMLButtonElement>('.resource-focus-previous')?.addEventListener('click', () => stepFocus(-1));
@@ -399,18 +741,18 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
 
     explorer.addEventListener('resource:select-kind', (event) => {
       if (!(event instanceof CustomEvent) || typeof event.detail !== 'string') return;
-      if (activeTopic === event.detail) activeTopic = '';
-      highlightTopic(event.detail);
+      selectTopic(event.detail);
     });
-
     explorer.addEventListener('resource:close-focus', closeFocus);
-
     window.addEventListener('keydown', (event) => {
       if (!activePanel) return;
       if (event.key === 'Escape') closeFocus();
       if (event.key === 'ArrowLeft') stepFocus(-1);
       if (event.key === 'ArrowRight') stepFocus(1);
     });
+
+    new ResizeObserver(renderNetwork).observe(network as Element);
+    renderNetwork();
   }
 </script>
 
@@ -418,10 +760,13 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
   .resource-explorer{width:100%;max-width:none;margin:0 auto clamp(72px,8vw,112px);scroll-margin-top:90px}
   .resource-explorer[hidden],.resource-focus-layer[hidden],.resource-focus-panel[hidden]{display:none}
   .resource-explorer-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  .resource-network{position:relative;min-height:clamp(980px,68vw,1160px);overflow:hidden;border:1px solid rgba(23,32,29,.2);border-radius:20px;background:radial-gradient(circle at 50% 49%,rgba(255,255,255,.64),transparent 22%),linear-gradient(rgba(248,247,242,.54),rgba(232,231,227,.34)),url('/assets/paper-tile.png');box-shadow:0 34px 82px -62px rgba(23,32,29,.72),inset 0 1px rgba(255,255,255,.78)}
+  .resource-network{position:relative;min-height:clamp(1120px,78vw,1380px);overflow:hidden;border:1px solid rgba(23,32,29,.2);border-radius:20px;background:radial-gradient(circle at 50% 49%,rgba(255,255,255,.64),transparent 22%),linear-gradient(rgba(248,247,242,.54),rgba(232,231,227,.34)),url('/assets/paper-tile.png');box-shadow:0 34px 82px -62px rgba(23,32,29,.72),inset 0 1px rgba(255,255,255,.78);cursor:grab;touch-action:pan-y;user-select:none;transition:min-height .62s var(--ease)}
+  .resource-network[data-active-topic]:not([data-active-topic=""]){min-height:clamp(1360px,92vw,1640px)}
+  .resource-network[data-orbiting="true"]{cursor:grabbing}
   .resource-network::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 23% 27%,rgba(193,59,51,.11),transparent 18%),radial-gradient(ellipse at 74% 22%,rgba(42,85,165,.09),transparent 19%),radial-gradient(ellipse at 70% 74%,rgba(71,115,95,.085),transparent 18%),radial-gradient(ellipse at 29% 79%,rgba(156,88,121,.08),transparent 18%);mix-blend-mode:multiply}
   .resource-network-map{position:absolute;inset:0;z-index:1;width:100%;height:100%;pointer-events:none}
   .resource-network-map path{fill:none;vector-effect:non-scaling-stroke;transition:opacity .3s var(--ease),stroke .3s var(--ease)}
+  .resource-face-connection{stroke:rgba(23,50,46,.26);stroke-width:.8;stroke-dasharray:4 7}
   .resource-root-connection{stroke:rgba(23,32,29,.11);stroke-width:.7}
   .resource-article-connection{stroke:rgba(23,32,29,.23);stroke-width:.68;stroke-dasharray:1.65 2.8}
   .resource-network[data-active-topic]:not([data-active-topic=""]) .resource-article-connection[data-highlighted="false"]{opacity:.08}
@@ -429,8 +774,8 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
   .resource-root-node{position:absolute;left:50%;top:50%;z-index:3;display:grid;place-items:center;width:88px;height:88px;border:1px solid rgba(23,32,29,.2);border-radius:50%;background:rgba(248,247,242,.86);box-shadow:0 14px 34px rgba(23,32,29,.08);transform:translate(-50%,-50%);transition:opacity .28s var(--ease),transform .28s var(--ease)}
   .resource-root-node span{position:absolute;color:rgba(23,50,46,.07);font-family:"Ma Shan Zheng",cursive;font-size:61px;line-height:1}
   .resource-root-node strong{position:relative;color:var(--t1);font-family:var(--fmono);font-size:9px;font-weight:500;letter-spacing:.13em;text-transform:uppercase}
-  .resource-network[data-focused="true"] .resource-root-node{opacity:0;transform:translate(-50%,-50%) scale(.84)}
-  .resource-hub{position:absolute;left:var(--hub-x);top:var(--hub-y);z-index:6;isolation:isolate;display:grid;grid-template-columns:auto 1fr;grid-template-areas:'count title' 'note note';align-items:center;gap:2px 8px;width:150px;padding:11px 13px;border:1px solid color-mix(in srgb,var(--hub-color) 38%,rgba(23,32,29,.18));border-radius:13px;background:linear-gradient(128deg,rgba(255,255,255,.9),color-mix(in srgb,var(--hub-c2) 10%,rgba(248,247,242,.88)));box-shadow:0 10px 28px color-mix(in srgb,var(--hub-color) 10%,transparent);transform:translate(-50%,-50%);text-align:left;cursor:pointer;transition:border-color .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease),transform .25s var(--ease),opacity .25s var(--ease)}
+  .resource-network[data-focused="true"] .resource-root-node,.resource-network[data-topic-focused="true"] .resource-root-node{opacity:0;transform:translate(-50%,-50%) scale(.84)}
+  .resource-hub{--screen-x:0px;--screen-y:0px;--depth-scale:1;--depth-opacity:1;--tilt-x:0deg;--tilt-y:0deg;position:absolute;left:50%;top:50%;z-index:6;isolation:isolate;display:grid;grid-template-columns:auto 1fr;grid-template-areas:'count title' 'note note';align-items:center;gap:2px 8px;width:150px;padding:11px 13px;border:1px solid color-mix(in srgb,var(--hub-color) 38%,rgba(23,32,29,.18));border-radius:13px;background:linear-gradient(128deg,rgba(255,255,255,.9),color-mix(in srgb,var(--hub-c2) 10%,rgba(248,247,242,.88)));box-shadow:0 10px 28px color-mix(in srgb,var(--hub-color) 10%,transparent);opacity:var(--depth-opacity);transform:translate(-50%,-50%) translate3d(var(--screen-x),var(--screen-y),0) perspective(820px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--depth-scale));text-align:left;cursor:pointer;will-change:transform,opacity;transition:border-color .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease),opacity .25s var(--ease)}
   .resource-hub::before{content:"";position:absolute;left:-4px;top:50%;width:8px;height:8px;border:2px solid var(--hub-color);border-radius:50%;background:var(--paper);transform:translateY(-50%)}
   .resource-hub-artwork{position:absolute;z-index:-1;inset:-38px -30px;overflow:hidden;opacity:.42;pointer-events:none;filter:saturate(.76);transition:opacity .3s var(--ease),transform .45s var(--ease)}
   .resource-hub-artwork::after{content:"";position:absolute;inset:0;background:url('/assets/paper-tile.png');background-size:260px;mix-blend-mode:soft-light;opacity:.42}
@@ -443,11 +788,11 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
   .resource-hub-count{grid-area:count;color:var(--hub-color);font-family:var(--fmono);font-size:10px;font-weight:600;font-variant-numeric:tabular-nums}
   .resource-hub>strong{grid-area:title;color:var(--t1);font-family:var(--fdisplay);font-size:20px;font-weight:500}
   .resource-hub>small{grid-area:note;color:var(--t3);font-size:10px;line-height:1.28}
-  .resource-hub:hover,.resource-hub[data-highlighted="true"]{border-color:var(--hub-color);background:rgba(255,255,255,.94);box-shadow:0 16px 38px color-mix(in srgb,var(--hub-color) 18%,rgba(23,32,29,.08));transform:translate(-50%,-50%) translateY(-2px)}
+  .resource-hub:hover,.resource-hub[data-highlighted="true"]{border-color:var(--hub-color);background:rgba(255,255,255,.94);box-shadow:0 16px 38px color-mix(in srgb,var(--hub-color) 18%,rgba(23,32,29,.08))}
   .resource-hub:hover .resource-hub-artwork,.resource-hub[data-highlighted="true"] .resource-hub-artwork{opacity:.68;transform:scale(1.035)}
   .resource-network[data-active-topic]:not([data-active-topic=""]) .resource-hub[data-highlighted="false"]{opacity:.52}
   .resource-article-nodes{position:absolute;inset:0;z-index:4}
-  .resource-article-node{--drag-x:0px;--drag-y:0px;--drag-r:0deg;--pull-scale:1;--node-scale:1;position:absolute;left:var(--node-x);top:var(--node-y);width:var(--node-size,66px);padding:0;border:0;background:none;transform:translate(calc(-50% + var(--drag-x)),calc(-50% + var(--drag-y))) rotate(var(--drag-r)) scale(var(--node-scale)) scale(var(--pull-scale));cursor:grab;touch-action:none;user-select:none;will-change:transform;transition:opacity .25s var(--ease),filter .25s var(--ease),transform .25s var(--ease)}
+  .resource-article-node{--screen-x:0px;--screen-y:0px;--depth-scale:1;--depth-opacity:1;--depth-blur:0px;--tilt-x:0deg;--tilt-y:0deg;--drag-x:0px;--drag-y:0px;--drag-r:0deg;--pull-scale:1;--node-scale:1;position:absolute;left:50%;top:50%;width:var(--node-size,66px);padding:0;border:0;background:none;opacity:var(--depth-opacity);filter:blur(var(--depth-blur));transform:translate(-50%,-50%) translate3d(calc(var(--screen-x) + var(--drag-x)),calc(var(--screen-y) + var(--drag-y)),0) perspective(760px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotate(var(--drag-r)) scale(var(--depth-scale)) scale(var(--node-scale)) scale(var(--pull-scale));cursor:grab;touch-action:none;user-select:none;will-change:transform,opacity,filter;transition:opacity .25s var(--ease),filter .25s var(--ease),transform .25s var(--ease)}
   .resource-node-tile{position:relative;display:block;height:calc(var(--node-size,66px) * 1.24);overflow:hidden;border:1px solid color-mix(in srgb,var(--node-accent) 42%,rgba(23,32,29,.18));border-radius:8px;background:linear-gradient(145deg,rgba(255,255,255,.96),color-mix(in srgb,var(--node-soft) 11%,rgba(248,247,242,.94)));box-shadow:0 10px 24px color-mix(in srgb,var(--node-accent) 13%,rgba(23,32,29,.08));animation:resource-node-drift 5.5s var(--ease) var(--node-delay) infinite alternate}
   .resource-node-tile::after{content:"";position:absolute;left:0;right:0;bottom:18px;height:3px;background:linear-gradient(90deg,var(--node-accent) 0 42%,transparent 42% 58%,var(--node-soft) 58% 81%,transparent 81%);mix-blend-mode:multiply;opacity:.68}
   .resource-node-tile img{display:block;width:100%;height:calc(var(--node-size,66px) * .94);object-fit:cover;pointer-events:none;filter:saturate(.62) contrast(.97);transition:filter .25s var(--ease),transform .35s var(--ease)}
@@ -461,6 +806,7 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
   .resource-article-node:hover .resource-node-caption,.resource-article-node:focus-visible .resource-node-caption{opacity:1;transform:translate(-50%,0)}
   .resource-network[data-active-topic]:not([data-active-topic=""]) .resource-article-node[data-highlighted="false"]{opacity:.22;filter:grayscale(.7)}
   .resource-network[data-focused="true"] .resource-article-node:not([data-selected="true"]){opacity:.3;filter:blur(.45px) saturate(.5)}
+  .resource-network[data-turning="true"] .resource-hub,.resource-network[data-turning="true"] .resource-article-node,.resource-network[data-orbiting="true"] .resource-hub,.resource-network[data-orbiting="true"] .resource-article-node{pointer-events:none}
   .resource-focus-layer{position:absolute;inset:0;z-index:12;pointer-events:none}
   .resource-focus-panel{position:absolute;left:clamp(260px,var(--focus-x),calc(100% - 260px));top:clamp(326px,var(--focus-y),calc(100% - 326px));width:min(500px,52vw);transform:translate(-50%,-50%);pointer-events:auto}
   .resource-focus-panel::before{content:"";position:absolute;z-index:-1;inset:-24px -34px;border-radius:22px;background:linear-gradient(90deg,color-mix(in srgb,var(--focus-c1) 25%,transparent) 0 27%,transparent 27% 34%,color-mix(in srgb,var(--focus-c2) 22%,transparent) 34% 62%,transparent 62% 69%,color-mix(in srgb,var(--focus-c3) 22%,transparent) 69% 88%,color-mix(in srgb,var(--focus-c4) 12%,transparent) 88%);filter:blur(8px) saturate(.76);opacity:.72;clip-path:polygon(1% 5%,97% 0,100% 94%,95% 100%,3% 97%,0 12%);mix-blend-mode:multiply;pointer-events:none}
@@ -482,7 +828,8 @@ const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((ca
   @keyframes resource-node-drift{from{transform:translate3d(0,-3px,0) rotate(-.35deg)}to{transform:translate3d(0,5px,0) rotate(.45deg)}}
   @keyframes resource-node-tap{0%{transform:translate3d(0,0,0) rotate(0) scale(1)}26%{transform:translate3d(-1.5px,1px,0) rotate(-1.15deg) scale(.985)}52%{transform:translate3d(1.2px,-.5px,0) rotate(.9deg) scale(1.012)}76%{transform:translate3d(-.55px,.25px,0) rotate(-.35deg) scale(.998)}100%{transform:translate3d(0,0,0) rotate(0) scale(1)}}
   @keyframes resource-focus-arrive{from{opacity:0;transform:translateY(9px) scale(.975)}to{opacity:1;transform:none}}
-  @media(max-width:900px){.resource-network{min-height:900px}.resource-hub{width:132px}.resource-focus-panel{width:min(456px,66vw)}.resource-focus-carousel{grid-template-columns:36px minmax(0,320px) 36px;gap:8px}.resource-focus-card{grid-template-rows:400px auto}}
-  @media(max-width:680px){.resource-network{min-height:820px}.resource-network-map{opacity:.75}.resource-root-node{width:70px;height:70px}.resource-root-node span{font-size:48px}.resource-hub{width:108px;padding:8px}.resource-hub>strong{font-size:17px}.resource-hub>small{display:none}.resource-article-node{width:clamp(42px,calc(var(--node-size,66px) * .72),54px)}.resource-node-tile{height:calc(clamp(42px,calc(var(--node-size,66px) * .72),54px) * 1.24)}.resource-node-tile img{height:calc(clamp(42px,calc(var(--node-size,66px) * .72),54px) * .94)}.resource-node-tile>span{min-height:15px;padding:3px 1px;font-size:9px}.resource-focus-panel{left:50%;top:50%;width:calc(100% - 20px)}.resource-focus-carousel{grid-template-columns:32px minmax(0,254px) 32px;gap:4px}.resource-focus-card{grid-template-rows:318px auto}.resource-focus-copy{min-height:98px;padding:11px 12px}.resource-focus-copy>b{font-size:17px}.resource-focus-step{width:32px;height:32px}.resource-focus-close{right:8px;top:-38px;width:30px;height:30px}.resource-node-caption{display:none}}
-  @media(prefers-reduced-motion:reduce){.resource-node-tile,.resource-focus-card,.resource-article-node.is-tapped .resource-node-tile{animation:none}.resource-network-map path,.resource-root-node,.resource-hub,.resource-article-node,.resource-node-tile img,.resource-node-caption,.resource-focus-step{transition:none}}
+  @media(max-width:900px){.resource-network{min-height:960px}.resource-network[data-active-topic]:not([data-active-topic=""]){min-height:1120px}.resource-hub{width:132px}.resource-focus-panel{width:min(456px,66vw)}.resource-focus-carousel{grid-template-columns:36px minmax(0,320px) 36px;gap:8px}.resource-focus-card{grid-template-rows:400px auto}}
+  @media(max-width:680px){.resource-network{min-height:860px}.resource-network[data-active-topic]:not([data-active-topic=""]){min-height:980px}.resource-network-map{opacity:.75}.resource-root-node{width:70px;height:70px}.resource-root-node span{font-size:48px}.resource-hub{width:108px;padding:8px}.resource-hub>strong{font-size:17px}.resource-hub>small{display:none}.resource-article-node{width:clamp(42px,calc(var(--node-size,66px) * .72),54px)}.resource-node-tile{height:calc(clamp(42px,calc(var(--node-size,66px) * .72),54px) * 1.24)}.resource-node-tile img{height:calc(clamp(42px,calc(var(--node-size,66px) * .72),54px) * .94)}.resource-node-tile>span{min-height:15px;padding:3px 1px;font-size:9px}.resource-focus-panel{left:50%;top:50%;width:calc(100% - 20px)}.resource-focus-carousel{grid-template-columns:32px minmax(0,254px) 32px;gap:4px}.resource-focus-card{grid-template-rows:318px auto}.resource-focus-copy{min-height:98px;padding:11px 12px}.resource-focus-copy>b{font-size:17px}.resource-focus-step{width:32px;height:32px}.resource-focus-close{right:8px;top:-38px;width:30px;height:30px}.resource-node-caption{display:none}}
+  @media(pointer:fine){.resource-network{touch-action:none}}
+  @media(prefers-reduced-motion:reduce){.resource-node-tile,.resource-focus-card,.resource-article-node.is-tapped .resource-node-tile{animation:none}.resource-network,.resource-network-map path,.resource-root-node,.resource-hub,.resource-article-node,.resource-node-tile img,.resource-node-caption,.resource-focus-step{transition:none}}
 </style>
