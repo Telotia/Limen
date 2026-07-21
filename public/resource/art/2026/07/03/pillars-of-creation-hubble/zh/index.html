@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 《创生之柱》— 哈勃太空望远镜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141b24; --ink-soft:#32404c; --ink-faint:#79838d;
+    --silver:#b9b4a8; --gold:#c98a4b; --rust:#5b2e22; --teal:#35606b; --bone:#e7e2d7;
+    --paper:rgba(248,245,239,.60); --line:rgba(20,27,36,.16); --void:#0b1622;
+    --indigo:#0e1b2a; --amber:#d69454; --starwhite:#ffe9c2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#cfd6d6; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 16% 8%, rgba(53,96,107,.28), transparent 60%),
+      radial-gradient(44rem 44rem at 86% 16%, rgba(214,148,84,.22), transparent 62%),
+      radial-gradient(42rem 42rem at 84% 90%, rgba(91,46,34,.18), transparent 60%),
+      radial-gradient(50rem 50rem at 20% 92%, rgba(14,27,42,.24), transparent 60%),
+      linear-gradient(160deg,#dde3e2,#c1c9c8);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(11,22,34,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#0e1b2a}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(11,22,34,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,138,75,.22)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.03</div>
+    <h1>创生之柱</h1>
+    <div class="sub">Pillars of Creation — 六千五百光年外，尘埃深处正在诞生星辰</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="哈勃太空望远镜拍摄《创生之柱》，鹰状星云">
+    <figcaption>NASA, ESA, Hubble Heritage Team（STScI/AURA），《创生之柱》（Pillars of Creation），2014年高清重制版（原始影像1995年）· 鹰状星云（Eagle Nebula, M16）· 约6,500光年外 · 公有领域</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">三根深褐色的尘埃巨柱，从阴影中挺立而起，边缘被无形的星光镀成金红色——这张1995年首次拍摄、2014年重新处理的照片，是人类历史上被印刷、转发、致敬次数最多的影像之一。它拍的不是风景，是新生恒星的产房，一场持续了数百万年、此刻仍在进行的宇宙级"分娩"。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 崇高感的三重奏 <span class="en">Composition</span></h2>
+    <p><b>三柱错落</b>：三根塔柱高度递减、从左至右排开，形成有韵律感的锯齿状天际线——既是经典三分法的变体，也是刻意打破的不对称平衡，让画面不至于死板。</p>
+    <p><b>基座宽阔、柱身收窄</b>：柱体从画面底部的宽厚阴影向上收细，制造强烈的垂直推力，视线被不由自主地引导向上——这正是"崇高"（the Sublime）美学最经典的构图公式：让渺小的观者去感受宇宙尺度。</p>
+    <p><b>柱尖的发光气体</b>如指尖轻触星海；柱与柱之间大片的深色负空间（暗尘埃带）不但没有削弱主体，反而强化了它的实体感与重量——柱尖处正是天文学家所说的"蒸发气体球"（EGGs），新恒星最先诞生的地方。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 互补色与"假彩色"叙事 <span class="en">Color Theory</span></h2>
+    <p>整幅画面的核心是一组<b>互补色对比</b>：暖褐、赤金的尘埃柱体，对撞冷蓝绿色的电离氢氧气体背景——在色轮上，橙红与蓝绿正好相对。这组对比让主体从背景里"跳"出来，同时也是恒星辐射的真实物理编码：柱体反射尘埃的暖光，背景则是被年轻恒星的紫外线电离后发出的蓝绿荧光。</p>
+    <p><b>哈勃调色板（Hubble Palette）</b>：望远镜实际捕捉到的是肉眼不可见的窄带波长（氢阿尔法、[OIII]、[SII]等），科学家把每个波段"指派"给一个RGB通道再合成成图——这是把不可见的数据翻译成情绪的"假彩色"技术。不是造假，而是"配色即叙事"的极致案例：色相在这里承载的是真实信息，不只是审美。</p>
+    <div class="palette">
+      <div class="sw" style="background:#0e1b2a;color:#e7e2d7">深空靛蓝<small>#0E1B2A · 背景</small></div>
+      <div class="sw" style="background:#35606b;color:#e7e2d7">电离青绿<small>#35606B · 气体</small></div>
+      <div class="sw" style="background:#5b2e22;color:#e7e2d7">尘埃赤褐<small>#5B2E22 · 柱体</small></div>
+      <div class="sw" style="background:#d69454;color:#1b1916">边缘赤金<small>#D69454 · 轮廓</small></div>
+      <div class="sw" style="background:#ffe9c2;color:#555;border:1px solid #e8d9b8">恒星芒白<small>#FFE9C2 · 星点</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与技法 <span class="en">Light & Technique</span></h2>
+    <p><b>轮廓光（rim light）</b>：柱体背后年轻炙热的恒星把柱体边缘"镀"上一层光晕，主体大部分留在阴影里——这与人像摄影里最经典的轮廓光用法一模一样，让厚重的尘埃有了呼吸感和体积感。</p>
+    <p><b>多波段分层合成</b>：哈勃并非一次曝光成像，而是用不同滤镜分别拍摄多张窄带影像，再在后期逐层叠加合成——这跟胶片时代的分区曝光、和今天数码摄影的HDR堆栈，本质上是同一套逻辑的不同版本。2014年的这一版由哈勃遗产团队（Hubble Heritage Team）用分辨率更高的第三代广域相机（WFC3）重新拍摄合成，细节比1995年原版丰富数倍。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 <span class="en">Why It Moves Us</span></h2>
+    <p><b>尺度的错位感</b>：每根柱子实际高达数光年（最高一根接近4光年），但构图和光影处理让它像近在咫尺、伸手可触的雕塑——这种"把不可感知的尺度翻译成可感知的形态"，正是它最厉害的地方。</p>
+    <p>这里既是恒星的<b>产房</b>，也是它自己的<b>坟场</b>：柱内致密的氢气正在坍缩、孕育新恒星；而周围新生恒星释放的紫外辐射与恒星风，同时也在一点点侵蚀、瓦解这些尘埃柱本身。诞生与消逝在同一张照片里同时发生——这份科学事实自带一种悲壮的诗意。也正因如此，它被印在无数T恤、专辑封面、教科书封面上，成了"科学如何变成大众视觉文化"的最佳范例之一。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者 · 望远镜与团队 <span class="en">The Artist(s)</span></h2>
+    <p>1995年的原始版本由天文学家<b>Jeff Hester</b>与<b>Paul Scowen</b>使用哈勃第二代广域行星相机（WFPC2）拍摄，发布后几乎瞬间成为标志性影像。2014年，为纪念哈勃望远镜升空25周年，<b>哈勃遗产团队</b>（Hubble Heritage Team, STScI/AURA）用分辨率更高的第三代广域相机（WFC3）重新拍摄合成了这一版本，即本文所用的图像。</p>
+    <p>2022年，詹姆斯·韦伯太空望远镜（JWST）用近红外波段重新拍摄了同一片区域，穿透尘埃看到了柱体内部藏着的更多新生恒星——两代望远镜、两种"看见"方式，为同一个题材写下了完全不同的两首诗。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 配色 / 用光 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>互补色跳跃法：</b>暖色主体 + 冷色背景（或反之）是让画面主体"跳出来"最简单有效的公式——人像、产品摄影的调色可以直接套用。</li>
+      <li><b>轮廓光优先于正面光：</b>让光源主要来自主体背后而非正面，大部分细节留在阴影中、只让边缘发光——比均匀的正面平光更有戏剧张力。</li>
+      <li><b>假彩色配色法：</b>做信息图或数据可视化时，可以借鉴"波段=通道"的思路——给不同类别的数据指派不同色相，让色彩本身承担叙事功能，而不只是装饰。</li>
+      <li><b>渐变高度构图：</b>三个高度不同、错落排列的视觉元素，比等高或单一元素更有韵律感和张力，适用于排版、陈列、甚至穿搭的层次搭配。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：NASA, ESA, Hubble Heritage Team（STScI/AURA）《创生之柱》2014年版（原始影像1995年）· 鹰状星云 M16<br>
+    来源：NASA / ESA / Wikimedia Commons · 公有领域，无版权限制 · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

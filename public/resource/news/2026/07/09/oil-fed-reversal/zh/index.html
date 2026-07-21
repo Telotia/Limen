@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金融 · 十天前崩过一次的停火,这次真崩了</title>
+<style>
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  :root{
+    --bg0:#0a0704; --bg1:#120d08; --card:#1a1108cc;
+    --line:rgba(217,119,6,0.20);
+    --grad1:#fb923c; --grad2:#f59e0b; --grad3:#1e3a8a;
+    --text:#f3ede2; --sub:#a8977f; --up:#34d399; --down:#f87171;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background: radial-gradient(ellipse 900px 600px at 15% -5%, rgba(251,146,60,0.16), transparent 60%),
+                radial-gradient(ellipse 800px 700px at 90% 15%, rgba(30,58,138,0.28), transparent 60%),
+                radial-gradient(ellipse 700px 600px at 50% 100%, rgba(245,158,11,0.10), transparent 60%),
+                linear-gradient(180deg, var(--bg0), var(--bg1) 40%, var(--bg0));
+    color: var(--text);
+    font-family: "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
+    line-height: 1.75;
+    padding: 0 0 80px;
+  }
+  .wrap{max-width: 760px; margin: 0 auto; padding: 64px 28px 0;}
+  .kicker{font-family: "IBM Plex Mono", monospace; letter-spacing:.18em; font-size:12px; color: var(--grad1); text-transform:uppercase; margin-bottom:14px;}
+  h1{
+    font-size: 34px; font-weight: 700; line-height:1.35; margin-bottom: 8px;
+    background: linear-gradient(90deg, #fff 10%, var(--grad1) 55%, var(--grad3) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .meta{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--sub); margin-bottom:36px;}
+  .card{
+    background: var(--card); border:1px solid var(--line); border-radius:20px;
+    padding: 26px 28px; margin-bottom: 22px; backdrop-filter: blur(14px);
+    box-shadow: 0 20px 50px -30px rgba(251,146,60,0.25);
+  }
+  h2{font-size:19px; color:#fff; margin-bottom:12px; display:flex; align-items:center; gap:10px;}
+  h2 .n{
+    font-family:"IBM Plex Mono",monospace; font-size:12px; width:26px; height:26px; border-radius:8px;
+    background: linear-gradient(135deg, var(--grad1), var(--grad3)); display:flex; align-items:center; justify-content:center; color:#0a0704; font-weight:700;
+  }
+  p{color:#dcd0bd; font-size:15.5px; margin-bottom:12px;}
+  strong{color:#fff; font-weight:700;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:14px;}
+  th,td{padding:10px 12px; border-bottom:1px solid var(--line); text-align:left;}
+  th{color:var(--grad1); font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-transform:uppercase;}
+  .statgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin: 16px 0;}
+  .stat{background:rgba(255,255,255,0.03); border:1px solid var(--line); border-radius:14px; padding:14px 12px; text-align:center;}
+  .stat .v{font-family:"IBM Plex Mono",monospace; font-size:20px; font-weight:700; color:var(--grad1);}
+  .stat .l{font-size:11.5px; color:var(--sub); margin-top:4px;}
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px;}
+  .bull, .bear{border-radius:14px; padding:16px; border:1px solid var(--line);}
+  .bull{background:rgba(52,211,153,0.06);}
+  .bear{background:rgba(248,113,113,0.06);}
+  .bull .t{color:var(--up); font-weight:700; margin-bottom:6px; font-family:"IBM Plex Mono",monospace; font-size:12px;}
+  .bear .t{color:var(--down); font-weight:700; margin-bottom:6px; font-family:"IBM Plex Mono",monospace; font-size:12px;}
+  .bull p, .bear p{font-size:13.5px; color:#c9bda8; margin-bottom:0;}
+  a{color:var(--grad1); text-decoration:none; border-bottom:1px dotted rgba(251,146,60,0.4);}
+  .sources{font-size:13px; color:var(--sub);}
+  .sources li{margin-bottom:8px; list-style:none;}
+  .foot{margin-top:40px; padding-top:24px; border-top:1px solid var(--line); font-size:12px; color:var(--sub); text-align:center;}
+  .foot .brand{font-family:"IBM Plex Mono",monospace; letter-spacing:.2em; color:var(--grad3);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">深度读 · 2026.07.09</div>
+  <h1>十天前刚崩过一次的停火,这次真崩了</h1>
+  <div class="meta">阅读时长 约6分钟 · 信息性内容,不构成投资建议</div>
+
+  <div class="card">
+    <h2><span class="n">1</span>发生了什么</h2>
+    <p>7月8日,特朗普在土耳其出席北约峰会时表态,称与伊朗的临时停火协议"结束了",美国"很可能"再次对伊朗发动空袭,并说自己"不确定"还想不想要一份新协议。伊朗随后被报道对海湾国家发动反击。消息一出,油价应声急涨:WTI原油当日一度涨超<strong>6.8%</strong>报<strong>75.27美元</strong>/桶,布伦特原油涨超<strong>7%</strong>冲到<strong>79.50美元</strong>附近,盘中一度摸高80美元;道指当天重挫<strong>576.76点(-1.09%)</strong>,收于52,348.39点,标普500跌0.28%至7,482.71点,唯独纳斯达克综合指数逆势涨0.2%至25,870.65点——靠的是芯片股撑盘。</p>
+    <p>到周四(7月9日)盘前,市场情绪略有企稳:特朗普随后又淡化了"全面开战"的说法,称他不认为美伊会真打起来,"事情会很快过去",标普500期货小幅回升0.2%。但这已经是这份停火协议在不到十天里第二次被推翻——7月初它刚刚把油价从126美元砸到72美元附近,被市场解读为"大脱险",如今又被打回原形。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">2</span>为什么会这样(传导机制)</h2>
+    <p>真正让这次冲击变得不一样的,是它撞上了同一天公布的另一份文件。美联储6月16-17日会议纪要在7月8日同步公布:18名FOMC官员里有<strong>9人</strong>明确倾向今年内至少加息一次——这是今年以来鹰派立场最集中的一次表态。油价飙升在这个时点砸下来,不是孤立的地缘冲击,而是直接给一个本已在辩论"要不要加息"的美联储,递上了一份"通胀风险"的实锤证据。</p>
+    <p>CME FedWatch数据显示,9月加息概率因此单日从约58%-62%跳升到<strong>68%-70%</strong>,12月加息概率一度冲到85%以上。这背后有真实的通胀基础在支撑:核心CPI同比已达<strong>4.2%</strong>,为三年新高;核心PCE同比<strong>3.4%</strong>,创近三年最快;汽油价格同比暴涨<strong>59%</strong>。换句话说,这次油价冲击不是在一个平静的通胀环境里发生,而是叠加在一个已经偏热的底子上。</p>
+    <div class="statgrid">
+      <div class="stat"><div class="v">9/18</div><div class="l">FOMC官员倾向年内加息</div></div>
+      <div class="stat"><div class="v">58%→69%</div><div class="l">9月加息概率单日跳升</div></div>
+      <div class="stat"><div class="v">4.2%</div><div class="l">核心CPI同比,三年新高</div></div>
+    </div>
+    <p>资金随即按教科书式的宏观逻辑轮动:对利率敏感的银行股(摩根大通、Visa)下跌,能源股(XLE成分股如钻石之背能源、西方石油、瓦莱罗能源)领涨;但纳指靠芯片股逆势翻红,说明这轮抛售并非无差别的"risk-off",而是有明确方向的资产轮动。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">3</span>关键数字与第二层影响</h2>
+    <p>第二层影响正在扩散:苹果与博通宣布把定制芯片供应协议延长至2031年,规模约300亿美元,博通股价当天大涨4.8%;同期,SK海力士正式启动约280-290亿美元的美股ADR上市,市场传出Coatue Management与Situational Awareness两家机构合计意向认购规模高达70亿美元,需求相当旺盛。在利率和地缘风险同时升温的这一天,AI芯片交易几乎毫发无损地继续狂奔。另一个值得注意的细节是黄金——按理说地缘风险升温该是避险资产的主场,但金价当天反而连续第四个交易日下跌,说明"利率上行"这条逻辑线,眼下压过了"避险买盘"这条逻辑线。</p>
+    <div class="split">
+      <div class="bull"><div class="t">看多论据(会回落)</div><p>特朗普事后明确淡化"全面开战";9月加息仍是较大概率而非板上钉钉;7月14日CPI才是真正的试金石;芯片股逆势上涨说明市场未把这次冲击定性为系统性风险。</p></div>
+      <div class="bear"><div class="t">看空论据(加息已难避免)</div><p>这是同一份停火协议不到十天内第二次被撕毁,降温本身就是脆弱叙事;美银已上调预测为年内三次25基点加息;消费者一年期通胀预期升至3.7%,为2023年9月以来最高,且独立于本轮油价。</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">4</span>这意味着什么</h2>
+    <p>最值得警惕的一点,不是"油价又涨了",而是这份停火协议在十天内经历了"崩溃—修复—再崩溃"的完整循环。7月初那份让油价从126美元砸到72美元、被普遍解读为"地缘脱险"的停火,本质上从来不是一个可以长期持仓的确定性事件,而更像一份随时可能被一句总统讲话作废的期权——涨跌全在一句话之间。如果有人在那次"大脱险"叙事里建立了结构性的做多风险资产、做空波动率的仓位,这次反转就是提醒:地缘政治的"解决"不等于风险归零,只是把风险暂时挪到了别处。</p>
+    <p>另一个容易被市场叙事忽略的地方是:芯片股在这一天顶着加息预期和地缘冲击双重利空逆势大涨,这既可能说明AI资本开支的信念已经真正与宏观利率脱钩,也可能只是说明,一旦美联储真的启动加息周期(9/18位委员本就倾向如此,与本轮油价无关),市场目前对芯片股的"免疫力"被高估了。两种解释现在都还立得住,答案要等真正的加息落地才能验证。</p>
+    <p><strong>一条可以带走的教训:</strong>不要把"停火""降温""脱险"这类地缘叙事当作可以长期持有的基本面变量去交易,它们更接近一份随时可能被撤销的短期期权;真正决定下一步走向的,是7月14日的CPI数据能不能验证这轮加息预期的跳升是"虚惊一场"还是"实锤兑现"。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">5</span>信息来源</h2>
+    <ul class="sources">
+      <li>1. Yahoo Finance — <a href="https://finance.yahoo.com/markets/stocks/live/stock-market-today-wednedsay-july-8-230111117.html" target="_blank">Stock market today: Nasdaq rises, Dow and S&P 500 retreat as oil prices climb on renewed US-Iran tensions</a></li>
+      <li>2. TheStreet — <a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-july-8-2026" target="_blank">Stock Market Today (July 8, 2026): U.S. resumes Iran strikes after Trump comments</a></li>
+      <li>3. Forbes — <a href="https://www.forbes.com/sites/tylerroush/2026/07/08/fed-minutes-signal-no-interest-rate-cuts-until-2027-as-renewed-iran-conflict-spikes-rate-hike-odds/" target="_blank">Fed Minutes Signal No Interest Rate Cuts Until 2027—As Renewed Iran Conflict Spikes Rate Hike Odds</a></li>
+      <li>4. Bloomberg — <a href="https://www.bloomberg.com/news/articles/2026-07-08/yardeni-says-inflation-fed-back-in-play-as-iran-crisis-returns" target="_blank">Iran Crisis Drives Oil Prices Higher, Fed Rate Hike Bets Increase</a></li>
+      <li>5. Yahoo Finance — <a href="https://finance.yahoo.com/markets/article/sk-hynix-seeks-28-billion-in-us-ipo-listing-as-memory-maker-rides-ai-wave-132016294.html" target="_blank">SK Hynix seeks $28 billion in US IPO listing as memory maker rides AI wave</a></li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    <div class="brand">金融</div>
+    <p style="margin-top:8px;">本文仅为信息整理与研判,不构成任何投资建议。市场有风险,决策需独立判断。</p>
+  </div>
+</div>
+</body>
+</html>

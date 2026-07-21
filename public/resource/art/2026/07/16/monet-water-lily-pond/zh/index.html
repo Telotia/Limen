@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 睡莲池 · 莫奈把花园变成一整片绿色和声</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eef1ec; --ink-soft:#c9d0c8; --ink-faint:#8b9a93;
+    --gold:#d98fa6; --verde:#46614a; --ochre:#7f97a6; --wine:#2f4a3c;
+    --paper:rgba(16,22,20,.62); --line:rgba(230,238,232,.14); --void:#040906;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#060a08; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(217,143,166,.20), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(70,97,74,.42), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(47,74,60,.4), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(4,9,6,.7), transparent 60%),
+      linear-gradient(170deg,#0c130f,#040705);
+    filter:blur(50px) saturate(1.05); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#9aa8a0;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;color:#f5f6f2;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c9cdc2;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#8b9a93;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.08) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(217,143,166,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#8b9a93;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:#c9cdc2;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.16</div>
+    <h1>睡莲池 · 莫奈把一座花园，画成一整片绿色和声</h1>
+    <div class="sub">克劳德·莫奈《睡莲池》(The Water-Lily Pond) · 1899</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="莫奈《睡莲池》：一座弧形木桥横跨画面，桥身漆成浅蓝灰色，桥上柳枝低垂、树影层叠；桥下水面铺满睡莲与粉白花朵，倒映着桥与树的影子，全画以绿色为主调">
+    <figcaption>《睡莲池》(The Water-Lily Pond) · 克劳德·莫奈，1899年，布面油画 · 英国国家美术馆，伦敦 · 原作公有领域，图片来自Wikimedia Commons</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">1899年，莫奈已经不满足于外出寻找风景了——他直接把风景亲手造了出来。他在吉维尼买下一块洼地，引来一条支流，挖成池塘，种满从日本进口的睡莲，又照着自己收藏的浮世绘版画，搭了一座漆成浅蓝灰色的木桥。这幅画里，几乎看不到天空，看不到岸，只剩一整片绿色的和声——莫奈自己就把这张画题为《睡莲池，绿色和声》(Le Bassin aux nymphéas, harmonie verte)。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 被删掉的地平线 <span class="en">Composition</span></h2>
+    <p>这张画最激进的地方，是莫奈几乎删除了地平线。传统风景画总要留一条线告诉你哪里是天、哪里是地，他却把这条线连同天空一起藏了起来：画面被一座拱桥从上到下切成两半，桥面之上是柳枝低垂、树影层叠；桥面之下，是睡莲铺满的水面与树影的倒影——上下几乎对称，你甚至分不清哪一半是"真实"，哪一半只是水中的镜像。</p>
+    <p>视角被特意压低、拉近，像是站在桥边俯身看水，而不是站在远处眺望风景；画框也几乎方正，四边都被植物与水面填满，没有留出任何"喘息"的空白，让人一进入画面就被整个包裹住。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 配色 · "绿色和声"，一整段类似色的呼吸 <span class="en">Color Theory</span></h2>
+    <p>莫奈给这张画起的法文原名，直接点出了配色逻辑——"绿色和声"（harmonie verte）。整幅画建立在一组类似色（analogous colors）体系上：从偏黄的柳绿、到中间调的苔绿、再到偏蓝的深潭绿与桥身的灰蓝色，全都落在色环上相邻的一段区间里，几乎没有强烈的对比色来打断视线，所以整张画看起来极其和谐，甚至有点催眠。</p>
+    <p>真正的"点睛"色，是水面上那几笔粉白与浅红的睡莲——面积小到几乎可以忽略，却因为是全画唯一偏暖、偏亮的颜色，一下子就把视线钉在了水面上。这和很多"性冷淡风"或莫兰迪式配色的逻辑完全一致：大面积同色系打底，极少量对比色/暖色做点缀，克制但不单调。</p>
+    <div class="palette">
+      <div class="sw" style="background:#7c8f4a;color:#1c2410">柳绿<small>#7C8F4A · 垂柳与光斑</small></div>
+      <div class="sw" style="background:#5a7350;color:#eef1ec">苔藓中绿<small>#5A7350 · 中景树影</small></div>
+      <div class="sw" style="background:#2f4a3c;color:#eef1ec">深潭绿<small>#2F4A3C · 水面深处</small></div>
+      <div class="sw" style="background:#7f97a6;color:#1c2410">桥身灰蓝<small>#7F97A6 · 木桥漆色</small></div>
+      <div class="sw" style="background:#d98fa6;color:#2f1420">睡莲粉<small>#D98FA6 · 水面花朵</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与技法 · 让倒影和实物一样"真实" <span class="en">Technique</span></h2>
+    <p>莫奈用的是印象派招牌的"断续笔触"（broken brushwork）——颜料不是被涂匀抹平的，而是一笔一笔、带着不同方向和厚薄的色块并置在画布上，靠观者的眼睛在一定距离外自动把它们"混合"成水波、树影和光斑。这也是印象派敢用近乎潦草的笔法、却依然让人觉得"像"的秘密。</p>
+    <p>更关键的技法在于水面本身：莫奈把水中倒影和水面本身画得几乎一样清晰、一样"实在"，你分不清哪里是睡莲的叶子，哪里是柳树在水里的影子——这种"拒绝分清虚实"的画法，后来被艺术史学家认为是西方绘画走向抽象的重要起点之一：当画家开始把"反射"和"实物"画得同样真实，具象与抽象的边界就开始松动了。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 先造一座花园，再回头画它 <span class="en">Why It Moves Us</span></h2>
+    <p>这张画最打动人的地方，或许不在画布上，而在画布之前：这个花园根本不是莫奈"找到"的风景，而是他自己一手设计、挖掘、种植出来的。他在吉维尼买地、雇园丁、从日本引进睡莲品种，又照着自己收藏的浮世绘版画定制了这座木桥——换句话说，他先把"想画的风景"造出来，再回过头去画它。这是一种很少见的创作自由：大多数画家在寻找题材，莫奈却先把题材种在了自己家后院。</p>
+    <p>从1899年这批《日本桥》系列开始，他此后二十多年几乎只画这一方池塘，一步步舍弃地平线、舍弃岸边，最终画出晚年那些占满整面墙、近乎抽象的巨幅《睡莲》组画（现藏巴黎橘园美术馆）。眼前这张相对"克制"的早期版本，恰好让我们看到这场漫长实验的起点——桥还在，还留着一点点具象的锚点，还没有完全飘进水面。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">Background</span></h2>
+    <p>克劳德·莫奈（Claude Monet，1840–1926），法国画家，印象派运动的核心创始人之一——"印象派"（Impressionism）这个名字本身，就来自他1872年的作品《日出·印象》。1883年，莫奈定居法国吉维尼（Giverny），并在此后四十多年里持续扩建自己的花园与睡莲池，这方水塘后来成为他晚年最重要的创作母题，直至去世前几乎从未间断。</p>
+    <p>莫奈已故逾九十年，原作早已进入公有领域；这幅《睡莲池》现藏英国国家美术馆（National Gallery, London），本文所用图片来自Wikimedia Commons的公有领域数字化档案。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 一个绿，一点粉，先造场景再拍它 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>用类似色打底，只留一处对比色做焦点：</b>大面积同一色系环境里，只用一小簇粉色或暖色收尾视线——软装、穿搭配色都能直接照搬这个比例。</li>
+      <li><b>删掉"地平线"，画面会更沉浸：</b>不管是拍照还是排版，让主体填满整个画框、不留呼吸的空白，反而会让人更想凑近看。</li>
+      <li><b>让"倒影"和"实物"一样清晰：</b>拍摄水面、镜面或玻璃反光时，故意让两者同样锐利、同样有细节，会产生一种介于真实与幻觉之间的独特氛围。</li>
+      <li><b>先创造场景，再拍/画它：</b>如果没有满意的题材，不妨像莫奈一样，自己动手把想要的画面先"布置"出来——一束花、一个角落、一次摆拍，都可以是自己的"吉维尼花园"。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：《睡莲池》，克劳德·莫奈，1899，原作公有领域<br>
+    来源：Wikimedia Commons · 英国国家美术馆藏 · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

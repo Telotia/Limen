@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>降息预期破灭：美联储新主席沃什转鹰，加息重回牌桌 · 2026-06-27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg0:#05060f; --bg1:#0a0f24; --panel:rgba(20,28,58,.55);
+    --line:rgba(120,150,255,.18); --line2:rgba(150,180,255,.32);
+    --ink:#eaf0ff; --soft:#aab6e0; --muted:#6c789f;
+    --up:#34e1a8; --down:#ff5d7e; --gold:#f0b94c; --cyan:#5ad1ff; --vio:#a98bff;
+    --grad:linear-gradient(120deg,#5ad1ff 0%,#7c8bff 45%,#c08bff 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Inter","Noto Serif SC",system-ui,sans-serif;
+    color:var(--ink); line-height:1.78; min-height:100vh;
+    background:
+      radial-gradient(48% 38% at 8% 4%, rgba(90,120,255,.30) 0%, transparent 62%),
+      radial-gradient(42% 36% at 95% 8%, rgba(170,110,255,.26) 0%, transparent 60%),
+      radial-gradient(50% 46% at 88% 96%, rgba(60,180,255,.18) 0%, transparent 62%),
+      radial-gradient(60% 50% at 6% 92%, rgba(120,90,255,.16) 0%, transparent 64%),
+      linear-gradient(165deg,var(--bg1) 0%,var(--bg0) 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:50px 22px 100px}
+  .kicker{font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:800;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px}
+  h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(31px,6vw,48px);line-height:1.18;letter-spacing:-.01em;margin-bottom:18px}
+  h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dek{font-size:18px;color:var(--soft);max-width:64ch;margin-bottom:24px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);margin-bottom:34px}
+  .meta span{background:rgba(30,40,80,.5);border:1px solid var(--line);padding:5px 13px;border-radius:999px;backdrop-filter:blur(8px)}
+  .card{
+    background:var(--panel);
+    backdrop-filter:blur(20px) saturate(1.25);-webkit-backdrop-filter:blur(20px) saturate(1.25);
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:0 18px 50px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(150,180,255,.12);
+    padding:26px 28px;margin:18px 0;position:relative;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1px;
+    background:linear-gradient(140deg,rgba(120,160,255,.4),transparent 40%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  h2{font-family:"Noto Serif SC",serif;font-size:23px;font-weight:700;margin:8px 0 14px;display:flex;align-items:center;gap:12px}
+  h2 .n{font-family:"Inter";font-size:14px;font-weight:800;color:#fff;background:var(--grad);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;box-shadow:0 6px 18px -4px rgba(110,130,255,.6)}
+  p{margin:10px 0}
+  .lead{font-size:17px;color:#dde5ff}
+  strong{font-weight:700;color:#fff}
+  .num-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:18px 0}
+  .stat{background:rgba(12,18,42,.6);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .stat .v{font-size:27px;font-weight:800;font-family:"Inter";letter-spacing:-.02em}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+  .up{color:var(--up)} .down{color:var(--down)} .cy{color:var(--cyan)} .vi{color:var(--vio)} .gd{color:var(--gold)}
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0}
+  @media(max-width:560px){.bb{grid-template-columns:1fr}}
+  .bull,.bear{border-radius:16px;padding:18px 20px;border:1px solid var(--line)}
+  .bull{background:linear-gradient(160deg,rgba(52,225,168,.14),rgba(20,28,58,.3))}
+  .bear{background:linear-gradient(160deg,rgba(255,93,126,.14),rgba(20,28,58,.3))}
+  .bull h3,.bear h3{font-size:15px;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+  .bull h3{color:var(--up)} .bear h3{color:var(--down)}
+  ul{margin:8px 0 4px;padding-left:20px} li{margin:7px 0;color:#cdd6f5}
+  .bar{height:12px;border-radius:999px;background:rgba(12,18,42,.8);overflow:hidden;margin:8px 0 4px;border:1px solid var(--line)}
+  .bar > i{display:block;height:100%;border-radius:999px;background:var(--grad)}
+  .barlbl{display:flex;justify-content:space-between;font-size:13px;color:var(--soft);margin-top:6px}
+  .src{font-size:14px} .src a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(90,209,255,.3)}
+  .src a:hover{border-bottom-color:var(--cyan)}
+  .disc{font-size:12.5px;color:var(--muted);border-top:1px dashed rgba(120,140,200,.35);padding-top:14px;margin-top:8px;line-height:1.6}
+  .takeaway{background:linear-gradient(150deg,rgba(124,139,255,.2),rgba(192,139,255,.12));font-size:17px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">金融 · 每日深读</div>
+  <h1>降息预期一夜蒸发：<br>美联储加息，<span class="g">重回牌桌</span></h1>
+  <p class="dek">2026 年 6 月 27 日。市场吵了一整年的问题本是「什么时候降息」；如今新主席沃什上任后，问题被改写成了——「他们会不会真的<strong>加息</strong>」。这不是一次普通的鹰派表态，而是整个利率预期的方向被掉头。</p>
+  <div class="meta">
+    <span>📅 2026-06-27</span><span>🏷️ 美联储 · 利率 · 通胀 · 美元</span><span>🎨 U03 科幻仪表盘</span><span>⏱️ 约 6 分钟</span>
+  </div>
+
+  <div class="card takeaway">
+    <strong>一句话：</strong>特朗普提名的新美联储主席凯文·沃什在 6 月 17 日首秀上，删掉了「宽松倾向」、把点阵图改成「2026 年不降息」，市场随即把<strong>年内加息</strong>的概率从「几乎没人押」拉到了过半。利率的故事从「降多少」变成了「会不会反向加」。
+  </div>
+
+  <div class="card">
+    <h2><span class="n">1</span>这两天到底发生了什么</h2>
+    <p class="lead">沃什在首场议息后的新闻发布会上释放了明确的鹰派信号：联邦基金利率维持在 <strong>3.5%–3.75%</strong> 不动，但措辞与预期全面转向。会后美股应声下挫，<strong>标普 500 跌 1.2%、纳指跌 1.3%、道指跌约 506 点</strong>。</p>
+    <div class="num-row">
+      <div class="stat"><div class="v cy">3.5–3.75%</div><div class="l">基准利率（按兵不动）</div></div>
+      <div class="stat"><div class="v gd">3.8%</div><div class="l">点阵图 2026 年底中值（3 月还是 3.4%）</div></div>
+      <div class="stat"><div class="v down">9 / 18</div><div class="l">官员预计年内至少加一次息</div></div>
+      <div class="stat"><div class="v down">−506</div><div class="l">发布会后道指点数</div></div>
+    </div>
+    <p>三个关键动作：① 新声明<strong>删去了原有的「宽松倾向」</strong>；② 点阵图中值上移到 3.8%，等于暗示<strong>2026 年不再降息</strong>；③ 沃什本人<strong>拒绝提交</strong>自己的利率预测——「对我来说没什么帮助」，成了唯一不交预测的委员。市场把这套组合读成：这位新主席不打算当「白宫的提线木偶」。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">2</span>为什么转鹰——通胀又抬头了</h2>
+    <p>转向的根本原因是通胀重新加速，叠加中东地缘冲击。硬数据并不温柔：</p>
+    <div class="num-row">
+      <div class="stat"><div class="v down">&gt;4%</div><div class="l">5 月 PCE（美联储最看重的通胀指标）</div></div>
+      <div class="stat"><div class="v down">+1.1%</div><div class="l">5 月 PPI 环比（同比批发通胀 6.5%）</div></div>
+      <div class="stat"><div class="v gd">4.232%</div><div class="l">2 年期美债收益率（2025 年 2 月来最高）</div></div>
+      <div class="stat"><div class="v vi">2026 高</div><div class="l">美元指数刷新年内新高</div></div>
+    </div>
+    <p>导火索是<strong>伊朗战争</strong>：早前油价飙升、战争天然的通胀属性，把整条收益率曲线推高；随后美伊就「60 天内达成协议」的路线图取得进展，但特朗普又威胁进一步军事行动、伊朗一度声称再次封锁霍尔木兹海峡。油价大起大落，通胀预期也跟着摇摆。利率走高反过来托起美元，把美元指数送上 2026 年高点。</p>
+    <p style="color:var(--soft);font-size:15.5px">值得注意的一处张力：尽管<strong>头条 PCE 突破 4%</strong>，但 5 月<strong>核心 PCE 反而弱于预期</strong>，叠加油价回落，让「会不会真的加息」仍悬而未决——这正是后面多空分歧的核心。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">3</span>核心争议：加息到底会不会落地</h2>
+    <p>这轮鹰派转向的本质，是市场对一个问题彻底分裂：<strong>沃什到底是会真的加息，还是只是嘴上强硬？</strong></p>
+    <div class="bb">
+      <div class="bull">
+        <h3>▲ 加息派（鹰）</h3>
+        <ul>
+          <li>头条 PCE 破 4%、批发通胀同比 6.5%，通胀<strong>明显再加速</strong></li>
+          <li>劳动力市场依旧强劲，需求未见塌方</li>
+          <li>战争＋油价＋供应链，输入性通胀风险高</li>
+          <li>新主席要立信誉，点阵图已上移、9/18 官员押加息</li>
+        </ul>
+      </div>
+      <div class="bear">
+        <h3>▼ 按兵派（鸽）</h3>
+        <ul>
+          <li>核心 PCE 弱于预期，油价随伊朗局势缓和而<strong>回落</strong></li>
+          <li>10 年期收益率一度跌破 4.40%，创七周新低</li>
+          <li>加息会推高房贷/车贷，<strong>中期选举前</strong>政治代价大</li>
+          <li>约半数 FOMC 的基准情形仍是「勉强避免加息」</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:14px">把概率摆出来更直观：发布会刚结束时，一些货币市场一度把 10 月加息押到接近九成；随后数据降温，区间回到「略高于抛硬币」的水平——有报道给到 <strong>9 月约 63%、12 月约 80%</strong>。无论具体数字如何，方向是一致的：<strong>几个月前几乎没人押加息，现在加息成了主流情景之一。</strong></p>
+    <div class="bar"><i style="width:63%"></i></div>
+    <div class="barlbl"><span>市场隐含「年内加息」概率</span><span class="gd">从 ≈0% → 过半</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">4</span>这意味着什么 · 下一步看什么</h2>
+    <p>对普通投资者，这一周真正的信号不是「加息一定来」，而是<strong>「利率的方向假设被推翻了」</strong>。一旦「更高更久」成为基准，几乎所有资产都要重新定价：债券承压、美元走强、长久期的成长/科技股估值首当其冲（这也呼应了近期资金撤离大票的轮动）。这是一条<strong>很窄的路</strong>——一切都押在接下来的通胀数据上。</p>
+    <ul>
+      <li><strong>7 月 1 日</strong>：ADP 就业 + ISM 制造业，先看经济与就业的成色。</li>
+      <li><strong>7 月 2 日</strong>：6 月非农与失业率——决定 9 月加息押注是被强化还是被打回。</li>
+      <li><strong>关键变量</strong>：通胀数据 + 油价（霍尔木兹/伊朗局势）。降温则鸽派赢、加息推迟；再热则鹰派落地。</li>
+    </ul>
+  </div>
+
+  <div class="card src">
+    <h2><span class="n">5</span>信源</h2>
+    <p>
+      • <a href="https://finance.yahoo.com/economy/policy/article/kevin-warsh-sworn-in-as-fed-chair-as-inflation-worries-raise-the-volume-on-possible-rate-hikes-164303530.html">Yahoo Finance — 沃什就任，通胀忧虑放大加息可能</a><br>
+      • <a href="https://fortune.com/2026/06/17/how-did-market-react-kevin-warsh-press-conference-inflation-rates/">Fortune — 沃什证明自己不是「提线木偶」，市场不买账</a><br>
+      • <a href="https://www.nbcnews.com/business/economy/inflation-kevin-warsh-fed-fomc-meeting-rcna350411">NBC News — 联储按兵不动，新主席直面通胀难题</a><br>
+      • <a href="https://www.cnbc.com/amp/2026/06/22/treasury-yields-investors-look-ahead-to-key-inflation-data.html">CNBC — 2 年期美债收益率创 2025 年 2 月来新高</a><br>
+      • <a href="https://www.schwab.com/learn/story/bond-market-iran-inflation-interest-rates">Charles Schwab — 伊朗、通胀与利率：债市更新</a><br>
+      • <a href="https://finance.yahoo.com/markets/stocks/articles/stock-market-news-jun-26-132200376.html">Yahoo Finance — 2026 年 6 月 26 日股市综述</a>
+    </p>
+    <p class="disc">本文为信息性整理，基于公开报道，不构成任何投资建议。市场有风险，决策需结合自身情况并咨询持牌专业人士。具体概率与数据以原始报道为准，可能随行情更新；不同信源对加息概率的口径略有差异，文中已并列呈现。</p>
+  </div>
+</div>
+</body>
+</html>

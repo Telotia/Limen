@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特朗普账户来了 · 给每个美国新生儿的1000美元 · 金融</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f5fb; --ink:#16131f; --muted:#5d5870; --line:rgba(22,19,31,.09);
+    --card:rgba(255,255,255,.66); --card-line:rgba(255,255,255,.9);
+    --g1:#4f7cff; --g2:#9a6cff; --g3:#ff6fb5;
+    --up:#1f9d6b; --down:#d3445b; --gold:#b88a2e;
+    --grad:linear-gradient(135deg,var(--g1) 0%,var(--g2) 52%,var(--g3) 100%);
+    --sq:34px; /* squircle radius */
+    --serif:"Noto Serif SC",serif; --sans:"Inter","Noto Sans SC",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  /* diffuse mesh glows */
+  body::before,body::after{content:"";position:fixed;border-radius:50%;filter:blur(90px);
+    z-index:0;opacity:.55;pointer-events:none;animation:float 22s ease-in-out infinite}
+  body::before{width:46vw;height:46vw;left:-10vw;top:-8vw;
+    background:radial-gradient(circle,#7ea2ff 0%,transparent 70%)}
+  body::after{width:42vw;height:42vw;right:-8vw;top:30vh;
+    background:radial-gradient(circle,#ff9ed0 0%,transparent 70%);animation-delay:-8s}
+  @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(3vw,4vh) scale(1.08)}}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+
+  /* squircle helper */
+  .sq{border-radius:var(--sq)}
+
+  header{padding:78px 0 30px;text-align:center}
+  .kicker{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+    padding:8px 16px;border:1px solid var(--line);border-radius:100px;background:rgba(255,255,255,.5);
+    backdrop-filter:blur(8px)}
+  .kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--grad);
+    box-shadow:0 0 0 4px rgba(154,108,255,.15)}
+  h1{font-family:var(--serif);font-weight:900;font-size:clamp(34px,6.4vw,56px);line-height:1.16;
+    margin:24px 0 16px;letter-spacing:-.01em}
+  h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dek{font-size:18px;color:var(--muted);max-width:600px;margin:0 auto}
+  .meta{margin-top:26px;font-size:13px;color:var(--muted);display:flex;gap:14px;
+    justify-content:center;flex-wrap:wrap;align-items:center}
+  .pill{padding:5px 13px;border:1px solid var(--line);border-radius:100px;background:rgba(255,255,255,.55)}
+
+  section{margin:34px 0}
+  .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .eyebrow .num{font-family:var(--sans);font-weight:700;font-size:14px;color:#fff;
+    width:38px;height:38px;display:grid;place-items:center;border-radius:13px;background:var(--grad);
+    box-shadow:0 8px 20px -8px rgba(122,90,255,.6)}
+  .eyebrow h2{font-family:var(--serif);font-weight:700;font-size:25px;letter-spacing:-.01em}
+  p{margin:0 0 16px;font-size:16.5px}
+  p .b{font-weight:700;color:var(--ink)}
+  .card{background:var(--card);border:1px solid var(--card-line);border-radius:var(--sq);
+    padding:26px 28px;backdrop-filter:blur(16px);
+    box-shadow:0 24px 60px -36px rgba(40,30,80,.4);transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s}
+  .card:hover{transform:translateY(-4px) scale(1.012);box-shadow:0 34px 70px -34px rgba(40,30,80,.5)}
+
+  /* stat grid */
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:8px 0}
+  .stat{background:var(--card);border:1px solid var(--card-line);border-radius:24px;padding:20px 22px;
+    backdrop-filter:blur(14px)}
+  .stat .v{font-family:var(--serif);font-weight:900;font-size:30px;line-height:1;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .l{font-size:13.5px;color:var(--muted);margin-top:9px}
+
+  /* how it works steps */
+  .steps{display:flex;flex-direction:column;gap:12px}
+  .step{display:flex;gap:16px;align-items:flex-start;background:var(--card);
+    border:1px solid var(--card-line);border-radius:22px;padding:18px 20px;backdrop-filter:blur(12px)}
+  .step .s{flex:none;width:30px;height:30px;border-radius:11px;background:rgba(122,90,255,.12);
+    color:var(--g2);font-weight:700;display:grid;place-items:center;font-size:14px}
+  .step b{display:block;font-size:15.5px;margin-bottom:2px}
+  .step span{font-size:14.5px;color:var(--muted)}
+
+  /* bull / bear */
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .bb .col{border-radius:24px;padding:22px;backdrop-filter:blur(12px)}
+  .bull{background:linear-gradient(160deg,rgba(31,157,107,.12),rgba(255,255,255,.5));border:1px solid rgba(31,157,107,.28)}
+  .bear{background:linear-gradient(160deg,rgba(211,68,91,.12),rgba(255,255,255,.5));border:1px solid rgba(211,68,91,.28)}
+  .bb h3{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .bull h3{color:var(--up)} .bear h3{color:var(--down)}
+  .bb ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .bb li{font-size:14.5px;padding-left:20px;position:relative;color:#332f40}
+  .bb li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:3px}
+  .bull li::before{background:var(--up)} .bear li::before{background:var(--down)}
+
+  blockquote{border-left:3px solid transparent;border-image:var(--grad) 1;padding:4px 0 4px 20px;
+    margin:18px 0;font-family:var(--serif);font-size:19px;font-weight:500;color:#2b2740}
+
+  .disclaimer{margin-top:30px;font-size:13px;color:var(--muted);background:rgba(255,255,255,.5);
+    border:1px dashed var(--line);border-radius:22px;padding:18px 22px}
+  .sources{margin:26px 0 10px}
+  .sources h2{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .sources a{display:block;color:var(--g1);font-size:14px;text-decoration:none;padding:6px 0;
+    border-bottom:1px solid var(--line);word-break:break-all}
+  .sources a:hover{color:var(--g2)}
+  footer{text-align:center;padding:34px 0 60px;color:var(--muted);font-size:13px}
+  footer .logo{font-family:var(--serif);font-weight:900;font-size:18px;color:var(--ink)}
+  @media(max-width:560px){.stats{grid-template-columns:1fr}.bb{grid-template-columns:1fr}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="kicker"><span class="dot"></span>金融 · 每日深读</span>
+    <h1>特朗普账户来了：<br>给每个美国新生儿的<span class="hl">1000美元</span></h1>
+    <p class="dek">7月正式上线，账户激活已经开始。这笔"白送的钱"到底怎么运作、值不值得加码？一篇看懂。</p>
+    <div class="meta">
+      <span class="pill">2026-06-28</span>
+      <span class="pill">主题 · 美国家庭理财</span>
+      <span class="pill">风格 U04 · 超椭圆</span>
+      <span class="pill">阅读 ~6 分钟</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="eyebrow"><span class="num">01</span><h2>发生了什么</h2></div>
+    <div class="card">
+      <p>美国一项全新的儿童投资账户——官方与媒体口中的 <span class="b">"特朗普账户"（Trump Accounts）</span>——本周进入实操阶段。国税局（IRS）从 <span class="b">2026年5月</span> 起陆续寄出账户激活信息，账户预计在 <span class="b">7月5日前后</span> 正式上线，财政部将向符合条件的孩子存入 <span class="b">1000美元</span> 的种子资金（不早于2026年7月4日到账）。</p>
+      <p>它的法律来源是 2025年7月4日签署的《One Big Beautiful Bill Act》（OBBBA）。简单说：<span class="b">2025—2028年间出生、且有社会安全号（SSN）的美国孩子</span>，政府免费送一笔1000美元的投资本金，强制投进低成本美股指数基金，长期复利、锁到18岁。</p>
+      <blockquote>"对新生儿来说，免费的1000美元是个无脑选项；真正的问题是要不要再往里加钱。"</blockquote>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow"><span class="num">02</span><h2>关键数字</h2></div>
+    <div class="stats">
+      <div class="stat"><div class="v">$1,000</div><div class="l">政府免费种子金（每个合格新生儿）</div></div>
+      <div class="stat"><div class="v">$5,000</div><div class="l">2026年个人年度缴款上限</div></div>
+      <div class="stat"><div class="v">0.10%</div><div class="l">基金费率上限（仅限低成本美股指数）</div></div>
+      <div class="stat"><div class="v">18岁</div><div class="l">资金锁定期，之后转为类传统IRA</div></div>
+      <div class="stat"><div class="v">$2,500</div><div class="l">雇主每年可额外缴入（不计入员工应税收入）</div></div>
+      <div class="stat"><div class="v">~$5,500</div><div class="l">1000美元按~10%年化复利18年后（示例估算）</div></div>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">官方 trumpaccounts.gov 测算：仅凭最初1000美元、之后不再缴款，按假设回报到27岁约1.5万美元、到55岁约24.3万美元。以上均为历史回报假设下的示例，<span class="b">非承诺收益</span>。</p>
+  </section>
+
+  <section>
+    <div class="eyebrow"><span class="num">03</span><h2>它到底怎么运作</h2></div>
+    <div class="steps">
+      <div class="step"><span class="s">1</span><div><b>谁有资格</b><span>2025—2028年出生、持有SSN的美国儿童。一个孩子只能开一个账户，开户优先顺序：法定监护人 → 父母 → 成年兄姐 → 祖父母。</span></div></div>
+      <div class="step"><span class="s">2</span><div><b>钱怎么投</b><span>只能投低成本、广基的美股指数基金（如标普500类），费率封顶0.10%，不能炒个股、不能投机。</span></div></div>
+      <div class="step"><span class="s">3</span><div><b>能放多少</b><span>2026年每年最多缴5000美元（2028年起随通胀调整）；雇主最多2500美元，政府/慈善机构的缴入不占额度。</span></div></div>
+      <div class="step"><span class="s">4</span><div><b>什么时候能取</b><span>满18岁前完全锁定，无紧急取款例外。18岁后转为类传统IRA：收益按普通收入征税，59岁半前提取一般另加10%罚金（教育、首套房、创业等合格用途可免罚）。</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow"><span class="num">04</span><h2>多头 vs 空头</h2></div>
+    <div class="bb">
+      <div class="col bull">
+        <h3>◆ 看好的理由</h3>
+        <ul>
+          <li>政府免费送1000美元本金，从出生就开始复利——"早开始"本身就是最大优势。</li>
+          <li>强制低成本指数 + 0.10%费率封顶，避免高费率侵蚀长期收益。</li>
+          <li>18岁后变身IRA，可用于首套房、创业、退休，比只能用于教育的529更灵活。</li>
+          <li>家长可叠加缴款，搭配后续"转Roth"策略，理论上能锁定多年免税增长。</li>
+        </ul>
+      </div>
+      <div class="col bear">
+        <h3>◆ 谨慎的理由</h3>
+        <ul>
+          <li>是"税延"不是"税免"：收益最终按普通收入征税，教育用途不如529、退休不如Roth。</li>
+          <li>年缴上限仅5000美元，远低于529的几十万美元额度，攒大学不占优。</li>
+          <li>账户死板：不能转给其他孩子，规则仍受IRA约束，灵活度有限。</li>
+          <li>"转Roth"省税要避开"kiddie tax"时点，操作复杂；部分开户细则尚未完全公布。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow"><span class="num">05</span><h2>这意味着什么</h2></div>
+    <div class="card">
+      <p>业内的共识是：把特朗普账户当成<span class="b">"补充项"而不是"替代项"</span>。AICPA 的一位专家形容它像"霰弹枪"——覆盖面广但不精准；而 529、Roth IRA 则是针对特定目标（上大学、退休）的"激光"。</p>
+      <p>对普通家庭，实操逻辑很清楚：<span class="b">免费的1000美元先领着、别错过</span>；至于要不要再往里加钱，要看你的目标——攒学费，529通常更划算；想给孩子一笔可用于买房/创业/退休的长期本金，特朗普账户的IRA属性才有独特价值。先定目标，再选账户。</p>
+      <p style="margin-bottom:0">更宏观地看，这是把"全民从出生就持有美股指数"写进政策的一次尝试——几千万孩子的种子资金长期流入指数基金，本身也是一个值得观察的资金面变量。</p>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    ⚠️ <b>免责声明：</b>本文为信息整理与科普，<b>不构成任何投资、税务或理财建议</b>。账户规则、缴款上限与开户流程以 IRS（irs.gov/trumpaccounts）与财政部官方信息为准，部分细则可能仍在更新。涉及个人资金决策请咨询持牌专业人士，并通过官方渠道核实后再操作，谨防仿冒网站。
+  </div>
+
+  <div class="sources">
+    <h2>主要来源</h2>
+    <a href="https://www.schwab.com/learn/story/ins-and-outs-new-trump-kids-accounts" target="_blank" rel="noopener">Charles Schwab — The Ins and Outs of the New Trump Kids' Accounts</a>
+    <a href="https://www.irs.gov/trumpaccounts" target="_blank" rel="noopener">IRS — Trump Accounts (官方)</a>
+    <a href="https://www.morningstar.com/personal-finance/trump-accounts-vs-529-assessing-pros-cons" target="_blank" rel="noopener">Morningstar — Trump Accounts vs. 529: Pros and Cons</a>
+    <a href="https://www.cnbc.com/2026/06/05/trump-accounts-vs-529s-roth-iras.html" target="_blank" rel="noopener">CNBC — Trump Accounts vs. 529s, Roth IRAs</a>
+    <a href="https://www.fidelity.com/learning-center/personal-finance/trump-accounts-vs-529-utma-ugma-roth-IRA" target="_blank" rel="noopener">Fidelity — Trump Accounts vs. 529 / UTMA / Roth IRA</a>
+    <a href="https://www.fedsmith.com/2026/05/07/trump-accounts-how-the-new-1000-baby-bonus-works-and-who-qualifies/" target="_blank" rel="noopener">FedSmith — How the New $1,000 Baby Bonus Works</a>
+  </div>
+
+  <footer>
+    <div class="logo">财经</div>
+    每日一题 · 财经深读 · 仅供学习，不构成投资建议<br>2026-06-28 · U04 超椭圆风格
+  </footer>
+
+</div>
+</body>
+</html>

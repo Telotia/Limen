@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · The Ecstasy of Saint Teresa · Bernini's Hidden Light</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eef1ef; --ink-soft:#c7ccd0; --ink-faint:#8b939a;
+    --gold:#c99a3f; --verde:#38453c; --ochre:#b97d3f; --wine:#5c3140;
+    --paper:rgba(18,22,26,.62); --line:rgba(230,238,240,.14); --void:#05060a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#07080b; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(201,154,63,.24), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(56,69,60,.4), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(92,49,64,.34), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(5,6,10,.7), transparent 60%),
+      linear-gradient(170deg,#0d0f14,#050608);
+    filter:blur(50px) saturate(1.05); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#9aa1a6;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Newsreader',serif;font-weight:700;color:#f5f6f4;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c9cdc4;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#8b939a;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.08) inset;
+  }
+  .card h2{font-family:'Newsreader',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .zh{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,154,63,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#8b939a;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Newsreader',serif;color:#c9cdc4;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.15</div>
+    <h1>The Ecstasy of Saint Teresa — Bernini Carved an Invisible Light Into Marble</h1>
+    <div class="sub">Gian Lorenzo Bernini, <em>The Ecstasy of Saint Teresa</em> · 1647–1652</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Interior of the Cornaro Chapel: a cascade of gilt bronze rays falling from a hidden upper window onto a white marble sculpture group of an angel and a swooning nun, floating on carved clouds within a frame of dark green marble columns and gold-veined ochre wall panels">
+    <figcaption><em>The Ecstasy of Saint Teresa</em>, Gian Lorenzo Bernini, 1647–1652 · Cornaro Chapel, Santa Maria della Vittoria, Rome · Photo: Livioandronico2013, CC BY-SA 4.0</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">Teresa of Ávila spent much of her life trying to put one experience into words. A small angel, its face bright as if "wholly on fire," held a long golden spear tipped with a point of fire and drove it into her heart, again and again — pain sharp enough to make her moan, and yet the instant it withdrew, she wished for nothing but for it to happen again. A hundred years later, Bernini built that nearly untranslatable religious experience into an entire glowing marble theater — a shaft of gilded light falling as if from heaven, its source hidden where no one standing below could ever see it.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="zh">构图</span></h2>
+    <p>This isn't a statue on a pedestal — it's an entire chapel built as a stage set. At the center, paired dark marble columns carry a broken pediment that opens onto a deep shadowed niche, and inside it, the figures of Teresa and the angel float in mid-air on a heap of carved cloud, with no visible support holding them up at all.</p>
+    <p>Easier to miss are the side walls: Bernini carved two rows of theater "boxes" into them, with relief portraits of eight members of the Cornaro family — the cardinal who commissioned the chapel among them — leaning on balustrades as if watching a performance, some gesturing, some in quiet conversation. The device folds the act of watching into the artwork itself: anyone who walks in today is, in effect, sharing a box with a family that's been sitting there for over 350 years.</p>
+    <p>Look up and there's a third layer — stucco angels and a ceiling fresco painting the sky splitting open around a descending dove. Architecture, sculpture, painting and light are fused into what Bernini called the <em>bel composto</em>, the "beautiful whole" — nothing here can be lifted out and read on its own.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color Theory <span class="zh">配色</span></h2>
+    <p>The chapel really only runs on three tiers of color. The figures themselves are carved from near-white Carrara marble — cool, luminous, and the only place your eye is meant to rest. Around them, the architectural frame is dark verde antico marble columns and a deep wine-toned marble base — heavy, restrained, like a hushed stage curtain. And tucked inside the niche wall, a small patch of warm ochre-veined marble quietly bridges the cool stone to the gold that's coming.</p>
+    <p>The real climax color is the shaft of gilt bronze rays — a small fraction of the composition by area, but the single most reflective surface in the room, so it reads first no matter where you stand. It's the same principle behind a lot of luxurious-looking color schemes: cover most of the space in low-saturation cool or neutral tone, and save the one high-saturation, high-reflectance accent for exactly the thing you want seen.</p>
+    <div class="palette">
+      <div class="sw" style="background:#ede6d8;color:#332c22">Carrara White<small>#EDE6D8 · the figures</small></div>
+      <div class="sw" style="background:#c99a3f;color:#241c05">Gilt Rays<small>#C99A3F · falling light</small></div>
+      <div class="sw" style="background:#38453c;color:#eef1ef">Verde Antico<small>#38453C · shrine columns</small></div>
+      <div class="sw" style="background:#b97d3f;color:#241c05">Ochre Marble<small>#B97D3F · niche wall</small></div>
+      <div class="sw" style="background:#5c3140;color:#eef1ef">Wine Marble<small>#5C3140 · base panels</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique <span class="zh">光影与技法</span></h2>
+    <p>The light itself is the closest thing to a magic trick in the whole chapel. Bernini cut a window above the pediment that's invisible from the floor, fitted it with amber glass, and let real Roman daylight strike a row of gilt bronze rods hanging down from the shadows behind the sculpture. What reads as a miracle is, mechanically, a hidden stage light — and because it's real sunlight, its intensity actually shifts through the day. Nothing here is a trick of representation; the light source has simply been deleted from view.</p>
+    <p>The carving does its own version of the same trick. The angel's gauzy robe is cut so deep and so thin it looks like it could tear; Teresa's heavy habit is carved in huge rolling folds, with a running drill boring nearly black shadow-holes into the deepest creases to make cloth look softer than stone has any right to. Polished skin catches light, roughened fabric absorbs it — and that contrast, more than anything else, is what makes two figures resting on a cloud look effortless rather than obviously propped up.</p>
+    <p>The photograph itself is doing similar work: shot as an HDR composite by Livioandronico2013, it holds the painted vault, the blown-out gold highlights, and the shadowed texture of the green marble columns all in one frame — a single exposure would either burn the rays to white or lose the dark stone entirely.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="zh">为何动人</span></h2>
+    <p>In chapter 29 of her autobiography, Teresa describes the angel's spear in specific, almost clinical detail: golden, its tip "seeming to have a point of fire," driven into her heart so deep it felt as if it reached her very entrails, drawing a moan when it was pulled back out. And then, immediately, the reversal — the pain was "so sweet that one could not wish it to cease," and her soul "could be content with nothing less than God." That fusion of pain and rapture into a single, indivisible sensation is exactly what Bernini carved: her head thrown back, lips parted, toes curling — an expression sitting so precisely between agony and bliss that no single word covers it.</p>
+    <p>That ambiguity has unsettled viewers since at least the 18th century. The French writer Charles de Brosses, passing through Rome, is said to have remarked, half in jest, that if this was divine love, he knew it quite well. The joke has survived for nearly three centuries for a reason: Bernini wasn't carving a safe devotional image. Baroque theology held that love of God should be felt through the whole body, not contemplated at arm's length — and putting something the secular eye reads as ecstasy onto the same face as sanctity is, in a real sense, the work's most honest and riskiest choice.</p>
+    <p>The Cornaro family portraits in the side boxes quietly turn that intensely private mystical vision into public theater — the patrons carved permanently into the audience, watching a performance people still travel to Rome specifically to see.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Background <span class="zh">作者背景</span></h2>
+    <p>Gian Lorenzo Bernini (1598–1680) was born in Naples and spent his adult life in Rome, where he became the defining figure of Roman High Baroque art — sculptor, architect and stage designer in one, responsible for landmarks including the colonnade of St. Peter's Square and the Fountain of the Four Rivers. The Cornaro Chapel was commissioned by the Venetian Cardinal Federico Cornaro and built between 1647 and 1652, intended in part as a future burial site for the Cornaro family.</p>
+    <p>The subject, Teresa of Ávila (1515–1582), was a Spanish Carmelite nun and mystic, co-founder of the Discalced Carmelites, canonized in 1622, and in 1970 named one of the first women ever declared a Doctor of the Church. Both Bernini and Teresa have been dead for centuries; the sculpture is in the public domain. This photograph was taken inside Santa Maria della Vittoria by photographer Livioandronico2013, published on Wikimedia Commons in 2015 under CC BY-SA 4.0 — the photograph's rights belong to the photographer.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="zh">可借鉴</span></h2>
+    <ul class="tips">
+      <li><b>Hide the light source, keep only its effect:</b> conceal the fixture completely and what people see reads as a miracle, not a lamp — this works for interiors, product photography, and stage lighting alike.</li>
+      <li><b>Put a witness inside the frame:</b> the Cornaro family's carved theater boxes plant an audience inside the work itself — this play-within-a-play framing pulls a real viewer into the scene faster than composition alone.</li>
+      <li><b>Use texture contrast to create focus, not just color:</b> matte and roughened surfaces next to polished, reflective ones separate "background" from "subject" instantly, no extra color needed.</li>
+      <li><b>Let the subject float free of its base:</b> obscure the actual support with cloud, smoke, or shadow, and the subject reads as weightless — an instant jolt of drama.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">A R T</div>
+    Image: <em>The Ecstasy of Saint Teresa</em>, Gian Lorenzo Bernini, 1647–1652, public domain · Photo: Livioandronico2013, 2015, CC BY-SA 4.0<br>
+    Source: Wikimedia Commons · Appreciation and analysis are the author's own
+  </footer>
+</div>
+</body>
+</html>

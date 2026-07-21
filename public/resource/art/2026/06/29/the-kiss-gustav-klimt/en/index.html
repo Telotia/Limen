@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · The Kiss — Gustav Klimt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --ink:#2a2417; --ink-soft:#4a4230; --ink-faint:#8a7d5c;
+ --gold:#d4af37; --bronze:#a67c2e; --ochre:#b8860b; --champ:#e8d9a8;
+ --ruby:#b23a4b; --cobalt:#2e4a7a; --meadow:#6b8e4e;
+ --ivory:#efe6cc; --void:#171206;
+ --paper:rgba(252,248,236,.58); --line:rgba(120,90,30,.16);
+ }
+ *{box-sizing:border-box;margin:0;padding:0}
+ html{scroll-behavior:smooth}
+ body{
+ font-family:'Jost',system-ui,sans-serif;
+ color:var(--ink); line-height:1.8; letter-spacing:.005em;
+ background:#ece3cb; min-height:100vh; overflow-x:hidden;
+ }
+ .field{position:fixed;inset:0;z-index:-1;
+ background:
+ radial-gradient(48rem 48rem at 18% 10%, rgba(212,175,55,.50), transparent 60%),
+ radial-gradient(42rem 42rem at 82% 18%, rgba(166,124,46,.40), transparent 62%),
+ radial-gradient(50rem 50rem at 28% 92%, rgba(107,142,78,.30), transparent 60%),
+ radial-gradient(36rem 36rem at 86% 86%, rgba(178,58,75,.20), transparent 60%),
+ linear-gradient(160deg,#f4ecd2,#e6dabb);
+ filter:blur(46px) saturate(1.02); transform:scale(1.12);
+ }
+ .wrap{max-width:840px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+ header{text-align:center;margin-bottom:34px}
+ .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+ color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+ h1{font-family:'Cormorant Garamond',serif;font-weight:700;
+ font-size:clamp(2.4rem,7vw,4rem);line-height:1.08;letter-spacing:.01em}
+ .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+ font-size:clamp(1.05rem,2.8vw,1.5rem);color:var(--ink-soft);margin-top:8px}
+ figure{margin:34px 0 12px;border-radius:20px;overflow:hidden;
+ box-shadow:0 30px 70px -28px rgba(60,44,8,.55),0 2px 0 rgba(255,255,255,.4) inset;
+ background:var(--void)}
+ figure img{display:block;width:100%;height:auto}
+ figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+ margin-top:14px;font-family:'Cormorant Garamond',serif;font-style:italic;letter-spacing:.03em}
+ .card{
+ background:var(--paper);
+ backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+ border:1px solid rgba(255,255,255,.55);
+ border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+ box-shadow:0 18px 50px -30px rgba(60,44,8,.45),0 1px 0 rgba(255,255,255,.6) inset;
+ }
+ .card h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.7rem;
+ margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+ .card h2 .idx{font-style:italic;font-size:1.5rem;color:var(--bronze);opacity:.95}
+ .card h2 .zh{font-family:system-ui,sans-serif;font-weight:400;
+ font-size:.92rem;color:var(--ink-faint);margin-left:auto;letter-spacing:.1em}
+ .card p{margin-top:12px;color:var(--ink-soft);font-weight:300;font-size:1.02rem}
+ .card p b{color:var(--ink);font-weight:500}
+ .lead{font-size:1.12rem}
+ .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+ gap:12px;margin-top:18px}
+ .sw{border-radius:13px;height:84px;display:flex;flex-direction:column;
+ justify-content:flex-end;padding:9px 11px;color:#fff;
+ font-size:.66rem;letter-spacing:.06em;line-height:1.4;
+ box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+ .sw small{opacity:.82;font-size:.6rem;display:block}
+ .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+ color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+ .tips li:first-child{border-top:none}
+ .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+ border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.22)}
+ .tips li b{color:var(--ink);font-weight:600}
+ footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+ font-family:'Cormorant Garamond',serif;font-style:italic;letter-spacing:.04em;line-height:1.9}
+ footer .brand{font-family:'Cormorant Garamond',serif;font-style:normal;color:var(--ink-soft);
+ letter-spacing:.3em;font-size:.8rem;margin-bottom:6px;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+ <header>
+ <div class="kicker"> · Daily Appreciation · 2026.06.29</div>
+ <h1>The Kiss</h1>
+ <div class="sub">Two people, fused into a single column of gold</div>
+ </header>
+
+ <figure>
+ <img src="../source.jpg" alt="Gustav Klimt, The Kiss, 1907–1908">
+ <figcaption>Gustav Klimt, <i>The Kiss</i> (Der Kuss), 1907–1908. Oil and gold &amp; silver leaf on canvas, 180 × 180 cm · Österreichische Galerie Belvedere, Vienna (public domain)</figcaption>
+ </figure>
+
+ <section class="card">
+ <p class="lead">Against a shimmering wall of gold, two lovers kneel at the edge of a flowering cliff. He bends to cradle her face; she closes her eyes and tilts up to meet him, folding into his arms. The trick is that you barely see <b>two</b> people — one golden robe wraps them into a single silhouette, a glowing, upright column. This is the summit of Klimt's <b>Golden Phase</b>, and the most famous kiss in the history of art.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">01</span> Composition</h2>
+ <p>Start with the frame: a rare <b>perfect square (180×180 cm, 1:1)</b>. A square is inherently stable, inward-looking, directionless — so your eye stays locked on the embracing mass at the center. Nothing leads it out.</p>
+ <p>The couple form a <b>vertical ovoid</b> (read it as a flower-bud or a pillar of light), set <b>high and slightly right</b>. Klimt leaves the left and top as a vast gold void, giving the image room to <b>breathe</b>. The single horizontal — the <b>flowering meadow</b> at the base — anchors the column like a plinth. One vertical, one horizontal: the structure holds.</p>
+ <p>All the feeling sits in the <b>top-right: her upturned face and those hands</b>. His face is hidden from us; hers is fully given. Then look at her <b>toes — curled over the cliff's edge</b>. The picture is stable, but stable on a precipice.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">02</span> Colour &amp; Theory</h2>
+ <p>The dominant "colour" is <b>gold</b> — and gold is a kind of <b>non-colour</b>: not pigment but reflective metal leaf, so the surface <b>flickers and shifts</b> as you move past it. That huge gold field (warm, bright, opulent) is really an <b>analogous palette</b> — a gradient through the warm family of gold, bronze and ochre — rich without shouting.</p>
+ <p>What makes it sing is the tiny dose of <b>saturated jewel tones</b> tucked into her dress: <b>rose-red, cobalt, meadow-green, violet</b>. They occupy almost no area, yet sitting on all that gold they <b>blaze</b>. This is the high-end logic of <b>large low-chroma field + small high-chroma accent</b>. The green grass against red flowers also hides a <b>red–green complementary</b> pairing that energizes the base.</p>
+ <div class="palette">
+ <div class="sw" style="background:#d4af37;color:#4a3a08">Byzantine Gold<small>#D4AF37</small></div>
+ <div class="sw" style="background:#a67c2e">Antique Bronze<small>#A67C2E</small></div>
+ <div class="sw" style="background:#b8860b">Ochre Gold<small>#B8860B</small></div>
+ <div class="sw" style="background:#efe6cc;color:#5a4f2c">Ivory<small>#EFE6CC</small></div>
+ <div class="sw" style="background:#b23a4b">Her Rose-Red<small>#B23A4B</small></div>
+ <div class="sw" style="background:#2e4a7a">Cobalt<small>#2E4A7A</small></div>
+ <div class="sw" style="background:#6b8e4e">Meadow Green<small>#6B8E4E</small></div>
+ </div>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">03</span> Light &amp; Mood</h2>
+ <p>There is almost <b>no conventional light-and-shadow</b>. The gold ground is flat — it casts no shadow and recedes into no distance. The light doesn't come from a lamp inside the picture; it comes from <b>the metal itself</b>. Stand before the original and the gold literally moves and glints as you shift — the painting is <b>alive</b>.</p>
+ <p>The only zone that is truly <b>modelled</b> is the two faces and the few visible hands — the flush of a cheek, the bend of a knuckle, painted with real volume in oil. <b>Flat ornament wrapped around solid flesh</b>: that contrast is Klimt's signature. Gold is the eternal, sacred light; flesh is the warmth of the present moment.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">04</span> Technique &amp; Symbol</h2>
+ <p><b>Oil with gold and silver leaf on canvas</b>, mixed media, roughly <b>180 × 180 cm</b>. Klimt's father was a <b>gold engraver</b> — gold was in his blood. After two trips to <b>Ravenna</b> in 1903, where the <b>Byzantine gold mosaics</b> floored him, he began papering his canvases in leaf, launching the Golden Phase.</p>
+ <p>Look at the <b>patterns on the two robes</b>: his side is <b>black-and-white rectangles and blocks</b> (hard, geometric); her side is <b>coloured circles, ovals and flowers</b> (soft, organic). Squares versus circles, rigid versus yielding — Klimt is writing the <b>masculine and feminine</b> in pure ornament, and in the embrace the two pattern-languages interlock into one.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">05</span> Why It Moves Us · Klimt</h2>
+ <p>It moves us because it paints <b>love as fusion</b>: not two outlines anymore, but a single glowing pillar of gold. It is <b>tender, erotic and almost sacred at once</b> — a gold ground was the treatment reserved for saints, and he spent it on a kiss. And the <b>cliff under her feet</b> laces the sweetness with suspense: love is beautiful, and balanced on an edge. That complexity is exactly why it never collapses into a sugary postcard.</p>
+ <p><b>Gustav Klimt</b> (1862–1918), Austrian, was the soul of the <b>Vienna Secession</b>. <i>The Kiss</i> was painted at the peak of his fame and finances — bought by the Austrian state before it was even finished. The models may be Klimt himself and his lifelong companion, the fashion designer <b>Emilie Flöge</b>, though he never explained: "Whoever wants to know something about me," he said, "ought to look carefully at my pictures."</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">06</span> Steal This Palette</h2>
+ <ul class="tips">
+ <li><b>Klimt formula:</b> champagne gold / bronze (~60%) + ivory cream (~25%) + <b>one jewel tone</b> as the spark (emerald, rose-red or sapphire, ~10–15%). Gold is the field; allow <b>only one</b> pop of colour.</li>
+ <li><b>For an outfit:</b> a champagne-gold satin or knit as the large warm base, ivory to support it, then <b>one emerald earring or one rose-red lip</b> as the saturated accent. Gold hates clutter — <b>negative space + a single bright note</b> is what reads as luxe.</li>
+ <li><b>For makeup:</b> the Klimt eye = <b>warm gold shadow + a natural flush on the cheek</b> (echoing the one part of her he painted real). Place the metallic only at the center of the lid and let reflection do the glowing — don't flood it.</li>
+ <li><b>One principle to keep:</b> to make a quiet base like gold or cream feel <b>expensive</b>, you don't add more colours — you add a <b>subtle gradient within one analogous family</b> plus a pinprick of high saturation. Restraint is the grammar of luxury.</li>
+ </ul>
+ </section>
+
+ <footer>
+ <div class="brand"></div>
+ Image: Gustav Klimt, The Kiss, 1907–1908 · Public domain<br>
+ Source: Österreichische Galerie Belvedere, Vienna / Wikimedia Commons · © to the original artist
+ </footer>
+</div>
+</body>
+</html>

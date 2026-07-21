@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · Nighthawks: A City's Loneliness Behind One Sheet of Glass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1d22; --ink-soft:#3c4048; --ink-faint:#83878f;
+    --gold:#e0b23a; --rust:#c1442d; --teal:#1c4a4a; --navy:#16202e;
+    --paper:rgba(250,250,248,.66); --line:rgba(20,22,26,.16); --void:#0e1720;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.01em;
+    background:#1a2530; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 16% 10%, rgba(224,178,58,.18), transparent 60%),
+      radial-gradient(44rem 44rem at 88% 16%, rgba(193,68,45,.14), transparent 62%),
+      radial-gradient(46rem 46rem at 84% 90%, rgba(28,74,74,.30), transparent 60%),
+      radial-gradient(50rem 50rem at 14% 92%, rgba(22,32,46,.5), transparent 60%),
+      linear-gradient(160deg,#22303c,#0e1720);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:#a9adb5;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Fraunces',serif;font-weight:700;color:#f2f0ea;
+    font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c7cad0;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.65),0 2px 0 rgba(255,255,255,.15) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:#9195a0;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.03em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.28rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--rust);opacity:.95}
+  .card h2 .sec{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.9rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.04rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.64rem;letter-spacing:.02em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.58rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(193,68,45,.3)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:#9195a0;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.04em;line-height:1.9}
+  footer .brand{font-family:'Fraunces',serif;color:#c7cad0;
+    letter-spacing:.3em;font-size:.72rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Look · 2026.07.11</div>
+    <h1>Nighthawks: A City's Loneliness Behind One Sheet of Glass</h1>
+    <div class="sub">Edward Hopper, Nighthawks · 1942</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Oil painting by Edward Hopper: a brightly lit glass-walled diner on a deserted late-night street corner, lemon-yellow light spilling out onto the pavement, three customers at the counter — a man in gray seen from behind, a couple in a dark suit and a red dress, and a white-uniformed counterman leaning over his work — the empty street outside wrapped in cool green shadow">
+    <figcaption>Nighthawks · Edward Hopper, 1942 · Oil on canvas, 84.1 × 152.4 cm · Art Institute of Chicago, public domain</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">A diner glows on a dead street corner like a ship run aground, four people trapped in the same wash of yellow light — and not one of them is looking at another. With a single curved pane of glass, Hopper bound the whole of American urban loneliness into one image. There's no dialogue, and yet it may be the most quoted, parodied, and referenced painting of the twentieth century — every neon-soaked film-noir street, from Blade Runner on down, owes something to this light.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="sec">A Window With No Door</span></h2>
+    <p>The strangest thing about this painting is what's missing: there's no visible entrance to the diner. The only opening in the whole scene is that sharp curved pane of glass, and it locks the viewer onto the sidewalk across the street — permanently on the outside, peering in like a passerby stealing a glance at someone else's night. That exclusion is the actual physical source of the painting's loneliness.</p>
+    <p>The counter arcs across the frame, pinning all four figures to one horizontal line, then splits them right back apart by the direction each body faces: the man seated alone with his back to us is fully sealed off; the suited man and the woman in red sit shoulder to shoulder but look elsewhere; the counterman, bent over his work, is the only one actually doing anything. Four people share one room, and no two lines of sight ever meet.</p>
+    <p>Outside, a wide stretch of empty sidewalk runs flat toward both edges of the frame, in sharp contrast to the tight, crowded counter inside — Hopper gave nearly half the canvas to "nobody's there," a genuinely bold use of negative space for 1942.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color Theory <span class="sec">American Night, Built From a Collision</span></h2>
+    <p>The whole picture rests on an extreme hot-cold collision: outside, the street and building shadows sit in a near-frozen family of dark green-gray and indigo; inside, a broad wash of almost-fluorescent lemon yellow. The two temperatures meet with almost no transition, right at the glass — a textbook demonstration of color creating a sensation of heat. The yellow doesn't need a label reading "warm"; your body registers the temperature of that light on its own.</p>
+    <p>That warm interior is then cut back apart by three saturated complements: the man's dark navy suit, the woman's red dress, the counterman's white uniform. Red and green — her dress against the deep teal storefront outside — sit almost directly opposite each other on the color wheel; distant from one another in the frame, they still call back and forth visually, giving the picture real chromatic tension inside an otherwise unified palette.</p>
+    <p>Hopper deliberately pulled the overall saturation down — even the lemon yellow is a grayed, warm yellow rather than a pure one. That "low-saturation, large-block color" approach is what separates him from his brighter, more decorative urban-scene contemporaries: restraint in color, and the mood only gets heavier for it.</p>
+    <div class="palette">
+      <div class="sw" style="background:#e8d16a;color:#3a2f0d">Diner lemon yellow<small>#E8D16A · interior light</small></div>
+      <div class="sw" style="background:#16202e;color:#dfe3ea">Indigo street night<small>#16202E · exterior shadow</small></div>
+      <div class="sw" style="background:#1c4a4a;color:#e3efec">Deep teal storefront<small>#1C4A4A · shop facade</small></div>
+      <div class="sw" style="background:#c1442d;color:#f8e9e2">Vermillion dress<small>#C1442D · figure accent</small></div>
+      <div class="sw" style="background:#9c3524;color:#f6e6dd">Dark brick ochre-red<small>#9C3524 · building facade</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Light & Technique <span class="sec">Glass as Frame, Light as Pigment</span></h2>
+    <p>Hopper was long fascinated by Manet-style realist brushwork and the clean, economical outlines he'd trained into during his years as a commercial illustrator; the surface here is almost brushless, the paint ground down thin and flat, edges cut sharp as silhouettes. It gives the picture the cool, deliberate feel of a film storyboard — and it's the technical signature that sets him apart from his more expressionist contemporaries.</p>
+    <p>Light is treated as the picture's only engine of narrative: the diner's fluorescent tubes are the sole light source in the entire scene, and from that one source every shadow under the counter, every highlight on a cheekbone, every faint reflection of yellow on the paving stones is logically derived. That "one light rules the whole frame" approach was picked up wholesale by film noir cinematographers a few years later.</p>
+    <p>Hopper and his wife, Josephine Nivison, regularly modeled for each other, and the woman here is believed to be based on Jo — their marriage itself was famously fraught with distance and friction, and on some level, the picture's sense of people sharing a room without ever truly reaching each other reads as a projection of their own relationship.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="sec">One Light, Six Weeks After Pearl Harbor</span></h2>
+    <p>Nighthawks was finished on January 21, 1942 — barely six weeks after Pearl Harbor, with the United States gripped by wartime anxiety and creeping blackout regulations. Hopper later denied any deliberate reference to the war, but the painting's mood — the world could go dark at any moment, and right now, this one light is still on — landed with uncanny precision on the collective psyche of the country at that exact moment, which is a large part of why it became a symbol of its era almost as soon as it was shown.</p>
+    <p>What keeps the painting alive, though, might be something more durable: it captures an intensely modern kind of loneliness — the kind where you can stand in a brightly lit, crowded public space, surrounded by strangers, and still connect with none of them. That "alone together" feeling reads, if anything, even truer in the smartphone era, which is likely why the image keeps getting reinterpreted, parodied, and quoted.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Background <span class="sec">The Artist</span></h2>
+    <p>Edward Hopper (1882–1967) is the defining figure of American realist painting. He spent years supporting himself as a commercial illustrator before his oil paintings finally found an audience in his forties. For most of his career he split his time between New York and the New England coast, painting gas stations, motels, theaters, and offices — the quiet, almost frozen instants embedded in America's ordinary public spaces.</p>
+    <p>Nighthawks is among his most important and final major works. The diner isn't a precise study of any single real location — Hopper assembled it from fragments of Greenwich Village streets he knew, imagined into a composite. That blurred line between observation and invention runs through his entire body of work.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="sec">One Light Source, Negative Space, Restrained Complements</span></h2>
+    <ul class="tips">
+      <li><b>Let one light source govern the whole palette:</b> a single lamp decides every warm and cool note in this picture. Fix where the light comes from first, then let every other color follow its temperature — the image will unify itself.</li>
+      <li><b>Big empty space makes the focal point heavier:</b> nearly half the canvas is empty street, and that emptiness is exactly what makes the four lit figures pop. You don't need to fill every corner with color or content.</li>
+      <li><b>Low saturation can still be dramatic:</b> neither the yellow nor the indigo here is a pure hue — both are grayed down. Lowering saturation doesn't lower emotional weight; it often makes an image easier to keep looking at.</li>
+      <li><b>Use orientation, not distance, to show distance between people:</b> these four figures are physically close, yet body direction alone splits them into three separate, disconnected groups. To show isolation in a composition, adjusting where people face works better than spreading them apart.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">A R T</div>
+    Image: Nighthawks · Edward Hopper, 1942 · Art Institute of Chicago · Public domain (1942 work, copyright never renewed, now public domain in the US)<br>
+    Source: Wikimedia Commons · Commentary and analysis are the author's own
+  </footer>
+</div>
+</body>
+</html>

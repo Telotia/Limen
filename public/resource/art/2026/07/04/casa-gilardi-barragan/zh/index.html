@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 黄色甬道 — 路易斯·巴拉甘 · 吉拉尔迪住宅</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c1a17; --ink-soft:#3d372e; --ink-faint:#877d6c;
+    --silver:#b9b4a8; --gold:#efc22e; --blue:#1e8fb0; --magenta:#c23a4a; --bone:#efe6d3;
+    --paper:rgba(250,246,235,.62); --line:rgba(28,26,23,.16); --void:#1a1512;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#d8d0bd; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 16% 8%, rgba(239,194,46,.32), transparent 60%),
+      radial-gradient(44rem 44rem at 88% 16%, rgba(30,143,176,.22), transparent 62%),
+      radial-gradient(42rem 42rem at 84% 90%, rgba(194,58,74,.18), transparent 60%),
+      radial-gradient(50rem 50rem at 20% 92%, rgba(74,51,36,.2), transparent 60%),
+      linear-gradient(160deg,#ece3cd,#d4cab2);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(26,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#1a1512}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(26,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:#b3860f;opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:#b3860f;box-shadow:0 0 0 4px rgba(239,194,46,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.04</div>
+    <h1>黄色甬道</h1>
+    <div class="sub">吉拉尔迪住宅 Casa Gilardi — 路易斯·巴拉甘，1976年，墨西哥城</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="路易斯·巴拉甘设计，吉拉尔迪住宅内部黄色甬道，尽头为蓝色泳池墙与品红屏风">
+    <figcaption>路易斯·巴拉甘（Luis Barragán），吉拉尔迪住宅（Casa Gilardi）内部甬道，1975–77年，墨西哥城 · 摄影 Ulises00 · Wikimedia Commons（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">一条被染成纯黄色的甬道，尽头是一扇门，门后是钴蓝色的泳池壁和一抹品红——没有一件"作品"挂在墙上，可这条走廊本身就是二十世纪最动人的色彩构图之一。这是墨西哥建筑师路易斯·巴拉甘74岁那年设计的最后一栋住宅，他用光、色和几何，把一条普通的过道变成了一场缓慢的、近乎宗教感的仪式。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 隧道透视 + 画框中的画框 <span class="en">Composition</span></h2>
+    <p><b>单点透视的甬道</b>：两侧墙面、天花与地面的线条全部收向画面深处的一扇门，视线被不由分说地吸进那个发光的方形缺口——这是最古典的隧道构图，门框本身成了"画框中的画框"，把远处的蓝与红压缩成一小块高纯度的宝石。</p>
+    <p><b>前景的"打断"</b>：左侧墙上挂着一幅深红色粗麻织物，旁边一盏浑圆的黄铜灯罩——两个柔软、有机、粗粝质感的物件，打断了走廊本身过于规整的几何感，也让眼睛在冲向门洞之前先有一次停留。</p>
+    <p><b>右侧的肋状墙面</b>：一排竖向凸起的壁柱状肌理，在侧光下投出规律的明暗条纹，像相机快门叶片一样把纵深感又强调了一遍——巴拉甘常用这种浮雕式的墙面来"驯服"直射光，让光影本身变成建筑构件。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 一整间被住进去的原色三角 <span class="en">Color Theory</span></h2>
+    <p>这条甬道用的不是"三种颜色"，而是色轮上最极端的一组关系——<b>黄、蓝、品红</b>，几乎等距分布的原色三角，理论上最大化的色彩张力。但巴拉甘没有把三色平均分配：<b>黄色占据了几乎100%的可视面积</b>（墙、天花、连窗玻璃本身都被染成黄色），蓝和红只在门洞尽头露出很小的一角。这种"一色统治、余色点睛"的比例，是让强烈对比不显得刺眼、反而显得奢侈克制的关键。</p>
+    <p>更狠的一点：巴拉甘不是"把墙刷成黄色"，而是让<b>光本身变成黄色</b>——甬道尽头的采光窗，连玻璃都是黄色的，阳光穿过黄玻璃再照进空间，整条走廊的空气、地面反光、影子的颜色都被浸染。这和"白光照在黄墙上"是完全不同的两件事：前者是给光源本身染色，后者只是给表面上色，视觉沉浸感天差地别。</p>
+    <div class="palette">
+      <div class="sw" style="background:#efc22e;color:#3d2c05">甬道浸润黄<small>#EFC22E · 墙面/光</small></div>
+      <div class="sw" style="background:#1e8fb0;color:#eef7fa">泳池钴蓝墙<small>#1E8FB0 · 深处</small></div>
+      <div class="sw" style="background:#c23a4a;color:#fceef0">屏风品红<small>#C23A4A · 点缀</small></div>
+      <div class="sw" style="background:#4a3324;color:#efe6d3">深胡桃木<small>#4A3324 · 画框</small></div>
+      <div class="sw" style="background:#8a5a3c;color:#efe6d3">赤陶地砖<small>#8A5A3C · 地面</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与技法 · 把光当建材用 <span class="en">Light & Technique</span></h2>
+    <p>巴拉甘的老朋友、画家丘乔·雷耶斯（Chucho Reyes Ferreira）以浓烈的原色画作闻名，是巴拉甘晚期用色的直接灵感来源——两人相识多年，巴拉甘收藏雷耶斯的画，也把这种"不怕撞色"的胆量搬进了建筑里。</p>
+    <p>甬道尽头那面泳池的蓝墙，白天会被水面反射的粼粼波光不断"重新点亮"；而画面中那抹品红，其实是一面<b>独立的遮挡墙</b>——它不承重，唯一的功能是挡住背后真正的天窗结构，只让观者看见"发光的效果"，看不见光是怎么来的。这是一种舞台式的手法：把机关藏起来，只呈现结果，光本身因此显得更神秘、更没有来源。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 一场从私密到社交的仪式 <span class="en">Why It Moves Us</span></h2>
+    <p>巴拉甘管自己的建筑叫"情感建筑"（emotional architecture）——他曾说，任何不能带来"宁静"的建筑都是一次失败。这条走廊正是这套哲学最直白的物理呈现：从卧室区走向后方的起居室和泳池，必须先穿过这条被纯色浸满、几乎不含任何"信息"的甬道——没有画、没有装饰、没有叙事，只有颜色和光本身。这种被迫的"清空"，让抵达泳池时那一小片蓝和跳动的水光显得格外奢侈，像一场设计好的情绪铺垫。</p>
+    <p>业主弗朗西斯科·吉拉尔迪（广告业者）当年只给了巴拉甘两个条件：保留院子里的老蓝花楹树、必须有一个室内泳池。除此之外，巴拉甘几乎是在毫无预算和功能限制下完成了他一生最后、也最纯粹的一次色彩实验。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">The Architect</span></h2>
+    <p>路易斯·巴拉甘（1902–1988），生于墨西哥哈利斯科州瓜达拉哈拉，土木工程科班出身，建筑完全靠自学。1920–30年代游历法国与西班牙，在巴黎旁听过勒·柯布西耶的讲座，后又造访摩洛哥，北非与地中海的乡土建筑给了他决定性的影响——尤其是厚墙、内向的庭院和被强光晒透的色彩。1980年，他成为普利兹克建筑奖第二位得主。他自己的住宅"巴拉甘故居工作室"于2004年被列入联合国教科文组织世界遗产名录。吉拉尔迪住宅（1975–77）是他晚年、也是一生最后一件住宅设计。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 配色 / 用光 / 空间 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>一色统治，余色点睛：</b>不要把强对比色平均分配。让一个饱和色占据80–90%的视觉面积，其余的对比色只在一个小"窗口"里露出——反而比五五开更奢侈、更耐看，适用于家居配色、版式设计，甚至穿搭（大面积单色 + 一处高纯度小面积撞色配饰）。</li>
+      <li><b>给光染色，而不只是给表面染色：</b>想要沉浸式的色彩氛围，试试给光源本身加色（彩色玻璃、彩色灯光滤片、彩色窗帘透光），而不是只刷墙——光源染色能让空气、影子、反光全部跟着变色，效果远强于单纯的表面涂装。</li>
+      <li><b>画框中的画框：</b>用门洞、窗框或任何天然的"洞口"去框住一小块高饱和色，能让色彩显得更珍贵、更有仪式感——比大面积平铺同样的颜色更抓眼。</li>
+      <li><b>用肌理去"驯服"光：</b>浮雕、凹凸、百叶式的立面纹理能把平淡的直射光切成有节奏的明暗条纹，让静态的墙面也有呼吸感。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：路易斯·巴拉甘设计，吉拉尔迪住宅内部甬道 · 摄影 Ulises00<br>
+    来源：Wikimedia Commons · 摄影者自愿置于公有领域 · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

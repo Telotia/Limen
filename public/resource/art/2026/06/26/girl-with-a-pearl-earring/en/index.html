@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art· Girl with a Pearl Earring — Vermeer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --ink:#2a2620; --ink-soft:#544d40; --ink-faint:#8a8170;
+ --ultramarine:#4b6f9b; --gold:#8c7438; --lemon:#e4d29a;
+ --coral:#be5c49; --void:#1e1c15; --cream:#ece8dc; --pearl:#d7d4ca;
+ --paper:rgba(255,253,248,.55); --line:rgba(60,52,40,.14);
+ }
+ *{box-sizing:border-box;margin:0;padding:0}
+ html{scroll-behavior:smooth}
+ body{
+ font-family:'Inter',system-ui,sans-serif;
+ color:var(--ink); line-height:1.8; letter-spacing:.005em;
+ background:#efe9df; min-height:100vh; overflow-x:hidden;
+ }
+.field{position:fixed;inset:0;z-index:-1;
+ background:
+ radial-gradient(46rem 46rem at 82% 8%, rgba(75,111,155,.42), transparent 60%),
+ radial-gradient(40rem 40rem at 12% 26%, rgba(228,210,154,.40), transparent 62%),
+ radial-gradient(50rem 50rem at 70% 92%, rgba(140,116,56,.30), transparent 60%),
+ radial-gradient(38rem 38rem at 20% 88%, rgba(190,92,73,.20), transparent 60%),
+ linear-gradient(160deg,#f3eee4,#e7e0d2);
+ filter:blur(46px) saturate(.92); transform:scale(1.12);
+ }
+.wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+ header{text-align:center;margin-bottom:34px}
+.kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+ color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+ h1{font-family:'Cormorant Garamond',serif;font-weight:700;
+ font-size:clamp(2.2rem,6.2vw,3.6rem);line-height:1.08;letter-spacing:.01em}
+.sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+ font-size:clamp(1.05rem,2.8vw,1.45rem);color:var(--ink-soft);margin-top:8px}
+ figure{margin:34px 0 12px;border-radius:20px;overflow:hidden;
+ box-shadow:0 30px 70px -28px rgba(30,28,21,.6),0 2px 0 rgba(255,255,255,.5) inset;
+ background:var(--void)}
+ figure img{display:block;width:100%;height:auto}
+ figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+ margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+.card{
+ background:var(--paper);
+ backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+ border:1px solid rgba(255,255,255,.55);
+ border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+ box-shadow:0 18px 50px -30px rgba(40,34,24,.5),0 1px 0 rgba(255,255,255,.6) inset;
+ }
+.card h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.7rem;
+ margin-bottom:4px;display:flex;align-items:baseline;gap:.6rem;letter-spacing:.01em}
+.card h2.idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+ font-size:1.5rem;color:var(--ultramarine);opacity:.85}
+.card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+.card p b{color:var(--ink);font-weight:500}
+.lead{font-size:1.12rem;font-family:'Cormorant Garamond',serif;color:var(--ink-soft)}
+.palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+ gap:12px;margin-top:18px}
+.sw{border-radius:13px;height:84px;display:flex;flex-direction:column;
+ justify-content:flex-end;padding:9px 11px;color:#fff;
+ font-size:.66rem;letter-spacing:.06em;line-height:1.4;
+ box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+.sw small{opacity:.82;font-size:.6rem;display:block}
+.tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+ color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+.tips li:first-child{border-top:none}
+.tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+ border-radius:50%;background:var(--coral);box-shadow:0 0 0 4px rgba(190,92,73,.16)}
+.tips li b{color:var(--ink);font-weight:600}
+ footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+ font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+ footer.brand{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--ink-soft);
+ letter-spacing:.3em;font-size:.9rem;margin-bottom:6px;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+ <header>
+ <div class="kicker">Art· Daily Appreciation· 2026.06.26</div>
+ <h1>Girl with a Pearl Earring</h1>
+ <div class="sub">Johannes Vermeer· The "Mona Lisa of the North" — a glance caught in soft side-light</div>
+ </header>
+
+ <figure>
+ <img src="../source.jpg" alt="Johannes Vermeer, Girl with a Pearl Earring, c. 1665">
+ <figcaption>Johannes Vermeer, <em>Meisje met de parel</em>, c. 1665, oil on canvas, 44.5 × 39 cm· Mauritshuis, The Hague (Public Domain)</figcaption>
+ </figure>
+
+ <section class="card">
+ <p class="lead">For more than three centuries she has been turning. Shoulder forward, face half-turned, eyes landing squarely on you — as if just called by name, lips parted, about to speak. Vermeer gave her no name and no story, and so everyone who stands before her pours themselves in.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">01</span> Composition</h2>
+ <p>This is not a portrait but a <b>tronie</b> — a study of an expression, a type, rather than a specific person. That anonymity is its power.</p>
+ <p>The luminous face and turban form a <b>glowing wedge</b> suspended in near-total black: no room, no props, every bit of attention forced onto that face. The eyes sit on the upper third; the pearl, near centre, is a soft visual anchor; the diagonal of the falling yellow cloth answers and balances the line of the shoulder. The vast dark is not "empty" — it is a faintly glowing <b>field</b>, soft and edgeless, doing the work of a diffuse background all on its own.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">02</span> Colour — Palette & Theory</h2>
+ <p>Vermeer's signature is <b>blue ↔ yellow complementaries</b>: the ultramarine turban against the lemon-yellow cloth, warm meeting cool at the crown of the head. Warm (skin, ochre jacket) against cool (blue, dark ground) builds depth through <b>colour temperature</b> alone.</p>
+ <p>The real source of its richness is one rule: <b>a large low-saturation field plus a single high-saturation accent</b> — that coral note on the lips. The value range is pushed to the limit (bright face on dark ground, maximum figure–ground contrast), yet every transition is soft, with no hard edges. That softness is the secret of its "diffuse" glow.</p>
+ <div class="palette">
+ <div class="sw" style="background:#4b6f9b">Ultramarine<small>#4B6F9B</small></div>
+ <div class="sw" style="background:#e4d29a;color:#5a4e2a">Lemon<small>#E4D29A</small></div>
+ <div class="sw" style="background:#8c7438">Ochre Gold<small>#8C7438</small></div>
+ <div class="sw" style="background:#e3be9e;color:#5a3c2a">Warm Skin<small>#E3BE9E</small></div>
+ <div class="sw" style="background:#be5c49">Coral Lip<small>#BE5C49</small></div>
+ <div class="sw" style="background:#1e1c15">Void<small>#1E1C15</small></div>
+ <div class="sw" style="background:#d7d4ca;color:#4a463c">Pearl<small>#D7D4CA</small></div>
+ </div>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">03</span> Light & Mood</h2>
+ <p>A single <b>soft side-light</b> falls from the upper left (north-window daylight), wrapping gently around the face — soft-edged, no harsh shadow, the shaded side melting into the dark. The catchlight in the eyes and a moist gleam on the lower lip are the "wet points" that bring her to life.</p>
+ <p>And the pearl is <b>not really "painted" at all</b>: just two strokes — a soft highlight above, a faint reflection of the collar below. Its luster is pure suggestion. Vermeer always painted the <b>light</b>, never the object.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">04</span> Technique & Medium</h2>
+ <p>Oil on canvas, c. 1665, just <b>44.5 × 39 cm</b> — a small painting. The method is built on <b>glazing</b>: thin, translucent layers stacked one over another. The background was once a glossy deep-green glaze (indigo + weld) that darkened to today's black over the centuries.</p>
+ <p>The turban is ultramarine ground from costly <b>lapis lazuli</b> — Vermeer was lavish enough to lay blue even into the shadows; the cloth is lead-tin yellow. Highlights are tapped in with soft <b>pointillé</b>, wet-in-wet, with melting transitions and almost no visible underdrawing — all in service of that breath-held softness.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">05</span> Why It Moves Us· Vermeer</h2>
+ <p>What moves us is that glance frozen <b>mid-turn</b>: you cannot tell whether she is turning toward you or away. The anonymity — no name, no narrative — lets everyone project themselves. The restraint: the whole picture offers only one pearl and one note of lip-red as accents; everything else is held back, like a caught breath.</p>
+ <p><b>Johannes Vermeer</b> (1632–1675) of Delft was a master of the Dutch Golden Age. Only about 34 works are attributed to him; he painted slowly and meticulously, and whether he used a camera obscura is still debated. He died in debt at 43 and was long forgotten, only rediscovered in the 19th century. This work hangs in the Mauritshuis, The Hague, and inspired Tracy Chevalier's novel and the 2003 film.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">06</span> Steal This — Palette & Styling</h2>
+ <ul class="tips">
+ <li><b>The Vermeer formula:</b> deep ultramarine + lemon/ochre gold + a warm neutral skin tone + near-black, with <b>one single note of coral</b>.</li>
+ <li><b>Styling translation:</b> a dusty-blue head wrap or top + camel/ochre coat + ivory collar + a single pearl + a coral-rose lip as the lone warm pop; keep everything else low-saturation.</li>
+ <li><b>Why it works:</b> low-saturation blue↔yellow complementaries read rich, not loud; one warm accent in a cool field creates an automatic focal point; the near-black "void" backdrop makes skin glow.</li>
+ <li><b>For portraits:</b> a single soft side-light (north-window), a clean dark background, the subject glancing back over the shoulder for a "caught" candid feel, and just one luminous accent.</li>
+ </ul>
+ </section>
+
+ <footer>
+ <div class="brand">Art</div>
+ Image: Johannes Vermeer, <em>Girl with a Pearl Earring</em>, c. 1665· Public Domain<br>
+ Source: Mauritshuis, The Hague / Wikimedia Commons
+ </footer>
+</div>
+</body>
+</html>

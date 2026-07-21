@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · Strangers Under Umbrellas — Gustave Caillebotte, 1877</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#231f1a; --ink-soft:#4a443b; --ink-faint:#8f887a;
+    --gold:#a85236; --rust:#a85236; --soot:#2b2b2e; --slate:#2c4a43;
+    --paper:rgba(250,250,246,.64); --line:rgba(23,21,18,.16); --void:#2b2b2e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.005em;
+    background:#c7bfa9; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(168,82,54,.30), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(44,74,67,.22), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(43,43,46,.28), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(199,180,140,.34), transparent 60%),
+      linear-gradient(160deg,#eae3d1,#c6bda6);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(2rem,6vw,3.3rem);line-height:1.12;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:8px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(23,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(23,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.5rem;color:var(--rust);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300;font-size:1.02rem}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.1rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.03em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;
+    border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(168,82,54,.3)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+    letter-spacing:.2em;font-size:1rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.08</div>
+    <h1>Strangers Under Umbrellas</h1>
+    <div class="sub">Paris Street; Rainy Day · Gustave Caillebotte, 1877</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Caillebotte's Paris Street; Rainy Day: a gentleman in a black top hat walks arm in arm with a woman in a dark plum dress along wet cobblestones, a wedge-shaped Haussmann-era building behind them, the canvas nearly bisected by a dark green lamppost">
+    <figcaption>Gustave Caillebotte, Paris Street; Rainy Day, 1877, oil on canvas, 212.2 × 276.2 cm · Art Institute of Chicago (1964.336) · Wikimedia Commons (public domain)</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">A gentleman in a black top hat, a woman in a dark plum dress on his arm, walking straight toward you across cobblestones still slick from rain — and behind them, an entire quarter of Paris glistening in the wet. At just over two meters tall and nearly three meters wide, this was the painting that looked least like "Impressionism" at the movement's own third exhibition in 1877. While everyone else was chasing broken, sun-flecked brushwork, Caillebotte painted the newly rebuilt Paris of Baron Haussmann with a precision closer to photography — freezing it into what reads like a movie still, a full half-century before movies existed.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="en">A lamppost splitting the perspective trap</span></h2>
+    <p><b>A near-dead-center vertical split:</b> a dark green cast-iron lamppost runs almost exactly down the middle of a canvas nearly three meters wide — a composition rule academic painting explicitly forbade (never place your visual weight at dead center). Caillebotte does it anyway, using a single thin post to generate a deliberate, faintly vertiginous symmetry.</p>
+    <p><b>Wide-angle-style distortion:</b> the joints between the cobblestones converge toward the vanishing point at an exaggerated angle, opening up a field of view wider than the eye actually sees — closer to a wide lens than to natural sight. Infrared examination of the canvas has in fact revealed a precise underlying perspective grid Caillebotte squared up before painting — a level of premeditation almost none of his Impressionist peers, who prized outdoor spontaneity over preparatory drawing, would have tolerated.</p>
+    <p><b>A figure the frame cuts off:</b> the umbrella-holding man at the right edge is sliced at the elbow by the canvas boundary — a "the shutter clicked before the frame was ready" quality Caillebotte borrowed deliberately from photography, so a meticulously engineered oil painting reads instead like a candid street snapshot.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color <span class="en">A cool grey symphony with one warm note</span></h2>
+    <p>The whole canvas is essentially a symphony written in grey: a creamy, overcast sky, the warm limestone grey of Haussmann-era facades, the silvery sheen rain leaves on cobblestone, and the ink-black and charcoal coats crowding the foreground. Saturation stays low across the board, but value does an enormous amount of work — "grey" here actually splits into seven or eight distinct warm and cool shades.</p>
+    <p>Caillebotte never lets the picture go fully monochrome: a small patch of terracotta-red building facade on the right, and the lamppost's own deep bottle-green, are the only two saturated notes in the entire composition — together they cover well under a tenth of the canvas, yet against so much muted grey they're the first thing the eye finds. It's the classic formula: a large field of low-saturation cool grey against a small area of high-saturation warmth — understated, but never dull.</p>
+    <div class="palette">
+      <div class="sw" style="background:#e4dac0;color:#3d3527">Ivory overcast sky<small>#E4DAC0 · clouds</small></div>
+      <div class="sw" style="background:#c7b48c;color:#3d3527">Warm limestone grey<small>#C7B48C · facades</small></div>
+      <div class="sw" style="background:#aca79d;color:#2b2620">Wet silver grey<small>#ACA79D · cobblestone</small></div>
+      <div class="sw" style="background:#2b2b2e;color:#e4dac0">Ink coat black<small>#2B2B2E · coats, hats</small></div>
+      <div class="sw" style="background:#a85236;color:#f2e8d9">Terracotta accent<small>#A85236 · facade</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique & History <span class="en">A portrait painted for the "new Paris"</span></h2>
+    <p>The strange wedge-shaped corner in this painting is the Quartier de l'Europe, newly finished as part of Baron Haussmann's rebuilding of Paris — an overhaul that straightened and widened medieval streets and, in doing so, cut a wave of acute-angled intersections that forced architects to build prow-like, knife-edge corner buildings. This urban geometry was brand new at the time, and Caillebotte was among the first painters to take it seriously as a subject.</p>
+    <p>His brushwork sets him apart from Monet and Renoir, who exhibited alongside him: Caillebotte trained under the academic painter Léon Bonnat, and his rigorous, tightly controlled realism left the surface almost free of visible stroke — for decades this got him dismissed as "not Impressionist enough," until late-20th-century scholarship reassessed his cool, controlled realism as an equally valid path through Impressionism's real subject: modern urban life.</p>
+    <p>The painting debuted at the third Impressionist exhibition in 1877, held in a rented space on rue Le Peletier in Paris — its scale and its radical composition made it one of the most talked-about works in the show.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="en">A crowd in which no two eyes meet</span></h2>
+    <p>What lingers about this painting isn't the rain — it's the isolation running through a street full of people. At least a dozen pedestrians appear, each sheltering under their own umbrella, each walking their own line, and not one pair of eyes meets another's. Even the couple in the foreground, arm in arm, look in different directions — proof that even the two people standing closest to each other are each sealed inside their own small dome of sky.</p>
+    <p>That particular sensation — surrounded by people, and entirely alone among them — is exactly what Baudelaire's poetry on the Parisian flâneur kept circling back to, and Caillebotte fixed it, whole, onto a single canvas you can return to and stare at indefinitely. A hundred and forty-seven years later, a rush-hour subway platform or a rainy street crossing still runs on the same emotional current — which is exactly why this painting still lands, instantly, today.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> The Artist <span class="en">Gustave Caillebotte</span></h2>
+    <p>Gustave Caillebotte (1848–1894) was born into a wealthy Parisian family that had made its fortune in textiles and military supply. He studied law and engineering before turning to painting under the academic master Léon Bonnat. Close with Monet, Renoir, and Degas, he was more than a fellow exhibitor — he personally financed the venues and logistics behind several of the Impressionist exhibitions. He was also one of the movement's most important early collectors: on his death in 1894 he bequeathed his personal collection of Monet, Renoir, Degas, Manet, and Pissarro paintings to the French state (an offer the art establishment initially resisted), and that bequest now forms the core of the Impressionist holdings at the Musée d'Orsay. Beyond painting, he was an avid yacht designer and gardener, and died suddenly of a stroke at 45 while working in his own garden in 1894.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="en">Grey palette / composition</span></h2>
+    <ul class="tips">
+      <li><b>The "considered" formula for grey dressing:</b> the man's ink-black coat, grey trousers, and black top hat sit in nearly the same low-saturation range as the woman's dark plum-brown dress — keep coat, umbrella, and accessories within one tonal band of cool or warm grey and even a simple outfit reads as deliberate and put-together.</li>
+      <li><b>Large low-saturation field + one saturated accent:</b> build the environment out of greys, creams, and taupes, and reserve high saturation for exactly one thing — a wall, a bag, a pair of shoes. It wears better over time than matching everything, and it's easy to apply to an outfit or a room.</li>
+      <li><b>A frame-cropped edge reads as more real:</b> in photography or composition, let an element at the canvas edge get naturally sliced by the frame instead of fitting every subject in whole — it reads closer to an actual observed moment, and carries more presence.</li>
+      <li><b>Use one vertical line to build tension:</b> placing a lamppost, a column, or a doorframe near dead center deliberately breaks the standard "never center your subject" rule, and the result is a taut, quietly magnetic focal point.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">Art</div>
+    Image: Gustave Caillebotte, Paris Street; Rainy Day, 1877, oil on canvas, 212.2 × 276.2 cm · Art Institute of Chicago (1964.336, Charles H. and Mary F. S. Worcester Collection)<br>
+    Source: Wikimedia Commons · Caillebotte died in 1894; the original work is in the public domain · appreciation is personal analysis
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · Sudden Shower over Shin-Ōhashi: Rain Carved Into Wood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211d1a; --ink-soft:#4a4137; --ink-faint:#8c8375;
+    --gold:#c9a227; --rust:#a13a2a; --soot:#16293c; --slate:#2f5878;
+    --paper:rgba(250,250,246,.64); --line:rgba(23,21,18,.16); --void:#16293c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.01em;
+    background:#c7d6da; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(47,88,120,.32), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(201,162,39,.26), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(22,41,60,.34), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(161,58,42,.20), transparent 60%),
+      linear-gradient(160deg,#e3e9e7,#b7c9cf);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Fraunces',serif;font-weight:700;
+    font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(23,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.03em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(23,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.28rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--rust);opacity:.95}
+  .card h2 .sec{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.9rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.04rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.64rem;letter-spacing:.02em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.58rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(161,58,42,.3)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.04em;line-height:1.9}
+  footer .brand{font-family:'Fraunces',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.72rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Look · 2026.07.10</div>
+    <h1>Sudden Shower over Shin-Ōhashi: Rain Carved Into Wood</h1>
+    <div class="sub">Utagawa Hiroshige, One Hundred Famous Views of Edo · 1857</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Ukiyo-e woodblock print by Utagawa Hiroshige: a deep indigo gradient sky filled with slanted black rain lines, a wooden truss bridge cutting diagonally from the lower left to the upper right of the frame, five pedestrians on the bridge hurrying under umbrellas and straw rain capes, a boatman poling a raft on the river below, a yellow and red title cartouche in the upper right corner">
+    <figcaption>Sudden Shower over Shin-Ōhashi Bridge and Atake, from One Hundred Famous Views of Edo · Utagawa Hiroshige, 1857 · Woodblock print (nishiki-e) · Public domain</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">No lightning, no thunder — just a few hundred thin diagonal lines, and Hiroshige pinned a sudden downpour to paper forever. The people on the bridge hunch forward and quicken their pace; the boatman below looks like nothing is happening at all. This 1857 woodblock print later got copied, brushstroke for brushstroke, into an oil painting by Van Gogh — becoming one of ukiyo-e's clearest doorways into Western modern art.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="sec">A Bridge, Cut in Half</span></h2>
+    <p>The bridge slices across the frame on a steep diagonal, running from the lower-left corner to the upper right — and it's cropped hard at both the bottom and right edges. That kind of unapologetic cropping was radical in 1857, decades ahead of the "snapshot" framing that photography would later popularize, and it's exactly the boldness that later hooked the Impressionists on ukiyo-e.</p>
+    <p>The five figures on the bridge are grouped unevenly: two under a single black umbrella move fastest in the foreground, a lone walker follows mid-distance, and two more, further back, recede into the depth — your eye is walked along the rhythm of the bridge planks straight toward the vanishing point, and into the indigo curtain of rain swallowing the horizon.</p>
+    <p>Below, a boatman stands at the center of a narrow raft, pole in hand — the only horizontal reference in the whole print. His presence is a quiet reminder: the panic belongs to the people on the bridge. The river itself keeps moving at its own pace.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color Theory <span class="sec">Weather in One Gradient</span></h2>
+    <p>The color range here is startlingly narrow — from the near-bare cream of the bridge planks, to the pale gray-blue of the river, up to an almost-black indigo at the top of the sky. Everything sits inside one blue-gray family, and depth is built entirely through shifts in value, not hue. It's an extreme case study in how little color a picture actually needs.</p>
+    <p>Against that restrained cool base, only two disproportionate warm notes are allowed in: the straw yellow of the rain hats and capes, and the vermillion red of the title cartouche in the corner. Compressed to almost nothing, those two small warm patches become the only place your eye can rest inside the rain.</p>
+    <p>The rain itself isn't printed color at all — it's carved on a separate block and printed as fine embossed lines, a technique called kesa-ame. One block, thicker and longer, prints across the sky; a second, finer and shorter, overprints the near foreground on the bridge. Layered slightly out of register, the two blocks create the illusion of rain growing thicker and closer as it nears the viewer.</p>
+    <div class="palette">
+      <div class="sw" style="background:#16293c;color:#e7edef">Deep bokashi indigo<small>#16293C · storm zenith</small></div>
+      <div class="sw" style="background:#b9d3d9;color:#213240">River pale gray-blue<small>#B9D3D9 · water plane</small></div>
+      <div class="sw" style="background:#c9a227;color:#3a2c0d">Straw rain-hat ochre<small>#C9A227 · hats & capes</small></div>
+      <div class="sw" style="background:#a13a2a;color:#f4e9e2">Cartouche vermillion<small>#A13A2A · title block</small></div>
+      <div class="sw" style="background:#6b4a2f;color:#f1e8dd">Timber chestnut brown<small>#6B4A2F · bridge truss</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique & History <span class="sec">Edo's Weather Report, Printed</span></h2>
+    <p>That sky, sliding from deep indigo into near-transparency, is bokashi — a hand-graded gradation applied directly to the woodblock, with the printer's brush loaded with steadily less water and pigment as it sweeps across, rather than built from multiple overprinted color blocks. It's why the exact position of the gradient varies slightly between early original impressions.</p>
+    <p>This print belongs to One Hundred Famous Views of Edo, Hiroshige's final major series (1856–1858), running to over 120 sheets and published by Uoya Eikichi. The series was still unfinished when Hiroshige died of cholera in 1858, during the epidemic that swept Edo that year; his pupil, Hiroshige II, completed the last few sheets.</p>
+    <p>The bridge is Shin-Ōhashi ("New Great Bridge"), spanning the Sumida River, an important crossing linking Edo to the Fukagawa district; "Atake" names the riverside spot near it. That "place name + weather or moment" formula is the naming logic behind the whole series — every print anchors a specific place to one fleeting instant.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="sec">One Rainstorm, Two Continents</span></h2>
+    <p>What lands hardest here might be how precisely it captures something with zero geography attached to it: the instinctive hunch of the shoulders and quickened step of anyone caught in sudden rain. Hiroshige says all of it with a handful of radically simplified silhouettes — the everyday version of mono no aware, the pathos of things: weather that lasts seconds, held forever.</p>
+    <p>In 1887, Van Gogh copied this print almost exactly in oil, in Paris, right down to the rain lines and the Japanese characters in the border — retitled Bridge in the Rain (after Hiroshige). It's one of the most direct pieces of evidence for how hard ukiyo-e hit the West during the Japonisme wave, and the starting point for how Impressionist and Post-Impressionist painters — Van Gogh, Monet, Degas — learned bold cropping and flat color planes from masters like Hiroshige and Hokusai.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Background <span class="sec">The Artist</span></h2>
+    <p>Utagawa Hiroshige (1797–1858) is the defining landscape master of late-Edo ukiyo-e, ranked alongside Hokusai as one of the two great names in the genre. Born into a firefighter's family, he trained in ukiyo-e and made his name with The Fifty-three Stations of the Tōkaidō, then spent much of his career recording the seasons and scenery of Edo and its highways.</p>
+    <p>One Hundred Famous Views of Edo was the most ambitious project of his final years, and the most complete visual record he left of the city. Not long after his death, Japan westernized rapidly through the Meiji Restoration, and many of the bridges and streets in these prints vanished entirely — making this series one of the few surviving visual testimonies of a city that no longer exists.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="sec">Gradient, Negative Space, One Warm Note</span></h2>
+    <ul class="tips">
+      <li><b>Trade color-stacking for a gradient:</b> the entire sky's depth comes from value shifts within a single hue. Before reaching for another color in a palette, try pushing the full brightness range of the one you already have.</li>
+      <li><b>In a cool palette, a little warm goes a long way:</b> straw yellow and vermillion together take up less than 5% of the frame, yet they're the only place the eye lands — restraint over most of the canvas makes the accent do more work.</li>
+      <li><b>Crop boldly for a sense of "now":</b> the bridge is cut off by the frame instead of shown whole, and that's exactly what makes it feel caught mid-moment. You don't need to fit the whole subject in frame — a partial view often reads as more immediate.</li>
+      <li><b>Use repetition to fake motion:</b> a few hundred nearly-parallel lines is the simplest animation there is. Dense, repeated straight strokes can suggest speed and weather in an otherwise still image — a trick that works just as well in graphic design and illustration.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">A R T</div>
+    Image: Sudden Shower over Shin-Ōhashi Bridge and Atake, One Hundred Famous Views of Edo · Utagawa Hiroshige, 1857 · Public domain (artist deceased over 150 years)<br>
+    Source: Wikimedia Commons · Commentary and analysis are the author's own
+  </footer>
+</div>
+</body>
+</html>

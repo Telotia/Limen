@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · JOB · One Curl of Smoke, Woven Into a Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#f2e9dd; --ink-soft:#d9c9b4; --ink-faint:#a3907c;
+    --gold:#c99a3f; --amber:#8f6d3e; --wine:#453a5c; --indigo:#2a2438;
+    --paper:rgba(20,16,26,.62); --line:rgba(242,233,221,.14); --void:#0e0b14;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#0e0b14; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(143,109,62,.30), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(201,154,63,.14), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(69,58,92,.60), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(14,11,20,.85), transparent 60%),
+      linear-gradient(170deg,#1c1424,#0a070e00);
+    filter:blur(50px) saturate(1.08); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#b39a80;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Newsreader',serif;font-weight:700;color:#f7ede0;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#d9c9b4;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#a3907c;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.06) inset;
+  }
+  .card h2{font-family:'Newsreader',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .zh{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,154,63,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#a3907c;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Newsreader',serif;color:#d9c9b4;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.19</div>
+    <h1>JOB — One Curl of Smoke, Woven Into an Entire Poster</h1>
+    <div class="sub">Alphonse Mucha, poster for <em>JOB</em> cigarette papers · 1896, Paris</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Mucha's poster for JOB cigarette papers: a woman in profile, head tilted back, eyes half-closed, a lit cigarette between her fingers; grey-blue smoke rises from her hand and curls through her wave-like dark hair before tangling into the giant olive-teal letters spelling JOB behind her; the ground is a deep grape-violet bordered by a bronze-gold and slate-blue zigzag mosaic pattern, with a small cluster of vermilion-red berries pinned in her hair">
+    <figcaption>Poster for <em>JOB</em> cigarette papers · by Alphonse Mucha · 1896 · printed by Ferdinand Champenois (Paris) · This work is in the public domain; image via Wikimedia Commons, used here for commentary and appreciation</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">The night before Christmas 1894, a Paris print shop was short-staffed and scrambling to finish a poster for Sarah Bernhardt's new play, <em>Gismonda</em>. The illustrator who got pulled in to cover the job was an almost-unknown Czech artist named Alphonse Mucha. The poster went up on the streets of Paris, and within a day Bernhardt had sent for him and signed him to a six-year contract. Two years later, the cigarette-paper company JOB came calling for a poster of their own — the name itself was an accident of branding: founder Jean Bardou had simply printed his initials, J and B, split by a small diamond, on his paper packets, and Parisians read the whole thing as one word, "JOB." What Mucha handed back became, alongside its 1898 companion piece, one of the most reproduced, pirated, and physically stolen-off-the-wall posters of his career.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="zh">构图</span></h2>
+    <p>There's almost no negative space left in this frame. The woman's head tilts back, eyes half-closed, a thread of grey-blue smoke rising from the cigarette between her fingers and curling up through her hair until it tangles into the giant letters spelling JOB behind her — at some point you can no longer tell where the hair ends, the smoke begins, or the lettering takes over. This is the trick Mucha had already worked out with <em>Gismonda</em>: never give the product name its own clean, isolated space. Fold it into the same decorative curve-language as the figure and the pattern around her.</p>
+    <p>Your eye ends up tracing a slow loop — fingers to hair to smoke to letterform — instead of reading the poster in one glance the way most advertising asks you to.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color Theory <span class="zh">配色</span></h2>
+    <p>The ground is a heavy, muted grape-violet, framed by a zigzag mosaic border in bronze-gold and slate blue-grey — a device Mucha lifted from Byzantine mosaic work, the same trick he'd used on <em>Gismonda</em>, reserved for commissions he wanted to feel weightier than an ordinary street ad. The letters spelling JOB sit in a muted olive-teal, close enough to the violet background to stay quiet.</p>
+    <p>What actually pulls your eye first isn't her face — it's the single cluster of vermilion-red berries pinned in her hair, the one saturated warm note in an otherwise hushed, tonal palette, placed almost dead-center near the top of the frame.</p>
+    <div class="palette">
+      <div class="sw" style="background:#453a5c;color:#f2e9dd">Grape Violet<small>#453A5C · ground</small></div>
+      <div class="sw" style="background:#8f6d3e;color:#2a1a08">Bronze Gold<small>#8F6D3E · border pattern</small></div>
+      <div class="sw" style="background:#6b7690;color:#f2e9dd">Slate Blue-Grey<small>#6B7690 · border, cool note</small></div>
+      <div class="sw" style="background:#4f7d6e;color:#f2e9dd">Olive Teal<small>#4F7D6E · "JOB" lettering</small></div>
+      <div class="sw" style="background:#b23a2c;color:#f2e9dd">Vermilion Red<small>#B23A2C · hair ornament</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique <span class="zh">光影与技法</span></h2>
+    <p>This is a color lithograph, printed by Ferdinand Champenois, Mucha's regular Paris publisher — a process that requires cutting and registering a separate stone for every color, so the more hues in the print, the harder it is to pull off cleanly. Nearly all of Mucha's best-known Paris posters came off Champenois's presses. Every shape here is flat color bounded by a dark contour line — hair, smoke, and pattern all separated the same way — a technique lifted from the ukiyo-e woodblock prints that had just reached Paris, and one Toulouse-Lautrec was using at the same moment.</p>
+    <p>The hair itself resolves into coiling, whip-like curls — what French critics called the <em>coup de fouet</em>, the "whiplash line" — which went on to become the single most recognizable visual signature of Art Nouveau as a whole.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="zh">为何动人</span></h2>
+    <p>Most commercial posters in the 1890s just printed the product name and price as boldly as possible. Mucha does close to the opposite: the JOB brand name is woven into the decorative pattern so thoroughly you could miss it on a first look, while the actual subject of the poster is a woman mid-exhale, eyes half-shut, seemingly lost in her own thought rather than selling you anything. He's selling a mood — languid, private, faintly luxurious — before he's selling rolling papers.</p>
+    <p>That's an advertising move that still holds up today, and in 1896 it was close to an invention. The posters were popular enough that collectors and passersby would tear them straight off walls before the paste had even dried, which says plenty about how far this image had already traveled beyond "advertisement."</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Background <span class="zh">作者背景</span></h2>
+    <p>Alphonse Mucha (1860–1939) was born in Moravia, in what's now the Czech Republic. Filling in for a colleague just before Christmas 1894, he produced the <em>Gismonda</em> poster for Sarah Bernhardt almost by accident, and went from unknown to the most in-demand poster artist in Paris within a day — he stayed her house designer for six years while also taking on a flood of commercial work: cigarette papers, beer, bicycles, perfume. The look became known simply as "Le Style Mucha," and later generations largely came to treat it as shorthand for Art Nouveau itself.</p>
+    <p>The JOB commission came from the Bardou family, who funded artists to promote the brand from 1895 onward; Mucha's two posters for them — this 1896 version and a larger 1898 companion — remain among his most collected works today. Late in life, Mucha set commercial work aside and spent nearly twenty years on <em>The Slav Epic</em>, twenty monumental canvases he considered his real legacy, rather than the posters that made him famous. This work is in the public domain; image via Wikimedia Commons.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="zh">可借鉴</span></h2>
+    <ul class="tips">
+      <li><b>One saturated warm note against a muted field:</b> violet, gold, and grey-blue all stay quiet here — the one thing that grabs the eye first is the single cluster of red, not the largest patch of color.</li>
+      <li><b>Don't bolt your title onto a corner:</b> let a logo or headline follow a curve that's already in the image instead of just stamping it on top — it reads as more resolved.</li>
+      <li><b>Pick one recurring line and repeat it everywhere:</b> Mucha renders smoke, hair, and border pattern with the same coiling curve. Pick a single shape or stroke and repeat it across a composition to unify it.</li>
+      <li><b>Mood before product:</b> decide what feeling you want (languid, weighty, restrained…) before you settle on composition or props, not the other way around.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">A R T</div>
+    Image: poster for <em>JOB</em> cigarette papers, by Alphonse Mucha, 1896, printed by F. Champenois<br>
+    Public domain · Source: Wikimedia Commons · Appreciation and analysis are the author's own
+  </footer>
+</div>
+</body>
+</html>

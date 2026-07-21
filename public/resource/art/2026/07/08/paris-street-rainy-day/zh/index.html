@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 雨伞下的巴黎 — 古斯塔夫·卡耶博特《巴黎街道，雨天》1877年</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#231f1a; --ink-soft:#4a443b; --ink-faint:#8f887a;
+    --gold:#a85236; --rust:#a85236; --soot:#2b2b2e; --slate:#2c4a43;
+    --paper:rgba(250,250,246,.64); --line:rgba(23,21,18,.16); --void:#2b2b2e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#c7bfa9; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(168,82,54,.30), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(44,74,67,.22), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(43,43,46,.28), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(199,180,140,.34), transparent 60%),
+      linear-gradient(160deg,#eae3d1,#c6bda6);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(23,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(23,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--rust);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(168,82,54,.3)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.08</div>
+    <h1>雨伞下的巴黎</h1>
+    <div class="sub">《巴黎街道，雨天》Paris Street; Rainy Day — 古斯塔夫·卡耶博特，1877年，法国</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="卡耶博特《巴黎街道，雨天》：一位戴黑色礼帽的绅士与一位穿深紫色长裙的女士撑伞走在雨后的巴黎鹅卵石街道上，身后是欧洲区改造后呈楔形的豪斯曼式建筑，画面被一根深绿色路灯柱几乎居中纵向分割">
+    <figcaption>古斯塔夫·卡耶博特，《巴黎街道，雨天》，1877年，布面油画，212.2 × 276.2 cm · 现藏于芝加哥艺术学院（The Art Institute of Chicago，编号1964.336）· Wikimedia Commons（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">一位戴黑色高礼帽的绅士挽着一位穿深紫色长裙的女士，在雨后发亮的鹅卵石街道上迎面走来——他们身后，整座巴黎欧洲区都被这场雨泡得湿漉漉的。这幅高2.1米、宽近2.8米的巨制，是1877年第三届印象派画展上最"不像印象派"的一张画：别人都在追逐阳光斑驳的碎笔触，卡耶博特却用近乎照片般精准的透视和笔法，把豪斯曼改造后的新巴黎，定格成了一张提前了半个世纪的"电影截帧"。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 一根路灯柱劈开的透视陷阱 <span class="en">Composition</span></h2>
+    <p><b>近乎居中的纵向分割</b>：画面正中一根深绿色铸铁路灯柱，几乎把2.8米宽的画布劈成两半——这在当时是极大胆的构图禁忌，古典绘画讲究"重心不落在正中"，卡耶博特偏要反着来，用一根细柱制造出一种刻意的、几近眩晕的对称张力。</p>
+    <p><b>广角般的透视畸变</b>：脚下鹅卵石的缝隙线以夸张的角度向远处收拢，视野宽得不像肉眼所见，更像广角镜头——事实上，红外线检测显示画布底层保留着卡耶博特为这套透视网格打的精确底稿，这在崇尚户外即兴、反对预先打稿的印象派同行中相当罕见。</p>
+    <p><b>被画框"切掉"的人</b>：右侧撑伞的男子只露出半个身子，胳膊肘直接被画框边缘切断——这种"来不及构好图就按下快门"的即视感，是卡耶博特刻意向摄影借来的手法，让一幅精心谋划的油画，看起来像一张随手抓拍的街头快照。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 冷灰色调里的一点暖色 <span class="en">Color Theory</span></h2>
+    <p>整幅画几乎是一支"灰色协奏曲"：奶灰色天空、石灰岩暖灰色的豪斯曼式楼房、被雨水泡出银灰光泽的鹅卵石、行人身上大片的墨黑与炭灰礼服——这些颜色饱和度都压得很低，明度却拉出了丰富的层次，光是"灰"就写出了七八种深浅冷暖不同的灰。</p>
+    <p>卡耶博特没有让画面全灰下去：画面右侧一小块陶土砖红色的建筑立面、路灯柱本身的墨绿色，是全图仅有的两抹高饱和色，加起来不到画面的一成，却因为四周都是被压低的冷灰色，格外抓人眼球。这正是"大面积低饱和冷灰 + 小面积高饱和暖色"的经典配色公式——低调，却绝不沉闷。</p>
+    <div class="palette">
+      <div class="sw" style="background:#e4dac0;color:#3d3527">象牙云灰天<small>#E4DAC0 · 阴天天空</small></div>
+      <div class="sw" style="background:#c7b48c;color:#3d3527">石灰岩暖灰<small>#C7B48C · 豪斯曼楼房</small></div>
+      <div class="sw" style="background:#aca79d;color:#2b2620">湿地银灰<small>#ACA79D · 雨后鹅卵石</small></div>
+      <div class="sw" style="background:#2b2b2e;color:#e4dac0">墨色礼服黑<small>#2B2B2E · 大衣与礼帽</small></div>
+      <div class="sw" style="background:#a85236;color:#f2e8d9">陶土砖红<small>#A85236 · 建筑立面</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 技法与历史 · 一场画给"新巴黎"的肖像 <span class="en">Technique & History</span></h2>
+    <p>画中这个奇特的楔形街角，是当时刚刚改造完成的"欧洲区"（Quartier de l'Europe）——奥斯曼男爵主持的巴黎大改造把中世纪的窄巷拉直拓宽，切出了大量这种锐角路口，逼得建筑师把楼房盖成船首般的尖角。这在当时是极新的城市景观，卡耶博特几乎是第一批把它郑重其事地搬上画布的人。</p>
+    <p>他的笔法也和同场展出的莫奈、雷诺阿截然不同：卡耶博特早年师从学院派画家莱昂·博纳（Léon Bonnat），底子是严谨的写实训练，画面因此工整、细腻、几乎不见笔触——这让他在很长一段时间里被认为"不够印象派"，直到二十世纪后半叶，学界才重新把这种冷静克制的写实，看作印象派处理"现代都市生活"母题时同样重要的另一条路径。</p>
+    <p>此画在1877年第三届印象派画展（假座巴黎勒佩勒蒂埃街的一处临时展厅）首次公开展出，尺幅之大、构图之新，让它成为当届最受瞩目的作品之一。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 挤满了人，却没有一双眼神相遇 <span class="en">Why It Moves Us</span></h2>
+    <p>这幅画最耐人寻味的地方，不是雨，而是"人挤人却互不相干"的疏离感：画中至少有十来位行人，每个人都撑着自己的一把伞，走着自己的方向，没有任何两个人的视线交汇。前景这对男女虽然挽着手臂，眼神却也各自望向不同方向——即便是最亲密的两人，也各自被包裹在一小片属于自己的伞下天地里。</p>
+    <p>这种"身处人群、却彼此隔绝"的现代都市体验，其实正是波德莱尔笔下"游荡者"（flâneur）诗歌反复咏叹的主题，而卡耶博特用一整张画布，把这种说不清道不明的孤独感，凝固成了可以被反复凝视的静止画面。147年过去，写字楼下班高峰期的地铁站台、雨天的十字路口，依然是同一种情绪——这也是这幅画至今仍能让人一秒共情的原因。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">The Artist</span></h2>
+    <p>古斯塔夫·卡耶博特（Gustave Caillebotte，1848–1894），出身巴黎富裕的纺织及军需制造世家，早年学过法律和工程，后转而师从学院派名家莱昂·博纳习画。他与莫奈、雷诺阿、德加交情深厚，不仅以画家身份参展，更以私人财力资助了好几届印象派画展的场地与运作。他同时也是最重要的早期印象派收藏家之一——1894年他去世后，将自己收藏的莫奈、雷诺阿、德加、马奈、毕沙罗等人的画作悉数遗赠给法国政府（起初还遭到学院派的抵制），这批藏品后来构成了今天奥赛博物馆印象派馆藏的核心。除绘画外，他还是热衷的帆船设计师与园艺爱好者，1894年在自家花园劳作时突发中风去世，年仅45岁。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 灰调穿搭与构图实操点 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>灰调穿搭的"高级感公式"：</b>画中男士的墨黑大衣、灰色长裤、黑色礼帽，与女士的深紫棕长裙几乎同属一个低饱和色域——雨具、大衣、配饰若都控制在同一明度区间内的冷灰或暖灰，即使款式简单，也会显得考究、成套。</li>
+      <li><b>大面积低饱和 + 一点高饱和：</b>整体环境用灰、米、驼等低饱和色打底，只留一处（一面墙、一个包、一双鞋）用高饱和色，比"全身撞色"更耐看，也更容易复制到日常穿搭或室内配色里。</li>
+      <li><b>"被切边"的构图更显真实：</b>拍照或构图时，让画面边缘的元素被画框/取景框自然"切掉"一部分，比刻意把所有主体都完整收进画面，更接近真实观察的瞬间感，也更有现场感。</li>
+      <li><b>用一根竖线制造张力：</b>把一根路灯、一根柱子、一道门框安排在画面接近正中的位置，故意打破"重心居中是构图大忌"的常规，能制造出一种紧绷、微妙的视觉焦点。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：古斯塔夫·卡耶博特，《巴黎街道，雨天》，1877年，布面油画，212.2 × 276.2 cm · 现藏于芝加哥艺术学院（编号1964.336，Charles H. and Mary F. S. Worcester Collection）<br>
+    来源：Wikimedia Commons · 卡耶博特1894年逝世，原作已超过版权保护期，进入公有领域 · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

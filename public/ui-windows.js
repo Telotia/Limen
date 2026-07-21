@@ -13,6 +13,12 @@
     return Math.max(min, Math.min(max, value));
   }
 
+  function requestCompactNavigation(reason) {
+    window.dispatchEvent(new CustomEvent('telotia:navigation-collapse', {
+      detail: { reason: reason || 'ui-window-interaction' }
+    }));
+  }
+
   function makeButton(text, label, action) {
     var button = document.createElement('button');
     button.type = 'button';
@@ -107,6 +113,7 @@
       styleGroup.addEventListener('click', function (event) {
         var button = event.target.closest('[data-window-os]');
         if (!button) return;
+        requestCompactNavigation('window-style');
         setWorkspaceOS(frame, button.dataset.windowOs, [macButton, windowsButton], nativeControls);
       });
     }
@@ -147,6 +154,7 @@
     toolbar.addEventListener('click', function (event) {
       var button = event.target.closest('[data-window-action]');
       if (!button || button.disabled) return;
+      requestCompactNavigation(button.dataset.windowAction);
       var action = button.dataset.windowAction;
       if (action === 'zoom-out') applyZoom(zoomIndex - 1);
       if (action === 'zoom-in') applyZoom(zoomIndex + 1);
@@ -223,6 +231,7 @@
     function beginResize(event) {
       if (window.matchMedia('(max-width: 820px)').matches) return;
       event.preventDefault();
+      requestCompactNavigation('window-resize');
       var rect = frame.getBoundingClientRect();
       var xDirection = Number(event.currentTarget.dataset.resizeX);
       var limits = sizeLimits(rect, xDirection);
@@ -296,11 +305,16 @@
       launcherIcon.alt = '';
       launcherIcon.width = 76;
       launcherIcon.height = 76;
+      var launcherIconShell = document.createElement('span');
+      launcherIconShell.className = 'workspace-app-icon';
+      launcherIconShell.setAttribute('aria-hidden', 'true');
+      launcherIconShell.appendChild(launcherIcon);
       var launcherName = document.createElement('span');
+      launcherName.className = 'workspace-app-name';
       launcherName.textContent = 'TELOTIA';
       var launcherHint = document.createElement('small');
       launcherHint.textContent = 'Double-click to open';
-      launcher.appendChild(launcherIcon);
+      launcher.appendChild(launcherIconShell);
       launcher.appendChild(launcherName);
       launcher.appendChild(launcherHint);
       frame.parentNode.insertBefore(launcher, frame.nextSibling);
@@ -394,6 +408,7 @@
       nativeControls.forEach(function (button) {
         button.addEventListener('click', function (event) {
           event.stopPropagation();
+          requestCompactNavigation(button.dataset.nativeWindowAction);
           var action = button.dataset.nativeWindowAction;
           if (action === 'minimize') toggleMinimize();
           if (action === 'maximize') toggleMaximize();
@@ -413,6 +428,7 @@
           if (event.target.closest('button, a, input, select, textarea, [data-no-window-drag]')) return;
           if (frame.classList.contains('is-maximized')) return;
           event.preventDefault();
+          requestCompactNavigation('window-drag');
           var rect = frame.getBoundingClientRect();
           dragState = {
             startX: event.clientX,
@@ -463,6 +479,7 @@
         nativeTitlebar.addEventListener('dblclick', function (event) {
           if (event.target.closest('.workspace-native-control')) return;
           if (performance.now() < suppressTitlebarDoubleClickUntil) return;
+          requestCompactNavigation('window-maximize');
           toggleMaximize();
         });
       }
@@ -482,7 +499,10 @@
       resizeHandle.addEventListener('pointermove', moveResize);
       resizeHandle.addEventListener('pointerup', endResize);
       resizeHandle.addEventListener('pointercancel', endResize);
-      resizeHandle.addEventListener('dblclick', resetSize);
+      resizeHandle.addEventListener('dblclick', function () {
+        requestCompactNavigation('window-size-reset');
+        resetSize();
+      });
       resizeHandle.addEventListener('keydown', function (event) {
         if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return;
         var xDirection = Number(resizeHandle.dataset.resizeX);
@@ -491,6 +511,7 @@
         var verticalKey = event.key === 'ArrowUp' || event.key === 'ArrowDown';
         if ((horizontalKey && !xDirection) || (verticalKey && !yDirection)) return;
         event.preventDefault();
+        requestCompactNavigation('window-keyboard-resize');
         var rect = frame.getBoundingClientRect();
         var limits = sizeLimits(rect, xDirection);
         var step = event.shiftKey ? 8 : 24;

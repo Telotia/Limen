@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 《雾海上的漫游者》— 卡斯帕·大卫·弗里德里希</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1916; --ink-soft:#3c3833; --ink-faint:#857f74;
+    --silver:#b9b4a8; --sepia:#8c7a5e; --slate:#5d6670; --bone:#e7e2d7;
+    --paper:rgba(248,245,239,.60); --line:rgba(60,55,45,.16); --void:#101010;
+    --olive:#3B3A2E; --ochre:#5B4636; --fog:#9AA6A6; --ridge:#7C8A8C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#d3d4cf; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 16% 8%, rgba(122,134,124,.20), transparent 60%),
+      radial-gradient(44rem 44rem at 86% 16%, rgba(154,166,166,.28), transparent 62%),
+      radial-gradient(42rem 42rem at 84% 90%, rgba(91,70,54,.14), transparent 60%),
+      radial-gradient(50rem 50rem at 20% 92%, rgba(59,58,46,.16), transparent 60%),
+      linear-gradient(160deg,#e6e6e0,#c9cbc4);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(20,18,14,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#dcdfd9}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(20,18,14,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--sepia);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--sepia);box-shadow:0 0 0 4px rgba(140,122,94,.22)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.02</div>
+    <h1>雾海上的漫游者</h1>
+    <div class="sub">Der Wanderer über dem Nebelmeer — 站在世界的边缘，背对着我们</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="卡斯帕·大卫·弗里德里希《雾海上的漫游者》约1817年">
+    <figcaption>Caspar David Friedrich，《雾海上的漫游者》（Der Wanderer über dem Nebelmeer），约1817年 · 布面油画 94.8×74.8cm · 德国浪漫主义 · 现藏汉堡美术馆（Hamburger Kunsthalle）· Wikimedia Commons（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">一个背影，一片雾海，几座若隐若现的山尖。没有脸，没有情节，可这幅两百年前的画，却是今天互联网上被转发最多的「意义感」配图之一——每一个觉得自己站在人生某个山顶、前路一片茫然的人，都能在这团雾里看到自己。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 背影的心理学 <span class="en">Composition</span></h2>
+    <p><b>Rückenfigur（背影人物）</b>：人物背对观者，站在画面近乎正中偏左的位置，占据视觉焦点却不展示表情——这样处理让他成为「观众的替身」而非「被观看的对象」。你不是在看他看风景，你是<b>透过他</b>在看风景。</p>
+    <p><b>三层空间递进</b>：近景嶙峋岩石（暗、清晰、细节丰富）→ 中景雾中山尖（渐次模糊、变亮变冷）→ 远景几乎融进天空的最远山脊。层层递进，把二维画布「拉」出纵深。</p>
+    <p><b>低地平线 + 竖幅构图</b>：人物头顶几乎顶到画面上三分之一处，让天空与雾气占据大半画幅，制造「渺小个体面对浩瀚」的尺度对比——这是「崇高」（the Sublime）美学最经典的构图公式。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 用色温画透视 <span class="en">Color Theory</span></h2>
+    <p>弗里德里希没有用线性透视的消失点，他用的是<b>空气透视（aerial perspective）</b>：近处岩石是饱和、偏暖的深橄榄绿与赭石棕；越往远处，色彩越冷、越淡、饱和度越低，最终溶进灰蓝色的雾里。<b>距离不是靠线条画出来的，是靠「色彩变冷」画出来的</b>——这是色彩理论里最朴素也最有效的深度错觉手法。</p>
+    <div class="palette">
+      <div class="sw" style="background:#3B3A2E;color:#e7e2d7">橄榄绿<small>#3B3A2E · 大衣</small></div>
+      <div class="sw" style="background:#5B4636;color:#e7e2d7">赭石棕<small>#5B4636 · 近岩</small></div>
+      <div class="sw" style="background:#9AA6A6;color:#1b1916">雾灰蓝<small>#9AA6A6 · 中景</small></div>
+      <div class="sw" style="background:#7C8A8C;color:#e7e2d7">远山蓝<small>#7C8A8C · 远景</small></div>
+      <div class="sw" style="background:#D8DCD6;color:#555;border:1px solid #c7cbc2">天光灰白<small>#D8DCD6 · 留白</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与技法 <span class="en">Light & Technique</span></h2>
+    <p>这幅画<b>没有明确的太阳</b>，光源就是雾本身——弥漫、均匀、没有方向性的冷光，让整幅画笼罩在一种介于清晨与阴天之间的暧昧光线里。人物是纯粹的剪影（逆光效果）：细节全部隐去，只剩轮廓，这让他更像一个「符号」而非具体的人。</p>
+    <p>技法上是典型的德国浪漫主义<b>精细罩染（glazing）</b>：颜料层层叠加，笔触几乎不可见，靠色彩与明暗的微妙过渡去建立空间，而不是靠可见笔触的动感——和同样爱画雾气与夜色的梵高，走的是完全相反的路子。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 <span class="en">Why It Moves Us</span></h2>
+    <p>这幅画最迷人的地方是它的<b>暧昧</b>：这个背影，是征服了自然的英雄，还是在自然面前渺小到无言的普通人？弗里德里希没有给答案，把解读权完全交给观者——这也是为什么两百年后，它依然被印在励志书封面上说成「直面未知」，也被用来讨论孤独与存在主义式的怅惘。</p>
+    <p>一个没有脸的人，却让全世界的人都在里面看见自己——这可能是绘画能做到的最高级的「共情设计」。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者 · 弗里德里希 <span class="en">The Artist</span></h2>
+    <p><b>卡斯帕·大卫·弗里德里希</b>（Caspar David Friedrich，1774–1840），德国浪漫主义最重要的风景画家，一生大部分时间在德累斯顿工作。他把风景画从「记录自然」提升为「精神性的沉思」——画中常有教堂废墟、十字架、雾、月光，把自然本身当作宗教体验的载体。</p>
+    <p>有学者认为画中背影可能就是他自己的自画像（红发相似）。他晚年境遇凄凉、几近被遗忘，直到20世纪初被重新发掘，如今被视为浪漫主义精神最强的代表。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 配色 / 穿搭 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>冷暖分层配色法：</b>前景用暖棕/橄榄，中景过渡，远景用冷灰蓝——套用到照片调色或插画配色，立刻有纵深感和「电影感」。</li>
+      <li><b>背影构图：</b>想让观众代入而非旁观，把人物放小、放背对镜头、置于画面视觉中心——旅拍、头像、封面图都适用。</li>
+      <li><b>穿搭移植：</b>深橄榄绿大衣 + 暗棕靴，配雾感灰蓝背景——「安静的高级感」（quiet luxury）配色公式，低饱和度 + 高级灰调即可复刻。</li>
+      <li><b>留白：</b>让「雾」（负空间）占据大部分画面，主体越小、留白越多，情绪张力反而越强。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：Caspar David Friedrich《雾海上的漫游者》约1817年 · 公有领域 · 现藏汉堡美术馆<br>
+    来源：Wikimedia Commons · 版权归原作者 · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · The Face Bauhaus Built From Geometry — Joost Schmidt, 1923</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1512; --ink-soft:#3d372e; --ink-faint:#877d6c;
+    --ochre:#d9a548; --red:#c1332a; --slate:#8b9a93; --bone:#efe6d3;
+    --paper:rgba(250,246,235,.62); --line:rgba(28,26,23,.16); --void:#1a1512;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.005em;
+    background:#d9cbaa; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(217,165,72,.42), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(193,51,42,.22), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(26,21,18,.24), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(139,154,147,.18), transparent 60%),
+      linear-gradient(160deg,#ecdfbc,#d3c19a);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(2rem,6vw,3.3rem);line-height:1.12;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:8px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(26,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#1a1512}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(26,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.5rem;color:#a3441f;opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300;font-size:1.02rem}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.1rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.03em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;
+    border-radius:50%;background:#a3441f;box-shadow:0 0 0 4px rgba(217,165,72,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+    letter-spacing:.2em;font-size:1rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.05</div>
+    <h1>The Face Bauhaus Built From Geometry</h1>
+    <div class="sub">Staatliches Bauhaus Ausstellung poster — Joost Schmidt, 1923, Weimar</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Joost Schmidt's 1923 poster for the Staatliches Bauhaus exhibition, a red, black and ochre geometric diagonal composition">
+    <figcaption>Joost Schmidt, poster for the Staatliches Bauhaus Ausstellung, 1923, Weimar · Wikimedia Commons (public domain)</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">A poster built from just three colors — red, black, mustard-yellow — takes a face apart into a circle, a square, a triangle, and pins it diagonally across the frame. No furniture, no building, no photograph — yet this is arguably the single most famous piece of graphic design the Bauhaus ever produced, and it answers "what is Bauhaus" more precisely than any object could.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="en">A face, taken apart, then nailed together on a diagonal</span></h2>
+    <p><b>A brief constraint, not a free choice:</b> this poster won a design competition whose rules required entrants to incorporate the Bauhaus-Signet — the pared-down profile/eye emblem designed by Oskar Schlemmer, a distillation of the school's "human-geometry" philosophy. Schmidt folded that emblem into a cross-shaped arrangement of circles, half-circles, and squares, tilted off the vertical.</p>
+    <p><b>A diagonal spine instead of a grid:</b> the poster's main axis runs from bottom-left to top-right — "AUSSTELLUNG" climbs the diagonal, "BAUHAUS" bites horizontally across the center — producing a sense of motion, as if the whole composition is about to tip over. It reads as far more energetic than any grid-aligned layout could.</p>
+    <p><b>Occlusion instead of shading:</b> the jagged black shape stacks over the red ring and ochre ground, and depth comes entirely from which flat color sits in front of which — not from any gradient or light source. It's a print-logic kind of space: it doesn't simulate where light comes from, only who's blocking whom.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color <span class="en">Designed to be recognized from 120 train stations</span></h2>
+    <p>The restrained triad — red, black (standing in functionally for "cool"), and mustard-ochre — isn't an arbitrary choice. It sits directly on top of the Bauhaus's own color pedagogy: in his color theory course at the school, Kandinsky proposed a mapping between the three primaries and the three basic geometric forms (square=red, circle=blue, triangle=yellow). This poster doesn't apply that formula literally, but the underlying logic is the same — geometry as color, color as geometry.</p>
+    <p>The poster was originally printed and pasted up across 120 German railway stations as touring advertising for the 1923 "Bauhaus Week" exhibition. The high contrast and the small number of colors aren't an aesthetic preference — they're a functional requirement: a passerby needed to recognize it from meters away, in seconds.</p>
+    <div class="palette">
+      <div class="sw" style="background:#d9a548;color:#3d2c05">Ochre ground<small>#D9A548 · field</small></div>
+      <div class="sw" style="background:#1a1512;color:#efe6d3">Ink black<small>#1A1512 · form</small></div>
+      <div class="sw" style="background:#c1332a;color:#fceef0">Vermilion red<small>#C1332A · ring</small></div>
+      <div class="sw" style="background:#efe6d3;color:#3d372e">Bone cream<small>#EFE6D3 · highlight</small></div>
+      <div class="sw" style="background:#8b9a93;color:#1a1512">Slate teal<small>#8B9A93 · accent</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique & History <span class="en">A manifesto for the turn from craft to industry</span></h2>
+    <p>1923, the year this poster was made, is also the year Bauhaus director Walter Gropius coined the school's new slogan, "Art and Technology: A New Unity" — the moment the Bauhaus formally stepped away from Johannes Itten's mystically-inflected, craft-based early phase and toward industrialized, standardized production. This poster is itself living evidence of that turn: it wasn't painted, it was designed — using geometric form, printed type, and color theory as a reproducible system that replaced the randomness of an individual hand.</p>
+    <p>The small stacked-letter monogram in the poster's upper right is Schmidt's own designer's mark — placed alongside Schlemmer's Bauhaus emblem at the center. It's a strikingly modern piece of design ethics: a collective institutional brand and an individual author's signature, coexisting in the same frame.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="en">A face, taken apart into permanence</span></h2>
+    <p>What makes this poster affecting is exactly that it abstracts "a person" almost past recognition, yet you're still certain, at a glance, that you're looking at a face — one eye (the black dot inside the red ring), one profile (the jagged black silhouette), compressed into pure geometric logic without losing that faint sense that someone is looking back at you. That's the Bauhaus's central ideal made visible: the unity of head, hand, and heart — an artist's intuition, a craftsman's hand, an engineer's reason, meant to be one thing rather than three competing identities.</p>
+    <p>A century later, this poster reads almost like a prophecy of the century of graphic design that followed it — from the Swiss International Typographic Style to the brand identity systems of countless tech companies today, all of which can trace an ancestor back to this tilted red-and-black sheet.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> The Designer <span class="en">Joost Schmidt</span></h2>
+    <p>Joost Schmidt (1893–1948) was born in Wunstorf, Germany. He entered the Bauhaus at Weimar in 1919, studying under Johannes Itten and Oskar Schlemmer, initially focused on woodcarving. From 1925 he stayed on as a teacher, running the lettering curriculum; he headed the sculpture workshop from 1928–1930 and the department for advertising, calligraphy, and print/graphic design from 1928–1932. After the Bauhaus was shut down under Nazi pressure in 1933, he continued working as a graphic designer in Berlin under difficult conditions, later teaching at the Berlin College of Visual Arts. He died in Nuremberg in 1948.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="en">Graphic Design / Color / Layout</span></h2>
+    <ul class="tips">
+      <li><b>Give high contrast a job, not just a look:</b> this poster's contrast exists to be recognized from a distance, in a short window of time. Before you design anything, ask "how far away, and how fast, does this need to be understood?" — then set your contrast level accordingly.</li>
+      <li><b>A diagonal reads as more energetic than a grid:</b> rotating key elements 30–45 degrees almost always makes a layout feel more alive and less static — true for logos, posters, and covers alike.</li>
+      <li><b>Build depth with occlusion, not gradients:</b> stacking a few flat, opaque shapes reads cleaner and more "designed" than a soft shadow gradient — especially in flat, geometric visual systems.</li>
+      <li><b>Make the mark part of the composition, not a sticker on top of it:</b> Schmidt didn't tuck the Bauhaus emblem into a corner — he wove it into the entire geometric structure. Strong brand design treats the logo and the layout as one system, not two separate layers.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">Art</div>
+    Image: Joost Schmidt, poster for the 1923 Staatliches Bauhaus Ausstellung · held at the Bauhaus-Archiv Berlin<br>
+    Source: Wikimedia Commons · the designer died in 1948, the work is in the public domain · appreciation is personal analysis
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · The Man Who Painted Speed as Fog — J. M. W. Turner, 1844</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211d1a; --ink-soft:#453f37; --ink-faint:#8a8175;
+    --gold:#cf9f52; --rust:#7a4326; --soot:#201d1a; --slate:#5f7f92;
+    --paper:rgba(250,250,246,.62); --line:rgba(23,21,18,.16); --void:#201d1a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.005em;
+    background:#c7cdc9; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(207,159,82,.42), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(122,67,38,.24), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(32,29,26,.26), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(95,127,146,.24), transparent 60%),
+      linear-gradient(160deg,#dde2dd,#b7c0bc);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(2rem,6vw,3.3rem);line-height:1.12;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:8px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(23,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:#201d1a}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(23,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.5rem;color:#8a4a26;opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300;font-size:1.02rem}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.1rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.03em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;
+    border-radius:50%;background:#8a4a26;box-shadow:0 0 0 4px rgba(207,159,82,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+    letter-spacing:.2em;font-size:1rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Appreciation · 2026.07.06</div>
+    <h1>The Man Who Painted Speed as Fog</h1>
+    <div class="sub">Rain, Steam, and Speed – The Great Western Railway · J. M. W. Turner, 1844</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Turner's Rain, Steam, and Speed — a steam locomotive charging out of a mist of rain and steam, wrapped in warm gold light against a cool grey-blue downpour">
+    <figcaption>J. M. W. Turner, Rain, Steam, and Speed – The Great Western Railway, 1844, oil on canvas · The National Gallery, London · Wikimedia Commons (public domain)</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">A steam locomotive bursts out of the depths of the canvas, its engine wrapped in a cloud of white steam and rain that nearly swallows the whole painting. This is England in 1844 — decades before photography could capture anything like motion blur — and Turner had already painted pure speed with a loaded brush. Historians have called it, only half-jokingly, the first Futurist painting, nearly seventy years before the Futurists ever wrote a manifesto.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="en">A diagonal aimed straight at the viewer</span></h2>
+    <p><b>A perspective that breaks the rules:</b> the only true straight line in the painting is the diagonal formed by the track and the bridge deck, running from the bottom-right corner straight into a vanishing point deep in the canvas — with the locomotive bearing down directly on us. Landscape painting in 1844 still leaned on stable horizons and symmetrical compositions; Turner instead chose an angle that feels like it's about to run the viewer over.</p>
+    <p><b>A bridge nobody believed would hold:</b> the bridge on the left is Maidenhead Railway Bridge, engineered by Isambard Kingdom Brunel and completed in 1838 — the public at the time widely doubted that such flat, wide brick arches could bear any real weight, yet Brunel built what were then the flattest brick arches in the world. Turner putting this "bridge that defied common sense" into the frame is itself a statement.</p>
+    <p><b>A hare, about to be overtaken:</b> the National Gallery's own notes on the painting point out a faint hare running along the tracks just ahead of the train — one of the fastest land animals of the era, here on the verge of being caught and passed by a machine. Nature's speed limit, being replaced by industry's.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color <span class="en">Goethe's color theory and "advancing" warmth</span></h2>
+    <p>In 1840, Charles Lock Eastlake published his English translation of Goethe's Theory of Colours, and the aging Turner read it and was deeply affected — just one year before this painting, in 1843, he made two works directly named after Goethe's theory, Shade and Darkness and Light and Colour. Goethe argued that yellow, orange, and red are "positive," advancing colors, while blue, violet, and green are "negative," receding ones — a logic that reads almost like the literal color formula for this painting.</p>
+    <p>The knot of warm gold light tearing through the rain cloud at the painting's center is the plainest possible demonstration of "warmth advances": the eye is drawn straight to that small patch of gold breaking through the mist around the engine, and even though it occupies a tiny fraction of the canvas, it overpowers the far larger field of cool grey-blue rain around it. That's a focal point built from color theory, not from outline.</p>
+    <div class="palette">
+      <div class="sw" style="background:#c7d0d6;color:#211d1a">Rain-mist grey-blue<small>#C7D0D6 · sky</small></div>
+      <div class="sw" style="background:#cf9f52;color:#3d2c05">Breaking gold<small>#CF9F52 · light</small></div>
+      <div class="sw" style="background:#7a4326;color:#f2ead9">Track ochre-brown<small>#7A4326 · rails</small></div>
+      <div class="sw" style="background:#201d1a;color:#efe6d3">Engine soot black<small>#201D1A · locomotive</small></div>
+      <div class="sw" style="background:#7a93a0;color:#201d1a">River grey-green<small>#7A93A0 · the Thames</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Technique & History <span class="en">The old man who leaned out into the storm</span></h2>
+    <p>A well-known anecdote circulates about this painting — impossible to fully verify, but repeated across multiple art-historical accounts: the 69-year-old Turner is said to have ridden the Great Western Railway himself and, during a rainstorm, leaned his head out the carriage window for a full nine minutes, letting the wind and rain hit his face, just to see for himself what light and moisture actually looked like at high speed through a downpour — echoing the earlier, similarly unverifiable legend of the young Turner having himself lashed to a ship's mast to study a blizzard.</p>
+    <p>Technically, the late Turner relied heavily on scumbling — dragging almost-dry, oil-thin paint quickly and loosely across an already-dried layer beneath, letting the underlying color show through unevenly and producing a diffused, boundary-dissolving haze. It's an effect that echoes the loose brushwork of Impressionism three decades later — Turner got there first, by a full generation.</p>
+    <p>The Great Western Railway was engineered by Brunel, known for its unusually wide 7-foot broad gauge and exceptional speed, and it quickly became the fastest railway in Britain not long after opening. This painting was made at the height of Britain's speculative "Railway Mania."</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="en">Motion blur, painted before photography existed</span></h2>
+    <p>Photography wouldn't manage to capture real motion blur for decades. Turner, in 1844, painted the visual vertigo of high speed itself from nothing but observation and memory — the locomotive's outline dissolving into its own steam and rain until it's nearly abstracted into a smear of light. It was a radical gesture for its time, and contemporary critics mocked it as unreadable.</p>
+    <p>The faint hare on the tracks, the leisurely boat drifting beneath the bridge — these fragments of the "old world" being left behind by the train turn this from merely a painting of a locomotive into a visual record of how speed itself reshapes human perception. Viewers in 1844 were realizing, for the first time, that the world seen from a moving train was a genuinely different visual experience from the world seen on foot or on horseback. That mixture of anxiety and exhilaration about technology accelerating daily life still lands precisely, two hundred years later.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> The Artist <span class="en">J. M. W. Turner</span></h2>
+    <p>Joseph Mallord William Turner (1775–1851) was born in Covent Garden, London, the son of a barber, and entered the Royal Academy Schools at just 14. He was obsessed throughout his life with light, the sea, and weather at its most extreme — blizzards, fires, sunrises and sunsets — and his late work grew progressively more abstract, its color and brushwork nearly breaking free of concrete form altogether, later recognized as a crucial forerunner of Impressionism and even Abstract Expressionism. He died in 1851 at a house in Chelsea, London, and bequeathed a vast body of work to the nation; most of it now hangs at Tate Britain, while Rain, Steam, and Speed itself is held at the National Gallery, London.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="en">Color Theory / Atmosphere</span></h2>
+    <ul class="tips">
+      <li><b>Warm advances, cool recedes:</b> if you want one point in a composition to become the focal point, don't just make it bigger — give it a touch of warmth. Even a tiny patch of gold or orange-red can leap forward out of a much larger cool-toned field and be the first thing the eye catches.</li>
+      <li><b>Build fog with dry, broken strokes, not a blur filter:</b> dragging dry, loose paint across a base color reads as far more "material" than simply lowering clarity — it's the same principle 3D volumetric fog and depth-of-field are trying to simulate: sharp up close, with distant light scattered and diluted by the medium in between.</li>
+      <li><b>Leave a corner for the old world:</b> if you want a "new thing" to land with more force, keep a small trace of the "old world" at the edge of the frame or the story (a boat, a hare) — the contrast sharpens the narrative tension on its own, with no caption required.</li>
+      <li><b>Treat looking as part of the making:</b> true or not, the anecdote points at something real — the most reliable way to render a fleeting weather effect or quality of light is often to go stand in it for a few minutes, not to imagine it from memory alone.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">Art</div>
+    Image: J. M. W. Turner, Rain, Steam, and Speed – The Great Western Railway, 1844, oil on canvas, 91×121.8cm · held at the National Gallery, London<br>
+    Source: Wikimedia Commons · the artist died in 1851, the work is in the public domain · appreciation is personal analysis
+  </footer>
+</div>
+</body>
+</html>

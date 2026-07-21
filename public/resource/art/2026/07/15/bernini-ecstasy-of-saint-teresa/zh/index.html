@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 圣特蕾莎的狂喜 · 贝尼尼把光刻进大理石</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eef1ef; --ink-soft:#c7ccd0; --ink-faint:#8b939a;
+    --gold:#c99a3f; --verde:#38453c; --ochre:#b97d3f; --wine:#5c3140;
+    --paper:rgba(18,22,26,.62); --line:rgba(230,238,240,.14); --void:#05060a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#07080b; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(50rem 50rem at 18% 6%, rgba(201,154,63,.24), transparent 60%),
+      radial-gradient(46rem 46rem at 86% 14%, rgba(56,69,60,.4), transparent 62%),
+      radial-gradient(48rem 48rem at 82% 92%, rgba(92,49,64,.34), transparent 60%),
+      radial-gradient(52rem 52rem at 12% 94%, rgba(5,6,10,.7), transparent 60%),
+      linear-gradient(170deg,#0d0f14,#050608);
+    filter:blur(50px) saturate(1.05); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:#9aa1a6;font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;color:#f5f6f4;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:#c9cdc4;margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.75),0 2px 0 rgba(255,255,255,.1) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:#8b939a;text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.08) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.6)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,154,63,.28)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:#8b939a;
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:#c9cdc4;
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.15</div>
+    <h1>圣特蕾莎的狂喜 · 贝尼尼把一束看不见的光刻进大理石</h1>
+    <div class="sub">吉安·洛伦佐·贝尼尼《圣特蕾莎的狂喜》(The Ecstasy of Saint Teresa) · 1647–1652</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="科尔纳罗礼拜堂内景：一排镀金光柱从上方隐藏的窗口垂落而下，照亮悬浮在云朵上的白色大理石雕像——一位天使与晕厥的圣特蕾莎，四周环绕深绿色大理石柱与金黄色纹理墙面">
+    <figcaption>《圣特蕾莎的狂喜》(The Ecstasy of Saint Teresa) · 吉安·洛伦佐·贝尼尼，1647–1652年 · 科尔纳罗礼拜堂，圣玛利亚·德拉·维多利亚教堂，罗马 · 摄影：Livioandronico2013，CC BY-SA 4.0</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">圣特蕾莎在自传里写过一次她终生都在试图讲清楚、却始终觉得语言不够用的经历：一个不算高大、面容明亮得像是"浑身着火的天使"，手持一支镀金、矛尖带火的长枪，一次又一次刺入她的心脏——那种疼痛几乎让她忍不住呻吟，可长枪抽出的一瞬间，她却只盼着这份疼痛永远不要停。一百年后，贝尼尼把这段几乎无法转述的宗教体验，直接搭建成了一整间会发光的大理石剧场：一束镀金的光柱像是从天而降，而制造这束光的窗户，被他悄悄藏在了没人能看见的地方。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 一整间被设计成剧场的礼拜堂 <span class="en">Composition</span></h2>
+    <p>这不是一件摆在展台上的雕塑，而是一整间被贝尼尼当作舞台来设计的科尔纳罗礼拜堂。中央是一座由深色大理石双柱撑起的神龛（aedicule），断山花向两侧打开，露出后方那道深邃的暗色壁龛——圣特蕾莎与天使的雕像群就悬浮在这道壁龛的半空中，脚下是层层叠叠、几乎要溢出神龛边框的云朵，没有任何看得见的基座在托住她们。</p>
+    <p>更容易被忽略的是两侧墙面：贝尼尼在礼拜堂左右各凿出一排"包厢"，浮雕出委托人科尔纳罗家族先后八位成员——枢机主教、总督——的半身像，姿态各异地倚在栏杆上，像是在剧院里看戏、彼此低声议论。这一设计把"观看"这件事本身也刻进了作品里：走进礼拜堂的访客，其实是在和几百年前的科尔纳罗家族共享同一场演出。</p>
+    <p>抬头看，穹顶上还有一层灰泥天使与湿壁画，画出云层裂开、圣灵鸽子降临的幻觉——建筑、雕塑、绘画、光线在这里被贝尼尼合并成他所说的"总体构图"（bel composto），没有一层是可以单独摘掉的布景。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 配色 · 白色大理石、深绿石柱与鎏金，教堂剧场的三段色阶 <span class="en">Color Theory</span></h2>
+    <p>整间礼拜堂的配色其实只有三层逻辑：雕像本身用的是接近纯白的卡拉拉大理石，冷静、发光，是全场唯一的情绪焦点；环绕它的建筑框架，是深绿的维尔德古董大理石双柱，配上暗酒红与青黑纹理的石材护墙，色调厚重、克制，像一层压低了声音的舞台幕布；只有神龛内壁那一小片暖黄纹理的古董黄大理石，为冷色调的空间悄悄留出一丝暖意，替后面即将出现的金色做铺垫。</p>
+    <p>真正的"高潮色"，是那束镀金青铜光柱——它只出现在雕像正上方一小块区域,面积在全图里占比很小，却因为高反光、和周围哑光大理石形成最强对比,一进门就先抓住视线。这与很多教科书级的高级感配色同理：大面积用低饱和的冷色或中性色打底,把最高饱和、最高反光的颜色留给最想被看见的那一处。</p>
+    <div class="palette">
+      <div class="sw" style="background:#ede6d8;color:#332c22">卡拉拉白<small>#EDE6D8 · 雕像本体</small></div>
+      <div class="sw" style="background:#c99a3f;color:#241c05">鎏金光柱<small>#C99A3F · 天降之光</small></div>
+      <div class="sw" style="background:#38453c;color:#eef1ef">维尔德古董绿<small>#38453C · 神龛石柱</small></div>
+      <div class="sw" style="background:#b97d3f;color:#241c05">古董黄大理石<small>#B97D3F · 壁龛内壁</small></div>
+      <div class="sw" style="background:#5c3140;color:#eef1ef">酒红纹理石<small>#5C3140 · 护墙基座</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与技法 · 把窗户本身藏起来，只让光的奇迹落地 <span class="en">Technique</span></h2>
+    <p>这束光是整件作品里最像"作弊"的部分：贝尼尼在山花上方开了一扇访客从地面完全看不到的窗，装上黄色玻璃，让真实的罗马日光穿过窗子,打在一排排从暗处垂下的镀金青铜杆上——于是我们看到的"神迹之光"，其实是一场被精心藏起光源的舞台灯光设计。更妙的是，这束光会随一天里日照角度变化而明暗浮动,教堂从来没有欺骗过任何人,只是把"光源"这一件事,从视觉里彻底删除了。</p>
+    <p>雕像本身的技法同样在服务这场光的戏法：贝尼尼把天使轻盈的薄纱衣袍雕得极深、极透，边缘薄到几乎透光；圣特蕾莎沉重的修女袍则雕出大团大团翻涌的褶皱，用运钻技法在阴影最深处钻出近乎全黑的孔洞,制造出布料远比石头更柔软的错觉。同一块大理石，抛光的肌肤会反光,粗磨的衣料会吸光——这种质感对比，才是让"云朵托着两个人悬在半空"这件事看起来毫不费力的真正原因。</p>
+    <p>这张照片本身也在配合这种效果：摄影师Livioandronico2013用HDR多重曝光合成，把礼拜堂顶部彩绘、金色光柱的高光、大理石暗部的纹理,同时收进一张画面里——如果只用单次曝光，这束光会亮到过曝一片死白，暗部的绿色石柱纹理就会完全消失。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 疼痛与狂喜，共享同一张脸 <span class="en">Why It Moves Us</span></h2>
+    <p>圣特蕾莎在自传第29章里,把那次神秘经历写得极其具体：天使的长矛"金色，矛尖仿佛带着一点火"，反复刺入她的心脏，抽出时"仿佛要把内脏一并带走"，让她"忍不住发出几声呻吟"——但她紧接着写道，这份痛楚"甜美到令人不愿它停止，灵魂除了上帝之外,不会再满足于任何更少的东西"。这种疼痛与甜蜜无法分割、肉体经验与灵魂经验彼此重叠的描述，正是贝尼尼想要雕出来的那一刻：她的头向后仰去,嘴唇微张,脚趾蜷起,整具身体呈现出的表情,处在痛苦与陶醉之间，模糊到无法用一个词准确命名。</p>
+    <p>这份模糊从18世纪起就没让人省心——据记载，途经罗马的法国文人夏尔·德·布罗斯参观后半开玩笑地评论道，如果这就是"神圣的爱"，那他对这种爱再熟悉不过。这类调侃流传了几百年，恰恰说明贝尼尼没有在雕刻一幅"安全"的宗教图像:巴洛克神学本就相信,人对上帝的爱应当调动整个身体去经历,而不只是精神上的默想——把"神圣"与世俗读者眼中的"情欲"画在同一张脸上，某种程度上正是这件作品最诚实、也最敢冒险的地方。</p>
+    <p>两侧包厢里科尔纳罗家族的浮雕像，则悄悄把这份私密的神秘体验变成了一场公开演出——委托人自己被永久刻在观众席上,注视着这场几百年后依然有人专程赶来罗马看的"戏"。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">Background</span></h2>
+    <p>吉安·洛伦佐·贝尼尼（Gian Lorenzo Bernini，1598–1680）出生于那不勒斯，成年后长居罗马，是罗马盛期巴洛克艺术当之无愧的核心人物——身兼雕塑家、建筑师、舞台设计师，一人主导了圣彼得大教堂广场柱廊、四河喷泉等罗马地标的诞生。科尔纳罗礼拜堂由威尼斯枢机主教费代里科·科尔纳罗委托、1647至1652年间建成，最初设计目的之一，就是作为科尔纳罗家族未来的家族墓室。</p>
+    <p>雕像所塑造的阿维拉的圣特蕾莎（Teresa of Ávila，1515–1582）是西班牙加尔默罗会修女、神秘主义者，也是赤足加尔默罗会的创立者之一，1622年被封为圣徒，1970年被追授"教会圣师"称号，是史上第一批获此殊荣的女性之一。贝尼尼与圣特蕾莎均已去世逾三百年，原作早已进入公有领域；本文所用照片摄于圣玛利亚·德拉·维多利亚教堂内，由摄影师Livioandronico2013于2015年拍摄并发布于Wikimedia Commons，采用CC BY-SA 4.0协议授权,图片版权归摄影师所有。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 把光源藏起来，把观众也刻进场景里 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>藏起光源本身，只留光的效果：</b>把灯具、光源彻底隐藏，观众看到的会是"奇迹"而不是"灯"——空间设计、产品拍摄、舞台布光都适用这个原理。</li>
+      <li><b>让"目击者"也出现在画面里：</b>科尔纳罗家族的包厢浮雕相当于把观众提前安放进了作品，这种"戏中戏"式的构图能迅速把真实观者也代入进情境。</li>
+      <li><b>用质感对比制造焦点，而不是单靠颜色：</b>哑光粗粝与抛光反光并置，本身就能立刻区分"背景"与"主角"，不需要额外加颜色去抢戏。</li>
+      <li><b>让主体脱离基座,制造失重感：</b>用云朵、烟雾或阴影模糊掉支撑结构，主体看起来悬浮，画面会立刻多出一层戏剧张力。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：《圣特蕾莎的狂喜》，吉安·洛伦佐·贝尼尼，1647–1652，原作公有领域 · 摄影：Livioandronico2013，2015，CC BY-SA 4.0<br>
+    来源：Wikimedia Commons · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

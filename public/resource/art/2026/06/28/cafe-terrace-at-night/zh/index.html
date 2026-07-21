@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 《夜间露天咖啡座》— 文森特·梵高</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#20242e; --ink-soft:#3c4250; --ink-faint:#7a7e8c;
+    --cobalt:#213a6b; --night:#16264a; --sky:#2c4a86; --violet:#4b5c84;
+    --saffron:#f4c430; --gold:#e0a82e; --sulphur:#cfa646;
+    --leaf:#4a7a3a; --door:#2f6b4f; --rust:#c46a2a; --cream:#ede6c8; --void:#0e1428;
+    --paper:rgba(250,248,240,.58); --line:rgba(40,40,30,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#e9e4d6; min-height:100vh; overflow-x:hidden;
+  }
+  /* 弥散光场：钴蓝夜空 + 灯火暖黄 */
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(46rem 46rem at 16% 12%, rgba(33,58,107,.46), transparent 60%),
+      radial-gradient(40rem 40rem at 80% 20%, rgba(244,196,48,.30), transparent 62%),
+      radial-gradient(50rem 50rem at 30% 92%, rgba(75,92,132,.34), transparent 60%),
+      radial-gradient(38rem 38rem at 84% 84%, rgba(74,122,58,.22), transparent 60%),
+      linear-gradient(160deg,#f0ead9,#e3dcca);
+    filter:blur(46px) saturate(.98); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:20px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(14,20,40,.62),0 2px 0 rgba(255,255,255,.4) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+    border:1px solid rgba(255,255,255,.55);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(14,20,40,.5),0 1px 0 rgba(255,255,255,.6) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--gold);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:84px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;color:#fff;
+    font-size:.66rem;letter-spacing:.06em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.82;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--saffron);box-shadow:0 0 0 4px rgba(244,196,48,.20)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.06.28</div>
+    <h1>夜间露天咖啡座</h1>
+    <div class="sub">Café Terrace at Night — 一盏灯，把黑夜画成了暖色</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="文森特·梵高《夜间露天咖啡座》1888年">
+    <figcaption>Vincent van Gogh，《夜间露天咖啡座》（Terrasse du café le soir），1888年9月，布面油画 80.7 × 65.3 cm · 荷兰 奥特洛 克勒勒-米勒博物馆藏（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">一条铺着鹅卵石的小街，一爿亮着煤气灯的咖啡馆。遮阳棚像一团被点燃的金黄，热烘烘地泼在墙上、地上；街那头是深蓝的夜空，第一次，梵高把星星画进了画里。最动人的，是他做了一件事——<b>整幅画，没有用一点黑色</b>。黑夜，被他换成了蓝、紫、绿。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 <span class="en">Composition</span></h2>
+    <p>这是一幅靠<b>透视</b>把人拉进去的画。鹅卵石的缝、屋檐的线、桌椅的排布，全部沿着街道向右后方<b>汇聚</b>，把视线送进画面深处那条幽暗的小巷——一个清晰的「近大远小」单点透视，街道因此有了纵深。</p>
+    <p>左边那块巨大的<b>金黄遮阳棚</b>是绝对的主角：一个倾斜的暖色大楔形，亮、重、向前扑。右边是大片暗蓝的楼房，沉、退、压住画面——一<b>亮一暗、一进一退</b>，天平就稳了。前景的桌椅与暗色人影像一道<b>框</b>，把你「框」在街口往里看；中央那个<b>白衣侍者</b>是全画最亮的竖线，所有暖光都向他收拢。天上的星点和棚下的灯，遥遥<b>呼应</b>成一组节奏。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 配色与理论 <span class="en">Colour</span></h2>
+    <p>整幅画的引擎，是一对<b>互补色：蓝 ↔ 橙黄</b>。煤气灯的暖黄（橙系）与夜空的钴蓝，正好在色环上相对。互补色并置会触发<b>同时对比（simultaneous contrast）</b>：黄因蓝而更灼、蓝因黄而更深，两边都被对方「点亮」。这套色彩科学来自梵高熟读的<b>谢弗勒尔（Chevreul）与夏尔·布朗</b>，也来自他崇拜的德拉克洛瓦。</p>
+    <p>更关键的是那句他写给妹妹的话（大意）：<b>「一幅没有黑色的夜画，只有美丽的蓝、紫和绿。」</b>所以你看——<b>暗处不是黑，是饱和的冷色</b>：石路的阴影是紫蓝，巷子的深处是墨蓝，门与树是绿。暖（黄／橙）只占小面积却最跳，冷（蓝／紫／绿）占大面积做底——这正是<b>小面积暖色 ＋ 大面积冷色</b>的高级配色法：克制、却有焦点。</p>
+    <div class="palette">
+      <div class="sw" style="background:#213a6b">夜空钴蓝<small>#213A6B</small></div>
+      <div class="sw" style="background:#16264a">巷口墨蓝<small>#16264A</small></div>
+      <div class="sw" style="background:#4b5c84">石路紫蓝<small>#4B5C84</small></div>
+      <div class="sw" style="background:#f4c430;color:#5a4410">星窗灯黄<small>#F4C430</small></div>
+      <div class="sw" style="background:#e0a82e;color:#4a3608">遮阳棚金<small>#E0A82E</small></div>
+      <div class="sw" style="background:#c46a2a">暖橙木<small>#C46A2A</small></div>
+      <div class="sw" style="background:#4a7a3a">门与树绿<small>#4A7A3A</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与气氛 <span class="en">Light & Mood</span></h2>
+    <p>画里没有月亮、没有路灯特写，唯一的光源是<b>遮阳棚下那盏煤气灯</b>。梵高不画「光本身」，而是把光<b>染</b>在它照到的地方：被照亮的墙是发烫的硫磺黄，地面是浅柠檬绿，越往暗处越转蓝——<b>用色温的冷暖，代替明暗的黑白</b>，这是整幅画最聪明的地方。</p>
+    <p>气氛因此既<b>温暖又辽阔</b>：近处是人间的烟火与喧声，抬头却是无垠的星夜。这是梵高<b>第一幅画星空</b>的作品——同月他画了《罗讷河上的星夜》，次年才有那幅著名的《星夜》。这里的星空还很安静，像一个刚被点亮的念头。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 技法与媒材 <span class="en">Technique</span></h2>
+    <p>布面油画，约 <b>80.7 × 65.3 cm</b>，1888年9月作于法国南部小城<b>阿尔勒（Arles）</b>的福鲁姆广场。它是<b>在夜里、当场对景写生</b>的——梵高在信里得意地说，他极享受「夜间在户外作画」。</p>
+    <p>笔触是<b>厚涂（impasto）＋ 方向性排笔</b>：石路一笔一笔顺着透视刷向深处，夜空用一<b>点点分开的笔触</b>点出星与光晕，能看到新印象派（修拉的点彩）的影子，但更松、更冲动。颜色多是<b>未经调灰的纯色直接并置</b>，靠观者的眼睛在远处自行「混色」——这也是它在屏幕上依然亮得跳眼的原因。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 为何动人 · 作者 <span class="en">Why · Van Gogh</span></h2>
+    <p>它动人，是因为<b>少见的暖</b>。梵高的画常有焦灼，这幅却是<b>松弛、好客、近乎幸福</b>的：一桌桌人围着灯坐着，街口透出谈笑，黑夜被驯成了一床暖色的被。渺小的灯火对抗浩大的夜空——不是悲壮，而是<b>「有人在等你回来」</b>的温度。（也有研究者把中央白衣人与周围约十二个身影读作隐藏的「最后的晚餐」，此为一种<b>争议性解读</b>，姑且备一说。）</p>
+    <p><b>文森特·梵高</b>（1853–1890），荷兰人。1888年的阿尔勒是他一生最高产、最明亮的时期：他租下「黄房子」，梦想办一个艺术家公社，盼着高更南下同住。短短约十五个月他画了两百多幅，生前却几乎一画未售。今天，这爿咖啡馆仍在阿尔勒营业，被刷成同样的金黄，叫「<b>梵高咖啡馆</b>」。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 配色 · 穿搭可借鉴 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>梵高配色公式：</b>钴蓝／藏青（约50%）＋ 金黄／藏红花（约30%）＋ 暖橙锈红＆橄榄绿点缀（约20%），<b>全程零黑色</b>。</li>
+      <li><b>穿搭翻译：</b>把<b>藏青当「夜」</b>做大面积底（牛仔、海军蓝针织），再用一件<b>藏红花／芥末黄</b>当「那盏灯」做焦点，驼／锈色点缀，橄榄绿做过渡，米白当侍者高光。暖色只放一处、面积要小，才跳得动人。</li>
+      <li><b>想「显高级」记一条：</b>要让一个颜色更亮，就把它的<b>互补色</b>放它旁边（黄配蓝、橙配蓝）；要让「暗」更耐看，<b>用深蓝紫代替黑</b>——更柔、更有空气。</li>
+      <li><b>家居／空间借走：</b>暖光灯 ＋ 冷色墙＝瞬间有「咖啡馆的深度与温度」，这正是餐厅、酒馆用暖黄灯打冷调环境的底层逻辑。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：Vincent van Gogh《夜间露天咖啡座》1888 · 公有领域<br>
+    来源：Kröller-Müller Museum, Otterlo / Wikimedia Commons · 版权归原作者
+  </footer>
+</div>
+</body>
+</html>

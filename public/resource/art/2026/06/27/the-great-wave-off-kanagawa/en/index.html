@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art· The Great Wave off Kanagawa — Hokusai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --ink:#1b2630; --ink-soft:#3c4a57; --ink-faint:#74808c;
+ --prussian:#003153; --indigo:#1e4d74; --wave:#4e82b0; --foamblue:#a7c5dd;
+ --cream:#e8dcc0; --ochre:#b58e5b; --void:#0c1c2e; --foam:#f3efe6;
+ --paper:rgba(248,251,255,.55); --line:rgba(20,40,60,.14);
+ }
+ *{box-sizing:border-box;margin:0;padding:0}
+ html{scroll-behavior:smooth}
+ body{
+ font-family:'Noto Sans SC',system-ui,sans-serif;
+ color:var(--ink); line-height:1.8; letter-spacing:.005em;
+ background:#e4ecf2; min-height:100vh; overflow-x:hidden;
+ }
+.field{position:fixed;inset:0;z-index:-1;
+ background:
+ radial-gradient(46rem 46rem at 18% 10%, rgba(0,49,83,.40), transparent 60%),
+ radial-gradient(40rem 40rem at 84% 24%, rgba(78,130,176,.38), transparent 62%),
+ radial-gradient(50rem 50rem at 30% 92%, rgba(30,77,116,.32), transparent 60%),
+ radial-gradient(38rem 38rem at 82% 86%, rgba(181,142,91,.22), transparent 60%),
+ linear-gradient(160deg,#eef1ea,#dfe7ec);
+ filter:blur(46px) saturate(.95); transform:scale(1.12);
+ }
+.wrap{max-width:860px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+ header{text-align:center;margin-bottom:34px}
+.kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+ color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+ h1{font-family:'Cormorant Garamond',serif;font-weight:600;
+ font-size:clamp(2.4rem,6.4vw,4rem);line-height:1.05;letter-spacing:.01em}
+.sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+ font-size:clamp(1.05rem,2.8vw,1.5rem);color:var(--ink-soft);margin-top:8px}
+ figure{margin:34px 0 12px;border-radius:20px;overflow:hidden;
+ box-shadow:0 30px 70px -28px rgba(12,28,46,.6),0 2px 0 rgba(255,255,255,.5) inset;
+ background:var(--void)}
+ figure img{display:block;width:100%;height:auto}
+ figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+ margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+.card{
+ background:var(--paper);
+ backdrop-filter:blur(22px) saturate(1.1);-webkit-backdrop-filter:blur(22px) saturate(1.1);
+ border:1px solid rgba(255,255,255,.55);
+ border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+ box-shadow:0 18px 50px -30px rgba(12,28,46,.5),0 1px 0 rgba(255,255,255,.6) inset;
+ }
+.card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.7rem;
+ margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem;letter-spacing:.01em}
+.card h2.idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+ font-size:1.5rem;color:var(--wave);opacity:.95}
+.card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+.card p b{color:var(--ink);font-weight:500}
+.lead{font-size:1.12rem;font-family:'Cormorant Garamond',serif;line-height:1.6}
+.palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+ gap:12px;margin-top:18px}
+.sw{border-radius:13px;height:84px;display:flex;flex-direction:column;
+ justify-content:flex-end;padding:9px 11px;color:#fff;
+ font-size:.66rem;letter-spacing:.06em;line-height:1.4;
+ box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+.sw small{opacity:.82;font-size:.62rem;display:block;font-family:'Cormorant Garamond',serif;letter-spacing:.08em}
+.tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+ color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+.tips li:first-child{border-top:none}
+.tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+ border-radius:50%;background:var(--ochre);box-shadow:0 0 0 4px rgba(181,142,91,.18)}
+.tips li b{color:var(--ink);font-weight:600}
+ footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+ font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+ footer.brand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+ letter-spacing:.2em;font-size:.95rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+ <header>
+ <div class="kicker">Art· Daily Appreciation· 2026.06.27</div>
+ <h1>The Great Wave off Kanagawa</h1>
+ <div class="sub"> — the instant before the break, held forever</div>
+ </header>
+
+ <figure>
+ <img src="../source.jpg" alt="Katsushika Hokusai, The Great Wave off Kanagawa, c.1831">
+ <figcaption>Katsushika Hokusai, "The Great Wave off Kanagawa," c. 1831, polychrome woodblock print, approx. 25.7 × 37.9 cm· The Metropolitan Museum of Art (Public Domain)</figcaption>
+ </figure>
+
+ <section class="card">
+ <p class="lead">A wave is frozen forever in the instant before it breaks. Foam claws reach into the sky, three boats vanish into the trough, and sacred Mount Fuji shrinks to a small quiet triangle at the heart of the swell. This isn't a picture of the sea — it's a picture of power and fragility, and the most reproduced shade of blue on Earth.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">01</span> Composition</h2>
+ <p>The whole image is one enormous <b>asymmetric triangle</b>: the crest rears up on the left and lunges right, shattering into a row of <b>claw-like foam fingers</b> — a living thing about to strike. The diagonal of the trough drives your eye to the center, to <b>Mount Fuji</b>.</p>
+ <p>The masterstroke is a <b>visual rhyme that's also a reversal</b>: the white triangle of Fuji's distant peak is swallowed, echoed and magnified by the near foam. Through <b>forced perspective</b>, Hokusai makes the eternal sacred mountain smaller than a fleck of spray. The curl approximates a <b>logarithmic (golden) spiral</b>, and the foam breaks into smaller waves, then smaller still — a <b>self-similar, fractal</b> structure that keeps the frozen image churning. A low horizon and wide empty sky compress the tension to the last second.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">02</span> Colour &amp; Theory</h2>
+ <p>The soul of this image is a blue — <b>Prussian blue (bero-ai / "Berlin blue")</b>: a <b>synthetic pigment</b> newly imported into Japan via China, brighter, more stable and fade-resistant than traditional indigo — and cheaper. The whole <i>Thirty-Six Views</i> series was marketed on this bold imported blue.</p>
+ <p>Palette logic = <b>near-monochrome blue + warm neutral</b>. From inky base, to mid-blue, to pale spray, it's a stack of <b>analogous</b> values; the only cool/warm tension comes from the warm <b>cream sky and ochre hulls</b> — a restrained <b>complementary</b> play. The gradients are <b>hand-wiped</b> via the <b>bokashi</b> technique, and the bare <b>paper itself becomes the foam</b> — cleaner than any white pigment.</p>
+ <div class="palette">
+ <div class="sw" style="background:#003153">Prussian<small>#003153</small></div>
+ <div class="sw" style="background:#1e4d74">Indigo<small>#1E4D74</small></div>
+ <div class="sw" style="background:#4e82b0">Wave<small>#4E82B0</small></div>
+ <div class="sw" style="background:#a7c5dd;color:#1b3a52">Foam<small>#A7C5DD</small></div>
+ <div class="sw" style="background:#e8dcc0;color:#5a4e2a">Cream Sky<small>#E8DCC0</small></div>
+ <div class="sw" style="background:#b58e5b">Hull Ochre<small>#B58E5B</small></div>
+ <div class="sw" style="background:#0c1c2e">Deep Ink<small>#0C1C2E</small></div>
+ </div>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">03</span> Light &amp; Mood</h2>
+ <p>Ukiyo-e doesn't use Western chiaroscuro. No cast shadows, no fading gloom — just <b>flat color fields and a crisp outline (the key block)</b>. The "light" lives in two places: the glowing <b>cream sky</b> and the patches of <b>pure white foam</b>.</p>
+ <p>A faint warmth near the horizon reads as early morning, yet the whole feels cold, alert, breath-held. Because it's flattened, the <b>shape</b> of the wave is pushed to its limit — this is design, not realism.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">04</span> Technique &amp; Medium</h2>
+ <p>This is a <b>nishiki-e (polychrome woodblock) print</b>, published c. 1831 by Nishimuraya Yohachi. It wasn't made by one hand but by <b>a team</b>: Hokusai drew the design; a <b>carver</b> cut the outline block plus a separate cherry-wood block per color; a <b>printer</b> hand-rubbed each layer with a baren, using <b>kentō</b> registration marks to keep colors aligned.</p>
+ <p>It was a <b>mass-produced, affordable commercial print</b> — the same blocks pulled thousands of impressions (early pulls are sharpest). That's why it traveled so widely; the Met, the British Museum and many others each hold their own. It's small: about <b>25.7 × 37.9 cm</b>.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">05</span> Why It Moves Us· Hokusai</h2>
+ <p>What moves us is the <b>instant before the break</b> — the wave at its peak, not yet falling, tension maxed out. It's the <b>contrast</b>: tiny people and boats against an overwhelming sea, with even sacred Fuji demoted to a bit player — a deeply Japanese meditation on <b>impermanence (mujō) and <i>mono no aware</i></b>. And the silhouette is so simple and strong the whole world reads it instantly.</p>
+ <p><b>Katsushika Hokusai</b> (1760–1849) of Edo called himself the <b>"old man mad about painting."</b> Said to have made over 30,000 works, changed his name ~thirty times, and moved house nearly a hundred times, he created this series in his early seventies — and claimed he wouldn't truly master art until 110. The print shaped Western <i>Japonisme</i> (Monet, Van Gogh), inspired the cover of Debussy's <i>La Mer</i>, and appears on Japan's 2024 ¥1,000 banknote.</p>
+ </section>
+
+ <section class="card">
+ <h2><span class="idx">06</span> Steal This Palette</h2>
+ <ul class="tips">
+ <li><b>Hokusai's colour formula:</b> deep Prussian blue (60%) + cream/oatmeal (30%) + camel/ochre accent (10%), with <b>clean white</b> as the "foam" highlight.</li>
+ <li><b>In an outfit:</b> essentially <b>denim blue + cream + tan</b> — endlessly wearable. For graded depth, <b>layer blues of different values</b> (navy coat / mid-blue knit / pale-blue shirt) — the bokashi gradient, worn.</li>
+ <li><b>Why it works:</b> one family of analogous blues = calm; a single warm neutral = breathing room inside the cool; generous white space = it lifts the whole, just like the spray.</li>
+ <li><b>For design:</b> near-monochrome cool + one warm anchor reads quiet but with contrast. And like Hokusai — <b>leave bold empty space</b> so the main shape can speak.</li>
+ </ul>
+ </section>
+
+ <footer>
+ <div class="brand">Art</div>
+ Image: Katsushika Hokusai, "The Great Wave off Kanagawa," c.1831· Public Domain<br>
+ Source: The Metropolitan Museum of Art / Wikimedia Commons· © original creator
+ </footer>
+</div>
+</body>
+</html>

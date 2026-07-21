@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>霍尔木兹松绑，油价从 $126 跌回 $72：一场能源大退潮 · 金融</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070b16; --ink:#eef3ff; --muted:#9aa6c4;
+    --cyan:#46e0ff; --violet:#9a6cff; --amber:#ffb24a;
+    --up:#34d399; --down:#ff6b81;
+    --grad:linear-gradient(120deg,var(--cyan) 0%,var(--violet) 100%);
+    --serif:"Noto Serif SC",serif; --sans:"Inter","Noto Sans SC",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:
+      radial-gradient(1200px 900px at 8% -4%, rgba(70,224,255,.16), transparent 58%),
+      radial-gradient(1100px 1000px at 100% 8%, rgba(154,108,255,.18), transparent 60%),
+      radial-gradient(900px 800px at 80% 100%, rgba(255,178,74,.10), transparent 60%),
+      linear-gradient(165deg,#0a1326 0%,#070b16 55%,#05070f 100%);
+    background-attachment:fixed;color:var(--ink);font-family:var(--sans);
+    line-height:1.75;font-size:19px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:84px 28px 120px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;letter-spacing:.02em}
+  .brand .d{width:13px;height:13px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 6px rgba(70,224,255,.15)}
+  .brand small{color:var(--muted);font-weight:500;font-size:16px;margin-left:4px}
+  .kicker{margin-top:54px;font-size:17px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--cyan)}
+  h1{font-family:var(--serif);font-weight:900;font-size:60px;line-height:1.16;letter-spacing:-.01em;margin:18px 0 22px}
+  h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dek{font-size:23px;color:#cdd6ee;line-height:1.7}
+  .meta{margin-top:26px;font-size:16px;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap;
+    border-top:1px solid rgba(255,255,255,.1);padding-top:22px}
+  h2{font-family:var(--serif);font-weight:900;font-size:38px;margin:62px 0 22px;line-height:1.25}
+  h2 .n{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-right:14px}
+  p{margin:18px 0;color:#cdd6ee}
+  p b,strong{color:#fff;font-weight:700}
+  a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(70,224,255,.4)}
+  .glass{background:rgba(20,30,54,.5);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);
+    border:1px solid rgba(255,255,255,.13);border-radius:24px;
+    box-shadow:0 10px 40px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.16);
+    padding:34px 38px;margin:34px 0}
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin:34px 0}
+  .stat{padding:30px 30px}
+  .stat .n{font-family:var(--serif);font-weight:900;font-size:54px;line-height:1;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .n.amber{background:linear-gradient(120deg,var(--amber),#ff7a59);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .t{font-size:17px;color:var(--muted);margin-top:12px;line-height:1.5}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:30px 0}
+  .box h3{font-size:24px;margin-bottom:16px}
+  .box.bull{border-color:rgba(52,211,153,.34)} .box.bull h3{color:var(--up)}
+  .box.bear{border-color:rgba(255,107,129,.34)} .box.bear h3{color:var(--down)}
+  ul{margin:14px 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+  li{position:relative;padding-left:30px;color:#cdd6ee}
+  li::before{content:"";position:absolute;left:0;top:11px;width:13px;height:13px;border-radius:4px;background:var(--grad)}
+  .box.bull li::before{background:var(--up)} .box.bear li::before{background:var(--down)}
+  .src{font-size:16px;color:var(--muted)}
+  .src li::before{background:var(--muted);width:8px;height:8px;border-radius:50%;top:11px}
+  .disc{font-size:16px;color:var(--muted);line-height:1.7}
+  .end{margin-top:60px;border-top:1px solid rgba(255,255,255,.1);padding-top:24px;
+    font-size:15px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  @media (max-width:680px){.wrap{padding:54px 20px 90px}h1{font-size:42px}.dek{font-size:20px}
+    h2{font-size:30px}.stats,.split{grid-template-columns:1fr}}
+  @media (prefers-reduced-transparency:reduce){.glass{background:rgba(12,18,34,.96);backdrop-filter:none;-webkit-backdrop-filter:none}}
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:rgba(12,18,34,.95)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brand"><span class="d"></span>金融<small>每日深读</small></div>
+
+  <div class="kicker">大宗商品 · 地缘退潮</div>
+  <h1>霍尔木兹松绑，油价从 <span class="hl">$126 跌回 $72</span>：一场能源大退潮</h1>
+  <p class="dek">2026 年最猛烈的能源冲击，正在以同样的速度退潮。当美伊停火框架落地、海峡重新通航,布伦特原油从战时高位一路回落——这对通胀、利率和你的钱包,都不是小事。</p>
+  <div class="meta"><span>2026 年 6 月 29 日</span><span>模板 U11 · 液态玻璃</span><span>信息整理 · 非投资建议</span></div>
+
+  <h2><span class="n">01</span>发生了什么</h2>
+  <p>过去 48 小时,市场叙事的主角从"战争"切换到"退潮"。在美伊达成停火框架、海湾航运恢复的推动下,<b>布伦特原油跌至约 $72/桶</b>,创下 2 月 27 日(冲突爆发前夕)以来的最低水平。这与几个月前的画面形成强烈反差:今年 3 月 8 日,布伦特四年来首次突破 $100,峰值一度冲到约 <b>$126/桶</b>,被普遍视为<b>自 1970 年代以来对全球能源供给的最大一次中断</b>。</p>
+  <p>真正的转折点是航道的物理重启。海湾油轮重新公开穿越霍尔木兹海峡,波斯湾出口已恢复到战前约 <b>75%</b>;沙特在 Ras Tanura 港重启装船,阿联酋、科威特、卡塔尔也在增产(尽管一度受困于油轮运力不足)。6 月 27 日,美国海军主导的联合海事信息中心(JMIC)在阿曼附近<b>拓宽了一条新航道</b>,双向放行更多船只——这被解读为对伊朗"控制海峡"叙事的直接挑战。</p>
+
+  <div class="stats">
+    <div class="stat glass"><div class="n amber">$72</div><div class="t">布伦特原油现价 · 自 2 月底以来最低(峰值曾达约 $126)</div></div>
+    <div class="stat glass"><div class="n">−20%+</div><div class="t">较 2026 年春季高点的回落幅度</div></div>
+    <div class="stat glass"><div class="n amber">75%</div><div class="t">波斯湾出口已恢复至战前水平</div></div>
+    <div class="stat glass"><div class="n">&lt;$4</div><div class="t">美国汽油均价已跌回 $4/加仑以下(较冲突高峰约 −$0.65)</div></div>
+  </div>
+
+  <h2><span class="n">02</span>为什么重要:油价是通胀的"总开关"</h2>
+  <p>油价不是孤立的商品价格,它是通胀链条上游的"总开关"。当布伦特从 $126 回落到 $72,传导链条几乎立刻被点亮:</p>
+  <p>其一,<b>通胀预期降温</b>。能源价格下行直接压低运输、化工、出行等多个环节成本,市场对"美联储今年还要再加几次息"的担忧明显缓解。其二,<b>利率随之松动</b>:随着油价下滑,10 年期美债收益率回落至 <b>4.5% 以下</b>。其三,<b>家庭端立竿见影</b>:美国汽油均价跌回 $4/加仑下方,较冲突高峰回落约 $0.65,等于给消费者发了一笔隐形"减税"。</p>
+  <p>但市场的反应并不是简单的"普涨"。便宜的油同时意味着<b>能源股盈利预期下修</b>——在停火预期升温的过程中,能源板块反而走弱。叠加大型科技股因 AI 资本开支与估值担忧而回调,标普 500 在 6 月整体仍累跌约 <b>3%</b>。换句话说,这是一次结构性的"换挡",而非全面风险偏好回升。</p>
+
+  <h2><span class="n">03</span>多空两面:谁在受益,谁该警惕</h2>
+  <div class="split">
+    <div class="box bull glass">
+      <h3>◆ 利多(顺风)</h3>
+      <ul>
+        <li>油价下行→通胀压力缓解</li>
+        <li>债券收益率回落,利好成长股估值</li>
+        <li>家庭加油、企业运输成本下降</li>
+        <li>消费、航空、广义股指潜在受益</li>
+        <li>给美联储更多观望空间</li>
+      </ul>
+    </div>
+    <div class="box bear glass">
+      <h3>◆ 风险(警惕)</h3>
+      <ul>
+        <li>停火脆弱:特朗普曾指控伊朗违约</li>
+        <li>分析师认为伊朗仍握有封锁海峡的实际能力</li>
+        <li>能源板块盈利与股价承压</li>
+        <li>实物供给恢复需要时间</li>
+        <li>单次油轮事件即可让价格瞬间反弹</li>
+      </ul>
+    </div>
+  </div>
+  <p>一个常被忽视的"认知差":华盛顿宣称海峡已重新开放,但区域能源分析师普遍认为,无论协议怎么写,<b>伊朗对霍尔木兹的实际威慑力依然存在</b>。这一"纸面 vs 现实"的落差,正是市场尚未完全消化的尾部风险。</p>
+
+  <h2><span class="n">04</span>这对普通人意味着什么</h2>
+  <p>把它放进更长的镜头里:世界银行预测布伦特原油 <b>2026 年均价约 $86/桶</b>,假设供给在四季度前逐步恢复,<b>2027 年或回落至 $70</b>。趋势是向下的,但路径会很颠簸。</p>
+  <p>对个人而言,有三点值得记住:① 油价回落是真实的<b>通胀顺风</b>,会反映在加油、机票和部分日用品上;② 这种顺风<b>建立在一个脆弱的停火之上</b>,地缘新闻仍会制造剧烈波动;③ 与其押注油价方向,不如把它当成一个观察通胀与利率走向的<b>领先指标</b>。便宜的油是顺风,脆弱的停火是尾部风险——两件事同时成立。</p>
+
+  <div class="glass">
+    <h3 style="font-family:var(--serif);font-size:22px;margin-bottom:10px">一句话收尾</h3>
+    <p style="margin:0">能源大退潮给了市场和家庭一段喘息,但霍尔木兹的"安全"仍写在沙上。把油价当温度计,而不是赌注。</p>
+  </div>
+
+  <h2><span class="n">05</span>资料来源</h2>
+  <ul class="src">
+    <li>CNBC — <a href="https://www.cnbc.com/2026/06/23/stock-market-today-live-updates.html">Stock market news (June 24, 2026)</a></li>
+    <li>Al Jazeera — <a href="https://www.aljazeera.com/economy/2026/6/18/oil-prices-fall-stocks-rally-as-us-iran-sign-framework-to-end-war">Oil prices fall, stocks rally as US, Iran sign framework to end war</a></li>
+    <li>CNBC — <a href="https://www.cnbc.com/2026/06/19/oil-prices-wti-brent-crude-us-iran-deal-strait-hormuz-shipping-recovery.html">Brent rises after U.S.–Iran peace talks postponed</a></li>
+    <li>World Bank Blogs — <a href="https://blogs.worldbank.org/en/opendata/strait-of-hormuz-disruption-sends-oil-prices-surging">Strait of Hormuz disruption sends oil prices surging</a></li>
+    <li>Wikipedia — <a href="https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis">2026 Strait of Hormuz crisis</a></li>
+    <li>U.S. EIA — <a href="https://www.eia.gov/outlooks/steo/pdf/steo_full.pdf">June 2026 Short-Term Energy Outlook</a></li>
+  </ul>
+
+  <p class="disc">⚠️ 免责声明:本文为公开信息的整理与科普,<b>不构成任何投资、税务或交易建议</b>。文中数据来自上述公开报道,会随行情与官方修订而变动;油价与地缘局势波动剧烈,个人决策请独立核实并咨询持牌专业人士。</p>
+
+  <div class="end"><span>金融 · 每日深读</span><span>2026.06.29 · U11</span></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 新大桥骤雨 · 把雨丝刻进版画里</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211d1a; --ink-soft:#4a4137; --ink-faint:#8c8375;
+    --gold:#c9a227; --rust:#a13a2a; --soot:#16293c; --slate:#2f5878;
+    --paper:rgba(250,250,246,.64); --line:rgba(23,21,18,.16); --void:#16293c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#c7d6da; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(47,88,120,.32), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(201,162,39,.26), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(22,41,60,.34), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(161,58,42,.20), transparent 60%),
+      linear-gradient(160deg,#e3e9e7,#b7c9cf);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(23,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(23,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--rust);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(161,58,42,.3)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.10</div>
+    <h1>新大桥骤雨 · 把雨丝刻进版画里</h1>
+    <div class="sub">歌川广重《名所江户百景》· 大桥安宅之骤雨，1857年</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="歌川广重浮世绘《大桥安宅之骤雨》，深蓝色渐变天空中密布倾斜的黑色雨线，一座木桁架大桥从左下角斜向切入画面右上角，桥上五名行人撑伞、披蓑衣顶雨疾行，远处江面上一位船夫撑一只木筏，画面右上角是黄色与红色的题字色块">
+    <figcaption>《名所江户百景》之《大桥安宅之骤雨》· 歌川广重，1857年（安政四年）· 大判锦绘，多色木版画 · 美国大都会艺术博物馆等机构藏，公有领域</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">没有闪电，没有雷声，广重只用几百条细细的斜线，就把一场突如其来的暴雨钉在了纸上。桥上的人弓着背、揣着伞往前挤，桥下的船夫却像什么都没发生——这张诞生于1857年的木版画，后来被梵高原样临摹进了油画里，成了浮世绘走向西方现代艺术的一扇窗。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 一座桥，切成两半的世界 <span class="en">Composition</span></h2>
+    <p>大桥以陡峭的对角线从画面左下角一路斜切向右上角，桥身在下边缘和右边缘都被直接"切断"——这种毫不犹豫的裁切在1857年是相当激进的构图，比后来风靡欧洲的"快照式"摄影构图早了半个世纪，也正是这种大胆的不完整感，让浮世绘之后深深迷住了印象派画家。</p>
+    <p>桥上五个人物被安排成疏密不一的两组：近景一把黑伞下并排的两人步伐最急，中景独行的一人、远处并肩的两人依次拉开纵深，视线沿着桥面的木纹节奏一步步被送向桥的尽头，也送向那片吞没了地平线的深蓝雨幕。</p>
+    <p>桥下江面上，一位船夫撑着长篙立在窄筏中央，是全画唯一的水平参照物——他的存在悄悄提醒你：桥面上的仓皇，只是这场雨给行人的感受，江水本身依旧不紧不慢地流着。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 一次渐变染色里的天气 <span class="en">Color Theory</span></h2>
+    <p>整张画的色域窄得惊人——从桥面地面近乎裸色的米白，到江面的浅灰蓝，再到天空顶部近乎墨黑的深靛蓝，全部压在同一个蓝灰色系里，靠明度的连续推移而非色相的跳跃来制造纵深感，这正是"少色也能出画面"的一个极端范例。</p>
+    <p>在这套克制的冷色底子上，只安放了两处不成比例的暖色：行人斗笠与蓑衣上那一点浓烈的稻草黄，以及画面右上角题字色块里的朱红印章色——冷底暖点的配比被压缩到极致，反而让这两小块暖色异常显眼，成了视线在雨幕里唯一能歇脚的地方。</p>
+    <p>雨线本身不是"画"上去的颜色，而是用另一块专门雕刻的版单独套印的细线——版画术语称之为"毛雨"：一版粗而长，压在天空区域；一版细而短，叠印在近景桥面上，两版错位叠加，才做出雨丝由远及近逐渐变粗、变密的错觉。</p>
+    <div class="palette">
+      <div class="sw" style="background:#16293c;color:#e7edef">藍摺渐变靛蓝<small>#16293C · 雨幕天顶</small></div>
+      <div class="sw" style="background:#b9d3d9;color:#213240">江面浅灰蓝<small>#B9D3D9 · 水面留白</small></div>
+      <div class="sw" style="background:#c9a227;color:#3a2c0d">稻草笠赭黄<small>#C9A227 · 斗笠蓑衣</small></div>
+      <div class="sw" style="background:#a13a2a;color:#f4e9e2">题字朱印红<small>#A13A2A · 落款色块</small></div>
+      <div class="sw" style="background:#6b4a2f;color:#f1e8dd">桥木栗棕<small>#6B4A2F · 木桁架</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 技法与历史 · "晕染"里的江户天气预报 <span class="en">Technique & History</span></h2>
+    <p>天空那片从深靛蓝到近乎透明的过渡，靠的是浮世绘独有的"晕染"（暈し，bokashi）刷版技法——刻版师傅在同一块木版上，用蘸水量逐渐减少的刷子手工拖出深浅渐变，而非依赖多块色版叠印，这也是为什么每一张早期原版拓印，天空的渐变位置都会有细微差异。</p>
+    <p>这幅画属于《名所江户百景》系列，是广重晚年（1856–1858年）的收官之作，一共120余幅，由版元鱼屋栄吉出版。系列尚未完稿，广重就于1858年死于那一年席卷江户的霍乱大流行，最后几幅由弟子二代广重补齐。</p>
+    <p>画中的"新大桥"横跨隅田川，是当时江户城东连接深川的重要桥梁之一，"安宅"则是桥畔一处地名——这类"地名+天气/时刻"的组合标题，是《名所江户百景》全系列共用的命名逻辑，每一幅都在记录一个具体地点在某个瞬间的光景。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 一场雨，跨海跨了一个画派 <span class="en">Why It Moves Us</span></h2>
+    <p>这张画最打动人的地方，或许是它精准地捕捉了一种毫无地域差别的瞬间：任何人被雨突然浇到时，那种缩着肩膀、加快脚步的本能反应，广重用几个简化到极致的剪影就说尽了——这是浮世绘美学里"物哀"的日常版本：转瞬即逝的天气，被永远定格。</p>
+    <p>1887年，梵高在巴黎几乎逐笔临摹了这幅画，画成油画《雨中桥（仿广重）》，甚至连雨线和边框上的汉字都照描不误——这是浮世绘冲击西方"日本主义"（Japonisme）浪潮里最直接的证据之一，也是印象派、后印象派画家（梵高、莫奈、德加）从广重、北斋这批浮世绘大师身上学走大胆构图与平面色块的起点。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">Background</span></h2>
+    <p>歌川广重（1797–1858）是江户末期浮世绘"风景画"（風景画）的集大成者，与葛饰北斎并称浮世绘风景两大宗师。他早年出身消防员世家，后转投浮世绘门下，凭《东海道五十三次》系列一举成名，此后一生几乎都在描绘江户与东海道沿途的四季风物。</p>
+    <p>《名所江户百景》是他生涯末期投入心血最重的系列，也是他留给后世最完整的江户城市影像档案；他去世后不久，日本就在明治维新中迅速西化，画中记录的许多桥梁、街景早已不复存在，这批版画因此也成了消失的江户城仅存的视觉证词之一。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 渐变、留白与一点暖色 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>用渐变代替多色堆砌：</b>整张画只用一个色相的深浅变化就撑起了天空的纵深，做设计配色时，与其急着加新颜色，不如先试试同一色相拉满明度区间。</li>
+      <li><b>冷色画面里，暖色只需要一点点：</b>稻草黄和朱红加起来占比不到画面的5%，却是视线唯一的落点——留住大面积的克制，比到处加亮色更容易让重点突出。</li>
+      <li><b>大胆裁切，制造"正在发生"的临场感：</b>桥身被边框直接切断，反而比把桥完整框进画面更有现场感——构图时不必强求把主体"框全"，露出一角常常更有张力。</li>
+      <li><b>用重复线条制造动态：</b>几百条几乎平行的雨线本身就是最简单的"动效"，密集的重复直线能在静止的画面里制造出风雨的速度感，这个技巧在平面设计和插画里同样好用。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：《名所江户百景·大桥安宅之骤雨》· 歌川广重，1857年 · 公有领域（作者逝世超过150年）<br>
+    来源：Wikimedia Commons · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 偷草莓的画眉 — 威廉·莫里斯 ·《草莓贼》1883年</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211d1a; --ink-soft:#453f37; --ink-faint:#8a8175;
+    --gold:#c9836b; --rust:#9c3a3a; --soot:#1f2b52; --slate:#6f6b3f;
+    --paper:rgba(250,250,246,.64); --line:rgba(23,21,18,.16); --void:#1f2b52;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#c9c0ae; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(201,131,102,.42), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(156,58,58,.24), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(31,43,82,.30), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(111,107,63,.26), transparent 60%),
+      linear-gradient(160deg,#e4ddce,#c3baa4);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(23,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(23,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--rust);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(201,131,102,.3)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.07</div>
+    <h1>偷草莓的画眉</h1>
+    <div class="sub">《草莓贼》Strawberry Thief — 威廉·莫里斯，1883年，英国</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="威廉·莫里斯《草莓贼》纹样，深靛蓝底色上，珊瑚色画眉鸟叼着草莓，穿梭在钴蓝藤蔓与月季之间，镜像对称满铺构图">
+    <figcaption>威廉·莫里斯，《草莓贼》，设计于1883年，靛蓝拔染印花棉布 · 伦敦维多利亚与阿尔伯特博物馆（V&A）等地藏有原件 · Wikimedia Commons（公有领域）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">一整片深靛蓝的布面上，画眉鸟叼着草莓穿梭在藤蔓与月季之间——这是威廉·莫里斯蹲守了好几个季度才等到的画面：那些偷吃他家草莓的鸟，被他原样"逮"进了这块布里。这件1883年注册的纹样，是纺织史上少数"从没有停产过"的图案之一——140多年后的今天，你依然能在Morris &amp; Co.的官网上把它买回家做窗帘。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 镜像对称与"密不透风"的满铺 <span class="en">Composition</span></h2>
+    <p><b>轴对称的呼吸感</b>：画面以中轴线镜像对称，两只画眉相对而立，脚下的草莓、头顶的月季一一呼应，视觉上像一面被展开的折扇——这种对称让重复的织物图案在被裁剪、拼接成窗帘或沙发套时，始终能找到一个"正中"的落点。</p>
+    <p><b>维多利亚式的"密集恐惧"美学</b>：莫里斯坚持满版铺陈——藤蔓、叶片、花朵层层叠叠盖满每一寸背景，几乎找不到一块纯色留白。这是当时纺织设计的典型野心：图案越密集，越能体现工艺与用料的"值回票价"。</p>
+    <p><b>密而不乱</b>：靠深浅两层蓝把背景和前景分出层次——深靛蓝地色托底，浅钴蓝藤蔓在其上勾出第二层轮廓，画眉与草莓的暖色系被单独"架"在最上层，视线不会在密集的枝叶里迷路。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 靛蓝与珊瑚橙的互补震动 <span class="en">Color Theory</span></h2>
+    <p>全图的色彩逻辑其实很简单：一对互补色——靛蓝（冷、蓝紫调）与珊瑚橙/砖红（暖、橙红调）。色相环上正对着的两种颜色放在一起会产生"越看越亮"的视觉振动感，这也是为什么这块布即使隔着房间看，也绝不会"糊"成一团蓝。</p>
+    <p>莫里斯没有让暖色铺满画面，而是只用在画眉的羽毛、草莓果实、少数花芯上——暖色面积不到全图的一成五，却因为和大面积冷色形成强对比，成为视线第一时间落脚的地方。这是"小面积高饱和暖色 + 大面积低饱和冷色"的经典配色公式。</p>
+    <div class="palette">
+      <div class="sw" style="background:#1f2b52;color:#e8e2d3">靛蓝地色<small>#1F2B52 · 底布</small></div>
+      <div class="sw" style="background:#7c8fc4;color:#1f2b52">钴蓝藤蔓<small>#7C8FC4 · 卷草纹</small></div>
+      <div class="sw" style="background:#6f6b3f;color:#f2ead9">橄榄藤叶<small>#6F6B3F · 叶片</small></div>
+      <div class="sw" style="background:#c9836b;color:#3d2110">珊瑚知更<small>#C9836B · 画眉</small></div>
+      <div class="sw" style="background:#9c3a3a;color:#f2ead9">草莓緋红<small>#9C3A3A · 果实</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 技法与历史 · 一块布要染一个月的"靛蓝拔染" <span class="en">Technique & History</span></h2>
+    <p>"草莓贼"用的是当时最难驾驭的印花工艺之一：靛蓝拔染法（indigo discharge printing）。工序是先把整匹布染成实心的深蓝，再用刻好图案的木版蘸漂白剂把需要显色的区域"拔"掉底色，最后再用其他木版把黄、红、绿等颜色一层层套印回去——一块布，光是拔色、套色、水洗、晾晒往返下来，最长要花整整一个月。</p>
+    <p>莫里斯为了掌握这项工艺，前后花了近六年时间在自己位于萨里郡的梅顿修道院工坊（Merton Abbey Workshops）反复试验。他对天然靛蓝染料格外执着，坚决抵制当时已经普及、更廉价快捷的合成苯胺染料，理由是合成染料的颜色"廉价而刺眼，经不起时间"。</p>
+    <p>图案的灵感直接来自生活：莫里斯在自己位于科茨沃尔德的家——凯尔姆斯科特庄园（Kelmscott Manor）——种了一片草莓，却总被画眉鸟偷吃，他索性把这个"作案现场"原样画进了纹样里，画眉低头啄食的姿态写实得几乎像一份"田野观察笔记"。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 一个从没下架过的图案 <span class="en">Why It Moves Us</span></h2>
+    <p>"草莓贼"是纺织史上少见的、从1883年设计出来后就再没停产过的图案之一——Morris &amp; Co.至今仍在按当年的靛蓝拔染古法生产限量版本，V&amp;A博物馆也收藏着一件1883年前后印制的原件（编号T.586-1919）。</p>
+    <p>它动人的地方在于：一块布是静止的，图案是重复的，画眉的姿势也是定格的——但互补色的震动感、镜像构图带来的呼吸感，加上"偷草莓"这个带着生活气与一点顽皮的小故事，让这块布看起来像是在轻轻"动"。这恰恰是装饰艺术最难的地方：在没有叙事时间线的静态重复图案里，做出"活"的错觉。140年来，从中产阶级的客厅窗帘到今天的丝巾与联名单品，这只偷草莓的画眉几乎从未真正离开过大众视野——它证明了一件好的装饰设计，可以比任何一场潮流活得都长。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">The Artist</span></h2>
+    <p>威廉·莫里斯（William Morris，1834–1896），英国设计师、诗人、印刷家与早期社会主义活动家，工艺美术运动（Arts and Crafts Movement）的核心人物。他反对工业革命后机器批量生产带来的粗糙装饰，主张"家里不该放任何你不知道有用、或不相信它美的东西"。1861年他与友人共同创立室内装饰设计公司"莫里斯商行"（Morris &amp; Co.），一生设计逾五十种壁纸与纺织纹样，几乎全部取材于他亲手打理的花园与英国乡野植物。他于1896年在伦敦去世，而"草莓贼"至今仍是Morris &amp; Co.最畅销的经典款之一。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 图案与配色实操点 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>深色地色能"收纳"复杂图案：</b>如果设计元素多、细节密，先给一个足够深、足够统一的地色（深蓝、深绿、墨黑），能瞬间让一堆散乱元素显得"高级"而不是"乱"。</li>
+      <li><b>互补色只用在主角身上：</b>想让画面有记忆点，不需要把暖色铺满——挑一两个真正想让人记住的元素（一只鸟、一个logo），把全图仅有的高饱和暖色都留给它。</li>
+      <li><b>镜像对称是最快的"高级感"捷径：</b>把任意一组元素做左右镜像重复，视觉上立刻会显得工整、有仪式感，这也是纹章、宗教艺术、奢侈品Logo最常用的构图诀窍之一。</li>
+      <li><b>让图案"讲一个真实的小故事"：</b>比起纯抽象几何，一个来自生活观察的具体场景（哪怕只是"鸟偷吃草莓"这种小事），会让重复图案有情绪落点，不容易腻。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：威廉·莫里斯，《草莓贼》，设计于1883年，靛蓝拔染印花棉布 · 原件藏于伦敦维多利亚与阿尔伯特博物馆（V&A，编号T.586-1919）等地<br>
+    来源：Wikimedia Commons · 原设计已超过版权保护期，进入公有领域 · 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

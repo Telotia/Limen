@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术 · 布拉诺 · 雾里认家的颜色 — 布拉诺岛彩色运河</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#231f1a; --ink-soft:#4a443b; --ink-faint:#8f887a;
+    --gold:#d9714f; --rust:#d9714f; --soot:#22384a; --slate:#3e7a96;
+    --paper:rgba(250,250,246,.64); --line:rgba(23,21,18,.16); --void:#22384a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC',system-ui,sans-serif;
+    color:var(--ink); line-height:1.85; letter-spacing:.01em;
+    background:#c9d8de; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(217,113,79,.28), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(62,122,150,.30), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(34,56,74,.24), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(227,185,60,.30), transparent 60%),
+      linear-gradient(160deg,#e9ecdf,#bcd2d8);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.2;letter-spacing:.02em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(23,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.82rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.04em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(23,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Noto Serif SC',serif;font-weight:600;font-size:1.32rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--rust);opacity:.95}
+  .card h2 .en{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.95rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.06rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.66rem;letter-spacing:.04em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.6rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(217,113,79,.3)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.8rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.05em;line-height:1.9}
+  footer .brand{font-family:'Noto Serif SC',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.74rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">艺术 · 每日赏析 · 2026.07.09</div>
+    <h1>布拉诺 · 雾里认家的颜色</h1>
+    <div class="sub">运河边的糖果色小屋 — 布拉诺岛，威尼斯潟湖，意大利</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="布拉诺Rio Giudecca运河两岸排列着柠檬黄、鼠尾草绿、珊瑚粉、钴蓝等高饱和色小屋，画面深处是圣马丁教堂明显倾斜的钟楼，平静水面倒映出整条街道的颜色，近景是一排系船木桩">
+    <figcaption>布拉诺，Rio Giudecca 运河与圣马丁教堂斜塔 · 摄影：Kallerna，2024年12月11日 · Wikimedia Commons（CC BY-SA 4.0）</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">没有一位建筑师，也没有一份统一的色卡，布拉诺却拼出了全世界最经得起放大看的一条彩色运河——每一栋屋子归属不同的人家，却在几百年间被同一套不成文的规矩管束着：想换颜色，得先向当地政府报批，而且不能撞上隔壁那家祖传的色号。结果是一整条街，浓烈得像打翻的糖果盒，却诡异地和谐——这背后，其实是一套比想象中严谨得多的色彩秩序。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> 构图 · 运河本身就是引导线 <span class="en">Composition</span></h2>
+    <p>运河是这张照片最诚实的引导线：两岸屋墙笔直地把视线夹向画面深处，最终撞上那座明显倾斜的圣马丁教堂钟楼——它不偏不倚落在画面右侧三分线附近，用一点点"歪"打破了运河笔直带来的规整感，成为整张照片唯一的动态焦点。</p>
+    <p>前景一排排系船的木桩（briccole）以近乎等距的节奏刺出水面，像五线谱上的音符，把视线一节节送向远方，也把原本空荡的水面切割出有呼吸感的前后层次。</p>
+    <p>平静的运河把两岸建筑完整地复刻成一面倒影，色彩因此被"用了两次"——整条街在画面下半部又被温柔地晕开、拉长，构图因此多了一条隐藏的对称轴。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> 色彩 · 撞色的秩序 <span class="en">Color Theory</span></h2>
+    <p>每一栋房子被漆成与邻居截然不同、但饱和度相近的颜色——柠檬黄贴着钴蓝，鼠尾草绿挨着珊瑚粉——这正是谢弗勒尔"同时对比"定律的活教材：两种强对比色紧挨在一起时，会互相把对方的饱和度"借"得更高，柠檬黄旁边的蓝会显得比它单独存在时更蓝、更冷。</p>
+    <p>但整条街并不闹，因为所有颜色都被压在同一个中等明度的区间里，屋顶统一的赤陶橙、门窗统一的雪白木框，像乐谱里反复出现的同一个和弦，把满街的高饱和色安全地"框"在了一套秩序里，不至于杂乱刺眼。</p>
+    <div class="palette">
+      <div class="sw" style="background:#a8cbe0;color:#213240">潟湖天光蓝<small>#A8CBE0 · 冬日晴空</small></div>
+      <div class="sw" style="background:#e3b93c;color:#3d2e0f">蛋黄赭黄<small>#E3B93C · 临河屋墙</small></div>
+      <div class="sw" style="background:#8fae79;color:#233018">鼠尾草绿<small>#8FAE79 · 相邻民居</small></div>
+      <div class="sw" style="background:#e0836a;color:#3d1f14">珊瑚橘粉<small>#E0836A · 街角房屋</small></div>
+      <div class="sw" style="background:#b5502f;color:#f2e8d9">陶土屋瓦棕<small>#B5502F · 统一屋顶色</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> 光影与历史 · 一套写进制度里的颜色 <span class="en">Light & History</span></h2>
+    <p>照片拍摄于12月一个晴朗傍晚（摄影师记录的时间是2024年12月11日），低角度的冬日暖阳斜斜扫过屋墙，把本就浓烈的色块又镀上一层金橙色调，同时在墙面转角处拉出成片的蓝紫色阴影——暖墙冷影，恰好又是一组互补色的天然对照。</p>
+    <p>布拉诺的房子从来不是"随便刷刷"：岛上的居民世代要向当地政府申请获批之后才能给自家外墙上色，而且不少屋子的颜色是被历史记录"锁定"的——换句话说，你现在看到的每一面墙，颜色配方可能已经在同一块地基上，被刷了几百年。</p>
+    <p>这座醒目倾斜的钟楼属于圣马丁教堂，倾斜早在几个世纪前就已存在（地基是威尼斯潟湖典型的松软淤泥），如今已成了布拉诺自己的"比萨斜塔"，也是这条运河尽头唯一挺立的地标。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> 为何动人 · 美是生存的副产品 <span class="en">Why It Moves Us</span></h2>
+    <p>最广为流传的说法是：布拉诺的渔民常年要在潟湖大雾里划船回家，妻子们把自家外墙漆成一眼就能认出的颜色，好让丈夫在浓雾里循着色块摸回自己的门——一个纯粹为了"生存需要"而诞生的办法，几百年后活成了全世界最上镜的街道。</p>
+    <p>最打动人的，或许不是颜色本身，而是这份"美"从来不是设计出来给人看的：画面里散步的行人、系在门口的船、晾在窗边的一角布——这条运河至今仍是有人在里面生活、系船、买菜的真实街道，绚烂只是这些普通日子的副产品。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> 作者背景 <span class="en">Background</span></h2>
+    <p>布拉诺（Burano）是威尼斯潟湖里的一座小渔岛，距离主岛威尼斯约7公里，自16世纪起就以精细的"布拉诺针绣花边"（merletto di Burano）闻名欧洲宫廷，岛上至今仍有一座花边博物馆。渔业与花边，才是这座岛屿真正的历史主线，色彩斑斓的房子，最初不过是渔民生活里再朴素不过的实用设计。</p>
+    <p>这张照片的拍摄者Kallerna是Wikimedia Commons上一位相当高产的芬兰摄影师志愿者，长期在全球各地拍摄地标建筑与城市风光，并以知识共享协议公开授权。这张摄于Tre Ponti桥头、望向Rio Giudecca运河的照片，已被Commons收录为"优质图片"（Quality Image）。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> 可借鉴 · 撞色公式与穿搭 <span class="en">Steal This</span></h2>
+    <ul class="tips">
+      <li><b>撞色不等于乱色，统一明度才是关键：</b>选几种饱和度、明度都接近的颜色（比如都偏"中等亮度"），即使色相天差地别，放在一起也不会显脏乱，这是布拉诺配色不"辣眼睛"的真正秘密。</li>
+      <li><b>用一个中性色"收边"：</b>布拉诺无论墙面多跳，屋顶统一是陶土橙、门窗统一是雪白——家居配色同理，主色可以大胆放开选，但踢脚线、窗框、五金件统一用同一种中性色，就能把混搭"框"住。</li>
+      <li><b>色块穿搭公式：</b>上衣一个饱和色（如芥末黄），下装换成它的邻近色或弱对比色（如豆绿、雾霾蓝），鞋包配一个中性色收尾——这正是布拉诺"一栋一色、屋顶统一收边"的穿衣版本。</li>
+      <li><b>暖光时段更偏爱高饱和色：</b>想拍出布拉诺这种浓郁的色块感，挑黄昏前一小时的斜射暖光去拍撞色场景或穿搭，暖光会让高饱和色显色更浓、层次更足。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">艺 术</div>
+    图片：布拉诺 Rio Giudecca 运河与圣马丁教堂斜塔 · 摄影：Kallerna，2024年12月11日<br>
+    来源：Wikimedia Commons（CC BY-SA 4.0，署名-相同方式共享）· 本文赏析为个人分析
+  </footer>
+</div>
+</body>
+</html>

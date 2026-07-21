@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金融 · Circle 拿下银行牌照,涨幅却被自己吃掉了一半</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#132420; --ink2:#3c5650; --muted:#6a7d78;
+    --blue:#0d9488; --blue-d:#0b5c53; --line:rgba(19,36,32,.10);
+    --up:#1a8f5e; --down:#d2453c; --card:rgba(255,255,255,.72);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink);
+    font-family:"Inter","Noto Serif SC",system-ui,sans-serif;
+    line-height:1.85; font-size:18px;
+    background-color:#eaf4f1;
+    background:
+      radial-gradient(ellipse 60% 45% at 16% 18%, oklch(0.74 0.10 180 / .55) 0%, transparent 56%),
+      radial-gradient(ellipse 50% 60% at 86% 12%, oklch(0.82 0.10 85 / .38) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 55% at 78% 88%, oklch(0.78 0.08 300 / .32) 0%, transparent 58%),
+      radial-gradient(ellipse 60% 50% at 22% 92%, oklch(0.76 0.09 145 / .34) 0%, transparent 58%),
+      #eaf4f1;
+    background-attachment:fixed;
+  }
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:soft-light;opacity:.10;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:72px 26px 120px}
+  .kicker{font-family:"Inter",sans-serif;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    font-size:13px;color:var(--blue-d);margin-bottom:18px}
+  h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(30px,5.6vw,48px);line-height:1.2;
+    margin:0 0 20px;letter-spacing:-.01em}
+  .lede{font-size:21px;color:var(--ink2);font-weight:500;margin:0 0 30px}
+  .meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-family:"Inter",sans-serif;
+    font-size:13.5px;color:var(--muted);padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:14px}
+  .meta .dot{width:5px;height:5px;border-radius:50%;background:var(--blue)}
+  h2{font-family:"Noto Serif SC",serif;font-weight:700;font-size:27px;margin:52px 0 16px;letter-spacing:-.005em;
+    display:flex;align-items:baseline;gap:12px}
+  h2 .n{font-family:"Inter",sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--blue);
+    width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;flex:none;
+    box-shadow:0 4px 14px rgba(13,148,136,.35)}
+  h3{font-size:19px;font-weight:700;margin:30px 0 8px;color:var(--ink)}
+  p{margin:0 0 18px}
+  strong{font-weight:700;color:var(--ink);background:linear-gradient(transparent 62%, rgba(13,148,136,.16) 0)}
+  .pull{font-family:"Noto Serif SC",serif;font-weight:600;font-size:23px;line-height:1.6;color:var(--blue-d);
+    border-left:4px solid var(--blue);padding:6px 0 6px 22px;margin:30px 0}
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:26px 0}
+  .stat{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.7);border-radius:16px;padding:20px 20px;
+    box-shadow:0 8px 30px rgba(19,36,32,.07)}
+  .stat .v{font-family:"Inter",sans-serif;font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1.1}
+  .stat .l{font-size:13.5px;color:var(--muted);margin-top:6px}
+  .stat.up .v{color:var(--up)} .stat.down .v{color:var(--down)}
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+  .panel{border-radius:16px;padding:22px;background:var(--card);backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.7);box-shadow:0 8px 30px rgba(19,36,32,.07)}
+  .panel h4{margin:0 0 10px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .panel.bull h4{color:var(--up)} .panel.bear h4{color:var(--down)}
+  .panel ul{margin:0;padding-left:18px;font-size:15.5px;color:var(--ink2);line-height:1.7}
+  .panel li{margin-bottom:8px}
+  .callout{background:rgba(13,148,136,.08);border:1px solid rgba(13,148,136,.22);border-radius:16px;
+    padding:22px 24px;margin:28px 0}
+  .callout .t{font-weight:700;color:var(--blue-d);margin-bottom:6px;font-size:15px;font-family:"Inter",sans-serif;
+    letter-spacing:.04em;text-transform:uppercase}
+  .disc{font-size:13.5px;color:var(--muted);background:rgba(19,36,32,.04);border-radius:14px;padding:18px 20px;
+    margin-top:40px;line-height:1.65}
+  .src{margin-top:30px;font-size:14px;color:var(--ink2)}
+  .src a{color:var(--blue-d);text-decoration:none;border-bottom:1px solid rgba(13,148,136,.3)}
+  .src li{margin-bottom:7px}
+  footer{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);
+    font-family:"Inter",sans-serif;font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
+  @media(max-width:560px){.stats,.bb{grid-template-columns:1fr}.wrap{padding:50px 20px 90px}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+  <div class="kicker">金融 · 每日深读</div>
+  <h1>Circle 拿下银行牌照,涨幅却被自己吃掉了一半</h1>
+  <p class="lede">7 月 10 日,OCC 正式批准 Circle 成立国民信托银行。股价盘中冲高 16%,收盘只剩 5%——一天之内,市场自己把叙事改了口供。</p>
+  <div class="meta">
+    <span>2026-07-11</span><span class="dot"></span>
+    <span>加密 · 监管银行化</span><span class="dot"></span>
+    <span>资讯解读,非投资建议</span>
+  </div>
+
+  <h2><span class="n">1</span>发生了什么</h2>
+  <p>7 月 10 日,美国货币监理署(OCC)向 <strong>Circle Internet Group 正式发放"国民信托银行"牌照最终批文</strong>,新实体名为 Circle National Trust——不是全牌照商业银行,不能吸收存款、不能放贷,但可以受托保管数字资产。这是 Circle 从 2025 年递交申请、当年 12 月拿到有条件批复以来,走完的最后一步。</p>
+  <p>同一批拿到条件批复的还有 Ripple、Paxos、BitGo、Fidelity Digital Assets:其中 Ripple 和 Circle 拿的是全新"de novo"联邦牌照,另外三家是把已有的州级信托牌照升级为联邦牌照。在这之前,唯一持有联邦信托牌照的加密公司只有 Anchorage Digital Bank,那还是 2021 年的事。</p>
+  <p class="pull">"消息一出,CRCL 盘中最高涨了约 16%,创近两个月最大单日涨幅;可到收盘,涨幅缩水到约 5%——当天涨出去的钱,自己吃掉了一大半。"</p>
+
+  <h2><span class="n">2</span>为什么会这样:传导机制</h2>
+  <p>这张牌照不是 Circle 主动去争取的礼物,而是<strong>2025 年 7 月生效的 GENIUS Act(美国首部联邦稳定币立法)硬性要求的作业</strong>:法律规定,大型支付稳定币发行方必须拿到 OCC 的联邦监管资质。换句话说,不申请这张牌照,长期经营 USDC 的合法性本身就有隐患——这是"必须做"而不是"想不想做"的选项。</p>
+  <p>牌照目前放行的,是给 Circle 及其关联方提供受联邦监管的数字资产托管服务,未来计划延伸到机构客户、银行、受监管的衍生品机构。但真正被外界寄予厚望的一步——<strong>把 USDC 的储备资产直接放进 OCC 的监管框架里</strong>——公司自己说了,这是"未来能力",不是现在就生效的东西。今天拿到的是门票,不是终点。</p>
+
+  <h2><span class="n">3</span>关键数字</h2>
+  <div class="stats">
+    <div class="stat down"><div class="v">+16%→+5%</div><div class="l">CRCL 盘中最高涨幅 vs. 收盘涨幅</div></div>
+    <div class="stat"><div class="v">$73.2B</div><div class="l">USDC 流通规模,行业第二</div></div>
+    <div class="stat"><div class="v">$184.1B</div><div class="l">对比:Tether USDT 流通规模</div></div>
+    <div class="stat down"><div class="v">$263→$63</div><div class="l">CRCL 过去一年从最高点到最低点</div></div>
+    <div class="stat"><div class="v">5 家</div><div class="l">2025 年 12 月同批拿到联邦信托条件批复的公司数</div></div>
+    <div class="stat up"><div class="v">$157</div><div class="l">Clear Street 目标价,较现价近乎翻倍</div></div>
+  </div>
+
+  <h2><span class="n">4</span>第二层影响:谁受益,谁受损</h2>
+  <p>牌照本身让 Circle 拿到一枚"联邦认证"的徽章,理论上能帮它把托管服务卖给更保守的机构客户——银行、受监管的衍生品交易所——这些客户过去嫌加密公司"不够正规",现在少了一个拒绝的理由。同一批拿到牌照的 Ripple 也跟着沾光,验证了"先拿牌照再扩张"这条路能走通。</p>
+  <p>真正受挤压的,是那些还没拿到联邦牌照的纯托管型加密公司,它们现在多了一个明显劣势。传统银行业协会担心另一件事:加密公司拿到"银行"这个身份标签,却不用背负银行该有的资本金和存款保险义务,是一种不对等的竞争。参议员 Elizabeth Warren 公开质疑这批牌照压根不该按《国民银行法》的标准发出去,担心的是系统性风险被悄悄外包给一批监管框架还没跟上的新玩家。</p>
+  <p>但这些都没碰到 <strong>Circle 真正的痛点</strong>。它股价从 $263 跌到 $63,不是因为监管不够正规,而是因为 Visa 和 Coinbase 联手推出的对手稳定币,正在从渠道端抢走 USDC 的流量——用户在哪个交易所、哪张卡上花稳定币,才是真正决定谁赢的变量。一张联邦信托牌照,管不了这件事。</p>
+
+  <h2><span class="n">5</span>多空双方最强论据</h2>
+  <div class="bb">
+    <div class="panel bull">
+      <h4>▲ 看多</h4>
+      <ul>
+        <li>一旦 USDC 储备真正被纳入 OCC 直接监管,这是一条大多数对手复制不了的合规护城河。</li>
+        <li>机构资金、代币化资产天然偏好"越无聊越安全"的场景,这张牌照正对准这类需求。</li>
+        <li>Clear Street 维持高目标价,赌的正是这份长期确定性眼下被市场低估。</li>
+      </ul>
+    </div>
+    <div class="panel bear">
+      <h4>▼ 看空</h4>
+      <ul>
+        <li>Mizuho 把当天涨幅评价为"过度乐观"——牌照根本没碰增长放缓的根本问题。</li>
+        <li>Wolfe Research 判断类似:战略上是好事,短期对盈利没有实质拉动。</li>
+        <li>Circle 的短板从来不是"够不够合规",而是"渠道端打不打得过 Visa 和 Coinbase"——牌照给不出答案。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2><span class="n">6</span>被忽略与被夸大的:一点批判</h2>
+  <p>当天最诚实的信号,不是那条"Circle 拿下银行牌照"的标题,而是<strong>股价从 +16% 缩水到 +5% 的那条曲线</strong>。早盘的叙事是"监管认证=利好",收盘前市场已经用脚投票改了口供:这张牌照解决的是"会不会被叫停"的尾部风险,不是"打不打得过对手"的核心问题——而后者才是把股价砍掉四分之三的真凶。</p>
+  <p>被忽视的还有 Warren 那条质疑本身。它不只是政治噪音,而是一个真实的结构性问题:一家靠手续费吃饭的加密公司,套上"信托银行"这个身份标签,系统性风险监管框架跟不跟得上?这个问题,在一片"里程碑"式的报道里几乎没人认真接过。</p>
+
+  <div class="callout">
+    <div class="t">这件事到底意味着什么</div>
+    <p style="margin:0">一张牌照可以消除"会不会被监管叫停"的尾部风险,却治不好"打不打得过对手"的增长病。市场用一天之内的涨幅回吐,替所有人把这句话说清楚了。</p>
+  </div>
+
+  <h2><span class="n">7</span>给你的一条借鉴</h2>
+  <p><strong>第一,别追"重大监管利好"新闻的开盘涨幅。</strong>等等看它在当天或第二天有没有被市场自己吃回去——这个回吐幅度,往往比标题本身更诚实地告诉你,这条消息到底有没有碰到真问题。</p>
+  <p><strong>第二,把"合规许可"和"竞争壁垒"分开看。</strong>牌照能拿掉的是"被叫停"的尾部风险,拿不走的是渠道、用户习惯、网络效应这些真正决定谁赢的东西。看到一条"获批"新闻时,先问一句:它解决的是不是正在真正拖累这只股票的那个问题。</p>
+
+  <div class="disc">
+    <strong>免责声明:</strong>本文为公开信息的整理与解读,仅供学习与一般参考,不构成任何投资建议或买卖要约。所涉数据、价格以官方与原始来源为准,可能随时变动。投资有风险,任何决策请自行核实并对自己负责。
+  </div>
+
+  <div class="src">
+    <strong>主要来源</strong>
+    <ul>
+      <li><a href="https://www.circle.com/pressroom/circle-receives-final-occ-approval-to-establish-national-trust-bank">Circle Pressroom — Circle Receives Final OCC Approval to Establish National Trust Bank</a></li>
+      <li><a href="https://www.coindesk.com/business/2026/07/10/circle-secures-u-s-trust-bank-approval-in-crypto-expansion">CoinDesk — Circle Secures U.S. Trust Bank Approval in Crypto Expansion</a></li>
+      <li><a href="https://www.americanbanker.com/news/circle-is-granted-a-trust-bank-charter-from-the-occ">American Banker — Circle Is Granted a Trust Bank Charter From the OCC</a></li>
+      <li><a href="https://www.tradingkey.com/analysis/stocks/us-stocks/262023424-circle-gets-an-occ-bank-charter-mizuho-see-marketreaction-is-overly-optimistic-tradingkey">TradingKey — Circle Gets an OCC Bank Charter; Mizuho Sees Market Reaction as Overly Optimistic</a></li>
+      <li><a href="https://247wallst.com/investing/2026/07/10/circle-jumps-13-on-occ-trust-bank-approval-coinbase-and-strategy-gain-5-as-bitcoin-bounces/">24/7 Wall St. — Circle Jumps on OCC Trust Bank Approval</a></li>
+    </ul>
+  </div>
+
+  <footer><span>金融 · 每日深读</span><span>2026-07-11</span></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art · Burano: Painted So You Could Find Your Way Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#231f1a; --ink-soft:#4a443b; --ink-faint:#8f887a;
+    --gold:#d9714f; --rust:#d9714f; --soot:#22384a; --slate:#3e7a96;
+    --paper:rgba(250,250,246,.64); --line:rgba(23,21,18,.16); --void:#22384a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink); line-height:1.8; letter-spacing:.01em;
+    background:#c9d8de; min-height:100vh; overflow-x:hidden;
+  }
+  .field{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(48rem 48rem at 14% 8%, rgba(217,113,79,.28), transparent 60%),
+      radial-gradient(42rem 42rem at 90% 14%, rgba(62,122,150,.30), transparent 62%),
+      radial-gradient(40rem 40rem at 86% 92%, rgba(34,56,74,.24), transparent 60%),
+      radial-gradient(50rem 50rem at 18% 92%, rgba(227,185,60,.30), transparent 60%),
+      linear-gradient(160deg,#e9ecdf,#bcd2d8);
+    filter:blur(48px) saturate(1); transform:scale(1.12);
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,40px) 90px}
+  header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:500;margin-bottom:18px}
+  h1{font-family:'Fraunces',serif;font-weight:700;
+    font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.2;letter-spacing:.01em}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink-soft);margin-top:10px}
+  figure{margin:34px 0 12px;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 70px -28px rgba(23,21,18,.55),0 2px 0 rgba(255,255,255,.4) inset;
+    background:var(--void)}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.8rem;color:var(--ink-faint);text-align:center;
+    margin-top:14px;font-family:'Cormorant Garamond',serif;letter-spacing:.03em}
+  .card{
+    background:var(--paper);
+    backdrop-filter:blur(22px) saturate(1.05);-webkit-backdrop-filter:blur(22px) saturate(1.05);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:20px;padding:clamp(22px,4vw,38px);margin-top:22px;
+    box-shadow:0 18px 50px -30px rgba(23,21,18,.45),0 1px 0 rgba(255,255,255,.55) inset;
+  }
+  .card h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.28rem;
+    margin-bottom:6px;display:flex;align-items:baseline;gap:.6rem}
+  .card h2 .idx{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.4rem;color:var(--rust);opacity:.95}
+  .card h2 .sec{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-weight:500;font-size:.9rem;color:var(--ink-faint);margin-left:auto}
+  .card p{margin-top:12px;color:var(--ink-soft);font-weight:300}
+  .card p b{color:var(--ink);font-weight:500}
+  .lead{font-size:1.04rem}
+  .palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+    gap:12px;margin-top:18px}
+  .sw{border-radius:13px;height:96px;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:9px 11px;
+    font-size:.64rem;letter-spacing:.02em;line-height:1.4;
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+  .sw small{opacity:.85;font-size:.58rem;display:block}
+  .tips li{list-style:none;padding:11px 0 11px 26px;position:relative;
+    color:var(--ink-soft);font-weight:300;border-top:1px solid var(--line)}
+  .tips li:first-child{border-top:none}
+  .tips li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(217,113,79,.3)}
+  .tips li b{color:var(--ink);font-weight:600}
+  footer{text-align:center;margin-top:40px;font-size:.78rem;color:var(--ink-faint);
+    font-family:'Cormorant Garamond',serif;letter-spacing:.04em;line-height:1.9}
+  footer .brand{font-family:'Fraunces',serif;color:var(--ink-soft);
+    letter-spacing:.3em;font-size:.72rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="field"></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">Art · Daily Look · 2026.07.09</div>
+    <h1>Burano: Painted So You Could Find Your Way Home</h1>
+    <div class="sub">The candy-colored canal houses of Burano, Venice Lagoon, Italy</div>
+  </header>
+
+  <figure>
+    <img src="../source.jpg" alt="Rio Giudecca canal in Burano lined with saturated lemon-yellow, sage-green, coral-pink and cobalt-blue houses, the leaning bell tower of San Martino church in the distance, still water reflecting the whole street, a row of mooring poles in the foreground">
+    <figcaption>Burano, Rio Giudecca canal and the leaning tower of San Martino · Photo: Kallerna, December 11, 2024 · Wikimedia Commons (CC BY-SA 4.0)</figcaption>
+  </figure>
+
+  <section class="card">
+    <p class="lead">No architect drew this up, and there's no single color chart — yet Burano stitched together the most Instagram-proof canal on earth. Every house belongs to a different family, but for centuries they've all answered to one unwritten rule: repaint your wall, and the town has to approve the color first — and it can't clash with your neighbor's inherited hue. The result looks like a spilled box of candy, and somehow it still works. That's not decoration. That's centuries of color discipline.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">01</span> Composition <span class="sec">The Canal Leads You</span></h2>
+    <p>The canal itself is the most honest leading line in the shot: both rows of houses funnel your eye straight down the water, until it collides with the visibly leaning bell tower of San Martino — parked just off the right third-line, its slight tilt is the one dynamic note in an otherwise ruler-straight frame.</p>
+    <p>A row of mooring poles (briccole) punches out of the water in near-even rhythm in the foreground, like notes on a staff, walking your eye forward in stages instead of dumping the whole street on you at once.</p>
+    <p>The still canal doubles as a mirror — the entire street gets replayed, softened and stretched, across the lower half of the frame, giving the composition a hidden axis of symmetry.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">02</span> Color Theory <span class="sec">Ordered Clashing</span></h2>
+    <p>Every house is painted a hue almost as saturated as, but completely different from, its neighbor's — lemon yellow next to cobalt blue, sage green against coral pink. It's a living demonstration of Chevreul's law of simultaneous contrast: two intense, contrasting colors placed side by side make each other look even more saturated than they'd read alone.</p>
+    <p>But the street never tips into visual noise, because every color is pinned to the same mid-range value, and the terracotta roofline plus white window trim repeat down the whole block like a recurring chord — the one constant that lets the rest run wild.</p>
+    <div class="palette">
+      <div class="sw" style="background:#a8cbe0;color:#213240">Lagoon sky blue<small>#A8CBE0 · winter sky</small></div>
+      <div class="sw" style="background:#e3b93c;color:#3d2e0f">Egg-yolk ochre<small>#E3B93C · canalside wall</small></div>
+      <div class="sw" style="background:#8fae79;color:#233018">Sage green<small>#8FAE79 · neighbor house</small></div>
+      <div class="sw" style="background:#e0836a;color:#3d1f14">Coral pink<small>#E0836A · corner house</small></div>
+      <div class="sw" style="background:#b5502f;color:#f2e8d9">Terracotta roof<small>#B5502F · the unifier</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">03</span> Light & History <span class="sec">Color, Written Into Law</span></h2>
+    <p>Shot on a clear December evening (the file is dated December 11, 2024), the low winter sun rakes across the facades at an angle, gilding already-intense colors with warm orange light while carving cool blue-violet shadows into every corner turn — warm wall, cool shadow, a built-in complementary pair.</p>
+    <p>Burano's houses were never just painted on a whim: residents have to apply to the local council before repainting a facade, and many walls carry colors effectively locked to that specific plot by historical record — the color you're looking at may have been mixed to the same formula, on that same foundation, for centuries.</p>
+    <p>The tilted tower belongs to the Church of San Martino; the lean dates back centuries, a side effect of building on the Venice Lagoon's notoriously soft silt. It's become Burano's own leaning tower — and the only landmark still standing at the end of this canal.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">04</span> Why It Moves Us <span class="sec">Beauty as a Byproduct</span></h2>
+    <p>The most repeated origin story: Burano's fishermen rowed home through thick lagoon fog, so their wives painted the family house a color no other wall wore, so a husband could spot his own front door through the haze. A solution born purely out of survival became, centuries later, the most photographed street on earth.</p>
+    <p>What actually moves you here probably isn't the color itself — it's that none of this beauty was designed to be looked at. The people walking by, the boat tied at the door, a scrap of laundry drying at a window: this canal is still a real street where people live, moor boats, and buy groceries. The color is just a byproduct of ordinary life.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">05</span> Background <span class="sec">The Island & The Photographer</span></h2>
+    <p>Burano is a small fishing island in the Venice Lagoon, about 7 km from the main island. Since the 16th century it's also been famous across European courts for its needle lace (merletto di Burano), and the island still keeps a lace museum today. Fishing and lace, not color, are the island's actual historical throughline — the painted houses started as the plainest kind of working-life practicality.</p>
+    <p>The photographer, Kallerna, is a prolific Finnish volunteer contributor on Wikimedia Commons who has photographed landmarks and cityscapes worldwide under open licenses. This shot, taken from the Tre Ponti bridge looking down Rio Giudecca, is listed on Commons as a Quality Image.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="idx">06</span> Steal This <span class="sec">Color Formula & Outfit Tips</span></h2>
+    <ul class="tips">
+      <li><b>Clashing colors ≠ messy colors — match the value, not the hue:</b> pick colors at roughly the same brightness level, no matter how far apart their hues sit on the wheel. That's the actual secret behind why Burano never reads as visual chaos.</li>
+      <li><b>Anchor it with one neutral:</b> however loud the walls get, every roof is the same terracotta orange and every window frame the same white. Do the same at home — go bold on the wall color, but keep trim, baseboards, and hardware in one consistent neutral.</li>
+      <li><b>The outfit version of this formula:</b> one saturated color up top (mustard yellow), a near-neighbor or low-contrast color below (pea green, dusty blue), and a neutral bag or shoe to close it out — that's Burano's "one house, one hue, same roofline" logic, worn.</li>
+      <li><b>Shoot saturated color in low warm light:</b> if you want this candy-color intensity in your own photos or outfit shots, aim for the hour before sunset — raking warm light makes saturated colors read even richer, with more dimension.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="brand">A R T</div>
+    Image: Rio Giudecca canal and the leaning tower of San Martino, Burano · Photo: Kallerna, December 11, 2024<br>
+    Source: Wikimedia Commons (CC BY-SA 4.0) · Commentary and analysis are the author's own
+  </footer>
+</div>
+</body>
+</html>
