@@ -346,10 +346,13 @@ function initFooterInk(){
   var peek=document.createElement('button'); peek.type='button'; peek.className='nav-peek'; peek.setAttribute('aria-label','Show menu');
   peek.innerHTML='<img src="/telotia-mark-tricolor-transparent.webp" alt="">';
   document.body.appendChild(peek);
+  var collapseControl=nav.querySelector('.nav-collapse');
   var hidden=false, last=0;
   function show(){nav.style.top='0';nav.style.opacity='';nav.style.pointerEvents='';peek.classList.remove('show');hidden=false;}
   function hide(){nav.style.top='-120px';nav.style.opacity='0';nav.style.pointerEvents='none';peek.classList.add('show');hidden=true;}
   peek.addEventListener('click',function(e){e.preventDefault();show();last=window.pageYOffset||document.documentElement.scrollTop||0;}); /* reveal nav + reset baseline so a later scroll-down re-hides */
+  if(collapseControl){collapseControl.addEventListener('click',function(e){e.preventDefault();hide();});}
+  window.addEventListener('telotia:navigation-collapse',function(){ if(!hidden) hide(); });
   window.addEventListener('scroll',function(){
     var y=window.pageYOffset||document.documentElement.scrollTop||0;
     if(y>last+4 && y>80){ if(!hidden) hide(); }            /* scrolling down → hide (peek shows) */

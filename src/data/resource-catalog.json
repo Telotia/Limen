@@ -1,482 +1,955 @@
 [
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "The Forced Buying That Didn\u0027t Hold · SpaceX Is Down 45% From Its High",
         "date":  "2026-07-20",
         "dateLabel":  "Jul 20, 2026",
         "folderLabel":  "2026/07/20/spacex-squeeze-unwind",
         "href":  "/resource/news/2026/07/20/spacex-squeeze-unwind/en/index.html",
         "zhHref":  "/resource/news/2026/07/20/spacex-squeeze-unwind/zh/index.html",
-        "image":  "/resource/news/2026/07/20/spacex-squeeze-unwind/cover.jpg"
+        "image":  "/resource/news/2026/07/20/spacex-squeeze-unwind/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/20/spacex-squeeze-unwind/en/card-1.jpg",
+                      "/resource/news/2026/07/20/spacex-squeeze-unwind/en/card-2.jpg",
+                      "/resource/news/2026/07/20/spacex-squeeze-unwind/en/card-3.jpg",
+                      "/resource/news/2026/07/20/spacex-squeeze-unwind/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Meta May Rent $10B in Compute to Anthropic",
         "date":  "2026-07-19",
         "dateLabel":  "Jul 19, 2026",
         "folderLabel":  "2026/07/19/meta-anthropic-compute-landlord",
         "href":  "/resource/news/2026/07/19/meta-anthropic-compute-landlord/en/index.html",
         "zhHref":  "/resource/news/2026/07/19/meta-anthropic-compute-landlord/zh/index.html",
-        "image":  "/resource/news/2026/07/19/meta-anthropic-compute-landlord/cover.jpg"
+        "image":  "/resource/news/2026/07/19/meta-anthropic-compute-landlord/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/19/meta-anthropic-compute-landlord/en/card-1.jpg",
+                      "/resource/news/2026/07/19/meta-anthropic-compute-landlord/en/card-2.jpg",
+                      "/resource/news/2026/07/19/meta-anthropic-compute-landlord/en/card-3.jpg",
+                      "/resource/news/2026/07/19/meta-anthropic-compute-landlord/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "JOB · One Curl of Smoke, Woven Into a Poster",
         "date":  "2026-07-19",
         "dateLabel":  "Jul 19, 2026",
         "folderLabel":  "2026/07/19/job-cigarettes-mucha",
         "href":  "/resource/art/2026/07/19/job-cigarettes-mucha/en/index.html",
         "zhHref":  "/resource/art/2026/07/19/job-cigarettes-mucha/zh/index.html",
-        "image":  "/resource/art/2026/07/19/job-cigarettes-mucha/cover.jpg"
+        "image":  "/resource/art/2026/07/19/job-cigarettes-mucha/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/19/job-cigarettes-mucha/en/card-1.jpg",
+                      "/resource/art/2026/07/19/job-cigarettes-mucha/en/card-2.jpg",
+                      "/resource/art/2026/07/19/job-cigarettes-mucha/en/card-3.jpg",
+                      "/resource/art/2026/07/19/job-cigarettes-mucha/en/card-4.jpg",
+                      "/resource/art/2026/07/19/job-cigarettes-mucha/en/card-5.jpg",
+                      "/resource/art/2026/07/19/job-cigarettes-mucha/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Kimi K3 Triggers a Global Tech Selloff",
         "date":  "2026-07-18",
         "dateLabel":  "Jul 18, 2026",
         "folderLabel":  "2026/07/18/kimi-k3-deepseek-moment",
         "href":  "/resource/news/2026/07/18/kimi-k3-deepseek-moment/en/index.html",
         "zhHref":  "/resource/news/2026/07/18/kimi-k3-deepseek-moment/zh/index.html",
-        "image":  "/resource/news/2026/07/18/kimi-k3-deepseek-moment/cover.jpg"
+        "image":  "/resource/news/2026/07/18/kimi-k3-deepseek-moment/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/18/kimi-k3-deepseek-moment/en/card-1.jpg",
+                      "/resource/news/2026/07/18/kimi-k3-deepseek-moment/en/card-2.jpg",
+                      "/resource/news/2026/07/18/kimi-k3-deepseek-moment/en/card-3.jpg",
+                      "/resource/news/2026/07/18/kimi-k3-deepseek-moment/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "In the Mood for Love · One Qipao, an Entire Unspoken Longing",
         "date":  "2026-07-18",
         "dateLabel":  "Jul 18, 2026",
         "folderLabel":  "2026/07/18/in-the-mood-for-love-poster",
         "href":  "/resource/art/2026/07/18/in-the-mood-for-love-poster/en/index.html",
         "zhHref":  "/resource/art/2026/07/18/in-the-mood-for-love-poster/zh/index.html",
-        "image":  "/resource/art/2026/07/18/in-the-mood-for-love-poster/cover.jpg"
+        "image":  "/resource/art/2026/07/18/in-the-mood-for-love-poster/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/18/in-the-mood-for-love-poster/en/card-1.jpg",
+                      "/resource/art/2026/07/18/in-the-mood-for-love-poster/en/card-2.jpg",
+                      "/resource/art/2026/07/18/in-the-mood-for-love-poster/en/card-3.jpg",
+                      "/resource/art/2026/07/18/in-the-mood-for-love-poster/en/card-4.jpg",
+                      "/resource/art/2026/07/18/in-the-mood-for-love-poster/en/card-5.jpg",
+                      "/resource/art/2026/07/18/in-the-mood-for-love-poster/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "TSMC\u0027s Profit Hit a Record +77%. The Stock Fell Anyway.",
         "date":  "2026-07-17",
         "dateLabel":  "Jul 17, 2026",
         "folderLabel":  "2026/07/17/tsmc-beat-and-drop",
         "href":  "/resource/news/2026/07/17/tsmc-beat-and-drop/en/index.html",
         "zhHref":  "/resource/news/2026/07/17/tsmc-beat-and-drop/zh/index.html",
-        "image":  "/resource/news/2026/07/17/tsmc-beat-and-drop/cover.jpg"
+        "image":  "/resource/news/2026/07/17/tsmc-beat-and-drop/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/17/tsmc-beat-and-drop/en/card-1.jpg",
+                      "/resource/news/2026/07/17/tsmc-beat-and-drop/en/card-2.jpg",
+                      "/resource/news/2026/07/17/tsmc-beat-and-drop/en/card-3.jpg",
+                      "/resource/news/2026/07/17/tsmc-beat-and-drop/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Several Circles · Kandinsky\u0027s Theory That Color Has a Shape",
         "date":  "2026-07-17",
         "dateLabel":  "Jul 17, 2026",
         "folderLabel":  "2026/07/17/several-circles-kandinsky",
         "href":  "/resource/art/2026/07/17/several-circles-kandinsky/en/index.html",
         "zhHref":  "/resource/art/2026/07/17/several-circles-kandinsky/zh/index.html",
-        "image":  "/resource/art/2026/07/17/several-circles-kandinsky/cover.jpg"
+        "image":  "/resource/art/2026/07/17/several-circles-kandinsky/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/17/several-circles-kandinsky/en/card-1.jpg",
+                      "/resource/art/2026/07/17/several-circles-kandinsky/en/card-2.jpg",
+                      "/resource/art/2026/07/17/several-circles-kandinsky/en/card-3.jpg",
+                      "/resource/art/2026/07/17/several-circles-kandinsky/en/card-4.jpg",
+                      "/resource/art/2026/07/17/several-circles-kandinsky/en/card-5.jpg",
+                      "/resource/art/2026/07/17/several-circles-kandinsky/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The Water-Lily Pond · Monet\u0027s Green Harmony",
         "date":  "2026-07-16",
         "dateLabel":  "Jul 16, 2026",
         "folderLabel":  "2026/07/16/monet-water-lily-pond",
         "href":  "/resource/art/2026/07/16/monet-water-lily-pond/en/index.html",
         "zhHref":  "/resource/art/2026/07/16/monet-water-lily-pond/zh/index.html",
-        "image":  "/resource/art/2026/07/16/monet-water-lily-pond/cover.jpg"
+        "image":  "/resource/art/2026/07/16/monet-water-lily-pond/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/16/monet-water-lily-pond/en/card-1.jpg",
+                      "/resource/art/2026/07/16/monet-water-lily-pond/en/card-2.jpg",
+                      "/resource/art/2026/07/16/monet-water-lily-pond/en/card-3.jpg",
+                      "/resource/art/2026/07/16/monet-water-lily-pond/en/card-4.jpg",
+                      "/resource/art/2026/07/16/monet-water-lily-pond/en/card-5.jpg",
+                      "/resource/art/2026/07/16/monet-water-lily-pond/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Memory Chips Fall Into a Bear Market",
         "date":  "2026-07-16",
         "dateLabel":  "Jul 16, 2026",
         "folderLabel":  "2026/07/16/memory-etf-shakeout",
         "href":  "/resource/news/2026/07/16/memory-etf-shakeout/en/index.html",
         "zhHref":  "/resource/news/2026/07/16/memory-etf-shakeout/zh/index.html",
-        "image":  "/resource/news/2026/07/16/memory-etf-shakeout/cover.jpg"
+        "image":  "/resource/news/2026/07/16/memory-etf-shakeout/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/16/memory-etf-shakeout/en/card-1.jpg",
+                      "/resource/news/2026/07/16/memory-etf-shakeout/en/card-2.jpg",
+                      "/resource/news/2026/07/16/memory-etf-shakeout/en/card-3.jpg",
+                      "/resource/news/2026/07/16/memory-etf-shakeout/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The Ecstasy of Saint Teresa · Bernini\u0027s Hidden Light",
         "date":  "2026-07-15",
         "dateLabel":  "Jul 15, 2026",
         "folderLabel":  "2026/07/15/bernini-ecstasy-of-saint-teresa",
         "href":  "/resource/art/2026/07/15/bernini-ecstasy-of-saint-teresa/en/index.html",
         "zhHref":  "/resource/art/2026/07/15/bernini-ecstasy-of-saint-teresa/zh/index.html",
-        "image":  "/resource/art/2026/07/15/bernini-ecstasy-of-saint-teresa/cover.jpg"
+        "image":  "/resource/art/2026/07/15/bernini-ecstasy-of-saint-teresa/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/15/bernini-ecstasy-of-saint-teresa/en/card-1.jpg",
+                      "/resource/art/2026/07/15/bernini-ecstasy-of-saint-teresa/en/card-2.jpg",
+                      "/resource/art/2026/07/15/bernini-ecstasy-of-saint-teresa/en/card-3.jpg",
+                      "/resource/art/2026/07/15/bernini-ecstasy-of-saint-teresa/en/card-4.jpg",
+                      "/resource/art/2026/07/15/bernini-ecstasy-of-saint-teresa/en/card-5.jpg",
+                      "/resource/art/2026/07/15/bernini-ecstasy-of-saint-teresa/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "IBM\u0027s Worst Day",
         "date":  "2026-07-15",
         "dateLabel":  "Jul 15, 2026",
         "folderLabel":  "2026/07/15/ibm-crash-ai-capex-shift",
         "href":  "/resource/news/2026/07/15/ibm-crash-ai-capex-shift/en/index.html",
         "zhHref":  "/resource/news/2026/07/15/ibm-crash-ai-capex-shift/zh/index.html",
-        "image":  "/resource/news/2026/07/15/ibm-crash-ai-capex-shift/cover.jpg"
+        "image":  "/resource/news/2026/07/15/ibm-crash-ai-capex-shift/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/15/ibm-crash-ai-capex-shift/en/card-1.jpg",
+                      "/resource/news/2026/07/15/ibm-crash-ai-capex-shift/en/card-2.jpg",
+                      "/resource/news/2026/07/15/ibm-crash-ai-capex-shift/en/card-3.jpg",
+                      "/resource/news/2026/07/15/ibm-crash-ai-capex-shift/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The Peacock Room · A Grudge Painted in Gold Leaf",
         "date":  "2026-07-14",
         "dateLabel":  "Jul 14, 2026",
         "folderLabel":  "2026/07/14/peacock-room-whistler",
         "href":  "/resource/art/2026/07/14/peacock-room-whistler/en/index.html",
         "zhHref":  "/resource/art/2026/07/14/peacock-room-whistler/zh/index.html",
-        "image":  "/resource/art/2026/07/14/peacock-room-whistler/cover.jpg"
+        "image":  "/resource/art/2026/07/14/peacock-room-whistler/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/14/peacock-room-whistler/en/card-1.jpg",
+                      "/resource/art/2026/07/14/peacock-room-whistler/en/card-2.jpg",
+                      "/resource/art/2026/07/14/peacock-room-whistler/en/card-3.jpg",
+                      "/resource/art/2026/07/14/peacock-room-whistler/en/card-4.jpg",
+                      "/resource/art/2026/07/14/peacock-room-whistler/en/card-5.jpg",
+                      "/resource/art/2026/07/14/peacock-room-whistler/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "CPI, Fed Testimony, and Bank Earnings Collide",
         "date":  "2026-07-14",
         "dateLabel":  "Jul 14, 2026",
         "folderLabel":  "2026/07/14/cpi-hike-bank-earnings-collide",
         "href":  "/resource/news/2026/07/14/cpi-hike-bank-earnings-collide/en/index.html",
         "zhHref":  "/resource/news/2026/07/14/cpi-hike-bank-earnings-collide/zh/index.html",
-        "image":  "/resource/news/2026/07/14/cpi-hike-bank-earnings-collide/cover.jpg"
+        "image":  "/resource/news/2026/07/14/cpi-hike-bank-earnings-collide/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/14/cpi-hike-bank-earnings-collide/en/card-1.jpg",
+                      "/resource/news/2026/07/14/cpi-hike-bank-earnings-collide/en/card-2.jpg",
+                      "/resource/news/2026/07/14/cpi-hike-bank-earnings-collide/en/card-3.jpg",
+                      "/resource/news/2026/07/14/cpi-hike-bank-earnings-collide/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Kospi Crashes 8% · a Successful Listing Becomes the Trigger",
         "date":  "2026-07-13",
         "dateLabel":  "Jul 13, 2026",
         "folderLabel":  "2026/07/13/kospi-adr-arbitrage-crash",
         "href":  "/resource/news/2026/07/13/kospi-adr-arbitrage-crash/en/index.html",
         "zhHref":  "/resource/news/2026/07/13/kospi-adr-arbitrage-crash/zh/index.html",
-        "image":  "/resource/news/2026/07/13/kospi-adr-arbitrage-crash/cover.jpg"
+        "image":  "/resource/news/2026/07/13/kospi-adr-arbitrage-crash/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/13/kospi-adr-arbitrage-crash/en/card-1.jpg",
+                      "/resource/news/2026/07/13/kospi-adr-arbitrage-crash/en/card-2.jpg",
+                      "/resource/news/2026/07/13/kospi-adr-arbitrage-crash/en/card-3.jpg",
+                      "/resource/news/2026/07/13/kospi-adr-arbitrage-crash/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Curtain of Light at the Edge of the World",
         "date":  "2026-07-13",
         "dateLabel":  "Jul 13, 2026",
         "folderLabel":  "2026/07/13/aurora-borealis-scott-kelly-iss",
         "href":  "/resource/art/2026/07/13/aurora-borealis-scott-kelly-iss/en/index.html",
         "zhHref":  "/resource/art/2026/07/13/aurora-borealis-scott-kelly-iss/zh/index.html",
-        "image":  "/resource/art/2026/07/13/aurora-borealis-scott-kelly-iss/cover.jpg"
+        "image":  "/resource/art/2026/07/13/aurora-borealis-scott-kelly-iss/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/13/aurora-borealis-scott-kelly-iss/en/card-1.jpg",
+                      "/resource/art/2026/07/13/aurora-borealis-scott-kelly-iss/en/card-2.jpg",
+                      "/resource/art/2026/07/13/aurora-borealis-scott-kelly-iss/en/card-3.jpg",
+                      "/resource/art/2026/07/13/aurora-borealis-scott-kelly-iss/en/card-4.jpg",
+                      "/resource/art/2026/07/13/aurora-borealis-scott-kelly-iss/en/card-5.jpg",
+                      "/resource/art/2026/07/13/aurora-borealis-scott-kelly-iss/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The New Look, at the Water\u0027s Edge",
         "date":  "2026-07-12",
         "dateLabel":  "Jul 12, 2026",
         "folderLabel":  "2026/07/12/new-look-gown-tidal-basin-frissell",
         "href":  "/resource/art/2026/07/12/new-look-gown-tidal-basin-frissell/en/index.html",
         "zhHref":  "/resource/art/2026/07/12/new-look-gown-tidal-basin-frissell/zh/index.html",
-        "image":  "/resource/art/2026/07/12/new-look-gown-tidal-basin-frissell/cover.jpg"
+        "image":  "/resource/art/2026/07/12/new-look-gown-tidal-basin-frissell/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/12/new-look-gown-tidal-basin-frissell/en/card-1.jpg",
+                      "/resource/art/2026/07/12/new-look-gown-tidal-basin-frissell/en/card-2.jpg",
+                      "/resource/art/2026/07/12/new-look-gown-tidal-basin-frissell/en/card-3.jpg",
+                      "/resource/art/2026/07/12/new-look-gown-tidal-basin-frissell/en/card-4.jpg",
+                      "/resource/art/2026/07/12/new-look-gown-tidal-basin-frissell/en/card-5.jpg",
+                      "/resource/art/2026/07/12/new-look-gown-tidal-basin-frissell/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Nighthawks: A City\u0027s Loneliness Behind One Sheet of Glass",
         "date":  "2026-07-11",
         "dateLabel":  "Jul 11, 2026",
         "folderLabel":  "2026/07/11/nighthawks-edward-hopper",
         "href":  "/resource/art/2026/07/11/nighthawks-edward-hopper/en/index.html",
         "zhHref":  "/resource/art/2026/07/11/nighthawks-edward-hopper/zh/index.html",
-        "image":  "/resource/art/2026/07/11/nighthawks-edward-hopper/cover.jpg"
+        "image":  "/resource/art/2026/07/11/nighthawks-edward-hopper/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/11/nighthawks-edward-hopper/en/card-1.jpg",
+                      "/resource/art/2026/07/11/nighthawks-edward-hopper/en/card-2.jpg",
+                      "/resource/art/2026/07/11/nighthawks-edward-hopper/en/card-3.jpg",
+                      "/resource/art/2026/07/11/nighthawks-edward-hopper/en/card-4.jpg",
+                      "/resource/art/2026/07/11/nighthawks-edward-hopper/en/card-5.jpg",
+                      "/resource/art/2026/07/11/nighthawks-edward-hopper/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Circle Won a Bank Charter · the Stock Gave Half the Pop Back",
         "date":  "2026-07-11",
         "dateLabel":  "Jul 11, 2026",
         "folderLabel":  "2026/07/11/circle-bank-charter-fade",
         "href":  "/resource/news/2026/07/11/circle-bank-charter-fade/en/index.html",
         "zhHref":  "/resource/news/2026/07/11/circle-bank-charter-fade/zh/index.html",
-        "image":  "/resource/news/2026/07/11/circle-bank-charter-fade/cover.jpg"
+        "image":  "/resource/news/2026/07/11/circle-bank-charter-fade/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/11/circle-bank-charter-fade/en/card-1.jpg",
+                      "/resource/news/2026/07/11/circle-bank-charter-fade/en/card-2.jpg",
+                      "/resource/news/2026/07/11/circle-bank-charter-fade/en/card-3.jpg",
+                      "/resource/news/2026/07/11/circle-bank-charter-fade/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Sudden Shower over Shin-Ōhashi: Rain Carved Into Wood",
         "date":  "2026-07-10",
         "dateLabel":  "Jul 10, 2026",
         "folderLabel":  "2026/07/10/sudden-shower-over-shin-ohashi-hiroshige",
         "href":  "/resource/art/2026/07/10/sudden-shower-over-shin-ohashi-hiroshige/en/index.html",
         "zhHref":  "/resource/art/2026/07/10/sudden-shower-over-shin-ohashi-hiroshige/zh/index.html",
-        "image":  "/resource/art/2026/07/10/sudden-shower-over-shin-ohashi-hiroshige/cover.jpg"
+        "image":  "/resource/art/2026/07/10/sudden-shower-over-shin-ohashi-hiroshige/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/10/sudden-shower-over-shin-ohashi-hiroshige/en/card-1.jpg",
+                      "/resource/art/2026/07/10/sudden-shower-over-shin-ohashi-hiroshige/en/card-2.jpg",
+                      "/resource/art/2026/07/10/sudden-shower-over-shin-ohashi-hiroshige/en/card-3.jpg",
+                      "/resource/art/2026/07/10/sudden-shower-over-shin-ohashi-hiroshige/en/card-4.jpg",
+                      "/resource/art/2026/07/10/sudden-shower-over-shin-ohashi-hiroshige/en/card-5.jpg",
+                      "/resource/art/2026/07/10/sudden-shower-over-shin-ohashi-hiroshige/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "One Quarter\u0027s Profit Just Covered a $26.5B IPO",
         "date":  "2026-07-10",
         "dateLabel":  "Jul 10, 2026",
         "folderLabel":  "2026/07/10/sk-hynix-nasdaq-debut",
         "href":  "/resource/news/2026/07/10/sk-hynix-nasdaq-debut/en/index.html",
         "zhHref":  "/resource/news/2026/07/10/sk-hynix-nasdaq-debut/zh/index.html",
-        "image":  "/resource/news/2026/07/10/sk-hynix-nasdaq-debut/cover.jpg"
+        "image":  "/resource/news/2026/07/10/sk-hynix-nasdaq-debut/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/10/sk-hynix-nasdaq-debut/en/card-1.jpg",
+                      "/resource/news/2026/07/10/sk-hynix-nasdaq-debut/en/card-2.jpg",
+                      "/resource/news/2026/07/10/sk-hynix-nasdaq-debut/en/card-3.jpg",
+                      "/resource/news/2026/07/10/sk-hynix-nasdaq-debut/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "The Ceasefire That Broke Once Already Just Broke Again",
         "date":  "2026-07-09",
         "dateLabel":  "Jul 9, 2026",
         "folderLabel":  "2026/07/09/oil-fed-reversal",
         "href":  "/resource/news/2026/07/09/oil-fed-reversal/en/index.html",
         "zhHref":  "/resource/news/2026/07/09/oil-fed-reversal/zh/index.html",
-        "image":  "/resource/news/2026/07/09/oil-fed-reversal/cover.jpg"
+        "image":  "/resource/news/2026/07/09/oil-fed-reversal/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/09/oil-fed-reversal/en/card-1.jpg",
+                      "/resource/news/2026/07/09/oil-fed-reversal/en/card-2.jpg",
+                      "/resource/news/2026/07/09/oil-fed-reversal/en/card-3.jpg",
+                      "/resource/news/2026/07/09/oil-fed-reversal/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Burano: Painted So You Could Find Your Way Home",
         "date":  "2026-07-09",
         "dateLabel":  "Jul 9, 2026",
         "folderLabel":  "2026/07/09/burano-colorful-canal-houses",
         "href":  "/resource/art/2026/07/09/burano-colorful-canal-houses/en/index.html",
         "zhHref":  "/resource/art/2026/07/09/burano-colorful-canal-houses/zh/index.html",
-        "image":  "/resource/art/2026/07/09/burano-colorful-canal-houses/cover.jpg"
+        "image":  "/resource/art/2026/07/09/burano-colorful-canal-houses/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/09/burano-colorful-canal-houses/en/card-1.jpg",
+                      "/resource/art/2026/07/09/burano-colorful-canal-houses/en/card-2.jpg",
+                      "/resource/art/2026/07/09/burano-colorful-canal-houses/en/card-3.jpg",
+                      "/resource/art/2026/07/09/burano-colorful-canal-houses/en/card-4.jpg",
+                      "/resource/art/2026/07/09/burano-colorful-canal-houses/en/card-5.jpg",
+                      "/resource/art/2026/07/09/burano-colorful-canal-houses/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Strangers Under Umbrellas · Gustave Caillebotte, 1877",
         "date":  "2026-07-08",
         "dateLabel":  "Jul 8, 2026",
         "folderLabel":  "2026/07/08/paris-street-rainy-day",
         "href":  "/resource/art/2026/07/08/paris-street-rainy-day/en/index.html",
         "zhHref":  "/resource/art/2026/07/08/paris-street-rainy-day/zh/index.html",
-        "image":  "/resource/art/2026/07/08/paris-street-rainy-day/cover.jpg"
+        "image":  "/resource/art/2026/07/08/paris-street-rainy-day/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/08/paris-street-rainy-day/en/card-1.jpg",
+                      "/resource/art/2026/07/08/paris-street-rainy-day/en/card-2.jpg",
+                      "/resource/art/2026/07/08/paris-street-rainy-day/en/card-3.jpg",
+                      "/resource/art/2026/07/08/paris-street-rainy-day/en/card-4.jpg",
+                      "/resource/art/2026/07/08/paris-street-rainy-day/en/card-5.jpg",
+                      "/resource/art/2026/07/08/paris-street-rainy-day/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Samsung Just Posted Its Best Quarter Ever. The Stock Fell Anyway.",
         "date":  "2026-07-08",
         "dateLabel":  "Jul 8, 2026",
         "folderLabel":  "2026/07/08/samsung-profit-selloff",
         "href":  "/resource/news/2026/07/08/samsung-profit-selloff/en/index.html",
         "zhHref":  "/resource/news/2026/07/08/samsung-profit-selloff/zh/index.html",
-        "image":  "/resource/news/2026/07/08/samsung-profit-selloff/cover.jpg"
+        "image":  "/resource/news/2026/07/08/samsung-profit-selloff/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/08/samsung-profit-selloff/en/card-1.jpg",
+                      "/resource/news/2026/07/08/samsung-profit-selloff/en/card-2.jpg",
+                      "/resource/news/2026/07/08/samsung-profit-selloff/en/card-3.jpg",
+                      "/resource/news/2026/07/08/samsung-profit-selloff/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The Thrush That Steals Strawberries · William Morris, 1883",
         "date":  "2026-07-07",
         "dateLabel":  "Jul 7, 2026",
         "folderLabel":  "2026/07/07/strawberry-thief-william-morris",
         "href":  "/resource/art/2026/07/07/strawberry-thief-william-morris/en/index.html",
         "zhHref":  "/resource/art/2026/07/07/strawberry-thief-william-morris/zh/index.html",
-        "image":  "/resource/art/2026/07/07/strawberry-thief-william-morris/cover.jpg"
+        "image":  "/resource/art/2026/07/07/strawberry-thief-william-morris/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/07/strawberry-thief-william-morris/en/card-1.jpg",
+                      "/resource/art/2026/07/07/strawberry-thief-william-morris/en/card-2.jpg",
+                      "/resource/art/2026/07/07/strawberry-thief-william-morris/en/card-3.jpg",
+                      "/resource/art/2026/07/07/strawberry-thief-william-morris/en/card-4.jpg",
+                      "/resource/art/2026/07/07/strawberry-thief-william-morris/en/card-5.jpg",
+                      "/resource/art/2026/07/07/strawberry-thief-william-morris/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "SpaceX Forces Its Way Into the Nasdaq-100",
         "date":  "2026-07-07",
         "dateLabel":  "Jul 7, 2026",
         "folderLabel":  "2026/07/07/spacex-nasdaq100-squeeze",
         "href":  "/resource/news/2026/07/07/spacex-nasdaq100-squeeze/en/index.html",
         "zhHref":  "/resource/news/2026/07/07/spacex-nasdaq100-squeeze/zh/index.html",
-        "image":  "/resource/news/2026/07/07/spacex-nasdaq100-squeeze/cover.jpg"
+        "image":  "/resource/news/2026/07/07/spacex-nasdaq100-squeeze/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/07/spacex-nasdaq100-squeeze/en/card-1.jpg",
+                      "/resource/news/2026/07/07/spacex-nasdaq100-squeeze/en/card-2.jpg",
+                      "/resource/news/2026/07/07/spacex-nasdaq100-squeeze/en/card-3.jpg",
+                      "/resource/news/2026/07/07/spacex-nasdaq100-squeeze/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The Man Who Painted Speed as Fog · J. M. W. Turner, 1844",
         "date":  "2026-07-06",
         "dateLabel":  "Jul 6, 2026",
         "folderLabel":  "2026/07/06/rain-steam-and-speed-turner",
         "href":  "/resource/art/2026/07/06/rain-steam-and-speed-turner/en/index.html",
         "zhHref":  "/resource/art/2026/07/06/rain-steam-and-speed-turner/zh/index.html",
-        "image":  "/resource/art/2026/07/06/rain-steam-and-speed-turner/cover.jpg"
+        "image":  "/resource/art/2026/07/06/rain-steam-and-speed-turner/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/06/rain-steam-and-speed-turner/en/card-1.jpg",
+                      "/resource/art/2026/07/06/rain-steam-and-speed-turner/en/card-2.jpg",
+                      "/resource/art/2026/07/06/rain-steam-and-speed-turner/en/card-3.jpg",
+                      "/resource/art/2026/07/06/rain-steam-and-speed-turner/en/card-4.jpg",
+                      "/resource/art/2026/07/06/rain-steam-and-speed-turner/en/card-5.jpg",
+                      "/resource/art/2026/07/06/rain-steam-and-speed-turner/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Circuit Breakers Hit, SK Hynix Wants $29B on Nasdaq",
         "date":  "2026-07-06",
         "dateLabel":  "Jul 6, 2026",
         "folderLabel":  "2026/07/06/chip-crack-hynix-listing",
         "href":  "/resource/news/2026/07/06/chip-crack-hynix-listing/en/index.html",
         "zhHref":  "/resource/news/2026/07/06/chip-crack-hynix-listing/zh/index.html",
-        "image":  "/resource/news/2026/07/06/chip-crack-hynix-listing/cover.jpg"
+        "image":  "/resource/news/2026/07/06/chip-crack-hynix-listing/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/06/chip-crack-hynix-listing/en/card-1.jpg",
+                      "/resource/news/2026/07/06/chip-crack-hynix-listing/en/card-2.jpg",
+                      "/resource/news/2026/07/06/chip-crack-hynix-listing/en/card-3.jpg",
+                      "/resource/news/2026/07/06/chip-crack-hynix-listing/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The Face Bauhaus Built From Geometry · Joost Schmidt, 1923",
         "date":  "2026-07-05",
         "dateLabel":  "Jul 5, 2026",
         "folderLabel":  "2026/07/05/bauhaus-exhibition-poster-1923",
         "href":  "/resource/art/2026/07/05/bauhaus-exhibition-poster-1923/en/index.html",
         "zhHref":  "/resource/art/2026/07/05/bauhaus-exhibition-poster-1923/zh/index.html",
-        "image":  "/resource/art/2026/07/05/bauhaus-exhibition-poster-1923/cover.jpg"
+        "image":  "/resource/art/2026/07/05/bauhaus-exhibition-poster-1923/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/05/bauhaus-exhibition-poster-1923/en/card-1.jpg",
+                      "/resource/art/2026/07/05/bauhaus-exhibition-poster-1923/en/card-2.jpg",
+                      "/resource/art/2026/07/05/bauhaus-exhibition-poster-1923/en/card-3.jpg",
+                      "/resource/art/2026/07/05/bauhaus-exhibition-poster-1923/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Half of All Bitcoin Is Now Underwater",
         "date":  "2026-07-05",
         "dateLabel":  "Jul 5, 2026",
         "folderLabel":  "2026/07/05/btc-underwater",
         "href":  "/resource/news/2026/07/05/btc-underwater/en/index.html",
         "zhHref":  "/resource/news/2026/07/05/btc-underwater/zh/index.html",
-        "image":  "/resource/news/2026/07/05/btc-underwater/cover.jpg"
+        "image":  "/resource/news/2026/07/05/btc-underwater/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/05/btc-underwater/en/card-1.jpg",
+                      "/resource/news/2026/07/05/btc-underwater/en/card-2.jpg",
+                      "/resource/news/2026/07/05/btc-underwater/en/card-3.jpg",
+                      "/resource/news/2026/07/05/btc-underwater/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The Yellow Corridor · Luis Barragán, Casa Gilardi",
         "date":  "2026-07-04",
         "dateLabel":  "Jul 4, 2026",
         "folderLabel":  "2026/07/04/casa-gilardi-barragan",
         "href":  "/resource/art/2026/07/04/casa-gilardi-barragan/en/index.html",
         "zhHref":  "/resource/art/2026/07/04/casa-gilardi-barragan/zh/index.html",
-        "image":  "/resource/art/2026/07/04/casa-gilardi-barragan/cover.jpg"
+        "image":  "/resource/art/2026/07/04/casa-gilardi-barragan/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/04/casa-gilardi-barragan/en/card-1.jpg",
+                      "/resource/art/2026/07/04/casa-gilardi-barragan/en/card-2.jpg",
+                      "/resource/art/2026/07/04/casa-gilardi-barragan/en/card-3.jpg",
+                      "/resource/art/2026/07/04/casa-gilardi-barragan/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Jobs Cracked, Dow Record",
         "date":  "2026-07-04",
         "dateLabel":  "Jul 4, 2026",
         "folderLabel":  "2026/07/04/jobs-shock-dow-record",
         "href":  "/resource/news/2026/07/04/jobs-shock-dow-record/en/index.html",
         "zhHref":  "/resource/news/2026/07/04/jobs-shock-dow-record/zh/index.html",
-        "image":  "/resource/news/2026/07/04/jobs-shock-dow-record/cover.jpg"
+        "image":  "/resource/news/2026/07/04/jobs-shock-dow-record/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/04/jobs-shock-dow-record/en/card-1.jpg",
+                      "/resource/news/2026/07/04/jobs-shock-dow-record/en/card-2.jpg",
+                      "/resource/news/2026/07/04/jobs-shock-dow-record/en/card-3.jpg",
+                      "/resource/news/2026/07/04/jobs-shock-dow-record/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Pillars of Creation · Hubble Space Telescope",
         "date":  "2026-07-03",
         "dateLabel":  "Jul 3, 2026",
         "folderLabel":  "2026/07/03/pillars-of-creation-hubble",
         "href":  "/resource/art/2026/07/03/pillars-of-creation-hubble/en/index.html",
         "zhHref":  "/resource/art/2026/07/03/pillars-of-creation-hubble/zh/index.html",
-        "image":  "/resource/art/2026/07/03/pillars-of-creation-hubble/cover.jpg"
+        "image":  "/resource/art/2026/07/03/pillars-of-creation-hubble/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/03/pillars-of-creation-hubble/en/card-1.jpg",
+                      "/resource/art/2026/07/03/pillars-of-creation-hubble/en/card-2.jpg",
+                      "/resource/art/2026/07/03/pillars-of-creation-hubble/en/card-3.jpg",
+                      "/resource/art/2026/07/03/pillars-of-creation-hubble/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "OpenAI Offers Washington a 5% Stake",
         "date":  "2026-07-03",
         "dateLabel":  "Jul 3, 2026",
         "folderLabel":  "2026/07/03/openai-govt-stake",
         "href":  "/resource/news/2026/07/03/openai-govt-stake/en/index.html",
         "zhHref":  "/resource/news/2026/07/03/openai-govt-stake/zh/index.html",
-        "image":  "/resource/news/2026/07/03/openai-govt-stake/cover.jpg"
+        "image":  "/resource/news/2026/07/03/openai-govt-stake/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/03/openai-govt-stake/en/card-1.jpg",
+                      "/resource/news/2026/07/03/openai-govt-stake/en/card-2.jpg",
+                      "/resource/news/2026/07/03/openai-govt-stake/en/card-3.jpg",
+                      "/resource/news/2026/07/03/openai-govt-stake/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Wanderer above the Sea of Fog · Caspar David Friedrich",
         "date":  "2026-07-02",
         "dateLabel":  "Jul 2, 2026",
         "folderLabel":  "2026/07/02/wanderer-above-the-sea-of-fog",
         "href":  "/resource/art/2026/07/02/wanderer-above-the-sea-of-fog/en/index.html",
         "zhHref":  "/resource/art/2026/07/02/wanderer-above-the-sea-of-fog/zh/index.html",
-        "image":  "/resource/art/2026/07/02/wanderer-above-the-sea-of-fog/cover.jpg"
+        "image":  "/resource/art/2026/07/02/wanderer-above-the-sea-of-fog/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/02/wanderer-above-the-sea-of-fog/en/card-1.jpg",
+                      "/resource/art/2026/07/02/wanderer-above-the-sea-of-fog/en/card-2.jpg",
+                      "/resource/art/2026/07/02/wanderer-above-the-sea-of-fog/en/card-3.jpg",
+                      "/resource/art/2026/07/02/wanderer-above-the-sea-of-fog/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Meta Compute: One Report Repriced the AI Compute Market",
         "date":  "2026-07-02",
         "dateLabel":  "Jul 2, 2026",
         "folderLabel":  "2026/07/02/meta-compute-cloud",
         "href":  "/resource/news/2026/07/02/meta-compute-cloud/en/index.html",
         "zhHref":  "/resource/news/2026/07/02/meta-compute-cloud/zh/index.html",
-        "image":  "/resource/news/2026/07/02/meta-compute-cloud/cover.jpg"
+        "image":  "/resource/news/2026/07/02/meta-compute-cloud/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/02/meta-compute-cloud/en/card-1.jpg",
+                      "/resource/news/2026/07/02/meta-compute-cloud/en/card-2.jpg",
+                      "/resource/news/2026/07/02/meta-compute-cloud/en/card-3.jpg",
+                      "/resource/news/2026/07/02/meta-compute-cloud/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Micron Up 240%, Nvidia Up 15% · Same AI Story, Different Winner",
         "date":  "2026-07-01",
         "dateLabel":  "Jul 1, 2026",
         "folderLabel":  "2026/07/01/chip-rally-nvidia-lag",
         "href":  "/resource/news/2026/07/01/chip-rally-nvidia-lag/en/index.html",
         "zhHref":  "/resource/news/2026/07/01/chip-rally-nvidia-lag/zh/index.html",
-        "image":  "/resource/news/2026/07/01/chip-rally-nvidia-lag/cover.jpg"
+        "image":  "/resource/news/2026/07/01/chip-rally-nvidia-lag/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/01/chip-rally-nvidia-lag/en/card-1.jpg",
+                      "/resource/news/2026/07/01/chip-rally-nvidia-lag/en/card-2.jpg",
+                      "/resource/news/2026/07/01/chip-rally-nvidia-lag/en/card-3.jpg",
+                      "/resource/news/2026/07/01/chip-rally-nvidia-lag/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Composition II in Red, Blue, and Yellow · Piet Mondrian",
         "date":  "2026-07-01",
         "dateLabel":  "Jul 1, 2026",
         "folderLabel":  "2026/07/01/mondrian-composition-red-blue-yellow",
         "href":  "/resource/art/2026/07/01/mondrian-composition-red-blue-yellow/en/index.html",
         "zhHref":  "/resource/art/2026/07/01/mondrian-composition-red-blue-yellow/zh/index.html",
-        "image":  "/resource/art/2026/07/01/mondrian-composition-red-blue-yellow/cover.jpg"
+        "image":  "/resource/art/2026/07/01/mondrian-composition-red-blue-yellow/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/01/mondrian-composition-red-blue-yellow/en/card-1.jpg",
+                      "/resource/art/2026/07/01/mondrian-composition-red-blue-yellow/en/card-2.jpg",
+                      "/resource/art/2026/07/01/mondrian-composition-red-blue-yellow/en/card-3.jpg",
+                      "/resource/art/2026/07/01/mondrian-composition-red-blue-yellow/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Migrant Mother · Dorothea Lange",
         "date":  "2026-06-30",
         "dateLabel":  "Jun 30, 2026",
         "folderLabel":  "2026/06/30/migrant-mother",
         "href":  "/resource/art/2026/06/30/migrant-mother/en/index.html",
         "zhHref":  "/resource/art/2026/06/30/migrant-mother/zh/index.html",
-        "image":  "/resource/art/2026/06/30/migrant-mother/cover.jpg"
+        "image":  "/resource/art/2026/06/30/migrant-mother/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/06/30/migrant-mother/en/card-1.jpg",
+                      "/resource/art/2026/06/30/migrant-mother/en/card-2.jpg",
+                      "/resource/art/2026/06/30/migrant-mother/en/card-3.jpg",
+                      "/resource/art/2026/06/30/migrant-mother/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "A Stock\u0027s Price Tag, Not Its Size, Just Won a Dow Seat",
         "date":  "2026-06-30",
         "dateLabel":  "Jun 30, 2026",
         "folderLabel":  "2026/06/30/alphabet-joins-dow",
         "href":  "/resource/news/2026/06/30/alphabet-joins-dow/en/index.html",
         "zhHref":  "/resource/news/2026/06/30/alphabet-joins-dow/zh/index.html",
-        "image":  "/resource/news/2026/06/30/alphabet-joins-dow/cover.jpg"
+        "image":  "/resource/news/2026/06/30/alphabet-joins-dow/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/06/30/alphabet-joins-dow/en/card-1.jpg",
+                      "/resource/news/2026/06/30/alphabet-joins-dow/en/card-2.jpg",
+                      "/resource/news/2026/06/30/alphabet-joins-dow/en/card-3.jpg",
+                      "/resource/news/2026/06/30/alphabet-joins-dow/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The Kiss · Gustav Klimt",
         "date":  "2026-06-29",
         "dateLabel":  "Jun 29, 2026",
         "folderLabel":  "2026/06/29/the-kiss-gustav-klimt",
         "href":  "/resource/art/2026/06/29/the-kiss-gustav-klimt/en/index.html",
         "zhHref":  "/resource/art/2026/06/29/the-kiss-gustav-klimt/zh/index.html",
-        "image":  "/resource/art/2026/06/29/the-kiss-gustav-klimt/cover.jpg"
+        "image":  "/resource/art/2026/06/29/the-kiss-gustav-klimt/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/06/29/the-kiss-gustav-klimt/en/card-1.jpg",
+                      "/resource/art/2026/06/29/the-kiss-gustav-klimt/en/card-2.jpg",
+                      "/resource/art/2026/06/29/the-kiss-gustav-klimt/en/card-3.jpg",
+                      "/resource/art/2026/06/29/the-kiss-gustav-klimt/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Hormuz Eases, Oil Falls From $126 to $72: A Great Energy Unwind",
         "date":  "2026-06-29",
         "dateLabel":  "Jun 29, 2026",
         "folderLabel":  "2026/06/29/hormuz-ceasefire-oil",
         "href":  "/resource/news/2026/06/29/hormuz-ceasefire-oil/en/index.html",
         "zhHref":  "/resource/news/2026/06/29/hormuz-ceasefire-oil/zh/index.html",
-        "image":  "/resource/news/2026/06/29/hormuz-ceasefire-oil/cover.jpg"
+        "image":  "/resource/news/2026/06/29/hormuz-ceasefire-oil/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/06/29/hormuz-ceasefire-oil/en/card-1.jpg",
+                      "/resource/news/2026/06/29/hormuz-ceasefire-oil/en/card-2.jpg",
+                      "/resource/news/2026/06/29/hormuz-ceasefire-oil/en/card-3.jpg",
+                      "/resource/news/2026/06/29/hormuz-ceasefire-oil/en/card-4.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Trump Accounts Go Live· $1,000 for Every U.S. Newborn",
         "date":  "2026-06-28",
         "dateLabel":  "Jun 28, 2026",
         "folderLabel":  "2026/06/28/trump-accounts-launch",
         "href":  "/resource/news/2026/06/28/trump-accounts-launch/en/index.html",
         "zhHref":  "/resource/news/2026/06/28/trump-accounts-launch/zh/index.html",
-        "image":  "/resource/news/2026/06/28/trump-accounts-launch/cover.jpg"
+        "image":  "/resource/news/2026/06/28/trump-accounts-launch/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/06/28/trump-accounts-launch/en/card-1.jpg",
+                      "/resource/news/2026/06/28/trump-accounts-launch/en/card-2.jpg",
+                      "/resource/news/2026/06/28/trump-accounts-launch/en/card-3.jpg",
+                      "/resource/news/2026/06/28/trump-accounts-launch/en/card-4.jpg",
+                      "/resource/news/2026/06/28/trump-accounts-launch/en/card-5.jpg",
+                      "/resource/news/2026/06/28/trump-accounts-launch/en/card-6.jpg",
+                      "/resource/news/2026/06/28/trump-accounts-launch/en/card-7.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Café Terrace at Night · Vincent van Gogh",
         "date":  "2026-06-28",
         "dateLabel":  "Jun 28, 2026",
         "folderLabel":  "2026/06/28/cafe-terrace-at-night",
         "href":  "/resource/art/2026/06/28/cafe-terrace-at-night/en/index.html",
         "zhHref":  "/resource/art/2026/06/28/cafe-terrace-at-night/zh/index.html",
-        "image":  "/resource/art/2026/06/28/cafe-terrace-at-night/cover.jpg"
+        "image":  "/resource/art/2026/06/28/cafe-terrace-at-night/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/06/28/cafe-terrace-at-night/en/card-1.jpg",
+                      "/resource/art/2026/06/28/cafe-terrace-at-night/en/card-2.jpg",
+                      "/resource/art/2026/06/28/cafe-terrace-at-night/en/card-3.jpg",
+                      "/resource/art/2026/06/28/cafe-terrace-at-night/en/card-4.jpg",
+                      "/resource/art/2026/06/28/cafe-terrace-at-night/en/card-5.jpg",
+                      "/resource/art/2026/06/28/cafe-terrace-at-night/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The Great Wave off Kanagawa · Hokusai",
         "date":  "2026-06-27",
         "dateLabel":  "Jun 27, 2026",
         "folderLabel":  "2026/06/27/the-great-wave-off-kanagawa",
         "href":  "/resource/art/2026/06/27/the-great-wave-off-kanagawa/en/index.html",
         "zhHref":  "/resource/art/2026/06/27/the-great-wave-off-kanagawa/zh/index.html",
-        "image":  "/resource/art/2026/06/27/the-great-wave-off-kanagawa/cover.jpg"
+        "image":  "/resource/art/2026/06/27/the-great-wave-off-kanagawa/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/06/27/the-great-wave-off-kanagawa/en/card-1.jpg",
+                      "/resource/art/2026/06/27/the-great-wave-off-kanagawa/en/card-2.jpg",
+                      "/resource/art/2026/06/27/the-great-wave-off-kanagawa/en/card-3.jpg",
+                      "/resource/art/2026/06/27/the-great-wave-off-kanagawa/en/card-4.jpg",
+                      "/resource/art/2026/06/27/the-great-wave-off-kanagawa/en/card-5.jpg",
+                      "/resource/art/2026/06/27/the-great-wave-off-kanagawa/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "Rate cuts are off · a Fed HIKE is back on the table (Warsh\u0027s hawkish turn)",
         "date":  "2026-06-27",
         "dateLabel":  "Jun 27, 2026",
         "folderLabel":  "2026/06/27/fed-hike-back-on-table",
         "href":  "/resource/news/2026/06/27/fed-hike-back-on-table/en/index.html",
         "zhHref":  "/resource/news/2026/06/27/fed-hike-back-on-table/zh/index.html",
-        "image":  "/resource/news/2026/06/27/fed-hike-back-on-table/cover.jpg"
+        "image":  "/resource/news/2026/06/27/fed-hike-back-on-table/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/06/27/fed-hike-back-on-table/en/card-1.jpg",
+                      "/resource/news/2026/06/27/fed-hike-back-on-table/en/card-2.jpg",
+                      "/resource/news/2026/06/27/fed-hike-back-on-table/en/card-3.jpg",
+                      "/resource/news/2026/06/27/fed-hike-back-on-table/en/card-4.jpg",
+                      "/resource/news/2026/06/27/fed-hike-back-on-table/en/card-5.jpg",
+                      "/resource/news/2026/06/27/fed-hike-back-on-table/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
         "title":  "The Great Rotation: Dow Hits a Record While Tech Slides",
         "date":  "2026-06-26",
         "dateLabel":  "Jun 26, 2026",
         "folderLabel":  "2026/06/26/great-rotation",
         "href":  "/resource/news/2026/06/26/great-rotation/en/index.html",
         "zhHref":  "/resource/news/2026/06/26/great-rotation/zh/index.html",
-        "image":  "/resource/news/2026/06/26/great-rotation/cover.jpg"
+        "image":  "/resource/news/2026/06/26/great-rotation/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/06/26/great-rotation/en/card-1.jpg",
+                      "/resource/news/2026/06/26/great-rotation/en/card-2.jpg",
+                      "/resource/news/2026/06/26/great-rotation/en/card-3.jpg",
+                      "/resource/news/2026/06/26/great-rotation/en/card-4.jpg",
+                      "/resource/news/2026/06/26/great-rotation/en/card-5.jpg",
+                      "/resource/news/2026/06/26/great-rotation/en/card-6.jpg"
+                  ]
     },
     {
         "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "Girl with a Pearl Earring · Vermeer",
         "date":  "2026-06-26",
         "dateLabel":  "Jun 26, 2026",
         "folderLabel":  "2026/06/26/girl-with-a-pearl-earring",
         "href":  "/resource/art/2026/06/26/girl-with-a-pearl-earring/en/index.html",
         "zhHref":  "/resource/art/2026/06/26/girl-with-a-pearl-earring/zh/index.html",
-        "image":  "/resource/art/2026/06/26/girl-with-a-pearl-earring/cover.jpg"
+        "image":  "/resource/art/2026/06/26/girl-with-a-pearl-earring/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/06/26/girl-with-a-pearl-earring/en/card-1.jpg",
+                      "/resource/art/2026/06/26/girl-with-a-pearl-earring/en/card-2.jpg",
+                      "/resource/art/2026/06/26/girl-with-a-pearl-earring/en/card-3.jpg",
+                      "/resource/art/2026/06/26/girl-with-a-pearl-earring/en/card-4.jpg",
+                      "/resource/art/2026/06/26/girl-with-a-pearl-earring/en/card-5.jpg",
+                      "/resource/art/2026/06/26/girl-with-a-pearl-earring/en/card-6.jpg"
+                  ]
     }
 ]

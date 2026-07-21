@@ -1,0 +1,488 @@
+---
+import catalog from '../../data/resource-catalog.json';
+
+type TopicId = 'art' | 'news' | 'science' | 'release';
+
+interface ResourceEntry {
+  kind: TopicId;
+  categories?: TopicId[];
+  cards?: string[];
+  title: string;
+  date: string;
+  dateLabel: string;
+  folderLabel: string;
+  href: string;
+  zhHref: string;
+  image: string;
+}
+
+const MAX_PER_TOPIC = 10;
+const entries = catalog as ResourceEntry[];
+
+const topics = [
+  {
+    id: 'art', label: 'Art', note: 'RYB · visual culture', x: 23, y: 27,
+    color: '#a84d45', colors: ['#b9554d', '#d5ad4f', '#5475a2', '#263c3a'],
+  },
+  {
+    id: 'news', label: 'News', note: 'Ink · systems in motion', x: 74, y: 22,
+    color: '#3f617d', colors: ['#496e8b', '#8a9691', '#d4b36b', '#263c3a'],
+  },
+  {
+    id: 'science', label: 'Science', note: 'RGB · research and evidence', x: 70, y: 74,
+    color: '#47735f', colors: ['#aa625c', '#5f8a6d', '#5679a8', '#263c3a'],
+  },
+  {
+    id: 'release', label: 'Fashion', note: 'CMYK · releases and editions', x: 29, y: 79,
+    color: '#9c5879', colors: ['#5b9aaa', '#a45b82', '#d3ae51', '#263c3a'],
+  },
+] as const;
+
+const topicById = new Map(topics.map((topic) => [topic.id, topic]));
+
+const clusterOffsets: Record<TopicId, readonly { x: number; y: number }[]> = {
+  art: [
+    { x: -16, y: -13 }, { x: -6, y: -8 }, { x: 4, y: -18 }, { x: 12, y: -9 }, { x: 18, y: 2 },
+    { x: 9, y: 8 }, { x: 15, y: 15 }, { x: -3, y: 18 }, { x: -17, y: 10 }, { x: -11, y: -1 },
+  ],
+  news: [
+    { x: -18, y: -9 }, { x: -9, y: -16 }, { x: 2, y: -9 }, { x: 9, y: -18 }, { x: 17, y: -6 },
+    { x: 13, y: 5 }, { x: 18, y: 13 }, { x: 3, y: 16 }, { x: -8, y: 9 }, { x: -15, y: 3 },
+  ],
+  science: [
+    { x: -18, y: -7 }, { x: -10, y: -16 }, { x: 0, y: -9 }, { x: 8, y: -18 }, { x: 17, y: -8 },
+    { x: 12, y: 4 }, { x: 18, y: 13 }, { x: 4, y: 17 }, { x: -9, y: 11 }, { x: -16, y: 3 },
+  ],
+  release: [
+    { x: -17, y: -10 }, { x: -7, y: -17 }, { x: 2, y: -8 }, { x: 11, y: -17 }, { x: 18, y: -4 },
+    { x: 11, y: 7 }, { x: 16, y: 15 }, { x: 1, y: 17 }, { x: -11, y: 10 }, { x: -18, y: 2 },
+  ],
+};
+
+const nodeSizes = [62, 70, 58, 66, 74, 61, 69, 57, 72, 64] as const;
+
+const entriesByTopic = new Map<TopicId, ResourceEntry[]>();
+topics.forEach((topic) => {
+  entriesByTopic.set(
+    topic.id,
+    entries.filter((entry) => (entry.categories ?? [entry.kind]).includes(topic.id)).slice(0, MAX_PER_TOPIC),
+  );
+});
+
+const clusterUsage: Record<TopicId, number> = { art: 0, news: 0, science: 0, release: 0 };
+const seenEntries = new Set<string>();
+const articleNodes: Array<ResourceEntry & {
+  categories: TopicId[];
+  cards: string[];
+  palette: (typeof topics)[number];
+  homeTopic: TopicId;
+  position: { x: number; y: number };
+  size: number;
+  id: string;
+}> = [];
+
+topics.forEach((topic) => {
+  entriesByTopic.get(topic.id)?.forEach((entry) => {
+    if (seenEntries.has(entry.href)) return;
+    seenEntries.add(entry.href);
+
+    const categories = entry.categories?.length ? entry.categories : [entry.kind];
+    const preferredHome = categories.includes(entry.kind) ? entry.kind : categories[0];
+    const homeTopic = clusterUsage[preferredHome] < MAX_PER_TOPIC ? preferredHome : topic.id;
+    const home = topicById.get(homeTopic) ?? topics[0];
+    const clusterIndex = clusterUsage[homeTopic] % clusterOffsets[homeTopic].length;
+    const offset = clusterOffsets[homeTopic][clusterIndex];
+    clusterUsage[homeTopic] += 1;
+
+    articleNodes.push({
+      ...entry,
+      categories,
+      cards: entry.cards?.length ? entry.cards : [entry.image],
+      palette: home,
+      homeTopic,
+      position: { x: home.x + offset.x, y: home.y + offset.y },
+      size: nodeSizes[clusterIndex],
+      id: `resource-node-${articleNodes.length}`,
+    });
+  });
+});
+
+const connections = articleNodes.flatMap((entry) => entry.categories.flatMap((category) => {
+  const topic = topics.find((candidate) => candidate.id === category);
+  if (!topic) return [];
+  return [{ topic: topic.id, topicX: topic.x, topicY: topic.y, color: topic.color, entry }];
+}));
+---
+
+<section class="resource-explorer" data-resource-explorer hidden aria-labelledby="resource-explorer-title">
+  <h2 id="resource-explorer-title" class="resource-explorer-title">Connected resource field</h2>
+
+  <div class="resource-network" data-resource-network data-focused="false">
+    <svg class="resource-network-map" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      {topics.map((topic) => (
+        <path class="resource-root-connection" d={`M 50 50 Q ${(50 + topic.x) / 2} ${(50 + topic.y) / 2 - 3} ${topic.x} ${topic.y}`} />
+      ))}
+      {connections.map((connection, index) => (
+        <path
+          class="resource-article-connection"
+          data-topic={connection.topic}
+          data-entry-id={connection.entry.id}
+          style={`--connection-color:${connection.color}`}
+          d={`M ${connection.topicX} ${connection.topicY} Q ${(connection.topicX + connection.entry.position.x) / 2 + ((index % 5) - 2) * 1.15} ${(connection.topicY + connection.entry.position.y) / 2 + ((index % 3) - 1) * 1.4} ${connection.entry.position.x} ${connection.entry.position.y}`}
+        />
+      ))}
+    </svg>
+
+    <div class="resource-root-node" aria-hidden="true">
+      <span>藏</span>
+      <strong>Resources</strong>
+    </div>
+
+    {topics.map((topic) => (
+      <button
+        class="resource-hub"
+        type="button"
+        data-topic={topic.id}
+        data-highlighted="false"
+        style={`--hub-x:${topic.x}%;--hub-y:${topic.y}%;--hub-color:${topic.color};--hub-c1:${topic.colors[0]};--hub-c2:${topic.colors[1]};--hub-c3:${topic.colors[2]};--hub-c4:${topic.colors[3]}`}
+        aria-pressed="false"
+      >
+        <span class="resource-hub-artwork" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="resource-hub-count">{String(entriesByTopic.get(topic.id)?.length ?? 0).padStart(2, '0')}</span>
+        <strong>{topic.label}</strong>
+        <small>{topic.note}</small>
+      </button>
+    ))}
+
+    <div class="resource-article-nodes">
+      {articleNodes.map((entry, index) => (
+        <button
+          class="resource-article-node"
+          type="button"
+          data-entry-id={entry.id}
+          data-topics={entry.categories.join(' ')}
+          data-primary-topic={entry.homeTopic}
+          data-highlighted="false"
+          style={`--node-x:${entry.position.x}%;--node-y:${entry.position.y}%;--node-size:${entry.size}px;--node-delay:${index * -0.43}s;--node-accent:${entry.palette.color};--node-soft:${entry.palette.colors[1]}`}
+          aria-label={`Preview ${entry.title}`}
+        >
+          <span class="resource-node-tile">
+            <img src={entry.cards[0]} alt="" loading="lazy" />
+            <span>{entry.date.slice(5).replace('-', ' / ')}</span>
+          </span>
+          <span class="resource-node-caption">{entry.title}</span>
+        </button>
+      ))}
+    </div>
+
+    <div class="resource-focus-layer" data-resource-focus-layer hidden>
+      {articleNodes.map((entry) => (
+        <article
+          class="resource-focus-panel"
+          data-entry-id={entry.id}
+          data-primary-topic={entry.homeTopic}
+          style={`--focus-x:${entry.position.x}%;--focus-y:${entry.position.y}%;--focus-accent:${entry.palette.color};--focus-c1:${entry.palette.colors[0]};--focus-c2:${entry.palette.colors[1]};--focus-c3:${entry.palette.colors[2]};--focus-c4:${entry.palette.colors[3]}`}
+          hidden
+        >
+          <button class="resource-focus-close" type="button" aria-label="Return to all resource cards">×</button>
+          <div class="resource-focus-carousel">
+            <button class="resource-focus-step resource-focus-previous" type="button" aria-label="Previous card">
+              <span aria-hidden="true">←</span>
+            </button>
+            <a class="resource-focus-card" href={entry.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${entry.title} in a new tab`}>
+              <span class="resource-focus-images">
+                {entry.cards.map((card, index) => (
+                  <img src={card} alt="" data-slide-index={index} hidden={index !== 0} />
+                ))}
+              </span>
+              <span class="resource-focus-copy">
+                <span><strong>{entry.categories.join(' + ')}</strong><time datetime={entry.date}>{entry.dateLabel}</time></span>
+                <b>{entry.title}</b>
+                <small>Click again to open the full article ↗</small>
+              </span>
+            </a>
+            <button class="resource-focus-step resource-focus-next" type="button" aria-label="Next card">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+          <p class="resource-focus-status" aria-live="polite">
+            Card <span data-focus-current>01</span> / {String(entry.cards.length).padStart(2, '0')}
+          </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const explorer = document.querySelector<HTMLElement>('[data-resource-explorer]');
+
+  if (explorer) {
+    const network = explorer.querySelector<HTMLElement>('[data-resource-network]');
+    const focusLayer = explorer.querySelector<HTMLElement>('[data-resource-focus-layer]');
+    const hubs = [...explorer.querySelectorAll<HTMLButtonElement>('.resource-hub')];
+    const articleButtons = [...explorer.querySelectorAll<HTMLButtonElement>('.resource-article-node')];
+    const connections = [...explorer.querySelectorAll<SVGPathElement>('.resource-article-connection')];
+    const panels = [...explorer.querySelectorAll<HTMLElement>('.resource-focus-panel')];
+    let activeTopic = '';
+    let activePanel: HTMLElement | null = null;
+    let activeSlide = 0;
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+
+    const renderPanel = () => {
+      if (!activePanel) return;
+      const slides = [...activePanel.querySelectorAll<HTMLImageElement>('[data-slide-index]')];
+      const current = activePanel.querySelector<HTMLElement>('[data-focus-current]');
+      slides.forEach((slide, index) => { slide.hidden = index !== activeSlide; });
+      if (current) current.textContent = String(activeSlide + 1).padStart(2, '0');
+      activePanel.querySelectorAll<HTMLButtonElement>('.resource-focus-step').forEach((button) => {
+        button.disabled = slides.length <= 1;
+      });
+    };
+
+    const closeFocus = () => {
+      if (!network || !focusLayer) return;
+      focusLayer.hidden = true;
+      network.dataset.focused = 'false';
+      panels.forEach((panel) => { panel.hidden = true; });
+      articleButtons.forEach((button) => { button.dataset.selected = 'false'; });
+      activePanel = null;
+      activeSlide = 0;
+    };
+
+    const openFocus = (entryId: string) => {
+      if (!network || !focusLayer) return;
+      const nextPanel = panels.find((panel) => panel.dataset.entryId === entryId);
+      if (!nextPanel) return;
+      activePanel = nextPanel;
+      activeSlide = 0;
+      panels.forEach((panel) => { panel.hidden = panel !== nextPanel; });
+      articleButtons.forEach((button) => { button.dataset.selected = String(button.dataset.entryId === entryId); });
+      focusLayer.hidden = false;
+      network.dataset.focused = 'true';
+      renderPanel();
+      nextPanel.querySelector<HTMLAnchorElement>('.resource-focus-card')?.focus({ preventScroll: true });
+    };
+
+    const stepFocus = (direction: number) => {
+      if (!activePanel) return;
+      const count = activePanel.querySelectorAll('[data-slide-index]').length;
+      if (count <= 1) return;
+      activeSlide = (activeSlide + direction + count) % count;
+      renderPanel();
+    };
+
+    const highlightTopic = (topic: string) => {
+      activeTopic = activeTopic === topic ? '' : topic;
+      hubs.forEach((hub) => {
+        const highlighted = hub.dataset.topic === activeTopic;
+        hub.dataset.highlighted = String(highlighted);
+        hub.setAttribute('aria-pressed', String(highlighted));
+      });
+      articleButtons.forEach((button) => {
+        const highlighted = !activeTopic || (button.dataset.topics?.split(' ').includes(activeTopic) ?? false);
+        button.dataset.highlighted = String(highlighted);
+      });
+      connections.forEach((connection) => {
+        connection.dataset.highlighted = String(!activeTopic || connection.dataset.topic === activeTopic);
+      });
+      if (network) network.dataset.activeTopic = activeTopic;
+    };
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    articleButtons.forEach((button) => {
+      let pointerId = -1;
+      let startX = 0;
+      let startY = 0;
+      let moved = false;
+      let suppressClick = false;
+      let settleTimer = 0;
+
+      const setPull = (x: number, y: number, rotation: number, scale: number) => {
+        button.style.setProperty('--drag-x', `${x.toFixed(2)}px`);
+        button.style.setProperty('--drag-y', `${y.toFixed(2)}px`);
+        button.style.setProperty('--drag-r', `${rotation.toFixed(2)}deg`);
+        button.style.setProperty('--pull-scale', scale.toFixed(3));
+      };
+
+      const settle = () => {
+        window.clearTimeout(settleTimer);
+        button.dataset.dragging = 'false';
+        button.style.transition = reduceMotion ? 'none' : 'transform 420ms cubic-bezier(.22,1.18,.36,1)';
+        setPull(0, 0, 0, 1);
+        settleTimer = window.setTimeout(() => { button.style.removeProperty('transition'); }, 440);
+      };
+
+      button.addEventListener('pointerdown', (event) => {
+        if (event.button !== 0 || activePanel) return;
+        window.clearTimeout(settleTimer);
+        pointerId = event.pointerId;
+        startX = event.clientX;
+        startY = event.clientY;
+        moved = false;
+        button.style.transition = 'none';
+        button.setPointerCapture(event.pointerId);
+      });
+
+      button.addEventListener('pointermove', (event) => {
+        if (event.pointerId !== pointerId || !button.hasPointerCapture(event.pointerId)) return;
+        const rawX = event.clientX - startX;
+        const rawY = event.clientY - startY;
+        const distance = Math.hypot(rawX, rawY);
+        if (distance < 3) return;
+        event.preventDefault();
+        moved = true;
+        button.dataset.dragging = 'true';
+
+        const limit = Math.min(56, Math.max(38, (network?.clientWidth ?? 840) * .045));
+        const resistedDistance = limit * Math.tanh(distance / (limit * .78));
+        const ratio = resistedDistance / distance;
+        const pullX = rawX * ratio;
+        const pullY = rawY * ratio;
+        const tension = resistedDistance / limit;
+        setPull(pullX, pullY, (pullX / limit) * 1.65, 1 + tension * .025);
+      });
+
+      const releasePointer = (event: PointerEvent) => {
+        if (event.pointerId !== pointerId) return;
+        suppressClick = moved;
+        pointerId = -1;
+        settle();
+      };
+
+      button.addEventListener('pointerup', releasePointer);
+      button.addEventListener('pointercancel', releasePointer);
+
+      button.addEventListener('click', () => {
+        if (suppressClick) {
+          suppressClick = false;
+          return;
+        }
+        const entryId = button.dataset.entryId ?? '';
+        if (reduceMotion) {
+          openFocus(entryId);
+          return;
+        }
+        button.classList.remove('is-tapped');
+        requestAnimationFrame(() => button.classList.add('is-tapped'));
+        window.setTimeout(() => {
+          button.classList.remove('is-tapped');
+          openFocus(entryId);
+        }, 230);
+      });
+    });
+    hubs.forEach((hub) => hub.addEventListener('click', () => highlightTopic(hub.dataset.topic ?? '')));
+    panels.forEach((panel) => {
+      panel.querySelector<HTMLButtonElement>('.resource-focus-close')?.addEventListener('click', closeFocus);
+      panel.querySelector<HTMLButtonElement>('.resource-focus-previous')?.addEventListener('click', () => stepFocus(-1));
+      panel.querySelector<HTMLButtonElement>('.resource-focus-next')?.addEventListener('click', () => stepFocus(1));
+      panel.addEventListener('pointerdown', (event) => {
+        swipeStartX = event.clientX;
+        swipeStartY = event.clientY;
+        panel.dataset.swiped = 'false';
+      });
+      panel.addEventListener('pointerup', (event) => {
+        const deltaX = event.clientX - swipeStartX;
+        const deltaY = event.clientY - swipeStartY;
+        if (Math.abs(deltaX) < 54 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) return;
+        panel.dataset.swiped = 'true';
+        stepFocus(deltaX < 0 ? 1 : -1);
+      });
+      panel.querySelector<HTMLAnchorElement>('.resource-focus-card')?.addEventListener('click', (event) => {
+        if (panel.dataset.swiped !== 'true') return;
+        event.preventDefault();
+        panel.dataset.swiped = 'false';
+      });
+    });
+
+    explorer.addEventListener('resource:select-kind', (event) => {
+      if (!(event instanceof CustomEvent) || typeof event.detail !== 'string') return;
+      if (activeTopic === event.detail) activeTopic = '';
+      highlightTopic(event.detail);
+    });
+
+    explorer.addEventListener('resource:close-focus', closeFocus);
+
+    window.addEventListener('keydown', (event) => {
+      if (!activePanel) return;
+      if (event.key === 'Escape') closeFocus();
+      if (event.key === 'ArrowLeft') stepFocus(-1);
+      if (event.key === 'ArrowRight') stepFocus(1);
+    });
+  }
+</script>
+
+<style>
+  .resource-explorer{width:100%;max-width:none;margin:0 auto clamp(72px,8vw,112px);scroll-margin-top:90px}
+  .resource-explorer[hidden],.resource-focus-layer[hidden],.resource-focus-panel[hidden]{display:none}
+  .resource-explorer-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .resource-network{position:relative;min-height:clamp(980px,68vw,1160px);overflow:hidden;border:1px solid rgba(23,32,29,.2);border-radius:20px;background:radial-gradient(circle at 50% 49%,rgba(255,255,255,.64),transparent 22%),linear-gradient(rgba(248,247,242,.54),rgba(232,231,227,.34)),url('/assets/paper-tile.png');box-shadow:0 34px 82px -62px rgba(23,32,29,.72),inset 0 1px rgba(255,255,255,.78)}
+  .resource-network::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 23% 27%,rgba(193,59,51,.11),transparent 18%),radial-gradient(ellipse at 74% 22%,rgba(42,85,165,.09),transparent 19%),radial-gradient(ellipse at 70% 74%,rgba(71,115,95,.085),transparent 18%),radial-gradient(ellipse at 29% 79%,rgba(156,88,121,.08),transparent 18%);mix-blend-mode:multiply}
+  .resource-network-map{position:absolute;inset:0;z-index:1;width:100%;height:100%;pointer-events:none}
+  .resource-network-map path{fill:none;vector-effect:non-scaling-stroke;transition:opacity .3s var(--ease),stroke .3s var(--ease)}
+  .resource-root-connection{stroke:rgba(23,32,29,.11);stroke-width:.7}
+  .resource-article-connection{stroke:rgba(23,32,29,.23);stroke-width:.68;stroke-dasharray:1.65 2.8}
+  .resource-network[data-active-topic]:not([data-active-topic=""]) .resource-article-connection[data-highlighted="false"]{opacity:.08}
+  .resource-network[data-active-topic]:not([data-active-topic=""]) .resource-article-connection[data-highlighted="true"]{stroke:var(--connection-color);stroke-width:1.1}
+  .resource-root-node{position:absolute;left:50%;top:50%;z-index:3;display:grid;place-items:center;width:88px;height:88px;border:1px solid rgba(23,32,29,.2);border-radius:50%;background:rgba(248,247,242,.86);box-shadow:0 14px 34px rgba(23,32,29,.08);transform:translate(-50%,-50%);transition:opacity .28s var(--ease),transform .28s var(--ease)}
+  .resource-root-node span{position:absolute;color:rgba(23,50,46,.07);font-family:"Ma Shan Zheng",cursive;font-size:61px;line-height:1}
+  .resource-root-node strong{position:relative;color:var(--t1);font-family:var(--fmono);font-size:9px;font-weight:500;letter-spacing:.13em;text-transform:uppercase}
+  .resource-network[data-focused="true"] .resource-root-node{opacity:0;transform:translate(-50%,-50%) scale(.84)}
+  .resource-hub{position:absolute;left:var(--hub-x);top:var(--hub-y);z-index:6;isolation:isolate;display:grid;grid-template-columns:auto 1fr;grid-template-areas:'count title' 'note note';align-items:center;gap:2px 8px;width:150px;padding:11px 13px;border:1px solid color-mix(in srgb,var(--hub-color) 38%,rgba(23,32,29,.18));border-radius:13px;background:linear-gradient(128deg,rgba(255,255,255,.9),color-mix(in srgb,var(--hub-c2) 10%,rgba(248,247,242,.88)));box-shadow:0 10px 28px color-mix(in srgb,var(--hub-color) 10%,transparent);transform:translate(-50%,-50%);text-align:left;cursor:pointer;transition:border-color .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease),transform .25s var(--ease),opacity .25s var(--ease)}
+  .resource-hub::before{content:"";position:absolute;left:-4px;top:50%;width:8px;height:8px;border:2px solid var(--hub-color);border-radius:50%;background:var(--paper);transform:translateY(-50%)}
+  .resource-hub-artwork{position:absolute;z-index:-1;inset:-38px -30px;overflow:hidden;opacity:.42;pointer-events:none;filter:saturate(.76);transition:opacity .3s var(--ease),transform .45s var(--ease)}
+  .resource-hub-artwork::after{content:"";position:absolute;inset:0;background:url('/assets/paper-tile.png');background-size:260px;mix-blend-mode:soft-light;opacity:.42}
+  .resource-hub-artwork i{position:absolute;display:block;mix-blend-mode:multiply;filter:blur(.65px);transform:rotate(var(--block-r,0deg));clip-path:polygon(2% 4%,96% 0,100% 91%,91% 100%,4% 96%,0 10%)}
+  .resource-hub-artwork i::after{content:"";position:absolute;inset:-8px;background:radial-gradient(ellipse at center,currentColor 0 38%,transparent 74%);opacity:.34;filter:blur(8px)}
+  .resource-hub-artwork i:nth-child(1){left:7%;top:15%;width:52%;height:41%;--block-r:-1.4deg;background:color-mix(in srgb,var(--hub-c1) 34%,transparent);color:var(--hub-c1)}
+  .resource-hub-artwork i:nth-child(2){right:8%;top:8%;width:39%;height:55%;--block-r:1.2deg;background:color-mix(in srgb,var(--hub-c2) 30%,transparent);color:var(--hub-c2)}
+  .resource-hub-artwork i:nth-child(3){left:25%;bottom:7%;width:57%;height:34%;--block-r:.5deg;background:color-mix(in srgb,var(--hub-c3) 27%,transparent);color:var(--hub-c3)}
+  .resource-hub-artwork i:nth-child(4){right:0;bottom:12%;width:22%;height:31%;--block-r:-2deg;background:color-mix(in srgb,var(--hub-c4) 16%,transparent);color:var(--hub-c4)}
+  .resource-hub-count{grid-area:count;color:var(--hub-color);font-family:var(--fmono);font-size:10px;font-weight:600;font-variant-numeric:tabular-nums}
+  .resource-hub>strong{grid-area:title;color:var(--t1);font-family:var(--fdisplay);font-size:20px;font-weight:500}
+  .resource-hub>small{grid-area:note;color:var(--t3);font-size:10px;line-height:1.28}
+  .resource-hub:hover,.resource-hub[data-highlighted="true"]{border-color:var(--hub-color);background:rgba(255,255,255,.94);box-shadow:0 16px 38px color-mix(in srgb,var(--hub-color) 18%,rgba(23,32,29,.08));transform:translate(-50%,-50%) translateY(-2px)}
+  .resource-hub:hover .resource-hub-artwork,.resource-hub[data-highlighted="true"] .resource-hub-artwork{opacity:.68;transform:scale(1.035)}
+  .resource-network[data-active-topic]:not([data-active-topic=""]) .resource-hub[data-highlighted="false"]{opacity:.52}
+  .resource-article-nodes{position:absolute;inset:0;z-index:4}
+  .resource-article-node{--drag-x:0px;--drag-y:0px;--drag-r:0deg;--pull-scale:1;--node-scale:1;position:absolute;left:var(--node-x);top:var(--node-y);width:var(--node-size,66px);padding:0;border:0;background:none;transform:translate(calc(-50% + var(--drag-x)),calc(-50% + var(--drag-y))) rotate(var(--drag-r)) scale(var(--node-scale)) scale(var(--pull-scale));cursor:grab;touch-action:none;user-select:none;will-change:transform;transition:opacity .25s var(--ease),filter .25s var(--ease),transform .25s var(--ease)}
+  .resource-node-tile{position:relative;display:block;height:calc(var(--node-size,66px) * 1.24);overflow:hidden;border:1px solid color-mix(in srgb,var(--node-accent) 42%,rgba(23,32,29,.18));border-radius:8px;background:linear-gradient(145deg,rgba(255,255,255,.96),color-mix(in srgb,var(--node-soft) 11%,rgba(248,247,242,.94)));box-shadow:0 10px 24px color-mix(in srgb,var(--node-accent) 13%,rgba(23,32,29,.08));animation:resource-node-drift 5.5s var(--ease) var(--node-delay) infinite alternate}
+  .resource-node-tile::after{content:"";position:absolute;left:0;right:0;bottom:18px;height:3px;background:linear-gradient(90deg,var(--node-accent) 0 42%,transparent 42% 58%,var(--node-soft) 58% 81%,transparent 81%);mix-blend-mode:multiply;opacity:.68}
+  .resource-node-tile img{display:block;width:100%;height:calc(var(--node-size,66px) * .94);object-fit:cover;pointer-events:none;filter:saturate(.62) contrast(.97);transition:filter .25s var(--ease),transform .35s var(--ease)}
+  .resource-node-tile>span{position:relative;display:grid;min-height:17px;place-items:center;padding:3px 2px 4px;border-top:1px solid rgba(23,32,29,.12);background:rgba(255,255,255,.84);color:var(--t2);font-family:var(--fmono);font-size:10px;font-weight:500;line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums}
+  .resource-node-caption{position:absolute;left:50%;top:calc(100% + 8px);width:170px;padding:7px 9px;border:1px solid rgba(23,32,29,.18);border-radius:8px;background:rgba(248,247,242,.96);box-shadow:0 10px 26px rgba(23,32,29,.12);color:var(--t2);font-family:var(--fbody);font-size:10px;line-height:1.25;opacity:0;pointer-events:none;transform:translate(-50%,-4px);transition:opacity .2s var(--ease),transform .2s var(--ease)}
+  .resource-article-node:hover,.resource-article-node:focus-visible,.resource-article-node[data-selected="true"]{--node-scale:1.08;z-index:9}
+  .resource-article-node[data-dragging="true"]{--node-scale:1.035;z-index:11;cursor:grabbing}
+  .resource-article-node[data-dragging="true"] .resource-node-tile{animation-play-state:paused;box-shadow:0 17px 34px color-mix(in srgb,var(--node-accent) 21%,rgba(23,32,29,.1))}
+  .resource-article-node.is-tapped .resource-node-tile{animation:resource-node-tap 230ms cubic-bezier(.2,.8,.25,1) both}
+  .resource-article-node:hover .resource-node-tile img,.resource-article-node:focus-visible .resource-node-tile img{filter:saturate(.9) contrast(1.04);transform:scale(1.035)}
+  .resource-article-node:hover .resource-node-caption,.resource-article-node:focus-visible .resource-node-caption{opacity:1;transform:translate(-50%,0)}
+  .resource-network[data-active-topic]:not([data-active-topic=""]) .resource-article-node[data-highlighted="false"]{opacity:.22;filter:grayscale(.7)}
+  .resource-network[data-focused="true"] .resource-article-node:not([data-selected="true"]){opacity:.3;filter:blur(.45px) saturate(.5)}
+  .resource-focus-layer{position:absolute;inset:0;z-index:12;pointer-events:none}
+  .resource-focus-panel{position:absolute;left:clamp(260px,var(--focus-x),calc(100% - 260px));top:clamp(326px,var(--focus-y),calc(100% - 326px));width:min(500px,52vw);transform:translate(-50%,-50%);pointer-events:auto}
+  .resource-focus-panel::before{content:"";position:absolute;z-index:-1;inset:-24px -34px;border-radius:22px;background:linear-gradient(90deg,color-mix(in srgb,var(--focus-c1) 25%,transparent) 0 27%,transparent 27% 34%,color-mix(in srgb,var(--focus-c2) 22%,transparent) 34% 62%,transparent 62% 69%,color-mix(in srgb,var(--focus-c3) 22%,transparent) 69% 88%,color-mix(in srgb,var(--focus-c4) 12%,transparent) 88%);filter:blur(8px) saturate(.76);opacity:.72;clip-path:polygon(1% 5%,97% 0,100% 94%,95% 100%,3% 97%,0 12%);mix-blend-mode:multiply;pointer-events:none}
+  .resource-focus-close{position:absolute;right:2px;top:-44px;z-index:4;display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(23,32,29,.25);border-radius:50%;background:rgba(248,247,242,.9);color:var(--t2);font-size:19px;cursor:pointer}
+  .resource-focus-carousel{display:grid;grid-template-columns:42px minmax(0,360px) 42px;align-items:center;justify-content:center;gap:13px}
+  .resource-focus-card{display:grid;grid-template-rows:450px auto;overflow:hidden;border:1px solid rgba(23,32,29,.3);border-radius:17px;background:#f8f7f2;box-shadow:0 30px 78px rgba(23,32,29,.25);color:inherit;text-decoration:none;animation:resource-focus-arrive .36s var(--ease) both}
+  .resource-focus-images{display:block;overflow:hidden;background:#ece9e1}
+  .resource-focus-images img{display:block;width:100%;height:100%;object-fit:cover}
+  .resource-focus-images img[hidden]{display:none}
+  .resource-focus-copy{display:flex;flex-direction:column;min-height:112px;padding:14px 17px 15px;background:linear-gradient(145deg,#fff,#efede6)}
+  .resource-focus-copy>span{display:flex;justify-content:space-between;gap:12px;color:var(--t3);font-family:var(--fmono);font-size:10.5px;font-weight:500;letter-spacing:.05em;text-transform:uppercase}
+  .resource-focus-copy strong{color:var(--focus-accent);font-weight:500}
+  .resource-focus-copy>b{display:-webkit-box;overflow:hidden;margin-top:8px;color:var(--t1);font-family:var(--fdisplay);font-size:21px;font-weight:500;line-height:1.04;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  .resource-focus-copy>small{margin-top:auto;color:var(--teal);font-family:var(--fmono);font-size:10.5px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+  .resource-focus-step{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(23,32,29,.25);border-radius:50%;background:rgba(248,247,242,.9);color:var(--t2);cursor:pointer;transition:background .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease)}
+  .resource-focus-step:hover:not(:disabled){border-color:rgba(42,85,165,.58);background:#fff;transform:scale(1.06)}
+  .resource-focus-step:disabled{opacity:.28;cursor:not-allowed}
+  .resource-focus-status{margin-top:9px;color:var(--t3);font-family:var(--fmono);font-size:10px;font-weight:500;letter-spacing:.05em;text-align:center;text-transform:uppercase}
+  @keyframes resource-node-drift{from{transform:translate3d(0,-3px,0) rotate(-.35deg)}to{transform:translate3d(0,5px,0) rotate(.45deg)}}
+  @keyframes resource-node-tap{0%{transform:translate3d(0,0,0) rotate(0) scale(1)}26%{transform:translate3d(-1.5px,1px,0) rotate(-1.15deg) scale(.985)}52%{transform:translate3d(1.2px,-.5px,0) rotate(.9deg) scale(1.012)}76%{transform:translate3d(-.55px,.25px,0) rotate(-.35deg) scale(.998)}100%{transform:translate3d(0,0,0) rotate(0) scale(1)}}
+  @keyframes resource-focus-arrive{from{opacity:0;transform:translateY(9px) scale(.975)}to{opacity:1;transform:none}}
+  @media(max-width:900px){.resource-network{min-height:900px}.resource-hub{width:132px}.resource-focus-panel{width:min(456px,66vw)}.resource-focus-carousel{grid-template-columns:36px minmax(0,320px) 36px;gap:8px}.resource-focus-card{grid-template-rows:400px auto}}
+  @media(max-width:680px){.resource-network{min-height:820px}.resource-network-map{opacity:.75}.resource-root-node{width:70px;height:70px}.resource-root-node span{font-size:48px}.resource-hub{width:108px;padding:8px}.resource-hub>strong{font-size:17px}.resource-hub>small{display:none}.resource-article-node{width:clamp(42px,calc(var(--node-size,66px) * .72),54px)}.resource-node-tile{height:calc(clamp(42px,calc(var(--node-size,66px) * .72),54px) * 1.24)}.resource-node-tile img{height:calc(clamp(42px,calc(var(--node-size,66px) * .72),54px) * .94)}.resource-node-tile>span{min-height:15px;padding:3px 1px;font-size:9px}.resource-focus-panel{left:50%;top:50%;width:calc(100% - 20px)}.resource-focus-carousel{grid-template-columns:32px minmax(0,254px) 32px;gap:4px}.resource-focus-card{grid-template-rows:318px auto}.resource-focus-copy{min-height:98px;padding:11px 12px}.resource-focus-copy>b{font-size:17px}.resource-focus-step{width:32px;height:32px}.resource-focus-close{right:8px;top:-38px;width:30px;height:30px}.resource-node-caption{display:none}}
+  @media(prefers-reduced-motion:reduce){.resource-node-tile,.resource-focus-card,.resource-article-node.is-tapped .resource-node-tile{animation:none}.resource-network-map path,.resource-root-node,.resource-hub,.resource-article-node,.resource-node-tile img,.resource-node-caption,.resource-focus-step{transition:none}}
+</style>

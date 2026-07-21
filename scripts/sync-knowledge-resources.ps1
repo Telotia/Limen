@@ -1,6 +1,8 @@
 param(
   [string]$ArtRoot = 'C:\Users\whyke\Nextcloud\Library\knowledge\art',
   [string]$NewsRoot = 'C:\Users\whyke\Nextcloud\Library\knowledge\finance',
+  [string]$ScienceRoot = 'C:\Users\whyke\Nextcloud\Library\knowledge\science',
+  [string]$ReleaseRoot = 'C:\Users\whyke\Nextcloud\Library\knowledge\release',
   [string]$RepoRoot = (Split-Path -Parent $PSScriptRoot)
 )
 
@@ -62,7 +64,7 @@ function Get-HtmlTitle {
   $middleDot = [char]0x00B7
   $emDash = [char]0x2014
   $enDash = [char]0x2013
-  $title = $title -replace "^(Art|Finance)\s*[$middleDot|:]\s*", ''
+  $title = $title -replace "^(Art|Finance|News|Science|Release)\s*[$middleDot|:]\s*", ''
   $title = $title -replace "[$emDash$enDash]", " $middleDot "
   $title = $title -replace "\s*$middleDot\s*\d{4}-\d{2}-\d{2}\s*$", ''
   $title = $title -replace "\s*$middleDot\s*Finance\s*$", ''
@@ -94,7 +96,7 @@ function Get-ResourceFolders {
 
 function Sync-Collection {
   param(
-    [Parameter(Mandatory)][ValidateSet('art', 'news')][string]$Kind,
+    [Parameter(Mandatory)][ValidateSet('art', 'news', 'science', 'release')][string]$Kind,
     [Parameter(Mandatory)][string]$Root
   )
 
@@ -126,6 +128,16 @@ function Sync-Collection {
       }
     }
 
+    $cardUrls = @()
+    $englishCardSources = Get-ChildItem -LiteralPath (Join-Path $folder.Source 'en') -Filter 'card-*.png' -File -ErrorAction SilentlyContinue |
+      Sort-Object { [int]([regex]::Match($_.BaseName, '\d+').Value) }
+    foreach ($cardSource in $englishCardSources) {
+      $cardNumber = [regex]::Match($cardSource.BaseName, '\d+').Value
+      $cardFileName = "card-$cardNumber.jpg"
+      Convert-ToWebJpeg -Source $cardSource.FullName -Destination (Join-Path $destination "en\$cardFileName") -MaxWidth 720 -Quality 78 -MaxBytes 524288
+      $cardUrls += "/resource/$Kind/$relativeFolder/en/$cardFileName"
+    }
+
     if ($Kind -eq 'art') {
       $sourceImage = Join-Path $folder.Source 'source.jpg'
       if (Test-Path -LiteralPath $sourceImage) {
@@ -136,6 +148,11 @@ function Sync-Collection {
       $sourceImage = Join-Path $folder.Source 'en\card-1.png'
       if (Test-Path -LiteralPath $sourceImage) {
         Convert-ToWebJpeg -Source $sourceImage -Destination (Join-Path $destination 'cover.jpg') -MaxWidth 960 -Quality 82 -MaxBytes 1310720
+      } else {
+        $sourceImage = Join-Path $folder.Source 'source.jpg'
+        if (Test-Path -LiteralPath $sourceImage) {
+          Convert-ToWebJpeg -Source $sourceImage -Destination (Join-Path $destination 'cover.jpg') -MaxWidth 960 -Quality 82 -MaxBytes 1310720
+        }
       }
     }
 
@@ -147,8 +164,18 @@ function Sync-Collection {
       $title = $title -join ' '
     }
 
+    $categories = @($Kind)
+    $metadataPath = Join-Path $folder.Source 'resource.json'
+    if (Test-Path -LiteralPath $metadataPath) {
+      $metadata = Get-Content -LiteralPath $metadataPath -Raw | ConvertFrom-Json
+      if ($metadata.categories) {
+        $categories = @($metadata.categories | ForEach-Object { ([string]$_).ToLowerInvariant() } | Select-Object -Unique)
+      }
+    }
+
     $entries += [pscustomobject][ordered]@{
       kind = $Kind
+      categories = $categories
       title = $title
       date = $dateText
       dateLabel = $date.ToString('MMM d, yyyy', $culture)
@@ -156,6 +183,7 @@ function Sync-Collection {
       href = "/resource/$Kind/$relativeFolder/en/index.html"
       zhHref = "/resource/$Kind/$relativeFolder/zh/index.html"
       image = "/resource/$Kind/$relativeFolder/cover.jpg"
+      cards = $cardUrls
     }
   }
   return $entries
@@ -164,6 +192,8 @@ function Sync-Collection {
 $catalog = @()
 $catalog += Sync-Collection -Kind art -Root $ArtRoot
 $catalog += Sync-Collection -Kind news -Root $NewsRoot
+if (Test-Path -LiteralPath $ScienceRoot) { $catalog += Sync-Collection -Kind science -Root $ScienceRoot }
+if (Test-Path -LiteralPath $ReleaseRoot) { $catalog += Sync-Collection -Kind release -Root $ReleaseRoot }
 $catalog = $catalog | Sort-Object { $_.date }, { $_.title } -Descending
 
 $catalogPath = Join-Path $RepoRoot 'src\data\resource-catalog.json'
@@ -172,5 +202,7 @@ $catalogJson = $catalog | ConvertTo-Json -Depth 5
 
 $artCount = @($catalog | Where-Object kind -eq 'art').Count
 $newsCount = @($catalog | Where-Object kind -eq 'news').Count
-Write-Output "Synced $artCount Art entries and $newsCount News entries."
+$scienceCount = @($catalog | Where-Object kind -eq 'science').Count
+$releaseCount = @($catalog | Where-Object kind -eq 'release').Count
+Write-Output "Synced $artCount Art, $newsCount News, $scienceCount Science, and $releaseCount Release entries."
 Write-Output "Catalog: $catalogPath"
