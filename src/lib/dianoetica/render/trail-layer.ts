@@ -82,6 +82,12 @@ function drawOneTrail(ctx: CanvasRenderingContext2D, p: Particle, world: World):
     )
   }
 
+  // The chaotic path begins like wet ink touching paper: a faint, narrow
+  // trace that gains body as the two Lorenz wings are drawn. This preserves
+  // the final geometry without flashing a fully seeded history on screen.
+  const reveal = chaoticIntroReveal(p, world)
+  baseAlpha *= 0.14 + 0.86 * reveal
+
   // Copy samples into scratch buffers. Telos can keep a much longer memory
   // than we render; sampled iteration preserves old lobes without building a
   // giant polygon every frame.
@@ -101,7 +107,7 @@ function drawOneTrail(ctx: CanvasRenderingContext2D, p: Particle, world: World):
 
   if (p.isTelos) {
     if (!telosTrail) return
-    drawChunkedTelosStroke(ctx, N, h, sat, lt, baseAlpha, telosTrail, world)
+    drawChunkedTelosStroke(ctx, N, h, sat, lt, baseAlpha, telosTrail, world, 0.48 + 0.52 * reveal)
     return
   }
 
@@ -190,6 +196,7 @@ function drawChunkedTelosStroke(
   baseAlpha: number,
   telosTrail: TelosTrailConfig,
   world: World,
+  widthScale: number,
 ): void {
   const numChunks = Math.max(2, Math.min(telosTrail.chunkCount, Math.floor(N / 8)))
   const maxSegmentLength = Math.max(
@@ -219,7 +226,7 @@ function drawChunkedTelosStroke(
     grad.addColorStop(0, `hsla(${h},${sat}%,${lt}%,${telosAlpha(tStart, baseAlpha, telosTrail)})`)
     grad.addColorStop(1, `hsla(${h},${sat}%,${lt}%,${telosAlpha(tEnd, baseAlpha, telosTrail)})`)
     ctx.strokeStyle = grad
-    ctx.lineWidth = telosLineWidth((tStart + tEnd) * 0.5, telosTrail)
+    ctx.lineWidth = telosLineWidth((tStart + tEnd) * 0.5, telosTrail) * widthScale
 
     ctx.beginPath()
     ctx.moveTo(sx[startIdx], sy[startIdx])
@@ -236,6 +243,16 @@ function drawChunkedTelosStroke(
 
   ctx.lineCap = previousLineCap
   ctx.lineJoin = previousLineJoin
+}
+
+function chaoticIntroReveal(p: Particle, world: World): number {
+  if (!p.isTelos || world.telosPattern !== 'chaotic pattern' || world.chaoticIntroComplete) {
+    return 1
+  }
+
+  const duration = TELOS_PATTERN_CONFIG['chaotic pattern'].chaoticIntro.durationSeconds
+  const progress = clamp(world.phaseTime / duration, 0, 1)
+  return progress * progress * (3 - 2 * progress)
 }
 
 function telosAlpha(t: number, baseAlpha: number, telosTrail: TelosTrailConfig): string {

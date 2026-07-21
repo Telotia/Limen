@@ -186,7 +186,9 @@ export const TELOS_PATTERN_CONFIG = {
     },
     maxParticles: 8,
     chaoticIntro: {
-      durationSeconds: 0.001, // effectively instant — skip the wind-up intro
+      // Let the Lorenz path draw itself. The long distance gives both wings
+      // enough time to emerge while the duration keeps the reveal legible.
+      durationSeconds: 5.2,
       pathDistancePx: 5000,
     },
     chaoticPath: {

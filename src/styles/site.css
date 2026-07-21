@@ -176,6 +176,66 @@
     max-width:none;
     overflow:visible !important;
   }
+  .ui-window-stage{
+    --ui-window-stage-gutter:clamp(12px,2vw,32px);
+    --ui-window-stage-playroom:clamp(72px,9vw,120px);
+    position:relative;
+    min-width:0;
+    width:100%;
+    height:calc(var(--ui-window-base-height) + var(--ui-window-stage-playroom) + 52px);
+    overflow:hidden;
+    contain:layout paint;
+    isolation:isolate;
+  }
+  .ui-window-stage>.ui-manipulable-window[data-window-freedom="contained"]{
+    position:absolute !important;
+    inset:0 auto auto var(--ui-window-stage-gutter);
+    width:calc(100% - (var(--ui-window-stage-gutter) * 2));
+    height:var(--ui-window-base-height);
+    max-width:100%;
+  }
+  .ui-window-stage>.ui-manipulable-window[data-window-freedom="contained"] .ui-window-resize-left,
+  .ui-window-stage>.ui-manipulable-window[data-window-freedom="contained"] .ui-window-resize-right,
+  .ui-window-stage>.ui-manipulable-window[data-window-freedom="contained"] .ui-window-resize-bottom,
+  .ui-window-stage>.ui-manipulable-window[data-window-freedom="contained"] .ui-window-resize-bottom-left,
+  .ui-window-stage>.ui-manipulable-window[data-window-freedom="contained"] .ui-window-resize-bottom-right{
+    opacity:.64;
+  }
+  .ui-window-drag-handle{
+    position:absolute;
+    z-index:14;
+    top:4px;
+    left:50%;
+    width:46px;
+    height:18px;
+    padding:0;
+    border:0;
+    border-radius:9px;
+    background:transparent;
+    transform:translateX(-50%);
+    cursor:grab;
+    touch-action:none;
+    opacity:.42;
+    transition:opacity .18s var(--ease),background-color .18s var(--ease);
+  }
+  .ui-window-drag-handle::before{
+    content:"";
+    position:absolute;
+    left:9px;
+    right:9px;
+    top:8px;
+    height:1px;
+    border-radius:999px;
+    background:rgba(38,56,50,.52);
+    box-shadow:0 -3px rgba(38,56,50,.14),0 3px rgba(38,56,50,.14);
+  }
+  .ui-window-drag-handle:hover,
+  .ui-window-drag-handle:focus-visible{
+    opacity:1;
+    outline:none;
+    background:rgba(42,85,165,.075);
+  }
+  .ui-manipulable-window.is-window-dragging .ui-window-drag-handle{cursor:grabbing;opacity:1}
   .ui-window-viewport{
     position:relative;
     z-index:1;
@@ -186,6 +246,7 @@
     scrollbar-color:rgba(42,85,165,.34) transparent;
   }
   .ui-manipulable-window.has-user-window-size .ui-window-viewport{height:100%}
+  .ui-manipulable-window[data-window-freedom="contained"]>.ui-window-viewport{height:100%}
   .ui-manipulable-window .ui-window-clip{transform-origin:top left}
   .ui-window-tools{
     position:absolute;
@@ -435,6 +496,9 @@
 
   @media(max-width:820px){
     .ui-window-resize-handle{display:none}
+    .ui-window-stage{height:auto;overflow:visible;contain:none}
+    .ui-window-stage>.ui-manipulable-window[data-window-freedom="contained"]{position:relative !important;inset:auto;width:auto;height:auto}
+    .ui-window-drag-handle{display:none}
     .ui-manipulable-window{width:auto !important;height:auto !important;max-width:100% !important}
     .ui-manipulable-window .ui-window-viewport{height:auto !important}
     .ui-window-tools{top:auto;bottom:9px;right:0;transform:translateX(-36px);max-width:calc(100vw - 36px);gap:4px}
@@ -449,7 +513,7 @@
   }
 
   @media(prefers-reduced-motion:reduce){
-    .ui-window-tool-button,.ui-window-resize-handle,.workspace-app-icon{transition:none}
+    .ui-window-tool-button,.ui-window-resize-handle,.ui-window-drag-handle,.workspace-app-icon{transition:none}
     .workspace-window.is-closing,.workspace-window.is-opening,.workspace-app-launcher.is-arriving{animation:none}
   }
 
