@@ -182,10 +182,17 @@
     position:relative;
     min-width:0;
     width:100%;
-    height:calc(var(--ui-window-base-height) + var(--ui-window-stage-playroom) + 52px);
+    height:max(
+      calc(var(--ui-window-base-height) + var(--ui-window-stage-playroom) + 52px),
+      var(--ui-window-user-height, 0px)
+    );
     overflow:hidden;
     contain:layout paint;
     isolation:isolate;
+  }
+  .ui-window-stage[data-window-expand-right="true"]{
+    overflow:visible;
+    contain:layout;
   }
   .ui-window-stage>.ui-manipulable-window[data-window-freedom="contained"]{
     position:absolute !important;
@@ -319,11 +326,11 @@
   .ui-window-resize-right{
     top:34px;
     bottom:30px;
-    width:9px;
+    width:15px;
     cursor:ew-resize;
   }
-  .ui-window-resize-left{left:-3px}
-  .ui-window-resize-right{right:-3px}
+  .ui-window-resize-left{left:-6px}
+  .ui-window-resize-right{right:-6px}
   .ui-window-resize-top,
   .ui-window-resize-bottom{
     left:34px;
@@ -345,8 +352,8 @@
   }
   .ui-window-resize-left::after,
   .ui-window-resize-right::after{top:50%;width:1px;height:34px;transform:translateY(-50%)}
-  .ui-window-resize-left::after{left:4px}
-  .ui-window-resize-right::after{right:4px}
+  .ui-window-resize-left::after{left:7px}
+  .ui-window-resize-right::after{right:7px}
   .ui-window-resize-top::after,
   .ui-window-resize-bottom::after{left:50%;width:34px;height:1px;transform:translateX(-50%)}
   .ui-window-resize-top::after{top:4px}

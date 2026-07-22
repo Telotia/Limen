@@ -240,6 +240,23 @@
     var pendingFrame = 0;
     var pendingSize = null;
 
+    function stageCanUseRightPageMargin(stageRect) {
+      if (!contained || !stage || !stage.parentElement) return false;
+      var parentRect = stage.parentElement.getBoundingClientRect();
+      return Math.abs(parentRect.right - stageRect.right) <= 2;
+    }
+
+    function containedRightBoundary(stageRect) {
+      var boundary = stageRect.right;
+      if (!stageCanUseRightPageMargin(stageRect)) return boundary;
+      var section = stage.closest('section');
+      if (!section) return boundary;
+      var sectionRect = section.getBoundingClientRect();
+      var sectionStyle = window.getComputedStyle(section);
+      var sectionPaddingRight = parseFloat(sectionStyle.paddingRight) || 0;
+      return Math.max(boundary, sectionRect.right - sectionPaddingRight);
+    }
+
     function sizeLimits(rect, xDirection) {
       var currentRect = rect || frame.getBoundingClientRect();
       var viewportMargin = 12;
@@ -248,13 +265,18 @@
         var stageRect = stage.getBoundingClientRect();
         var minimumWidth = Math.max(spec.minWidth, Math.round(stageRect.width * .58));
         var minimumHeight = Math.max(spec.minHeight, Math.round(baseFrameHeight * .64));
-        var rightLimit = Math.max(minimumWidth, stageRect.right - currentRect.left);
+        var rightLimit = Math.max(minimumWidth, containedRightBoundary(stageRect) - currentRect.left);
         var leftLimit = Math.max(minimumWidth, currentRect.right - stageRect.left);
+        var downwardCanvas = Math.max(
+          4096,
+          baseFrameHeight + window.innerHeight * 2,
+          document.documentElement.scrollHeight + window.innerHeight
+        );
         return {
           minWidth: Math.min(minimumWidth, stageRect.width),
           maxWidth: Math.max(minimumWidth, xDirection < 0 ? leftLimit : rightLimit),
-          minHeight: Math.min(minimumHeight, stageRect.height),
-          maxHeight: Math.max(minimumHeight, stageRect.bottom - currentRect.top - 42)
+          minHeight: minimumHeight,
+          maxHeight: Math.max(minimumHeight, downwardCanvas)
         };
       }
       var maxWidth = viewportWidth;
@@ -271,6 +293,12 @@
     var offsetX = 0;
     var offsetY = 0;
 
+    function syncContainedStageHeight(height) {
+      if (!contained || !stage) return;
+      var frameHeight = Math.max(spec.minHeight, Math.ceil(height || frame.getBoundingClientRect().height));
+      stage.style.setProperty('--ui-window-user-height', frameHeight + 52 + 'px');
+    }
+
     function writeSize() {
       pendingFrame = 0;
       if (!pendingSize) return;
@@ -281,6 +309,7 @@
       offsetX += pendingSize.left - resizedRect.left;
       offsetY += pendingSize.top - resizedRect.top;
       frame.style.translate = Math.round(offsetX) + 'px ' + Math.round(offsetY) + 'px';
+      syncContainedStageHeight(pendingSize.height);
       pendingSize = null;
     }
 
@@ -343,6 +372,7 @@
       frame.style.removeProperty('width');
       frame.style.removeProperty('height');
       frame.style.removeProperty('translate');
+      if (stage) stage.style.removeProperty('--ui-window-user-height');
       offsetX = 0;
       offsetY = 0;
       frame.classList.remove('is-window-resizing', 'has-user-window-size', 'has-user-window-position');
@@ -353,6 +383,10 @@
     var keepContainedFrameInsideStage = function () {};
 
     if (contained && stage) {
+      if (stageCanUseRightPageMargin(stage.getBoundingClientRect())) {
+        stage.dataset.windowExpandRight = 'true';
+      }
+
       function containedPositionLimits(rect) {
         var stageRect = stage.getBoundingClientRect();
         return {
@@ -366,14 +400,14 @@
       keepContainedFrameInsideStage = function () {
         var stageRect = stage.getBoundingClientRect();
         var rect = frame.getBoundingClientRect();
-        var nextWidth = Math.min(rect.width, stageRect.width);
-        var nextHeight = Math.min(rect.height, Math.max(spec.minHeight, stageRect.height - 42));
-        if (nextWidth !== rect.width || nextHeight !== rect.height) {
+        var allowedWidth = Math.max(spec.minWidth, containedRightBoundary(stageRect) - rect.left);
+        var nextWidth = Math.min(rect.width, allowedWidth);
+        if (nextWidth !== rect.width) {
           frame.style.width = Math.round(nextWidth) + 'px';
-          frame.style.height = Math.round(nextHeight) + 'px';
           frame.classList.add('has-user-window-size');
           rect = frame.getBoundingClientRect();
         }
+        syncContainedStageHeight(rect.height);
         var limits = containedPositionLimits(rect);
         var nextLeft = clamp(rect.left, limits.minLeft, limits.maxLeft);
         var nextTop = clamp(rect.top, limits.minTop, limits.maxTop);
