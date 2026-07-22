@@ -506,11 +506,33 @@
     .ui-window-stage{height:auto;overflow:visible;contain:none}
     .ui-window-stage>.ui-manipulable-window[data-window-freedom="contained"]{position:relative !important;inset:auto;width:auto;height:auto}
     .ui-window-drag-handle{display:none}
-    .ui-manipulable-window{width:auto !important;height:auto !important;max-width:100% !important}
+    .ui-manipulable-window{
+      width:auto !important;
+      height:auto !important;
+      max-width:100% !important;
+      margin-bottom:64px !important;
+    }
     .ui-manipulable-window .ui-window-viewport{height:auto !important}
-    .ui-window-tools{top:auto;bottom:9px;right:0;transform:translateX(-36px);max-width:calc(100vw - 36px);gap:4px}
-    .ui-window-tool-label{font-size:11px;padding-left:4px}
-    .ui-window-tool-button{height:25px;min-width:27px;padding:0 7px;font-size:11px}
+    /* Controls are a dock belonging to the window, not an overlay on its
+       content. The reserved margin keeps the dock clear of instructions,
+       diagrams, following copy, and the footer at every phone width. */
+    .ui-manipulable-window>.ui-window-tools{
+      top:auto;
+      right:0;
+      bottom:-10px;
+      left:auto;
+      transform:translateY(100%);
+      max-width:100%;
+      min-height:44px;
+      padding:5px;
+      gap:4px;
+      border-radius:11px;
+      background:rgba(248,247,242,.97);
+      box-shadow:0 14px 28px -22px rgba(23,32,29,.74),inset 0 1px rgba(255,255,255,.92);
+      white-space:nowrap;
+    }
+    .ui-window-tool-label{font-size:11px;padding:0 4px}
+    .ui-window-tool-button{height:34px;min-width:34px;padding:0 9px;font-size:12px}
     .ui-window-fit{display:none}
     .workspace-window[data-window-os="windows"] .workspace-toolbar{padding:6px 7px !important}
     .workspace-window[data-window-os="windows"] .window-controls{width:auto;margin-left:auto}
