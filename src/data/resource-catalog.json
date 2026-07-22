@@ -1,5 +1,46 @@
 [
     {
+        "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
+        "title":  "The Ten Largest, No. 3, Youth · A Painting Written for the Future",
+        "date":  "2026-07-22",
+        "dateLabel":  "Jul 22, 2026",
+        "folderLabel":  "2026/07/22/the-ten-largest-no3-youth-af-klint",
+        "href":  "/resource/art/2026/07/22/the-ten-largest-no3-youth-af-klint/en/index.html",
+        "zhHref":  "/resource/art/2026/07/22/the-ten-largest-no3-youth-af-klint/zh/index.html",
+        "image":  "/resource/art/2026/07/22/the-ten-largest-no3-youth-af-klint/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/22/the-ten-largest-no3-youth-af-klint/en/card-1.jpg",
+                      "/resource/art/2026/07/22/the-ten-largest-no3-youth-af-klint/en/card-2.jpg",
+                      "/resource/art/2026/07/22/the-ten-largest-no3-youth-af-klint/en/card-3.jpg",
+                      "/resource/art/2026/07/22/the-ten-largest-no3-youth-af-klint/en/card-4.jpg",
+                      "/resource/art/2026/07/22/the-ten-largest-no3-youth-af-klint/en/card-5.jpg",
+                      "/resource/art/2026/07/22/the-ten-largest-no3-youth-af-klint/en/card-6.jpg",
+                      "/resource/art/2026/07/22/the-ten-largest-no3-youth-af-klint/en/card-7.jpg"
+                  ]
+    },
+    {
+        "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
+        "title":  "The Tariff Expires Friday. Trump Swapped In a Harder One.",
+        "date":  "2026-07-22",
+        "dateLabel":  "Jul 22, 2026",
+        "folderLabel":  "2026/07/22/tariff-durability-shift",
+        "href":  "/resource/news/2026/07/22/tariff-durability-shift/en/index.html",
+        "zhHref":  "/resource/news/2026/07/22/tariff-durability-shift/zh/index.html",
+        "image":  "/resource/news/2026/07/22/tariff-durability-shift/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/22/tariff-durability-shift/en/card-1.jpg",
+                      "/resource/news/2026/07/22/tariff-durability-shift/en/card-2.jpg",
+                      "/resource/news/2026/07/22/tariff-durability-shift/en/card-3.jpg",
+                      "/resource/news/2026/07/22/tariff-durability-shift/en/card-4.jpg"
+                  ]
+    },
+    {
         "kind":  "news",
         "categories":  [
                            "news"
