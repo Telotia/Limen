@@ -1,13 +1,13 @@
 (function initTelotiaWindows() {
   var zoomLevels = [0.9, 1, 1.15, 1.3, 1.5];
   var targetSpecs = [
-    { selector: '.home-hero .glow-wrap', key: 'hero-ledger', label: 'Evidence ledger', minWidth: 320, minHeight: 180 },
-    { selector: '.home-path .proof-ledger', key: 'proof-path', label: 'Proof path', minWidth: 360, minHeight: 220 },
-    { selector: '.workspace-window', key: 'workspace', label: 'Review workspace', minWidth: 560, minHeight: 320, os: true },
-    { selector: '#demo .glow-wrap', key: 'demo', label: 'Interactive demo', minWidth: 420, minHeight: 280 },
-    { selector: '.process-window', key: 'process', label: 'Process view', minWidth: 420, minHeight: 220 },
-    { selector: '.particle-lifecycle-panel', key: 'particle-lifecycle', label: 'Particle lifecycle', minWidth: 420, minHeight: 300 },
-    { selector: '#tlSpikeWrap', key: 'verdict', label: 'Verdict space', minWidth: 360, minHeight: 220 }
+    { selector: '.home-hero .glow-wrap', key: 'hero-ledger', label: 'Evidence ledger', minWidth: 320, minHeight: 180, mode: 'contained' },
+    { selector: '.home-path .proof-ledger', key: 'proof-path', label: 'Proof path', minWidth: 360, minHeight: 220, mode: 'contained' },
+    { selector: '.workspace-window', key: 'workspace', label: 'Review workspace', minWidth: 560, minHeight: 320, mode: 'desktop', os: true },
+    { selector: '#demo .glow-wrap', key: 'demo', label: 'Interactive demo', minWidth: 420, minHeight: 280, mode: 'contained' },
+    { selector: '.process-window', key: 'process', label: 'Process view', minWidth: 420, minHeight: 220, mode: 'contained' },
+    { selector: '.particle-lifecycle-panel', key: 'particle-lifecycle', label: 'Particle lifecycle', minWidth: 420, minHeight: 300, mode: 'contained' },
+    { selector: '#tlSpikeWrap', key: 'verdict', label: 'Verdict space', minWidth: 360, minHeight: 220, mode: 'contained', preserveHeight: true }
   ];
 
   function clamp(value, min, max) {
@@ -79,8 +79,28 @@
 
   function enhance(frame, spec, index) {
     if (frame.dataset.windowControlsReady === 'true') return;
+    var contained = spec.mode === 'contained';
+    var stage = null;
+    var initialRect = frame.getBoundingClientRect();
+    var baseFrameWidth = Math.ceil(initialRect.width);
+    var baseFrameHeight = Math.ceil(initialRect.height);
+    if (contained) {
+      var frameStyle = window.getComputedStyle(frame);
+      stage = document.createElement('div');
+      stage.className = 'ui-window-stage';
+      stage.dataset.windowStage = spec.key;
+      stage.style.setProperty('--ui-window-base-height', baseFrameHeight + 'px');
+      stage.style.marginTop = frameStyle.marginTop;
+      stage.style.marginRight = frameStyle.marginRight;
+      stage.style.marginBottom = frameStyle.marginBottom;
+      stage.style.marginLeft = frameStyle.marginLeft;
+      frame.style.margin = '0';
+      frame.parentNode.insertBefore(stage, frame);
+      stage.appendChild(frame);
+    }
     frame.dataset.windowControlsReady = 'true';
     frame.dataset.windowKey = spec.key + '-' + index;
+    frame.dataset.windowFreedom = contained ? 'contained' : 'desktop';
     frame.classList.add('ui-manipulable-window');
     frame.setAttribute('aria-label', frame.getAttribute('aria-label') || spec.label);
 
@@ -90,6 +110,29 @@
     viewport.className = 'ui-window-viewport';
     clip.parentNode.insertBefore(viewport, clip);
     viewport.appendChild(clip);
+
+    function syncContainedBaseSize() {
+      if (!contained || !stage || frame.classList.contains('has-user-window-size')) return;
+      if (spec.preserveHeight) {
+        stage.style.setProperty('--ui-window-base-height', baseFrameHeight + 'px');
+        stage.style.setProperty('--ui-window-base-width', baseFrameWidth + 'px');
+        return;
+      }
+      frame.style.height = 'auto';
+      var preparedRect = frame.getBoundingClientRect();
+      baseFrameWidth = Math.ceil(preparedRect.width);
+      baseFrameHeight = Math.ceil(preparedRect.height);
+      stage.style.setProperty('--ui-window-base-height', baseFrameHeight + 'px');
+      stage.style.setProperty('--ui-window-base-width', baseFrameWidth + 'px');
+      frame.style.removeProperty('height');
+    }
+
+    syncContainedBaseSize();
+    if (contained && document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        requestAnimationFrame(syncContainedBaseSize);
+      });
+    }
 
     var toolbar = document.createElement('div');
     toolbar.className = 'ui-window-tools';
@@ -181,22 +224,61 @@
     var resizeHandles = [
       makeResizeHandle(-1, 0, 'ui-window-resize-left', 'vertical', 'Resize ' + spec.label + ' from left edge'),
       makeResizeHandle(1, 0, 'ui-window-resize-right', 'vertical', 'Resize ' + spec.label + ' from right edge'),
-      makeResizeHandle(0, -1, 'ui-window-resize-top', 'horizontal', 'Resize ' + spec.label + ' from top edge'),
       makeResizeHandle(0, 1, 'ui-window-resize-bottom', 'horizontal', 'Resize ' + spec.label + ' from bottom edge'),
-      makeResizeHandle(-1, -1, 'ui-window-resize-top-left ui-window-resize-corner', 'horizontal', 'Resize ' + spec.label + ' from top left corner'),
-      makeResizeHandle(1, -1, 'ui-window-resize-top-right ui-window-resize-corner', 'horizontal', 'Resize ' + spec.label + ' from top right corner'),
       makeResizeHandle(-1, 1, 'ui-window-resize-bottom-left ui-window-resize-corner', 'horizontal', 'Resize ' + spec.label + ' from bottom left corner'),
       makeResizeHandle(1, 1, 'ui-window-resize-bottom-right ui-window-resize-corner', 'horizontal', 'Resize ' + spec.label + ' from bottom right corner')
     ];
+    if (!contained) {
+      resizeHandles.push(
+        makeResizeHandle(0, -1, 'ui-window-resize-top', 'horizontal', 'Resize ' + spec.label + ' from top edge'),
+        makeResizeHandle(-1, -1, 'ui-window-resize-top-left ui-window-resize-corner', 'horizontal', 'Resize ' + spec.label + ' from top left corner'),
+        makeResizeHandle(1, -1, 'ui-window-resize-top-right ui-window-resize-corner', 'horizontal', 'Resize ' + spec.label + ' from top right corner')
+      );
+    }
 
     var resizeState = null;
     var pendingFrame = 0;
     var pendingSize = null;
 
+    function stageCanUseRightPageMargin(stageRect) {
+      if (!contained || !stage || !stage.parentElement) return false;
+      var parentRect = stage.parentElement.getBoundingClientRect();
+      return Math.abs(parentRect.right - stageRect.right) <= 2;
+    }
+
+    function containedRightBoundary(stageRect) {
+      var boundary = stageRect.right;
+      if (!stageCanUseRightPageMargin(stageRect)) return boundary;
+      var section = stage.closest('section');
+      if (!section) return boundary;
+      var sectionRect = section.getBoundingClientRect();
+      var sectionStyle = window.getComputedStyle(section);
+      var sectionPaddingRight = parseFloat(sectionStyle.paddingRight) || 0;
+      return Math.max(boundary, sectionRect.right - sectionPaddingRight);
+    }
+
     function sizeLimits(rect, xDirection) {
       var currentRect = rect || frame.getBoundingClientRect();
       var viewportMargin = 12;
       var viewportWidth = Math.max(280, window.innerWidth - viewportMargin * 2);
+      if (contained && stage) {
+        var stageRect = stage.getBoundingClientRect();
+        var minimumWidth = Math.max(spec.minWidth, Math.round(stageRect.width * .58));
+        var minimumHeight = Math.max(spec.minHeight, Math.round(baseFrameHeight * .64));
+        var rightLimit = Math.max(minimumWidth, containedRightBoundary(stageRect) - currentRect.left);
+        var leftLimit = Math.max(minimumWidth, currentRect.right - stageRect.left);
+        var downwardCanvas = Math.max(
+          4096,
+          baseFrameHeight + window.innerHeight * 2,
+          document.documentElement.scrollHeight + window.innerHeight
+        );
+        return {
+          minWidth: Math.min(minimumWidth, stageRect.width),
+          maxWidth: Math.max(minimumWidth, xDirection < 0 ? leftLimit : rightLimit),
+          minHeight: minimumHeight,
+          maxHeight: Math.max(minimumHeight, downwardCanvas)
+        };
+      }
       var maxWidth = viewportWidth;
       if (xDirection > 0) maxWidth = window.innerWidth - viewportMargin - currentRect.left;
       if (xDirection < 0) maxWidth = currentRect.right - viewportMargin;
@@ -211,6 +293,12 @@
     var offsetX = 0;
     var offsetY = 0;
 
+    function syncContainedStageHeight(height) {
+      if (!contained || !stage) return;
+      var frameHeight = Math.max(spec.minHeight, Math.ceil(height || frame.getBoundingClientRect().height));
+      stage.style.setProperty('--ui-window-user-height', frameHeight + 52 + 'px');
+    }
+
     function writeSize() {
       pendingFrame = 0;
       if (!pendingSize) return;
@@ -221,6 +309,7 @@
       offsetX += pendingSize.left - resizedRect.left;
       offsetY += pendingSize.top - resizedRect.top;
       frame.style.translate = Math.round(offsetX) + 'px ' + Math.round(offsetY) + 'px';
+      syncContainedStageHeight(pendingSize.height);
       pendingSize = null;
     }
 
@@ -283,11 +372,128 @@
       frame.style.removeProperty('width');
       frame.style.removeProperty('height');
       frame.style.removeProperty('translate');
+      if (stage) stage.style.removeProperty('--ui-window-user-height');
       offsetX = 0;
       offsetY = 0;
       frame.classList.remove('is-window-resizing', 'has-user-window-size', 'has-user-window-position');
       updateFitState();
       live.textContent = spec.label + ' size reset';
+    }
+
+    var keepContainedFrameInsideStage = function () {};
+
+    if (contained && stage) {
+      if (stageCanUseRightPageMargin(stage.getBoundingClientRect())) {
+        stage.dataset.windowExpandRight = 'true';
+      }
+
+      function containedPositionLimits(rect) {
+        var stageRect = stage.getBoundingClientRect();
+        return {
+          minLeft: stageRect.left,
+          maxLeft: Math.max(stageRect.left, stageRect.right - rect.width),
+          minTop: stageRect.top,
+          maxTop: Math.max(stageRect.top, stageRect.bottom - rect.height - 42)
+        };
+      }
+
+      keepContainedFrameInsideStage = function () {
+        var stageRect = stage.getBoundingClientRect();
+        var rect = frame.getBoundingClientRect();
+        var allowedWidth = Math.max(spec.minWidth, containedRightBoundary(stageRect) - rect.left);
+        var nextWidth = Math.min(rect.width, allowedWidth);
+        if (nextWidth !== rect.width) {
+          frame.style.width = Math.round(nextWidth) + 'px';
+          frame.classList.add('has-user-window-size');
+          rect = frame.getBoundingClientRect();
+        }
+        syncContainedStageHeight(rect.height);
+        var limits = containedPositionLimits(rect);
+        var nextLeft = clamp(rect.left, limits.minLeft, limits.maxLeft);
+        var nextTop = clamp(rect.top, limits.minTop, limits.maxTop);
+        offsetX += nextLeft - rect.left;
+        offsetY += nextTop - rect.top;
+        frame.style.translate = Math.round(offsetX) + 'px ' + Math.round(offsetY) + 'px';
+        updateFitState();
+      };
+
+      if (spec.allowMove === true) {
+        var dragHandle = document.createElement('button');
+        dragHandle.type = 'button';
+        dragHandle.className = 'ui-window-drag-handle';
+        dragHandle.setAttribute('aria-label', 'Move ' + spec.label + ' within its panel');
+        dragHandle.title = 'Drag to move within this panel. Double-click to reset.';
+        frame.appendChild(dragHandle);
+
+        var containedDragState = null;
+
+        function moveContainedTo(targetLeft, targetTop) {
+          var rect = frame.getBoundingClientRect();
+          var limits = containedPositionLimits(rect);
+          var nextLeft = clamp(targetLeft, limits.minLeft, limits.maxLeft);
+          var nextTop = clamp(targetTop, limits.minTop, limits.maxTop);
+          offsetX += nextLeft - rect.left;
+          offsetY += nextTop - rect.top;
+          frame.style.translate = Math.round(offsetX) + 'px ' + Math.round(offsetY) + 'px';
+          frame.classList.add('has-user-window-position');
+          updateFitState();
+          live.textContent = spec.label + ' moved within its panel';
+        }
+
+        function beginContainedDrag(event) {
+          if (event.button !== 0 || window.matchMedia('(max-width: 820px)').matches) return;
+          event.preventDefault();
+          requestCompactNavigation('window-drag');
+          var rect = frame.getBoundingClientRect();
+          containedDragState = {
+            startX: event.clientX,
+            startY: event.clientY,
+            startLeft: rect.left,
+            startTop: rect.top
+          };
+          frame.classList.add('is-window-dragging');
+          dragHandle.setPointerCapture(event.pointerId);
+        }
+
+        function moveContainedDrag(event) {
+          if (!containedDragState) return;
+          moveContainedTo(
+            containedDragState.startLeft + event.clientX - containedDragState.startX,
+            containedDragState.startTop + event.clientY - containedDragState.startY
+          );
+        }
+
+        function endContainedDrag(event) {
+          if (!containedDragState) return;
+          containedDragState = null;
+          frame.classList.remove('is-window-dragging');
+          if (dragHandle.hasPointerCapture(event.pointerId)) dragHandle.releasePointerCapture(event.pointerId);
+        }
+
+        dragHandle.addEventListener('pointerdown', beginContainedDrag);
+        dragHandle.addEventListener('pointermove', moveContainedDrag);
+        dragHandle.addEventListener('pointerup', endContainedDrag);
+        dragHandle.addEventListener('pointercancel', endContainedDrag);
+        dragHandle.addEventListener('dblclick', function () {
+          requestCompactNavigation('window-position-reset');
+          offsetX = 0;
+          offsetY = 0;
+          frame.style.translate = '0px 0px';
+          frame.classList.remove('has-user-window-position');
+          updateFitState();
+          live.textContent = spec.label + ' position reset';
+        });
+        dragHandle.addEventListener('keydown', function (event) {
+          if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return;
+          event.preventDefault();
+          requestCompactNavigation('window-keyboard-drag');
+          var rect = frame.getBoundingClientRect();
+          var step = event.shiftKey ? 6 : 18;
+          var x = rect.left + (event.key === 'ArrowLeft' ? -step : event.key === 'ArrowRight' ? step : 0);
+          var y = rect.top + (event.key === 'ArrowUp' ? -step : event.key === 'ArrowDown' ? step : 0);
+          moveContainedTo(x, y);
+        });
+      }
     }
 
     function updateFitState() {
@@ -531,7 +737,11 @@
     });
 
     window.addEventListener('resize', function () {
-      if (window.matchMedia('(max-width: 820px)').matches) resetSize();
+      if (window.matchMedia('(max-width: 820px)').matches) {
+        resetSize();
+        return;
+      }
+      if (contained) requestAnimationFrame(keepContainedFrameInsideStage);
     }, { passive: true });
   }
 
