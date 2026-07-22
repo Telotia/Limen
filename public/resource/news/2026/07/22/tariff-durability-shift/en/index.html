@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?v=8">
+<title>News · The Tariff Expires Friday. Trump Swapped In a Harder One.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --ink:#241a12; --ink2:#5c4632; --muted:#8a7562;
+ --amb:#b8860b; --amb-d:#7a4a12; --line:rgba(36,26,18,.10);
+ --up:#1a8f5e; --down:#c0392b; --card:rgba(255,255,255,.72);
+ }
+ *{box-sizing:border-box}
+ html{scroll-behavior:smooth}
+ body{
+ margin:0; color:var(--ink);
+ font-family:"Inter","Newsreader",system-ui,sans-serif;
+ line-height:1.75; font-size:18px;
+ background-color:#f6f0e6;
+ background:
+ radial-gradient(ellipse 60% 45% at 16% 18%, oklch(0.80 0.10 75 / .50) 0%, transparent 56%),
+ radial-gradient(ellipse 50% 60% at 86% 12%, oklch(0.70 0.09 30 / .30) 0%, transparent 55%),
+ radial-gradient(ellipse 55% 55% at 78% 88%, oklch(0.62 0.06 260 / .22) 0%, transparent 58%),
+ radial-gradient(ellipse 60% 50% at 22% 92%, oklch(0.78 0.09 60 / .34) 0%, transparent 58%),
+ #f6f0e6;
+ background-attachment:fixed;
+ }
+ .grain{position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:soft-light;opacity:.10;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+ .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:72px 26px 120px}
+ .kicker{font-family:"Inter",sans-serif;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+ font-size:13px;color:var(--amb-d);margin-bottom:18px}
+ h1{font-family:"Newsreader",serif;font-weight:800;font-size:clamp(30px,5.4vw,46px);line-height:1.22;
+ margin:0 0 20px;letter-spacing:-.01em}
+ .lede{font-size:20px;color:var(--ink2);font-weight:500;margin:0 0 30px}
+ .meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-family:"Inter",sans-serif;
+ font-size:13.5px;color:var(--muted);padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:14px}
+ .meta .dot{width:5px;height:5px;border-radius:50%;background:var(--amb)}
+ h2{font-family:"Newsreader",serif;font-weight:700;font-size:26px;margin:52px 0 16px;letter-spacing:-.005em;
+ display:flex;align-items:baseline;gap:12px}
+ h2 .n{font-family:"Inter",sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--amb);
+ width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;flex:none;
+ box-shadow:0 4px 14px rgba(184,134,11,.35)}
+ p{margin:0 0 18px}
+ strong{font-weight:700;color:var(--ink);background:linear-gradient(transparent 62%, rgba(184,134,11,.18) 0)}
+ .pull{font-family:"Newsreader",serif;font-style:italic;font-weight:500;font-size:22px;line-height:1.6;color:var(--amb-d);
+ border-left:4px solid var(--amb);padding:6px 0 6px 22px;margin:30px 0}
+ ul.stats{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:26px 0;padding:0}
+ .stat{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+ border:1px solid rgba(255,255,255,.7);border-radius:16px;padding:20px 20px;
+ box-shadow:0 8px 30px rgba(36,26,18,.07)}
+ .stat .v{font-family:"Inter",sans-serif;font-weight:700;font-size:23px;letter-spacing:-.02em;line-height:1.1}
+ .stat .l{font-size:13.5px;color:var(--muted);margin-top:6px}
+ .stat.down .v{color:var(--down)}
+ .bb{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+ .panel{border-radius:16px;padding:22px;background:var(--card);backdrop-filter:blur(14px);
+ border:1px solid rgba(255,255,255,.7);box-shadow:0 8px 30px rgba(36,26,18,.07)}
+ .panel h4{margin:0 0 10px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;
+ text-transform:uppercase;letter-spacing:.04em;font-family:"Inter",sans-serif}
+ .panel.bull h4{color:var(--up)} .panel.bear h4{color:var(--down)}
+ .panel p{margin:0;font-size:15.5px;color:var(--ink2);line-height:1.7}
+ .callout{background:rgba(184,134,11,.09);border:1px solid rgba(184,134,11,.24);border-radius:16px;
+ padding:22px 24px;margin:28px 0}
+ .callout .t{font-weight:700;color:var(--amb-d);margin-bottom:6px;font-size:15px;font-family:"Inter",sans-serif;
+ letter-spacing:.04em;text-transform:uppercase}
+ .disc{font-size:13.5px;color:var(--muted);background:rgba(36,26,18,.04);border-radius:14px;padding:18px 20px;
+ margin-top:40px;line-height:1.65}
+ .src{margin-top:30px;font-size:14px;color:var(--ink2)}
+ .src a{color:var(--amb-d);text-decoration:none;border-bottom:1px solid rgba(184,134,11,.35)}
+ .src li{margin-bottom:7px}
+ footer{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);
+ font-family:"Inter",sans-serif;font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
+ @media(max-width:560px){.stats,.bb{grid-template-columns:1fr}.wrap{padding:50px 20px 90px}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+ <div class="kicker">Finance · Daily Deep-Dive</div>
+ <h1>The Tariff Expires Friday. Trump Swapped In a Harder One.</h1>
+ <p class="lede">The Supreme Court ruled emergency tariffs illegal in February. The 10% stopgap tariff that ruling forced him into runs out at 12:01am Friday. The real story isn't that more tariffs are coming — it's that the replacements are tools the Court itself named as legitimate, which makes them much harder to undo.</p>
+ <div class="meta">
+ <span>2026-07-22</span><span class="dot"></span>
+ <span>Tariffs · Trade Law Authority Shift</span><span class="dot"></span>
+ <span>Informational, not investment advice</span>
+ </div>
+
+ <h2><span class="n">1</span>What happened</h2>
+ <p>On February 20, the Supreme Court ruled the International Emergency Economic Powers Act (IEEPA) does not authorize the president to impose tariffs — a double rejection of Trump's "Liberation Day" global tariffs and his fentanyl-linked tariffs. The same day, Trump signed a proclamation switching to Section 122 of the Trade Act of 1974, a flat 10% tariff on all countries effective February 24. But Section 122 carries a hard ceiling: 150 days by statute, expiring this Friday, <strong>July 24 at 12:01am Eastern</strong>. There's no sign Congress plans to extend it.</p>
+ <p>US Trade Representative Jamieson Greer told CNBC on July 21 to "expect action soon" — not a vague hedge, but confirmation the replacement is already in motion: forced-labor tariffs on 60 economies under Section 301, and a separate <strong>50% tariff on Canada</strong> specifically, invoked under Section 338 of the Tariff Act of 1930 — a provision that has sat unused for 94 years.</p>
+ <p class="pull">"The last two years of tariffs ran on emergency powers — fast to sign, short by statute. This round leans on two laws the Supreme Court itself called legitimate."</p>
+
+ <h2><span class="n">2</span>Why: the mechanism</h2>
+ <p>Section 122 could go into effect the same day the Court struck down IEEPA precisely because it's fast, broad, and fragile — the president signs and it's live, but the law caps out at 150 days, making it a stopgap by design, not a strategy. Section 301 and Section 338 are the opposite: slow to invoke (Section 301 required a formal investigation, public comment, and hearings — the case was opened in March, hearings ran in April), and narrower in scope, but far harder to unwind in court once they take effect. The reason is subtle but decisive: the Supreme Court's own ruling named Sections 232, 301, 201, 122, and 338 as examples of tariff authority Congress actually spelled out clearly — effectively pre-blessing these tools in the same opinion that killed IEEPA.</p>
+ <p>Section 338 is the more striking piece. It's a provision from the 1930 Smoot-Hawley Tariff Act that lets the president impose tariffs up to 50% on countries found to discriminate against US commerce — no prior investigation required, no statutory expiration, and the International Trade Commission plays only an advisory role. The law has existed for 94 years and this marks its first genuine use, aimed squarely at Canadian autos, dairy, and alcohol.</p>
+
+ <h2><span class="n">3</span>The numbers</h2>
+ <ul class="stats">
+ <li class="stat"><div class="v">150 days</div><div class="l">Statutory life of the Section 122 10% global tariff (Feb 24–Jul 24)</div></li>
+ <li class="stat"><div class="v">60 countries</div><div class="l">Covered by the Section 301 forced-labor tariffs, including China, the EU, Japan, India</div></li>
+ <li class="stat down"><div class="v">50%</div><div class="l">Section 338 tariff on Canadian autos, dairy, and alcohol</div></li>
+ <li class="stat"><div class="v">94 years</div><div class="l">Since Section 338 was enacted in 1930 — this is its first real invocation</div></li>
+ <li class="stat"><div class="v">53M+</div><div class="l">Import entries that paid IEEPA duties; roughly 20.1M still awaiting refund liquidation</div></li>
+ <li class="stat"><div class="v">~19%</div><div class="l">Estimated year-over-year jump in port container volume, driven by pre-tariff frontloading</div></li>
+ </ul>
+
+ <h2><span class="n">4</span>Second-order effects: who wins, who loses</h2>
+ <p>The clearest losers are Canadian auto, dairy, and alcohol exporters, and US apparel retailers leaning on Asian supply chains — retail stocks dropping 5-7% in a single day on prior tariff-escalation news isn't unusual, and industry groups have already warned publicly that these costs get passed through to consumers. Canadian Prime Minister Mark Carney called the move a violation of USMCA but said he's willing to "engage intensively" on negotiations — which itself signals limited Canadian leverage: USMCA's mandatory six-year review just opened on July 1, and if the pact isn't renewed it defaults into annual reviews with a possible termination path by 2036. The timing means Trump is placing a chip on the negotiating table right as that window opened.</p>
+ <p>On the winning side are importers who already frontloaded inventory — port data shows container volume up nearly 19% year-over-year, meaning sharper operators had already priced this round of tariffs into their stocking strategy. Trade-compliance law firms and advisory shops are seeing a parallel surge in business. Countries with a partial forced-labor enforcement record (Canada, the EU, Mexico, the UK, Taiwan) get taxed at 10% versus 12.5% for the 54 countries with zero enforcement — a 2.5-point compliance discount, in effect.</p>
+
+ <h2><span class="n">5</span>Bull vs. bear</h2>
+ <div class="bb">
+ <div class="panel bull">
+ <h4>▲ Bull case</h4>
+ <p>Sections 301 and 338 run through investigation, notice, and hearing procedures — slower but far more legally durable than IEEPA's "sign and it's live" approach, giving businesses steadier expectations once these tariffs settle. Frontloading at ports shows the market already saw this coming and has partly absorbed the shock.</p>
+ </div>
+ <div class="panel bear">
+ <h4>▼ Bear case</h4>
+ <p>Section 338 has zero precedent — its first real use in 94 years — and will almost certainly draw an immediate legal challenge. Hitting Canada, a top-three trading partner, with a 50% tariff right as USMCA's mandatory review just opened risks the entire North American trade framework, not just one product category, if negotiations sour.</p>
+ </div>
+ </div>
+
+ <h2><span class="n">6</span>What the narrative is missing — and overstating</h2>
+ <p>Most coverage flattens this into the familiar "Trump does more tariffs" script, lumping it in with two years of IEEPA-era tariff noise — which is exactly where the market risks underpricing what's actually different. This round isn't about more tariffs; it's about switching to tools that don't fall apart in court. Every authority the Supreme Court itself cited by name in the opinion that killed IEEPA is now being used. If markets keep pricing these the way they priced the emergency-powers version — "the courts will strike it down eventually" — they're likely underrating the odds this round actually sticks around.</p>
+ <p>Also underweighted: the significance of Section 338 has little to do with whether Canada wins or loses this particular fight. A 94-year-dormant legal tool being activated for the first time is itself the precedent — any country found to "discriminate against US commerce" going forward could face the same 50% option without the lengthy investigation process Section 301 requires.</p>
+
+ <div class="callout">
+ <div class="t">What this actually means</div>
+ <p style="margin:0">The shift is from emergency-powers tariffs — instant to sign, dead by statute in 150 days — to statutory tariffs that take longer to arrive but are nearly impossible to overturn. That's not a change in how big the tariffs are. It's a change in whether they can be undone at all.</p>
+ </div>
+
+ <h2><span class="n">7</span>One takeaway</h2>
+ <p><strong>First, when a tariff headline hits, check which law it cites before reacting.</strong> Emergency-powers tariffs are fast, fragile political leverage — historically easy for courts or negotiations to reverse, and reasonable to treat as noise. Statutory tariffs (Sections 301, 232, 338) that clear investigation and hearings are hard to reverse once in force; treat those as close to permanent policy and price them into supply-chain and margin assumptions, not as something to wait out.</p>
+ <p><strong>Second, if you hold exposure to Canadian auto parts, dairy, or apparel retail leaning on Asian manufacturing,</strong> this isn't a "wait and see if it gets struck down" situation — it's worth checking now what tariff-cost hedging and pass-through plans those companies have actually laid out on their earnings calls.</p>
+
+ <div class="disc">
+ <strong>Disclaimer:</strong> This piece is a summary and interpretation of public information for informational and general reference purposes only, and does not constitute investment advice or a solicitation to buy or sell any security. Figures, rates, and effective dates reflect official announcements and original sources and may change at any time. Investing involves risk; verify independently and take responsibility for your own decisions.
+ </div>
+
+ <div class="src">
+ <strong>Primary sources</strong>
+ <ul>
+ <li><a href="https://www.cnbc.com/amp/2026/07/21/trump-trade-tariffs-greer-section-301.html">CNBC — Greer hints new Trump tariffs coming on dozens of countries: "Expect action soon"</a></li>
+ <li><a href="https://www.forbes.com/sites/saradorn/2026/07/21/new-tariffs-on-other-countries-coming-soon-as-punishment-for-forced-labor-trump-trade-rep-says/">Forbes — New tariffs on other countries coming "soon," Trump's trade rep says</a></li>
+ <li><a href="https://www.pbs.org/newshour/politics/trump-imposes-50-tariffs-on-canadian-goods-citing-disputes-over-autos-alcohol-and-cheese">PBS NewsHour — Trump imposes 50% tariffs on Canadian goods, citing disputes over autos, alcohol and cheese</a></li>
+ <li><a href="https://www.hklaw.com/en/insights/publications/2026/02/supreme-court-strikes-down-ieepa-tariffs">Holland &amp; Knight — Supreme Court Strikes Down IEEPA Tariffs: What Importers Need to Know</a></li>
+ <li><a href="https://www.freshfields.com/en/our-thinking/blogs/a-fresh-take/post-ieepa-tariff-landscape-new-authorities-and-the-path-to-refunds-102mn2g">Freshfields — Post-IEEPA Tariff Landscape: New Authorities and the Path to Refunds</a></li>
+ <li><a href="https://www.cnbc.com/2026/06/03/us-tariffs-60-economies-dection-301-forced-labor-trade-practices-.html">CNBC — U.S. proposes fresh tariffs on 60 economies over forced-labor trade practices</a></li>
+ </ul>
+ </div>
+
+ <footer><span>Finance · Daily Deep-Dive</span><span>2026-07-22</span></footer>
+</div>
+</body>
+</html>
