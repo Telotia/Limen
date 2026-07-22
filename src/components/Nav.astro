@@ -15,6 +15,7 @@ const isCurrent = (href: string) => {
 ---
 
 <!-- NAV -->
+<div class="nav-flow-slot" aria-hidden="true"></div>
 <nav class="navlight" aria-label="Primary navigation" style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:28px;padding:0 64px;min-height:72px;background:linear-gradient(90deg,rgba(230,226,216,.94),rgba(246,243,236,.9) 46%,rgba(230,226,216,.94));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(23,32,29,.22);box-shadow:0 1px 0 rgba(255,255,255,.35)">
     <button class="nav-collapse" type="button" aria-label="Collapse navigation">
       <span aria-hidden="true">←</span>
@@ -78,6 +79,10 @@ const isCurrent = (href: string) => {
   </nav>
 
 <style>
+  .nav-flow-slot {
+    display: none;
+  }
+
   .nav-collapse {
     position: absolute;
     left: 17px;
@@ -236,11 +241,34 @@ const isCurrent = (href: string) => {
   }
 
   @media (max-width: 960px) {
+    .nav-flow-slot {
+      display: block;
+      height: 68px;
+      transition: height .34s cubic-bezier(.22,.61,.36,1);
+    }
+
     .navlight {
+      position: fixed !important;
+      inset: 0 0 auto !important;
+      z-index: 80 !important;
       height: 68px !important;
       padding: 0 16px 0 52px !important;
       flex-wrap: nowrap !important;
       gap: 10px !important;
+      transition: transform .34s cubic-bezier(.22,.61,.36,1), opacity .24s ease, visibility 0s linear 0s !important;
+      will-change: transform, opacity;
+    }
+
+    .navlight.is-nav-hidden {
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: translate3d(0,-110%,0) !important;
+      transition: transform .34s cubic-bezier(.22,.61,.36,1), opacity .24s ease, visibility 0s linear .34s !important;
+    }
+
+    body.telotia-nav-hidden .nav-flow-slot {
+      height: 54px;
     }
 
     .nav-brand img {
@@ -274,6 +302,14 @@ const isCurrent = (href: string) => {
   }
 
   @media (max-width: 420px) {
+    .nav-flow-slot {
+      height: 64px;
+    }
+
+    body.telotia-nav-hidden .nav-flow-slot {
+      height: 52px;
+    }
+
     .navlight {
       height: 64px !important;
       min-height: 64px !important;

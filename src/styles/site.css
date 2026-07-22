@@ -517,6 +517,143 @@
     .workspace-window[data-window-os="windows"] .workspace-native-control{width:22px;min-height:22px}
     .workspace-app-launcher{min-height:360px;margin-top:28px}
     .workspace-window .workspace-toolbar{cursor:default;touch-action:auto}
+
+    /* Mobile workspace is still presented as an application window. Keep its
+       controls in a separate dock below the frame, and let the review surface
+       scroll inside the frame instead of making the page and footer compete
+       with a desktop-sized canvas. */
+    .workspace-window.ui-manipulable-window{
+      margin-bottom:68px !important;
+      box-shadow:0 2px 0 var(--rule),0 22px 44px -34px rgba(23,32,29,.58) !important;
+    }
+    .workspace-window.ui-manipulable-window>.ui-window-viewport{
+      height:clamp(380px,68dvh,720px) !important;
+      max-height:clamp(380px,68dvh,720px);
+      overflow:auto;
+      overscroll-behavior:contain;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-gutter:stable;
+      border-radius:inherit;
+      background:rgba(241,239,232,.93);
+    }
+    .workspace-window .ui-window-clip{
+      box-sizing:border-box;
+      min-width:0;
+    }
+    .workspace-window .workspace-window-body{
+      box-sizing:border-box;
+      width:100%;
+      min-width:0;
+      grid-template-columns:48px minmax(0,1fr) !important;
+    }
+    .workspace-window .workspace-window-body>*{min-width:0;max-width:100%}
+    .workspace-window #tlWsPages,
+    .workspace-window #tlWsPages>[data-wpage]{
+      box-sizing:border-box;
+      width:100%;
+      min-width:0;
+      max-width:100%;
+    }
+    .workspace-window #tlWsPages :is(h1,h2,h3,h4,p,span,div){overflow-wrap:anywhere}
+    .workspace-window #tlWsPages>[data-wpage="0"]{
+      grid-template-columns:minmax(0,1fr) !important;
+    }
+    .workspace-window #tlWsPages>[data-wpage="0"]>div:first-child{
+      padding:18px 14px !important;
+      border-right:0 !important;
+    }
+    .workspace-window #tlWsPages>[data-wpage="0"]>aside{
+      padding:18px 14px !important;
+      border-top:1px solid var(--rulesoft);
+    }
+    .workspace-window #tlWsPages>[data-wpage="1"],
+    .workspace-window #tlWsPages>[data-wpage="2"],
+    .workspace-window #tlWsPages>[data-wpage="3"]{
+      padding:18px 14px !important;
+    }
+    .workspace-window #tlWsPages>[data-wpage="1"]>div[style*="flex-direction:column"]>div{
+      display:grid !important;
+      grid-template-columns:minmax(0,1fr) auto;
+      align-items:center !important;
+      gap:8px 12px !important;
+      padding:13px 12px !important;
+    }
+    .workspace-window #tlWsPages>[data-wpage="1"]>div[style*="flex-direction:column"]>div>span:first-child{
+      grid-column:1/-1;
+      min-width:0;
+    }
+    .workspace-window #tlWsPages>[data-wpage="1"]>div[style*="flex-direction:column"]>div>span:nth-child(2){
+      grid-column:1;
+      width:100% !important;
+      min-width:0;
+    }
+    .workspace-window #tlWsPages>[data-wpage="1"]>div[style*="flex-direction:column"]>div>span:nth-child(3){
+      grid-column:2;
+      width:auto !important;
+      min-width:58px;
+    }
+    .workspace-window #tlWsPages>[data-wpage="2"]>div[style*="repeat(3"]{
+      grid-template-columns:minmax(0,1fr) !important;
+      gap:10px !important;
+    }
+    .workspace-window #tlWsPages>[data-wpage="2"] div[style*="justify-content:space-between"],
+    .workspace-window #tlWsPages>[data-wpage="3"] div[style*="justify-content:space-between"]{
+      align-items:flex-start !important;
+      flex-wrap:wrap;
+      row-gap:8px !important;
+    }
+    .workspace-window #tlWsDetail>div{
+      grid-template-columns:minmax(0,1fr) !important;
+    }
+    .workspace-window #tlWsDetail>div>div:first-child{
+      padding:18px 14px !important;
+      border-right:0 !important;
+      border-bottom:1px solid var(--rulesoft);
+    }
+    .workspace-window #tlWsDetail>div>div:last-child{
+      padding:18px 14px !important;
+    }
+    .workspace-window .crow{
+      box-sizing:border-box;
+      min-width:0;
+      max-width:100%;
+      align-items:flex-start !important;
+      flex-wrap:wrap;
+      row-gap:8px;
+    }
+    .workspace-window .crow>div{min-width:0;max-width:100%}
+    .workspace-window .claim-flow-node{box-sizing:border-box;width:100%;min-width:0}
+    .workspace-window.ui-manipulable-window>.ui-window-tools{
+      top:auto;
+      right:6px;
+      bottom:-12px;
+      left:auto;
+      transform:translateY(100%);
+      max-width:calc(100vw - 48px);
+      min-height:44px;
+      padding:5px;
+      gap:3px;
+      border-radius:11px;
+      background:rgba(248,247,242,.97);
+      box-shadow:0 14px 28px -22px rgba(23,32,29,.74),inset 0 1px rgba(255,255,255,.92);
+      white-space:nowrap;
+    }
+    .workspace-window .ui-window-style-group{gap:3px}
+    .workspace-window .ui-window-tool-divider{height:24px;margin:0 1px}
+    .workspace-window .ui-window-tool-label{padding:0 4px;font-size:11px}
+    .workspace-window .ui-window-tool-button{
+      min-width:34px;
+      height:34px;
+      padding:0 9px;
+      border-radius:7px;
+      font-size:12px;
+    }
+    #workspace .section-mark-right + [style*="max-width:1180px"]{padding-right:0 !important}
+    #workspace .section-mark-right{
+      right:-24px !important;
+      top:86px !important;
+      opacity:.46;
+    }
   }
 
   @media(prefers-reduced-motion:reduce){
@@ -586,6 +723,38 @@
 section[id]{content-visibility:auto;contain-intrinsic-size:auto 760px;border-top:0 !important}
 .site-footer{border-top:0 !important}
 html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+
+/* Mobile navigation is a real fixed surface, not a transparent sticky layer.
+   The small flow slot reserves only the space that is visually present, while
+   the hidden nav is removed from focus and pointer hit-testing by the script. */
+.navlight{
+  transition:transform .34s cubic-bezier(.22,.61,.36,1),opacity .24s ease,visibility 0s linear 0s !important;
+  will-change:transform,opacity;
+}
+.navlight.is-nav-hidden{
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+  transform:translate3d(0,-110%,0) !important;
+  transition:transform .34s cubic-bezier(.22,.61,.36,1),opacity .24s ease,visibility 0s linear .34s !important;
+}
+@media(max-width:960px){
+  .nav-flow-slot{
+    display:block !important;
+    height:68px;
+    transition:height .34s cubic-bezier(.22,.61,.36,1);
+  }
+  .navlight{
+    position:fixed !important;
+    inset:0 0 auto !important;
+    z-index:80 !important;
+  }
+  body.telotia-nav-hidden .nav-flow-slot{height:54px}
+}
+@media(max-width:420px){
+  .nav-flow-slot{height:64px}
+  body.telotia-nav-hidden .nav-flow-slot{height:52px}
+}
 
 /* One continuous paper stock. Sections no longer own separate paintings;
    sparse motifs live on a single page-length layer, so there are no seams. */
@@ -713,9 +882,44 @@ html.tl-scrolling [style*="backdrop-filter"]{backdrop-filter:none!important;-web
 
 @media(max-width:820px){
   #consult{padding-left:18px !important;padding-right:18px !important}
-  #consult .consult-stage{padding:42px 22px 46px;border-radius:16px}
-  #consult .consult-grid{grid-template-columns:1fr !important;gap:34px !important}
-  #consult form.glow-wrap{max-width:none;justify-self:stretch}
+  #consult .consult-stage{
+    box-sizing:border-box;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    padding:38px 16px 42px;
+    border-radius:16px;
+    overflow:hidden;
+  }
+  #consult .consult-grid{
+    box-sizing:border-box;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:30px !important;
+  }
+  #consult .consult-grid>*{
+    box-sizing:border-box;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+  }
+  #consult .consult-grid :is(h1,h2,h3,p,blockquote,a,label,span){overflow-wrap:anywhere}
+  #consult form.glow-wrap{
+    box-sizing:border-box;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0;
+    justify-self:stretch;
+    overflow:hidden !important;
+  }
+  #consult form.glow-wrap :is(input,textarea,select,button){box-sizing:border-box;max-width:100%}
+  #consult .ink-capillary-layer{
+    inset:-18px;
+    width:calc(100% + 36px);
+    height:calc(100% + 36px);
+  }
 }
 
 /* One paper stock, varied tonal fields: the footer closes in wet ink and mineral washes. */
