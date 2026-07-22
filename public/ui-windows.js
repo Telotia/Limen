@@ -186,7 +186,16 @@
       zoomIndex = clamp(nextIndex, 0, zoomLevels.length - 1);
       var zoom = zoomLevels[zoomIndex];
       clip.style.zoom = String(zoom);
-      clip.style.removeProperty('width');
+      if (window.matchMedia('(max-width: 820px)').matches) {
+        /* On phones, zoom should enlarge the reading scale while the content
+           continues to reflow inside the window. A compensating layout width
+           prevents the zoomed canvas from being clipped on the right. */
+        clip.style.width = (100 / zoom) + '%';
+        clip.style.maxWidth = 'none';
+      } else {
+        clip.style.removeProperty('width');
+        clip.style.removeProperty('max-width');
+      }
       frame.dataset.windowZoom = String(Math.round(zoom * 100));
       zoomOut.disabled = zoomIndex === 0;
       zoomIn.disabled = zoomIndex === zoomLevels.length - 1;
@@ -739,8 +748,10 @@
     window.addEventListener('resize', function () {
       if (window.matchMedia('(max-width: 820px)').matches) {
         resetSize();
+        applyZoom(zoomIndex);
         return;
       }
+      applyZoom(zoomIndex);
       if (contained) requestAnimationFrame(keepContainedFrameInsideStage);
     }, { passive: true });
   }

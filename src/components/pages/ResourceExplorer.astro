@@ -100,6 +100,28 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
   <h2 id="resource-explorer-title" class="resource-explorer-title">Connected resource field</h2>
 
   <div class="resource-network" data-resource-network data-focused="false">
+    <nav class="resource-mobile-pager" data-resource-mobile-pager aria-label="Resource topics">
+      <button class="resource-mobile-step" type="button" data-mobile-topic-step="-1" aria-label="Previous topic">←</button>
+      <div class="resource-mobile-current" aria-live="polite">
+        <strong data-mobile-topic-label>{topics[0]?.label}</strong>
+        <small><span data-mobile-topic-count>{entriesByTopic.get(topics[0]?.id)?.length ?? 0}</span> entries · swipe to change</small>
+      </div>
+      <button class="resource-mobile-step" type="button" data-mobile-topic-step="1" aria-label="Next topic">→</button>
+      <div class="resource-mobile-tabs" role="tablist" aria-label="Choose a resource topic">
+        {topics.map((topic, index) => (
+          <button
+            type="button"
+            role="tab"
+            data-mobile-topic={topic.id}
+            data-mobile-topic-index={index}
+            aria-selected={index === 0 ? 'true' : 'false'}
+          >
+            {topic.label}
+          </button>
+        ))}
+      </div>
+    </nav>
+
     <svg class="resource-network-map" aria-hidden="true">
       {faceConnections.map((connection) => (
         <path class="resource-face-connection" data-from-topic={connection.from} data-to-topic={connection.to} />
@@ -161,6 +183,10 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
       ))}
     </div>
 
+    <p class="resource-mobile-empty" data-resource-mobile-empty hidden>
+      This layer is ready for its first field note.
+    </p>
+
     <div class="resource-focus-layer" data-resource-focus-layer hidden>
       {articleNodes.map((entry) => (
         <article
@@ -215,6 +241,13 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
     const faceConnections = [...explorer.querySelectorAll<SVGPathElement>('.resource-face-connection')];
     const articleConnections = [...explorer.querySelectorAll<SVGPathElement>('.resource-article-connection')];
     const panels = [...explorer.querySelectorAll<HTMLElement>('.resource-focus-panel')];
+    const mobilePager = explorer.querySelector<HTMLElement>('[data-resource-mobile-pager]');
+    const mobileTopicLabel = explorer.querySelector<HTMLElement>('[data-mobile-topic-label]');
+    const mobileTopicCount = explorer.querySelector<HTMLElement>('[data-mobile-topic-count]');
+    const mobileEmptyState = explorer.querySelector<HTMLElement>('[data-resource-mobile-empty]');
+    const mobileTopicTabs = [...explorer.querySelectorAll<HTMLButtonElement>('[data-mobile-topic]')];
+    const mobileTopicSteps = [...explorer.querySelectorAll<HTMLButtonElement>('[data-mobile-topic-step]')];
+    const mobileQuery = window.matchMedia('(max-width: 680px)');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const forward = new Vector3(0, 0, 1);
     const goldenAngle = Math.PI * (3 - Math.sqrt(5));
@@ -333,6 +366,49 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
     let activeSlide = 0;
     let swipeStartX = 0;
     let swipeStartY = 0;
+    let mobileTopicIndex = 0;
+    let mobileSwipeStartX = 0;
+    let mobileSwipeStartY = 0;
+    let mobileSwipeGuard = false;
+
+    const updateMobileTopic = (nextIndex: number, direction = 0) => {
+      if (!network || !topics.length) return;
+      closeFocus();
+      mobileTopicIndex = (nextIndex + topics.length) % topics.length;
+      const selected = topics[mobileTopicIndex];
+      network.dataset.mobileTopic = selected.id;
+      network.dataset.mobileDirection = direction < 0 ? 'previous' : direction > 0 ? 'next' : 'direct';
+      const selectedTab = mobileTopicTabs[mobileTopicIndex];
+      if (mobileTopicLabel) mobileTopicLabel.textContent = selectedTab?.textContent?.trim() || selected.id;
+      const visibleCount = articleButtons.filter((button) => button.dataset.topics?.split(' ').includes(selected.id)).length;
+      if (mobileTopicCount) mobileTopicCount.textContent = String(visibleCount);
+      if (mobileEmptyState) mobileEmptyState.hidden = visibleCount > 0;
+      mobileTopicTabs.forEach((tab, index) => tab.setAttribute('aria-selected', String(index === mobileTopicIndex)));
+      articleButtons.forEach((button) => {
+        const visible = button.dataset.topics?.split(' ').includes(selected.id) ?? false;
+        button.dataset.mobileVisible = String(visible);
+        button.setAttribute('aria-hidden', String(!visible));
+        button.tabIndex = visible ? 0 : -1;
+      });
+      if (!reduceMotion && mobilePager) {
+        mobilePager.classList.remove('is-switching');
+        requestAnimationFrame(() => mobilePager.classList.add('is-switching'));
+      }
+    };
+
+    const syncResponsiveMode = () => {
+      if (!network) return;
+      network.dataset.mobileLayer = String(mobileQuery.matches);
+      if (mobileQuery.matches) updateMobileTopic(mobileTopicIndex);
+      else {
+        articleButtons.forEach((button) => {
+          button.removeAttribute('data-mobile-visible');
+          button.removeAttribute('aria-hidden');
+          button.tabIndex = 0;
+        });
+        renderNetwork();
+      }
+    };
 
     const articlePoint = (article: ArticleModel) => {
       const planeId = activeTopic && article.topics.includes(activeTopic) ? activeTopic : article.homeTopic;
@@ -528,6 +604,11 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
     };
 
     const selectTopic = (topicId: string) => {
+      if (mobileQuery.matches) {
+        const index = topics.findIndex((topic) => topic.id === topicId);
+        if (index >= 0) updateMobileTopic(index, index > mobileTopicIndex ? 1 : -1);
+        return;
+      }
       closeFocus();
       updateTopicState(activeTopic === topicId ? '' : topicId);
       const target = activeTopic
@@ -586,6 +667,11 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
 
       network.addEventListener('pointerdown', (event) => {
         if (event.button === 0) requestCompactNavigation('resource-panel-interaction');
+        if (mobileQuery.matches && !activePanel) {
+          mobileSwipeStartX = event.clientX;
+          mobileSwipeStartY = event.clientY;
+          return;
+        }
         if (event.button !== 0 || activePanel || isInteractiveTarget(event.target)) return;
         stopOrbit();
         window.cancelAnimationFrame(turnFrame);
@@ -624,6 +710,17 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
         applyOrbit(deltaX, deltaY);
       });
       const releaseOrbit = (event: PointerEvent) => {
+        if (mobileQuery.matches && !activePanel) {
+          const deltaX = event.clientX - mobileSwipeStartX;
+          const deltaY = event.clientY - mobileSwipeStartY;
+          if (Math.abs(deltaX) >= 52 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
+            event.preventDefault();
+            mobileSwipeGuard = true;
+            updateMobileTopic(mobileTopicIndex + (deltaX < 0 ? 1 : -1), deltaX < 0 ? 1 : -1);
+            window.setTimeout(() => { mobileSwipeGuard = false; }, 280);
+          }
+          return;
+        }
         if (event.pointerId !== orbitPointerId) return;
         orbitPointerId = -1;
         if (network.hasPointerCapture(event.pointerId)) network.releasePointerCapture(event.pointerId);
@@ -662,6 +759,7 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
       };
 
       button.addEventListener('pointerdown', (event) => {
+        if (mobileQuery.matches) return;
         if (event.button !== 0 || activePanel) return;
         window.clearTimeout(settleTimer);
         pointerId = event.pointerId;
@@ -697,6 +795,7 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
       button.addEventListener('pointerup', releasePointer);
       button.addEventListener('pointercancel', releasePointer);
       button.addEventListener('click', () => {
+        if (mobileSwipeGuard) return;
         if (suppressClick) {
           suppressClick = false;
           return;
@@ -716,6 +815,14 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
     });
 
     hubs.forEach((hub) => hub.addEventListener('click', () => selectTopic(hub.dataset.topic ?? '')));
+    mobileTopicTabs.forEach((tab) => tab.addEventListener('click', () => {
+      const index = Number(tab.dataset.mobileTopicIndex ?? 0);
+      updateMobileTopic(index, index > mobileTopicIndex ? 1 : index < mobileTopicIndex ? -1 : 0);
+    }));
+    mobileTopicSteps.forEach((button) => button.addEventListener('click', () => {
+      const direction = Number(button.dataset.mobileTopicStep ?? 0);
+      updateMobileTopic(mobileTopicIndex + direction, direction);
+    }));
     panels.forEach((panel) => {
       panel.querySelector<HTMLButtonElement>('.resource-focus-close')?.addEventListener('click', closeFocus);
       panel.querySelector<HTMLButtonElement>('.resource-focus-previous')?.addEventListener('click', () => stepFocus(-1));
@@ -755,8 +862,10 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
       if (event.key === 'ArrowRight') stepFocus(1);
     });
 
-    new ResizeObserver(renderNetwork).observe(network as Element);
+    mobileQuery.addEventListener('change', syncResponsiveMode);
+    new ResizeObserver(() => { if (!mobileQuery.matches) renderNetwork(); }).observe(network as Element);
     renderNetwork();
+    syncResponsiveMode();
   }
 </script>
 
@@ -764,7 +873,9 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
   .resource-explorer{width:100%;max-width:none;margin:0 auto clamp(72px,8vw,112px);scroll-margin-top:90px}
   .resource-explorer[hidden],.resource-focus-layer[hidden],.resource-focus-panel[hidden]{display:none}
   .resource-explorer-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  .resource-network{--resource-layer-focus:100;position:relative;isolation:isolate;min-height:clamp(1120px,78vw,1380px);overflow:hidden;border:1px solid rgba(23,32,29,.2);border-radius:20px;background:radial-gradient(circle at 50% 49%,rgba(255,255,255,.64),transparent 22%),linear-gradient(rgba(248,247,242,.54),rgba(232,231,227,.34)),url('/assets/paper-tile.png');box-shadow:0 34px 82px -62px rgba(23,32,29,.72),inset 0 1px rgba(255,255,255,.78);cursor:grab;touch-action:pan-y;user-select:none;transition:min-height .62s var(--ease)}
+  .resource-mobile-pager{display:none}
+  .resource-mobile-empty{display:none}
+  .resource-network{--resource-layer-focus:100;position:relative;isolation:isolate;min-height:clamp(1120px,78vw,1380px);overflow:hidden;border:1px solid rgba(23,32,29,.2);border-radius:20px;background:radial-gradient(circle at 50% 49%,rgba(255,255,255,.64),transparent 22%),linear-gradient(rgba(248,247,242,.54),rgba(232,231,227,.34)),url('/assets/ink-wash/textures/paper-tile.png');box-shadow:0 34px 82px -62px rgba(23,32,29,.72),inset 0 1px rgba(255,255,255,.78);cursor:grab;touch-action:pan-y;user-select:none;transition:min-height .62s var(--ease)}
   .resource-network[data-active-topic]:not([data-active-topic=""]){min-height:clamp(1360px,92vw,1640px)}
   .resource-network[data-orbiting="true"]{cursor:grabbing}
   .resource-network::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 23% 27%,rgba(193,59,51,.11),transparent 18%),radial-gradient(ellipse at 74% 22%,rgba(42,85,165,.09),transparent 19%),radial-gradient(ellipse at 70% 74%,rgba(71,115,95,.085),transparent 18%),radial-gradient(ellipse at 29% 79%,rgba(156,88,121,.08),transparent 18%);mix-blend-mode:multiply}
@@ -782,7 +893,7 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
   .resource-hub{--screen-x:0px;--screen-y:0px;--depth-scale:1;--depth-opacity:1;--tilt-x:0deg;--tilt-y:0deg;position:absolute;left:50%;top:50%;z-index:6;isolation:isolate;display:grid;grid-template-columns:auto 1fr;grid-template-areas:'count title' 'note note';align-items:center;gap:2px 8px;width:150px;padding:11px 13px;border:1px solid color-mix(in srgb,var(--hub-color) 38%,rgba(23,32,29,.18));border-radius:13px;background:linear-gradient(128deg,rgba(255,255,255,.9),color-mix(in srgb,var(--hub-c2) 10%,rgba(248,247,242,.88)));box-shadow:0 10px 28px color-mix(in srgb,var(--hub-color) 10%,transparent);opacity:var(--depth-opacity);filter:none;transform:translate(-50%,-50%) translate3d(var(--screen-x),var(--screen-y),0) perspective(820px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--depth-scale));text-align:left;cursor:pointer;will-change:transform,opacity,filter;transition:border-color .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease),opacity .25s var(--ease),filter .25s var(--ease)}
   .resource-hub::before{content:"";position:absolute;left:-4px;top:50%;width:8px;height:8px;border:2px solid var(--hub-color);border-radius:50%;background:var(--paper);transform:translateY(-50%)}
   .resource-hub-artwork{position:absolute;z-index:-1;inset:-38px -30px;overflow:hidden;opacity:.42;pointer-events:none;filter:saturate(.76);transition:opacity .3s var(--ease),transform .45s var(--ease)}
-  .resource-hub-artwork::after{content:"";position:absolute;inset:0;background:url('/assets/paper-tile.png');background-size:260px;mix-blend-mode:soft-light;opacity:.42}
+  .resource-hub-artwork::after{content:"";position:absolute;inset:0;background:url('/assets/ink-wash/textures/paper-tile.png');background-size:260px;mix-blend-mode:soft-light;opacity:.42}
   .resource-hub-artwork i{position:absolute;display:block;mix-blend-mode:multiply;filter:blur(.65px);transform:rotate(var(--block-r,0deg));clip-path:polygon(2% 4%,96% 0,100% 91%,91% 100%,4% 96%,0 10%)}
   .resource-hub-artwork i::after{content:"";position:absolute;inset:-8px;background:radial-gradient(ellipse at center,currentColor 0 38%,transparent 74%);opacity:.34;filter:blur(8px)}
   .resource-hub-artwork i:nth-child(1){left:7%;top:15%;width:52%;height:41%;--block-r:-1.4deg;background:color-mix(in srgb,var(--hub-c1) 34%,transparent);color:var(--hub-c1)}
@@ -834,7 +945,38 @@ const faceConnections = topics.flatMap((from, fromIndex) => topics.slice(fromInd
   @keyframes resource-node-tap{0%{transform:translate3d(0,0,0) rotate(0) scale(1)}26%{transform:translate3d(-1.5px,1px,0) rotate(-1.15deg) scale(.985)}52%{transform:translate3d(1.2px,-.5px,0) rotate(.9deg) scale(1.012)}76%{transform:translate3d(-.55px,.25px,0) rotate(-.35deg) scale(.998)}100%{transform:translate3d(0,0,0) rotate(0) scale(1)}}
   @keyframes resource-focus-arrive{from{opacity:0;transform:translateY(9px) scale(.975)}to{opacity:1;transform:none}}
   @media(max-width:900px){.resource-network{min-height:960px}.resource-network[data-active-topic]:not([data-active-topic=""]){min-height:1120px}.resource-hub{width:132px}.resource-focus-panel{width:min(456px,66vw)}.resource-focus-carousel{grid-template-columns:36px minmax(0,320px) 36px;gap:8px}.resource-focus-card{grid-template-rows:400px auto}}
-  @media(max-width:680px){.resource-network{min-height:860px}.resource-network[data-active-topic]:not([data-active-topic=""]){min-height:980px}.resource-network-map{opacity:.75}.resource-root-node{width:70px;height:70px}.resource-root-node span{font-size:48px}.resource-hub{width:108px;padding:8px}.resource-hub>strong{font-size:17px}.resource-hub>small{display:none}.resource-article-node{width:clamp(42px,calc(var(--node-size,66px) * .72),54px)}.resource-node-tile{height:calc(clamp(42px,calc(var(--node-size,66px) * .72),54px) * 1.24)}.resource-node-tile img{height:calc(clamp(42px,calc(var(--node-size,66px) * .72),54px) * .94)}.resource-node-tile>span{min-height:15px;padding:3px 1px;font-size:9px}.resource-focus-panel{left:50%;top:50%;width:calc(100% - 20px)}.resource-focus-carousel{grid-template-columns:32px minmax(0,254px) 32px;gap:4px}.resource-focus-card{grid-template-rows:318px auto}.resource-focus-copy{min-height:98px;padding:11px 12px}.resource-focus-copy>b{font-size:17px}.resource-focus-step{width:32px;height:32px}.resource-focus-close{right:8px;top:-38px;width:30px;height:30px}.resource-node-caption{display:none}}
+  @media(max-width:680px){
+    .resource-network,.resource-network[data-active-topic]:not([data-active-topic=""]){min-height:0;overflow:visible;padding:14px 12px 20px;cursor:default;touch-action:pan-y}
+    .resource-network-map,.resource-root-node,.resource-hub{display:none}
+    .resource-mobile-pager{position:relative;z-index:6;display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:center;gap:8px;margin-bottom:18px;padding:10px;border:1px solid rgba(23,32,29,.16);border-radius:14px;background:rgba(248,247,242,.86);box-shadow:0 12px 30px -24px rgba(23,32,29,.55);backdrop-filter:blur(8px)}
+    .resource-mobile-current{display:grid;gap:2px;text-align:center}
+    .resource-mobile-current strong{font-family:var(--fdisplay);font-size:25px;font-weight:500;line-height:1}
+    .resource-mobile-current small{color:var(--t3);font-family:var(--fmono);font-size:9px;letter-spacing:.04em;text-transform:uppercase}
+    .resource-mobile-step{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(23,32,29,.2);border-radius:50%;background:rgba(255,255,255,.72);color:var(--t1);font-size:17px}
+    .resource-mobile-tabs{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+    .resource-mobile-tabs button{min-height:32px;padding:6px 4px;border:1px solid transparent;border-radius:999px;background:transparent;color:var(--t3);font-family:var(--fmono);font-size:9px;letter-spacing:.04em;text-transform:uppercase}
+    .resource-mobile-tabs button[aria-selected="true"]{border-color:rgba(42,85,165,.34);background:rgba(255,255,255,.76);color:var(--blue)}
+    .resource-mobile-pager.is-switching .resource-mobile-current{animation:resource-mobile-topic-arrive .3s var(--ease) both}
+    .resource-article-nodes{position:relative;inset:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px;z-index:4}
+    .resource-mobile-empty{display:block;margin:6px 0 0;padding:54px 18px;border:1px dashed rgba(23,32,29,.2);border-radius:14px;background:rgba(248,247,242,.58);color:var(--t3);font-family:var(--fmono);font-size:11px;line-height:1.5;letter-spacing:.04em;text-align:center;text-transform:uppercase}
+    .resource-mobile-empty[hidden]{display:none}
+    .resource-article-node{position:relative;left:auto;top:auto;width:100%;opacity:1!important;filter:none!important;transform:none!important;touch-action:pan-y;transition:opacity .2s var(--ease),transform .2s var(--ease)}
+    .resource-article-node[data-mobile-visible="false"]{display:none}
+    .resource-node-tile{height:auto;border-radius:11px;animation:none}
+    .resource-node-tile img{width:100%;height:auto;aspect-ratio:1/.88;object-fit:cover}
+    .resource-node-tile>span{min-height:24px;padding:6px 3px 7px;font-size:11px;font-weight:600}
+    .resource-node-caption{position:static;display:-webkit-box;width:auto;margin:0;padding:8px 4px 0;border:0;background:transparent;box-shadow:none;color:var(--t2);font-size:12.5px;line-height:1.28;opacity:1;transform:none;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+    .resource-focus-layer{position:fixed;inset:0;z-index:500;display:grid;place-items:center;padding:58px 8px 16px;background:rgba(232,231,227,.54);backdrop-filter:blur(8px)}
+    .resource-focus-layer[hidden]{display:none}
+    .resource-focus-panel{position:relative;left:auto;top:auto;width:min(430px,calc(100vw - 16px));transform:none}
+    .resource-focus-carousel{grid-template-columns:34px minmax(0,1fr) 34px;gap:4px}
+    .resource-focus-card{grid-template-rows:min(58vh,430px) auto}
+    .resource-focus-copy{min-height:106px;padding:12px 13px}
+    .resource-focus-copy>b{font-size:18px}
+    .resource-focus-step{width:34px;height:34px}
+    .resource-focus-close{right:6px;top:-42px;width:32px;height:32px}
+  }
   @media(pointer:fine){.resource-network{touch-action:none}}
   @media(prefers-reduced-motion:reduce){.resource-node-tile,.resource-focus-card,.resource-article-node.is-tapped .resource-node-tile{animation:none}.resource-network,.resource-network-map path,.resource-root-node,.resource-hub,.resource-article-node,.resource-node-tile img,.resource-node-caption,.resource-focus-step{transition:none}}
+  @keyframes resource-mobile-topic-arrive{from{opacity:.45;transform:translate3d(10px,0,0)}to{opacity:1;transform:none}}
 </style>
