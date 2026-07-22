@@ -711,11 +711,38 @@
       [style*="font-size:46px"]{font-size:28px !important}
       [style*="font-size:42px"]{font-size:26px !important}
       [style*="max-width:1180px"]{max-width:100% !important}
-      .section-mark{top:64px !important;font-family:var(--fbrush) !important;font-size:88px !important;font-weight:400 !important;line-height:1;letter-spacing:.02em !important;color:rgba(30,44,39,.44) !important;opacity:.68;-webkit-text-fill-color:currentColor;-webkit-text-stroke:.3px rgba(30,44,39,.22) !important;text-shadow:0 1px .4px rgba(23,32,29,.1);filter:saturate(.76) contrast(1.08)}
+      /* The calligraphy is a replaceable background accent. It must never
+         reserve space, offset the reading column, or become interactive. */
+      .section-mark{
+        position:absolute !important;
+        top:64px !important;
+        z-index:0 !important;
+        pointer-events:none !important;
+        font-family:var(--fbrush) !important;
+        font-size:88px !important;
+        font-weight:400 !important;
+        line-height:1;
+        letter-spacing:.02em !important;
+        color:rgba(30,44,39,.38) !important;
+        opacity:.5;
+        -webkit-text-fill-color:currentColor;
+        -webkit-text-stroke:.3px rgba(30,44,39,.18) !important;
+        text-shadow:0 1px .4px rgba(23,32,29,.08);
+        filter:saturate(.72) contrast(1.04)
+      }
       .section-mark-left{left:-16px !important}
       .section-mark-right{right:-16px !important;transform:none !important}
-      .section-mark-left + [style*="max-width:1180px"]{padding-left:46px !important}
-      .section-mark-right + [style*="max-width:1180px"]{padding-right:46px !important}
+      .section-mark + *{
+        position:relative;
+        z-index:1;
+        box-sizing:border-box;
+        width:100%;
+        margin-inline:auto !important
+      }
+      .section-mark-left + [style*="max-width:1180px"],
+      .section-mark-right + [style*="max-width:1180px"]{
+        padding-inline:0 !important
+      }
       .workspace-toolbar{align-items:flex-start !important;flex-wrap:wrap !important;column-gap:10px !important;row-gap:7px !important;padding:12px 14px !important}
       .workspace-product{flex:0 0 auto;font-size:11px !important;line-height:1.4}
       .workspace-run{flex:1 1 160px;min-width:0;overflow-wrap:anywhere;line-height:1.4}
