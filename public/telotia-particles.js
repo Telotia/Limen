@@ -509,44 +509,57 @@
     let hover = null, gt = 0, ft = 0, _ph, _pox = null, _poy = null;
     // pointer state: a short tap adds/prunes; movement cancels the action.
     let down = false, panning = false, sx = 0, sy = 0, hitNode = null;
+    let activePointerId = null, touchPointer = false;
     function localXY(e) { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
-    function hit(wx, wy) { let best = null, bd = 1e9; for (const n of nodes) { if (n.fade) continue; const r = n.rt + 11, dx = wx - n.x, dy = wy - n.y, d = dx * dx + dy * dy; if (d < r * r && d < bd) { bd = d; best = n; } } return best; }
+    function hit(wx, wy, pad) { let best = null, bd = 1e9; for (const n of nodes) { if (n.fade) continue; const r = n.rt + (pad == null ? 11 : pad), dx = wx - n.x, dy = wy - n.y, d = dx * dx + dy * dy; if (d < r * r && d < bd) { bd = d; best = n; } } return best; }
+    function insideCanvas(xy) { return xy[0] >= 0 && xy[0] <= dim.w && xy[1] >= 0 && xy[1] <= dim.h; }
+    function resetPointer() {
+      down = false; panning = false; hitNode = null; activePointerId = null; touchPointer = false;
+      if (fine) cv.style.cursor = 'crosshair';
+    }
     function onMove(e) {
       const xy = localXY(e);
       if (down) {
+        if (e.pointerId !== activePointerId) return;
         const dx = xy[0] - sx, dy = xy[1] - sy;
-        if (!panning && dx * dx + dy * dy > 36) panning = true;   // >6px -> it's a drag
-        if (panning) cv.style.cursor = 'default';
+        const dragThreshold = touchPointer ? 144 : 36;
+        if (!panning && dx * dx + dy * dy > dragThreshold) panning = true;
+        if (panning && fine) cv.style.cursor = 'default';
         return;
       }
-      hover = hit(xy[0] - ox, xy[1] - oy);
+      if (!fine || e.pointerType === 'touch') return;
+      hover = hit(xy[0] - ox, xy[1] - oy, 11);
       cv.style.cursor = hover ? 'pointer' : 'crosshair';
     }
     function onDown(e) {
+      if (activePointerId !== null || e.isPrimary === false || (e.pointerType === 'mouse' && e.button !== 0)) return;
       const xy = localXY(e);
+      activePointerId = e.pointerId;
+      touchPointer = e.pointerType === 'touch';
       down = true; panning = false; sx = xy[0]; sy = xy[1];
-      hitNode = hit(xy[0] - ox, xy[1] - oy);
-      cv.style.cursor = hitNode ? 'pointer' : 'crosshair';
-      e.preventDefault();
+      hitNode = hit(xy[0] - ox, xy[1] - oy, touchPointer ? 24 : 11);
+      if (fine) cv.style.cursor = hitNode ? 'pointer' : 'crosshair';
+      // Keep one-finger vertical scrolling native on phones. A real scroll fires
+      // pointercancel; a stationary finger still produces the tap action below.
+      if (e.pointerType === 'mouse') e.preventDefault();
     }
     function onUp(e) {
-      if (!down) return;
-      down = false;
-      if (!panning) {                                     // a tap, not a drag
+      if (!down || e.pointerId !== activePointerId) return;
+      const xy = localXY(e);
+      if (!panning && insideCanvas(xy)) {                  // a tap, not a drag/scroll
         if (hitNode) falsify(hitNode);                    // tap a chain -> amber -> pruned
-        else { const xy = localXY(e), wx = xy[0] - ox, wy = xy[1] - oy; spawnAt(wx, wy, nearest(wx, wy)); }
+        else { const wx = xy[0] - ox, wy = xy[1] - oy; spawnAt(wx, wy, nearest(wx, wy)); }
       }
-      panning = false; hitNode = null; cv.style.cursor = 'crosshair';
+      resetPointer();
     }
-    function onLeave() { if (!down) { hover = null; cv.style.cursor = 'crosshair'; } }
-    if (fine) {
-      cv.style.cursor = 'crosshair';
-      cv.addEventListener('pointermove', onMove);
-      cv.addEventListener('pointerdown', onDown);
-      global.addEventListener('pointermove', onMove);
-      global.addEventListener('pointerup', onUp);
-      cv.addEventListener('pointerleave', onLeave);
-    }
+    function onCancel(e) { if (e.pointerId === activePointerId) resetPointer(); }
+    function onLeave() { if (!down) { hover = null; if (fine) cv.style.cursor = 'crosshair'; } }
+    if (fine) cv.style.cursor = 'crosshair';
+    cv.addEventListener('pointermove', onMove);
+    cv.addEventListener('pointerdown', onDown);
+    global.addEventListener('pointerup', onUp);
+    global.addEventListener('pointercancel', onCancel);
+    cv.addEventListener('pointerleave', onLeave);
 
     // advance the simulation one tick (shared by both renderers)
     function step() {
@@ -739,9 +752,9 @@
         _g.stop();
         global.removeEventListener('resize', onResize);
         cv.removeEventListener('pointermove', onMove);
-        global.removeEventListener('pointermove', onMove);
         cv.removeEventListener('pointerdown', onDown);
         global.removeEventListener('pointerup', onUp);
+        global.removeEventListener('pointercancel', onCancel);
         cv.removeEventListener('pointerleave', onLeave);
       }
     };
