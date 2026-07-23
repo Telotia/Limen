@@ -100,7 +100,11 @@ function seedCircleEntry(world: World): void {
 function seedChaoticIntro(world: World): void {
   const intro = TELOS_PATTERN_CONFIG['chaotic pattern'].chaoticIntro
   const cycleDuration = telosChaoticCycleDuration(world)
-  const introPathTime = telosChaoticPathTimeForDistance(world, intro.pathDistancePx)
+  const responsivePathDistance = Math.min(
+    intro.pathDistancePx,
+    world.baseRadius * intro.pathDistanceRadiusFactor,
+  )
+  const introPathTime = telosChaoticPathTimeForDistance(world, responsivePathDistance)
   const introSpeedMultiplier = introPathTime / intro.durationSeconds
   const randomizedStartWindow = Math.max(0, cycleDuration - introPathTime)
   world.chaoticIntroPathTime = introPathTime

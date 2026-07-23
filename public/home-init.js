@@ -340,35 +340,47 @@ function initFooterInk(){
   var nav=document.querySelector('.navlight'); if(!nav) return;
   /* Floating peek logo: the mark spins as a restrained brand signal. */
   var st=document.createElement('style');
-  st.textContent='.nav-peek{position:fixed;top:max(5px,env(safe-area-inset-top));left:max(10px,env(safe-area-inset-left));z-index:81;width:44px;height:44px;padding:1px;overflow:hidden;border:0;border-radius:50%;background:rgba(255,255,255,.68);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 5px 16px -8px rgba(16,24,47,.4);opacity:0;visibility:hidden;transform:scale(.82) translateY(-6px);transform-origin:center;pointer-events:none;transition:opacity .28s ease,transform .42s cubic-bezier(.16,1,.3,1),visibility 0s linear .42s,box-shadow .42s ease;cursor:pointer}.nav-peek.show{opacity:1;visibility:visible;transform:scale(1) translateY(0);pointer-events:auto;transition-delay:0s}.nav-peek.show:hover{transform:scale(1.12) translateY(0);box-shadow:0 12px 26px -12px rgba(16,24,47,.46)}.nav-peek img{width:100%;height:100%;object-fit:contain;display:block;transform:scale(1.06);transform-origin:center;will-change:transform}.nav-peek.show:not(:hover) img{animation:navPeekIdleCycle 30s linear infinite}.nav-peek.show:hover img{animation:navPeekHoverSpin 1.45s cubic-bezier(.22,.61,.36,1) 1}@keyframes navPeekHoverSpin{from{transform:scale(1.06) rotate(0deg)}to{transform:scale(1.06) rotate(1080deg)}}@keyframes navPeekIdleCycle{0%,93.666%{transform:scale(1.06) rotate(0deg)}100%{transform:scale(1.06) rotate(1080deg)}}@media(min-width:961px){.nav-peek{top:max(10px,env(safe-area-inset-top));left:14px}}@media (prefers-reduced-motion:reduce){.nav-peek,.nav-peek.show:hover{transition:opacity .2s ease;transform:scale(1) translateY(0)}.nav-peek img{animation:none!important;transform:scale(1.06);will-change:auto}}';
+  st.textContent='.nav-peek{position:fixed;top:max(5px,env(safe-area-inset-top));left:max(10px,env(safe-area-inset-left));z-index:81;width:44px;height:44px;padding:1px;overflow:hidden;border:0;border-radius:50%;background:rgba(255,255,255,.68);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 5px 16px -8px rgba(16,24,47,.4);opacity:0;visibility:hidden;transform:scale(.82) translateY(-6px);transform-origin:center;pointer-events:none;transition:opacity .28s ease,transform .42s cubic-bezier(.16,1,.3,1),visibility 0s linear .42s,box-shadow .42s ease;cursor:pointer}.nav-peek.show,body.telotia-nav-hidden .nav-peek,.navlight.is-nav-hidden~.nav-peek{opacity:1;visibility:visible;transform:scale(1) translateY(0);pointer-events:auto;transition-delay:0s}.nav-peek.show:hover,body.telotia-nav-hidden .nav-peek:hover{transform:scale(1.12) translateY(0);box-shadow:0 12px 26px -12px rgba(16,24,47,.46)}.nav-peek img{width:100%;height:100%;object-fit:contain;display:block;transform:scale(1.06);transform-origin:center;will-change:transform}.nav-peek.show:not(:hover) img,body.telotia-nav-hidden .nav-peek:not(:hover) img{animation:navPeekIdleCycle 30s linear infinite}.nav-peek.show:hover img,body.telotia-nav-hidden .nav-peek:hover img{animation:navPeekHoverSpin 1.45s cubic-bezier(.22,.61,.36,1) 1}@keyframes navPeekHoverSpin{from{transform:scale(1.06) rotate(0deg)}to{transform:scale(1.06) rotate(1080deg)}}@keyframes navPeekIdleCycle{0%,93.666%{transform:scale(1.06) rotate(0deg)}100%{transform:scale(1.06) rotate(1080deg)}}@media(min-width:961px){.nav-peek{top:max(10px,env(safe-area-inset-top));left:14px}}@media (prefers-reduced-motion:reduce){.nav-peek,.nav-peek.show:hover{transition:opacity .2s ease;transform:scale(1) translateY(0)}.nav-peek img{animation:none!important;transform:scale(1.06);will-change:auto}}';
   document.head.appendChild(st);
   var peek=document.createElement('button'); peek.type='button'; peek.className='nav-peek'; peek.setAttribute('aria-label','Show menu');
   peek.innerHTML='<img src="/telotia-mark-tricolor-transparent.webp" alt="">';
   document.body.appendChild(peek);
   var collapseControl=nav.querySelector('.nav-collapse');
   var mobileMenu=nav.querySelector('.nav-mobile');
-  var hidden=false, last=window.pageYOffset||document.documentElement.scrollTop||0, ticking=false;
+  var hidden=false, ticking=false, directionTravel=0, lastDirection=0, touchStartY=null, suppressScrollUntil=0;
+  function scrollY(){
+    var raw=window.pageYOffset||document.documentElement.scrollTop||0;
+    var max=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+    return Math.max(0,Math.min(max,raw));
+  }
+  var last=scrollY();
   function setNavInteractive(interactive){
     nav.setAttribute('aria-hidden',interactive?'false':'true');
     if('inert' in nav) nav.inert=!interactive;
   }
   function show(){
-    if(!hidden) return;
+    /* Re-apply every property even when our boolean already says "shown".
+       Mobile Safari can restore the DOM/CSS state separately from this closure
+       after toolbar changes or a back/forward cache restore. */
     nav.classList.remove('is-nav-hidden');
     document.body.classList.remove('telotia-nav-hidden');
     setNavInteractive(true);
     peek.classList.remove('show');
     hidden=false;
+    directionTravel=0;
+    suppressScrollUntil=Date.now()+260;
   }
   function hide(){
-    if(hidden || (mobileMenu && mobileMenu.open)) return;
+    if(mobileMenu && mobileMenu.open) return;
     nav.classList.add('is-nav-hidden');
     document.body.classList.add('telotia-nav-hidden');
     setNavInteractive(false);
     peek.classList.add('show');
     hidden=true;
+    directionTravel=0;
+    suppressScrollUntil=Date.now()+260;
   }
-  peek.addEventListener('click',function(e){e.preventDefault();show();last=window.pageYOffset||document.documentElement.scrollTop||0;}); /* reveal nav + reset baseline so a later scroll-down re-hides */
+  peek.addEventListener('click',function(e){e.preventDefault();show();last=scrollY();}); /* reveal nav + reset baseline so a later scroll-down re-hides */
   if(collapseControl){collapseControl.addEventListener('click',function(e){e.preventDefault();hide();});}
   window.addEventListener('telotia:navigation-collapse',function(){ if(!hidden) hide(); });
   if(mobileMenu){mobileMenu.addEventListener('toggle',function(){if(mobileMenu.open) show();});}
@@ -376,19 +388,60 @@ function initFooterInk(){
     if(ticking) return;
     ticking=true;
     window.requestAnimationFrame(function(){
-      var y=window.pageYOffset||document.documentElement.scrollTop||0;
-      if(y>last+12 && y>88){ hide(); }
-      else if(y<last-12 || y<=32){ show(); }
+      var y=scrollY();
+      /* Changing the flow-slot height by a few pixels can emit a synthetic
+         scroll event. Do not misread that layout correction as an upward
+         finger gesture and immediately undo the requested state. */
+      if(Date.now()<suppressScrollUntil){
+        last=y;
+        ticking=false;
+        return;
+      }
+      var delta=y-last;
+      var direction=delta===0?0:(delta>0?1:-1);
+      if(direction && direction!==lastDirection) directionTravel=0;
+      if(direction) directionTravel+=delta;
+      if(y<=32){ show(); }
+      else if(directionTravel>14 && y>88){ hide(); }
+      else if(directionTravel<-6){ show(); }
+      if(direction) lastDirection=direction;
       last=y;
       ticking=false;
     });
   },{passive:true});
-  window.addEventListener('pageshow',function(){
-    nav.classList.remove('is-nav-hidden');
-    document.body.classList.remove('telotia-nav-hidden');
-    setNavInteractive(true);
-    peek.classList.remove('show');
-    hidden=false;
-    last=window.pageYOffset||document.documentElement.scrollTop||0;
-  });
+  /* iOS may move the browser chrome without delivering enough page-scroll
+     delta to cross the threshold. Finger direction is therefore a second,
+     independent recovery path: dragging the page downward means travelling
+     back toward its top, so the full navigation must return immediately. */
+  document.addEventListener('touchstart',function(e){
+    touchStartY=e.touches&&e.touches[0]?e.touches[0].clientY:null;
+  },{passive:true});
+  document.addEventListener('touchmove',function(e){
+    if(touchStartY===null || !e.touches || !e.touches[0]) return;
+    var current=e.touches[0].clientY;
+    var travel=current-touchStartY;
+    if(travel>8){ show(); last=scrollY(); touchStartY=current; }
+    else if(travel<-16 && scrollY()>88){ hide(); last=scrollY(); touchStartY=current; }
+  },{passive:true});
+  document.addEventListener('touchend',function(){touchStartY=null;},{passive:true});
+  function ensureNavigationPresence(){
+    var navStyle=window.getComputedStyle(nav);
+    var peekStyle=window.getComputedStyle(peek);
+    var navRect=nav.getBoundingClientRect();
+    var navPresent=navStyle.visibility!=='hidden' && Number(navStyle.opacity||1)>.08 && navRect.bottom>0;
+    var peekPresent=peekStyle.visibility!=='hidden' && Number(peekStyle.opacity||0)>.08;
+    if(!navPresent && !peekPresent){
+      if(hidden || document.body.classList.contains('telotia-nav-hidden')) hide();
+      else show();
+    }
+  }
+  function resetNavigation(){
+    show();
+    last=scrollY();
+    lastDirection=0;
+  }
+  window.addEventListener('pageshow',resetNavigation);
+  window.addEventListener('orientationchange',resetNavigation);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden) resetNavigation();});
+  window.setInterval(ensureNavigationPresence,900);
 })();

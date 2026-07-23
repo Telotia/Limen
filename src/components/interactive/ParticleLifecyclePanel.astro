@@ -99,14 +99,31 @@
       observer.observe(canvas);
       window.addEventListener('pagehide', () => observer.disconnect(), { once: true });
     } else {
-      const animation = createAnimation(canvas, {
-        backgroundColor: 'transparent',
-        telosPattern: 'chaotic pattern',
-        center: ({ width, height }) => ({ x: width * .53, y: height * .5 }),
-        radius: ({ width, height }) => Math.min(width, height) * .27,
-      });
+      let animation: ReturnType<typeof createAnimation> | null = null;
+      const startAnimation = () => {
+        if (animation) return;
+        animation = createAnimation(canvas, {
+          backgroundColor: 'transparent',
+          telosPattern: 'chaotic pattern',
+          center: ({ width, height }) => ({ x: width * .53, y: height * .5 }),
+          radius: ({ width, height }) => Math.min(width, height) * .27,
+        });
+      };
 
-      window.addEventListener('pagehide', () => animation.destroy(), { once: true });
+      // Do not let the attractor finish while it sits below the fold. Its
+      // first visible state should always explain the claim entering the
+      // evidence field, especially on the long mobile layout.
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        startAnimation();
+        observer.disconnect();
+      }, { threshold: .18 });
+
+      observer.observe(canvas);
+      window.addEventListener('pagehide', () => {
+        observer.disconnect();
+        animation?.destroy();
+      }, { once: true });
     }
   }
 </script>

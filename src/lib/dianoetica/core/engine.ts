@@ -17,6 +17,7 @@ import { updateColors } from './color/drift'
 import { updateBursts } from './effects/burst'
 import { setupVisibilityPause } from '../utils/visibility'
 import { TELOS_PATTERN_CONFIG } from './patterns/telos-pattern-config'
+import { telosChaoticPathSample } from './phases/telos'
 
 export interface AnimationHandle {
   setCenter(center?: WorldCenter): void
@@ -99,11 +100,12 @@ export function createAnimation(
     if (!Number.isFinite(dt) || dt < 0) dt = 0
     if (dt > MAX_DT) dt = MAX_DT
 
+    const previousTelosPathTime = world.telosPathTime
     phaseMachine.update(dt)
     updateLifecycle(world, dt)
     stepPhysics(world, dt)
     updateColors(world.particles, world.time)
-    appendTrails(world)
+    appendTrails(world, previousTelosPathTime)
     world.bursts = updateBursts(world.bursts, dt)
     renderFrame(canvasState, world)
   }
@@ -163,8 +165,46 @@ export function createAnimation(
  * Append each particle's current position to its trail buffer, including
  * resolving claims as they move inward to be absorbed by Telos.
  */
-function appendTrails(world: World): void {
+function appendTrails(world: World, previousTelosPathTime: number): void {
   for (const p of world.particles) {
+    if (
+      p.isTelos &&
+      world.telosPattern === 'chaotic pattern' &&
+      !world.chaoticIntroComplete
+    ) {
+      appendChaoticIntroTrail(world, p, previousTelosPathTime)
+      continue
+    }
     p.trail.append(p.position)
+  }
+}
+
+/**
+ * Sample the real Lorenz path between animation frames during the reveal.
+ * Mobile browsers often render at 30 Hz; appending only one position per
+ * frame turns a mathematically smooth path into visible straight chords.
+ */
+function appendChaoticIntroTrail(
+  world: World,
+  particle: World['particles'][number],
+  previousPathTime: number,
+): void {
+  const currentPathTime = world.telosPathTime
+  const start = telosChaoticPathSample(world, previousPathTime).position
+  const end = telosChaoticPathSample(world, currentPathTime).position
+  const distance = Math.hypot(end.x - start.x, end.y - start.y)
+  const discontinuity = Math.max(80, world.baseRadius * 0.75)
+
+  if (!Number.isFinite(distance) || distance > discontinuity) {
+    particle.trail.append(particle.position)
+    return
+  }
+
+  const spacingPx = world.width <= 820 ? 1.8 : 2.4
+  const steps = Math.max(1, Math.ceil(distance / spacingPx))
+  for (let step = 1; step <= steps; step++) {
+    const amount = step / steps
+    const pathTime = previousPathTime + (currentPathTime - previousPathTime) * amount
+    particle.trail.append(telosChaoticPathSample(world, pathTime).position)
   }
 }

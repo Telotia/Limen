@@ -1,6 +1,7 @@
 import type { World } from '../core/world'
 import type { Particle } from '../core/particle'
 import { resolutionDisplay } from '../core/lifecycle/claim-resolution'
+import { TELOS_PATTERN_CONFIG } from '../core/patterns/telos-pattern-config'
 
 const HALO_RADIUS_MULTIPLIER = 4.5
 const HALO_INNER_ALPHA = 0.75
@@ -92,9 +93,12 @@ function drawTelos(ctx: CanvasRenderingContext2D, p: Particle, world: World): vo
   const time = world.time
   const knowledgePulse = telosKnowledgePulse(world)
   const pulse = 1 + TELOS_PULSE_AMPLITUDE * Math.sin(time * TELOS_PULSE_FREQ)
-  const r = p.radius * (pulse + knowledgePulse)
+  const reveal = chaoticIntroReveal(world)
+  const r = p.radius * (pulse + knowledgePulse) * (0.5 + reveal * 0.5)
   const cx = p.position.x
   const cy = p.position.y
+  const previousAlpha = ctx.globalAlpha
+  ctx.globalAlpha = previousAlpha * (0.04 + reveal * 0.96)
 
   // Soft warm halo
   const haloR = r * TELOS_HALO_MULTIPLIER
@@ -145,6 +149,14 @@ function drawTelos(ctx: CanvasRenderingContext2D, p: Particle, world: World): vo
   ctx.beginPath()
   ctx.arc(cx, cy, coreR, 0, Math.PI * 2)
   ctx.fill()
+  ctx.globalAlpha = previousAlpha
+}
+
+function chaoticIntroReveal(world: World): number {
+  if (world.telosPattern !== 'chaotic pattern' || world.chaoticIntroComplete) return 1
+  const duration = TELOS_PATTERN_CONFIG['chaotic pattern'].chaoticIntro.durationSeconds
+  const progress = Math.max(0, Math.min(1, world.phaseTime / duration))
+  return progress * progress * (3 - 2 * progress)
 }
 
 function telosKnowledgePulse(world: World): number {

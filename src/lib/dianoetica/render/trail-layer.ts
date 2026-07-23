@@ -86,7 +86,7 @@ function drawOneTrail(ctx: CanvasRenderingContext2D, p: Particle, world: World):
   // trace that gains body as the two Lorenz wings are drawn. This preserves
   // the final geometry without flashing a fully seeded history on screen.
   const reveal = chaoticIntroReveal(p, world)
-  baseAlpha *= 0.14 + 0.86 * reveal
+  baseAlpha *= 0.02 + 0.98 * reveal
 
   // Copy samples into scratch buffers. Telos can keep a much longer memory
   // than we render; sampled iteration preserves old lobes without building a
@@ -107,7 +107,7 @@ function drawOneTrail(ctx: CanvasRenderingContext2D, p: Particle, world: World):
 
   if (p.isTelos) {
     if (!telosTrail) return
-    drawChunkedTelosStroke(ctx, N, h, sat, lt, baseAlpha, telosTrail, world, 0.48 + 0.52 * reveal)
+    drawChunkedTelosStroke(ctx, N, h, sat, lt, baseAlpha, telosTrail, world, 0.22 + 0.78 * reveal)
     return
   }
 
@@ -234,8 +234,15 @@ function drawChunkedTelosStroke(
       const distance = Math.hypot(sx[j] - sx[j - 1], sy[j] - sy[j - 1])
       if (distance > maxSegmentLength) {
         ctx.moveTo(sx[j], sy[j])
-      } else {
+      } else if (j === endIdx - 1) {
         ctx.lineTo(sx[j], sy[j])
+      } else {
+        // Curve through the real Lorenz samples instead of exposing their
+        // straight chords. This is especially visible on a narrow high-DPR
+        // mobile canvas, where even dense samples can read as a polygon.
+        const midX = (sx[j] + sx[j + 1]) * 0.5
+        const midY = (sy[j] + sy[j + 1]) * 0.5
+        ctx.quadraticCurveTo(sx[j], sy[j], midX, midY)
       }
     }
     ctx.stroke()
