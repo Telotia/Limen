@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?v=8">
+<title>金融 · 仿制药被加征100%关税,可厂商偏偏没法涨价</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2b26; --ink2:#3f5850; --muted:#6f877e;
+    --amb:#1f7a5c; --amb-d:#12503a; --line:rgba(28,43,38,.10);
+    --up:#1a8f5e; --down:#c0392b; --card:rgba(255,255,255,.72);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink);
+    font-family:"Inter","Noto Serif SC",system-ui,sans-serif;
+    line-height:1.85; font-size:18px;
+    background-color:#eef4ee;
+    background:
+      radial-gradient(ellipse 60% 45% at 16% 18%, oklch(0.82 0.09 155 / .45) 0%, transparent 56%),
+      radial-gradient(ellipse 50% 60% at 86% 12%, oklch(0.74 0.08 175 / .30) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 55% at 78% 88%, oklch(0.66 0.05 200 / .22) 0%, transparent 58%),
+      radial-gradient(ellipse 60% 50% at 22% 92%, oklch(0.80 0.07 140 / .32) 0%, transparent 58%),
+      #eef4ee;
+    background-attachment:fixed;
+  }
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:soft-light;opacity:.10;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:72px 26px 120px}
+  .kicker{font-family:"Inter",sans-serif;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    font-size:13px;color:var(--amb-d);margin-bottom:18px}
+  h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(28px,5.4vw,44px);line-height:1.24;
+    margin:0 0 20px;letter-spacing:-.01em}
+  .lede{font-size:20px;color:var(--ink2);font-weight:500;margin:0 0 30px}
+  .meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-family:"Inter",sans-serif;
+    font-size:13.5px;color:var(--muted);padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:14px}
+  .meta .dot{width:5px;height:5px;border-radius:50%;background:var(--amb)}
+  h2{font-family:"Noto Serif SC",serif;font-weight:700;font-size:26px;margin:52px 0 16px;letter-spacing:-.005em;
+    display:flex;align-items:baseline;gap:12px}
+  h2 .n{font-family:"Inter",sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--amb);
+    width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;flex:none;
+    box-shadow:0 4px 14px rgba(31,122,92,.35)}
+  p{margin:0 0 18px}
+  strong{font-weight:700;color:var(--ink);background:linear-gradient(transparent 62%, rgba(31,122,92,.18) 0)}
+  .pull{font-family:"Noto Serif SC",serif;font-weight:600;font-size:22px;line-height:1.6;color:var(--amb-d);
+    border-left:4px solid var(--amb);padding:6px 0 6px 22px;margin:30px 0}
+  ul.stats{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:26px 0;padding:0}
+  .stat{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.7);border-radius:16px;padding:20px 20px;
+    box-shadow:0 8px 30px rgba(28,43,38,.07)}
+  .stat .v{font-family:"Inter",sans-serif;font-weight:700;font-size:25px;letter-spacing:-.02em;line-height:1.1}
+  .stat .l{font-size:13.5px;color:var(--muted);margin-top:6px}
+  .stat.down .v{color:var(--down)}
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+  .panel{border-radius:16px;padding:22px;background:var(--card);backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.7);box-shadow:0 8px 30px rgba(28,43,38,.07)}
+  .panel h4{margin:0 0 10px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .panel.bull h4{color:var(--up)} .panel.bear h4{color:var(--down)}
+  .panel p{margin:0;font-size:15.5px;color:var(--ink2);line-height:1.7}
+  .callout{background:rgba(31,122,92,.09);border:1px solid rgba(31,122,92,.24);border-radius:16px;
+    padding:22px 24px;margin:28px 0}
+  .callout .t{font-weight:700;color:var(--amb-d);margin-bottom:6px;font-size:15px;font-family:"Inter",sans-serif;
+    letter-spacing:.04em;text-transform:uppercase}
+  .disc{font-size:13.5px;color:var(--muted);background:rgba(28,43,38,.04);border-radius:14px;padding:18px 20px;
+    margin-top:40px;line-height:1.65}
+  .src{margin-top:30px;font-size:14px;color:var(--ink2)}
+  .src a{color:var(--amb-d);text-decoration:none;border-bottom:1px solid rgba(31,122,92,.35)}
+  .src li{margin-bottom:7px}
+  footer{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);
+    font-family:"Inter",sans-serif;font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
+  @media(max-width:560px){.stats,.bb{grid-template-columns:1fr}.wrap{padding:50px 20px 90px}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+  <div class="kicker">金融 · 每日深读</div>
+  <h1>仿制药被加征100%关税,可厂商偏偏没法涨价</h1>
+  <p class="lede">特朗普宣布对进口仿制药分阶段加征关税,2028年起100%,2029年再翻倍到200%。多数报道盯着"会不会伤到印度",却漏了一个更关键的细节:美国联邦项目早就用法律锁死了仿制药能涨多少价——这意味着这次关税的作用机制,从"逼厂商涨价转嫁成本",变成了"逼厂商退出市场"。</p>
+  <div class="meta">
+    <span>2026-07-23</span><span class="dot"></span>
+    <span>关税 · 医药供应链</span><span class="dot"></span>
+    <span>资讯解读,非投资建议</span>
+  </div>
+
+  <h2><span class="n">1</span>发生了什么</h2>
+  <p>7月21日,特朗普在Truth Social上宣布:从2026年8月1日起,进口仿制药先进入<strong>2年零关税过渡期</strong>;过渡期结束后,2028年起加征<strong>100%关税</strong>维持一年;2029年再翻倍到<strong>200%</strong>。政策依据是《1962年贸易扩展法》第232条——国家安全条款,与今年4月对进口专利/品牌药加征100%关税用的是同一条法律。当时生产商可以靠"承诺在美国建厂"或"接受政府定价协议"来换豁免,仿制药、生物类似药和相关原料药被明确排除在外;这次等于把这个豁免口子也堵上了。</p>
+  <p>白宫的说法很直接:给企业留出时间窗口,不搬厂就等着挨关税。大型药企在100%税率生效前有120天缓冲期,依赖代工厂的中小型仿制药企业缓冲期是180天。这套关税盯上的是一个体量不小的行业——全球仿制药市场规模接近<strong>5000亿美元</strong>,而美国开出的处方里,九成是仿制药。</p>
+  <p class="pull">"普通关税靠企业涨价转嫁成本才生效,可仿制药的价格上限,恰恰是发关税命令的这个联邦政府自己定的。"</p>
+
+  <h2><span class="n">2</span>为什么会这样:传导机制</h2>
+  <p>这次关税和过去一年市场见过的所有关税都不一样,差别不在税率,在<strong>目标商品的定价权归谁</strong>。美国仿制药有很大一部分要卖给Medicaid和340B药品定价项目——这两个联邦体系里都写着通胀返利条款,厂商每年能给仿制药涨多少价,早就被法律锁死了。换句话说,面对100%到200%的成本冲击,厂商没有"涨价转嫁给消费者"这条常规出路可走。</p>
+  <p>剩下的选项就只有三个:自己吞下成本、砸钱在美国建厂、或者干脆不卖了。对于本来利润就薄的品类——尤其是老旧的无菌注射剂和部分肿瘤仿制药,单价常常只有一两美元——建厂投入远高于产品本身能赚的钱,"退出美国市场"往往是唯一说得通的商业决定。这正是美国仿制药协会(Association for Accessible Medicines)此前提醒的风险:关税不会改善医疗质量,也不会让供应链变得更有韧性,反而可能把已经脆弱的品类推向短缺。</p>
+
+  <h2><span class="n">3</span>关键数字</h2>
+  <ul class="stats">
+    <li class="stat"><div class="v">~5000亿美元</div><div class="l">全球仿制药市场规模</div></li>
+    <li class="stat"><div class="v">90%</div><div class="l">美国处方药中仿制药占比(FDA数据)</div></li>
+    <li class="stat"><div class="v">50%+</div><div class="l">美国进口仿制药中来自印度的比例</div></li>
+    <li class="stat down"><div class="v">100%→200%</div><div class="l">关税税率:2028年首年,2029年再翻倍</div></li>
+    <li class="stat down"><div class="v">271 种</div><div class="l">当前美国在册短缺药品数量(高峰323种)</div></li>
+    <li class="stat down"><div class="v">+30%</div><div class="l">模型测算下,全球统一100%关税带来的处方均价涨幅(约+21.15美元/张)</div></li>
+  </ul>
+
+  <h2><span class="n">4</span>第二层影响:谁受益,谁受损</h2>
+  <p>最直接的输家是印度药企。印度供应了美国进口仿制药中一半以上的份额,美国也是印度制药出口的第一大市场,占其出口量三分之一以上,主要就是廉价仿制药。消息传出后,太阳制药、Dr Reddy's、西普拉、Torrent、Lupin、Aurobindo等公司股价当天普遍下跌1%到2.5%,印度Nifty制药指数跌近2%。但多家印度券商(如Motilal Oswal)明确指出,由于税率2028年才落地,短期冲击有限,这轮下跌更多是"情绪性"而非"基本面"定价。</p>
+  <p>真正的风险不在印度股市,而在美国医院药房。美国本身已经有271种药品在册短缺,其中不少是低利润的无菌注射剂,包括部分肿瘤用药——这类药品退出市场,患者往往只能改用价格高得多的品牌药,而品牌药供应通常更稳定,因为药企有动力维护其市场份额。潜在的赢家,是已有美国本土产能、或者原料药不依赖进口的仿制药企业,以及承接新建产能的美国建筑与设备供应商;而供应链上另一个隐患是原料药报复性反制——例如中国是美国四环素类抗生素原料药的最大进口来源,一旦中国限制出口,就算成品药"美国制造",照样可能断供。</p>
+
+  <h2><span class="n">5</span>多空双方最强论据</h2>
+  <div class="bb">
+    <div class="panel bull">
+      <h4>▲ 看多</h4>
+      <p>供应链过度集中于单一国家早被国会点名是国家安全隐患,2年零关税过渡期给了企业真实的建厂时间窗口;4月的品牌药关税已经出现企业以"承诺在美建厂"换取豁免的先例,说明谈判空间存在,不一定走到关税全额落地那一步。</p>
+    </div>
+    <div class="panel bear">
+      <h4>▼ 看空</h4>
+      <p>关税解决不了成本结构问题——印度的低成本优势来自劳动力和产业基础,不是补贴,关税逼不出一座能盈利的美国工厂;而Medicaid和340B的价格上限恰恰堵死了"涨价消化成本"这条路,企业理性的选择更可能是退出而非搬厂,直接冲击的正是已经短缺的271种药品所在的那类低利润品种。</p>
+    </div>
+  </div>
+
+  <h2><span class="n">6</span>被忽略与被夸大的:一点批判</h2>
+  <p>目前的报道和市场反应,几乎都在讲"印度贸易冲击"这条叙事——股价能跌、有具体的百分比、有明确的输家,天然更容易被写成新闻标题。但这恰恰是被过度定价的部分:多家分析机构自己都承认,2028年才生效,两年时间足够政策被修改、被诉讼缠住,或者像4月的品牌药关税一样,被谈成一批"建厂换豁免"的协议——今天的印度股价下跌,定价的是一个概率,不是一个确定结果。</p>
+  <p>真正被低估的,是价格管制这个变量本身。绝大多数关于关税的报道默认它通过"抬高终端售价"起作用,却没人问一句:如果卖方根本没有涨价的合法空间,这个关税实际上是在做什么?答案是把成本压力直接转成"要不要留在这个市场"的生存选择——这跟钢铁、汽车、电子产品这些普通关税的作用机制完全不同,也是为什么美国仿制药协会把它定性为"短缺风险"而不是"价格风险"。这个区别没有被大多数报道当作重点,却是判断这项政策实际效果的关键。</p>
+
+  <div class="callout">
+    <div class="t">这件事到底意味着什么</div>
+    <p style="margin:0">关税能不能达到目的,取决于目标商品的定价权是不是也被同一个政府管着。普通关税靠"企业涨价转嫁成本"生效;仿制药的价格上限恰恰是联邦项目自己定的,这就把关税的作用机制从"涨价"换成了"退出"。</p>
+  </div>
+
+  <h2><span class="n">7</span>给你的一条借鉴</h2>
+  <p><strong>第一,判断任何关税的实际影响前,先查一下目标商品的价格是不是被同一个政府管制着。</strong>如果是,"关税逼企业涨价从而伤害消费者"或"关税逼企业搬厂"这套常见叙事很可能是错的,该找的是退出/短缺这条线,而不是价格这条线。</p>
+  <p><strong>第二,如果持仓或家庭健康开支涉及医院、仿制药经销商(如麦克森这类分销商)或保险公司,</strong>未来两年真正值得盯的不是关税税率本身,而是FDA/美国医院药师协会的短缺药品清单——清单上短缺品种数量的变化,是判断企业到底在选择"退出"还是"搬厂"的最直接信号。</p>
+
+  <div class="disc">
+    <strong>免责声明:</strong>本文为公开信息的整理与解读,仅供学习与一般参考,不构成任何投资建议或买卖要约。所涉数据、税率、生效日期以官方公告与原始来源为准,可能随时变动。投资有风险,任何决策请自行核实并对自己负责。
+  </div>
+
+  <div class="src">
+    <strong>主要来源</strong>
+    <ul>
+      <li><a href="https://www.cnbc.com/2026/07/22/trump-generic-drugs-tariffs-medicine-trade-.html">CNBC — Trump plans generic drug tariffs from 2028 with two-year delay testing U.S. onshoring push</a></li>
+      <li><a href="https://www.cnbc.com/2026/07/22/trump-generic-drug-tariffs-prices-explained.html">CNBC — Trump's generic drug tariffs: What they could mean for medicine prices, manufacturers and supply</a></li>
+      <li><a href="https://www.bloomberg.com/news/articles/2026-07-21/trump-plans-100-tariff-on-generic-drugs-from-august-2028">Bloomberg — Trump's 100% Generic Drug Duty Threatens US Low-Cost Supply</a></li>
+      <li><a href="https://www.businesstoday.in/markets/stocks/story/pharma-stocks-sun-pharma-biocon-dr-reddys-torrent-pharma-shares-slip-after-trumps-generic-tariff-plan-544662-2026-07-23">Business Today — Pharma stocks: Sun Pharma, Biocon, Dr Reddy's, Torrent Pharma shares slip after Trump's generic tariff plan</a></li>
+      <li><a href="https://www.ajmc.com/view/trump-announces-timeline-for-100-generic-drug-tariffs-beginning-in-2028-200-in-2029">AJMC — Trump Announces Timeline for 100% Generic Drug Tariffs Beginning in 2028, 200% in 2029</a></li>
+      <li><a href="https://academic.oup.com/healthaffairsscholar/article/4/2/qxaf247/8402426">Health Affairs Scholar (Oxford Academic) — Potential impact of tariffs on active pharmaceutical ingredients on the price of US-made generic drugs</a></li>
+    </ul>
+  </div>
+
+  <footer><span>金融 · 每日深读</span><span>2026-07-23</span></footer>
+</div>
+</body>
+</html>
