@@ -4,6 +4,47 @@
         "categories":  [
                            "art"
                        ],
+        "title":  "The Serpentine Bench · A Park Stitched From Broken Tile",
+        "date":  "2026-07-23",
+        "dateLabel":  "Jul 23, 2026",
+        "folderLabel":  "2026/07/23/park-guell-serpentine-bench-gaudi",
+        "href":  "/resource/art/2026/07/23/park-guell-serpentine-bench-gaudi/en/index.html",
+        "zhHref":  "/resource/art/2026/07/23/park-guell-serpentine-bench-gaudi/zh/index.html",
+        "image":  "/resource/art/2026/07/23/park-guell-serpentine-bench-gaudi/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/23/park-guell-serpentine-bench-gaudi/en/card-1.jpg",
+                      "/resource/art/2026/07/23/park-guell-serpentine-bench-gaudi/en/card-2.jpg",
+                      "/resource/art/2026/07/23/park-guell-serpentine-bench-gaudi/en/card-3.jpg",
+                      "/resource/art/2026/07/23/park-guell-serpentine-bench-gaudi/en/card-4.jpg",
+                      "/resource/art/2026/07/23/park-guell-serpentine-bench-gaudi/en/card-5.jpg",
+                      "/resource/art/2026/07/23/park-guell-serpentine-bench-gaudi/en/card-6.jpg",
+                      "/resource/art/2026/07/23/park-guell-serpentine-bench-gaudi/en/card-7.jpg"
+                  ]
+    },
+    {
+        "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
+        "title":  "A 100% Tariff on Generic Drugs · But Sellers Can\u0027t Raise Prices",
+        "date":  "2026-07-23",
+        "dateLabel":  "Jul 23, 2026",
+        "folderLabel":  "2026/07/23/generic-drug-tariff-shortage",
+        "href":  "/resource/news/2026/07/23/generic-drug-tariff-shortage/en/index.html",
+        "zhHref":  "/resource/news/2026/07/23/generic-drug-tariff-shortage/zh/index.html",
+        "image":  "/resource/news/2026/07/23/generic-drug-tariff-shortage/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/23/generic-drug-tariff-shortage/en/card-1.jpg",
+                      "/resource/news/2026/07/23/generic-drug-tariff-shortage/en/card-2.jpg",
+                      "/resource/news/2026/07/23/generic-drug-tariff-shortage/en/card-3.jpg",
+                      "/resource/news/2026/07/23/generic-drug-tariff-shortage/en/card-4.jpg"
+                  ]
+    },
+    {
+        "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
         "title":  "The Ten Largest, No. 3, Youth · A Painting Written for the Future",
         "date":  "2026-07-22",
         "dateLabel":  "Jul 22, 2026",

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?v=8">
+<title>News · A 100% Tariff on Generic Drugs — But Sellers Can't Raise Prices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --ink:#1c2b26; --ink2:#3f5850; --muted:#6f877e;
+ --amb:#1f7a5c; --amb-d:#12503a; --line:rgba(28,43,38,.10);
+ --up:#1a8f5e; --down:#c0392b; --card:rgba(255,255,255,.72);
+ }
+ *{box-sizing:border-box}
+ html{scroll-behavior:smooth}
+ body{
+ margin:0; color:var(--ink);
+ font-family:"Inter","Newsreader",system-ui,sans-serif;
+ line-height:1.75; font-size:18px;
+ background-color:#eef4ee;
+ background:
+ radial-gradient(ellipse 60% 45% at 16% 18%, oklch(0.82 0.09 155 / .45) 0%, transparent 56%),
+ radial-gradient(ellipse 50% 60% at 86% 12%, oklch(0.74 0.08 175 / .30) 0%, transparent 55%),
+ radial-gradient(ellipse 55% 55% at 78% 88%, oklch(0.66 0.05 200 / .22) 0%, transparent 58%),
+ radial-gradient(ellipse 60% 50% at 22% 92%, oklch(0.80 0.07 140 / .32) 0%, transparent 58%),
+ #eef4ee;
+ background-attachment:fixed;
+ }
+ .grain{position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:soft-light;opacity:.10;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+ .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:72px 26px 120px}
+ .kicker{font-family:"Inter",sans-serif;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+ font-size:13px;color:var(--amb-d);margin-bottom:18px}
+ h1{font-family:"Newsreader",serif;font-weight:800;font-size:clamp(30px,5.4vw,46px);line-height:1.22;
+ margin:0 0 20px;letter-spacing:-.01em}
+ .lede{font-size:20px;color:var(--ink2);font-weight:500;margin:0 0 30px}
+ .meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-family:"Inter",sans-serif;
+ font-size:13.5px;color:var(--muted);padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:14px}
+ .meta .dot{width:5px;height:5px;border-radius:50%;background:var(--amb)}
+ h2{font-family:"Newsreader",serif;font-weight:700;font-size:26px;margin:52px 0 16px;letter-spacing:-.005em;
+ display:flex;align-items:baseline;gap:12px}
+ h2 .n{font-family:"Inter",sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--amb);
+ width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;flex:none;
+ box-shadow:0 4px 14px rgba(31,122,92,.35)}
+ p{margin:0 0 18px}
+ strong{font-weight:700;color:var(--ink);background:linear-gradient(transparent 62%, rgba(31,122,92,.18) 0)}
+ .pull{font-family:"Newsreader",serif;font-style:italic;font-weight:500;font-size:22px;line-height:1.6;color:var(--amb-d);
+ border-left:4px solid var(--amb);padding:6px 0 6px 22px;margin:30px 0}
+ ul.stats{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:26px 0;padding:0}
+ .stat{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+ border:1px solid rgba(255,255,255,.7);border-radius:16px;padding:20px 20px;
+ box-shadow:0 8px 30px rgba(28,43,38,.07)}
+ .stat .v{font-family:"Inter",sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;line-height:1.1}
+ .stat .l{font-size:13.5px;color:var(--muted);margin-top:6px}
+ .stat.down .v{color:var(--down)}
+ .bb{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+ .panel{border-radius:16px;padding:22px;background:var(--card);backdrop-filter:blur(14px);
+ border:1px solid rgba(255,255,255,.7);box-shadow:0 8px 30px rgba(28,43,38,.07)}
+ .panel h4{margin:0 0 10px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;
+ text-transform:uppercase;letter-spacing:.04em;font-family:"Inter",sans-serif}
+ .panel.bull h4{color:var(--up)} .panel.bear h4{color:var(--down)}
+ .panel p{margin:0;font-size:15.5px;color:var(--ink2);line-height:1.7}
+ .callout{background:rgba(31,122,92,.09);border:1px solid rgba(31,122,92,.24);border-radius:16px;
+ padding:22px 24px;margin:28px 0}
+ .callout .t{font-weight:700;color:var(--amb-d);margin-bottom:6px;font-size:15px;font-family:"Inter",sans-serif;
+ letter-spacing:.04em;text-transform:uppercase}
+ .disc{font-size:13.5px;color:var(--muted);background:rgba(28,43,38,.04);border-radius:14px;padding:18px 20px;
+ margin-top:40px;line-height:1.65}
+ .src{margin-top:30px;font-size:14px;color:var(--ink2)}
+ .src a{color:var(--amb-d);text-decoration:none;border-bottom:1px solid rgba(31,122,92,.35)}
+ .src li{margin-bottom:7px}
+ footer{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);
+ font-family:"Inter",sans-serif;font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
+ @media(max-width:560px){.stats,.bb{grid-template-columns:1fr}.wrap{padding:50px 20px 90px}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+ <div class="kicker">Finance · Daily Deep-Dive</div>
+ <h1>A 100% Tariff on Generic Drugs — But Sellers Can't Raise Prices</h1>
+ <p class="lede">Trump announced a phased tariff on imported generic drugs: 100% starting in 2028, doubling to 200% in 2029. Most coverage is fixated on whether this hurts India. The detail that actually matters got buried: federal programs already cap how much manufacturers can raise generic drug prices — which means this tariff can't work the way tariffs normally work. It doesn't push prices up. It pushes suppliers out.</p>
+ <div class="meta">
+ <span>2026-07-23</span><span class="dot"></span>
+ <span>Tariffs · Pharma Supply Chain</span><span class="dot"></span>
+ <span>Informational, not investment advice</span>
+ </div>
+
+ <h2><span class="n">1</span>What happened</h2>
+ <p>On July 21, Trump posted on Truth Social that imported generic drugs will get a <strong>two-year zero-tariff transition</strong> starting August 1, 2026. After that, tariffs rise to <strong>100%</strong> for one year starting in 2028, then double to <strong>200%</strong> in 2029. The authority is Section 232 of the Trade Expansion Act of 1962 — the national-security provision — the same law used in April to impose 100% tariffs on branded and patented drugs. That earlier order let manufacturers earn an exemption by committing to build US plants or accept government pricing deals, and it explicitly carved out generics, biosimilars, and related active ingredients. This announcement closes that carve-out.</p>
+ <p>The administration's logic is blunt: companies get a runway, and if they don't relocate, the tariff hits. Larger drugmakers get a 120-day buffer before the 100% rate takes effect; smaller manufacturers that rely on contract producers get 180 days. The target is a sizable industry — the global generic drug market runs close to <strong>$500 billion</strong>, and generics make up roughly 90% of all US prescriptions filled.</p>
+ <p class="pull">"An ordinary tariff works because companies raise prices to cover the cost. The price ceiling on generic drugs is set by the same federal government that just imposed the tariff."</p>
+
+ <h2><span class="n">2</span>Why: the mechanism</h2>
+ <p>This tariff behaves differently from anything the market has seen over the past year — not because the rate is unusual, but because of <strong>who controls the pricing power on the target good</strong>. A large share of US generic drugs flow through Medicaid and the 340B Drug Pricing Program, both of which write inflation-rebate rules into law that cap how much manufacturers can raise generic prices year over year. Facing a 100-to-200% cost shock, manufacturers don't have the standard tariff escape hatch of simply passing the cost to consumers.</p>
+ <p>That leaves three choices: absorb the cost, spend heavily to build US capacity, or stop selling the drug here. For already thin-margin categories — older sterile injectables and some oncology generics that often sell for a dollar or two a unit — the cost of a new plant dwarfs what the product itself can earn, making an exit from the US market the only decision that pencils out for many manufacturers. This is exactly the risk the Association for Accessible Medicines flagged earlier: tariffs, in their view, won't improve care or make the supply chain more resilient — they're more likely to push already-fragile drug categories toward shortage.</p>
+
+ <h2><span class="n">3</span>The numbers</h2>
+ <ul class="stats">
+ <li class="stat"><div class="v">~$500B</div><div class="l">Global generic drug market size</div></li>
+ <li class="stat"><div class="v">90%</div><div class="l">Share of US prescriptions filled with generics, per the FDA</div></li>
+ <li class="stat"><div class="v">50%+</div><div class="l">Share of US generic drug imports supplied by India</div></li>
+ <li class="stat down"><div class="v">100%→200%</div><div class="l">Tariff schedule: 2028 first year, doubling in 2029</div></li>
+ <li class="stat down"><div class="v">271 drugs</div><div class="l">Currently on the US shortage list (down from a peak of 323)</div></li>
+ <li class="stat down"><div class="v">+30%</div><div class="l">Modeled per-prescription price increase under a flat 100% global tariff (about +$21.15)</div></li>
+ </ul>
+
+ <h2><span class="n">4</span>Second-order effects: who wins, who loses</h2>
+ <p>The clearest losers are Indian drugmakers. India supplies more than half of US generic drug imports, and the US is India's largest pharmaceutical export market, absorbing over a third of its export volume — mostly cheap generics. Shares of Sun Pharma, Dr Reddy's, Cipla, Torrent Pharma, Lupin, and Aurobindo Pharma all fell between 1% and 2.5% the day the news broke, and India's Nifty Pharma index dropped nearly 2%. But several Indian brokerages, including Motilal Oswal, were explicit that the near-term hit is limited precisely because the tariff doesn't bite until 2028 — calling the sell-off "sentimental" rather than fundamentals-driven.</p>
+ <p>The bigger risk isn't sitting in Indian equity markets — it's sitting in American hospital pharmacies. The US already has 271 drugs on its shortage list, many of them low-margin sterile injectables, including oncology generics. When a generic exits the market, patients often shift to a far more expensive branded alternative, and branded supply tends to stay stable because manufacturers have every incentive to protect that market share. The potential winners are generic makers that already have US manufacturing footprints or don't depend on imported active ingredients, plus the construction and equipment suppliers who'd build any new US plants. A separate risk sits upstream: China is the largest source of imported active ingredients for tetracycline-class antibiotics made in the US — if Beijing restricted those exports in retaliation, even a "Made in USA" finished drug could face a shortage.</p>
+
+ <h2><span class="n">5</span>Bull vs. bear</h2>
+ <div class="bb">
+ <div class="panel bull">
+ <h4>▲ Bull case</h4>
+ <p>Congress has already flagged overconcentration in a single supplier country as a national-security risk, and the two-year zero-tariff runway gives companies real lead time to build. The April branded-drug tariff already produced exemption deals in exchange for US manufacturing commitments — a precedent that negotiation, not blunt tariff impact, may be the actual outcome here too.</p>
+ </div>
+ <div class="panel bear">
+ <h4>▼ Bear case</h4>
+ <p>A tariff can't fix the underlying cost structure — India's cost advantage comes from labor and industrial base, not a subsidy, and tariffs alone can't manufacture a profitable US plant into existence. Medicaid and 340B price caps block the "raise prices to absorb the cost" route entirely, making exit the more rational choice for manufacturers than relocation — hitting exactly the low-margin drug categories that already populate the 271-item shortage list.</p>
+ </div>
+ </div>
+
+ <h2><span class="n">6</span>What the narrative is missing — and overstating</h2>
+ <p>Nearly all current coverage and market reaction is framed as an India trade-war story — it has a stock chart, a specific percentage, an identifiable loser, which makes it naturally easy to turn into a headline. That's exactly the part getting overpriced: multiple analysts themselves note the tariff doesn't take effect until 2028, and two years is enough time for the policy to be revised, tied up in litigation, or negotiated into exemption deals the way the April branded-drug tariff was. Today's move in Indian pharma shares is pricing a probability, not a settled outcome.</p>
+ <p>What's genuinely underweighted is the price-control variable itself. Most tariff coverage defaults to assuming the mechanism is "raise the shelf price" — without asking what a tariff actually does when the seller has no legal room to raise the price at all. The answer is that it converts cost pressure directly into a stay-or-leave decision, which is a fundamentally different mechanism than a steel, auto, or electronics tariff. That's why the Association for Accessible Medicines is framing this as a shortage risk rather than a price risk — a distinction most coverage treats as a footnote when it's actually the key to judging what this policy will really do.</p>
+
+ <div class="callout">
+ <div class="t">What this actually means</div>
+ <p style="margin:0">Whether a tariff achieves its stated goal depends on whether the government also controls the target good's pricing power. Ordinary tariffs work by letting companies raise prices to cover the cost; Medicaid/340B price caps on generics are set by the same government imposing the tariff — which converts the tariff's real mechanism from "raise the price" to "leave the market."</p>
+ </div>
+
+ <h2><span class="n">7</span>One takeaway</h2>
+ <p><strong>First, before judging any tariff's real-world effect, check whether the target good's price is regulated by the same government imposing the tariff.</strong> If so, the standard "tariff forces price hikes that hurt consumers" or "tariff forces relocation" narrative is likely wrong — look for the exit-and-shortage story instead of the price story.</p>
+ <p><strong>Second, if your portfolio or household health spending touches hospitals, generic-drug distributors, or health insurers,</strong> the thing to actually track over the next two years isn't the headline tariff rate — it's the FDA/ASHP drug shortage list. A rising count there is the clearest signal that manufacturers are choosing to exit rather than relocate.</p>
+
+ <div class="disc">
+ <strong>Disclaimer:</strong> This piece is a summary and interpretation of public information for informational and general reference purposes only, and does not constitute investment advice or a solicitation to buy or sell any security. Figures, rates, and effective dates reflect official announcements and original sources and may change at any time. Investing involves risk; verify independently and take responsibility for your own decisions.
+ </div>
+
+ <div class="src">
+ <strong>Primary sources</strong>
+ <ul>
+ <li><a href="https://www.cnbc.com/2026/07/22/trump-generic-drugs-tariffs-medicine-trade-.html">CNBC — Trump plans generic drug tariffs from 2028 with two-year delay testing U.S. onshoring push</a></li>
+ <li><a href="https://www.cnbc.com/2026/07/22/trump-generic-drug-tariffs-prices-explained.html">CNBC — Trump's generic drug tariffs: What they could mean for medicine prices, manufacturers and supply</a></li>
+ <li><a href="https://www.bloomberg.com/news/articles/2026-07-21/trump-plans-100-tariff-on-generic-drugs-from-august-2028">Bloomberg — Trump's 100% Generic Drug Duty Threatens US Low-Cost Supply</a></li>
+ <li><a href="https://www.businesstoday.in/markets/stocks/story/pharma-stocks-sun-pharma-biocon-dr-reddys-torrent-pharma-shares-slip-after-trumps-generic-tariff-plan-544662-2026-07-23">Business Today — Pharma stocks: Sun Pharma, Biocon, Dr Reddy's, Torrent Pharma shares slip after Trump's generic tariff plan</a></li>
+ <li><a href="https://www.ajmc.com/view/trump-announces-timeline-for-100-generic-drug-tariffs-beginning-in-2028-200-in-2029">AJMC — Trump Announces Timeline for 100% Generic Drug Tariffs Beginning in 2028, 200% in 2029</a></li>
+ <li><a href="https://academic.oup.com/healthaffairsscholar/article/4/2/qxaf247/8402426">Health Affairs Scholar (Oxford Academic) — Potential impact of tariffs on active pharmaceutical ingredients on the price of US-made generic drugs</a></li>
+ </ul>
+ </div>
+
+ <footer><span>Finance · Daily Deep-Dive</span><span>2026-07-23</span></footer>
+</div>
+</body>
+</html>
