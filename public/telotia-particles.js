@@ -37,6 +37,20 @@
     return { ctx: ctx, w: r.width, h: r.height };
   }
 
+  // Pointer events arrive in rendered viewport pixels. A resizable/zoomable
+  // window can temporarily render a canvas at a different size from the
+  // logical CSS-pixel dimensions used by its simulation, so always map the
+  // event back into that logical coordinate space.
+  function pointerXY(cv, dim, event) {
+    const r = cv.getBoundingClientRect();
+    const renderedWidth = Math.max(1, r.width);
+    const renderedHeight = Math.max(1, r.height);
+    return [
+      (event.clientX - r.left) * dim.w / renderedWidth,
+      (event.clientY - r.top) * dim.h / renderedHeight
+    ];
+  }
+
   // "#2F6FB0", 0.5  ->  "rgba(47,111,176,0.500)"
   function hexA(hex, a) {
     const n = parseInt(hex.slice(1), 16), r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
@@ -510,7 +524,7 @@
     // pointer state: a short tap adds/prunes; movement cancels the action.
     let down = false, panning = false, sx = 0, sy = 0, hitNode = null;
     let activePointerId = null, touchPointer = false;
-    function localXY(e) { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+    function localXY(e) { return pointerXY(cv, dim, e); }
     function hit(wx, wy, pad) { let best = null, bd = 1e9; for (const n of nodes) { if (n.fade) continue; const r = n.rt + (pad == null ? 11 : pad), dx = wx - n.x, dy = wy - n.y, d = dx * dx + dy * dy; if (d < r * r && d < bd) { bd = d; best = n; } } return best; }
     function insideCanvas(xy) { return xy[0] >= 0 && xy[0] <= dim.w && xy[1] >= 0 && xy[1] <= dim.h; }
     function resetPointer() {
@@ -747,10 +761,18 @@
     var _g = gated(cv, draw);
 
     global.addEventListener('resize', onResize);
+    // Window resizing changes this canvas without necessarily changing the
+    // browser viewport. Observe its containing panel so the backing store,
+    // simulation bounds, and pointer coordinates stay synchronized.
+    var resizeObserver = ('ResizeObserver' in global)
+      ? new global.ResizeObserver(onResize)
+      : null;
+    if (resizeObserver) resizeObserver.observe(cv.parentElement || cv);
     return {
       destroy: function () {
         _g.stop();
         global.removeEventListener('resize', onResize);
+        if (resizeObserver) resizeObserver.disconnect();
         cv.removeEventListener('pointermove', onMove);
         cv.removeEventListener('pointerdown', onDown);
         global.removeEventListener('pointerup', onUp);
