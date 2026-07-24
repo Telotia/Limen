@@ -1,5 +1,47 @@
 [
     {
+        "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
+        "title":  "Alphabet \u0026 Tesla Capex Meets a Red Sea Oil Shock",
+        "date":  "2026-07-24",
+        "dateLabel":  "Jul 24, 2026",
+        "folderLabel":  "2026/07/24/capex-oil-shock-collision",
+        "href":  "/resource/news/2026/07/24/capex-oil-shock-collision/en/index.html",
+        "zhHref":  "/resource/news/2026/07/24/capex-oil-shock-collision/zh/index.html",
+        "image":  "/resource/news/2026/07/24/capex-oil-shock-collision/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/24/capex-oil-shock-collision/en/card-1.jpg",
+                      "/resource/news/2026/07/24/capex-oil-shock-collision/en/card-2.jpg",
+                      "/resource/news/2026/07/24/capex-oil-shock-collision/en/card-3.jpg",
+                      "/resource/news/2026/07/24/capex-oil-shock-collision/en/card-4.jpg"
+                  ]
+    },
+    {
+        "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
+        "title":  "A Bigger Splash · Two Weeks to Paint Two Seconds",
+        "date":  "2026-07-24",
+        "dateLabel":  "Jul 24, 2026",
+        "folderLabel":  "2026/07/24/a-bigger-splash-hockney",
+        "href":  "/resource/art/2026/07/24/a-bigger-splash-hockney/en/index.html",
+        "zhHref":  "/resource/art/2026/07/24/a-bigger-splash-hockney/zh/index.html",
+        "image":  "/resource/art/2026/07/24/a-bigger-splash-hockney/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/24/a-bigger-splash-hockney/en/card-1.jpg",
+                      "/resource/art/2026/07/24/a-bigger-splash-hockney/en/card-2.jpg",
+                      "/resource/art/2026/07/24/a-bigger-splash-hockney/en/card-3.jpg",
+                      "/resource/art/2026/07/24/a-bigger-splash-hockney/en/card-4.jpg",
+                      "/resource/art/2026/07/24/a-bigger-splash-hockney/en/card-5.jpg",
+                      "/resource/art/2026/07/24/a-bigger-splash-hockney/en/card-6.jpg",
+                      "/resource/art/2026/07/24/a-bigger-splash-hockney/en/card-7.jpg",
+                      "/resource/art/2026/07/24/a-bigger-splash-hockney/en/card-8.jpg"
+                  ]
+    },
+    {
         "kind":  "art",
         "categories":  [
                            "art"
