@@ -1,5 +1,28 @@
 [
     {
+        "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
+        "title":  "Majorelle Blue · The Color a Painter Patented to Keep",
+        "date":  "2026-07-25",
+        "dateLabel":  "Jul 25, 2026",
+        "folderLabel":  "2026/07/25/majorelle-blue-garden-marrakech",
+        "href":  "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/index.html",
+        "zhHref":  "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/zh/index.html",
+        "image":  "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-1.jpg",
+                      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-2.jpg",
+                      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-3.jpg",
+                      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-4.jpg",
+                      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-5.jpg",
+                      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-6.jpg",
+                      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-7.jpg",
+                      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-8.jpg"
+                  ]
+    },
+    {
         "kind":  "news",
         "categories":  [
                            "news"
