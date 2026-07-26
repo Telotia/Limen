@@ -1,5 +1,43 @@
 [
     {
+        "kind":  "news",
+        "categories":  [
+                           "news"
+                       ],
+        "title":  "Energy, tariffs, and rates",
+        "date":  "2026-07-26",
+        "dateLabel":  "Jul 26, 2026",
+        "folderLabel":  "2026/07/26/daily-news",
+        "href":  "/resource/news/2026/07/26/daily-news/en/index.html",
+        "zhHref":  "/resource/news/2026/07/26/daily-news/zh/index.html",
+        "image":  "/resource/news/2026/07/26/daily-news/cover.jpg",
+        "cards":  [
+                      "/resource/news/2026/07/26/daily-news/en/card-1.jpg",
+                      "/resource/news/2026/07/26/daily-news/en/card-2.jpg",
+                      "/resource/news/2026/07/26/daily-news/en/card-3.jpg",
+                      "/resource/news/2026/07/26/daily-news/en/card-4.jpg"
+                  ]
+    },
+    {
+        "kind":  "art",
+        "categories":  [
+                           "art"
+                       ],
+        "title":  "Christina’s World",
+        "date":  "2026-07-26",
+        "dateLabel":  "Jul 26, 2026",
+        "folderLabel":  "2026/07/26/christinas-world-wyeth",
+        "href":  "/resource/art/2026/07/26/christinas-world-wyeth/en/index.html",
+        "zhHref":  "/resource/art/2026/07/26/christinas-world-wyeth/zh/index.html",
+        "image":  "/resource/art/2026/07/26/christinas-world-wyeth/cover.jpg",
+        "cards":  [
+                      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-1.jpg",
+                      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-2.jpg",
+                      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-3.jpg",
+                      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-4.jpg"
+                  ]
+    },
+    {
         "kind":  "art",
         "categories":  [
                            "art"
