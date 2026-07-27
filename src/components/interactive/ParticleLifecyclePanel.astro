@@ -46,7 +46,7 @@
         const cx = rect.width * .53;
         const cy = rect.height * .5;
         const radius = Math.min(rect.width, rect.height) * .25;
-        const colors = ['#2A55A5', '#C13B33', '#D3A743', '#52645d'];
+        const colors = ['#1685A9', '#9D2933', '#FFB61E', '#50616D'];
 
         const raw: { x: number; y: number }[] = [];
         let lx = .1;
@@ -76,7 +76,7 @@
         context.lineCap = 'round';
         context.lineJoin = 'round';
         context.lineWidth = 1.1;
-        context.strokeStyle = 'rgba(38, 56, 50, .21)';
+        context.strokeStyle = 'rgba(66, 76, 80, .21)';
         context.beginPath();
         points.forEach((point, index) => {
           if (index === 0) context.moveTo(point.x, point.y);
@@ -140,8 +140,8 @@
     overflow: hidden;
     border: 1px solid var(--rule);
     border-radius: 18px;
-    background: rgba(246, 243, 236, .90);
-    box-shadow: 0 28px 62px -50px rgba(23, 32, 29, .62);
+    background: rgba(242, 236, 222, .90);
+    box-shadow: 0 28px 62px -50px rgba(22, 24, 35, .62);
   }
 
   :global(.particle-lifecycle-panel.ui-manipulable-window) {
@@ -164,7 +164,7 @@
     padding: clamp(32px, 4vw, 52px);
     border-right: 1px solid var(--rulesoft);
     background:
-      linear-gradient(rgba(248, 246, 240, .90), rgba(241, 239, 232, .92)),
+      linear-gradient(rgba(255, 251, 240, .90), rgba(242, 236, 222, .92)),
       url('/assets/ink-wash/07-water-bottom.webp') center / cover;
   }
 
@@ -227,8 +227,8 @@
     min-width: 0;
     min-height: 470px;
     background:
-      radial-gradient(ellipse at 52% 48%, rgba(42, 85, 165, .10), transparent 34%),
-      radial-gradient(ellipse at 72% 70%, rgba(227, 163, 44, .075), transparent 38%),
+      radial-gradient(ellipse at 52% 48%, rgba(22, 133, 169, .10), transparent 34%),
+      radial-gradient(ellipse at 72% 70%, rgba(255, 182, 30, .075), transparent 38%),
       linear-gradient(145deg, rgba(232, 231, 227, .52), rgba(248, 246, 240, .78));
   }
 
