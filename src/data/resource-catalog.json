@@ -5,6 +5,44 @@
       "news"
     ],
     "title": "Kecheng Finance | Daily Financial News Brief",
+    "date": "2026-08-03",
+    "dateLabel": "Aug 3, 2026",
+    "folderLabel": "2026/08/03/daily-news",
+    "href": "/resource/news/2026/08/03/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/03/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/03/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/03/daily-news/en/card-1.png",
+      "/resource/news/2026/08/03/daily-news/en/card-2.png",
+      "/resource/news/2026/08/03/daily-news/en/card-3.png",
+      "/resource/news/2026/08/03/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Lady of Shalott",
+    "date": "2026-08-03",
+    "dateLabel": "Aug 3, 2026",
+    "folderLabel": "2026/08/03/the-lady-of-shalott-waterhouse",
+    "href": "/resource/art/2026/08/03/the-lady-of-shalott-waterhouse/en/index.html",
+    "zhHref": "/resource/art/2026/08/03/the-lady-of-shalott-waterhouse/zh/index.html",
+    "image": "/resource/art/2026/08/03/the-lady-of-shalott-waterhouse/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/03/the-lady-of-shalott-waterhouse/en/card-1.png",
+      "/resource/art/2026/08/03/the-lady-of-shalott-waterhouse/en/card-2.png",
+      "/resource/art/2026/08/03/the-lady-of-shalott-waterhouse/en/card-3.png",
+      "/resource/art/2026/08/03/the-lady-of-shalott-waterhouse/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
+    "title": "Kecheng Finance | Daily Financial News Brief",
     "date": "2026-08-01",
     "dateLabel": "Aug 1, 2026",
     "folderLabel": "2026/08/01/daily-news",
