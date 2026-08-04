@@ -4,7 +4,7 @@
     "categories": [
       "news"
     ],
-    "title": "Kecheng Finance | Daily Financial News Brief",
+    "title": "Daily Finance | 2026-08-03",
     "date": "2026-08-03",
     "dateLabel": "Aug 3, 2026",
     "folderLabel": "2026/08/03/daily-news",
@@ -23,7 +23,7 @@
     "categories": [
       "art"
     ],
-    "title": "The Lady of Shalott",
+    "title": "The Lady of Shalott｜Daily Art",
     "date": "2026-08-03",
     "dateLabel": "Aug 3, 2026",
     "folderLabel": "2026/08/03/the-lady-of-shalott-waterhouse",
@@ -42,7 +42,45 @@
     "categories": [
       "news"
     ],
-    "title": "Kecheng Finance | Daily Financial News Brief",
+    "title": "Daily Financial Brief | 2026-08-02",
+    "date": "2026-08-02",
+    "dateLabel": "Aug 2, 2026",
+    "folderLabel": "2026/08/02/daily-news",
+    "href": "/resource/news/2026/08/02/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/02/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/02/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/02/daily-news/en/card-1.png",
+      "/resource/news/2026/08/02/daily-news/en/card-2.png",
+      "/resource/news/2026/08/02/daily-news/en/card-3.png",
+      "/resource/news/2026/08/02/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Sleeping Gypsy · Daily Art",
+    "date": "2026-08-02",
+    "dateLabel": "Aug 2, 2026",
+    "folderLabel": "2026/08/02/the-sleeping-gypsy-henri-rousseau",
+    "href": "/resource/art/2026/08/02/the-sleeping-gypsy-henri-rousseau/en/index.html",
+    "zhHref": "/resource/art/2026/08/02/the-sleeping-gypsy-henri-rousseau/zh/index.html",
+    "image": "/resource/art/2026/08/02/the-sleeping-gypsy-henri-rousseau/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/02/the-sleeping-gypsy-henri-rousseau/en/card-1.png",
+      "/resource/art/2026/08/02/the-sleeping-gypsy-henri-rousseau/en/card-2.png",
+      "/resource/art/2026/08/02/the-sleeping-gypsy-henri-rousseau/en/card-3.png",
+      "/resource/art/2026/08/02/the-sleeping-gypsy-henri-rousseau/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
+    "title": "Daily Financial Brief | 2026-08-01",
     "date": "2026-08-01",
     "dateLabel": "Aug 1, 2026",
     "folderLabel": "2026/08/01/daily-news",
@@ -61,7 +99,7 @@
     "categories": [
       "art"
     ],
-    "title": "The Gulf Stream 湾流",
+    "title": "The Gulf Stream · Daily Art",
     "date": "2026-08-01",
     "dateLabel": "Aug 1, 2026",
     "folderLabel": "2026/08/01/the-gulf-stream-winslow-homer",
@@ -80,7 +118,45 @@
     "categories": [
       "news"
     ],
-    "title": "Kecheng Finance | Daily Financial News & Market Brief",
+    "title": "Daily Financial Brief | 2026-07-31",
+    "date": "2026-07-31",
+    "dateLabel": "Jul 31, 2026",
+    "folderLabel": "2026/07/31/daily-news",
+    "href": "/resource/news/2026/07/31/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/07/31/daily-news/zh/index.html",
+    "image": "/resource/news/2026/07/31/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/07/31/daily-news/en/card-1.png",
+      "/resource/news/2026/07/31/daily-news/en/card-2.png",
+      "/resource/news/2026/07/31/daily-news/en/card-3.png",
+      "/resource/news/2026/07/31/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "Red Sunset · Daily Art",
+    "date": "2026-07-31",
+    "dateLabel": "Jul 31, 2026",
+    "folderLabel": "2026/07/31/red-sunset-kuindzhi",
+    "href": "/resource/art/2026/07/31/red-sunset-kuindzhi/en/index.html",
+    "zhHref": "/resource/art/2026/07/31/red-sunset-kuindzhi/zh/index.html",
+    "image": "/resource/art/2026/07/31/red-sunset-kuindzhi/cover.jpg",
+    "cards": [
+      "/resource/art/2026/07/31/red-sunset-kuindzhi/en/card-1.png",
+      "/resource/art/2026/07/31/red-sunset-kuindzhi/en/card-2.png",
+      "/resource/art/2026/07/31/red-sunset-kuindzhi/en/card-3.png",
+      "/resource/art/2026/07/31/red-sunset-kuindzhi/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
+    "title": "Daily Financial Brief | 2026-07-30",
     "date": "2026-07-30",
     "dateLabel": "Jul 30, 2026",
     "folderLabel": "2026/07/30/daily-news",
@@ -99,7 +175,7 @@
     "categories": [
       "art"
     ],
-    "title": "The Garden of Earthly Delights",
+    "title": "The Garden of Earthly Delights · Daily Art",
     "date": "2026-07-30",
     "dateLabel": "Jul 30, 2026",
     "folderLabel": "2026/07/30/garden-of-earthly-delights-bosch",
@@ -118,18 +194,18 @@
     "categories": [
       "news"
     ],
-    "title": "Energy, tariffs, and rates",
-    "date": "2026-07-26",
-    "dateLabel": "Jul 26, 2026",
-    "folderLabel": "2026/07/26/daily-news",
-    "href": "/resource/news/2026/07/26/daily-news/en/index.html",
-    "zhHref": "/resource/news/2026/07/26/daily-news/zh/index.html",
-    "image": "/resource/news/2026/07/26/daily-news/cover.jpg",
+    "title": "Daily Financial Brief | 2026-07-29",
+    "date": "2026-07-29",
+    "dateLabel": "Jul 29, 2026",
+    "folderLabel": "2026/07/29/daily-news",
+    "href": "/resource/news/2026/07/29/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/07/29/daily-news/zh/index.html",
+    "image": "/resource/news/2026/07/29/daily-news/cover.png",
     "cards": [
-      "/resource/news/2026/07/26/daily-news/en/card-1.jpg",
-      "/resource/news/2026/07/26/daily-news/en/card-2.jpg",
-      "/resource/news/2026/07/26/daily-news/en/card-3.jpg",
-      "/resource/news/2026/07/26/daily-news/en/card-4.jpg"
+      "/resource/news/2026/07/29/daily-news/en/card-1.png",
+      "/resource/news/2026/07/29/daily-news/en/card-2.png",
+      "/resource/news/2026/07/29/daily-news/en/card-3.png",
+      "/resource/news/2026/07/29/daily-news/en/card-4.png"
     ]
   },
   {
@@ -137,7 +213,121 @@
     "categories": [
       "art"
     ],
-    "title": "Christina’s World",
+    "title": "Ophelia · Daily Art",
+    "date": "2026-07-29",
+    "dateLabel": "Jul 29, 2026",
+    "folderLabel": "2026/07/29/ophelia-millais",
+    "href": "/resource/art/2026/07/29/ophelia-millais/en/index.html",
+    "zhHref": "/resource/art/2026/07/29/ophelia-millais/zh/index.html",
+    "image": "/resource/art/2026/07/29/ophelia-millais/cover.jpg",
+    "cards": [
+      "/resource/art/2026/07/29/ophelia-millais/en/card-1.png",
+      "/resource/art/2026/07/29/ophelia-millais/en/card-2.png",
+      "/resource/art/2026/07/29/ophelia-millais/en/card-3.png",
+      "/resource/art/2026/07/29/ophelia-millais/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
+    "title": "Daily Financial Brief | 2026-07-28",
+    "date": "2026-07-28",
+    "dateLabel": "Jul 28, 2026",
+    "folderLabel": "2026/07/28/daily-news",
+    "href": "/resource/news/2026/07/28/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/07/28/daily-news/zh/index.html",
+    "image": "/resource/news/2026/07/28/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/07/28/daily-news/en/card-1.png",
+      "/resource/news/2026/07/28/daily-news/en/card-2.png",
+      "/resource/news/2026/07/28/daily-news/en/card-3.png",
+      "/resource/news/2026/07/28/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Red Studio · Daily Art",
+    "date": "2026-07-28",
+    "dateLabel": "Jul 28, 2026",
+    "folderLabel": "2026/07/28/red-studio-matisse",
+    "href": "/resource/art/2026/07/28/red-studio-matisse/en/index.html",
+    "zhHref": "/resource/art/2026/07/28/red-studio-matisse/zh/index.html",
+    "image": "/resource/art/2026/07/28/red-studio-matisse/cover.jpg",
+    "cards": [
+      "/resource/art/2026/07/28/red-studio-matisse/en/card-1.png",
+      "/resource/art/2026/07/28/red-studio-matisse/en/card-2.png",
+      "/resource/art/2026/07/28/red-studio-matisse/en/card-3.png",
+      "/resource/art/2026/07/28/red-studio-matisse/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
+    "title": "Daily Financial Brief | July 27, 2026",
+    "date": "2026-07-27",
+    "dateLabel": "Jul 27, 2026",
+    "folderLabel": "2026/07/27/daily-news",
+    "href": "/resource/news/2026/07/27/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/07/27/daily-news/zh/index.html",
+    "image": "/resource/news/2026/07/27/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/07/27/daily-news/en/card-1.png",
+      "/resource/news/2026/07/27/daily-news/en/card-2.png",
+      "/resource/news/2026/07/27/daily-news/en/card-3.png",
+      "/resource/news/2026/07/27/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Ambassadors · Daily Art",
+    "date": "2026-07-27",
+    "dateLabel": "Jul 27, 2026",
+    "folderLabel": "2026/07/27/the-ambassadors-holbein",
+    "href": "/resource/art/2026/07/27/the-ambassadors-holbein/en/index.html",
+    "zhHref": "/resource/art/2026/07/27/the-ambassadors-holbein/zh/index.html",
+    "image": "/resource/art/2026/07/27/the-ambassadors-holbein/cover.jpg",
+    "cards": [
+      "/resource/art/2026/07/27/the-ambassadors-holbein/en/card-1.png",
+      "/resource/art/2026/07/27/the-ambassadors-holbein/en/card-2.png",
+      "/resource/art/2026/07/27/the-ambassadors-holbein/en/card-3.png",
+      "/resource/art/2026/07/27/the-ambassadors-holbein/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
+    "title": "News · Energy, tariffs, and rates",
+    "date": "2026-07-26",
+    "dateLabel": "Jul 26, 2026",
+    "folderLabel": "2026/07/26/daily-news",
+    "href": "/resource/news/2026/07/26/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/07/26/daily-news/zh/index.html",
+    "image": "/resource/news/2026/07/26/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/07/26/daily-news/en/card-1.png",
+      "/resource/news/2026/07/26/daily-news/en/card-2.png",
+      "/resource/news/2026/07/26/daily-news/en/card-3.png",
+      "/resource/news/2026/07/26/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "Art · Christina&#8217;s World",
     "date": "2026-07-26",
     "dateLabel": "Jul 26, 2026",
     "folderLabel": "2026/07/26/christinas-world-wyeth",
@@ -145,10 +335,29 @@
     "zhHref": "/resource/art/2026/07/26/christinas-world-wyeth/zh/index.html",
     "image": "/resource/art/2026/07/26/christinas-world-wyeth/cover.jpg",
     "cards": [
-      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-1.jpg",
-      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-2.jpg",
-      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-3.jpg",
-      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-4.jpg"
+      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-1.png",
+      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-2.png",
+      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-3.png",
+      "/resource/art/2026/07/26/christinas-world-wyeth/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
+    "title": "Daily Financial Brief | 2026-07-25",
+    "date": "2026-07-25",
+    "dateLabel": "Jul 25, 2026",
+    "folderLabel": "2026/07/25/daily-news",
+    "href": "/resource/news/2026/07/25/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/07/25/daily-news/zh/index.html",
+    "image": "/resource/news/2026/07/25/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/07/25/daily-news/en/card-1.png",
+      "/resource/news/2026/07/25/daily-news/en/card-2.png",
+      "/resource/news/2026/07/25/daily-news/en/card-3.png",
+      "/resource/news/2026/07/25/daily-news/en/card-4.png"
     ]
   },
   {
@@ -156,7 +365,7 @@
     "categories": [
       "art"
     ],
-    "title": "Majorelle Blue · The Color a Painter Patented to Keep",
+    "title": "Art · Majorelle Blue · The Color a Painter Patented to Keep",
     "date": "2026-07-25",
     "dateLabel": "Jul 25, 2026",
     "folderLabel": "2026/07/25/majorelle-blue-garden-marrakech",
@@ -164,14 +373,14 @@
     "zhHref": "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/zh/index.html",
     "image": "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/cover.jpg",
     "cards": [
-      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-1.jpg",
-      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-2.jpg",
-      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-3.jpg",
-      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-4.jpg",
-      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-5.jpg",
-      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-6.jpg",
-      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-7.jpg",
-      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-8.jpg"
+      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-1.png",
+      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-2.png",
+      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-3.png",
+      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-4.png",
+      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-5.png",
+      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-6.png",
+      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-7.png",
+      "/resource/art/2026/07/25/majorelle-blue-garden-marrakech/en/card-8.png"
     ]
   },
   {
