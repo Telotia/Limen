@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Growth rebounds, costs stay hot",
+    "date": "2026-08-04",
+    "dateLabel": "Aug 4, 2026",
+    "folderLabel": "2026/08/04/daily-news",
+    "href": "/resource/news/2026/08/04/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/04/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/04/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/04/daily-news/en/card-1.png",
+      "/resource/news/2026/08/04/daily-news/en/card-2.png",
+      "/resource/news/2026/08/04/daily-news/en/card-3.png",
+      "/resource/news/2026/08/04/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Tetons and the Snake River ANSEL ADAMS · 1942",
+    "date": "2026-08-04",
+    "dateLabel": "Aug 4, 2026",
+    "folderLabel": "2026/08/04/the-tetons-and-the-snake-river",
+    "href": "/resource/art/2026/08/04/the-tetons-and-the-snake-river/en/index.html",
+    "zhHref": "/resource/art/2026/08/04/the-tetons-and-the-snake-river/zh/index.html",
+    "image": "/resource/art/2026/08/04/the-tetons-and-the-snake-river/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/04/the-tetons-and-the-snake-river/en/card-1.png",
+      "/resource/art/2026/08/04/the-tetons-and-the-snake-river/en/card-2.png",
+      "/resource/art/2026/08/04/the-tetons-and-the-snake-river/en/card-3.png",
+      "/resource/art/2026/08/04/the-tetons-and-the-snake-river/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Daily Finance | 2026-08-03",
     "date": "2026-08-03",
     "dateLabel": "Aug 3, 2026",
