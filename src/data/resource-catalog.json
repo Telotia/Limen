@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Earnings ignite risk appetite; oil and data set the direction",
+    "date": "2026-08-05",
+    "dateLabel": "Aug 5, 2026",
+    "folderLabel": "2026/08/05/daily-news",
+    "href": "/resource/news/2026/08/05/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/05/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/05/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/05/daily-news/en/card-1.png",
+      "/resource/news/2026/08/05/daily-news/en/card-2.png",
+      "/resource/news/2026/08/05/daily-news/en/card-3.png",
+      "/resource/news/2026/08/05/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Dog",
+    "date": "2026-08-05",
+    "dateLabel": "Aug 5, 2026",
+    "folderLabel": "2026/08/05/the-dog-goya",
+    "href": "/resource/art/2026/08/05/the-dog-goya/en/index.html",
+    "zhHref": "/resource/art/2026/08/05/the-dog-goya/zh/index.html",
+    "image": "/resource/art/2026/08/05/the-dog-goya/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/05/the-dog-goya/en/card-1.png",
+      "/resource/art/2026/08/05/the-dog-goya/en/card-2.png",
+      "/resource/art/2026/08/05/the-dog-goya/en/card-3.png",
+      "/resource/art/2026/08/05/the-dog-goya/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Growth rebounds, costs stay hot",
     "date": "2026-08-04",
     "dateLabel": "Aug 4, 2026",
