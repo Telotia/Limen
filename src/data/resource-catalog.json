@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Payrolls pending. Oil and yields are not.",
+    "date": "2026-08-07",
+    "dateLabel": "Aug 7, 2026",
+    "folderLabel": "2026/08/07/daily-news",
+    "href": "/resource/news/2026/08/07/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/07/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/07/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/07/daily-news/en/card-1.png",
+      "/resource/news/2026/08/07/daily-news/en/card-2.png",
+      "/resource/news/2026/08/07/daily-news/en/card-3.png",
+      "/resource/news/2026/08/07/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "Two Hands, One Lesson THE BANJO LESSON",
+    "date": "2026-08-07",
+    "dateLabel": "Aug 7, 2026",
+    "folderLabel": "2026/08/07/the-banjo-lesson-tanner",
+    "href": "/resource/art/2026/08/07/the-banjo-lesson-tanner/en/index.html",
+    "zhHref": "/resource/art/2026/08/07/the-banjo-lesson-tanner/zh/index.html",
+    "image": "/resource/art/2026/08/07/the-banjo-lesson-tanner/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/07/the-banjo-lesson-tanner/en/card-1.png",
+      "/resource/art/2026/08/07/the-banjo-lesson-tanner/en/card-2.png",
+      "/resource/art/2026/08/07/the-banjo-lesson-tanner/en/card-3.png",
+      "/resource/art/2026/08/07/the-banjo-lesson-tanner/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Growth, hiring and prices send three different signals",
     "date": "2026-08-06",
     "dateLabel": "Aug 6, 2026",
