@@ -106,6 +106,20 @@ else
   NEWS_COVER_EXT="$NEWS_EXT"
 fi
 
+# Source generators may leave more than one newline at EOF. Git's whitespace
+# gate treats that harmless HTML formatting as an error, so normalize copied
+# HTML inside the disposable worktree before staging. Source files are not
+# modified.
+ART_DEST="$ART_DEST" NEWS_DEST="$NEWS_DEST" python3 - <<'PY'
+import os
+from pathlib import Path
+
+for root_name in ("ART_DEST", "NEWS_DEST"):
+    for path in Path(os.environ[root_name]).rglob("*.html"):
+        content = path.read_bytes()
+        path.write_bytes(content.rstrip(b"\r\n") + b"\n")
+PY
+
 CATALOG="$WORKTREE/src/data/resource-catalog.json"
 DATE="$DATE" ART_SLUG="$ART_SLUG" ART_SOURCE="$ART_SOURCE" NEWS_ROOT="$NEWS_ROOT" NEWS_COVER_EXT="$NEWS_COVER_EXT" CATALOG="$CATALOG" python3 - <<'PY'
 import html, json, os, re
