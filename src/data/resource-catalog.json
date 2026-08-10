@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Daily Finance | Stocks Extend Gains, but Oil and the Dollar Rise Too",
+    "date": "2026-08-10",
+    "dateLabel": "Aug 10, 2026",
+    "folderLabel": "2026/08/10/daily-news",
+    "href": "/resource/news/2026/08/10/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/10/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/10/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/10/daily-news/en/card-1.png",
+      "/resource/news/2026/08/10/daily-news/en/card-2.png",
+      "/resource/news/2026/08/10/daily-news/en/card-3.png",
+      "/resource/news/2026/08/10/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "How one flower becomes a space",
+    "date": "2026-08-10",
+    "dateLabel": "Aug 10, 2026",
+    "folderLabel": "2026/08/10/magnolia-blossom-cunningham",
+    "href": "/resource/art/2026/08/10/magnolia-blossom-cunningham/en/index.html",
+    "zhHref": "/resource/art/2026/08/10/magnolia-blossom-cunningham/zh/index.html",
+    "image": "/resource/art/2026/08/10/magnolia-blossom-cunningham/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/10/magnolia-blossom-cunningham/en/card-1.png",
+      "/resource/art/2026/08/10/magnolia-blossom-cunningham/en/card-2.png",
+      "/resource/art/2026/08/10/magnolia-blossom-cunningham/en/card-3.png",
+      "/resource/art/2026/08/10/magnolia-blossom-cunningham/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Weekend oil risk meets inflation week",
     "date": "2026-08-09",
     "dateLabel": "Aug 9, 2026",
