@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Weekend oil risk meets inflation week",
+    "date": "2026-08-09",
+    "dateLabel": "Aug 9, 2026",
+    "folderLabel": "2026/08/09/daily-news",
+    "href": "/resource/news/2026/08/09/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/09/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/09/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/09/daily-news/en/card-1.png",
+      "/resource/news/2026/08/09/daily-news/en/card-2.png",
+      "/resource/news/2026/08/09/daily-news/en/card-3.png",
+      "/resource/news/2026/08/09/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Ball LE BALLON · 1899",
+    "date": "2026-08-09",
+    "dateLabel": "Aug 9, 2026",
+    "folderLabel": "2026/08/09/the-ball-vallotton",
+    "href": "/resource/art/2026/08/09/the-ball-vallotton/en/index.html",
+    "zhHref": "/resource/art/2026/08/09/the-ball-vallotton/zh/index.html",
+    "image": "/resource/art/2026/08/09/the-ball-vallotton/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/09/the-ball-vallotton/en/card-1.png",
+      "/resource/art/2026/08/09/the-ball-vallotton/en/card-2.png",
+      "/resource/art/2026/08/09/the-ball-vallotton/en/card-3.png",
+      "/resource/art/2026/08/09/the-ball-vallotton/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Weak hiring brings rate relief. Oil keeps the inflation constraint.",
     "date": "2026-08-08",
     "dateLabel": "Aug 8, 2026",
