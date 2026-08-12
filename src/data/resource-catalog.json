@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Daily Finance | The CPI Squeeze: Softer Jobs Meet Oil Near $90",
+    "date": "2026-08-12",
+    "dateLabel": "Aug 12, 2026",
+    "folderLabel": "2026/08/12/daily-news",
+    "href": "/resource/news/2026/08/12/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/12/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/12/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/12/daily-news/en/card-1.png",
+      "/resource/news/2026/08/12/daily-news/en/card-2.png",
+      "/resource/news/2026/08/12/daily-news/en/card-3.png",
+      "/resource/news/2026/08/12/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "A city wired with rain",
+    "date": "2026-08-12",
+    "dateLabel": "Aug 12, 2026",
+    "folderLabel": "2026/08/12/boulevard-montmartre-at-night-pissarro",
+    "href": "/resource/art/2026/08/12/boulevard-montmartre-at-night-pissarro/en/index.html",
+    "zhHref": "/resource/art/2026/08/12/boulevard-montmartre-at-night-pissarro/zh/index.html",
+    "image": "/resource/art/2026/08/12/boulevard-montmartre-at-night-pissarro/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/12/boulevard-montmartre-at-night-pissarro/en/card-1.png",
+      "/resource/art/2026/08/12/boulevard-montmartre-at-night-pissarro/en/card-2.png",
+      "/resource/art/2026/08/12/boulevard-montmartre-at-night-pissarro/en/card-3.png",
+      "/resource/art/2026/08/12/boulevard-montmartre-at-night-pissarro/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Daily Finance | Oil Reclaims the Inflation Narrative Before CPI",
     "date": "2026-08-11",
     "dateLabel": "Aug 11, 2026",
