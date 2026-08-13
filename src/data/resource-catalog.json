@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "CPI Cools, PPI Pending: Rate Risk Eases as AI Faces a Profit Test",
+    "date": "2026-08-13",
+    "dateLabel": "Aug 13, 2026",
+    "folderLabel": "2026/08/13/daily-news",
+    "href": "/resource/news/2026/08/13/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/13/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/13/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/13/daily-news/en/card-1.png",
+      "/resource/news/2026/08/13/daily-news/en/card-2.png",
+      "/resource/news/2026/08/13/daily-news/en/card-3.png",
+      "/resource/news/2026/08/13/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "Close together. Looking elsewhere.",
+    "date": "2026-08-13",
+    "dateLabel": "Aug 13, 2026",
+    "folderLabel": "2026/08/13/group-of-three-girls-sher-gil",
+    "href": "/resource/art/2026/08/13/group-of-three-girls-sher-gil/en/index.html",
+    "zhHref": "/resource/art/2026/08/13/group-of-three-girls-sher-gil/zh/index.html",
+    "image": "/resource/art/2026/08/13/group-of-three-girls-sher-gil/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/13/group-of-three-girls-sher-gil/en/card-1.png",
+      "/resource/art/2026/08/13/group-of-three-girls-sher-gil/en/card-2.png",
+      "/resource/art/2026/08/13/group-of-three-girls-sher-gil/en/card-3.png",
+      "/resource/art/2026/08/13/group-of-three-girls-sher-gil/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Daily Finance | The CPI Squeeze: Softer Jobs Meet Oil Near $90",
     "date": "2026-08-12",
     "dateLabel": "Aug 12, 2026",
