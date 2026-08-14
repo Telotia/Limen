@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Cooler PPI, Retail Sales Next: Record Stocks Await a Demand Test",
+    "date": "2026-08-14",
+    "dateLabel": "Aug 14, 2026",
+    "folderLabel": "2026/08/14/daily-news",
+    "href": "/resource/news/2026/08/14/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/14/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/14/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/14/daily-news/en/card-1.png",
+      "/resource/news/2026/08/14/daily-news/en/card-2.png",
+      "/resource/news/2026/08/14/daily-news/en/card-3.png",
+      "/resource/news/2026/08/14/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "I Saw the Figure 5 in Gold",
+    "date": "2026-08-14",
+    "dateLabel": "Aug 14, 2026",
+    "folderLabel": "2026/08/14/i-saw-the-figure-5-in-gold",
+    "href": "/resource/art/2026/08/14/i-saw-the-figure-5-in-gold/en/index.html",
+    "zhHref": "/resource/art/2026/08/14/i-saw-the-figure-5-in-gold/zh/index.html",
+    "image": "/resource/art/2026/08/14/i-saw-the-figure-5-in-gold/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/14/i-saw-the-figure-5-in-gold/en/card-1.png",
+      "/resource/art/2026/08/14/i-saw-the-figure-5-in-gold/en/card-2.png",
+      "/resource/art/2026/08/14/i-saw-the-figure-5-in-gold/en/card-3.png",
+      "/resource/art/2026/08/14/i-saw-the-figure-5-in-gold/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "CPI Cools, PPI Pending: Rate Risk Eases as AI Faces a Profit Test",
     "date": "2026-08-13",
     "dateLabel": "Aug 13, 2026",
