@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Weak Consumption Meets Rebounding Oil",
+    "date": "2026-08-15",
+    "dateLabel": "Aug 15, 2026",
+    "folderLabel": "2026/08/15/daily-news",
+    "href": "/resource/news/2026/08/15/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/15/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/15/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/15/daily-news/en/card-1.png",
+      "/resource/news/2026/08/15/daily-news/en/card-2.png",
+      "/resource/news/2026/08/15/daily-news/en/card-3.png",
+      "/resource/news/2026/08/15/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Song of the Lark",
+    "date": "2026-08-15",
+    "dateLabel": "Aug 15, 2026",
+    "folderLabel": "2026/08/15/the-song-of-the-lark-breton",
+    "href": "/resource/art/2026/08/15/the-song-of-the-lark-breton/en/index.html",
+    "zhHref": "/resource/art/2026/08/15/the-song-of-the-lark-breton/zh/index.html",
+    "image": "/resource/art/2026/08/15/the-song-of-the-lark-breton/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/15/the-song-of-the-lark-breton/en/card-1.png",
+      "/resource/art/2026/08/15/the-song-of-the-lark-breton/en/card-2.png",
+      "/resource/art/2026/08/15/the-song-of-the-lark-breton/en/card-3.png",
+      "/resource/art/2026/08/15/the-song-of-the-lark-breton/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Cooler PPI, Retail Sales Next: Record Stocks Await a Demand Test",
     "date": "2026-08-14",
     "dateLabel": "Aug 14, 2026",
