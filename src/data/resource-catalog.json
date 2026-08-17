@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Stocks Pause Near Records as Retail, Oil and Rates Take the Baton",
+    "date": "2026-08-17",
+    "dateLabel": "Aug 17, 2026",
+    "folderLabel": "2026/08/17/daily-news",
+    "href": "/resource/news/2026/08/17/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/17/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/17/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/17/daily-news/en/card-1.png",
+      "/resource/news/2026/08/17/daily-news/en/card-2.png",
+      "/resource/news/2026/08/17/daily-news/en/card-3.png",
+      "/resource/news/2026/08/17/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Home Grew Around Him",
+    "date": "2026-08-17",
+    "dateLabel": "Aug 17, 2026",
+    "folderLabel": "2026/08/17/ketchup-growth-inkwash-film",
+    "href": "/resource/art/2026/08/17/ketchup-growth-inkwash-film/en/index.html",
+    "zhHref": "/resource/art/2026/08/17/ketchup-growth-inkwash-film/zh/index.html",
+    "image": "/resource/art/2026/08/17/ketchup-growth-inkwash-film/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/17/ketchup-growth-inkwash-film/en/card-1.png",
+      "/resource/art/2026/08/17/ketchup-growth-inkwash-film/en/card-2.png",
+      "/resource/art/2026/08/17/ketchup-growth-inkwash-film/en/card-3.png",
+      "/resource/art/2026/08/17/ketchup-growth-inkwash-film/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Tanker Attacks Carry an Energy Tail Risk Into Fed-Minutes and Retail Week",
     "date": "2026-08-16",
     "dateLabel": "Aug 16, 2026",
