@@ -146,6 +146,50 @@ IMAGE_PYTHON="${RESOURCE_IMAGE_PYTHON:-$HOME/venv/bin/python}"
 "$IMAGE_PYTHON" "$ROOT/scripts/resize-resource-image.py" \
   "$ART_SOURCE_IMAGE" "$ART_DEST/cover.jpg" --max-width 2200 --quality 86
 cp -a "$ART_DEST/cover.jpg" "$ART_DEST/source.jpg"
+
+# Locale pages can reference the source image by its original extension, while
+# publishing always emits a size-safe JPEG. Keep those relative links valid.
+ART_DEST="$ART_DEST" python3 - <<'PY'
+import os
+import re
+from pathlib import Path
+
+for path in Path(os.environ["ART_DEST"]).rglob("*.html"):
+    text = path.read_text(encoding="utf-8")
+    text = re.sub(r"source\.(?:png|jpe?g|webp)", "source.jpg", text, flags=re.I)
+    path.write_text(text, encoding="utf-8")
+PY
+
+# Copy top-level audio/video linked by the article. Cloudflare Pages rejects
+# individual assets above 25 MiB, so oversized MP4 files are transcoded to a
+# web-ready 720p H.264/AAC version when ffmpeg is available.
+FFMPEG="${RESOURCE_FFMPEG:-$(command -v ffmpeg || true)}"
+if [[ -z "$FFMPEG" ]]; then
+  FFMPEG="$HOME/sglang-venv/lib/python3.11/site-packages/imageio_ffmpeg/binaries/ffmpeg-linux64-v4.2.2"
+fi
+while IFS= read -r media; do
+  media_name="$(basename "$media")"
+  media_dest="$ART_DEST/$media_name"
+  media_size="$(stat -c %s "$media")"
+  if [[ "${media_name,,}" == *.mp4 && "$media_size" -gt 24000000 ]]; then
+    [[ -x "$FFMPEG" ]] || {
+      echo "oversized Art video needs ffmpeg: $media ($media_size bytes)" >&2
+      exit 1
+    }
+    "$FFMPEG" -y -i "$media" -vf scale=1280:-2 -c:v libx264 -preset medium \
+      -crf 26 -pix_fmt yuv420p -c:a aac -b:a 96k -movflags +faststart "$media_dest"
+  else
+    cp -a "$media" "$media_dest"
+  fi
+  published_size="$(stat -c %s "$media_dest")"
+  [[ "$published_size" -le 25000000 ]] || {
+    echo "Art media exceeds the 25 MB publish limit: $media_dest ($published_size bytes)" >&2
+    exit 1
+  }
+done < <(find "$ART_SOURCE" -maxdepth 1 -type f \
+  \( -iname '*.mp4' -o -iname '*.webm' -o -iname '*.mp3' -o -iname '*.m4a' -o -iname '*.wav' \) \
+  -print | sort)
+
 copy_locale "$NEWS_ROOT/en" "$NEWS_DEST/en"
 copy_locale "$NEWS_ROOT/zh" "$NEWS_DEST/zh" "$NEWS_ROOT/index.html"
 if [[ -f "$NEWS_ROOT/source.jpg" ]]; then
