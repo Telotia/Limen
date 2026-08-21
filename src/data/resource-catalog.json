@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Daily Finance | August 21, 2026",
+    "date": "2026-08-21",
+    "dateLabel": "Aug 21, 2026",
+    "folderLabel": "2026/08/21/daily-news",
+    "href": "/resource/news/2026/08/21/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/21/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/21/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/21/daily-news/en/card-1.png",
+      "/resource/news/2026/08/21/daily-news/en/card-2.png",
+      "/resource/news/2026/08/21/daily-news/en/card-3.png",
+      "/resource/news/2026/08/21/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "How a triangle becomes a verb",
+    "date": "2026-08-21",
+    "dateLabel": "Aug 21, 2026",
+    "folderLabel": "2026/08/21/beat-the-whites-with-the-red-wedge",
+    "href": "/resource/art/2026/08/21/beat-the-whites-with-the-red-wedge/en/index.html",
+    "zhHref": "/resource/art/2026/08/21/beat-the-whites-with-the-red-wedge/zh/index.html",
+    "image": "/resource/art/2026/08/21/beat-the-whites-with-the-red-wedge/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/21/beat-the-whites-with-the-red-wedge/en/card-1.png",
+      "/resource/art/2026/08/21/beat-the-whites-with-the-red-wedge/en/card-2.png",
+      "/resource/art/2026/08/21/beat-the-whites-with-the-red-wedge/en/card-3.png",
+      "/resource/art/2026/08/21/beat-the-whites-with-the-red-wedge/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Split Rate Signals, Treasury Buybacks Cushion Risk Assets",
     "date": "2026-08-20",
     "dateLabel": "Aug 20, 2026",
