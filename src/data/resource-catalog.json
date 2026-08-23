@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Daily Finance | A Three-Way Stress Test for the Week Ahead",
+    "date": "2026-08-23",
+    "dateLabel": "Aug 23, 2026",
+    "folderLabel": "2026/08/23/daily-news",
+    "href": "/resource/news/2026/08/23/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/23/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/23/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/23/daily-news/en/card-1.png",
+      "/resource/news/2026/08/23/daily-news/en/card-2.png",
+      "/resource/news/2026/08/23/daily-news/en/card-3.png",
+      "/resource/news/2026/08/23/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "Wearing cool color like light",
+    "date": "2026-08-23",
+    "dateLabel": "Aug 23, 2026",
+    "folderLabel": "2026/08/23/the-blue-boy-gainsborough",
+    "href": "/resource/art/2026/08/23/the-blue-boy-gainsborough/en/index.html",
+    "zhHref": "/resource/art/2026/08/23/the-blue-boy-gainsborough/zh/index.html",
+    "image": "/resource/art/2026/08/23/the-blue-boy-gainsborough/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/23/the-blue-boy-gainsborough/en/card-1.png",
+      "/resource/art/2026/08/23/the-blue-boy-gainsborough/en/card-2.png",
+      "/resource/art/2026/08/23/the-blue-boy-gainsborough/en/card-3.png",
+      "/resource/art/2026/08/23/the-blue-boy-gainsborough/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Resilient Growth Meets Bond and Oil Constraints",
     "date": "2026-08-22",
     "dateLabel": "Aug 22, 2026",
