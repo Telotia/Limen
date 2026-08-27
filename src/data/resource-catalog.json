@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Resilient growth, sticky inflation and AI earnings raise the rate hurdle",
+    "date": "2026-08-27",
+    "dateLabel": "Aug 27, 2026",
+    "folderLabel": "2026/08/27/daily-news",
+    "href": "/resource/news/2026/08/27/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/27/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/27/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/27/daily-news/en/card-1.png",
+      "/resource/news/2026/08/27/daily-news/en/card-2.png",
+      "/resource/news/2026/08/27/daily-news/en/card-3.png",
+      "/resource/news/2026/08/27/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "A Whole Winter, Built on One Descent",
+    "date": "2026-08-27",
+    "dateLabel": "Aug 27, 2026",
+    "folderLabel": "2026/08/27/the-hunters-in-the-snow-bruegel",
+    "href": "/resource/art/2026/08/27/the-hunters-in-the-snow-bruegel/en/index.html",
+    "zhHref": "/resource/art/2026/08/27/the-hunters-in-the-snow-bruegel/zh/index.html",
+    "image": "/resource/art/2026/08/27/the-hunters-in-the-snow-bruegel/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/27/the-hunters-in-the-snow-bruegel/en/card-1.png",
+      "/resource/art/2026/08/27/the-hunters-in-the-snow-bruegel/en/card-2.png",
+      "/resource/art/2026/08/27/the-hunters-in-the-snow-bruegel/en/card-3.png",
+      "/resource/art/2026/08/27/the-hunters-in-the-snow-bruegel/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Daily Finance | Oil Relief Meets Sticky Inflation and a High-Bar AI Earnings Test",
     "date": "2026-08-26",
     "dateLabel": "Aug 26, 2026",
