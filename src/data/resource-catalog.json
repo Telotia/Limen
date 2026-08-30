@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "A 65-Billion-Barrel Vision Meets a High Discount Rate",
+    "date": "2026-08-30",
+    "dateLabel": "Aug 30, 2026",
+    "folderLabel": "2026/08/30/daily-news",
+    "href": "/resource/news/2026/08/30/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/08/30/daily-news/zh/index.html",
+    "image": "/resource/news/2026/08/30/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/08/30/daily-news/en/card-1.png",
+      "/resource/news/2026/08/30/daily-news/en/card-2.png",
+      "/resource/news/2026/08/30/daily-news/en/card-3.png",
+      "/resource/news/2026/08/30/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "One Black Hat Cuts Through the Night",
+    "date": "2026-08-30",
+    "dateLabel": "Aug 30, 2026",
+    "folderLabel": "2026/08/30/divan-japonais-toulouse-lautrec",
+    "href": "/resource/art/2026/08/30/divan-japonais-toulouse-lautrec/en/index.html",
+    "zhHref": "/resource/art/2026/08/30/divan-japonais-toulouse-lautrec/zh/index.html",
+    "image": "/resource/art/2026/08/30/divan-japonais-toulouse-lautrec/cover.jpg",
+    "cards": [
+      "/resource/art/2026/08/30/divan-japonais-toulouse-lautrec/en/card-1.png",
+      "/resource/art/2026/08/30/divan-japonais-toulouse-lautrec/en/card-2.png",
+      "/resource/art/2026/08/30/divan-japonais-toulouse-lautrec/en/card-3.png",
+      "/resource/art/2026/08/30/divan-japonais-toulouse-lautrec/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Hawkish credibility repriced",
     "date": "2026-08-29",
     "dateLabel": "Aug 29, 2026",
