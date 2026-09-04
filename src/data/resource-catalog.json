@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Daily Finance | Markets Price Patience Before the Jobs Data",
+    "date": "2026-09-04",
+    "dateLabel": "Sep 4, 2026",
+    "folderLabel": "2026/09/04/daily-news",
+    "href": "/resource/news/2026/09/04/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/04/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/04/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/04/daily-news/en/card-1.png",
+      "/resource/news/2026/09/04/daily-news/en/card-2.png",
+      "/resource/news/2026/09/04/daily-news/en/card-3.png",
+      "/resource/news/2026/09/04/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "Not one blade— three forces colliding",
+    "date": "2026-09-04",
+    "dateLabel": "Sep 4, 2026",
+    "folderLabel": "2026/09/04/judith-beheading-holofernes-artemisia",
+    "href": "/resource/art/2026/09/04/judith-beheading-holofernes-artemisia/en/index.html",
+    "zhHref": "/resource/art/2026/09/04/judith-beheading-holofernes-artemisia/zh/index.html",
+    "image": "/resource/art/2026/09/04/judith-beheading-holofernes-artemisia/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/04/judith-beheading-holofernes-artemisia/en/card-1.png",
+      "/resource/art/2026/09/04/judith-beheading-holofernes-artemisia/en/card-2.png",
+      "/resource/art/2026/09/04/judith-beheading-holofernes-artemisia/en/card-3.png",
+      "/resource/art/2026/09/04/judith-beheading-holofernes-artemisia/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Daily Finance | A Bond-Market Breather Is Not an All-Clear",
     "date": "2026-09-03",
     "dateLabel": "Sep 3, 2026",
