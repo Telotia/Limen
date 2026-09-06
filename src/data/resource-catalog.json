@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Jobs Hand the Baton to Inflation as U.S., European and Cloud Tests Converge",
+    "date": "2026-09-06",
+    "dateLabel": "Sep 6, 2026",
+    "folderLabel": "2026/09/06/daily-news",
+    "href": "/resource/news/2026/09/06/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/06/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/06/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/06/daily-news/en/card-1.png",
+      "/resource/news/2026/09/06/daily-news/en/card-2.png",
+      "/resource/news/2026/09/06/daily-news/en/card-3.png",
+      "/resource/news/2026/09/06/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The veil does not hide love. It gives love a shape.",
+    "date": "2026-09-06",
+    "dateLabel": "Sep 6, 2026",
+    "folderLabel": "2026/09/06/the-cradle-berthe-morisot",
+    "href": "/resource/art/2026/09/06/the-cradle-berthe-morisot/en/index.html",
+    "zhHref": "/resource/art/2026/09/06/the-cradle-berthe-morisot/zh/index.html",
+    "image": "/resource/art/2026/09/06/the-cradle-berthe-morisot/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/06/the-cradle-berthe-morisot/en/card-1.png",
+      "/resource/art/2026/09/06/the-cradle-berthe-morisot/en/card-2.png",
+      "/resource/art/2026/09/06/the-cradle-berthe-morisot/en/card-3.png",
+      "/resource/art/2026/09/06/the-cradle-berthe-morisot/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Resilient hiring raises the rate hurdle; weekend energy risk awaits verification",
     "date": "2026-09-05",
     "dateLabel": "Sep 5, 2026",
