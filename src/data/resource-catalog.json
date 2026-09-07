@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Oil and Rate Bets Weigh on Europe as Asian Chips Surge: Markets Reject a One-Way Trade",
+    "date": "2026-09-07",
+    "dateLabel": "Sep 7, 2026",
+    "folderLabel": "2026/09/07/daily-news",
+    "href": "/resource/news/2026/09/07/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/07/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/07/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/07/daily-news/en/card-1.png",
+      "/resource/news/2026/09/07/daily-news/en/card-2.png",
+      "/resource/news/2026/09/07/daily-news/en/card-3.png",
+      "/resource/news/2026/09/07/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "Light does not illuminate the object. It leaves touch on paper.",
+    "date": "2026-09-07",
+    "dateLabel": "Sep 7, 2026",
+    "folderLabel": "2026/09/07/fotogramm-moholy-nagy",
+    "href": "/resource/art/2026/09/07/fotogramm-moholy-nagy/en/index.html",
+    "zhHref": "/resource/art/2026/09/07/fotogramm-moholy-nagy/zh/index.html",
+    "image": "/resource/art/2026/09/07/fotogramm-moholy-nagy/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/07/fotogramm-moholy-nagy/en/card-1.png",
+      "/resource/art/2026/09/07/fotogramm-moholy-nagy/en/card-2.png",
+      "/resource/art/2026/09/07/fotogramm-moholy-nagy/en/card-3.png",
+      "/resource/art/2026/09/07/fotogramm-moholy-nagy/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Jobs Hand the Baton to Inflation as U.S., European and Cloud Tests Converge",
     "date": "2026-09-06",
     "dateLabel": "Sep 6, 2026",
