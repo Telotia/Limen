@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Oil Retreats From Its Spike, but the Rate Alarm Persists Before U.S. CPI",
+    "date": "2026-09-11",
+    "dateLabel": "Sep 11, 2026",
+    "folderLabel": "2026/09/11/daily-news",
+    "href": "/resource/news/2026/09/11/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/11/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/11/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/11/daily-news/en/card-1.png",
+      "/resource/news/2026/09/11/daily-news/en/card-2.png",
+      "/resource/news/2026/09/11/daily-news/en/card-3.png",
+      "/resource/news/2026/09/11/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Dragon Is Not Dead, Yet the Storm Has Already Been Pierced",
+    "date": "2026-09-11",
+    "dateLabel": "Sep 11, 2026",
+    "folderLabel": "2026/09/11/saint-george-and-the-dragon-uccello",
+    "href": "/resource/art/2026/09/11/saint-george-and-the-dragon-uccello/en/index.html",
+    "zhHref": "/resource/art/2026/09/11/saint-george-and-the-dragon-uccello/zh/index.html",
+    "image": "/resource/art/2026/09/11/saint-george-and-the-dragon-uccello/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/11/saint-george-and-the-dragon-uccello/en/card-1.png",
+      "/resource/art/2026/09/11/saint-george-and-the-dragon-uccello/en/card-2.png",
+      "/resource/art/2026/09/11/saint-george-and-the-dragon-uccello/en/card-3.png",
+      "/resource/art/2026/09/11/saint-george-and-the-dragon-uccello/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Daily Finance | $100 Oil Meets a Data-and-Central-Bank Day: Growth, Inflation and AI Cash Flow Face the Same Test",
     "date": "2026-09-10",
     "dateLabel": "Sep 10, 2026",
