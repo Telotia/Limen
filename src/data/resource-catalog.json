@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Daily Markets Briefing | CPI Keeps a Fed Hike Live: Cheaper Oil Lifts Stocks, but Rates and Consumers Carry the Risk Forward",
+    "date": "2026-09-12",
+    "dateLabel": "Sep 12, 2026",
+    "folderLabel": "2026/09/12/daily-news",
+    "href": "/resource/news/2026/09/12/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/12/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/12/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/12/daily-news/en/card-1.png",
+      "/resource/news/2026/09/12/daily-news/en/card-2.png",
+      "/resource/news/2026/09/12/daily-news/en/card-3.png",
+      "/resource/news/2026/09/12/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "She Looks Away— and the Painting Looks Back",
+    "date": "2026-09-12",
+    "dateLabel": "Sep 12, 2026",
+    "folderLabel": "2026/09/12/madame-x-sargent",
+    "href": "/resource/art/2026/09/12/madame-x-sargent/en/index.html",
+    "zhHref": "/resource/art/2026/09/12/madame-x-sargent/zh/index.html",
+    "image": "/resource/art/2026/09/12/madame-x-sargent/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/12/madame-x-sargent/en/card-1.png",
+      "/resource/art/2026/09/12/madame-x-sargent/en/card-2.png",
+      "/resource/art/2026/09/12/madame-x-sargent/en/card-3.png",
+      "/resource/art/2026/09/12/madame-x-sargent/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Oil Retreats From Its Spike, but the Rate Alarm Persists Before U.S. CPI",
     "date": "2026-09-11",
     "dateLabel": "Sep 11, 2026",
