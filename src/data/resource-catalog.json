@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Oil and AI drain risk appetite together as central-bank week turns into a live market test",
+    "date": "2026-09-14",
+    "dateLabel": "Sep 14, 2026",
+    "folderLabel": "2026/09/14/daily-news",
+    "href": "/resource/news/2026/09/14/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/14/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/14/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/14/daily-news/en/card-1.png",
+      "/resource/news/2026/09/14/daily-news/en/card-2.png",
+      "/resource/news/2026/09/14/daily-news/en/card-3.png",
+      "/resource/news/2026/09/14/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "A beam of light speaks first.",
+    "date": "2026-09-14",
+    "dateLabel": "Sep 14, 2026",
+    "folderLabel": "2026/09/14/the-calling-of-saint-matthew-caravaggio",
+    "href": "/resource/art/2026/09/14/the-calling-of-saint-matthew-caravaggio/en/index.html",
+    "zhHref": "/resource/art/2026/09/14/the-calling-of-saint-matthew-caravaggio/zh/index.html",
+    "image": "/resource/art/2026/09/14/the-calling-of-saint-matthew-caravaggio/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/14/the-calling-of-saint-matthew-caravaggio/en/card-1.png",
+      "/resource/art/2026/09/14/the-calling-of-saint-matthew-caravaggio/en/card-2.png",
+      "/resource/art/2026/09/14/the-calling-of-saint-matthew-caravaggio/en/card-3.png",
+      "/resource/art/2026/09/14/the-calling-of-saint-matthew-caravaggio/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Two chokepoints enter central-bank week: a Hormuz ship strike raises the stakes for rates and demand",
     "date": "2026-09-13",
     "dateLabel": "Sep 13, 2026",
