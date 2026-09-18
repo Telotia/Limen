@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Japan Hikes, the Yen Falls: A Credibility Trade",
+    "date": "2026-09-18",
+    "dateLabel": "Sep 18, 2026",
+    "folderLabel": "2026/09/18/daily-news",
+    "href": "/resource/news/2026/09/18/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/18/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/18/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/18/daily-news/en/card-1.png",
+      "/resource/news/2026/09/18/daily-news/en/card-2.png",
+      "/resource/news/2026/09/18/daily-news/en/card-3.png",
+      "/resource/news/2026/09/18/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "When Color Starts to Wrestle",
+    "date": "2026-09-18",
+    "dateLabel": "Sep 18, 2026",
+    "folderLabel": "2026/09/18/fighting-forms-franz-marc",
+    "href": "/resource/art/2026/09/18/fighting-forms-franz-marc/en/index.html",
+    "zhHref": "/resource/art/2026/09/18/fighting-forms-franz-marc/zh/index.html",
+    "image": "/resource/art/2026/09/18/fighting-forms-franz-marc/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/18/fighting-forms-franz-marc/en/card-1.png",
+      "/resource/art/2026/09/18/fighting-forms-franz-marc/en/card-2.png",
+      "/resource/art/2026/09/18/fighting-forms-franz-marc/en/card-3.png",
+      "/resource/art/2026/09/18/fighting-forms-franz-marc/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "A Policy Split: The Fed Hikes for the First Time in Three Years While the Bank of England Waits",
     "date": "2026-09-17",
     "dateLabel": "Sep 17, 2026",
