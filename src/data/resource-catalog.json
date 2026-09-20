@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "New variables in trade and supply",
+    "date": "2026-09-20",
+    "dateLabel": "Sep 20, 2026",
+    "folderLabel": "2026/09/20/daily-news",
+    "href": "/resource/news/2026/09/20/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/20/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/20/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/20/daily-news/en/card-1.png",
+      "/resource/news/2026/09/20/daily-news/en/card-2.png",
+      "/resource/news/2026/09/20/daily-news/en/card-3.png",
+      "/resource/news/2026/09/20/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The Rhinoceros: An Armour of Imagination",
+    "date": "2026-09-20",
+    "dateLabel": "Sep 20, 2026",
+    "folderLabel": "2026/09/20/the-rhinoceros",
+    "href": "/resource/art/2026/09/20/the-rhinoceros/en/index.html",
+    "zhHref": "/resource/art/2026/09/20/the-rhinoceros/zh/index.html",
+    "image": "/resource/art/2026/09/20/the-rhinoceros/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/20/the-rhinoceros/en/card-1.png",
+      "/resource/art/2026/09/20/the-rhinoceros/en/card-2.png",
+      "/resource/art/2026/09/20/the-rhinoceros/en/card-3.png",
+      "/resource/art/2026/09/20/the-rhinoceros/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Resilient indexes, strained funding and physical supply",
     "date": "2026-09-19",
     "dateLabel": "Sep 19, 2026",
