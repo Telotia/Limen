@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Growth firms, supply eases: rates still constrain",
+    "date": "2026-09-23",
+    "dateLabel": "Sep 23, 2026",
+    "folderLabel": "2026/09/23/daily-news",
+    "href": "/resource/news/2026/09/23/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/23/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/23/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/23/daily-news/en/card-1.png",
+      "/resource/news/2026/09/23/daily-news/en/card-2.png",
+      "/resource/news/2026/09/23/daily-news/en/card-3.png",
+      "/resource/news/2026/09/23/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "Where autumn keeps the light",
+    "date": "2026-09-23",
+    "dateLabel": "Sep 23, 2026",
+    "folderLabel": "2026/09/23/autumn-oaks",
+    "href": "/resource/art/2026/09/23/autumn-oaks/en/index.html",
+    "zhHref": "/resource/art/2026/09/23/autumn-oaks/zh/index.html",
+    "image": "/resource/art/2026/09/23/autumn-oaks/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/23/autumn-oaks/en/card-1.png",
+      "/resource/art/2026/09/23/autumn-oaks/en/card-2.png",
+      "/resource/art/2026/09/23/autumn-oaks/en/card-3.png",
+      "/resource/art/2026/09/23/autumn-oaks/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Technology rebounds. Inflation constraints remain.",
     "date": "2026-09-22",
     "dateLabel": "Sep 22, 2026",
