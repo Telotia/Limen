@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Jobs, rates and earnings diverge",
+    "date": "2026-09-24",
+    "dateLabel": "Sep 24, 2026",
+    "folderLabel": "2026/09/24/daily-news",
+    "href": "/resource/news/2026/09/24/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/24/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/24/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/24/daily-news/en/card-1.png",
+      "/resource/news/2026/09/24/daily-news/en/card-2.png",
+      "/resource/news/2026/09/24/daily-news/en/card-3.png",
+      "/resource/news/2026/09/24/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The shape of forward",
+    "date": "2026-09-24",
+    "dateLabel": "Sep 24, 2026",
+    "folderLabel": "2026/09/24/the-bicycle-race",
+    "href": "/resource/art/2026/09/24/the-bicycle-race/en/index.html",
+    "zhHref": "/resource/art/2026/09/24/the-bicycle-race/zh/index.html",
+    "image": "/resource/art/2026/09/24/the-bicycle-race/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/24/the-bicycle-race/en/card-1.png",
+      "/resource/art/2026/09/24/the-bicycle-race/en/card-2.png",
+      "/resource/art/2026/09/24/the-bicycle-race/en/card-3.png",
+      "/resource/art/2026/09/24/the-bicycle-race/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Growth firms, supply eases: rates still constrain",
     "date": "2026-09-23",
     "dateLabel": "Sep 23, 2026",

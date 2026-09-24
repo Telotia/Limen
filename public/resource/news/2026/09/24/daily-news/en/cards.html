@@ -1,0 +1,74 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1080"><title>Daily Finance | 2026-09-24 | Four briefing cards</title><style>
+  :root{
+    --bg0:#05060f; --bg1:#0a0f24; --panel:rgba(20,28,58,.55);
+    --line:rgba(120,150,255,.18); --line2:rgba(150,180,255,.32);
+    --ink:#eaf0ff; --soft:#aab6e0; --muted:#6c789f;
+    --up:#34e1a8; --down:#ff5d7e; --gold:#f0b94c; --cyan:#5ad1ff; --vio:#a98bff;
+    --grad:linear-gradient(120deg,#5ad1ff 0%,#7c8bff 45%,#c08bff 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Inter","Noto Serif SC",system-ui,sans-serif;
+    color:var(--ink); line-height:1.78; min-height:100vh;
+    background:
+      radial-gradient(48% 38% at 8% 4%, rgba(90,120,255,.30) 0%, transparent 62%),
+      radial-gradient(42% 36% at 95% 8%, rgba(170,110,255,.26) 0%, transparent 60%),
+      radial-gradient(50% 46% at 88% 96%, rgba(60,180,255,.18) 0%, transparent 62%),
+      radial-gradient(60% 50% at 6% 92%, rgba(120,90,255,.16) 0%, transparent 64%),
+      linear-gradient(165deg,var(--bg1) 0%,var(--bg0) 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:50px 22px 100px}
+  .kicker{font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:800;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px}
+  h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(31px,6vw,48px);line-height:1.18;letter-spacing:-.01em;margin-bottom:18px}
+  h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dek{font-size:18px;color:var(--soft);max-width:64ch;margin-bottom:24px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);margin-bottom:34px}
+  .meta span{background:rgba(30,40,80,.5);border:1px solid var(--line);padding:5px 13px;border-radius:999px;backdrop-filter:blur(8px)}
+  .card{
+    background:var(--panel);
+    backdrop-filter:blur(20px) saturate(1.25);-webkit-backdrop-filter:blur(20px) saturate(1.25);
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:0 18px 50px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(150,180,255,.12);
+    padding:26px 28px;margin:18px 0;position:relative;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1px;
+    background:linear-gradient(140deg,rgba(120,160,255,.4),transparent 40%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  h2{font-family:"Noto Serif SC",serif;font-size:23px;font-weight:700;margin:8px 0 14px;display:flex;align-items:center;gap:12px}
+  h2 .n{font-family:"Inter";font-size:14px;font-weight:800;color:#fff;background:var(--grad);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;box-shadow:0 6px 18px -4px rgba(110,130,255,.6)}
+  p{margin:10px 0}
+  .lead{font-size:17px;color:#dde5ff}
+  strong{font-weight:700;color:#fff}
+  .num-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:18px 0}
+  .stat{background:rgba(12,18,42,.6);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .stat .v{font-size:27px;font-weight:800;font-family:"Inter";letter-spacing:-.02em}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+  .up{color:var(--up)} .down{color:var(--down)} .cy{color:var(--cyan)} .vi{color:var(--vio)} .gd{color:var(--gold)}
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0}
+  @media(max-width:560px){.bb{grid-template-columns:1fr}}
+  .bull,.bear{border-radius:16px;padding:18px 20px;border:1px solid var(--line)}
+  .bull{background:linear-gradient(160deg,rgba(52,225,168,.14),rgba(20,28,58,.3))}
+  .bear{background:linear-gradient(160deg,rgba(255,93,126,.14),rgba(20,28,58,.3))}
+  .bull h3,.bear h3{font-size:15px;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+  .bull h3{color:var(--up)} .bear h3{color:var(--down)}
+  ul{margin:8px 0 4px;padding-left:20px} li{margin:7px 0;color:#cdd6f5}
+  .bar{height:12px;border-radius:999px;background:rgba(12,18,42,.8);overflow:hidden;margin:8px 0 4px;border:1px solid var(--line)}
+  .bar > i{display:block;height:100%;border-radius:999px;background:var(--grad)}
+  .barlbl{display:flex;justify-content:space-between;font-size:13px;color:var(--soft);margin-top:6px}
+  .src{font-size:14px} .src a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(90,209,255,.3)}
+  .src a:hover{border-bottom-color:var(--cyan)}
+  .disc{font-size:12.5px;color:var(--muted);border-top:1px dashed rgba(120,140,200,.35);padding-top:14px;margin-top:8px;line-height:1.6}
+  .takeaway{background:linear-gradient(150deg,rgba(124,139,255,.2),rgba(192,139,255,.12));font-size:17px}
+
+:root{--space:8px;--radius:22px;--muted:#aab6ce} .wrap{max-width:960px}nav{display:flex;gap:16px;flex-wrap:wrap;margin:24px 0}a{color:var(--cyan);overflow-wrap:anywhere}article,section.watch,.takeaway{padding:28px;margin:24px 0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:inset 0 1px 0 var(--line)}h2{display:block}h3{color:var(--cyan);font-size:14px;margin-top:20px}.risk h3{color:var(--down)}.meta{display:block;margin:12px 0}.source{font-size:13px}.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}@media(max-width:600px){.split{grid-template-columns:1fr}.wrap{padding:28px 18px}article{padding:20px}}
+
+body{padding:32px;display:grid;gap:32px;justify-content:center}.card{width:1080px;height:1350px;margin:0;padding:64px;display:flex;flex-direction:column;background:radial-gradient(90% 70% at 0 0,rgba(90,120,255,.24),transparent 70%),radial-gradient(75% 65% at 100% 100%,rgba(170,110,255,.16),transparent 70%),linear-gradient(165deg,var(--bg1),var(--bg0));border-radius:24px}.card-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line2);padding-bottom:24px}.card .kicker{font-size:21px;letter-spacing:.10em;margin:0}.card-top span{font-size:22px;color:var(--soft)}.card h1{font-size:66px;line-height:1.16;white-space:pre-line;margin:32px 0 16px;letter-spacing:-.025em}.card .dek{font-size:27px;line-height:1.5;margin-bottom:24px}.stat{padding:24px 28px;margin:0 0 20px}.value{font-size:54px;font-weight:800;line-height:1.2;color:var(--cyan)}.stat-label{font-size:22px;color:var(--soft);margin-top:10px}.card-block{display:grid;grid-template-columns:164px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line2);font-size:26px;line-height:1.48}.card-block b{color:var(--cyan);font-size:22px}.card-block.risk b{color:var(--down)}.card-foot{margin-top:auto;padding-top:24px;color:var(--soft);font-size:18px;line-height:1.55}.sources{margin:10px 0}.sources a{font-size:18px}.isolated{padding:0;display:block;background:none}.isolated .card{border-radius:0;box-shadow:none}.card[hidden]{display:none!important}@media print{body{padding:0;gap:0}.card{break-after:page;border-radius:0}@page{size:1080px 1350px;margin:0}}
+</style></head><body><!-- style_ref: U41 / premium-dark-editorial-finance-cards --><section class="card" id="card-1" aria-label="Today’s theme"><div class="card-top"><div class="kicker">Daily Finance / Today’s theme</div><span>01 / 04</span></div><h1>Resilient growth.
+Selective pricing.</h1><p class="dek">Jobs, policy and earnings point in different directions.</p><div class="stat"><div class="value">6 STORIES</div><div class="stat-label">Information cutoff · 07:00 EDT</div></div><div class="card-block "><b>Fact</b><div>Australian jobs rise; Switzerland holds at zero. Oil climbs and the dollar stays firm.</div></div><div class="card-block "><b>Inference</b><div>Corporate delivery must offset pressure from rates and costs.</div></div><div class="card-block risk"><b>Countercase</b><div>Diplomatic progress or softer demand could change the pricing narrative.</div></div><footer class="card-foot">Cutoff: Sep 24, 07:00 EDT · Price times in full briefing<div class="sources"><a href="https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/aug-2026">Official statistics</a> · <a href="https://www.snb.ch/en/publications/communication/press-releases-restricted/pre_20260924">Central bank</a> · <a href="https://ca.finance.yahoo.com/news/oil-extends-gains-little-sign-082323102.html">News agency</a> · <a href="index.html">Full briefing</a></div>Information only. Not investment advice.</footer></section><section class="card" id="card-2" aria-label="Macro and central banks"><div class="card-top"><div class="kicker">Daily Finance / Macro and central banks</div><span>02 / 04</span></div><h1>More jobs.
+More job seekers.</h1><p class="dek">One indicator cannot settle the policy debate.</p><div class="stat"><div class="value">4.6% / 0%</div><div class="stat-label">Australian unemployment / Swiss policy rate</div></div><div class="card-block "><b>Fact</b><div>Australia added 39,500 jobs; participation reached 67.1%. Switzerland held at zero.</div></div><div class="card-block "><b>Inference</b><div>Labour supply and inflation differences permit divergent policies.</div></div><div class="card-block risk"><b>Countercase</b><div>Hours still rose 0.7%; energy may add inflation pressure.</div></div><footer class="card-foot">Cutoff: Sep 24, 07:00 EDT · Price times in full briefing<div class="sources"><a href="https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/aug-2026">Official statistics</a> · <a href="https://www.snb.ch/en/publications/communication/press-releases-restricted/pre_20260924">Central bank</a> · <a href="https://www.rba.gov.au/media-releases/2025/mr-25-02.html">Central bank</a> · <a href="index.html">Full briefing</a></div>Information only. Not investment advice.</footer></section><section class="card" id="card-3" aria-label="Markets and industry"><div class="card-top"><div class="kicker">Daily Finance / Markets and industry</div><span>03 / 04</span></div><h1>Check breadth.
+Check margins.</h1><p class="dek">Technology hopes and retail profits need different tests.</p><div class="stat"><div class="value">+0.76% / −0.39%</div><div class="stat-label">Japan’s main 225-stock index / broader index · Close</div></div><div class="card-block "><b>Fact</b><div>Technology supported Japan’s headline index; a Swedish retailer had one-time margin gains.</div></div><div class="card-block "><b>Inference</b><div>Index strength is not broad strength; a profit beat may not recur.</div></div><div class="card-block risk"><b>Countercase</b><div>Orders and better sales can help; costly energy may erode margins.</div></div><footer class="card-foot">Cutoff: Sep 24, 07:00 EDT · Price times in full briefing<div class="sources"><a href="https://www.fidelity.com/news/article/us-markets/202609240311RTRSNEWSCOMBINED_L1N45G06Q_1">News agency</a> · <a href="https://hmgroup.com/news/h-m-hennes-mauritz-ab-nine-month-report-2026/">Issuer release</a> · <a href="https://www.investing.com/news/stock-market-news/european-shares-dip-on-middle-east-tensions-ahead-of-uschina-talks-4914545">News agency</a> · <a href="index.html">Full briefing</a></div>Information only. Not investment advice.</footer></section><section class="card" id="card-4" aria-label="Next week and risks"><div class="card-top"><div class="kicker">Daily Finance / Next week and risks</div><span>04 / 04</span></div><h1>Policy meets
+the data.</h1><p class="dek">Next week: September 28–October 2.</p><div class="stat"><div class="value">29 SEP → 02 OCT</div><div class="stat-label">Official schedules · Not outcome forecasts</div></div><div class="card-block "><b>September 29</b><div>Australian decision: 14:30 AEST. US job openings: 10:00 EDT.</div></div><div class="card-block "><b>Sep 30 / Oct 2</b><div>GDP and PCE: Wednesday, 08:30 EDT. Employment: Friday, 08:30 EDT.</div></div><div class="card-block risk"><b>Risk</b><div>Firm prices may lift rates; weak jobs may lower earnings expectations.</div></div><footer class="card-foot">Cutoff: Sep 24, 07:00 EDT · Price times in full briefing<div class="sources"><a href="https://www.rba.gov.au/media-releases/2025/mr-25-02.html">Central bank</a> · <a href="https://www.bls.gov/schedule/2026/10_sched.htm">Labour statistics agency</a> · <a href="https://www.bea.gov/news/schedule">Economic statistics agency</a> · <a href="index.html">Full briefing</a></div>Information only. Not investment advice.</footer></section><script>(()=>{const value=new URLSearchParams(location.search).get('card');if(/^[1-4]$/.test(value||'')){document.body.classList.add('isolated');document.querySelectorAll('.card').forEach((card,i)=>{card.hidden=i+1!==Number(value)});}})();</script></body></html>
