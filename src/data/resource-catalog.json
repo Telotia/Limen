@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Markets find relief; inflation expectations remain a constraint",
+    "date": "2026-09-26",
+    "dateLabel": "Sep 26, 2026",
+    "folderLabel": "2026/09/26/daily-news",
+    "href": "/resource/news/2026/09/26/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/26/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/26/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/26/daily-news/en/card-1.png",
+      "/resource/news/2026/09/26/daily-news/en/card-2.png",
+      "/resource/news/2026/09/26/daily-news/en/card-3.png",
+      "/resource/news/2026/09/26/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "One flame, two gazes",
+    "date": "2026-09-26",
+    "dateLabel": "Sep 26, 2026",
+    "folderLabel": "2026/09/26/the-penitent-magdalen",
+    "href": "/resource/art/2026/09/26/the-penitent-magdalen/en/index.html",
+    "zhHref": "/resource/art/2026/09/26/the-penitent-magdalen/zh/index.html",
+    "image": "/resource/art/2026/09/26/the-penitent-magdalen/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/26/the-penitent-magdalen/en/card-1.png",
+      "/resource/art/2026/09/26/the-penitent-magdalen/en/card-2.png",
+      "/resource/art/2026/09/26/the-penitent-magdalen/en/card-3.png",
+      "/resource/art/2026/09/26/the-penitent-magdalen/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Bond pressure meets a yen and Japan equity rebound",
     "date": "2026-09-25",
     "dateLabel": "Sep 25, 2026",
