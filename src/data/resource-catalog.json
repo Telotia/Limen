@@ -4,6 +4,39 @@
     "categories": [
       "news"
     ],
+    "title": "Higher rates test equity resilience",
+    "date": "2026-09-29",
+    "dateLabel": "Sep 29, 2026",
+    "folderLabel": "2026/09/29/daily-news",
+    "href": "/resource/news/2026/09/29/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/29/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/29/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/29/daily-news/en/card-1.png",
+      "/resource/news/2026/09/29/daily-news/en/card-2.png",
+      "/resource/news/2026/09/29/daily-news/en/card-3.png",
+      "/resource/news/2026/09/29/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "A small bundle. A vast quiet.",
+    "date": "2026-09-29",
+    "dateLabel": "Sep 29, 2026",
+    "folderLabel": "2026/09/29/still-life-with-asparagus",
+    "href": "/resource/art/2026/09/29/still-life-with-asparagus/en/index.html",
+    "zhHref": "/resource/art/2026/09/29/still-life-with-asparagus/zh/index.html",
+    "image": "/resource/art/2026/09/29/still-life-with-asparagus/cover.jpg",
+    "cards": []
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Oil pressure returns as growth and deal prospects diverge",
     "date": "2026-09-28",
     "dateLabel": "Sep 28, 2026",
