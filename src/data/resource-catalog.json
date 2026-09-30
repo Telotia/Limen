@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Quarter-end tests: better production, unresolved inflation and earnings",
+    "date": "2026-09-30",
+    "dateLabel": "Sep 30, 2026",
+    "folderLabel": "2026/09/30/daily-news",
+    "href": "/resource/news/2026/09/30/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/09/30/daily-news/zh/index.html",
+    "image": "/resource/news/2026/09/30/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/09/30/daily-news/en/card-1.png",
+      "/resource/news/2026/09/30/daily-news/en/card-2.png",
+      "/resource/news/2026/09/30/daily-news/en/card-3.png",
+      "/resource/news/2026/09/30/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "A city, set trembling.",
+    "date": "2026-09-30",
+    "dateLabel": "Sep 30, 2026",
+    "folderLabel": "2026/09/30/champs-de-mars-red-tower",
+    "href": "/resource/art/2026/09/30/champs-de-mars-red-tower/en/index.html",
+    "zhHref": "/resource/art/2026/09/30/champs-de-mars-red-tower/zh/index.html",
+    "image": "/resource/art/2026/09/30/champs-de-mars-red-tower/cover.jpg",
+    "cards": [
+      "/resource/art/2026/09/30/champs-de-mars-red-tower/en/card-1.png",
+      "/resource/art/2026/09/30/champs-de-mars-red-tower/en/card-2.png",
+      "/resource/art/2026/09/30/champs-de-mars-red-tower/en/card-3.png",
+      "/resource/art/2026/09/30/champs-de-mars-red-tower/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Higher rates test equity resilience",
     "date": "2026-09-29",
     "dateLabel": "Sep 29, 2026",
