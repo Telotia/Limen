@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Jobs await; bonds and diesel supply shape risk",
+    "date": "2026-10-02",
+    "dateLabel": "Oct 2, 2026",
+    "folderLabel": "2026/10/02/daily-news",
+    "href": "/resource/news/2026/10/02/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/10/02/daily-news/zh/index.html",
+    "image": "/resource/news/2026/10/02/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/10/02/daily-news/en/card-1.png",
+      "/resource/news/2026/10/02/daily-news/en/card-2.png",
+      "/resource/news/2026/10/02/daily-news/en/card-3.png",
+      "/resource/news/2026/10/02/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The city grows tentacles",
+    "date": "2026-10-02",
+    "dateLabel": "Oct 2, 2026",
+    "folderLabel": "2026/10/02/the-octopus",
+    "href": "/resource/art/2026/10/02/the-octopus/en/index.html",
+    "zhHref": "/resource/art/2026/10/02/the-octopus/zh/index.html",
+    "image": "/resource/art/2026/10/02/the-octopus/cover.jpg",
+    "cards": [
+      "/resource/art/2026/10/02/the-octopus/en/card-1.png",
+      "/resource/art/2026/10/02/the-octopus/en/card-2.png",
+      "/resource/art/2026/10/02/the-octopus/en/card-3.png",
+      "/resource/art/2026/10/02/the-octopus/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Softer inflation, divided markets",
     "date": "2026-10-01",
     "dateLabel": "Oct 1, 2026",
