@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Services costs rise as the equity rally faces a breadth test",
+    "date": "2026-10-06",
+    "dateLabel": "Oct 6, 2026",
+    "folderLabel": "2026/10/06/daily-news",
+    "href": "/resource/news/2026/10/06/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/10/06/daily-news/zh/index.html",
+    "image": "/resource/news/2026/10/06/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/10/06/daily-news/en/card-1.png",
+      "/resource/news/2026/10/06/daily-news/en/card-2.png",
+      "/resource/news/2026/10/06/daily-news/en/card-3.png",
+      "/resource/news/2026/10/06/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "One guitar. Many ways to see.",
+    "date": "2026-10-06",
+    "dateLabel": "Oct 6, 2026",
+    "folderLabel": "2026/10/06/abstraction-guitar-and-glass",
+    "href": "/resource/art/2026/10/06/abstraction-guitar-and-glass/en/index.html",
+    "zhHref": "/resource/art/2026/10/06/abstraction-guitar-and-glass/zh/index.html",
+    "image": "/resource/art/2026/10/06/abstraction-guitar-and-glass/cover.jpg",
+    "cards": [
+      "/resource/art/2026/10/06/abstraction-guitar-and-glass/en/card-1.png",
+      "/resource/art/2026/10/06/abstraction-guitar-and-glass/en/card-2.png",
+      "/resource/art/2026/10/06/abstraction-guitar-and-glass/en/card-3.png",
+      "/resource/art/2026/10/06/abstraction-guitar-and-glass/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Resilient growth, persistent funding pressure",
     "date": "2026-10-05",
     "dateLabel": "Oct 5, 2026",
