@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "After the rebound, costs and demand face a test",
+    "date": "2026-10-10",
+    "dateLabel": "Oct 10, 2026",
+    "folderLabel": "2026/10/10/daily-news",
+    "href": "/resource/news/2026/10/10/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/10/10/daily-news/zh/index.html",
+    "image": "/resource/news/2026/10/10/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/10/10/daily-news/en/card-1.png",
+      "/resource/news/2026/10/10/daily-news/en/card-2.png",
+      "/resource/news/2026/10/10/daily-news/en/card-3.png",
+      "/resource/news/2026/10/10/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "A Garden Around the Shoulders",
+    "date": "2026-10-10",
+    "dateLabel": "Oct 10, 2026",
+    "folderLabel": "2026/10/10/floral-broad-collar",
+    "href": "/resource/art/2026/10/10/floral-broad-collar/en/index.html",
+    "zhHref": "/resource/art/2026/10/10/floral-broad-collar/zh/index.html",
+    "image": "/resource/art/2026/10/10/floral-broad-collar/cover.jpg",
+    "cards": [
+      "/resource/art/2026/10/10/floral-broad-collar/en/card-1.png",
+      "/resource/art/2026/10/10/floral-broad-collar/en/card-2.png",
+      "/resource/art/2026/10/10/floral-broad-collar/en/card-3.png",
+      "/resource/art/2026/10/10/floral-broad-collar/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Daily Finance | Oil relief meets financing costs and growth quality",
     "date": "2026-10-09",
     "dateLabel": "Oct 9, 2026",
