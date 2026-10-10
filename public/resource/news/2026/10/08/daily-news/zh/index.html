@@ -1,0 +1,67 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>油价、利率与盈利预期的三重检验</title><style>
+  :root{
+    --bg0:#05060f; --bg1:#0a0f24; --panel:rgba(20,28,58,.55);
+    --line:rgba(120,150,255,.18); --line2:rgba(150,180,255,.32);
+    --ink:#eaf0ff; --soft:#aab6e0; --muted:#6c789f;
+    --up:#34e1a8; --down:#ff5d7e; --gold:#f0b94c; --cyan:#5ad1ff; --vio:#a98bff;
+    --grad:linear-gradient(120deg,#5ad1ff 0%,#7c8bff 45%,#c08bff 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Inter","Noto Serif SC",system-ui,sans-serif;
+    color:var(--ink); line-height:1.78; min-height:100vh;
+    background:
+      radial-gradient(48% 38% at 8% 4%, rgba(90,120,255,.30) 0%, transparent 62%),
+      radial-gradient(42% 36% at 95% 8%, rgba(170,110,255,.26) 0%, transparent 60%),
+      radial-gradient(50% 46% at 88% 96%, rgba(60,180,255,.18) 0%, transparent 62%),
+      radial-gradient(60% 50% at 6% 92%, rgba(120,90,255,.16) 0%, transparent 64%),
+      linear-gradient(165deg,var(--bg1) 0%,var(--bg0) 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:50px 22px 100px}
+  .kicker{font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:800;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px}
+  h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(31px,6vw,48px);line-height:1.18;letter-spacing:-.01em;margin-bottom:18px}
+  h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dek{font-size:18px;color:var(--soft);max-width:64ch;margin-bottom:24px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);margin-bottom:34px}
+  .meta span{background:rgba(30,40,80,.5);border:1px solid var(--line);padding:5px 13px;border-radius:999px;backdrop-filter:blur(8px)}
+  .card{
+    background:var(--panel);
+    backdrop-filter:blur(20px) saturate(1.25);-webkit-backdrop-filter:blur(20px) saturate(1.25);
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:0 18px 50px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(150,180,255,.12);
+    padding:26px 28px;margin:18px 0;position:relative;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1px;
+    background:linear-gradient(140deg,rgba(120,160,255,.4),transparent 40%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  h2{font-family:"Noto Serif SC",serif;font-size:23px;font-weight:700;margin:8px 0 14px;display:flex;align-items:center;gap:12px}
+  h2 .n{font-family:"Inter";font-size:14px;font-weight:800;color:#fff;background:var(--grad);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;box-shadow:0 6px 18px -4px rgba(110,130,255,.6)}
+  p{margin:10px 0}
+  .lead{font-size:17px;color:#dde5ff}
+  strong{font-weight:700;color:#fff}
+  .num-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:18px 0}
+  .stat{background:rgba(12,18,42,.6);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .stat .v{font-size:27px;font-weight:800;font-family:"Inter";letter-spacing:-.02em}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+  .up{color:var(--up)} .down{color:var(--down)} .cy{color:var(--cyan)} .vi{color:var(--vio)} .gd{color:var(--gold)}
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0}
+  @media(max-width:560px){.bb{grid-template-columns:1fr}}
+  .bull,.bear{border-radius:16px;padding:18px 20px;border:1px solid var(--line)}
+  .bull{background:linear-gradient(160deg,rgba(52,225,168,.14),rgba(20,28,58,.3))}
+  .bear{background:linear-gradient(160deg,rgba(255,93,126,.14),rgba(20,28,58,.3))}
+  .bull h3,.bear h3{font-size:15px;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+  .bull h3{color:var(--up)} .bear h3{color:var(--down)}
+  ul{margin:8px 0 4px;padding-left:20px} li{margin:7px 0;color:#cdd6f5}
+  .bar{height:12px;border-radius:999px;background:rgba(12,18,42,.8);overflow:hidden;margin:8px 0 4px;border:1px solid var(--line)}
+  .bar > i{display:block;height:100%;border-radius:999px;background:var(--grad)}
+  .barlbl{display:flex;justify-content:space-between;font-size:13px;color:var(--soft);margin-top:6px}
+  .src{font-size:14px} .src a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(90,209,255,.3)}
+  .src a:hover{border-bottom-color:var(--cyan)}
+  .disc{font-size:12.5px;color:var(--muted);border-top:1px dashed rgba(120,140,200,.35);padding-top:14px;margin-top:8px;line-height:1.6}
+  .takeaway{background:linear-gradient(150deg,rgba(124,139,255,.2),rgba(192,139,255,.12));font-size:17px}
+
+:root{--space:16px;--radius:22px} .wrap{max-width:940px} a{color:var(--cyan);overflow-wrap:anywhere} nav{display:flex;gap:24px;margin:20px 0} .src{line-height:1.65}.disc{color:var(--soft)} h2{display:block} .deck{width:1080px;margin:auto;padding:0}.slide{width:1080px;height:1350px;padding:76px;display:flex;flex-direction:column;margin:32px 0;border-radius:0}.slide h1{font-size:72px;line-height:1.18;margin:32px 0}.slide h2{font-size:42px}.slide p{font-size:30px;line-height:1.6}.slide .kicker{font-size:22px}.slide .panel{padding:26px;background:rgba(12,18,42,.65);border:1px solid var(--line);border-radius:var(--radius);margin:16px 0}.slide footer{margin-top:auto;font-size:22px;line-height:1.6;border-top:1px dashed var(--line2);padding-top:20px;color:var(--soft)}.slide .big{font-size:90px;color:var(--cyan);font-weight:800}.isolated .slide{margin:0}.isolated{margin:0}</style></head><body><main class="wrap"><div class="kicker">每日财经 · 2026-10-08</div><h1>油价、利率与盈利预期的三重检验</h1><p class="dek">今日主线（编辑观点）：能源与融资压力正在检验盈利增长能否转化为股价支撑。新增德国贸易数据与三星指引提供了增长分化的直接证据。</p><p>截至2026-10-08 07:00 EDT / 11:00 UTC；仅纳入此前可确认的发布，未标更新时间的当日报道仅作定性背景。素材源生成于10:38:31 UTC，标记fresh；103条均有发布时间，范围为10月6日12:00至10月8日10:30 UTC，均在48小时内。采用会议纪要线索后重新核验原文；素材与转载数量均不作为事实证明。来源链接为3–4个/条；机构独立与底层数据独立分别说明。部分新闻仅能读取搜索索引文本。</p><nav><a href="../en/index.html">English</a><a href="cards.html">四张卡片</a></nav><article class="card"><h2>01 · 会议纪要：年内再加息仍是多数判断</h2><p><strong>事实:</strong> 10月7日公布的9月15–16日会议纪要显示，多数与会者认为年底前再加息可能合适，但未来决定取决于新数据。9月已加息25个基点至3.75%–4.00%；纪要公布没有改变现行利率。</p><p><strong>市场影响（推断）:</strong> 持续偏高的政策路径可能支撑美元、压低长久期资产估值；这是传导推断，不是汇率或加息日期预测。</p><p><strong>反方风险:</strong> 纪要反映9月判断；后续通胀降温或就业走弱可能改变决策。能源冲击的持续性仍不确定。</p><p><strong>来源口径:</strong> 三个来源主体：央行原文、AP、Axios；两家媒体解读同一份纪要，并非三套独立政策证据。</p><ul class="src"><li><a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260916.htm">Federal Reserve · minutes · Oct 7, 18:00 UTC</a></li><li><a href="https://apnews.com/article/b7ed20e31e1a6fa5da6d78e5fe35b0c3">AP · Oct 7, 18:05 UTC</a></li><li><a href="https://www.axios.com/2026/10/07/fed-warsh-minutes-rates">Axios · Oct 7, 18:34 UTC</a></li></ul></article><article class="card"><h2>02 · 德国出口下滑：生产反弹未覆盖外需裂口</h2><p><strong>事实:</strong> 10月8日发布的8月数据：经季节与日历调整，出口环比下降0.8%，进口上升0.9%，贸易顺差195亿欧元。路透报道对美出口下降6.3%，对华出口增长4.7%。这是8月贸易额，不能当作10月实时需求。</p><p><strong>市场影响（推断）:</strong> 出口走弱可能拖累工业企业订单与欧洲增长，并加重欧元压力；与昨日生产回升并存，说明复苏并不均衡。</p><p><strong>反方风险:</strong> 单月波动、价格变化和目的地分化限制外推；对华出口增长提供部分缓冲，名义贸易额不等于实际产量。</p><p><strong>来源口径:</strong> 三个来源主体：统计局、Reuters、Anadolu；媒体共同引用统计局数据。统计局新闻目录已核实标题和核心数值，单篇原文直接打开失败。</p><ul class="src"><li><a href="https://www.destatis.de/EN/Press/2026/10/PE26_356_51.html">Destatis · release 356 · Oct 8</a></li><li><a href="https://www.marketscreener.com/news/german-exports-fall-unexpectedly-in-august-ce785ddede8df625">Reuters via MarketScreener · Oct 8, 06:20 UTC</a></li><li><a href="https://m.aa.com.tr/en/economy/german-exports-fall-in-august-as-shipments-to-us-decline/4081723">Anadolu Agency · Oct 8</a></li></ul></article><article class="card"><h2>03 · 股市与汇率：盈利亮点未阻止亚洲回撤</h2><p><strong>事实:</strong> 10月8日韩国综合指数收跌2.62%，Aju报道外资与机构净卖出。早盘亚洲市场报道也显示风险偏好走弱。路透当日盘中报道美元受高收益率支撑、欧元承压；该页面未给出精确更新时间，因此不采用其即时汇率或欧洲指数报价。</p><p><strong>市场影响（推断）:</strong> 融资成本与资金流可能压过盈利增长，指数高位不代表所有行业资金充裕。美元偏强可能收紧新兴市场美元融资条件。</p><p><strong>反方风险:</strong> 一天的卖出不证明长期趋势；盈利增长、债券需求改善或油价缓和均可能扭转压力。跨地区报价时点不同，不能拼成同一时刻行情。</p><p><strong>来源口径:</strong> 三个来源主体：Aju、Reuters、Investing.com；后者为自有署名市场稿，配图版权不代表稿件由Reuters撰写。未明确更新时间的报道仅作定性背景。</p><ul class="src"><li><a href="https://www.ajupress.com/view/20261008164704063">Aju Press · Oct 8, 08:00 UTC</a></li><li><a href="https://theedgemalaysia.com/node/820961">Reuters via The Edge · Oct 8 · intraday, update time unspecified</a></li><li><a href="https://www.investing.com/news/stock-market-news/asia-stocks-fall-as-surging-oil-yields-weigh-samsung-slips-despite-record-profit-4937861">Investing.com · Oct 8 · snapshot 03:50 UTC</a></li></ul></article><article class="card"><h2>04 · 原油：地缘消息重新推高供应风险溢价</h2><p><strong>事实:</strong> AP在10月8日早盘记录布伦特原油上涨4.1%至104.32美元/桶；这是报道时点报价，不是结算价。Reuters与Newsquawk亦报道油价回升。潜在军事行动消息来自媒体及匿名消息源，不能写成已决定或已发生的行动。</p><p><strong>市场影响（推断）:</strong> 更高能源成本可能侵蚀运输与制造利润，并使央行更难忽略通胀；产油企业的收入获益仍取决于实际销量和成本。</p><p><strong>反方风险:</strong> 风险溢价可随谈判消息快速回吐；库存、航运与实物流量未在本轮逐项核实，不能仅凭期货跳涨声称出现新增供应缺口。</p><p><strong>来源口径:</strong> 三个来源主体：AP、Reuters、Newsquawk；军事消息可能共用上游报道，三个媒体不等于三份独立军事确认。</p><ul class="src"><li><a href="https://apnews.com/article/6a096d714c874db13632794a32cebaa6">AP · Oct 8, 05:17 UTC · early-session snapshot</a></li><li><a href="https://theedgemalaysia.com/node/820961">Reuters via The Edge · Oct 8 · intraday, update time unspecified</a></li><li><a href="https://www.newsquawk.com/headlines/market-analysis-asia-pac-stocks-are-mostly-lower-as-oil-rebounds-amid-geopolitical-risks-and-with-samsung-electronics-missing-lofty-expectations">Newsquawk · Oct 8, 03:22 UTC</a></li></ul></article><article class="card"><h2>05 · 公司与行业：三星盈利指引强劲，预期口径分裂</h2><p><strong>事实:</strong> 三星10月8日预计第三季度收入195万亿韩元、营业利润107.40万亿韩元；这是初步指引。公司表列上年同期营业利润12.17万亿韩元。Reuters报道的LSEG SmartEstimate为106.1万亿，Bloomberg报道的分析师均值为108.7万亿；因此“超预期”取决于预期样本。完整财报会议定于10月29日10:00 KST。</p><p><strong>市场影响（推断）:</strong> 存储需求为产业链提供盈利支持，但股价还取决于已计入的预期、资本开支和现金回报；营业利润不能直接视为可分配现金。</p><p><strong>反方风险:</strong> 分部利润、现金流与最终业绩尚未公布；组件涨价可能挤压终端业务。Breakingviews的估值比较属观点，不能作为公司管理层指引。</p><p><strong>来源口径:</strong> 三个独立来源主体：公司、Reuters、Bloomberg；IR日历与公司新闻稿合计只算一个主体。Business Times链接同时承载其他稿件，仅使用三星/Bloomberg段落。</p><ul class="src"><li><a href="https://news.samsung.com/global/samsung-electronics-announces-earnings-guidance-for-third-quarter-2026">Samsung Electronics · preliminary guidance · Oct 8</a></li><li><a href="https://www.breakingviews.com/columns/breaking-view/samsungs-ai-riches-lag-nvidias-money-machine-2026-10-08/">Reuters Breakingviews · context facts and opinion · Oct 8, 03:19 UTC</a></li><li><a href="https://www.businesstimes.com.sg/companies-markets/capital-markets-currencies/wall-street-ends-lower-record-highs-treasury-yields-climb">Bloomberg via The Business Times · Oct 8, 01:04 UTC · Samsung section</a></li><li><a href="https://www.samsung.com/global/ir/ir-events-presentations/events/">Samsung IR · earnings calendar · verified Oct 8</a></li></ul></article><article class="card"><h2>下周观察与风险</h2><p>下周观察：美国9月CPI定于10月14日08:30 EDT、PPI定于10月15日08:30 EDT发布。观察能源与核心价格是否分化，而非提前断言通胀结果。美联储下一次会议为10月27–28日；三星完整财报会议在10月29日。日历仅证明计划，不证明结果。</p><p class="src"><a href="https://www.bls.gov/schedule/2026/10_sched.htm">BLS · October release calendar · verified Oct 8</a></p><p class="src"><a href="https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm">Federal Reserve · meeting calendar · verified Oct 8</a></p><p class="src"><a href="https://www.samsung.com/global/ir/ir-events-presentations/events/">Samsung IR · earnings calendar · verified Oct 8</a></p></article><footer class="disc">每日财经 · 公开资料研究稿，不构成投资建议。事实、传导推断与编辑观点已分别标示；盘中数据可能变动。</footer></main></body></html>

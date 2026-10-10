@@ -1,0 +1,67 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>油价、利率与盈利预期的三重检验</title><style>
+  :root{
+    --bg0:#05060f; --bg1:#0a0f24; --panel:rgba(20,28,58,.55);
+    --line:rgba(120,150,255,.18); --line2:rgba(150,180,255,.32);
+    --ink:#eaf0ff; --soft:#aab6e0; --muted:#6c789f;
+    --up:#34e1a8; --down:#ff5d7e; --gold:#f0b94c; --cyan:#5ad1ff; --vio:#a98bff;
+    --grad:linear-gradient(120deg,#5ad1ff 0%,#7c8bff 45%,#c08bff 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Inter","Noto Serif SC",system-ui,sans-serif;
+    color:var(--ink); line-height:1.78; min-height:100vh;
+    background:
+      radial-gradient(48% 38% at 8% 4%, rgba(90,120,255,.30) 0%, transparent 62%),
+      radial-gradient(42% 36% at 95% 8%, rgba(170,110,255,.26) 0%, transparent 60%),
+      radial-gradient(50% 46% at 88% 96%, rgba(60,180,255,.18) 0%, transparent 62%),
+      radial-gradient(60% 50% at 6% 92%, rgba(120,90,255,.16) 0%, transparent 64%),
+      linear-gradient(165deg,var(--bg1) 0%,var(--bg0) 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:50px 22px 100px}
+  .kicker{font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:800;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px}
+  h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(31px,6vw,48px);line-height:1.18;letter-spacing:-.01em;margin-bottom:18px}
+  h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dek{font-size:18px;color:var(--soft);max-width:64ch;margin-bottom:24px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);margin-bottom:34px}
+  .meta span{background:rgba(30,40,80,.5);border:1px solid var(--line);padding:5px 13px;border-radius:999px;backdrop-filter:blur(8px)}
+  .card{
+    background:var(--panel);
+    backdrop-filter:blur(20px) saturate(1.25);-webkit-backdrop-filter:blur(20px) saturate(1.25);
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:0 18px 50px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(150,180,255,.12);
+    padding:26px 28px;margin:18px 0;position:relative;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1px;
+    background:linear-gradient(140deg,rgba(120,160,255,.4),transparent 40%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  h2{font-family:"Noto Serif SC",serif;font-size:23px;font-weight:700;margin:8px 0 14px;display:flex;align-items:center;gap:12px}
+  h2 .n{font-family:"Inter";font-size:14px;font-weight:800;color:#fff;background:var(--grad);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;box-shadow:0 6px 18px -4px rgba(110,130,255,.6)}
+  p{margin:10px 0}
+  .lead{font-size:17px;color:#dde5ff}
+  strong{font-weight:700;color:#fff}
+  .num-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:18px 0}
+  .stat{background:rgba(12,18,42,.6);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .stat .v{font-size:27px;font-weight:800;font-family:"Inter";letter-spacing:-.02em}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+  .up{color:var(--up)} .down{color:var(--down)} .cy{color:var(--cyan)} .vi{color:var(--vio)} .gd{color:var(--gold)}
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0}
+  @media(max-width:560px){.bb{grid-template-columns:1fr}}
+  .bull,.bear{border-radius:16px;padding:18px 20px;border:1px solid var(--line)}
+  .bull{background:linear-gradient(160deg,rgba(52,225,168,.14),rgba(20,28,58,.3))}
+  .bear{background:linear-gradient(160deg,rgba(255,93,126,.14),rgba(20,28,58,.3))}
+  .bull h3,.bear h3{font-size:15px;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+  .bull h3{color:var(--up)} .bear h3{color:var(--down)}
+  ul{margin:8px 0 4px;padding-left:20px} li{margin:7px 0;color:#cdd6f5}
+  .bar{height:12px;border-radius:999px;background:rgba(12,18,42,.8);overflow:hidden;margin:8px 0 4px;border:1px solid var(--line)}
+  .bar > i{display:block;height:100%;border-radius:999px;background:var(--grad)}
+  .barlbl{display:flex;justify-content:space-between;font-size:13px;color:var(--soft);margin-top:6px}
+  .src{font-size:14px} .src a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(90,209,255,.3)}
+  .src a:hover{border-bottom-color:var(--cyan)}
+  .disc{font-size:12.5px;color:var(--muted);border-top:1px dashed rgba(120,140,200,.35);padding-top:14px;margin-top:8px;line-height:1.6}
+  .takeaway{background:linear-gradient(150deg,rgba(124,139,255,.2),rgba(192,139,255,.12));font-size:17px}
+
+:root{--space:16px;--radius:22px} .wrap{max-width:940px} a{color:var(--cyan);overflow-wrap:anywhere} nav{display:flex;gap:24px;margin:20px 0} .src{line-height:1.65}.disc{color:var(--soft)} h2{display:block} .deck{width:1080px;margin:auto;padding:0}.slide{width:1080px;height:1350px;padding:76px;display:flex;flex-direction:column;margin:32px 0;border-radius:0}.slide h1{font-size:72px;line-height:1.18;margin:32px 0}.slide h2{font-size:42px}.slide p{font-size:30px;line-height:1.6}.slide .kicker{font-size:22px}.slide .panel{padding:26px;background:rgba(12,18,42,.65);border:1px solid var(--line);border-radius:var(--radius);margin:16px 0}.slide footer{margin-top:auto;font-size:22px;line-height:1.6;border-top:1px dashed var(--line2);padding-top:20px;color:var(--soft)}.slide .big{font-size:90px;color:var(--cyan);font-weight:800}.isolated .slide{margin:0}.isolated{margin:0}</style></head><body><main class="deck"><!-- style_ref: U41 --><section class="slide card" data-card="1"><div class="kicker">今日主线 · 2026-10-08</div><h1>盈利强，<br>融资更贵</h1><div class="panel"><p>今日主线（编辑观点）：能源与融资压力正在检验盈利增长能否转化为股价支撑。新增德国贸易数据与三星指引提供了增长分化的直接证据。</p></div><div class="panel"><p>三重检验：能源成本、政策路径、已计入的盈利预期。</p></div><footer>每日财经 · 07:00 EDT / 11:00 UTC<br>来源与核验限制见正文 · 不构成投资建议<br>01 / 04 · <a href="index.html">阅读全文</a></footer></section><section class="slide card" data-card="2"><div class="kicker">宏观与央行 · 2026-10-08</div><h1>外需回落<br>利率仍偏紧</h1><div class="panel"><p>德国8月出口环比 −0.8%；美联储纪要保留年内再加息可能。</p></div><div class="panel"><p>推断：增长降温与能源通胀可能同时出现。风险：单月数据与旧会议判断均不能外推。</p></div><footer>每日财经 · 07:00 EDT / 11:00 UTC<br>来源与核验限制见正文 · 不构成投资建议<br>02 / 04 · <a href="index.html">阅读全文</a></footer></section><section class="slide card" data-card="3"><div class="kicker">市场与行业 · 2026-10-08</div><h1>利润指引<br>不等于回报</h1><div class="panel"><p>韩国股市收跌2.62%。三星营业利润指引107.40万亿韩元，仍待完整财报。</p></div><div class="panel"><p>推断：利率与资金流可能压过盈利。风险：预期样本不同，“超预期”并非统一结论。</p></div><footer>每日财经 · 07:00 EDT / 11:00 UTC<br>来源与核验限制见正文 · 不构成投资建议<br>03 / 04 · <a href="index.html">阅读全文</a></footer></section><section class="slide card" data-card="4"><div class="kicker">下周观察与风险 · 2026-10-08</div><h1>先看通胀<br>再看决策</h1><div class="panel"><p>10月14日 CPI / 10月15日 PPI，均为08:30 EDT；10月27–28日美联储会议。</p></div><div class="panel"><p>观察：能源是否传导到核心价格。反方风险：油价溢价回吐、就业走弱或盈利兑现均可改变定价。日历不等于结果。</p></div><footer>每日财经 · 07:00 EDT / 11:00 UTC<br>来源与核验限制见正文 · 不构成投资建议<br>04 / 04 · <a href="index.html">阅读全文</a></footer></section></main><script>const n=Number(new URLSearchParams(location.search).get("card"));if(Number.isInteger(n)&&n>=1&&n<=4){document.body.classList.add("isolated");document.querySelectorAll(".slide").forEach((el,i)=>{el.hidden=i!==n-1;el.style.display=i===n-1?"flex":"none"})}</script></body></html>
