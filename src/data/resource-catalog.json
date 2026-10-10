@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Softer jobs lift stocks; bond pressure persists",
+    "date": "2026-10-03",
+    "dateLabel": "Oct 3, 2026",
+    "folderLabel": "2026/10/03/daily-news",
+    "href": "/resource/news/2026/10/03/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/10/03/daily-news/zh/index.html",
+    "image": "/resource/news/2026/10/03/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/10/03/daily-news/en/card-1.png",
+      "/resource/news/2026/10/03/daily-news/en/card-2.png",
+      "/resource/news/2026/10/03/daily-news/en/card-3.png",
+      "/resource/news/2026/10/03/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "Cold ice. A warm hand.",
+    "date": "2026-10-03",
+    "dateLabel": "Oct 3, 2026",
+    "folderLabel": "2026/10/03/love-of-winter",
+    "href": "/resource/art/2026/10/03/love-of-winter/en/index.html",
+    "zhHref": "/resource/art/2026/10/03/love-of-winter/zh/index.html",
+    "image": "/resource/art/2026/10/03/love-of-winter/cover.jpg",
+    "cards": [
+      "/resource/art/2026/10/03/love-of-winter/en/card-1.png",
+      "/resource/art/2026/10/03/love-of-winter/en/card-2.png",
+      "/resource/art/2026/10/03/love-of-winter/en/card-3.png",
+      "/resource/art/2026/10/03/love-of-winter/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Jobs await; bonds and diesel supply shape risk",
     "date": "2026-10-02",
     "dateLabel": "Oct 2, 2026",
