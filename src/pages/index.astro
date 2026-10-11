@@ -1,10 +1,11 @@
 ---
-import ComingSoon from '../components/ComingSoon.astro';
+import TelosHome from '../components/TelosHome.astro';
 // dev.telotia.com renders the multi-page ink-wash site (site/index.html) --
 // perf-optimized (30fps cap, off-screen pause, DPR 1.5, trimmed particle
-// counts) and the current design direction. Sibling pages: process, workspace,
-// demo, research, consult (see those .astro files -- same pattern).
-// prod (telotia.com) shows the <ComingSoon /> teaser until launch.
+// counts). Sibling pages: process, workspace, demo, research, consult (see
+// those .astro files -- same pattern).
+// prod (telotia.com) renders <TelosHome />: the scroll story, "coming soon"
+// and how to reach us, French by default.
 import designRaw from '../../site/index.html?raw';
 
 const limenEnv = process.env.LIMEN_ENV ?? 'dev';
@@ -14,21 +15,44 @@ const bodyMatch = designRaw.match(/<body[^>]*>([\s\S]*?)<\/body>/);
 const designHtml = bodyMatch ? bodyMatch[1] : '';
 ---
 
-<html lang="en-CA">
+<html lang={isProd ? 'fr-CA' : 'en-CA'} data-lang={isProd ? 'fr' : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{isProd ? 'Telotia — Arriving September 2026' : 'Telotia — claim-to-evidence validation'}</title>
-    {isProd && <meta name="description" content="Every claim, held to the evidence behind it. Arriving September 2026 — Montréal." />}
+    {
+      isProd ? (
+        <Fragment>
+          <title>Telotia</title>
+          <meta name="title-fr" content="Telotia" />
+          <meta name="title-en" content="Telotia" />
+          <meta name="description" content="Telotia. Moderniser la santé, une poignée de main à la fois. Lancement à venir." />
+          <link rel="preload" href="/fonts/Outfit.ttf" as="font" type="font/ttf" crossorigin />
+          <link rel="preload" href="/fonts/Inter-cv11.ttf" as="font" type="font/ttf" crossorigin />
+          {/* Before first paint: the saved language, and whether the animated story will run. */}
+          <script is:inline>
+            (function () {
+              var root = document.documentElement, lang = null;
+              try { lang = localStorage.getItem('telotia-lang'); } catch (e) {}
+              var forced = new URLSearchParams(location.search).get('lang');
+              if (forced === 'en' || forced === 'fr') lang = forced;
+              if (lang === 'en') { root.dataset.lang = 'en'; root.lang = 'en-CA'; }
+              if (matchMedia('(min-width: 760px) and (prefers-reduced-motion: no-preference)').matches) root.classList.add('story-on');
+            })();
+          </script>
+        </Fragment>
+      ) : (
+        <title>Telotia — claim-to-evidence validation</title>
+      )
+    }
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   </head>
-  <body>
+  <body class={isProd ? 'telos' : undefined}>
     {
       isProd ? (
-        <ComingSoon />
+        <TelosHome />
       ) : (
         // site/index.html's own <script src="telotia-particles.js?v=8"> /
         // "footer-assets.js?v=8"> tags live inside its <body>, so they come
