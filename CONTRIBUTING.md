@@ -25,6 +25,11 @@ This document is the standard. Read it once end-to-end before your first PR.
 
 ## 1. The branching model
 
+> **Since 12 October 2026, `main` is the base for telotia.com.** The production site (the scroll homepage and the privacy page) lives on `main`. It has diverged from `dev`, which keeps the earlier multi-page site and the daily resources and still deploys dev.telotia.com.
+> - Website work branches from `main` and comes back through a PR into `main`.
+> - `dev` is no longer released to production.
+> - The model below describes how the two branches worked before that. §4 and §7 show the current flow.
+
 Limen uses a two-branch [GitLab-Flow](https://about.gitlab.com/topics/version-control/what-is-gitlab-flow/)-style model:
 
 ```
@@ -116,8 +121,8 @@ If a hook ever needs bypassing (rare), use `--no-verify`. Don't make a habit of 
 ## 4. Working on a change
 
 ```sh
-# 1. Start from a fresh dev
-git checkout dev
+# 1. Start from a fresh base: main for telotia.com, dev for dev.telotia.com
+git checkout main
 git pull --ff-only
 
 # 2. Branch off
@@ -133,7 +138,7 @@ git commit -m "feat(pages): add hero section"
 # 5. Push your feature branch
 git push -u origin feature/your-change-here
 
-# 6. Open a PR into dev (see §5)
+# 6. Open a PR into the branch you started from (main for telotia.com; see §5 for dev)
 ```
 
 ### Test locally before opening a PR
@@ -174,6 +179,8 @@ After merge, `Deploy dev` pushes the debug dashboard to `dev.telotia.com` and sm
 
 ## 6. Releasing to production (`dev` → `main`)
 
+> Retired on 12 October 2026: `dev` is no longer released to production (see §1). telotia.com changes go straight into `main` through a PR, as in §7.
+
 When dev has accumulated enough merged work to be worth shipping (the team's call, no fixed cadence):
 
 ```sh
@@ -201,7 +208,9 @@ The draft release lives at `https://github.com/Telotia/Limen/releases`. You can 
 
 ---
 
-## 7. Hotfixes (skipping `dev`)
+## 7. Changes to telotia.com (PRs into `main`)
+
+This used to be the hotfix path. It is now how every telotia.com change ships. Step 4, syncing `main` back into `dev`, no longer applies.
 
 If production is broken and dev has WIP that can't ship yet:
 
