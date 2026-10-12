@@ -1,0 +1,216 @@
+---
+// The telotia.com homepage (production): a scroll story that runs from a first link to a whole
+// system and ends on Telotia, then "coming soon" and how to reach us. French by default, EN switch.
+// Behaviour lives in src/scripts/telos/. Styles are global but scoped under body.telos, because the
+// dev build of index.astro imports this component without rendering it.
+---
+
+<a class="skip" href="#contact"><span data-only="fr" lang="fr">Passer l’animation</span><span data-only="en" lang="en">Skip the animation</span></a>
+
+<header class="bar">
+  <a class="brand" href="/" data-wordmark aria-label="Telotia"></a>
+  <nav class="nav">
+    <span class="status"><span data-only="fr" lang="fr">Lancement à venir</span><span data-only="en" lang="en">Launching soon</span></span>
+    <div class="lang" role="group" aria-label="Langue · Language">
+      <button type="button" data-set="fr" aria-pressed="true">FR</button>
+      <span aria-hidden="true">·</span>
+      <button type="button" data-set="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn" href="mailto:hello@telotia.com"><span data-only="fr" lang="fr">Nous joindre</span><span data-only="en" lang="en">Contact</span></a>
+  </nav>
+</header>
+
+<main>
+  <!-- The scroll story (wide screens, motion allowed). Drawn on one canvas; the words are real text. -->
+  <section class="story" id="story" aria-hidden="true">
+    <div class="viewport" id="story-viewport">
+      <div class="frame" id="story-frame">
+        <canvas id="story-canvas"></canvas>
+        <div class="scene s1">
+          <h2 class="t"><span data-only="fr" lang="fr">Ici, le travail déborde.</span><span data-only="en" lang="en">Here, work piles up.</span></h2>
+        </div>
+        <div class="scene s2">
+          <h2 class="t"><span data-only="fr" lang="fr">Ailleurs, quelqu’un a le temps.</span><span data-only="en" lang="en">Elsewhere, someone has time.</span></h2>
+        </div>
+        <div class="scene s3">
+          <h2 class="t a"><span data-only="fr" lang="fr">D’abord, un lien.</span><span data-only="en" lang="en">First, one link.</span></h2>
+          <h2 class="t b"><span data-only="fr" lang="fr">Puis, tout un système.</span><span data-only="en" lang="en">Then, a whole system.</span></h2>
+        </div>
+        <div class="scene s5">
+          <p class="t"><span data-only="fr" lang="fr">Moderniser la santé, une poignée de main à la fois.</span><span data-only="en" lang="en">Modernizing healthcare, one handshake at a time.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The same story as plain text, for screen readers while the animated version is shown. -->
+  <section class="sr-only story-text">
+    <div data-only="fr" lang="fr">
+      <p>Ici, le travail déborde. Ailleurs, quelqu’un a le temps.</p>
+      <p>D’abord, un lien. Puis, tout un système.</p>
+      <p>Telotia. Moderniser la santé, une poignée de main à la fois.</p>
+    </div>
+    <div data-only="en" lang="en">
+      <p>Here, work piles up. Elsewhere, someone has time.</p>
+      <p>First, one link. Then, a whole system.</p>
+      <p>Telotia. Modernizing healthcare, one handshake at a time.</p>
+    </div>
+  </section>
+
+  <!-- The static version: small screens, reduced motion, and no JavaScript. -->
+  <section class="static">
+    <ol class="static-lines">
+      <li><span data-only="fr" lang="fr">Ici, le travail déborde.</span><span data-only="en" lang="en">Here, work piles up.</span></li>
+      <li><span data-only="fr" lang="fr">Ailleurs, quelqu’un a le temps.</span><span data-only="en" lang="en">Elsewhere, someone has time.</span></li>
+      <li><span data-only="fr" lang="fr">D’abord, un lien.</span><span data-only="en" lang="en">First, one link.</span></li>
+      <li><span data-only="fr" lang="fr">Puis, tout un système.</span><span data-only="en" lang="en">Then, a whole system.</span></li>
+    </ol>
+    <div class="static-end">
+      <div class="static-mark" data-wordmark></div>
+      <p class="static-tag"><span data-only="fr" lang="fr">Moderniser la santé, une poignée de main à la fois.</span><span data-only="en" lang="en">Modernizing healthcare, one handshake at a time.</span></p>
+    </div>
+  </section>
+
+  <section class="soon" id="contact" aria-labelledby="soon-title">
+    <h2 id="soon-title"><span data-only="fr" lang="fr">Bientôt.</span><span data-only="en" lang="en">Coming soon.</span></h2>
+    <p><span data-only="fr" lang="fr">Telotia prépare son lancement.<br />Une question, une collaboration ? Écrivez-nous.</span><span data-only="en" lang="en">Telotia is preparing its launch.<br />A question, a collaboration? Write to us.</span></p>
+    <a class="mail" href="mailto:hello@telotia.com">hello@telotia.com</a>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <span>© 2026 Telotia · Montréal</span>
+  <span class="spacer"></span>
+  <a href="mailto:hello@telotia.com">hello@telotia.com</a>
+</footer>
+
+<style is:global>
+  /* Tokens from the Telotia design system v2. Font families get their own names so they never
+     collide with the dev site's fonts. */
+  @font-face { font-family: "Telotia Inter"; src: url(/fonts/Inter-cv11.ttf) format("truetype"); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: "Telotia Outfit"; src: url(/fonts/Outfit.ttf) format("truetype"); font-weight: 100 900; font-display: swap; }
+
+  body.telos {
+    --bg: #F8FAF9;
+    --border: #DEE6E4;
+    --text: #282D32;
+    --text2: #617075;
+    --teal: #00545A;
+    --margin: max(20px, calc((100vw - 1200px) / 2));
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --display: "Telotia Outfit", "Helvetica Neue", Arial, sans-serif;
+    --sans: "Telotia Inter", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 400 16px/26px var(--sans);
+    font-feature-settings: "cv11" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .telos *, .telos *::before, .telos *::after { box-sizing: border-box; }
+  .telos a { color: var(--teal); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .telos :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+  html.lenis, html.lenis body.telos { height: auto; }              /* the one Lenis rule this page needs */
+  .telos .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* One language at a time; French by default. */
+  html[data-lang="fr"] .telos [data-only="en"],
+  html[data-lang="en"] .telos [data-only="fr"] { display: none !important; }
+
+  .telos .skip {
+    position: absolute; left: 12px; top: -64px; z-index: 30;
+    background: var(--text); color: #FFFFFF; text-decoration: none;
+    padding: 8px 14px; border-radius: 8px; font: 500 14px/20px var(--sans);
+  }
+  .telos .skip:focus { top: 12px; }
+
+  /* Header: wordmark, status, language switch, one action. */
+  .telos .bar {
+    position: fixed; inset: 0 0 auto 0; z-index: 10; height: 96px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 var(--margin); background: var(--bg);
+  }
+  .telos .brand { display: block; width: 140px; }
+  .telos .brand svg { display: block; width: 100%; height: auto; }
+  .telos .nav { display: flex; align-items: center; gap: 32px; font: 500 14px/20px var(--sans); }
+  .telos .status { color: var(--text2); font-weight: 400; }
+  .telos .lang { display: flex; gap: 6px; color: var(--text2); }
+  .telos .lang button {
+    font: inherit; color: var(--text2); background: none; border: 0; padding: 4px 2px; cursor: pointer;
+    border-bottom: 1px solid transparent;
+  }
+  .telos .lang button[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--text); }
+  .telos .btn {
+    display: inline-block; background: var(--text); color: #FFFFFF; text-decoration: none;
+    border-radius: 8px; padding: 8px 16px; transition: background 150ms var(--ease);
+  }
+  .telos .btn:hover { background: #3A4148; }
+
+  /* The scroll story: a 1440 x 810 design frame, scaled to fit and pinned while it plays. */
+  .telos .story { display: none; position: relative; }
+  html.story-on .telos .story { display: block; }
+  .telos .viewport { position: relative; height: 100vh; overflow: hidden; }
+  .telos .frame { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; transform-origin: 0 0; opacity: 0; }
+  .telos .frame canvas { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; }
+  .telos .scene { position: absolute; }
+  .telos .scene h2 { margin: 0 0 0 -2px; font: 400 48px/58px var(--display); letter-spacing: -0.025em; color: var(--text); text-wrap: balance; }
+  .telos .s1 { left: 720px; top: 232px; width: 620px; }
+  .telos .s2 { left: 176px; top: 214px; width: 540px; }
+  .telos .s3 { left: 176px; top: 190px; width: 760px; }
+  .telos .s3 h2 { white-space: nowrap; }
+  .telos .s5 { left: 220px; top: 514px; width: 1000px; text-align: center; }
+  .telos .s5 p { margin: 0; font: 400 30px/40px var(--display); letter-spacing: -0.01em; color: var(--text2); }
+  html:not(.story-on) .telos .story-text { display: none; }
+
+  /* The static version. */
+  .telos .static { padding: 168px var(--margin) 112px; }
+  html.story-on .telos .static { display: none; }
+  .telos .static-lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 40px; }
+  .telos .static-lines li { font: 400 clamp(32px, 7vw, 48px)/1.2 var(--display); letter-spacing: -0.025em; text-wrap: balance; }
+  .telos .static-end { margin-top: 104px; }
+  .telos .static-mark { width: min(100%, 560px); }
+  .telos .static-mark svg { display: block; width: 100%; height: auto; }
+  .telos .static-tag { margin: 24px 0 0; font: 400 clamp(20px, 4.4vw, 28px)/1.35 var(--display); color: var(--text2); text-wrap: balance; }
+
+  /* Coming soon, and how to reach us. */
+  .telos .soon { padding: 128px var(--margin) 136px; border-top: 1px solid var(--border); scroll-margin-top: 96px; }
+  .telos .soon h2 { margin: 0; font: 400 clamp(44px, 7vw, 72px)/1.05 var(--display); letter-spacing: -0.03em; }
+  .telos .soon p { margin: 24px 0 0; max-width: 560px; font: 400 20px/31px var(--sans); color: var(--text2); }
+  .telos .soon .mail {
+    display: inline-block; margin-top: 40px; padding-bottom: 6px;
+    font: 400 clamp(26px, 4vw, 36px)/1.2 var(--display); letter-spacing: -0.015em;
+    color: var(--text); text-decoration: none; border-bottom: 1.5px solid var(--teal);
+    transition: color 150ms var(--ease);
+  }
+  .telos .soon .mail:hover { color: var(--teal); }
+
+  .telos .site-foot {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px;
+    padding: 40px var(--margin) 48px; border-top: 1px solid var(--border);
+    font: 400 14px/20px var(--sans); color: var(--text2);
+  }
+  .telos .site-foot a { color: var(--text2); }
+  .telos .site-foot .spacer { flex: 1; }
+
+  @media (max-width: 767px) {
+    .telos .bar { height: 72px; }
+    .telos .brand { width: 120px; }
+    .telos .nav { gap: 16px; }
+    .telos .static { padding-top: 136px; }
+    .telos .soon { padding: 96px var(--margin) 104px; scroll-margin-top: 72px; }
+  }
+  @media (max-width: 639px) {
+    .telos .status { display: none; }
+  }
+</style>
+
+<script>
+  import { initSite } from '../scripts/telos/site.js';
+  import { initStory } from '../scripts/telos/story.js';
+
+  if (document.body.classList.contains('telos')) {
+    initSite();
+    initStory();
+  }
+</script>
