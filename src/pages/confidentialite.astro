@@ -1,0 +1,360 @@
+---
+// telotia.com/confidentialite: the privacy policy, under Québec's Act respecting the protection of
+// personal information in the private sector (as amended by Law 25). Both languages are in the page;
+// French by default, with the EN switch. Only facts confirmed by Telotia are stated.
+import '../styles/telos.css';
+import Header from '../components/telos/Header.astro';
+import Footer from '../components/telos/Footer.astro';
+---
+
+<html lang="fr-CA" data-lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Confidentialité · Telotia</title>
+    <meta name="title-fr" content="Confidentialité · Telotia" />
+    <meta name="title-en" content="Privacy · Telotia" />
+    <meta name="description" content="Politique de confidentialité de Telotia." />
+    <link rel="preload" href="/fonts/Outfit.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Inter-cv11.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    {/* Before first paint: the saved language. */}
+    <script is:inline>
+      (function () {
+        var root = document.documentElement, lang = null;
+        try { lang = localStorage.getItem('telotia-lang'); } catch (e) {}
+        var forced = new URLSearchParams(location.search).get('lang');
+        if (forced === 'en' || forced === 'fr') lang = forced;
+        if (lang === 'en') { root.dataset.lang = 'en'; root.lang = 'en-CA'; }
+      })();
+    </script>
+  </head>
+  <body class="telos">
+    <a class="skip" href="#policy"><span data-only="fr" lang="fr">Aller au contenu</span><span data-only="en" lang="en">Skip to content</span></a>
+    <Header />
+
+    <main class="doc" id="policy">
+      <header class="head">
+        <p class="eyebrow"><span data-only="fr" lang="fr">Politique de confidentialité</span><span data-only="en" lang="en">Privacy policy</span></p>
+        <h1><span data-only="fr" lang="fr">Vos renseignements personnels</span><span data-only="en" lang="en">Your personal information</span></h1>
+        <div class="meta">
+          <span>Version 1.0</span><span aria-hidden="true">·</span>
+          <span data-only="fr" lang="fr">11 octobre 2026</span><span data-only="en" lang="en">October 11, 2026</span>
+        </div>
+        <div class="rule" aria-hidden="true"></div>
+      </header>
+
+      <nav class="toc" aria-label="Sommaire · Contents">
+        <p class="label"><span data-only="fr" lang="fr">Sommaire</span><span data-only="en" lang="en">Contents</span></p>
+        <ol>
+          <li><a href="#s1"><span data-only="fr" lang="fr">Qui nous sommes</span><span data-only="en" lang="en">Who we are</span></a></li>
+          <li><a href="#s2"><span data-only="fr" lang="fr">Ce que nous recueillons</span><span data-only="en" lang="en">What we collect</span></a></li>
+          <li><a href="#s3"><span data-only="fr" lang="fr">Témoins et suivi</span><span data-only="en" lang="en">Cookies and tracking</span></a></li>
+          <li><a href="#s4"><span data-only="fr" lang="fr">Utilisation et consentement</span><span data-only="en" lang="en">Use and consent</span></a></li>
+          <li><a href="#s5"><span data-only="fr" lang="fr">Communication à des tiers</span><span data-only="en" lang="en">Sharing</span></a></li>
+          <li><a href="#s6"><span data-only="fr" lang="fr">Hors du Québec</span><span data-only="en" lang="en">Outside Québec</span></a></li>
+          <li><a href="#s7"><span data-only="fr" lang="fr">Sécurité</span><span data-only="en" lang="en">Security</span></a></li>
+          <li><a href="#s8"><span data-only="fr" lang="fr">Conservation</span><span data-only="en" lang="en">Retention</span></a></li>
+          <li><a href="#s9"><span data-only="fr" lang="fr">Vos droits</span><span data-only="en" lang="en">Your rights</span></a></li>
+          <li><a href="#s10"><span data-only="fr" lang="fr">Responsable</span><span data-only="en" lang="en">Person in charge</span></a></li>
+          <li><a href="#s11"><span data-only="fr" lang="fr">Plaintes</span><span data-only="en" lang="en">Complaints</span></a></li>
+          <li><a href="#s12"><span data-only="fr" lang="fr">Mineurs</span><span data-only="en" lang="en">Minors</span></a></li>
+          <li><a href="#s13"><span data-only="fr" lang="fr">Modifications</span><span data-only="en" lang="en">Changes</span></a></li>
+        </ol>
+      </nav>
+
+      <article>
+        <div data-only="fr" lang="fr-CA">
+          <aside class="brief">
+            <h2>En bref</h2>
+            <ul>
+              <li>Nous ne vendons ni ne louons vos renseignements personnels.</li>
+              <li>Ce site n’utilise ni témoins publicitaires, ni outils d’analyse, ni profilage.</li>
+              <li>Nous recueillons seulement ce que vous nous écrivez et les données techniques nécessaires pour afficher et protéger le site.</li>
+              <li>Vous pouvez accéder à vos renseignements, les faire corriger ou en demander la suppression.</li>
+            </ul>
+          </aside>
+
+          <section class="s" id="s1">
+            <h2><span class="n">1</span>Qui nous sommes</h2>
+            <p>Telotia est une jeune entreprise établie à Montréal (Québec). La présente politique explique comment nous traitons les renseignements personnels recueillis par le site telotia.com et dans nos échanges par courriel.</p>
+            <p>Elle s’appuie sur la <a href="https://www.legisquebec.gouv.qc.ca/fr/document/lc/P-39.1">Loi sur la protection des renseignements personnels dans le secteur privé</a>.</p>
+          </section>
+
+          <section class="s" id="s2">
+            <h2><span class="n">2</span>Ce que nous recueillons</h2>
+            <p>Nous recueillons le moins de renseignements possible.</p>
+            <table>
+              <thead><tr><th>Renseignements</th><th>Comment</th><th>Pourquoi</th><th>Durée</th></tr></thead>
+              <tbody>
+                <tr><td>Correspondance&nbsp;: nom, adresse courriel, contenu du message</td><td>Vous nous les transmettez en nous écrivant</td><td>Vous répondre et assurer le suivi de l’échange</td><td>Le temps nécessaire pour vous répondre et assurer le suivi</td></tr>
+                <tr><td>Données techniques&nbsp;: adresse IP, navigateur, pages consultées, date et heure</td><td>Automatiquement, par notre hébergeur, lors de votre visite</td><td>Afficher le site et le protéger contre les abus</td><td>Durée limitée, selon les pratiques de notre hébergeur</td></tr>
+                <tr><td>Préférence de langue</td><td>Conservée dans votre navigateur seulement</td><td>Afficher le site dans la langue choisie</td><td>Jusqu’à ce que vous effaciez les données de votre navigateur</td></tr>
+              </tbody>
+            </table>
+            <p>Merci de ne pas nous transmettre de renseignements sensibles, ni de renseignements concernant d’autres personnes.</p>
+          </section>
+
+          <section class="s" id="s3">
+            <h2><span class="n">3</span>Témoins et suivi</h2>
+            <p>Nous n’utilisons aucun témoin publicitaire ou analytique, ni aucune technologie permettant de vous identifier, de vous localiser ou d’effectuer un profilage.</p>
+            <p>Notre hébergeur peut utiliser un témoin strictement nécessaire à la sécurité du site, par exemple pour distinguer les visites du trafic automatisé. Il ne sert à aucune autre fin. Les polices et les fichiers du site sont servis par nos propres serveurs&#8239;; aucune ressource n’est chargée auprès d’un tiers.</p>
+          </section>
+
+          <section class="s" id="s4">
+            <h2><span class="n">4</span>Utilisation et consentement</h2>
+            <p>Nous utilisons vos renseignements uniquement aux fins décrites ci-dessus. En nous écrivant, vous consentez à ce que nous utilisions vos coordonnées pour vous répondre&#8239;; vous pouvez retirer ce consentement en tout temps.</p>
+            <p>Nous ne prenons aucune décision fondée exclusivement sur un traitement automatisé de vos renseignements.</p>
+          </section>
+
+          <section class="s" id="s5">
+            <h2><span class="n">5</span>Communication à des tiers</h2>
+            <p>Nous ne vendons, ne louons et n’échangeons pas vos renseignements. Nous les communiquons seulement aux fournisseurs qui nous aident à exploiter le site et notre messagerie, dans la mesure nécessaire à leur service&nbsp;: notre hébergeur et réseau de diffusion (Cloudflare) et notre fournisseur de courriel (Google Workspace). Ces fournisseurs sont tenus de protéger vos renseignements.</p>
+            <p>Nous pouvons aussi communiquer des renseignements lorsque la loi l’exige.</p>
+          </section>
+
+          <section class="s" id="s6">
+            <h2><span class="n">6</span>Hors du Québec</h2>
+            <p>Nos fournisseurs, Google pour le courriel et Cloudflare pour l’hébergement, peuvent conserver ou traiter vos renseignements à l’extérieur du Québec, notamment aux États-Unis.</p>
+          </section>
+
+          <section class="s" id="s7">
+            <h2><span class="n">7</span>Sécurité</h2>
+            <p>Nous protégeons vos renseignements par des mesures raisonnables&nbsp;: communications chiffrées (HTTPS), accès limité aux seules personnes qui en ont besoin et authentification à deux facteurs sur nos comptes.</p>
+            <p>Nous tenons un registre des incidents de confidentialité. Si un incident présente un risque de préjudice sérieux, nous en aviserons la Commission d’accès à l’information et les personnes concernées.</p>
+          </section>
+
+          <section class="s" id="s8">
+            <h2><span class="n">8</span>Conservation</h2>
+            <p>Nous conservons vos renseignements le temps nécessaire aux fins indiquées à la section&nbsp;2, puis nous les détruisons ou les anonymisons de façon sécuritaire.</p>
+          </section>
+
+          <section class="s" id="s9">
+            <h2><span class="n">9</span>Vos droits</h2>
+            <p>Vous pouvez en tout temps&nbsp;:</p>
+            <ul>
+              <li>accéder aux renseignements personnels que nous détenons à votre sujet&#8239;;</li>
+              <li>les faire rectifier s’ils sont inexacts, incomplets ou équivoques&#8239;;</li>
+              <li>retirer votre consentement&#8239;;</li>
+              <li>demander que nous cessions de diffuser vos renseignements, ou que nous désindexions un hyperlien qui permet d’y accéder, dans les cas prévus par la loi&#8239;;</li>
+              <li>obtenir vos renseignements dans un format technologique structuré et couramment utilisé.</li>
+            </ul>
+            <p>Pour exercer ces droits, écrivez-nous à l’adresse indiquée à la section&nbsp;10. Nous vous répondrons dans un délai de 30&nbsp;jours et pourrions vous demander de confirmer votre identité.</p>
+          </section>
+
+          <section class="s" id="s10">
+            <h2><span class="n">10</span>Responsable</h2>
+            <p>La personne qui exerce la plus haute autorité chez Telotia agit comme responsable de la protection des renseignements personnels.</p>
+            <div class="contact">
+              <dl>
+                <dt>Fonction</dt><dd>Responsable de la protection des renseignements personnels</dd>
+                <dt>Courriel</dt><dd><a href="mailto:hello@telotia.com?subject=Confidentialit%C3%A9">hello@telotia.com</a>, objet «&nbsp;Confidentialité&nbsp;»</dd>
+                <dt>Ville</dt><dd>Montréal (Québec)</dd>
+              </dl>
+            </div>
+          </section>
+
+          <section class="s" id="s11">
+            <h2><span class="n">11</span>Plaintes</h2>
+            <p>Si notre réponse ne vous satisfait pas, vous pouvez vous adresser à la <a href="https://www.cai.gouv.qc.ca/">Commission d’accès à l’information du Québec</a>.</p>
+          </section>
+
+          <section class="s" id="s12">
+            <h2><span class="n">12</span>Mineurs</h2>
+            <p>Ce site ne s’adresse pas aux personnes de moins de 14&nbsp;ans, et nous ne recueillons pas sciemment leurs renseignements.</p>
+          </section>
+
+          <section class="s" id="s13">
+            <h2><span class="n">13</span>Modifications</h2>
+            <p>Nous pourrions mettre à jour cette politique. La date de la version en vigueur figure en haut de la page&#8239;; tout changement important y sera signalé.</p>
+          </section>
+        </div>
+
+        <div data-only="en" lang="en-CA">
+          <aside class="brief">
+            <h2>In short</h2>
+            <ul>
+              <li>We do not sell or rent your personal information.</li>
+              <li>This site uses no advertising cookies, no analytics and no profiling.</li>
+              <li>We collect only what you write to us, and the technical data needed to serve and protect the site.</li>
+              <li>You can access your information, have it corrected or ask us to delete it.</li>
+            </ul>
+          </aside>
+
+          <section class="s" id="s1-en">
+            <h2><span class="n">1</span>Who we are</h2>
+            <p>Telotia is a young company based in Montréal, Québec. This policy explains how we handle personal information collected through telotia.com and in our email exchanges.</p>
+            <p>It follows Québec’s <a href="https://www.legisquebec.gouv.qc.ca/en/document/cs/P-39.1">Act respecting the protection of personal information in the private sector</a>.</p>
+          </section>
+
+          <section class="s" id="s2-en">
+            <h2><span class="n">2</span>What we collect</h2>
+            <p>We collect as little as possible.</p>
+            <table>
+              <thead><tr><th>Information</th><th>How</th><th>Why</th><th>How long</th></tr></thead>
+              <tbody>
+                <tr><td>Correspondence: name, email address, message content</td><td>You send it when you write to us</td><td>To reply and follow up on the exchange</td><td>As long as replying and following up require</td></tr>
+                <tr><td>Technical data: IP address, browser, pages viewed, date and time</td><td>Automatically, by our host, when you visit</td><td>To serve the site and protect it from abuse</td><td>A limited period, under our host’s practices</td></tr>
+                <tr><td>Language preference</td><td>Kept in your browser only</td><td>To show the site in the language you chose</td><td>Until you clear your browser data</td></tr>
+              </tbody>
+            </table>
+            <p>Please do not send us sensitive information, or information about other people.</p>
+          </section>
+
+          <section class="s" id="s3-en">
+            <h2><span class="n">3</span>Cookies and tracking</h2>
+            <p>We use no advertising or analytics cookies, and no technology that identifies, locates or profiles you.</p>
+            <p>Our host may use a cookie that is strictly necessary for security, for example to tell visits apart from automated traffic. It serves no other purpose. Fonts and site files are served from our own servers; nothing is loaded from a third party.</p>
+          </section>
+
+          <section class="s" id="s4-en">
+            <h2><span class="n">4</span>Use and consent</h2>
+            <p>We use your information only for the purposes described above. By writing to us, you consent to our using your contact details to reply; you can withdraw that consent at any time.</p>
+            <p>We make no decision based exclusively on automated processing of your information.</p>
+          </section>
+
+          <section class="s" id="s5-en">
+            <h2><span class="n">5</span>Sharing</h2>
+            <p>We do not sell, rent or trade your information. We share it only with the providers who help us run the site and our email, and only as far as their service requires: our host and content delivery network (Cloudflare) and our email provider (Google Workspace). These providers are required to protect your information.</p>
+            <p>We may also disclose information when the law requires it.</p>
+          </section>
+
+          <section class="s" id="s6-en">
+            <h2><span class="n">6</span>Outside Québec</h2>
+            <p>Our providers, Google for email and Cloudflare for hosting, may store or process your information outside Québec, including in the United States.</p>
+          </section>
+
+          <section class="s" id="s7-en">
+            <h2><span class="n">7</span>Security</h2>
+            <p>We protect your information with reasonable measures: encrypted connections (HTTPS), access limited to the people who need it, and two-factor authentication on our accounts.</p>
+            <p>We keep a register of confidentiality incidents. If an incident presents a risk of serious injury, we will notify the Commission d’accès à l’information and the people concerned.</p>
+          </section>
+
+          <section class="s" id="s8-en">
+            <h2><span class="n">8</span>Retention</h2>
+            <p>We keep your information only as long as the purposes in section 2 require, then destroy or anonymize it securely.</p>
+          </section>
+
+          <section class="s" id="s9-en">
+            <h2><span class="n">9</span>Your rights</h2>
+            <p>At any time, you can:</p>
+            <ul>
+              <li>access the personal information we hold about you;</li>
+              <li>have it corrected if it is inaccurate, incomplete or equivocal;</li>
+              <li>withdraw your consent;</li>
+              <li>ask us to stop disseminating your information, or to de-index a hyperlink that gives access to it, in the cases the law provides;</li>
+              <li>receive your information in a structured, commonly used technological format.</li>
+            </ul>
+            <p>To exercise these rights, write to the address in section 10. We will reply within 30 days and may ask you to confirm your identity.</p>
+          </section>
+
+          <section class="s" id="s10-en">
+            <h2><span class="n">10</span>Person in charge</h2>
+            <p>The person with the highest authority at Telotia acts as the person in charge of the protection of personal information.</p>
+            <div class="contact">
+              <dl>
+                <dt>Role</dt><dd>Person in charge of the protection of personal information</dd>
+                <dt>Email</dt><dd><a href="mailto:hello@telotia.com?subject=Privacy">hello@telotia.com</a>, subject “Privacy”</dd>
+                <dt>City</dt><dd>Montréal, Québec</dd>
+              </dl>
+            </div>
+          </section>
+
+          <section class="s" id="s11-en">
+            <h2><span class="n">11</span>Complaints</h2>
+            <p>If our reply does not satisfy you, you can contact the <a href="https://www.cai.gouv.qc.ca/">Commission d’accès à l’information du Québec</a>.</p>
+          </section>
+
+          <section class="s" id="s12-en">
+            <h2><span class="n">12</span>Minors</h2>
+            <p>This site is not directed at people under 14, and we do not knowingly collect their information.</p>
+          </section>
+
+          <section class="s" id="s13-en">
+            <h2><span class="n">13</span>Changes</h2>
+            <p>We may update this policy. The date of the version in force appears at the top of the page; any significant change will be flagged there.</p>
+          </section>
+        </div>
+      </article>
+    </main>
+
+    <Footer current="privacy" />
+
+    <style is:global>
+      .telos .doc {
+        display: grid; grid-template-columns: 220px minmax(0, var(--measure)); gap: 0 112px;
+        padding: 168px var(--margin) 112px;
+      }
+      .telos .head { grid-column: 1 / -1; max-width: calc(220px + 112px + var(--measure)); margin-bottom: 64px; }
+      .telos .eyebrow { margin: 0 0 16px; font: 500 14px/20px var(--sans); color: var(--text2); }
+      .telos .head h1 { margin: 0 0 20px -2px; font: 400 48px/56px var(--display); letter-spacing: -0.025em; text-wrap: balance; }
+      .telos .meta {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+        font: 400 14px/20px var(--sans); color: var(--text2); font-variant-numeric: tabular-nums;
+      }
+      /* Telotia's line under the title: a drop, one turn, the run, the point. */
+      .telos .rule { position: relative; width: calc(100% - 16px); height: 24px; margin-top: 40px; border-left: 1.5px solid var(--text); border-bottom: 1.5px solid var(--text); border-bottom-left-radius: 16px; }
+      .telos .rule::after { content: ""; position: absolute; right: -16px; bottom: -4.75px; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+
+      .telos .toc { position: sticky; top: 128px; align-self: start; font: 400 14px/21px var(--sans); }
+      .telos .toc .label { margin: 0 0 12px; font-weight: 500; color: var(--text2); }
+      .telos .toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; }
+      .telos .toc li { counter-increment: toc; }
+      .telos .toc a { display: flex; gap: 12px; padding: 5px 0; color: var(--text2); text-decoration: none; transition: color 150ms var(--ease); }
+      .telos .toc a::before { content: counter(toc); min-width: 16px; font-variant-numeric: tabular-nums; color: var(--border-strong); }
+      .telos .toc a:hover { color: var(--text); }
+
+      .telos article { min-width: 0; }
+      .telos .brief { margin: 0 0 64px; padding: 24px 28px; border-radius: 12px; background: var(--subtle); }
+      .telos .brief h2 { margin: 0 0 8px; font: 500 14px/20px var(--sans); color: var(--text2); }
+      .telos .brief ul { margin: 0; padding-left: 18px; }
+      .telos .brief li { margin: 6px 0; }
+      .telos .s { margin: 0 0 56px; scroll-margin-top: 128px; }
+      .telos .s h2 { display: flex; gap: 16px; margin: 0 0 16px; font: 500 26px/34px var(--display); letter-spacing: -0.015em; text-wrap: balance; }
+      .telos .s h2 .n { min-width: 28px; color: var(--text2); font-variant-numeric: tabular-nums; }
+      .telos .s p { margin: 0 0 14px; }
+      .telos .s ul { margin: 0 0 14px; padding-left: 20px; }
+      .telos .s li { margin: 6px 0; }
+      .telos table { width: 100%; margin: 20px 0 12px; border-collapse: collapse; font: 400 14px/21px var(--sans); }
+      .telos th { padding: 10px 12px; text-align: left; font-weight: 500; background: var(--subtle); border-bottom: 1px solid var(--border-strong); }
+      .telos td { padding: 12px; vertical-align: top; border-bottom: 1px solid var(--border); }
+      .telos td:first-child { font-weight: 500; }
+      .telos .contact { margin: 20px 0 0; padding: 20px 24px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+      .telos .contact dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 24px; margin: 0; }
+      .telos .contact dt { color: var(--text2); }
+      .telos .contact dd { margin: 0; }
+
+      @media (max-width: 1023px) {
+        .telos .doc { grid-template-columns: minmax(0, 1fr); padding-top: 136px; }
+        .telos .toc { position: static; margin-bottom: 48px; }
+      }
+      @media (max-width: 767px) {
+        .telos .head h1 { font-size: 34px; line-height: 42px; }
+        .telos .s h2 { font-size: 23px; line-height: 31px; }
+        .telos table, .telos thead, .telos tbody, .telos tr, .telos th, .telos td { display: block; }
+        .telos thead { display: none; }
+        .telos tr { padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .telos td { padding: 2px 0; border: 0; }
+      }
+    </style>
+
+    <script>
+      import { initSite } from '../scripts/telos/site.js';
+
+      initSite();
+      // Contents links follow the language shown (English section ids carry an -en suffix).
+      const fixToc = () => {
+        const en = document.documentElement.dataset.lang === 'en';
+        for (const a of document.querySelectorAll('.toc a')) {
+          const id = (a.getAttribute('href') || '').replace(/-en$/, '');
+          a.setAttribute('href', en ? id + '-en' : id);
+        }
+      };
+      fixToc();
+      for (const b of document.querySelectorAll('.lang button')) b.addEventListener('click', fixToc);
+    </script>
+  </body>
+</html>

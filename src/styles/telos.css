@@ -1,0 +1,84 @@
+/* Shared styles for the telotia.com pages (body.telos): tokens from the Telotia design system v2,
+   fonts, the header and the footer. Every rule is scoped under .telos because the dev build of
+   index.astro imports the homepage without rendering it. Font families get their own names so
+   they never collide with the dev site's fonts. */
+@font-face { font-family: "Telotia Inter"; src: url(/fonts/Inter-cv11.ttf) format("truetype"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Telotia Outfit"; src: url(/fonts/Outfit.ttf) format("truetype"); font-weight: 100 900; font-display: swap; }
+
+body.telos {
+  --bg: #F8FAF9;
+  --subtle: #F1F5F4;
+  --surface: #FFFFFF;
+  --border: #DEE6E4;
+  --border-strong: #7A8784;
+  --text: #282D32;
+  --text2: #617075;
+  --teal: #00545A;
+  --margin: max(20px, calc((100vw - 1200px) / 2));
+  --measure: 680px;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --display: "Telotia Outfit", "Helvetica Neue", Arial, sans-serif;
+  --sans: "Telotia Inter", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 16px/26px var(--sans);
+  font-feature-settings: "cv11" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.telos *, .telos *::before, .telos *::after { box-sizing: border-box; }
+.telos a { color: var(--teal); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.telos :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+.telos .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* One language at a time; French by default. */
+html[data-lang="fr"] .telos [data-only="en"],
+html[data-lang="en"] .telos [data-only="fr"] { display: none !important; }
+
+.telos .skip {
+  position: absolute; left: 12px; top: -64px; z-index: 30;
+  background: var(--text); color: #FFFFFF; text-decoration: none;
+  padding: 8px 14px; border-radius: 8px; font: 500 14px/20px var(--sans);
+}
+.telos .skip:focus { top: 12px; }
+
+/* Header: wordmark, status, language switch, one action. */
+.telos .bar {
+  position: fixed; inset: 0 0 auto 0; z-index: 10; height: 96px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--margin); background: var(--bg);
+}
+.telos .brand { display: block; width: 140px; }
+.telos .brand svg { display: block; width: 100%; height: auto; }
+.telos .nav { display: flex; align-items: center; gap: 32px; font: 500 14px/20px var(--sans); }
+.telos .status { color: var(--text2); font-weight: 400; }
+.telos .lang { display: flex; gap: 6px; color: var(--text2); }
+.telos .lang button {
+  font: inherit; color: var(--text2); background: none; border: 0; padding: 4px 2px; cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+.telos .lang button[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--text); }
+.telos .btn {
+  display: inline-block; background: var(--text); color: #FFFFFF; text-decoration: none;
+  border-radius: 8px; padding: 8px 16px; transition: background 150ms var(--ease);
+}
+.telos .btn:hover { background: #3A4148; }
+
+/* Footer. */
+.telos .site-foot {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px;
+  padding: 40px var(--margin) 48px; border-top: 1px solid var(--border);
+  font: 400 14px/20px var(--sans); color: var(--text2);
+}
+.telos .site-foot a { color: var(--text2); }
+.telos .site-foot .spacer { flex: 1; }
+
+@media (max-width: 767px) {
+  .telos .bar { height: 72px; }
+  .telos .brand { width: 120px; }
+  .telos .nav { gap: 16px; }
+}
+@media (max-width: 639px) {
+  .telos .status { display: none; }
+}
