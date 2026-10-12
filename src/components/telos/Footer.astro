@@ -1,0 +1,14 @@
+---
+// The telotia.com footer.
+interface Props {
+  current?: 'privacy';
+}
+const { current } = Astro.props;
+---
+
+<footer class="site-foot">
+  <span>© 2026 Telotia · Montréal</span>
+  <span class="spacer"></span>
+  <a href="mailto:hello@telotia.com">hello@telotia.com</a>
+  <a href="/confidentialite" aria-current={current === 'privacy' ? 'page' : undefined}><span data-only="fr" lang="fr">Confidentialité</span><span data-only="en" lang="en">Privacy</span></a>
+</footer>

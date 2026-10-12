@@ -5,22 +5,14 @@
 // no JavaScript get the static version.
 // Behaviour lives in src/scripts/telos/. Styles are global but scoped under body.telos, because the
 // dev build of index.astro imports this component without rendering it.
+import '../styles/telos.css';
+import Header from './telos/Header.astro';
+import Footer from './telos/Footer.astro';
 ---
 
 <a class="skip" href="#contact"><span data-only="fr" lang="fr">Passer l’animation</span><span data-only="en" lang="en">Skip the animation</span></a>
 
-<header class="bar">
-  <a class="brand" href="/" data-wordmark aria-label="Telotia"></a>
-  <nav class="nav">
-    <span class="status"><span data-only="fr" lang="fr">Lancement à venir</span><span data-only="en" lang="en">Launching soon</span></span>
-    <div class="lang" role="group" aria-label="Langue · Language">
-      <button type="button" data-set="fr" aria-pressed="true">FR</button>
-      <span aria-hidden="true">·</span>
-      <button type="button" data-set="en" aria-pressed="false">EN</button>
-    </div>
-    <a class="btn" href="mailto:hello@telotia.com"><span data-only="fr" lang="fr">Nous joindre</span><span data-only="en" lang="en">Contact</span></a>
-  </nav>
-</header>
+<Header />
 
 <main>
   <!-- The scroll story (motion allowed). Drawn on one canvas; the words are real text. -->
@@ -80,74 +72,10 @@
   </section>
 </main>
 
-<footer class="site-foot">
-  <span>© 2026 Telotia · Montréal</span>
-  <span class="spacer"></span>
-  <a href="mailto:hello@telotia.com">hello@telotia.com</a>
-</footer>
+<Footer />
 
 <style is:global>
-  /* Tokens from the Telotia design system v2. Font families get their own names so they never
-     collide with the dev site's fonts. */
-  @font-face { font-family: "Telotia Inter"; src: url(/fonts/Inter-cv11.ttf) format("truetype"); font-weight: 100 900; font-display: swap; }
-  @font-face { font-family: "Telotia Outfit"; src: url(/fonts/Outfit.ttf) format("truetype"); font-weight: 100 900; font-display: swap; }
-
-  body.telos {
-    --bg: #F8FAF9;
-    --border: #DEE6E4;
-    --text: #282D32;
-    --text2: #617075;
-    --teal: #00545A;
-    --margin: max(20px, calc((100vw - 1200px) / 2));
-    --ease: cubic-bezier(0.4, 0, 0.2, 1);
-    --display: "Telotia Outfit", "Helvetica Neue", Arial, sans-serif;
-    --sans: "Telotia Inter", "Helvetica Neue", Arial, sans-serif;
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 400 16px/26px var(--sans);
-    font-feature-settings: "cv11" 1;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-  .telos *, .telos *::before, .telos *::after { box-sizing: border-box; }
-  .telos a { color: var(--teal); text-underline-offset: 3px; text-decoration-thickness: 1px; }
-  .telos :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
   html.lenis, html.lenis body.telos { height: auto; }              /* the one Lenis rule this page needs */
-  .telos .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
-  /* One language at a time; French by default. */
-  html[data-lang="fr"] .telos [data-only="en"],
-  html[data-lang="en"] .telos [data-only="fr"] { display: none !important; }
-
-  .telos .skip {
-    position: absolute; left: 12px; top: -64px; z-index: 30;
-    background: var(--text); color: #FFFFFF; text-decoration: none;
-    padding: 8px 14px; border-radius: 8px; font: 500 14px/20px var(--sans);
-  }
-  .telos .skip:focus { top: 12px; }
-
-  /* Header: wordmark, status, language switch, one action. */
-  .telos .bar {
-    position: fixed; inset: 0 0 auto 0; z-index: 10; height: 96px;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 var(--margin); background: var(--bg);
-  }
-  .telos .brand { display: block; width: 140px; }
-  .telos .brand svg { display: block; width: 100%; height: auto; }
-  .telos .nav { display: flex; align-items: center; gap: 32px; font: 500 14px/20px var(--sans); }
-  .telos .status { color: var(--text2); font-weight: 400; }
-  .telos .lang { display: flex; gap: 6px; color: var(--text2); }
-  .telos .lang button {
-    font: inherit; color: var(--text2); background: none; border: 0; padding: 4px 2px; cursor: pointer;
-    border-bottom: 1px solid transparent;
-  }
-  .telos .lang button[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--text); }
-  .telos .btn {
-    display: inline-block; background: var(--text); color: #FFFFFF; text-decoration: none;
-    border-radius: 8px; padding: 8px 16px; transition: background 150ms var(--ease);
-  }
-  .telos .btn:hover { background: #3A4148; }
 
   /* The scroll story: a 1440 x 810 design frame, scaled to fit and pinned while it plays. */
   .telos .story { display: none; position: relative; }
@@ -196,23 +124,9 @@
   }
   .telos .soon .mail:hover { color: var(--teal); }
 
-  .telos .site-foot {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px;
-    padding: 40px var(--margin) 48px; border-top: 1px solid var(--border);
-    font: 400 14px/20px var(--sans); color: var(--text2);
-  }
-  .telos .site-foot a { color: var(--text2); }
-  .telos .site-foot .spacer { flex: 1; }
-
   @media (max-width: 767px) {
-    .telos .bar { height: 72px; }
-    .telos .brand { width: 120px; }
-    .telos .nav { gap: 16px; }
     .telos .static { padding-top: 136px; }
     .telos .soon { padding: 96px var(--margin) 104px; scroll-margin-top: 72px; }
-  }
-  @media (max-width: 639px) {
-    .telos .status { display: none; }
   }
 </style>
 
