@@ -36,7 +36,10 @@ const designHtml = bodyMatch ? bodyMatch[1] : '';
               var forced = new URLSearchParams(location.search).get('lang');
               if (forced === 'en' || forced === 'fr') lang = forced;
               if (lang === 'en') { root.dataset.lang = 'en'; root.lang = 'en-CA'; }
-              if (matchMedia('(min-width: 760px) and (prefers-reduced-motion: no-preference)').matches) root.classList.add('story-on');
+              if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+                root.classList.add('story-on');
+                if (matchMedia('(max-width: 759px)').matches) root.classList.add('story-tall');
+              }
             })();
           </script>
         </Fragment>

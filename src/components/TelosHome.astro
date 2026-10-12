@@ -1,6 +1,8 @@
 ---
 // The telotia.com homepage (production): a scroll story that runs from a first link to a whole
 // system and ends on Telotia, then "coming soon" and how to reach us. French by default, EN switch.
+// The story has a wide layout and a tall one for phones (html.story-tall); reduced motion and
+// no JavaScript get the static version.
 // Behaviour lives in src/scripts/telos/. Styles are global but scoped under body.telos, because the
 // dev build of index.astro imports this component without rendering it.
 ---
@@ -21,7 +23,7 @@
 </header>
 
 <main>
-  <!-- The scroll story (wide screens, motion allowed). Drawn on one canvas; the words are real text. -->
+  <!-- The scroll story (motion allowed). Drawn on one canvas; the words are real text. -->
   <section class="story" id="story" aria-hidden="true">
     <div class="viewport" id="story-viewport">
       <div class="frame" id="story-frame">
@@ -57,7 +59,7 @@
     </div>
   </section>
 
-  <!-- The static version: small screens, reduced motion, and no JavaScript. -->
+  <!-- The static version: reduced motion and no JavaScript. -->
   <section class="static">
     <ol class="static-lines">
       <li><span data-only="fr" lang="fr">Ici, le travail déborde.</span><span data-only="en" lang="en">Here, work piles up.</span></li>
@@ -150,7 +152,7 @@
   /* The scroll story: a 1440 x 810 design frame, scaled to fit and pinned while it plays. */
   .telos .story { display: none; position: relative; }
   html.story-on .telos .story { display: block; }
-  .telos .viewport { position: relative; height: 100vh; overflow: hidden; }
+  .telos .viewport { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
   .telos .frame { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; transform-origin: 0 0; opacity: 0; }
   .telos .frame canvas { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; }
   .telos .scene { position: absolute; }
@@ -162,6 +164,15 @@
   .telos .s5 { left: 220px; top: 514px; width: 1000px; text-align: center; }
   .telos .s5 p { margin: 0; font: 400 30px/40px var(--display); letter-spacing: -0.01em; color: var(--text2); }
   html:not(.story-on) .telos .story-text { display: none; }
+
+  /* The tall layout for phones: a 390 x 720 frame, the words above or below the picture. */
+  html.story-tall .telos .frame, html.story-tall .telos .frame canvas { width: 390px; height: 720px; }
+  html.story-tall .telos .scene h2 { font-size: 30px; line-height: 36px; letter-spacing: -0.02em; }
+  html.story-tall .telos .s1 { left: 24px; top: 150px; width: 342px; }
+  html.story-tall .telos .s2 { left: 24px; top: 588px; width: 342px; }
+  html.story-tall .telos .s3 { left: 24px; top: 100px; width: 342px; }
+  html.story-tall .telos .s5 { left: 20px; top: 404px; width: 350px; }
+  html.story-tall .telos .s5 p { font-size: 20px; line-height: 27px; }
 
   /* The static version. */
   .telos .static { padding: 168px var(--margin) 112px; }
