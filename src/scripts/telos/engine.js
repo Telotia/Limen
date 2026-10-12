@@ -3,11 +3,13 @@
 //   the camera pulls back: that world is one unit among many, all unconnected     -> the system as it is
 //   Telotia's point runs on and threads one line through every unit; each settles -> handshake, standard, optimisation
 //   everything gathers into the line, the line into the point, the point into the 'i' of Telotia
-// Deterministic: draw(ctx, t) depends only on t. Design frame 1440 x 810. Browser only (Path2D).
+// Deterministic: draw(ctx, t) depends only on t. Browser only (Path2D).
+// Two layouts share one world: wide (a 1440 x 810 frame) and tall (390 x 720, for phones), where the
+// world turns a quarter so Telotia's line runs down the screen and the camera follows the story.
 import { WORDMARK } from './wordmark.js';
 
-export function createEngine() {
-  const W = 1440, H = 810;
+export function createEngine({ tall = false } = {}) {
+  const W = tall ? 390 : 1440, H = tall ? 720 : 810;
   const LINE_Y = 640, RAIL = LINE_Y - 7, S = 16, TILE = 10, SPEED = 520;
   const LX = 120, LTOP = 150, LR = 32;                         // Telotia's line: a drop at x 120, one turn, then the run
   const L_DROP = LINE_Y - LR - LTOP, L_ARC = Math.PI * LR / 2;
@@ -64,12 +66,15 @@ export function createEngine() {
   };
   const TT = 33;
 
-  // The system: six units in two rows; the second row is mirrored so the line can come back through it.
+  // The system: units in two rows (three per row wide, two on phones); the second row is mirrored
+  // so the line can come back through it.
   const UNIT = 1300, ROW = 700, RU = 120;                       // unit pitch, row pitch, radius of the turns
-  const XR = 1310 + 2 * UNIT;                                   // where the first row's run ends
-  const LAYOUT = [{ ci: 0, row: 0 }, { ci: 1, row: 0 }, { ci: 2, row: 0 }, { ci: 2, row: 1 }, { ci: 1, row: 1 }, { ci: 0, row: 1 }];
+  const PER_ROW = tall ? 2 : 3;
+  const XR = 1310 + (PER_ROW - 1) * UNIT;                       // where the first row's run ends
+  const LAYOUT = [];
+  for (let ci = 0; ci < PER_ROW; ci++) LAYOUT.push({ ci, row: 0 });
+  for (let ci = PER_ROW - 1; ci >= 0; ci--) LAYOUT.push({ ci, row: 1 });
   const UNITS = LAYOUT.length;
-  const S_FIN = 0.305, Y0_FIN = 332;
 
   // Telotia's line as one path: drop, turn, first run, down and back, second run.
   const SEG = (() => {
@@ -331,14 +336,47 @@ export function createEngine() {
   });
   const unitClock = (u, t) => (t < tc[u] ? 3.6 - 0.25 * (tc[u] - t) : 3.6 + 4 * (t - tc[u]));
 
-  // ---------- camera and line
-  function camera(t) {
+  // ---------- camera: an affine map [a, b, c, d, e, f] from world units to the design frame
+  const mul = (M, N) => [
+    M[0] * N[0] + M[2] * N[1], M[1] * N[0] + M[3] * N[1],
+    M[0] * N[2] + M[2] * N[3], M[1] * N[2] + M[3] * N[3],
+    M[0] * N[4] + M[2] * N[5] + M[4], M[1] * N[4] + M[3] * N[5] + M[5],
+  ];
+  const apply = (M, x, y) => [M[0] * x + M[2] * y + M[4], M[1] * x + M[3] * y + M[5]];
+  const MIRROR = [-1, 0, 0, 1, 1430, 0];                       // a unit mirrored about its own centre
+
+  // Wide: the frame pulls back from the first world, anchored on the line's start.
+  const S_FIN = 0.305, Y0_FIN = 332;
+  function wideCamera(t) {
     const u = ease(span(t, ...T.zoom));
     const s = Math.exp(Math.log(S_FIN) * u);
     const Y0 = LTOP + (Y0_FIN - LTOP) * (1 - s) / (1 - S_FIN);
-    return { s, Y0 };
+    return [s, 0, 0, s, LX - LX * s, Y0 - LTOP * s];
   }
-  const toScreen = (c, x, y) => [LX + (x - LX) * c.s, c.Y0 + (y - LTOP) * c.s];
+  // Tall: a quarter turn (world x runs down the screen, world "up" points right) and a camera that
+  // follows the story. From each key's time, the world point (x, y) sits at frame point (X, Y) at scale s.
+  const TALL_KEYS = [
+    { t: 2.6, s: 0.66, x: 265, y: 400, X: 195, Y: 360 },     // the places, under the first words
+    { t: 4.6, s: 0.56, x: 500, y: 420, X: 195, Y: 360 },     // work leaving for the pool
+    { t: 6.8, s: 0.5, x: 955, y: 420, X: 195, Y: 330 },      // the pool and the people, words below
+    { t: 11.0, s: 0.5, x: 955, y: 420, X: 195, Y: 330 },     // held until those words have gone
+    { t: 13.4, s: 0.38, x: 715, y: 405, X: 195, Y: 430 },    // the whole first link
+    { t: 14.6, s: 0.38, x: 715, y: 405, X: 195, Y: 430 },
+    { t: 17.0, s: 0.193, x: 1425, y: 757, X: 195, Y: 448 },  // the whole system
+  ];
+  function tallCamera(t) {
+    const K = TALL_KEYS;
+    let k = K[0];
+    if (t >= K[K.length - 1].t) k = K[K.length - 1];
+    else if (t > K[0].t) {
+      let i = 0;
+      while (t > K[i + 1].t) i++;
+      const A = K[i], B = K[i + 1], u = ease(span(t, A.t, B.t));
+      k = { s: Math.exp(lerp(Math.log(A.s), Math.log(B.s), u)), x: lerp(A.x, B.x, u), y: lerp(A.y, B.y, u), X: lerp(A.X, B.X, u), Y: lerp(A.Y, B.Y, u) };
+    }
+    return [0, k.s, -k.s, 0, k.X + k.s * k.y, k.Y - k.s * k.x];
+  }
+  const camera = tall ? tallCamera : wideCamera;
   function lineB(t) {                                               // drawn length of the line from its start
     let b = 0, prev = 0;
     for (const [a0, a1, x] of T.reach) {
@@ -371,18 +409,21 @@ export function createEngine() {
 
   // ---------- Telotia
   const WMK = WORDMARK, WM_PATH = new Path2D(WMK.d);
-  const WMS = 0.86, WML = 720 - WMK.w * WMS / 2, WMT = 262;
+  const WMS = tall ? 0.326 : 0.86, WML = W / 2 - WMK.w * WMS / 2, WMT = tall ? 300 : 262;
   const DOT = [WML + WMK.dot[0] * WMS, WMT + WMK.dot[1] * WMS, WMK.dot[2] * WMS];
 
   // ---------- one moment
   function draw(ctx, t) {
-    const cam = camera(t);
+    const M = camera(t), sc = Math.hypot(M[0], M[1]);
 
     // Worlds: the first one at its own pace, the others on their own clocks once the line has reached them.
     for (let u = 0; u < UNITS; u++) {
-      const { ci, row } = LAYOUT[u], ox = UNIT * ci, oy = ROW * row, mirror = row === 1;
-      const sx = LX + (ox - LX) * cam.s, sy = cam.Y0 + (oy - LTOP) * cam.s;
-      if (sx > W + 10 || sy + LTOP * cam.s > H + 10) continue;
+      const { ci, row } = LAYOUT[u];
+      let Mu = mul(M, [1, 0, 0, 1, UNIT * ci, ROW * row]);
+      if (row === 1) Mu = mul(Mu, MIRROR);
+      const box = [[LX, LTOP], [1310, LTOP], [LX, 680], [1310, 680]].map(([x, y]) => apply(Mu, x, y));
+      const bx = box.map(q => q[0]), by = box.map(q => q[1]);
+      if (Math.min(...bx) > W + 10 || Math.max(...bx) < -10 || Math.min(...by) > H + 10 || Math.max(...by) < -10) continue;
       let a = 1 - sm(span(t, T.recede + 0.18 * u, T.recede + 0.18 * u + 0.7));
       let quiet = 1, wt = t;
       if (u === 0) {
@@ -395,9 +436,8 @@ export function createEngine() {
       }
       if (a <= 0.004) continue;
       ctx.save();
-      if (mirror) ctx.transform(-cam.s, 0, 0, cam.s, LX + (ox + 1430 - LX) * cam.s, sy);
-      else ctx.transform(cam.s, 0, 0, cam.s, sx, sy);
-      drawWorld(ctx, worlds[u], wt, { s: cam.s, a, quiet });
+      ctx.transform(...Mu);
+      drawWorld(ctx, worlds[u], wt, { s: sc, a, quiet });
       ctx.restore();
     }
 
@@ -406,8 +446,8 @@ export function createEngine() {
     const a0 = lerp(0, L_TOTAL, quad(span(t, ...T.gather)));
     if (b - a0 > 0.5) {
       ctx.save();
-      ctx.transform(cam.s, 0, 0, cam.s, LX - LX * cam.s, cam.Y0 - LTOP * cam.s);
-      ctx.globalAlpha = 1; ctx.strokeStyle = INK; ctx.lineWidth = 1.5 / cam.s; ctx.lineCap = 'round';
+      ctx.transform(...M);
+      ctx.globalAlpha = 1; ctx.strokeStyle = INK; ctx.lineWidth = 1.5 / sc; ctx.lineCap = 'round';
       ctx.setLineDash([b - a0, 1e7]); ctx.lineDashOffset = -a0;
       tracePath(ctx); ctx.stroke();
       ctx.setLineDash([]);
@@ -415,7 +455,7 @@ export function createEngine() {
     }
 
     // The point: it leads the line, then becomes the dot of Telotia's i.
-    let [px, py] = toScreen(cam, ...pointAt(b)), r = 5;
+    let [px, py] = apply(M, ...pointAt(b)), r = 5;
     const fu = span(t, ...T.fly);
     if (fu > 0) {
       const e = ease(fu), c = [px, DOT[1]];

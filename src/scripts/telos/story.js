@@ -1,7 +1,7 @@
 // Scroll orchestration for the homepage story.
 // ScrollTrigger pins the stage and scrubs one timeline; the timeline drives story time for the
 // canvas (which draws everything, Telotia's line and point included) and swaps the words.
-// Wide screens with motion allowed get the story; small screens and reduced motion get the static version.
+// Wide screens get the wide layout, phones the tall one; reduced motion gets the static version.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
@@ -12,13 +12,22 @@ export function initStory() {
   const cv = document.getElementById('story-canvas');
   if (!cv) return;
   gsap.registerPlugin(ScrollTrigger, SplitText);
+  ScrollTrigger.config({ ignoreMobileResize: true });       // the address bar coming and going is not a resize
   const capture = new URLSearchParams(location.search).has('capture');
-  let engine = null;
+  const engines = {};
 
-  gsap.matchMedia().add('(min-width: 760px) and (prefers-reduced-motion: no-preference)', context => {
-    engine = engine || createEngine();
-    document.documentElement.classList.add('story-on');   // shows the story, hides the static version
-    const E = engine, ctx = cv.getContext('2d');
+  gsap.matchMedia().add({
+    wide: '(min-width: 760px) and (prefers-reduced-motion: no-preference)',
+    tall: '(max-width: 759px) and (prefers-reduced-motion: no-preference)',
+  }, context => {
+    const { wide, tall } = context.conditions;
+    if (!wide && !tall) return;
+    const kind = tall ? 'tall' : 'wide';
+    const E = engines[kind] = engines[kind] || createEngine({ tall });
+    const root = document.documentElement;
+    root.classList.add('story-on');                            // shows the story, hides the static version
+    root.classList.toggle('story-tall', tall);
+    const ctx = cv.getContext('2d');
     const frame = document.getElementById('story-frame');
     const viewport = document.getElementById('story-viewport');
     const story = { t: 0 };
@@ -44,7 +53,7 @@ export function initStory() {
     const onResize = () => { layout(); ScrollTrigger.refresh(); };
 
     // Built once fonts are ready; context.add keeps these animations in the media query's context,
-    // so they are reverted cleanly if the screen narrows or reduced motion is switched on.
+    // so they are reverted cleanly when the layout changes or reduced motion is switched on.
     document.fonts.ready.then(() => context.add(() => {
       if (!alive) return;
       layout();
@@ -66,7 +75,7 @@ export function initStory() {
         pin: '#story-viewport', scrub: true, animation: tl, invalidateOnRefresh: true,
       });
       ScrollTrigger.refresh();                   // fonts can resolve after the load event, which skips the automatic refresh
-      if (!capture) {
+      if (!capture && wide) {                    // smooth wheel scrolling on desktop; phones keep native touch scrolling
         lenis = new Lenis({ lerp: 0.085, anchors: true });
         lenis.on('scroll', ScrollTrigger.update);
         raf = time => lenis.raf(time * 1000);
@@ -88,7 +97,7 @@ export function initStory() {
       if (lenis) lenis.destroy();
       frame.style.transform = '';
       frame.style.opacity = '';
-      document.documentElement.classList.remove('story-on');
+      root.classList.remove('story-on', 'story-tall');
     };
   });
 }
