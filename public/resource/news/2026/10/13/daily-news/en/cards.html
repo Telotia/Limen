@@ -1,0 +1,70 @@
+<!doctype html><!-- style_ref: U41 --><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily Finance | Briefing cards</title><style>
+  :root{
+    --bg0:#05060f; --bg1:#0a0f24; --panel:rgba(20,28,58,.55);
+    --line:rgba(120,150,255,.18); --line2:rgba(150,180,255,.32);
+    --ink:#eaf0ff; --soft:#aab6e0; --muted:#6c789f;
+    --up:#34e1a8; --down:#ff5d7e; --gold:#f0b94c; --cyan:#5ad1ff; --vio:#a98bff;
+    --grad:linear-gradient(120deg,#5ad1ff 0%,#7c8bff 45%,#c08bff 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Inter","Noto Serif SC",system-ui,sans-serif;
+    color:var(--ink); line-height:1.78; min-height:100vh;
+    background:
+      radial-gradient(48% 38% at 8% 4%, rgba(90,120,255,.30) 0%, transparent 62%),
+      radial-gradient(42% 36% at 95% 8%, rgba(170,110,255,.26) 0%, transparent 60%),
+      radial-gradient(50% 46% at 88% 96%, rgba(60,180,255,.18) 0%, transparent 62%),
+      radial-gradient(60% 50% at 6% 92%, rgba(120,90,255,.16) 0%, transparent 64%),
+      linear-gradient(165deg,var(--bg1) 0%,var(--bg0) 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:50px 22px 100px}
+  .kicker{font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:800;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px}
+  h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(31px,6vw,48px);line-height:1.18;letter-spacing:-.01em;margin-bottom:18px}
+  h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dek{font-size:18px;color:var(--soft);max-width:64ch;margin-bottom:24px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);margin-bottom:34px}
+  .meta span{background:rgba(30,40,80,.5);border:1px solid var(--line);padding:5px 13px;border-radius:999px;backdrop-filter:blur(8px)}
+  .card{
+    background:var(--panel);
+    backdrop-filter:blur(20px) saturate(1.25);-webkit-backdrop-filter:blur(20px) saturate(1.25);
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:0 18px 50px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(150,180,255,.12);
+    padding:26px 28px;margin:18px 0;position:relative;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1px;
+    background:linear-gradient(140deg,rgba(120,160,255,.4),transparent 40%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  h2{font-family:"Noto Serif SC",serif;font-size:23px;font-weight:700;margin:8px 0 14px;display:flex;align-items:center;gap:12px}
+  h2 .n{font-family:"Inter";font-size:14px;font-weight:800;color:#fff;background:var(--grad);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;box-shadow:0 6px 18px -4px rgba(110,130,255,.6)}
+  p{margin:10px 0}
+  .lead{font-size:17px;color:#dde5ff}
+  strong{font-weight:700;color:#fff}
+  .num-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:18px 0}
+  .stat{background:rgba(12,18,42,.6);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .stat .v{font-size:27px;font-weight:800;font-family:"Inter";letter-spacing:-.02em}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+  .up{color:var(--up)} .down{color:var(--down)} .cy{color:var(--cyan)} .vi{color:var(--vio)} .gd{color:var(--gold)}
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0}
+  @media(max-width:560px){.bb{grid-template-columns:1fr}}
+  .bull,.bear{border-radius:16px;padding:18px 20px;border:1px solid var(--line)}
+  .bull{background:linear-gradient(160deg,rgba(52,225,168,.14),rgba(20,28,58,.3))}
+  .bear{background:linear-gradient(160deg,rgba(255,93,126,.14),rgba(20,28,58,.3))}
+  .bull h3,.bear h3{font-size:15px;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+  .bull h3{color:var(--up)} .bear h3{color:var(--down)}
+  ul{margin:8px 0 4px;padding-left:20px} li{margin:7px 0;color:#cdd6f5}
+  .bar{height:12px;border-radius:999px;background:rgba(12,18,42,.8);overflow:hidden;margin:8px 0 4px;border:1px solid var(--line)}
+  .bar > i{display:block;height:100%;border-radius:999px;background:var(--grad)}
+  .barlbl{display:flex;justify-content:space-between;font-size:13px;color:var(--soft);margin-top:6px}
+  .src{font-size:14px} .src a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(90,209,255,.3)}
+  .src a:hover{border-bottom-color:var(--cyan)}
+  .disc{font-size:12.5px;color:var(--muted);border-top:1px dashed rgba(120,140,200,.35);padding-top:14px;margin-top:8px;line-height:1.6}
+  .takeaway{background:linear-gradient(150deg,rgba(124,139,255,.2),rgba(192,139,255,.12));font-size:17px}
+main.reader{max-width:920px;margin:auto;padding:48px 24px 80px}nav{display:flex;gap:24px;flex-wrap:wrap}a{color:var(--cyan)}.hero{padding:24px 0 32px}.story,.notes{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:28px;margin:22px 0;box-shadow:0 16px 40px #0005;backdrop-filter:blur(20px)}.story h2{display:block}.risk{border-left:4px solid var(--down);padding-left:16px}.meta{display:block;color:var(--soft)}.sources{font-size:14px;line-height:1.9;padding-left:20px}footer{color:var(--soft);font-size:14px}.sources li{overflow-wrap:anywhere}@media(max-width:600px){main.reader{padding:24px 16px}.story,.notes{padding:20px}}.deck{display:grid;justify-content:center;gap:48px;padding:48px}.card{width:1080px;height:1350px;position:relative;padding:72px;margin:0;border-radius:0;background:radial-gradient(65% 48% at 8% 4%,rgba(90,120,255,.3),transparent 64%),radial-gradient(55% 42% at 96% 9%,rgba(170,110,255,.26),transparent 62%),radial-gradient(58% 48% at 88% 96%,rgba(60,180,255,.18),transparent 64%),linear-gradient(165deg,var(--bg1),var(--bg0));overflow:hidden}.top{display:flex;justify-content:space-between;color:var(--soft);font-size:22px;letter-spacing:.08em;margin-bottom:48px}.badge{background:var(--grad);color:var(--bg0);padding:4px 14px;border-radius:10px;font-weight:900}.eyebrow{color:var(--cyan);font-size:24px;margin-bottom:20px}.card h1{font-size:66px;line-height:1.16;white-space:pre-line;margin:0 0 28px}.dek{font-size:25px;color:var(--soft);line-height:1.5;margin-bottom:34px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px 30px;margin:18px 0;box-shadow:0 16px 40px #0005,inset 0 1px 0 #aab6e020}.row{display:grid;grid-template-columns:220px 1fr;gap:24px;font-size:27px;line-height:1.5}.row strong{color:var(--cyan);font-size:25px}.card .risk{font-size:25px;line-height:1.5;border-left:6px solid var(--down);background:linear-gradient(160deg,rgba(255,93,126,.12),var(--panel))}.card footer{position:absolute;bottom:58px;left:72px;right:72px;font-size:18px;display:flex;justify-content:space-between;gap:24px;border-top:1px solid var(--line);padding-top:16px}.single .deck{padding:0;display:block}.single .card{margin:0}</style></head><body><main class="deck"><article class="card" data-card="1"><div class="top"><span>Daily Finance · 2026.10.13</span><span class="badge">01</span></div><div class="eyebrow">Today’s main thread</div><h1>Growth holds up.
+Risk concentrates.</h1><p class="dek">Oct 13, 2026 | Before the U.S. cash open</p><div class="panel row"><strong>Global outlook</strong><span>2026 growth forecast: 3.1%, not realized GDP.</span></div><div class="panel row"><strong>Market test</strong><span>Asian chips fall; government bonds attract demand.</span></div><div class="panel row"><strong>Key question</strong><span>Can technology spending deliver lasting cash returns?</span></div><div class="panel risk">Inference | A small upgrade leaves funding and concentration risks.</div><footer><span>Sources and cutoff in full brief</span><span>Not investment advice</span></footer></article><article class="card" data-card="2"><div class="top"><span>Daily Finance · 2026.10.13</span><span class="badge">02</span></div><div class="eyebrow">Macro and central banks</div><h1>Bonds recover.
+Inflation tests next.</h1><p class="dek">Early trading snapshot | Not a policy pivot</p><div class="panel row"><strong>OCT 14 · 08:30</strong><span>September U.S. CPI: watch core prices.</span></div><div class="panel row"><strong>OCT 15 · 08:30</strong><span>September U.S. PPI: watch cost pass-through.</span></div><div class="panel row"><strong>Dollar / rates</strong><span>Dollar still elevated; bond demand lowers yields.</span></div><div class="panel risk">Counter-risk | Cooler core prices help bonds; dearer energy may reverse gains. Times are EDT.</div><footer><span>Sources and cutoff in full brief</span><span>Not investment advice</span></footer></article><article class="card" data-card="3"><div class="top"><span>Daily Finance · 2026.10.13</span><span class="badge">03</span></div><div class="eyebrow">Markets / industry</div><h1>Chips retreat.
+Energy stays costly.</h1><p class="dek">Intraday observations | Profit forecasts remain untested</p><div class="panel row"><strong>Asian shares</strong><span>Korea leads losses; intraday declines are not closes.</span></div><div class="panel row"><strong>Energy</strong><span>Brent eases early, still above USD 100 a barrel.</span></div><div class="panel row"><strong>Company</strong><span>TSM call Oct 15: margins, spending and guidance.</span></div><div class="panel risk">Risk | Falling prices do not prove demand collapse; forecasts are not results.</div><footer><span>Sources and cutoff in full brief</span><span>Not investment advice</span></footer></article><article class="card" data-card="4"><div class="top"><span>Daily Finance · 2026.10.13</span><span class="badge">04</span></div><div class="eyebrow">Next week and risks</div><h1>Data this week.
+Delivery next.</h1><p class="dek">Current week: Oct 12–18 | Next: Oct 19–25</p><div class="panel row"><strong>Policy response</strong><span>Watch central-bank comments and funding costs.</span></div><div class="panel row"><strong>Breadth</strong><span>Track guidance, credit costs and energy deliveries.</span></div><div class="panel row"><strong>Alternative</strong><span>Better supply, cooler core prices and cash returns.</span></div><div class="panel risk">Risk | Spreading costs, weak technology returns or credit deterioration.</div><footer><span>Sources and cutoff in full brief</span><span>Not investment advice</span></footer></article></main><script>const n=new URLSearchParams(location.search).get('card');if(/^[1-4]$/.test(n)){document.body.classList.add('single');document.querySelectorAll('[data-card]').forEach(e=>{e.style.display=e.dataset.card===n?'block':'none'});}</script></body></html>

@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "Resilient growth meets a chip and energy risk test",
+    "date": "2026-10-13",
+    "dateLabel": "Oct 13, 2026",
+    "folderLabel": "2026/10/13/daily-news",
+    "href": "/resource/news/2026/10/13/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/10/13/daily-news/zh/index.html",
+    "image": "/resource/news/2026/10/13/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/10/13/daily-news/en/card-1.png",
+      "/resource/news/2026/10/13/daily-news/en/card-2.png",
+      "/resource/news/2026/10/13/daily-news/en/card-3.png",
+      "/resource/news/2026/10/13/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "The pressure of empty space",
+    "date": "2026-10-13",
+    "dateLabel": "Oct 13, 2026",
+    "folderLabel": "2026/10/13/the-demonstration",
+    "href": "/resource/art/2026/10/13/the-demonstration/en/index.html",
+    "zhHref": "/resource/art/2026/10/13/the-demonstration/zh/index.html",
+    "image": "/resource/art/2026/10/13/the-demonstration/cover.jpg",
+    "cards": [
+      "/resource/art/2026/10/13/the-demonstration/en/card-1.png",
+      "/resource/art/2026/10/13/the-demonstration/en/card-2.png",
+      "/resource/art/2026/10/13/the-demonstration/en/card-3.png",
+      "/resource/art/2026/10/13/the-demonstration/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Supply promises meet an inflation and earnings test",
     "date": "2026-10-12",
     "dateLabel": "Oct 12, 2026",
