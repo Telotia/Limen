@@ -1,0 +1,66 @@
+<!doctype html><!-- style_ref: U41 --><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>通胀待验，柴油与芯片交付成为焦点</title><style>
+  :root{
+    --bg0:#05060f; --bg1:#0a0f24; --panel:rgba(20,28,58,.55);
+    --line:rgba(120,150,255,.18); --line2:rgba(150,180,255,.32);
+    --ink:#eaf0ff; --soft:#aab6e0; --muted:#6c789f;
+    --up:#34e1a8; --down:#ff5d7e; --gold:#f0b94c; --cyan:#5ad1ff; --vio:#a98bff;
+    --grad:linear-gradient(120deg,#5ad1ff 0%,#7c8bff 45%,#c08bff 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Inter","Noto Serif SC",system-ui,sans-serif;
+    color:var(--ink); line-height:1.78; min-height:100vh;
+    background:
+      radial-gradient(48% 38% at 8% 4%, rgba(90,120,255,.30) 0%, transparent 62%),
+      radial-gradient(42% 36% at 95% 8%, rgba(170,110,255,.26) 0%, transparent 60%),
+      radial-gradient(50% 46% at 88% 96%, rgba(60,180,255,.18) 0%, transparent 62%),
+      radial-gradient(60% 50% at 6% 92%, rgba(120,90,255,.16) 0%, transparent 64%),
+      linear-gradient(165deg,var(--bg1) 0%,var(--bg0) 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:50px 22px 100px}
+  .kicker{font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:800;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px}
+  h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(31px,6vw,48px);line-height:1.18;letter-spacing:-.01em;margin-bottom:18px}
+  h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dek{font-size:18px;color:var(--soft);max-width:64ch;margin-bottom:24px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);margin-bottom:34px}
+  .meta span{background:rgba(30,40,80,.5);border:1px solid var(--line);padding:5px 13px;border-radius:999px;backdrop-filter:blur(8px)}
+  .card{
+    background:var(--panel);
+    backdrop-filter:blur(20px) saturate(1.25);-webkit-backdrop-filter:blur(20px) saturate(1.25);
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:0 18px 50px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(150,180,255,.12);
+    padding:26px 28px;margin:18px 0;position:relative;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1px;
+    background:linear-gradient(140deg,rgba(120,160,255,.4),transparent 40%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  h2{font-family:"Noto Serif SC",serif;font-size:23px;font-weight:700;margin:8px 0 14px;display:flex;align-items:center;gap:12px}
+  h2 .n{font-family:"Inter";font-size:14px;font-weight:800;color:#fff;background:var(--grad);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;box-shadow:0 6px 18px -4px rgba(110,130,255,.6)}
+  p{margin:10px 0}
+  .lead{font-size:17px;color:#dde5ff}
+  strong{font-weight:700;color:#fff}
+  .num-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:18px 0}
+  .stat{background:rgba(12,18,42,.6);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .stat .v{font-size:27px;font-weight:800;font-family:"Inter";letter-spacing:-.02em}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+  .up{color:var(--up)} .down{color:var(--down)} .cy{color:var(--cyan)} .vi{color:var(--vio)} .gd{color:var(--gold)}
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0}
+  @media(max-width:560px){.bb{grid-template-columns:1fr}}
+  .bull,.bear{border-radius:16px;padding:18px 20px;border:1px solid var(--line)}
+  .bull{background:linear-gradient(160deg,rgba(52,225,168,.14),rgba(20,28,58,.3))}
+  .bear{background:linear-gradient(160deg,rgba(255,93,126,.14),rgba(20,28,58,.3))}
+  .bull h3,.bear h3{font-size:15px;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+  .bull h3{color:var(--up)} .bear h3{color:var(--down)}
+  ul{margin:8px 0 4px;padding-left:20px} li{margin:7px 0;color:#cdd6f5}
+  .bar{height:12px;border-radius:999px;background:rgba(12,18,42,.8);overflow:hidden;margin:8px 0 4px;border:1px solid var(--line)}
+  .bar > i{display:block;height:100%;border-radius:999px;background:var(--grad)}
+  .barlbl{display:flex;justify-content:space-between;font-size:13px;color:var(--soft);margin-top:6px}
+  .src{font-size:14px} .src a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(90,209,255,.3)}
+  .src a:hover{border-bottom-color:var(--cyan)}
+  .disc{font-size:12.5px;color:var(--muted);border-top:1px dashed rgba(120,140,200,.35);padding-top:14px;margin-top:8px;line-height:1.6}
+  .takeaway{background:linear-gradient(150deg,rgba(124,139,255,.2),rgba(192,139,255,.12));font-size:17px}
+main.reader{max-width:920px;margin:auto;padding:48px 24px 80px}nav{display:flex;gap:24px;flex-wrap:wrap}a{color:var(--cyan)}.hero{padding:24px 0 32px}.story,.notes{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:28px;margin:22px 0;box-shadow:0 16px 40px #0005;backdrop-filter:blur(20px)}.story h2{display:block}.risk{border-left:4px solid var(--down);padding-left:16px}.meta{display:block;color:var(--soft)}.sources{font-size:14px;line-height:1.9;padding-left:20px}footer{color:var(--soft);font-size:14px}.sources li{overflow-wrap:anywhere}@media(max-width:600px){main.reader{padding:24px 16px}.story,.notes{padding:20px}}</style></head><body><main class="reader"><header class="hero"><p class="kicker">每日财经 · 2026-10-14｜能源供应恢复不均，设备财报兑现，利率路径仍待价格数据检验。</p><h1>通胀待验，柴油与芯片交付成为焦点</h1><p class="meta">核验截止: 2026-10-14 07:03 EDT (UTC−04:00)</p><nav><a href="cards.html">四张简介卡片</a><a href="../en/index.html">English</a></nav></header><section class="story"><h2>1. 美国通胀公布前：先分清预期与结果</h2><p class="meta">宏观｜10 月 14 日晨间；9 月 CPI 尚待发布</p><p><strong>事实: </strong>官方日历安排美国 9 月 CPI 于今天 08:30 EDT 发布，PPI 于 15 日同一时间发布。美联社与路透社的调查报道均显示，经济学家预计 CPI 同比 3.6%；这是预测，核验截止时没有公布值。</p><p><strong>市场影响（推断）: </strong>通胀若扩散至核心项目，可能压低降息想象空间并抬高企业融资成本；观察重点是价格结构，而非仅看能源带动的总指数。</p><p class="risk"><strong>反方风险: </strong>核心价格弱于预期或需求降温，可能缓和利率压力。单月总指数走高不足以证明工资与服务价格已出现持续二次传导。</p><h3>来源与时间</h3><ul class="sources"><li><a href="https://www.bls.gov/schedule/2026/10_sched.htm">美国劳工统计局：官方发布日历｜10 月 14 日核验</a></li><li><a href="https://www.news4jax.com/business/2026/10/14/more-expensive-gas-semiconductors-likely-pushed-up-inflation-last-month/">美联社：通胀预期报道｜10 月 14 日 01:01 EDT</a></li><li><a href="https://live.euronext.com/en/financial-news/stocks-steady-chipmakers-recover-ahead-us-inflation-data">路透社：欧洲早盘股债汇快照｜10 月 14 日，页面标时 10:51</a></li></ul></section><section class="story"><h2>2. 英国央行鹰派声音，也质疑四次加息定价</h2><p class="meta">利率 / 央行｜10 月 14 日新评论；9 月决议为背景</p><p><strong>事实: </strong>英国央行首席经济学家今天表示，对市场计入未来一年四次、每次 25 基点加息持怀疑态度；两家独立通讯社均有报道。这不等于反对任何加息。官方 9 月纪要显示，政策利率以 6 比 3 维持 3.75%，少数派主张加息。</p><p><strong>市场影响（推断）: </strong>若市场削减累计加息预期，英国短端收益率与英镑的利差支撑可能减弱；这是传导推断，本文未核验讲话后的即时价格反应。</p><p class="risk"><strong>反方风险: </strong>能源冲击延长或工资价格传导增强，可能支持更大紧缩。单个委员的讲话不是委员会承诺，市场定价也不是确定的政策路径。</p><h3>来源与时间</h3><ul class="sources"><li><a href="https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/september-2026">英国央行：9 月决议与会议纪要（背景原文）｜9 月 17 日</a></li><li><a href="https://www.streetinsider.com/Reuters/Bank%2Bof%2BEnglands%2BPill%2Bsays%2Bhes%2Bsceptical%2Babout%2Bmarket%2Bpricing%2Bfour%2Brate%2Bhikes/27182609.html">路透社：英国加息预期评论｜10 月 14 日 02:32 EDT</a></li><li><a href="https://ca.finance.yahoo.com/news/boe-hawk-pill-skeptical-market-072157743.html/">彭博社：加息路径需要更多证据｜10 月 14 日 03:21 EDT</a></li></ul></section><section class="story"><h2>3. 欧洲科技回稳，亚洲与美元并未同步转向</h2><p class="meta">股市 / 汇率｜10 月 14 日不同时间快照；非统一收盘</p><p><strong>事实: </strong>路透社欧洲早盘快照显示，欧洲广泛股指上涨约 0.4%，美国 10 年期国债收益率约 5.2%，美元指数约 102.17。美联社亚洲观察和市场研究的更早快照呈现地区分化；不能将不同时间、不同指数拼成全球一致反弹。</p><p><strong>市场影响（推断）: </strong>收益率回落和科技盈利消息可暂时支撑估值；美元仍高使海外收入换算和进口融资保持压力。指数回稳是否扩展到更多行业，比单一科技权重更有解释力。</p><p class="risk"><strong>反方风险: </strong>高预期、能源成本与通胀意外可能抵消盈利利好；反过来，订单兑现与核心降温能支持更广反弹。早盘涨幅不代表当天美国收盘。</p><h3>来源与时间</h3><ul class="sources"><li><a href="https://live.euronext.com/en/financial-news/stocks-steady-chipmakers-recover-ahead-us-inflation-data">路透社：欧洲早盘股债汇快照｜10 月 14 日，页面标时 10:51</a></li><li><a href="https://www.ksat.com/business/2026/10/14/asian-shares-trade-slip-after-us-stocks-edge-back-from-their-record-after-profit-reports/">美联社：亚洲市场时点观察｜10 月 14 日 02:25 EDT 更新</a></li><li><a href="https://www.home.saxo/en-gb/content/articles/options/sectors-pull-apart-the-index-holds---options-brief---14-october-2026-14102026">市场研究：前一日收盘与今日早盘分列｜10 月 14 日 06:00 CET 快照（原文标注）</a></li></ul></section><section class="story"><h2>4. 油市报告已发布：原油供应恢复，柴油仍紧</h2><p class="meta">能源 / 行业｜国际能源署 10 月 14 日报告；区分估计与预测</p><p><strong>事实: </strong>国际能源署最新报告估计，9 月全球石油供应环比增加 250 万桶 / 日至 1.023 亿桶 / 日；但预测柴油供应紧张将延续至 2027 年，并预计 2026 年全球石油需求同比减少 260 万桶 / 日。路透社另报道储备释放速度仍待明确，法新社报道区域安全风险。</p><p><strong>市场影响（推断）: </strong>原油增产与成品油短缺可以并存。运输、农业与工业成本应观察柴油库存、炼厂产出和实际到货；需求减少也可能反映高价格挤压，而非供需已经宽松。</p><p class="risk"><strong>反方风险: </strong>快速释放成品油储备、炼厂恢复和运输改善可缓解紧张；再次中断则可能放大压力。需求与 2027 年供应判断都是机构预测，不能写成已实现结果。</p><h3>来源与时间</h3><ul class="sources"><li><a href="https://www.iea.org/reports/oil-market-report-october-2026">国际能源署：10 月油市报告原文与公开要点｜10 月 14 日</a></li><li><a href="https://www.globalbankingandfinance.com/speed-europes-diesel-stock-release-focus-iea-meets/">路透社：柴油储备释放速度仍是变量｜10 月 14 日</a></li><li><a href="https://origin-zh9p7m-www.afp.com/en/asian-markets-mixed-tech-firms-claw-back-some-losses">法新社：能源与亚洲市场背景｜10 月 14 日 04:56（页面标时）</a></li></ul></section><section class="story"><h2>5. 芯片设备财报兑现，需求意向仍要变成交付</h2><p class="meta">公司 / 半导体｜10 月 14 日已发布第三季度结果</p><p><strong>事实: </strong>ASML 公布第三季度收入 116.62 亿欧元、净利润 49.60 亿欧元、毛利率 57.5%；全年收入指引为 440 亿至 450 亿欧元。公司称按现有计划，2027–2028 年产能仍不足以满足客户需求。路透社报道客户讨论更远期订单；独立编辑分析提醒净利润包含投资收益，本文未自行计算调整后利润。</p><p><strong>市场影响（推断）: </strong>财报为设备需求提供实际经营证据，但产能约束可能推迟收入确认。研究重点应从远期需求意向转向产能交付、服务升级收入和可重复利润。</p><p class="risk"><strong>反方风险: </strong>客户兴趣不是不可取消的订单，扩产也会占用现金。出口限制、客户投资回报与业务组合可能改变增长；生产效率和升级业务超预期则带来上行。</p><h3>来源与时间</h3><ul class="sources"><li><a href="https://www.investor.asml.com/news-releases/news-release-details/asml-reports-eu11.7-billion-total-net-sales-and-eu5.0-billion-net-income-q3-2026">ASML：第三季度财报原文｜10 月 14 日，欧洲当地 07:00</a></li><li><a href="https://www.streetinsider.com/Reuters/ASML%2Bsays%2BAI%2Bdemand%2Bwill%2Bexceed%2Bchip-tool%2Bcapacity%2Bthrough%2B2028/27182505.html">路透社：设备供应与客户需求｜10 月 14 日 01:07 EDT</a></li><li><a href="https://www.stocktitan.net/articles/asml-q3-2026-earnings-ai-chip-machine-demand">独立编辑分析：升级业务与投资收益拆分｜10 月 14 日；据公司披露</a></li></ul></section><section class="notes"><h2>下周观察与风险</h2><p>本周 10 月 12–18 日：今天 08:30 EDT 美国 CPI，15 日 08:30 EDT PPI，16 日 08:30 EDT 进出口价格，时间据官方日历。下周 19–25 日：官方日历列有 20 日 10:00 EDT 州就业数据与 21 日 10:00 EDT 季度周薪数据；同时跟踪通胀后的央行表态、财报指引广度、柴油释放与交付进度，这些是观察方向，不是额外确认的发布安排。核心风险是能源成本传导快于需求降温；反方是供应恢复与经营效率改善。</p></section><section class="notes"><h2>来源与核验说明</h2><p>每条列出三个不同原始机构或编辑部的来源，分别支持事实、背景或分析；不声称三个来源均独立确认所有数字。公司财报数字的原始来源仍是公司，编辑分析并非额外审计。通讯社转载按原始通讯社计数。日历与旧纪要用于背景，均标注日期；市场快照不混作收盘。已核验的国际能源署公开报告取代此前发布预告。资料仅在本地保存待审核，未自动发布。</p></section><footer>每日财经｜仅供信息与研究参考，不构成投资建议。事实、推断与反方情景分别标注；资料、价格及日程可能更新。</footer></main></body></html>
