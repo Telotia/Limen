@@ -4,6 +4,44 @@
     "categories": [
       "news"
     ],
+    "title": "After inflation: earnings delivery meets financing pressure",
+    "date": "2026-10-15",
+    "dateLabel": "Oct 15, 2026",
+    "folderLabel": "2026/10/15/daily-news",
+    "href": "/resource/news/2026/10/15/daily-news/en/index.html",
+    "zhHref": "/resource/news/2026/10/15/daily-news/zh/index.html",
+    "image": "/resource/news/2026/10/15/daily-news/cover.png",
+    "cards": [
+      "/resource/news/2026/10/15/daily-news/en/card-1.png",
+      "/resource/news/2026/10/15/daily-news/en/card-2.png",
+      "/resource/news/2026/10/15/daily-news/en/card-3.png",
+      "/resource/news/2026/10/15/daily-news/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "art",
+    "categories": [
+      "art"
+    ],
+    "title": "Abundance, made everyday",
+    "date": "2026-10-15",
+    "dateLabel": "Oct 15, 2026",
+    "folderLabel": "2026/10/15/whole-cloth-quilt",
+    "href": "/resource/art/2026/10/15/whole-cloth-quilt/en/index.html",
+    "zhHref": "/resource/art/2026/10/15/whole-cloth-quilt/zh/index.html",
+    "image": "/resource/art/2026/10/15/whole-cloth-quilt/cover.jpg",
+    "cards": [
+      "/resource/art/2026/10/15/whole-cloth-quilt/en/card-1.png",
+      "/resource/art/2026/10/15/whole-cloth-quilt/en/card-2.png",
+      "/resource/art/2026/10/15/whole-cloth-quilt/en/card-3.png",
+      "/resource/art/2026/10/15/whole-cloth-quilt/en/card-4.png"
+    ]
+  },
+  {
+    "kind": "news",
+    "categories": [
+      "news"
+    ],
     "title": "Inflation awaits; diesel and chip deliveries take focus",
     "date": "2026-10-14",
     "dateLabel": "Oct 14, 2026",
