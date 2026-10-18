@@ -25,13 +25,13 @@ const route = (key: ResourcePage) => key === 'home' ? '/resource' : `/resource/$
     <nav aria-label={copy.nav} data-nav>{routes.map(key => <a href={route(key)} data-route aria-current={page === key ? 'page' : undefined} data-copy={`${key}Nav`}>{copy[`${key}Nav`]}</a>)}</nav>
     <div class="language" role="group" aria-label={copy.language} data-language><button type="button" data-lang="en" aria-pressed="true" aria-label="English">EN</button><span aria-hidden="true">/</span><button type="button" data-lang="fr" aria-pressed="false" aria-label="Français">FR</button></div>
   </header>
-  <main id="main" class:list={["wrap", {"home-main": page === "home"}]}>
+  <main id="main" class="wrap">
   {page === 'home' ? <>
     <section class="hero" aria-labelledby="hero-title">
       <p class="eyebrow" data-copy="eyebrow">{copy.eyebrow}</p>
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1 id="hero-title" aria-label={copy.headline.replace("\n", " ")}><span class="headline-start" data-copy="headlineStart" aria-hidden="true">{copy.headlineStart}</span><span class="headline-line" aria-hidden="true"><span data-copy="headlinePrefix">{copy.headlinePrefix}</span><span class="rotating-word" data-word>{copy.headlineWords[0]}</span></span></h1>
+          <h1 id="hero-title" data-copy="headline">{copy.headline}</h1>
           <p class="lead" data-copy="lead">{copy.lead}</p>
           <div class="hero-actions"><a class="button" href="/resource/approach" data-route><span data-copy="primary">{copy.primary}</span><img src="/assets/resource-intro/morph/arrow-right.svg" alt="" width="22" height="22" /></a><a class="text-link" href="/resource/contact" data-route data-copy="secondary">{copy.secondary}</a></div>
         </div>
@@ -56,49 +56,14 @@ const route = (key: ResourcePage) => key === 'home' ? '/resource' : `/resource/$
       document.querySelector('meta[name="description"]').content = text.description;
       document.querySelector('[data-nav]').setAttribute('aria-label', text.nav);
       document.querySelector('[data-language]').setAttribute('aria-label', text.language);
-      document.querySelectorAll('[data-copy]').forEach(el => { if (text[el.dataset.copy] !== undefined) el.textContent = text[el.dataset.copy]; });
+      document.querySelectorAll('[data-copy]').forEach(el => { if (text[el.dataset.copy]) el.textContent = text[el.dataset.copy]; });
       document.querySelectorAll('[data-lang]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === chosen)));
       document.querySelectorAll('[data-route]').forEach(link => { const url = new URL(link.href); if (chosen === 'fr') url.searchParams.set('lang', 'fr'); else url.searchParams.delete('lang'); link.href = url.pathname + url.search; });
       if (updateAddress) { const url = new URL(location.href); if (chosen === 'fr') url.searchParams.set('lang', 'fr'); else url.searchParams.delete('lang'); history.replaceState(null, '', url); }
-      document.querySelector('#hero-title')?.setAttribute('aria-label', text.headline.replace('\n', ' '));
       document.dispatchEvent(new CustomEvent('resource-language', { detail: chosen }));
     }
     document.querySelectorAll('[data-lang]').forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.lang)));
     setLanguage(new URLSearchParams(location.search).get('lang'), false);
-    const wordElement = document.querySelector('[data-word]');
-    if (wordElement) {
-      const reduceWords = matchMedia('(prefers-reduced-motion: reduce)');
-      let wordIndex = 0, wordLanguage = document.documentElement.lang.startsWith('fr') ? 'fr' : 'en';
-      let wordPaused = false, wordTimer, wordRevision = 0;
-      const wordAnimations = () => wordElement.getAnimations().forEach(animation => animation.cancel());
-      function scheduleWords() {
-        clearTimeout(wordTimer);
-        wordRevision++; wordAnimations();
-        if (reduceWords.matches) { wordIndex = 0; wordElement.textContent = words[wordLanguage].headlineWords[0]; return; }
-        if (wordPaused || document.hidden) return;
-        const revision = wordRevision;
-        wordTimer = setTimeout(async () => {
-          const out = wordElement.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(-.12em)'}], {duration:220,easing:'ease-in',fill:'forwards'});
-          try { await out.finished; } catch { return; }
-          if (revision !== wordRevision) return;
-          const choices = words[wordLanguage].headlineWords;
-          wordIndex = (wordIndex + 1) % choices.length;
-          wordElement.textContent = choices[wordIndex];
-          out.cancel();
-          const enter = wordElement.animate([{opacity:0,transform:'translateY(.14em)'},{opacity:1,transform:'translateY(0)'}], {duration:400,easing:'cubic-bezier(.2,.7,.3,1)'});
-          try { await enter.finished; } catch { return; }
-          if (revision === wordRevision) scheduleWords();
-        }, 4200);
-      }
-      document.addEventListener('resource-language', event => {
-        wordLanguage = event.detail; wordIndex = 0;
-        wordElement.textContent = words[wordLanguage].headlineWords[0]; scheduleWords();
-      });
-      document.addEventListener('resource-motion', event => { wordPaused = event.detail.paused; scheduleWords(); });
-      document.addEventListener('visibilitychange', scheduleWords);
-      reduceWords.addEventListener('change', scheduleWords);
-      scheduleWords();
-    }
   </script>
 </>)}
 </body></html>
@@ -106,7 +71,7 @@ const route = (key: ResourcePage) => key === 'home' ? '/resource' : `/resource/$
 @font-face { font-family: 'Inter'; src: url('/assets/resource-intro/Inter-latin-wght-normal.woff2') format('woff2'); font-style: normal; font-weight: 100 900; font-display: swap; }
 :global(html[data-page='pharmacy-intro']) { --text: #282D32; --text-secondary: #617075; --teal: #00545A; --border: #DEE6E4; background: #FFFFFF; }
 :global(html[data-page='pharmacy-intro'] *) { box-sizing: border-box; }
-:global(html[data-page='pharmacy-intro'] body) { margin: 0; position: relative; isolation: isolate; color: var(--text); font: 400 16px/1.625 'Inter', Arial, sans-serif; font-feature-settings: 'cv11' 1; -webkit-font-smoothing: antialiased; min-height: 100svh; }
+:global(html[data-page='pharmacy-intro'] body) { margin: 0; position: relative; isolation: isolate; color: var(--text); font: 400 16px/1.625 'Inter', Arial, sans-serif; font-feature-settings: 'cv11' 1; -webkit-font-smoothing: antialiased; min-height: 100svh; display: flex; flex-direction: column; }
 :global(html[data-page='production-teaser'] body) { margin: 0; }
 :global(html[data-page='pharmacy-intro'] body)::before { content: ''; position: absolute; inset: 0; z-index: -1; background: url('/assets/ink-wash/textures/xuan-paper-generated.jpg') repeat; background-size: 680px; opacity: .20; pointer-events: none; }
 :global(html[data-page='pharmacy-intro'] a) { color: inherit; }
@@ -138,7 +103,7 @@ h1 { white-space: pre-line; font-size: clamp(80px, 10.5vw, 152px); line-height: 
 .index { width: 64px; flex: none; font-size: 13px; color: var(--text-secondary); }
 .next-page > img { margin-left: auto; transition: transform 240ms ease; } .next-page:hover > img { transform: translateX(6px); }
 .site-footer { border-top: 1px solid var(--border); padding-block: 24px; display: flex; justify-content: space-between; gap: 32px; font-size: 12px; color: var(--text-secondary); } .site-footer p { margin: 0; }
-.inner-hero { padding-block: 100px 64px; }
+.inner-hero { padding-block: 88px 64px; }
 .inner-hero h1 { max-width: 1100px; font-size: clamp(54px, 7vw, 96px); line-height: 1.08; margin-bottom: 40px; }
 .inner-lead { font-size: 24px; line-height: 1.6; color: var(--text-secondary); max-width: 760px; margin-bottom: 0; }
 .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; border-top: 1px solid var(--border); padding-block: 48px 80px; }
@@ -148,7 +113,7 @@ h2 { font-size: 28px; line-height: 1.3; letter-spacing: -.02em; margin-bottom: 2
 .contact-details { border-top: 1px solid var(--border); padding-block: 48px 80px; }
 .email { display: inline-flex; align-items: center; gap: 40px; padding-bottom: 8px; font-size: clamp(26px, 4vw, 48px); letter-spacing: -.025em; text-decoration: none; border-bottom: 1px solid var(--border); } .contact-details .location { margin: 32px 0 0; font-size: 14px; }
 .skip { position: absolute; top: -80px; left: 20px; padding: 12px; background: #FFFFFF; z-index: 5; } .skip:focus { top: 16px; }
-main { animation: arrive 400ms cubic-bezier(.2,.7,.3,1) both; } @keyframes arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+main { flex: 1; animation: arrive 400ms cubic-bezier(.2,.7,.3,1) both; } @keyframes arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 1100px) { .wrap { width: calc(100% - 64px); } nav { gap: 24px; } .site-header { gap: 20px; } .hero-grid { grid-template-columns: minmax(0, 1fr) 220px; gap: 32px; } .hero { padding-block: 80px; } h1 { font-size: clamp(74px, 10vw, 110px); } .lead { font-size: 23px; } .aside-note { font-size: 16px; padding-left: 20px; } }
 @media (max-width: 767px) {
   .wrap { width: calc(100% - 40px); } .site-header { flex-wrap: wrap; gap: 8px; padding-block: 16px; } .brand { margin-left: -16px; } .brand img { width: 190px; height: 62px; } .language { margin-left: auto; } nav { order: 3; width: 100%; margin: 0; gap: 26px; } nav a { font-size: 13px; }
@@ -158,16 +123,4 @@ main { animation: arrive 400ms cubic-bezier(.2,.7,.3,1) both; } @keyframes arriv
 }
 @media (max-width: 359px) { nav { gap: 20px; } .hero-aside { grid-template-columns: 140px 1fr; gap: 16px; } h1 { font-size: 51px; } }
 @media (prefers-reduced-motion: reduce) { main { animation: none; } nav a::after, .button, .next-page > img { transition: none; } }
-.home-main { width: 100%; margin: 0; }
-.home-main > .hero { padding-inline: max(48px, calc((100% - 1200px)/2)); background: #EAF4F2; position: relative; isolation: isolate; }
-.home-main > .hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: url('/assets/ink-wash/textures/xuan-paper-generated.jpg') repeat; background-size: 680px; opacity: .14; mix-blend-mode: multiply; pointer-events: none; }
-.home-main > .next-page { padding-inline: max(48px, calc((100% - 1200px)/2)); background: #00545A; color: #FFFFFF; border: 0; }
-.home-main > .next-page .index { color: #EAF4F2; }
-.home-main > .next-page img { filter: brightness(0) invert(1); }
-.headline-start, .headline-line { display: block; }
-.headline-start { font-weight: 500; }
-.headline-line { font-weight: 400; white-space: nowrap; }
-.rotating-word { display: inline-block; color: #00545A; font-weight: 350; }
-@media (max-width: 1100px) { .home-main > .hero, .home-main > .next-page { padding-inline: 32px; } }
-@media (max-width: 767px) { .home-main > .hero, .home-main > .next-page { padding-inline: 20px; } }
 </style>
