@@ -1,0 +1,8 @@
+# Retired resource pages retain useful destinations.
+/resource/company /resource/approach 302
+/resource/company/ /resource/approach 302
+/resource/company.html /resource/approach 302
+/resource/about /resource/approach 302
+/resource/contact /resource#contact 302
+/resource/contact/ /resource#contact 302
+/resource/contact.html /resource#contact 302
