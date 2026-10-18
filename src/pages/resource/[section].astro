@@ -1,0 +1,10 @@
+---
+import ResourceIntro from '../../components/pages/ResourceIntro.astro';
+import type { ResourcePage } from '../../data/resource-company';
+export function getStaticPaths() {
+  return ['approach', 'company', 'contact'].map(section => ({ params: { section } }));
+}
+const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
+const page = Astro.params.section as ResourcePage;
+---
+<ResourceIntro isProd={isProd} page={page} />
