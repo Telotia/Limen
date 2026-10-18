@@ -1,11 +1,14 @@
-# Preserve links to the introduction after moving it to /intro.
-/resource/approach /intro/approach 302
-/resource/approach/ /intro/approach 302
-/resource/approach.html /intro/approach 302
-/resource/company /intro/approach 302
-/resource/company/ /intro/approach 302
-/resource/company.html /intro/approach 302
-/resource/about /intro/approach 302
+# Keep former introduction pages linked to their single-page sections.
+/resource/approach /intro#approach 302
+/resource/approach/ /intro#approach 302
+/resource/approach.html /intro#approach 302
+/resource/company /intro#about 302
+/resource/company/ /intro#about 302
+/resource/company.html /intro#about 302
+/resource/about /intro#about 302
 /resource/contact /intro#contact 302
 /resource/contact/ /intro#contact 302
 /resource/contact.html /intro#contact 302
+/intro/approach /intro#approach 302
+/intro/approach/ /intro#approach 302
+/intro/approach.html /intro#approach 302
