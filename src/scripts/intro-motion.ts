@@ -20,6 +20,7 @@ export function mountIntroMotion() {
   const symbols = audience.map(panel => panel.querySelector<HTMLElement>('.audience-symbol')!);
   const desktop = matchMedia('(min-width: 768px) and (min-height: 650px)');
   const clamp = (value: number) => Math.max(0, Math.min(1, value));
+  const smooth = (value: number) => { const t = clamp(value); return t * t * (3 - 2 * t); };
   const root = document.documentElement;
   root.classList.add('scroll-chapters');
 
@@ -32,6 +33,7 @@ export function mountIntroMotion() {
     // sticky panels scale, so reversing the scroll follows exactly the same path.
     const aboutTop = about.getBoundingClientRect().top;
     const panelTops = audience.map(panel => panel.offsetTop - window.scrollY);
+    const panelHeight = audience[0].offsetHeight;
     const travel = Math.max(1, Math.min(bounds.height - height * .38, height * .7));
     const progress = Math.max(0, Math.min(1, (height * .9 - bounds.top) / travel));
     const enter = clamp((height * .9 - bounds.top) / (height * .65));
@@ -46,10 +48,11 @@ export function mountIntroMotion() {
       paragraph.style.transform = reduced.matches ? '' : `translateY(${(1 - amount) * 72}px)`;
     });
     audience.forEach((panel, index) => {
-      const arrival = clamp((height - panelTops[index]) / (height * .8));
-      const cover = index === 0 && desktop.matches ? clamp((height * .8 - panelTops[1]) / (height * .6)) : 0;
+      const arrival = smooth((height - panelTops[index]) / (height * .8));
+      const cover = index === 0 && desktop.matches
+        ? smooth((height * .14 + panelHeight - panelTops[1]) / Math.max(1, panelHeight - height * .04)) : 0;
       panel.style.transform = reduced.matches ? '' : desktop.matches
-        ? `scale(${1 - cover * .065})`
+        ? `scale(${1 - cover * .04})`
         : `translateY(${(1 - arrival) * 32}px)`;
       symbols[index].style.transform = reduced.matches ? '' : `rotate(${(1 - arrival) * (index ? -45 : 18)}deg) scale(${.72 + arrival * .28})`;
     });
