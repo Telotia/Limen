@@ -1,4 +1,3 @@
-export type ResourcePage = "home" | "approach";
 export const words = {
   en: {
     description:
@@ -7,7 +6,8 @@ export const words = {
     nav: "Main navigation",
     language: "Language",
     homeNav: "Home",
-    approachNav: "About / Approach",
+    aboutNav: "About",
+    approachNav: "Approach",
     companyNav: "Company",
     contactNav: "Contact",
     eyebrow: "Telotia / In development",
@@ -49,7 +49,8 @@ export const words = {
     nav: "Navigation principale",
     language: "Langue",
     homeNav: "Accueil",
-    approachNav: "À propos / Approche",
+    aboutNav: "À propos",
+    approachNav: "Approche",
     companyNav: "Entreprise",
     contactNav: "Contact",
     eyebrow: "Telotia / En développement",
