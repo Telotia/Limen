@@ -12,14 +12,47 @@ export function mountIntroMotion() {
   let words: HTMLElement[] = [];
   let frame = 0;
   let entrances: Animation[] = [];
+  let lines: HTMLElement[] = [];
+  const about = document.querySelector<HTMLElement>('#about')!;
+  const aboutHeading = about.querySelector<HTMLElement>('h2')!;
+  const paragraphs = Array.from(about.querySelectorAll<HTMLElement>('p'));
+  const audience = Array.from(document.querySelectorAll<HTMLElement>('.audience-panel'));
+  const symbols = audience.map(panel => panel.querySelector<HTMLElement>('.audience-symbol')!);
+  const desktop = matchMedia('(min-width: 768px) and (min-height: 650px)');
+  const clamp = (value: number) => Math.max(0, Math.min(1, value));
+  const root = document.documentElement;
+  root.classList.add('scroll-chapters');
 
   function update() {
     frame = 0;
     if (document.hidden) return;
     const height = window.innerHeight;
     const bounds = stage!.getBoundingClientRect();
+    // Read all geometry before changing styles. offsetTop stays stable while
+    // sticky panels scale, so reversing the scroll follows exactly the same path.
+    const aboutTop = about.getBoundingClientRect().top;
+    const panelTops = audience.map(panel => panel.offsetTop - window.scrollY);
     const travel = Math.max(1, Math.min(bounds.height - height * .38, height * .7));
     const progress = Math.max(0, Math.min(1, (height * .9 - bounds.top) / travel));
+    const enter = clamp((height * .9 - bounds.top) / (height * .65));
+    lines.forEach((line, index) => {
+      const distance = (1 - enter) * (desktop.matches ? 100 : 32) * (index % 2 ? 1 : -1);
+      line.style.transform = reduced.matches ? '' : `translateX(${distance}px) scale(${.92 + .08 * enter})`;
+    });
+    const aboutEnter = clamp((height * .85 - aboutTop) / (height * .6));
+    aboutHeading.style.transform = reduced.matches ? '' : `translateX(${-56 * (1 - aboutEnter)}px)`;
+    paragraphs.forEach((paragraph, index) => {
+      const amount = clamp(aboutEnter * 1.4 - index * .25);
+      paragraph.style.transform = reduced.matches ? '' : `translateY(${(1 - amount) * 72}px)`;
+    });
+    audience.forEach((panel, index) => {
+      const arrival = clamp((height - panelTops[index]) / (height * .8));
+      const cover = index === 0 && desktop.matches ? clamp((height * .8 - panelTops[1]) / (height * .6)) : 0;
+      panel.style.transform = reduced.matches ? '' : desktop.matches
+        ? `scale(${1 - cover * .065})`
+        : `translateY(${(1 - arrival) * 32}px)`;
+      symbols[index].style.transform = reduced.matches ? '' : `rotate(${(1 - arrival) * (index ? -45 : 18)}deg) scale(${.72 + arrival * .28})`;
+    });
     words.forEach((word, index) => {
       const amount = reduced.matches ? 1 : Math.max(0, Math.min(1, progress * words.length - index));
       word.classList.toggle('is-read', amount > .5);
@@ -64,10 +97,16 @@ export function mountIntroMotion() {
     const text = title!.textContent ?? '';
     title!.setAttribute('aria-label', text.replace(/\s+/g, ' '));
     words = [];
+    lines = [];
     const fragment = document.createDocumentFragment();
-    text.split(/(\s+)/).forEach(part => {
+    text.split('\n').forEach(lineText => {
+      const line = document.createElement('span');
+      line.className = 'reading-line';
+      line.setAttribute('aria-hidden', 'true');
+      lines.push(line);
+      lineText.split(/(\s+)/).forEach(part => {
       if (/^\s+$/.test(part)) {
-        fragment.append(document.createTextNode(part));
+        line.append(document.createTextNode(part));
         return;
       }
       const word = document.createElement('span');
@@ -81,7 +120,9 @@ export function mountIntroMotion() {
       ink.textContent = part;
       word.append(measure, ink);
       words.push(word);
-      fragment.append(word);
+      line.append(word);
+      });
+      fragment.append(line);
     });
     title!.replaceChildren(fragment);
     title!.classList.toggle('reading-motion', !reduced.matches);
@@ -107,7 +148,8 @@ export function mountIntroMotion() {
   document.addEventListener('resource-language', languageChanged);
   document.addEventListener('visibilitychange', visibilityChanged);
   reduced.addEventListener('change', preferenceChanged);
-  window.addEventListener('pagehide', () => {
+  window.addEventListener('pagehide', (event) => {
+    if (event.persisted) return;
     cancelAnimationFrame(frame);
     entrances.forEach(animation => animation.cancel());
     window.removeEventListener('scroll', schedule);
