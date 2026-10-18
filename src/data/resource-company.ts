@@ -1,4 +1,4 @@
-export type ResourcePage = "home" | "approach" | "company" | "contact";
+export type ResourcePage = "home" | "approach";
 export const words = {
   en: {
     description:
@@ -7,7 +7,7 @@ export const words = {
     nav: "Main navigation",
     language: "Language",
     homeNav: "Home",
-    approachNav: "Approach",
+    approachNav: "About / Approach",
     companyNav: "Company",
     contactNav: "Contact",
     eyebrow: "Telotia / In development",
@@ -15,9 +15,10 @@ export const words = {
     lead: "Clearer coordination for pharmacy teams.",
     primary: "Explore our approach",
     secondary: "Get in touch",
+    contactFooter: "Contact Telotia",
     context: "Professional support.\nThoughtful coordination.",
     nextApproach: "Our approach",
-    approachLabel: "01 / Our approach",
+    approachLabel: "About / Our approach",
     approachTitle: "Clear information.\nProfessional judgment.",
     approachIntro:
       "Professional support involves more than finding the right expertise. Communication, context and responsibility also need to be clear.",
@@ -48,7 +49,7 @@ export const words = {
     nav: "Navigation principale",
     language: "Langue",
     homeNav: "Accueil",
-    approachNav: "Approche",
+    approachNav: "À propos / Approche",
     companyNav: "Entreprise",
     contactNav: "Contact",
     eyebrow: "Telotia / En développement",
@@ -56,9 +57,10 @@ export const words = {
     lead: "Une coordination plus claire en pharmacie.",
     primary: "Découvrir notre approche",
     secondary: "Nous contacter",
+    contactFooter: "Contacter Telotia",
     context: "Un soutien professionnel.\nUne coordination réfléchie.",
     nextApproach: "Notre approche",
-    approachLabel: "01 / Notre approche",
+    approachLabel: "À propos / Notre approche",
     approachTitle: "Une information claire.\nUn jugement professionnel.",
     approachIntro:
       "Le soutien professionnel ne se limite pas à trouver la bonne expertise. La communication, le contexte et les responsabilités doivent aussi être clairs.",
