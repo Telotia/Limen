@@ -1,0 +1,6 @@
+Motion source icons (geometry unchanged; stroke set to Telotia teal):
+- handshake.svg: lucide-static 0.468.0, ISC, LUCIDE-LICENSE.txt
+- building-bridge.svg, scribble.svg, star.svg, arrow-right.svg:
+  @tabler/icons 3.35.0, MIT, LICENSE.txt
+Downloaded from the official packages via jsDelivr. The canvas samples their
+contours and interpolates particles; the chaotic state disperses the scribble.
