@@ -6,7 +6,7 @@ interface Props { isProd?: boolean; page?: ResourcePage; }
 const { isProd = false, page = 'home' } = Astro.props;
 const copy = words.en;
 const routes: ResourcePage[] = ['home', 'approach'];
-const route = (key: ResourcePage) => key === 'home' ? '/resource' : `/resource/${key}`;
+const route = (key: ResourcePage) => key === 'home' ? '/intro' : `/intro/${key}`;
 ---
 <!doctype html>
 <html lang="en-CA" data-page={isProd ? 'production-teaser' : 'pharmacy-intro'} data-section={page}>
@@ -21,7 +21,7 @@ const route = (key: ResourcePage) => key === 'home' ? '/resource' : `/resource/$
 {isProd ? <ComingSoon /> : (<>
   <a class="skip" href="#main" data-copy="skip">{copy.skip}</a>
   <header class="site-header wrap">
-    <a class="brand" href="/resource" data-route aria-label="Telotia"><img src="/assets/resource-intro/telotia-wordmark-temporary.png" alt="Telotia" width="210" height="68" /></a>
+    <a class="brand" href="/intro" data-route aria-label="Telotia"><img src="/assets/resource-intro/telotia-wordmark-temporary.png" alt="Telotia" width="210" height="68" /></a>
     <nav aria-label={copy.nav} data-nav>{routes.map(key => <a href={route(key)} data-route aria-current={page === key ? 'page' : undefined} data-copy={`${key}Nav`}>{copy[`${key}Nav`]}</a>)}</nav>
     <div class="language" role="group" aria-label={copy.language} data-language><button type="button" data-lang="en" aria-pressed="true" aria-label="English">EN</button><span aria-hidden="true">/</span><button type="button" data-lang="fr" aria-pressed="false" aria-label="Français">FR</button></div>
   </header>
@@ -33,7 +33,7 @@ const route = (key: ResourcePage) => key === 'home' ? '/resource' : `/resource/$
         <div class="hero-copy">
           <h1 id="hero-title" data-copy="headline">{copy.headline}</h1>
           <p class="lead" data-copy="lead">{copy.lead}</p>
-          <div class="hero-actions"><a class="button" href="/resource/approach" data-route><span data-copy="primary">{copy.primary}</span><img src="/assets/resource-intro/morph/arrow-right.svg" alt="" width="22" height="22" /></a><a class="text-link" href="#contact" data-copy="secondary">{copy.secondary}</a></div>
+          <div class="hero-actions"><a class="button" href="/intro/approach" data-route><span data-copy="primary">{copy.primary}</span><img src="/assets/resource-intro/morph/arrow-right.svg" alt="" width="22" height="22" /></a><a class="text-link" href="#contact" data-copy="secondary">{copy.secondary}</a></div>
         </div>
         <aside class="hero-aside"><CoordinationMotion /><p class="aside-note" data-copy="context">{copy.context}</p></aside>
       </div>

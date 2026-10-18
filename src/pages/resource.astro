@@ -1,7 +1,14 @@
 ---
-import ResourceIntro from '../components/pages/ResourceIntro.astro';
+import ResourcesContent from '../components/pages/ResourcesContent.astro';
+import MarketingShell from '../layouts/MarketingShell.astro';
 
 const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
 ---
 
-<ResourceIntro isProd={isProd} />
+<MarketingShell
+  isProd={isProd}
+  title="Resources | Telotia"
+  description="A chronological library of Telotia art appreciations and sourced news briefings."
+>
+  <ResourcesContent />
+</MarketingShell>
