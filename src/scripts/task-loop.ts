@@ -1,3 +1,4 @@
+import { attractor, sampleAttractor } from './task-loop-chaos';
 import { ease, loopState, loopSteps } from './task-loop-model';
 
 type Point = { x: number; y: number };
@@ -9,19 +10,14 @@ export function mountTaskLoop() {
   const ctx = canvas?.getContext('2d');
   if (!section || !canvas || !ctx) return;
   const title = section.querySelector<HTMLElement>('[data-loop-title]')!;
-
-
   const play = section.querySelector<HTMLButtonElement>('[data-play]')!;
-
-
 
   const scrub = section.querySelector<HTMLInputElement>('[data-scrub]')!;
 
   const hint = section.querySelector<HTMLElement>('[data-loop-hint]')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const short = matchMedia('(max-height: 650px)');
   let progress = 0, width = 0, height = 0, frame = 0, last = 0, current = -1;
-  let playing = false, visible = true, manual = false;
+  let playing = false, visible = false, autoStarted = false, interacted = false;
   const muted = '#617075', teal = '#00545A', line = '#DEE6E4';
 
   function text(value: string, x: number, y: number, color = muted, size = 13, align: CanvasTextAlign = 'center') {
@@ -58,7 +54,7 @@ export function mountTaskLoop() {
     const size = tall ? 4 : 5;
     function particle(point: Point, angle: number, alpha = .55, scale = 1) {
       ctx!.save(); ctx!.translate(point.x, point.y); ctx!.rotate(angle);
-      ctx!.globalAlpha = alpha; ctx!.fillStyle = '#849592';
+      ctx!.globalAlpha = alpha; ctx!.fillStyle = '#617875';
       ctx!.beginPath(); ctx!.roundRect(-size * scale / 2, -size * scale / 2, size * scale, size * scale, 1); ctx!.fill(); ctx!.restore();
     }
     // Uneven pharmacy workloads dissolve into a shared stream, rather than
@@ -69,47 +65,72 @@ export function mountTaskLoop() {
       const n = [18, 9, 26, 12, 21][lane];
       for (let j = 0; j < n; j++) {
         const y = bottom - Math.floor(j / 2) * (size + 4);
-        particle({ x: x + (j % 2) * (size + 4), y: y + Math.sin(clock * 5 + j) * 1.4 }, Math.sin(j + clock) * .12, .25 + seed(j + lane * 30) * .35);
+        particle({ x: x + (j % 2) * (size + 4), y: y + Math.sin(clock * 5 + j) * 1.4 }, Math.sin(j + clock) * .12, .65 + seed(j + lane * 30) * .25);
       }
     }
-    // Background tasks have staggered departures, eddies in the pool and
-    // arrivals among professionals. No arrows or permanent connecting paths.
-    for (let i = 0; i < (tall ? 48 : 96); i++) {
-      const t = mod(clock * (.38 + seed(i + 60) * .15) + seed(i + 2));
-      const a = tall ? p(.07 + seed(i) * .24, .20) : p(.06 + seed(i) * .22, .56);
-      let q: Point;
-      if (t < .36) q = routePoint(a, pool, ease(t / .36), (seed(i + 5) - .7) * height * .3);
-      else if (t < .67) {
-        const theta = (t - .36) * 12 + seed(i + 7) * Math.PI * 2;
-        const r = (.025 + seed(i + 9) * .085) * Math.sin(Math.PI * (t - .36) / .31);
-        q = { x: pool.x + Math.cos(theta) * width * r, y: pool.y + Math.sin(theta) * height * r * 1.8 };
-      } else {
-        const target = tall ? p(.12 + seed(i + 12) * .55, .72 + seed(i + 13) * .14) : p(.72 + seed(i + 12) * .22, .21 + seed(i + 13) * .49);
-        q = routePoint(pool, target, ease((t - .67) / .33), height * .12);
+    const chaosPoint = (index: number): Point => {
+      const q = sampleAttractor(index);
+      return { x: pool.x + q.x * width * (tall ? .21 : .135), y: pool.y + q.y * height * (tall ? .12 : .24) };
+    };
+    // A real Lorenz attractor gives the shared pool its two-lobed, folding
+    // structure. Short moving strands retain the airy white composition.
+    if (!reduced.matches) {
+      for (let strand = 0; strand < 20; strand++) {
+        const phase = mod(clock * .09 + strand / 20);
+        const start = Math.floor(phase * (attractor.length - 160));
+        ctx!.beginPath();
+        for (let j = 0; j < 100; j += 2) {
+          const q = chaosPoint(start + j);
+          if (!j) ctx!.moveTo(q.x, q.y); else ctx!.lineTo(q.x, q.y);
+        }
+        ctx!.strokeStyle = '#93A8A3'; ctx!.globalAlpha = .32 * Math.min(1, phase * 15, (1 - phase) * 15); ctx!.lineWidth = .7; ctx!.stroke();
       }
-      const fade = Math.min(1, t * 12, (1 - t) * 12);
-      particle(q, seed(i) * 2 + clock * .5, fade * .32, .75 + seed(i + 30) * .55);
+      ctx!.globalAlpha = 1;
+    }
+    // Each contextual particle enters and leaves at exactly the point where
+    // its Lorenz segment starts/ends. This avoids the old pool position jumps.
+    function flowPoint(i: number, t: number): Point {
+      const start = seed(i + 7) * 4000;
+      const a = tall ? p(.07 + seed(i) * .24, .20) : p(.06 + seed(i) * .22, .56);
+      const target = tall ? p(.12 + seed(i + 12) * .55, .72 + seed(i + 13) * .14) : p(.72 + seed(i + 12) * .22, .21 + seed(i + 13) * .49);
+      if (t < .26) return routePoint(a, chaosPoint(start), ease(t / .26), height * .08);
+      if (t < .76) return chaosPoint(start + ease((t - .26) / .50) * 1000);
+      return routePoint(chaosPoint(start + 1000), target, ease((t - .76) / .24), height * .08);
+    }
+    for (let i = 0; i < (tall ? 62 : 110); i++) {
+      const t = mod(clock * (.29 + seed(i + 60) * .10) + seed(i + 2));
+      const q = flowPoint(i, t);
+      const fade = Math.min(1, t * 18, (1 - t) * 18);
+      if (!reduced.matches) {
+        const tail = flowPoint(i, Math.max(0, t - .009));
+        ctx!.globalAlpha = fade * .22; ctx!.lineWidth = 1;
+        segment(tail, q, '#617875'); ctx!.globalAlpha = 1;
+      }
+      particle(q, seed(i) * 2 + clock * .3, fade * .68, .8 + seed(i + 30) * .55);
     }
     // A loose field of circles represents professionals, distinct from tasks.
     for (let i = 0; i < (tall ? 25 : 56); i++) {
       const dot = tall ? p(.12 + seed(i + 220) * .63, .69 + seed(i + 320) * .20) : p(.72 + seed(i + 220) * .24, .18 + seed(i + 320) * .54);
       if (Math.hypot(dot.x - worker.x, dot.y - worker.y) < 20) continue;
       dot.y += Math.sin(clock * 2 + i) * 2;
-      circle(dot, tall ? 2 : 2.8, '#AAB7B4', i % 5 ? '#AAB7B4' : '#FFFFFF');
+      circle(dot, tall ? 2 : 2.8, '#8B9F9B', i % 5 ? '#8B9F9B' : '#FFFFFF');
     }
     const selected = s >= 2 && s <= 4;
-    circle(worker, tall ? 4 : 5, selected ? '#617075' : '#AAB7B4', '#FFFFFF', 1.5);
+    circle(worker, tall ? 4 : 5, selected ? '#617075' : '#8B9F9B', '#FFFFFF', 1.5);
     if (s === 2 || s === 3) {
       // The professional reaches for the task; the token never changes identity.
       const reach = s === 2 ? Math.sin(Math.PI * ease(f)) : 0;
       const endpoint = mix(worker, pool, reach * .25);
-      segment(worker, endpoint, '#AAB7B4');
+      segment(worker, endpoint, '#8B9F9B');
     }
     let task = origin;
     const trace: Point[] = [];
     function taskAt(step: number, fraction: number): Point {
       if (step === 1) return routePoint(origin, pool, ease(fraction), height * .18);
-      if (step === 2) return { x: pool.x + Math.sin(fraction * Math.PI * 2) * 7, y: pool.y + (1 - Math.cos(fraction * Math.PI * 2)) * 5 };
+      if (step === 2) {
+        const q = chaosPoint(1800 + ease(fraction) * 900), envelope = Math.sin(Math.PI * fraction) ** 2;
+        return mix(pool, q, envelope);
+      }
       if (step === 3) return routePoint(pool, worker, ease(fraction / .42), height * .08);
       if (step === 4) {
         const t = ease(fraction), z = 1 - t;
@@ -119,23 +140,28 @@ export function mountTaskLoop() {
       return step >= 5 ? home : origin;
     }
     task = taskAt(s, f);
-    if (!reduced.matches && [1, 3, 4].includes(s)) {
+    if (!reduced.matches && [1, 2, 3, 4].includes(s)) {
       for (let j = 12; j >= 1; j--) trace.push(taskAt(s, Math.max(0, f - j * .012)));
-      trace.forEach((q, i) => { ctx!.globalAlpha = .03 + i * .014; circle(q, 2, teal, teal); }); ctx!.globalAlpha = 1;
+      trace.forEach((q, i) => { ctx!.globalAlpha = .12 + i * .035; circle(q, 2.4, teal, teal); }); ctx!.globalAlpha = 1;
     }
-    const token = tall ? 10 : 12;
+    const token = tall ? 16 : 20;
     ctx!.save(); ctx!.translate(task.x, task.y);
     ctx!.rotate(s === 1 || s === 4 ? Math.sin(f * Math.PI) * .6 : 0);
-    box(-token / 2, -token / 2, token, token, teal, s === 4 || s === 5 ? '#FFFFFF' : teal, 2);
+    box(-token / 2 - 3, -token / 2 - 3, token + 6, token + 6, '#FFFFFF', '#FFFFFF', 5);
+    box(-token / 2, -token / 2, token, token, teal, teal, 3);
     if (s === 6) {
       ctx!.beginPath(); ctx!.moveTo(-3, 0); ctx!.lineTo(-.5, 2.5); ctx!.lineTo(3.5, -2.5); ctx!.strokeStyle = '#FFFFFF'; ctx!.lineWidth = 1.3; ctx!.stroke();
     }
     ctx!.restore();
-    text('T-01', Math.max(23, Math.min(width - 23, task.x)), task.y - 21, teal, 11);
+    const labelX = Math.max(25, Math.min(width - 25, task.x));
+    box(labelX - 23, task.y - token / 2 - 30, 46, 22, '#FFFFFF', '#FFFFFF', 4);
+    ctx!.font = '600 12px Inter, Arial, sans-serif'; ctx!.fillStyle = teal; ctx!.textAlign = 'center';
+    ctx!.fillText('T-01', labelX, task.y - token / 2 - 18);
     // Restrained role labels ground the otherwise abstract particle field.
     text('Pharmacies', tall ? width * .18 : width * .17, tall ? height * .08 : height * .88, muted, 11);
     text('Pool', pool.x, tall ? height * .61 : height * .88, muted, 11);
     text('Remote pharmacists', tall ? width * .43 : width * .84, tall ? height * .95 : height * .88, muted, 11);
+    if (s >= 5) box(home.x - 43, home.y + 13, 86, 19, '#FFFFFF', '#FFFFFF', 3);
     text(s >= 5 ? s === 6 ? 'A · Reviewed' : 'A · Review' : 'A', home.x, home.y + 22, teal, 10);
   }
 
@@ -158,26 +184,14 @@ export function mountTaskLoop() {
       if (last) progress = Math.min(1, progress + Math.min(80, time - last) / 24500);
       last = time;
       if (progress === 1) playing = false;
-      syncScroll();
     }
     render();
     if (playing) frame = requestAnimationFrame(tick);
   }
   function schedule() { if (!frame && !document.hidden && visible) frame = requestAnimationFrame(tick); }
   function setProgress(value: number) {
-    playing = false; manual = true; last = 0; progress = Math.max(0, Math.min(1, value)); syncScroll(); schedule();
+    playing = false; interacted = true; last = 0; progress = Math.max(0, Math.min(1, value)); schedule();
   }
-  function syncScroll() {
-    // Seeking and playback keep the native scroll position in sync, so taking
-    // over with the wheel never jumps back to an unrelated chapter.
-    if (!reduced.matches && !short.matches && visible) window.scrollTo({ top: section!.offsetTop + progress * (section!.offsetHeight - innerHeight), behavior: 'instant' });
-  }
-  function scroll() {
-    if (manual || reduced.matches || short.matches) return;
-    progress = Math.max(0, Math.min(1, -section!.getBoundingClientRect().top / Math.max(1, section!.offsetHeight - innerHeight)));
-    schedule();
-  }
-  function userScroll() { manual = false; playing = false; last = 0; scroll(); }
   function resize() {
     const rect = canvas!.parentElement!.getBoundingClientRect();
     width = rect.width; height = rect.height;
@@ -187,30 +201,28 @@ export function mountTaskLoop() {
   }
   function preference() {
     if (reduced.matches) { playing = false; last = 0; }
-    hint.textContent = reduced.matches ? 'Use the slider to explore' : 'Scroll to follow';
+    hint.textContent = reduced.matches ? 'Use the slider to explore' : 'Plays once on entry';
     resize();
   }
   document.documentElement.classList.add('task-loop-on');
   section.querySelectorAll<HTMLButtonElement | HTMLInputElement>('button, input').forEach(control => { control.disabled = false; });
   play.addEventListener('click', () => {
-    manual = true;
+    interacted = true;
     if (progress >= 1) progress = 0;
     playing = !playing && !reduced.matches; last = 0; schedule();
   });
   scrub.addEventListener('input', () => setProgress(Number(scrub.value) / 1000));
   const observer = new ResizeObserver(resize); observer.observe(canvas.parentElement!);
-  const intersection = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; last = 0; if (visible) schedule(); });
+  const intersection = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting && entry.intersectionRatio >= .55; last = 0;
+    if (visible && !autoStarted && !interacted && !reduced.matches) {
+      autoStarted = true; progress = 0; playing = true;
+    }
+    if (visible) schedule();
+  }, { threshold: [0, .55] });
   intersection.observe(canvas);
   document.addEventListener('visibilitychange', () => { last = 0; if (!document.hidden) schedule(); });
-  window.addEventListener('scroll', scroll, { passive: true });
-  window.addEventListener('wheel', userScroll, { passive: true });
-  window.addEventListener('touchmove', userScroll, { passive: true });
-  window.addEventListener('keydown', event => {
-    if (event.target instanceof HTMLElement && /INPUT|BUTTON|TEXTAREA|SELECT/.test(event.target.tagName)) return;
-    if (['PageDown', 'PageUp', 'ArrowDown', 'ArrowUp', 'Home', 'End', ' '].includes(event.key)) userScroll();
-  });
   reduced.addEventListener('change', preference);
-  short.addEventListener('change', resize);
   document.fonts.ready.then(schedule);
   preference(); resize(); render();
 }
