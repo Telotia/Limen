@@ -52,12 +52,13 @@ async function callback() {
 }
 try {
   assert.equal((await request('/preview/task-loop')).status, 303);
+  assert.equal((await request('/private-preview/revision.json')).status, 303);
   assert.equal((await request('/_astro/TaskLoopPreview.fixture.js')).status, 403);
   const member = await login();
   assert.equal(member.status, 303, member.headers.get('X-Preview-Auth-Error') || 'member callback failed');
   assert.equal(member.headers.get('Location'), '/preview/task-loop#task-story');
   const cookie = member.headers.getSetCookie().find(c => c.startsWith('__Host-telotia-preview=')).split(';')[0];
-  for (const path of ['/preview/task-loop', '/_astro/TaskLoopPreview.fixture.js']) {
+  for (const path of ['/preview/task-loop', '/_astro/TaskLoopPreview.fixture.js', '/private-preview/revision.json']) {
     repositoryReply(200);
     const result = await request(path, cookie);
     assert.equal(result.status, 200);
@@ -77,7 +78,7 @@ try {
   const redirect = await callback();
   assert.equal(redirect.status, 503);
   assert.equal(redirect.headers.get('X-Preview-Auth-Error'), 'exchange-http-302');
-  assert.equal(assetReads, 2, 'no denied request may read private assets');
+  assert.equal(assetReads, 3, 'no denied request may read private assets');
   assert.equal(unexpectedOutbound, 0, 'all requests must stay on the fixed GitHub endpoints');
   for (const queue of replies.values()) assert.equal(queue.length, 0);
   console.info('Workers runtime: member HTML/JS, nonmember, revocation, public-repo fallback, API outage and redirect refusal passed.');

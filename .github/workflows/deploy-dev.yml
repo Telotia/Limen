@@ -31,6 +31,12 @@ jobs:
       - run: bun run build:dev
         env:
           PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
+      - name: Build private preview without publishing source
+        run: bun scripts/build-private-preview.ts
+        env:
+          PREVIEW_PRIVATE_SOURCE_BUNDLE: ${{ secrets.PREVIEW_PRIVATE_SOURCE_BUNDLE }}
+          PREVIEW_SESSION_SECRET: ${{ secrets.PREVIEW_SESSION_SECRET }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
       - name: Provision dev preview authentication secrets
         run: bun scripts/provision-dev-preview-secrets.ts
         env:
