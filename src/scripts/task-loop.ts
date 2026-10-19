@@ -16,6 +16,7 @@ export function mountTaskLoop() {
   let progress = 0, width = 0, height = 0, frame = 0, last = 0, current = -1;
   let playing = false, visible = false, autoStarted = false, interacted = false;
   const muted = '#617075', teal = '#00545A', line = '#DEE6E4';
+  const backgroundColors = ['#75817E', '#9CBEBD'] as const;
 
   function text(value: string, x: number, y: number, color = muted, size = 13, align: CanvasTextAlign = 'center') {
     ctx!.font = `400 ${size}px Inter, Arial, sans-serif`;
@@ -58,10 +59,11 @@ export function mountTaskLoop() {
       ctx!.globalAlpha = 1;
     }
     const size = (mobile ? 3.4 : 4.5) * state.camera.zoom;
-    for (const particle of state.particles) {
+    for (const [index, particle] of state.particles.entries()) {
       const q = project(particle);
       ctx!.globalAlpha = particle.opacity;
-      ctx!.fillStyle = '#617875';
+      // Color belongs to a stable particle identity, never to a task status.
+      ctx!.fillStyle = backgroundColors[index % 3 === 0 ? 1 : 0];
       ctx!.beginPath(); ctx!.roundRect(q.x - size / 2, q.y - size / 2, size, size, Math.max(.7, particle.round * size / 2)); ctx!.fill();
     }
     ctx!.globalAlpha = 1;
