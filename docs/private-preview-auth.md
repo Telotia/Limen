@@ -59,7 +59,10 @@ POST `/auth/task-preview/logout` clears the cookies and requires same-origin Ori
 All private responses are no-store for browsers and CDNs. Workers.dev aliases
 remain closed even when credentials are present.
 
-Run `bun test`, `bun run check`, dev/prod builds and Wrangler dry-run. Before opening
+Run `bun test`, `bun run test:preview-runtime`, `bun run check`, dev/prod builds and Wrangler dry-run. The runtime suite uses Workerd/Miniflare with mocked GitHub replies
+to cover real fetch semantics, member access, nonmember rejection and revocation.
+Workers supports `redirect: manual`; upstream redirects are rejected without following them.
+Before opening
 access, verify a real member succeeds, a GitHub user without repo access is denied,
 anonymous HTML redirects to login, direct anonymous private JS is denied, logout
 closes the page on refresh, and production and mentor pages stay unchanged.

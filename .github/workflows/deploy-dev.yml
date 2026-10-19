@@ -27,6 +27,7 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run check
       - run: bun test
+      - run: bun run test:preview-runtime
       - run: bun run build:dev
         env:
           PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}

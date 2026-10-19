@@ -14,6 +14,7 @@
     "astro": "astro",
     "check": "astro check",
     "test": "bun test",
+    "test:preview-runtime": "node scripts/test-preview-worker-runtime.mjs",
     "smoke:dev": "bun scripts/smoke-url.ts https://dev.telotia.com \"Request a pilot\"",
     "smoke:prod": "bun scripts/smoke-url.ts https://telotia.com \"September\"",
     "hooks:install": "git config core.hooksPath .githooks",
@@ -33,6 +34,7 @@
     "@types/node": "^25.7.0",
     "@types/three": "^0.184.1",
     "cross-env": "^7.0.3",
+    "miniflare": "4.20260515.0",
     "typescript": "^6.0.3",
     "wrangler": "^4.90.1"
   }

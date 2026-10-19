@@ -74,8 +74,15 @@ function page(status: number, title: string, detail: string, login = false, cook
 function ready(env: PreviewAuthEnv) {
   return Boolean(env.PREVIEW_GITHUB_CLIENT_ID && env.PREVIEW_GITHUB_CLIENT_SECRET && env.PREVIEW_SESSION_SECRET && env.PREVIEW_SESSION_SECRET.length >= 32);
 }
+function unavailable(stage: string, cookies: string[]) {
+  const result = page(503, 'Sign-in is temporarily unavailable', 'Access remains closed. Please try again later.', false, cookies);
+  // Fixed categories/status only: never upstream response text, tokens or credentials.
+  result.headers.set('X-Preview-Auth-Error', stage);
+  return result;
+}
 async function github(url: string, token: string, fetcher: Fetcher) {
-  return fetcher(url, { redirect: 'error', headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2026-03-10', 'User-Agent': 'Telotia-private-dev-preview' }, signal: AbortSignal.timeout(10000) });
+  // Workerd supports follow/manual only. Never follow a redirect with a user token.
+  return fetcher(url, { redirect: 'manual', headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2026-03-10', 'User-Agent': 'Telotia-private-dev-preview' }, signal: AbortSignal.timeout(10000) });
 }
 async function permitted(token: string, fetcher: Fetcher): Promise<'yes' | 'no' | 'unavailable'> {
   try {
@@ -118,25 +125,32 @@ export async function handlePreviewAuth(request: Request, env: PreviewAuthEnv, f
     if (!flow || flow.kind !== 'flow' || typeof flow.state !== 'string' || typeof flow.verifier !== 'string' || url.searchParams.getAll('state').length !== 1 || url.searchParams.getAll('code').length !== 1 || flow.state !== url.searchParams.get('state') || !code || code.length > 1024 || url.searchParams.has('error')) {
       return page(403, 'Sign-in could not be verified', 'Please start a new sign-in attempt.', true, clear);
     }
+    let stage = 'exchange';
     try {
       const exchange = await fetcher('https://github.com/login/oauth/access_token', {
-        method: 'POST', redirect: 'error', headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
+        method: 'POST', redirect: 'manual', headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'Telotia-private-dev-preview' },
         body: new URLSearchParams({ client_id: env.PREVIEW_GITHUB_CLIENT_ID!, client_secret: env.PREVIEW_GITHUB_CLIENT_SECRET!, redirect_uri: CALLBACK, code, code_verifier: flow.verifier }), signal: AbortSignal.timeout(10000),
       });
-      if (!exchange.ok) return page(503, 'Sign-in is temporarily unavailable', 'Access remains closed. Please try again later.', false, clear);
+      if (!exchange.ok) return unavailable('exchange-http-' + exchange.status, clear);
+      stage = 'exchange-json';
       const data = await exchange.json() as { access_token?: unknown; token_type?: unknown; expires_in?: unknown; error?: unknown };
       // GitHub App user tokens only. Installation/PAT/OAuth-app tokens are rejected.
       if (data.error || typeof data.access_token !== 'string' || !/^ghu_[A-Za-z0-9_]+$/.test(data.access_token) || data.access_token.length > 512 || data.token_type !== 'bearer') return page(403, 'Access denied', 'This sign-in does not grant project access.', false, clear);
       const token = data.access_token;
+      stage = 'identity';
       const [access, identity] = await Promise.all([permitted(token, fetcher), github('https://api.github.com/user', token, fetcher)]);
       if (access === 'unavailable' || identity.status >= 500) return page(503, 'Access check is temporarily unavailable', 'Access remains closed. Please try again later.', false, clear);
       const user = identity.ok ? await identity.json() as { id?: unknown } : null;
       if (access !== 'yes' || !user || !Number.isSafeInteger(user.id)) return page(403, 'Access denied', 'Your account cannot view this private project preview.', false, clear);
       const ttl = Math.min(900, typeof data.expires_in === 'number' && Number.isFinite(data.expires_in) ? Math.floor(data.expires_in) : 900);
       if (ttl < 1) return page(403, 'Access denied', 'Please start a new sign-in attempt.', true, clear);
+      stage = 'session';
       const session = await seal({ kind: 'session', token, exp: now() + ttl }, secret);
       return redirect(PREVIEW + '#task-story', [cookie(FLOW), cookie(SESSION, session, ttl)]);
-    } catch { return page(503, 'Sign-in is temporarily unavailable', 'Access remains closed. Please try again later.', false, clear); }
+    } catch (error) {
+      const name = error instanceof Error && ['TypeError', 'TimeoutError', 'AbortError', 'SyntaxError', 'OperationError'].includes(error.name) ? error.name : 'Error';
+      return unavailable(stage + '-' + name, clear);
+    }
   }
   if (authRoute) return response('Not found.', 404);
   const session = await open(readCookie(request, SESSION), secret, 'session');

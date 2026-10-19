@@ -66,6 +66,7 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run check
       - run: bun test
+      - run: bun run test:preview-runtime
       - name: Build dev
         run: bun run build:dev
         env:
