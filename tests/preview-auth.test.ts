@@ -26,7 +26,7 @@ function fixture() {
     expect(url).toBe('https://api.github.com/repos/Telotia/Telotia');
     checks++;
     return Response.json(repo, { status });
-  }) as typeof fetch;
+  });
   const request = (path: string, cookie?: string, init: RequestInit = {}) => handlePreviewAuth(new Request(origin + path, { ...init, headers: { ...(cookie ? { Cookie: cookie } : {}), ...init.headers } }), env, fetcher);
   return { env, fetcher, request, reads: () => reads, checks: () => checks,
     deny: (next = 404) => { status = next; }, publicRepo: () => { repo.private = false; } };
@@ -100,12 +100,12 @@ test('callbacks reject non-user tokens and network failures without serving prev
     const f = fixture(), start = (await f.request(root + '/start'))!;
     const state = new URL(start.headers.get('Location')!).searchParams.get('state');
     const request = new Request(origin + root + '/callback?code=fixture&state=' + state, { headers: { Cookie: cookieOf(start, '__Host-telotia-preview-flow') } });
-    const fetcher = (async () => Response.json({ access_token: credential, token_type: 'bearer' })) as typeof fetch;
+    const fetcher = async () => Response.json({ access_token: credential, token_type: 'bearer' });
     expect((await handlePreviewAuth(request, f.env, fetcher))!.status).toBe(403);
     expect(f.reads()).toBe(0);
   }
   const f = fixture(), login = await signIn(f);
-  const fetcher = (async () => { throw new Error('fixture network outage'); }) as typeof fetch;
+  const fetcher = async () => { throw new Error('fixture network outage'); };
   const response = await handlePreviewAuth(new Request(origin + '/preview/task-loop', { headers: { Cookie: login.cookie } }), f.env, fetcher);
   expect(response!.status).toBe(503); expect(f.reads()).toBe(0);
 });

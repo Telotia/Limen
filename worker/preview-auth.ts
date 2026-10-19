@@ -23,7 +23,7 @@ const headers = {
   'Referrer-Policy': 'no-referrer',
   'X-Content-Type-Options': 'nosniff',
 };
-type Fetcher = typeof fetch;
+type Fetcher = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 type Payload = { kind: 'flow'; state: string; verifier: string; exp: number } |
   { kind: 'session'; token: string; exp: number };
 const now = () => Math.floor(Date.now() / 1000);
