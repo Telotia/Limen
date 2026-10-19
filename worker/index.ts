@@ -1,4 +1,4 @@
-import { isPrivatePreview, closedPreview } from './private-preview';
+import { handlePreviewAuth, type PreviewAuthEnv } from './preview-auth';
 
 /**
  * Telotia site Worker.
@@ -23,7 +23,7 @@ interface ExecutionCtx {
   waitUntil(promise: Promise<unknown>): void;
 }
 
-interface Env {
+interface Env extends PreviewAuthEnv {
   /** Static assets (the Astro dist/ build). */
   ASSETS: AssetFetcher;
   /** Optional durable sink for leads. Enable via kv_namespaces in wrangler.jsonc. */
@@ -57,7 +57,8 @@ interface Lead {
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionCtx): Promise<Response> {
     const url = new URL(request.url);
-    if (isPrivatePreview(url.pathname)) return closedPreview(request, env.ENVIRONMENT === "production");
+    const preview = await handlePreviewAuth(request, env);
+    if (preview) return preview;
     if (url.pathname === "/api/pilot") {
       if (request.method !== "POST") return json({ ok: false, error: "Method not allowed." }, 405);
       return handlePilot(request, env, ctx);
