@@ -1,4 +1,4 @@
-import { chaosPoint, cinematicFrame, cinematicTask, type Point } from './task-loop-cinematic';
+import { cinematicFrame, cinematicTask, playbackPosition, type Point } from './task-loop-cinematic';
 import { ease, loopState, loopSteps } from './task-loop-model';
 
 export function mountTaskLoop() {
@@ -13,7 +13,7 @@ export function mountTaskLoop() {
 
   const hint = section.querySelector<HTMLElement>('[data-loop-hint]')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let progress = 0, width = 0, height = 0, frame = 0, last = 0, current = -1;
+  let progress = 0, width = 0, height = 0, frame = 0, last = 0;
   let playing = false, visible = false, autoStarted = false, interacted = false;
   const muted = '#617075', teal = '#00545A', line = '#DEE6E4';
   const backgroundColors = ['#75817E', '#9CBEBD'] as const;
@@ -31,34 +31,23 @@ export function mountTaskLoop() {
   function draw() {
     if (!width || !height) return;
     ctx!.clearRect(0, 0, width, height);
-    const state = cinematicFrame(progress, reduced.matches);
-    const step = loopState(progress).step;
+    const story = playbackPosition(progress);
+    const state = cinematicFrame(story, reduced.matches);
+    const step = loopState(story).step;
     const mobile = width < 600;
     const project = (q: { x: number; y: number }) => ({
       x: width * (.5 + (q.x - state.camera.x) * state.camera.zoom * (mobile ? .92 : .86)),
       y: height * .48 + (q.y - state.camera.y) * state.camera.zoom * (mobile ? Math.min(height * .96, width) : height * .96),
     });
     // One camera follows a single token while its surrounding particles morph
-    // from document to workload, attractor, professional field, and document.
-    if (state.chaos > .01 && !reduced.matches) {
-      for (let strand = 0; strand < 26; strand++) {
-        const start = strand * 170 + progress * 1500;
-        ctx!.beginPath();
-        for (let j = 0; j < 125; j += 2) {
-          const q = project(chaosPoint(start + j));
-          if (!j) ctx!.moveTo(q.x, q.y); else ctx!.lineTo(q.x, q.y);
-        }
-        ctx!.globalAlpha = state.chaos * .36; ctx!.strokeStyle = '#8B9F9B'; ctx!.lineWidth = .8; ctx!.stroke();
-      }
-      ctx!.globalAlpha = 1;
-    }
+    // from document to workload, shared queue, professional field, and document.
     if (state.document > .01) {
       const a = project({ x: .265, y: .22 }), b = project({ x: .765, y: .81 });
       ctx!.globalAlpha = Math.min(1, state.document);
       box(a.x, a.y, b.x - a.x, b.y - a.y, '#D8E2DF', '#FFFFFF', 12);
       ctx!.globalAlpha = 1;
     }
-    const size = (mobile ? 3.4 : 4.5) * state.camera.zoom;
+    const size = ((mobile ? 3.4 : 4.5) + state.pool * (mobile ? 1.5 : 2.4)) * state.camera.zoom;
     for (const [index, particle] of state.particles.entries()) {
       const q = project(particle);
       ctx!.globalAlpha = particle.opacity;
@@ -69,24 +58,24 @@ export function mountTaskLoop() {
     ctx!.globalAlpha = 1;
     // Selection comes from a professional. The contact dot stays gray so the
     // task remains the only teal object; final confirmation belongs to A.
-    if (progress > .37 && progress < .50) {
+    if (story > .37 && story < .50) {
       const q = project({ x: .72, y: .43 });
-      const opacity = ease((progress - .37) / .04) * (1 - ease((progress - .46) / .04));
+      const opacity = ease((story - .37) / .04) * (1 - ease((story - .46) / .04));
       ctx!.globalAlpha = opacity;
       circle(q, mobile ? 8 : 13, '#617075', '#FFFFFF', 1.5);
       ctx!.globalAlpha = 1;
     }
-    if (!reduced.matches && progress > .12 && progress < 5 / 7) {
+    if (!reduced.matches && story > .12 && story < 5 / 7) {
       ctx!.beginPath();
       for (let i = 16; i >= 0; i--) {
-        const q = project(cinematicTask(Math.max(0, progress - i * .0009)));
+        const q = project(cinematicTask(Math.max(0, story - i * .0009)));
         if (i === 16) ctx!.moveTo(q.x, q.y); else ctx!.lineTo(q.x, q.y);
       }
       ctx!.strokeStyle = teal; ctx!.lineWidth = mobile ? 2 : 2.5; ctx!.globalAlpha = .45; ctx!.stroke(); ctx!.globalAlpha = 1;
     }
     const task = project(state.task), token = mobile ? 17 : 22;
     ctx!.save(); ctx!.translate(task.x, task.y);
-    const angle = progress > .12 && progress < 5 / 7 ? Math.sin(progress * Math.PI * 14) * .18 : 0;
+    const angle = story > .12 && story < 5 / 7 ? Math.sin(story * Math.PI * 14) * .18 : 0;
     ctx!.rotate(angle);
     box(-token / 2 - 3, -token / 2 - 3, token + 6, token + 6, '#FFFFFF', '#FFFFFF', 5);
     box(-token / 2, -token / 2, token, token, teal, teal, 3);
@@ -99,7 +88,7 @@ export function mountTaskLoop() {
     ctx!.font = '600 12px Inter, Arial, sans-serif'; ctx!.fillStyle = teal; ctx!.textAlign = 'center'; ctx!.textBaseline = 'middle';
     ctx!.fillText('T-01', labelX, task.y - token / 2 - 18);
     if (step === 3 || step === 5) {
-      const f = loopState(progress).fraction;
+      const f = loopState(story).fraction;
       const scan = project({ x: .30, y: .41 + ease(f) * .33 });
       const end = project({ x: .70, y: .41 + ease(f) * .33 });
       ctx!.beginPath(); ctx!.moveTo(scan.x, scan.y); ctx!.lineTo(end.x, end.y);
@@ -107,8 +96,8 @@ export function mountTaskLoop() {
     }
     // One scene caption replaces three permanent role labels. The pharmacy
     // identity is repeated on the returned document and pinned in real text.
-    const labels = ['Pharmacy A', 'Pharmacies → shared pool', 'Shared pool · selected by a remote pharmacist', 'Remote pharmacist · processing', 'Returning to Pharmacy A', 'Pharmacy A · review', 'Pharmacy A · reviewed'];
-    text(labels[step], width * .5, height * .94, muted, mobile ? 10 : 12);
+    const labels = ['Pharmacy A', 'Pharmacies → shared pool', 'Shared pool · tasks from pharmacies, selected by remote pharmacists', 'Remote pharmacist · processing', 'Returning to Pharmacy A', 'Pharmacy A · review', 'Pharmacy A · reviewed'];
+    text(mobile && step === 2 ? 'Shared pool · pharmacy tasks' : labels[step], width * .5, height * .94, muted, mobile ? 10 : 12);
     if (state.document > .7) {
       const mark = project({ x: .69, y: .75 });
       text(step === 3 ? 'Remote' : 'A', mark.x, mark.y, muted, 11);
@@ -116,12 +105,12 @@ export function mountTaskLoop() {
   }
 
   function render() {
-    const state = loopState(progress);
-    if (state.step !== current) {
-      current = state.step;
-      title.textContent = ['One task, from Pharmacy A.', 'Into the shared pool.', 'A remote pharmacist selects it.', 'Professional work, in progress.', 'Back to Pharmacy A.', 'Pharmacy A reviews the work.', 'Reviewed. The loop is complete.'][current];
-      scrub.setAttribute('aria-valuetext', loopSteps[current].title);
-    }
+    const state = loopState(playbackPosition(progress));
+    const headline = state.step === 2 && playbackPosition(progress) >= .40
+      ? 'A remote pharmacist selects T-01.'
+      : ['One task, from Pharmacy A.', 'Into the shared pool.', 'Shared pool. Ready for selection.', 'Professional work, in progress.', 'Back to Pharmacy A.', 'Pharmacy A reviews the work.', 'Reviewed. The loop is complete.'][state.step];
+    if (title.textContent !== headline) title.textContent = headline;
+    if (scrub.getAttribute('aria-valuetext') !== headline) scrub.setAttribute('aria-valuetext', headline);
     scrub.value = String(Math.round(progress * 1000));
     play.textContent = playing ? 'Pause' : progress >= 1 ? 'Replay' : 'Play';
     play.setAttribute('aria-pressed', String(playing));
@@ -131,7 +120,7 @@ export function mountTaskLoop() {
     frame = 0;
     if (document.hidden || !visible) { last = 0; return; }
     if (playing) {
-      if (last) progress = Math.min(1, progress + Math.min(80, time - last) / 24500);
+      if (last) progress = Math.min(1, progress + Math.min(80, time - last) / 30000);
       last = time;
       if (progress === 1) playing = false;
     }

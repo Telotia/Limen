@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { cinematicFrame, cinematicTask } from '../src/scripts/task-loop-cinematic';
+import { cinematicFrame, cinematicTask, playbackPosition } from '../src/scripts/task-loop-cinematic';
 test('one tracked task keeps its source through every continuous camera transition', () => {
   let previous = cinematicFrame(0);
   for (let i = 0; i <= 1000; i++) {
@@ -30,4 +30,21 @@ test('particle identities interpolate without a jump at scene boundaries', () =>
     const a = cinematicFrame(t - 1e-7), b = cinematicFrame(t + 1e-7);
     a.particles.forEach((q, i) => expect(Math.hypot(q.x - b.particles[i].x, q.y - b.particles[i].y)).toBeLessThan(.0001));
   }
+});
+
+test('playback gives the pool an extended steady view before selection', () => {
+  expect(playbackPosition(.23)).toBeCloseTo(.29);
+  expect(playbackPosition(.50)).toBeCloseTo(.40);
+  for (const p of [.25, .30, .35, .40, .45]) {
+    const frame = cinematicFrame(playbackPosition(p));
+    expect(frame.pool).toBeGreaterThan(.95);
+    expect(frame.camera.zoom).toBeCloseTo(1.45);
+    expect(frame.camera.x).toBeCloseTo(.5);
+  }
+  let previous = 0;
+  for (let i = 0; i <= 1000; i++) {
+    const t = playbackPosition(i / 1000);
+    expect(t).toBeGreaterThanOrEqual(previous); previous = t;
+  }
+  expect(playbackPosition(1)).toBe(1);
 });
