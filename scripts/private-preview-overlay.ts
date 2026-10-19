@@ -50,7 +50,7 @@ export async function applyOverlay(data: Overlay, root: string) {
   // Validate every path and base before writing anything. Cross-platform line endings are normalized.
   for (const file of previewFiles) {
     const target = await realpath(resolve(base, file));
-    if (!target.startsWith(base + sep)) throw new Error('Private preview path escapes checkout.');
+    if (!target.startsWith(base + sep) || target !== resolve(base, file)) throw new Error('Private preview path is redirected or escapes checkout.');
     const content = await readFile(target, 'utf8');
     if (sourceHash(content) !== data.files[file].base) throw new Error('Private preview base changed; regenerate the encrypted package locally.');
     originals.set(target, content);

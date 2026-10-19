@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, symlink, unlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve, sep } from 'node:path';
 import { applyOverlay, openOverlay, previewFiles, sealOverlay, sourceHash, type Overlay } from '../scripts/private-preview-overlay';
@@ -33,6 +33,11 @@ test('overlay validates all original files before writing, supports CRLF and res
     await writeFile(join(root, previewFiles[1]), 'changed upstream');
     await expect(applyOverlay(fixture(), root)).rejects.toThrow('base changed');
     expect(await readFile(join(root, previewFiles[0]), 'utf8')).toBe(base.replaceAll('\n', '\r\n'));
+    if (process.platform !== 'win32') {
+      await unlink(join(root, previewFiles[1]));
+      await symlink(join(root, previewFiles[0]), join(root, previewFiles[1]));
+      await expect(applyOverlay(fixture(), root)).rejects.toThrow('path is redirected');
+    }
   } finally {
     const resolved = resolve(root);
     if (!resolved.startsWith(resolve(tmpdir()) + sep + 'telotia-overlay-test-')) throw new Error('Unsafe fixture cleanup path');
