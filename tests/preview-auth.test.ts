@@ -95,6 +95,23 @@ test('expired sessions and flow cookies cannot grant access', async () => {
   try { expect((await f.request('/preview/task-loop', login.cookie))!.status).toBe(303); expect(f.reads()).toBe(0); }
   finally { clock.mockRestore(); }
 });
+test('OAuth failures expose only safe diagnostic categories, never upstream content', async () => {
+  for (const kind of ['http', 'json', 'network']) {
+    const f = fixture(), start = (await f.request(root + '/start'))!;
+    const state = new URL(start.headers.get('Location')!).searchParams.get('state');
+    const request = new Request(origin + root + '/callback?code=fixture&state=' + state, { headers: { Cookie: cookieOf(start, '__Host-telotia-preview-flow') } });
+    const fetcher = async (_input: RequestInfo | URL, init?: RequestInit) => {
+      expect(new Headers(init?.headers).get('User-Agent')).toBe('Telotia-private-dev-preview');
+      if (kind === 'network') throw new TypeError('sensitive upstream content');
+      return new Response('sensitive upstream content', { status: kind === 'http' ? 403 : 200 });
+    };
+    const result = (await handlePreviewAuth(request, f.env, fetcher))!;
+    expect(result.status).toBe(503);
+    expect(result.headers.get('X-Preview-Auth-Error')).toBe(kind === 'http' ? 'exchange-http-403' : kind === 'json' ? 'exchange-json-SyntaxError' : 'exchange-TypeError');
+    expect(await result.text()).not.toContain('sensitive upstream content');
+    expect(f.reads()).toBe(0);
+  }
+});
 test('callbacks reject non-user tokens and network failures without serving preview assets', async () => {
   for (const credential of ['ghs_installationFixture', 'ghp_personalFixture', 'invalid']) {
     const f = fixture(), start = (await f.request(root + '/start'))!;
