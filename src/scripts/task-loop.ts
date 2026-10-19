@@ -1,8 +1,5 @@
-import { attractor, sampleAttractor } from './task-loop-chaos';
+import { chaosPoint, cinematicFrame, cinematicTask, type Point } from './task-loop-cinematic';
 import { ease, loopState, loopSteps } from './task-loop-model';
-
-type Point = { x: number; y: number };
-const mix = (a: Point, b: Point, t: number): Point => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
 
 export function mountTaskLoop() {
   const section = document.querySelector<HTMLElement>('#task-story');
@@ -30,139 +27,90 @@ export function mountTaskLoop() {
   function circle(p: Point, radius: number, stroke = '#A7B6B4', fill = '#FFFFFF', weight = 1) {
     ctx!.beginPath(); ctx!.arc(p.x, p.y, radius, 0, Math.PI * 2); ctx!.fillStyle = fill; ctx!.fill(); ctx!.strokeStyle = stroke; ctx!.lineWidth = weight; ctx!.stroke();
   }
-  function segment(a: Point, b: Point, color = line, dash = false) {
-    ctx!.beginPath(); ctx!.moveTo(a.x, a.y); ctx!.lineTo(b.x, b.y); ctx!.strokeStyle = color; ctx!.lineWidth = 1; ctx!.setLineDash(dash ? [3, 5] : []); ctx!.stroke(); ctx!.setLineDash([]);
-  }
-  function routePoint(a: Point, b: Point, t: number, lift: number): Point {
-    const point = mix(a, b, t); point.y -= Math.sin(t * Math.PI) * lift; return point;
-  }
-
-  // Seeded positions keep backwards scrubbing continuous and reproducible.
-  const seed = (i: number) => { const n = Math.sin(i * 127.1 + 311.7) * 43758.5453; return n - Math.floor(n); };
-  const mod = (n: number) => ((n % 1) + 1) % 1;
   function draw() {
     if (!width || !height) return;
     ctx!.clearRect(0, 0, width, height);
-    const { step: s, fraction: f } = loopState(progress);
-    const tall = width < 600;
-    const p = (x: number, y: number): Point => ({ x: x * width, y: y * height });
-    const origin = tall ? p(.19, .22) : p(.17, .55);
-    const pool = tall ? p(.72, .48) : p(.51, .58);
-    const worker = tall ? p(.32, .78) : p(.83, .46);
-    const home = tall ? p(.19, .34) : p(.17, .72);
-    const clock = progress * 5;
-    const size = tall ? 4 : 5;
-    function particle(point: Point, angle: number, alpha = .55, scale = 1) {
-      ctx!.save(); ctx!.translate(point.x, point.y); ctx!.rotate(angle);
-      ctx!.globalAlpha = alpha; ctx!.fillStyle = '#617875';
-      ctx!.beginPath(); ctx!.roundRect(-size * scale / 2, -size * scale / 2, size * scale, size * scale, 1); ctx!.fill(); ctx!.restore();
-    }
-    // Uneven pharmacy workloads dissolve into a shared stream, rather than
-    // becoming diagram nodes. Only the source lane has a small identity marker.
-    for (let lane = 0; lane < 5; lane++) {
-      const x = tall ? width * (.065 + lane * .062) : width * (.06 + lane * .055);
-      const bottom = tall ? height * .35 : height * .76;
-      const n = [18, 9, 26, 12, 21][lane];
-      for (let j = 0; j < n; j++) {
-        const y = bottom - Math.floor(j / 2) * (size + 4);
-        particle({ x: x + (j % 2) * (size + 4), y: y + Math.sin(clock * 5 + j) * 1.4 }, Math.sin(j + clock) * .12, .65 + seed(j + lane * 30) * .25);
-      }
-    }
-    const chaosPoint = (index: number): Point => {
-      const q = sampleAttractor(index);
-      return { x: pool.x + q.x * width * (tall ? .21 : .135), y: pool.y + q.y * height * (tall ? .12 : .24) };
-    };
-    // A real Lorenz attractor gives the shared pool its two-lobed, folding
-    // structure. Short moving strands retain the airy white composition.
-    if (!reduced.matches) {
-      for (let strand = 0; strand < 20; strand++) {
-        const phase = mod(clock * .09 + strand / 20);
-        const start = Math.floor(phase * (attractor.length - 160));
+    const state = cinematicFrame(progress, reduced.matches);
+    const step = loopState(progress).step;
+    const mobile = width < 600;
+    const project = (q: { x: number; y: number }) => ({
+      x: width * (.5 + (q.x - state.camera.x) * state.camera.zoom * (mobile ? .92 : .86)),
+      y: height * .48 + (q.y - state.camera.y) * state.camera.zoom * (mobile ? Math.min(height * .96, width) : height * .96),
+    });
+    // One camera follows a single token while its surrounding particles morph
+    // from document to workload, attractor, professional field, and document.
+    if (state.chaos > .01 && !reduced.matches) {
+      for (let strand = 0; strand < 26; strand++) {
+        const start = strand * 170 + progress * 1500;
         ctx!.beginPath();
-        for (let j = 0; j < 100; j += 2) {
-          const q = chaosPoint(start + j);
+        for (let j = 0; j < 125; j += 2) {
+          const q = project(chaosPoint(start + j));
           if (!j) ctx!.moveTo(q.x, q.y); else ctx!.lineTo(q.x, q.y);
         }
-        ctx!.strokeStyle = '#93A8A3'; ctx!.globalAlpha = .32 * Math.min(1, phase * 15, (1 - phase) * 15); ctx!.lineWidth = .7; ctx!.stroke();
+        ctx!.globalAlpha = state.chaos * .36; ctx!.strokeStyle = '#8B9F9B'; ctx!.lineWidth = .8; ctx!.stroke();
       }
       ctx!.globalAlpha = 1;
     }
-    // Each contextual particle enters and leaves at exactly the point where
-    // its Lorenz segment starts/ends. This avoids the old pool position jumps.
-    function flowPoint(i: number, t: number): Point {
-      const start = seed(i + 7) * 4000;
-      const a = tall ? p(.07 + seed(i) * .24, .20) : p(.06 + seed(i) * .22, .56);
-      const target = tall ? p(.12 + seed(i + 12) * .55, .72 + seed(i + 13) * .14) : p(.72 + seed(i + 12) * .22, .21 + seed(i + 13) * .49);
-      if (t < .26) return routePoint(a, chaosPoint(start), ease(t / .26), height * .08);
-      if (t < .76) return chaosPoint(start + ease((t - .26) / .50) * 1000);
-      return routePoint(chaosPoint(start + 1000), target, ease((t - .76) / .24), height * .08);
+    if (state.document > .01) {
+      const a = project({ x: .265, y: .22 }), b = project({ x: .765, y: .81 });
+      ctx!.globalAlpha = Math.min(1, state.document);
+      box(a.x, a.y, b.x - a.x, b.y - a.y, '#D8E2DF', '#FFFFFF', 12);
+      ctx!.globalAlpha = 1;
     }
-    for (let i = 0; i < (tall ? 62 : 110); i++) {
-      const t = mod(clock * (.29 + seed(i + 60) * .10) + seed(i + 2));
-      const q = flowPoint(i, t);
-      const fade = Math.min(1, t * 18, (1 - t) * 18);
-      if (!reduced.matches) {
-        const tail = flowPoint(i, Math.max(0, t - .009));
-        ctx!.globalAlpha = fade * .22; ctx!.lineWidth = 1;
-        segment(tail, q, '#617875'); ctx!.globalAlpha = 1;
+    const size = (mobile ? 3.4 : 4.5) * state.camera.zoom;
+    for (const particle of state.particles) {
+      const q = project(particle);
+      ctx!.globalAlpha = particle.opacity;
+      ctx!.fillStyle = '#617875';
+      ctx!.beginPath(); ctx!.roundRect(q.x - size / 2, q.y - size / 2, size, size, Math.max(.7, particle.round * size / 2)); ctx!.fill();
+    }
+    ctx!.globalAlpha = 1;
+    // Selection comes from a professional. The contact dot stays gray so the
+    // task remains the only teal object; final confirmation belongs to A.
+    if (progress > .37 && progress < .50) {
+      const q = project({ x: .72, y: .43 });
+      const opacity = ease((progress - .37) / .04) * (1 - ease((progress - .46) / .04));
+      ctx!.globalAlpha = opacity;
+      circle(q, mobile ? 8 : 13, '#617075', '#FFFFFF', 1.5);
+      ctx!.globalAlpha = 1;
+    }
+    if (!reduced.matches && progress > .12 && progress < 5 / 7) {
+      ctx!.beginPath();
+      for (let i = 16; i >= 0; i--) {
+        const q = project(cinematicTask(Math.max(0, progress - i * .0009)));
+        if (i === 16) ctx!.moveTo(q.x, q.y); else ctx!.lineTo(q.x, q.y);
       }
-      particle(q, seed(i) * 2 + clock * .3, fade * .68, .8 + seed(i + 30) * .55);
+      ctx!.strokeStyle = teal; ctx!.lineWidth = mobile ? 2 : 2.5; ctx!.globalAlpha = .45; ctx!.stroke(); ctx!.globalAlpha = 1;
     }
-    // A loose field of circles represents professionals, distinct from tasks.
-    for (let i = 0; i < (tall ? 25 : 56); i++) {
-      const dot = tall ? p(.12 + seed(i + 220) * .63, .69 + seed(i + 320) * .20) : p(.72 + seed(i + 220) * .24, .18 + seed(i + 320) * .54);
-      if (Math.hypot(dot.x - worker.x, dot.y - worker.y) < 20) continue;
-      dot.y += Math.sin(clock * 2 + i) * 2;
-      circle(dot, tall ? 2 : 2.8, '#8B9F9B', i % 5 ? '#8B9F9B' : '#FFFFFF');
-    }
-    const selected = s >= 2 && s <= 4;
-    circle(worker, tall ? 4 : 5, selected ? '#617075' : '#8B9F9B', '#FFFFFF', 1.5);
-    if (s === 2 || s === 3) {
-      // The professional reaches for the task; the token never changes identity.
-      const reach = s === 2 ? Math.sin(Math.PI * ease(f)) : 0;
-      const endpoint = mix(worker, pool, reach * .25);
-      segment(worker, endpoint, '#8B9F9B');
-    }
-    let task = origin;
-    const trace: Point[] = [];
-    function taskAt(step: number, fraction: number): Point {
-      if (step === 1) return routePoint(origin, pool, ease(fraction), height * .18);
-      if (step === 2) {
-        const q = chaosPoint(1800 + ease(fraction) * 900), envelope = Math.sin(Math.PI * fraction) ** 2;
-        return mix(pool, q, envelope);
-      }
-      if (step === 3) return routePoint(pool, worker, ease(fraction / .42), height * .08);
-      if (step === 4) {
-        const t = ease(fraction), z = 1 - t;
-        const c1 = tall ? p(.93, .93) : p(.94, .08), c2 = tall ? p(.05, .66) : p(.11, .04);
-        return { x: z ** 3 * worker.x + 3 * z * z * t * c1.x + 3 * z * t * t * c2.x + t ** 3 * home.x, y: z ** 3 * worker.y + 3 * z * z * t * c1.y + 3 * z * t * t * c2.y + t ** 3 * home.y };
-      }
-      return step >= 5 ? home : origin;
-    }
-    task = taskAt(s, f);
-    if (!reduced.matches && [1, 2, 3, 4].includes(s)) {
-      for (let j = 12; j >= 1; j--) trace.push(taskAt(s, Math.max(0, f - j * .012)));
-      trace.forEach((q, i) => { ctx!.globalAlpha = .12 + i * .035; circle(q, 2.4, teal, teal); }); ctx!.globalAlpha = 1;
-    }
-    const token = tall ? 16 : 20;
+    const task = project(state.task), token = mobile ? 17 : 22;
     ctx!.save(); ctx!.translate(task.x, task.y);
-    ctx!.rotate(s === 1 || s === 4 ? Math.sin(f * Math.PI) * .6 : 0);
+    const angle = progress > .12 && progress < 5 / 7 ? Math.sin(progress * Math.PI * 14) * .18 : 0;
+    ctx!.rotate(angle);
     box(-token / 2 - 3, -token / 2 - 3, token + 6, token + 6, '#FFFFFF', '#FFFFFF', 5);
     box(-token / 2, -token / 2, token, token, teal, teal, 3);
-    if (s === 6) {
-      ctx!.beginPath(); ctx!.moveTo(-3, 0); ctx!.lineTo(-.5, 2.5); ctx!.lineTo(3.5, -2.5); ctx!.strokeStyle = '#FFFFFF'; ctx!.lineWidth = 1.3; ctx!.stroke();
+    if (state.reviewed) {
+      ctx!.beginPath(); ctx!.moveTo(-4, 0); ctx!.lineTo(-1, 3); ctx!.lineTo(4, -3); ctx!.strokeStyle = '#FFFFFF'; ctx!.lineWidth = 1.6; ctx!.stroke();
     }
     ctx!.restore();
-    const labelX = Math.max(25, Math.min(width - 25, task.x));
-    box(labelX - 23, task.y - token / 2 - 30, 46, 22, '#FFFFFF', '#FFFFFF', 4);
-    ctx!.font = '600 12px Inter, Arial, sans-serif'; ctx!.fillStyle = teal; ctx!.textAlign = 'center';
+    const labelX = Math.max(26, Math.min(width - 26, task.x));
+    box(labelX - 24, task.y - token / 2 - 29, 48, 22, '#FFFFFF', '#FFFFFF', 4);
+    ctx!.font = '600 12px Inter, Arial, sans-serif'; ctx!.fillStyle = teal; ctx!.textAlign = 'center'; ctx!.textBaseline = 'middle';
     ctx!.fillText('T-01', labelX, task.y - token / 2 - 18);
-    // Restrained role labels ground the otherwise abstract particle field.
-    text('Pharmacies', tall ? width * .18 : width * .17, tall ? height * .08 : height * .88, muted, 11);
-    text('Pool', pool.x, tall ? height * .61 : height * .88, muted, 11);
-    text('Remote pharmacists', tall ? width * .43 : width * .84, tall ? height * .95 : height * .88, muted, 11);
-    if (s >= 5) box(home.x - 43, home.y + 13, 86, 19, '#FFFFFF', '#FFFFFF', 3);
-    text(s >= 5 ? s === 6 ? 'A · Reviewed' : 'A · Review' : 'A', home.x, home.y + 22, teal, 10);
+    if (step === 3 || step === 5) {
+      const f = loopState(progress).fraction;
+      const scan = project({ x: .30, y: .41 + ease(f) * .33 });
+      const end = project({ x: .70, y: .41 + ease(f) * .33 });
+      ctx!.beginPath(); ctx!.moveTo(scan.x, scan.y); ctx!.lineTo(end.x, end.y);
+      ctx!.strokeStyle = '#A3B3AF'; ctx!.lineWidth = 1; ctx!.stroke();
+    }
+    // One scene caption replaces three permanent role labels. The pharmacy
+    // identity is repeated on the returned document and pinned in real text.
+    const labels = ['Pharmacy A', 'Pharmacies → shared pool', 'Shared pool · selected by a remote pharmacist', 'Remote pharmacist · processing', 'Returning to Pharmacy A', 'Pharmacy A · review', 'Pharmacy A · reviewed'];
+    text(labels[step], width * .5, height * .94, muted, mobile ? 10 : 12);
+    if (state.document > .7) {
+      const mark = project({ x: .69, y: .75 });
+      text(step === 3 ? 'Remote' : 'A', mark.x, mark.y, muted, 11);
+    }
   }
 
   function render() {
