@@ -1,4 +1,4 @@
-import { cinematicFrame, cinematicTask, playbackPosition, type Point } from './task-loop-cinematic';
+import { cinematicFrame, cinematicTask, playbackPosition, poolGroups, type Point } from './task-loop-cinematic';
 import { ease, loopState } from './task-loop-model';
 
 export function mountTaskLoop() {
@@ -56,6 +56,14 @@ export function mountTaskLoop() {
       ctx!.beginPath(); ctx!.roundRect(q.x - size / 2, q.y - size / 2, size, size, Math.max(.7, particle.round * size / 2)); ctx!.fill();
     }
     ctx!.globalAlpha = 1;
+    if (state.pool > .01) {
+      ctx!.globalAlpha = state.pool;
+      for (const group of poolGroups) {
+        const label = project({ x: group.x, y: .72 });
+        text(group.label, label.x, label.y, muted, mobile ? 9 : 12);
+      }
+      ctx!.globalAlpha = 1;
+    }
     // Selection comes from a professional. The contact dot stays gray so the
     // task remains the only teal object; final confirmation belongs to A.
     if (story > .37 && story < .50) {
@@ -99,8 +107,8 @@ export function mountTaskLoop() {
     }
     // One scene caption replaces three permanent role labels. The pharmacy
     // identity is repeated on the returned document and pinned in real text.
-    const labels = ['Pharmacy A', 'Pharmacies → shared pool', 'Shared pool · tasks from pharmacies, selected by remote pharmacists', 'Remote pharmacist · processing', 'Returning to Pharmacy A', 'Pharmacy A · review', 'Pharmacy A · reviewed'];
-    text(mobile && step === 2 ? 'Shared pool · pharmacy tasks' : labels[step], width * .5, height * .94, muted, mobile ? 10 : 12);
+    const labels = ['Pharmacy A', 'Pharmacies → shared pool', 'Shared pool · illustrative task categories', 'Remote pharmacist · processing', 'Returning to Pharmacy A', 'Pharmacy A · review', 'Pharmacy A · reviewed'];
+    text(mobile && step === 2 ? 'Shared pool · illustrative categories' : labels[step], width * .5, height * .94, muted, mobile ? 10 : 12);
     if (state.document > .7) {
       const mark = project({ x: .69, y: .75 });
       text(step === 3 ? 'Remote' : 'A', mark.x, mark.y, muted, 11);
@@ -111,9 +119,11 @@ export function mountTaskLoop() {
     const state = loopState(playbackPosition(progress));
     const headline = state.step === 2 && playbackPosition(progress) >= .40
       ? 'A remote pharmacist selects T-01.'
-      : ['One task, from Pharmacy A.', 'Into the shared pool.', 'Shared pool. Ready for selection.', 'Professional work, in progress.', 'Back to Pharmacy A.', 'Pharmacy A reviews the work.', 'Reviewed. The loop is complete.'][state.step];
+      : ['One task, from Pharmacy A.', 'Into the shared pool.', 'Shared pool. Tasks grouped.', 'Professional work, in progress.', 'Back to Pharmacy A.', 'Pharmacy A reviews the work.', 'Reviewed. The loop is complete.'][state.step];
     if (title.textContent !== headline) title.textContent = headline;
-    if (scrub.getAttribute('aria-valuetext') !== headline) scrub.setAttribute('aria-valuetext', headline);
+    const description = state.step === 2 && playbackPosition(progress) < .40
+      ? 'Shared pool. Illustrative categories A, B and C. T-01 is in Category B.' : headline;
+    if (scrub.getAttribute('aria-valuetext') !== description) scrub.setAttribute('aria-valuetext', description);
     scrub.value = String(Math.round(progress * 1000));
     play.textContent = playing ? 'Pause' : progress >= 1 ? 'Replay' : 'Play';
     play.setAttribute('aria-pressed', String(playing));

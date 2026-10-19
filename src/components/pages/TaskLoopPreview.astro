@@ -30,7 +30,7 @@ import { loopSteps } from '../../scripts/task-loop-model';
         </div>
       </div>
     </section>
-    <details class="wrap walkthrough" id="walkthrough"><summary>Read the journey</summary><p>Illustrative tasks and pharmacy labels.</p><ol>{loopSteps.map((step, index) => <li id={`step-${index}`}><h3>{step.title}</h3><p>{step.body}</p></li>)}</ol></details>
+    <details class="wrap walkthrough" id="walkthrough"><summary>Read the journey</summary><p>Illustrative tasks and pharmacy labels. Categories A, B and C are examples; T-01 is shown in Category B.</p><ol>{loopSteps.map((step, index) => <li id={`step-${index}`}><h3>{step.title}</h3><p>{step.body}</p></li>)}</ol></details>
   </main>
   <footer class="wrap"><p>Telotia · Montréal</p><p>One task. Back to its origin.</p></footer>
   <script>import { mountTaskLoop } from '../../scripts/task-loop'; mountTaskLoop();</script>

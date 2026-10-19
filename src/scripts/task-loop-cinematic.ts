@@ -2,6 +2,11 @@ import { ease } from './task-loop-model';
 export type Point = { x: number; y: number };
 export const mixPoint = (a: Point, b: Point, t: number): Point => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
 const seed = (i: number) => { const n = Math.sin(i * 127.1 + 311.7) * 43758.5453; return n - Math.floor(n); };
+export const poolGroups = [
+  { id: 'A', label: 'Category A', x: .22 },
+  { id: 'B', label: 'Category B', x: .50 },
+  { id: 'C', label: 'Category C', x: .78 },
+] as const;
 const poolEntry = { x: .48, y: .45 }, poolExit = { x: .56, y: .45 };
 function poolTask(fraction: number): Point {
   const t = ease(fraction);
@@ -38,12 +43,13 @@ export function cinematicTask(time: number): Point {
 // independent low-amplitude drift gives each task a little breathing room.
 const poolCloud: Point[] = [];
 for (let i = 0; i < 180; i++) {
-  let point = { x: .5, y: .48 };
+  const group = poolGroups[Math.floor(i / 60)];
+  let point: Point = { x: group.x, y: .48 };
   for (let attempt = 0; attempt < 300; attempt++) {
     const n = i * 307 + attempt;
     const x = (seed(n + 2100) * 2 - 1), y = (seed(n + 8700) * 2 - 1);
     if (x * x + y * y > 1) continue;
-    point = { x: .5 + x * .27, y: .48 + y * .22 };
+    point = { x: group.x + x * .105, y: .48 + y * .17 };
     if (poolCloud.every(q => Math.hypot(point.x - q.x, point.y - q.y) > .023)) break;
   }
   poolCloud.push(point);
@@ -76,7 +82,7 @@ function layout(kind: number, i: number, t: number): Point {
 const keys = [0, .12, .29, .43, .55, .66, 5 / 7, .87, 1];
 const cameras = [
   { x: .5, y: .49, zoom: 1.22 }, { x: .5, y: .49, zoom: .92 },
-  { x: .5, y: .49, zoom: 1.45 }, { x: .67, y: .44, zoom: 1.22 },
+  { x: .5, y: .49, zoom: 1.17 }, { x: .67, y: .44, zoom: 1.22 },
   { x: .5, y: .49, zoom: 1.14 }, { x: .5, y: .49, zoom: .87 },
   { x: .5, y: .49, zoom: 1.10 }, { x: .5, y: .49, zoom: 1.20 },
   { x: .5, y: .49, zoom: 1.14 },
@@ -93,9 +99,9 @@ export function cinematicFrame(progress: number, reduced = false) {
     const morph = reduced ? blend : ease((transition - seed(i + 80) * .12) / .88);
     const q = mixPoint(layout(k, i, t), layout(k + 1, i, t), morph);
     const roundA = k === 3 ? 1 : 0, roundB = k + 1 === 3 ? 1 : 0;
-    return { ...q, round: roundA + (roundB - roundA) * morph, opacity: .48 + seed(i + 40) * .34 };
+    return { ...q, category: poolGroups[Math.floor(i / 60)].id, round: roundA + (roundB - roundA) * morph, opacity: .48 + seed(i + 40) * .34 };
   });
   return { pool: ease((t - .16) / .10) * (1 - ease((t - .4104) / .0196)), particles, task: cinematicTask(t), camera: reduced ? { x: .5, y: .49, zoom: 1 } : camera,
     document: (1 - ease(t / .12)) + ease((t - .43) / .09) * (1 - ease((t - .56) / .07)) + ease((t - .67) / .045),
-    taskId: 'T-01', origin: 'Pharmacy A', reviewed: t >= 6 / 7 };
+    taskId: 'T-01', taskCategory: 'B', origin: 'Pharmacy A', reviewed: t >= 6 / 7 };
 }
