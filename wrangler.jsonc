@@ -11,7 +11,8 @@
     "run_worker_first": true
   },
   "vars": {
-    "ENVIRONMENT": "development"
+    "ENVIRONMENT": "development",
+    "PREVIEW_GITHUB_CLIENT_ID": "Iv23liI7fsfx9u9d3NRS"
   },
   // Pilot leads are always logged (see `wrangler tail`). To also store them
   // durably, create a namespace and uncomment the block below:
