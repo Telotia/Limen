@@ -1,0 +1,9 @@
+---
+import TaskLoopPreview from '../../components/pages/TaskLoopPreview.astro';
+export function getStaticPaths() {
+  // This process illustration is a dev review surface, never a production route.
+  return (process.env.LIMEN_ENV ?? 'dev') === 'prod'
+    ? [] : [{ params: { demo: 'task-loop' } }];
+}
+---
+<TaskLoopPreview />

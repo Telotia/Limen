@@ -1,0 +1,51 @@
+---
+import { loopSteps } from '../../scripts/task-loop-model';
+---
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" /><title>Task loop preview | Telotia</title>
+  <meta name="description" content="A dev preview following one illustrative task from a pharmacy through professional support and back for review." />
+  <link rel="preload" href="/assets/resource-intro/Inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="icon" href="data:," />
+</head>
+<body>
+  <a class="skip" href="#walkthrough">Skip to the written walkthrough</a>
+  <header class="wrap"><a href="#top" aria-label="Telotia"><img class="logo" src="/assets/resource-intro/telotia-wordmark-temporary.png" width="210" height="68" alt="Telotia" /></a><p>Dev preview <span>·</span> Task loop</p></header>
+  <main id="top">
+    <div class="wrap introduction"><h1>One task.<br />A complete loop.</h1><p>From the originating pharmacy to professional support.<br class="wide" /> Then back to that same pharmacy for review.</p><a href="#task-story">Follow T-01 <span aria-hidden="true">↓</span></a></div>
+    <section id="task-story" class="story wrap" aria-label="Follow task T-01">
+      <div class="pin">
+        <div class="caption"><div><p class="task-origin">T-01 <span>·</span> Source: Pharmacy A</p><h2 data-loop-title>{loopSteps[0].title}</h2><p class="explanation" data-loop-body>{loopSteps[0].body}</p></div><p class="step-count" data-loop-count>1 / 7</p></div>
+        <div class="drawing"><canvas aria-hidden="true"></canvas></div>
+        <div class="controls" aria-label="Animation controls">
+          <button type="button" data-play disabled>Play the loop</button><button type="button" data-previous disabled aria-label="Previous step">Previous</button><button type="button" data-next disabled aria-label="Next step">Next</button><button type="button" data-replay disabled>Replay</button>
+          <label class="scrub">Journey progress<input type="range" min="0" max="1000" value="0" step="1" data-scrub disabled aria-label="Journey progress" /></label>
+        </div>
+        <ol class="steps" aria-label="Journey steps">{loopSteps.map((step, index) => <li><button type="button" data-step={index} disabled aria-current={index === 0 ? 'step' : undefined}><span>{String(index + 1).padStart(2, '0')}</span>{step.label}</button></li>)}</ol>
+        <p class="hint" data-loop-hint>Scroll to follow the task, or use the playback controls.</p>
+      </div>
+    </section>
+    <section class="wrap walkthrough" id="walkthrough"><h2>The complete journey</h2><p>An illustrative process, using a fictional task and pharmacy labels.</p><ol>{loopSteps.map((step, index) => <li id={`step-${index}`}><h3>{step.title}</h3><p>{step.body}</p></li>)}</ol></section>
+  </main>
+  <footer class="wrap"><p>Telotia · Montréal</p><p>Task T-01 · Origin preserved · Pharmacy review shown separately</p></footer>
+  <script>import { mountTaskLoop } from '../../scripts/task-loop'; mountTaskLoop();</script>
+</body>
+</html>
+<style is:global>
+@font-face { font-family: Inter; src: url('/assets/resource-intro/Inter-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+:root { --ink: #282D32; --muted: #617075; --teal: #00545A; --line: #DEE6E4; background: #FFFFFF; color: var(--ink); font: 400 16px/1.55 Inter, Arial, sans-serif; font-feature-settings: 'cv11' 1; scroll-behavior: smooth; }
+* { box-sizing: border-box; } body { margin: 0; } button, input { font: inherit; } a { color: inherit; } ::selection { background: #EAF4F2; } :focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; } .wrap { width: min(1200px, calc(100% - 80px)); margin-inline: auto; }
+header { display: flex; align-items: center; justify-content: space-between; padding-block: 24px; } .logo { display: block; object-fit: cover; } header p, footer, .hint, .step-count { color: var(--muted); font-size: 13px; } header p span, .task-origin span { margin-inline: 8px; } h1, h2, h3, p { margin-top: 0; } h1, h2, h3 { font-weight: 400; }
+.introduction { padding-block: 64px 72px; display: grid; grid-template-columns: 1.1fr 1fr; column-gap: 64px; align-items: end; } h1 { font-size: clamp(48px, 6.6vw, 88px); line-height: 1.05; letter-spacing: -.04em; margin-bottom: 0; grid-row: span 2; } .introduction p { font-size: 22px; color: var(--muted); margin-bottom: 24px; } .introduction a { justify-self: start; text-underline-offset: 6px; min-height: 44px; color: var(--teal); } .introduction a span { padding-left: 16px; }
+.story { border-top: 1px solid var(--line); } .pin { padding-block: 28px 20px; background: white; } .caption { display: flex; justify-content: space-between; gap: 24px; } .task-origin { color: var(--teal); font-size: 12px; margin-bottom: 12px; } .caption h2 { font-size: clamp(26px, 3.4vw, 44px); line-height: 1.15; letter-spacing: -.03em; margin-bottom: 12px; } .explanation { font-size: 16px; color: var(--muted); max-width: 780px; min-height: 50px; margin-bottom: 0; } .step-count { white-space: nowrap; margin-top: 2px; }
+.drawing { display: none; position: relative; flex: 1; min-height: 250px; } canvas { width: 100%; height: 100%; display: block; }
+.controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; padding-block: 12px; border-top: 1px solid var(--line); } button { min-height: 44px; border: 1px solid var(--line); border-radius: 6px; background: white; color: var(--ink); padding: 8px 16px; cursor: pointer; transition: background 160ms ease; } button:hover { background: #EAF4F2; } button:disabled { opacity: .5; cursor: default; } [data-play] { color: white; background: var(--teal); border-color: var(--teal); min-width: 150px; } [data-play]:hover { background: var(--ink); } .scrub { display: flex; align-items: center; gap: 16px; flex: 1; margin-left: 16px; font-size: 12px; color: var(--muted); white-space: nowrap; } input { width: 100%; accent-color: var(--teal); min-height: 44px; cursor: pointer; }
+.steps { display: flex; list-style: none; padding: 0; margin: 0; gap: 8px; overflow-x: auto; } .steps li { flex: 1; } .steps button { min-width: 105px; width: 100%; border: 0; border-top: 2px solid var(--line); border-radius: 0; font-size: 12px; text-align: left; padding-inline: 8px; } .steps button span { margin-right: 8px; color: var(--muted); } .steps button[aria-current] { border-color: var(--teal); color: var(--teal); background: #EAF4F2; } .hint { margin: 8px 0 0; font-size: 12px; }
+.walkthrough { padding-block: 72px; border-top: 1px solid var(--line); } .walkthrough > h2 { font-size: 36px; letter-spacing: -.03em; } .walkthrough p { color: var(--muted); } .walkthrough ol { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 64px; padding-left: 24px; margin-top: 40px; } .walkthrough h3 { font-size: 20px; margin-bottom: 8px; } .walkthrough li { padding-left: 8px; } footer { display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line); padding-block: 24px; } .skip { position: absolute; top: -100px; left: 20px; z-index: 4; background: white; padding: 12px; } .skip:focus { top: 12px; }
+.task-loop-on .story { height: 480svh; } .task-loop-on .pin { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; } .task-loop-on .drawing { display: block; }
+@media (max-width: 767px) { .wrap { width: calc(100% - 40px); } header { padding-block: 16px; } .logo { width: 150px; height: 49px; margin-left: -12px; } header p { font-size: 11px; max-width: 100px; text-align: right; } .introduction { display: block; padding-block: 40px; } h1 { margin-bottom: 28px; } .introduction p { font-size: 18px; } .wide { display: none; } .pin { padding-block: 16px 10px; } .task-origin { margin-bottom: 8px; } .caption h2 { font-size: 25px; } .explanation { font-size: 13px; min-height: 62px; } .caption { gap: 8px; } .step-count { font-size: 11px; } .drawing { min-height: 220px; } .controls { gap: 6px; padding-block: 8px; } button { padding-inline: 10px; font-size: 12px; } [data-play] { min-width: 118px; } .scrub { flex-basis: 100%; margin: 0; } .steps button { min-width: 95px; } .walkthrough ol { grid-template-columns: 1fr; gap: 20px; } footer { flex-direction: column; gap: 0; } }
+@media (prefers-reduced-motion: reduce) { :root { scroll-behavior: auto; } .task-loop-on .story { height: auto; } .task-loop-on .pin { position: relative; height: auto; } .drawing { flex: none; height: 420px; } [data-play] { display: none; } button { transition: none; } }
+@media (max-height: 650px) { .task-loop-on .story { height: auto; } .task-loop-on .pin { position: relative; height: auto; } .drawing { height: 360px; flex: none; } }
+</style>
