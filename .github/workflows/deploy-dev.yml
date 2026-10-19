@@ -35,6 +35,8 @@ jobs:
         run: bun scripts/build-private-preview.ts
         env:
           PREVIEW_PRIVATE_SOURCE_BUNDLE: ${{ secrets.PREVIEW_PRIVATE_SOURCE_BUNDLE }}
+          PREVIEW_PRIVATE_SOURCE_BUNDLE_2: ${{ secrets.PREVIEW_PRIVATE_SOURCE_BUNDLE_2 }}
+          PREVIEW_PRIVATE_SOURCE_BUNDLE_3: ${{ secrets.PREVIEW_PRIVATE_SOURCE_BUNDLE_3 }}
           PREVIEW_SESSION_SECRET: ${{ secrets.PREVIEW_SESSION_SECRET }}
           PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
       - name: Provision dev preview authentication secrets

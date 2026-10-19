@@ -35,3 +35,17 @@ the private preview. Regenerate it when the two public source bases change; keep
 the session secret synchronized when rotating its key. Removing the source-bundle
 secret restores the public baseline on the next dev deployment. Production's
 workflow never applies this overlay.
+
+## Larger private payloads
+
+The encrypted envelope may be split sequentially into three Actions Secrets:
+`PREVIEW_PRIVATE_SOURCE_BUNDLE`, `PREVIEW_PRIVATE_SOURCE_BUNDLE_2` and
+`PREVIEW_PRIVATE_SOURCE_BUNDLE_3`, each at most 44,000 characters. Set unused
+tail slots to `-`. Update all parts as one controlled release before dispatching
+dev; do not run a deployment during a partial update. Authentication covers the
+whole reassembled envelope, so missing, stale or reordered parts fail closed.
+The complete envelope is capped at 132,000 characters; source file and decoded
+manifest limits are unchanged. Existing one-part payloads remain supported.
+Private media can be embedded inside the protected source, never added to public
+assets or uploaded as build artifacts. Repository permission checks remain on
+every protected script request.

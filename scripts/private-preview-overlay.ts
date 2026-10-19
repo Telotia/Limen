@@ -28,12 +28,12 @@ export function sealOverlay(data: Overlay, secret: string): string {
   cipher.setAAD(Buffer.from(context));
   const encrypted = Buffer.concat([cipher.update(gzipSync(JSON.stringify(data))), cipher.final()]);
   const envelope = ['v1', iv.toString('base64url'), encrypted.toString('base64url'), cipher.getAuthTag().toString('base64url')].join('.');
-  if (envelope.length > 44000) throw new Error('Private preview package exceeds the secret size limit.');
+  if (envelope.length > 132000) throw new Error('Private preview package exceeds the multipart size limit.');
   return envelope;
 }
 export function openOverlay(envelope: string, secret: string): Overlay {
   try {
-    if (envelope.length > 44000) throw new Error();
+    if (envelope.length > 132000) throw new Error();
     const parts = envelope.trim().split('.');
     if (parts.length !== 4 || parts[0] !== 'v1' || parts.slice(1).some(p => !/^[A-Za-z0-9_-]+$/.test(p))) throw new Error();
     const iv = Buffer.from(parts[1], 'base64url'), tag = Buffer.from(parts[3], 'base64url');
@@ -61,4 +61,12 @@ export async function applyOverlay(data: Overlay, root: string) {
   } catch (error) { await restore(); throw error; }
   const revision = createHash('sha256').update(previewFiles.map(file => data.files[file].hash).join(':')).digest('hex');
   return { restore, revision };
+}
+
+// Each part is an Actions Secret; empty or '-' tail slots preserve one-part deployments.
+export function assembleOverlay(parts: readonly string[]): string {
+  if (parts.length !== 3) throw new Error('Expected three private preview slots.');
+  const active = parts.map(p => p.trim()).map(p => p === '-' ? '' : p);
+  if (active.some(p => p.length > 44000) || (!active[0] && active.some(Boolean)) || (!active[1] && active[2])) throw new Error('Invalid private preview parts.');
+  return active.join('');
 }
