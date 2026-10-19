@@ -81,7 +81,8 @@ function unavailable(stage: string, cookies: string[]) {
   return result;
 }
 async function github(url: string, token: string, fetcher: Fetcher) {
-  return fetcher(url, { redirect: 'error', headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2026-03-10', 'User-Agent': 'Telotia-private-dev-preview' }, signal: AbortSignal.timeout(10000) });
+  // Workerd supports follow/manual only. Never follow a redirect with a user token.
+  return fetcher(url, { redirect: 'manual', headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2026-03-10', 'User-Agent': 'Telotia-private-dev-preview' }, signal: AbortSignal.timeout(10000) });
 }
 async function permitted(token: string, fetcher: Fetcher): Promise<'yes' | 'no' | 'unavailable'> {
   try {
@@ -127,7 +128,7 @@ export async function handlePreviewAuth(request: Request, env: PreviewAuthEnv, f
     let stage = 'exchange';
     try {
       const exchange = await fetcher('https://github.com/login/oauth/access_token', {
-        method: 'POST', redirect: 'error', headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'Telotia-private-dev-preview' },
+        method: 'POST', redirect: 'manual', headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'Telotia-private-dev-preview' },
         body: new URLSearchParams({ client_id: env.PREVIEW_GITHUB_CLIENT_ID!, client_secret: env.PREVIEW_GITHUB_CLIENT_SECRET!, redirect_uri: CALLBACK, code, code_verifier: flow.verifier }), signal: AbortSignal.timeout(10000),
       });
       if (!exchange.ok) return unavailable('exchange-http-' + exchange.status, clear);
