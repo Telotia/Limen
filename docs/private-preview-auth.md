@@ -18,6 +18,18 @@ and production remain unchanged. Configuration absent: 403. Production: 404.
 
 ## Dev Worker configuration
 
+If you do not have Cloudflare dashboard access, use the existing GitHub Actions
+deployment identity. In Telotia/Limen Settings > Secrets and variables > Actions,
+create repository secrets `PREVIEW_GITHUB_CLIENT_SECRET` and
+`PREVIEW_SESSION_SECRET`. The dev workflow forwards only these two values through
+Wrangler stdin to `limen-dev`, using the existing Cloudflare deployment credential.
+Values are never printed or passed as process arguments. Missing both secrets is
+a no-op; partial configuration fails the deployment before writing anything.
+The existing token must have Worker secret edit access; the workflow cannot bypass
+Cloudflare permission checks. Production deployment does not run this step.
+After adding or rotating secrets, run Deploy dev manually against the dev branch
+or push a normal dev change. Do not run it against a production branch.
+
 Configure only Worker `limen-dev` (not production `limen`) through Cloudflare's
 Variables and Secrets screen, or interactive Wrangler secret prompts:
 
