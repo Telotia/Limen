@@ -1,8 +1,10 @@
+import { isPrivatePreview, closedPreview } from './private-preview';
+
 /**
  * Telotia site Worker.
  *
  * The Astro `dist/` build is served automatically by the `assets` binding, so
- * this script only runs for requests that don't match a static file. The one
+ * dev requests run through this script first to close private preview assets. The
  * dynamic route is the pilot-request intake:
  *
  *   POST /api/pilot  ->  verify Cloudflare Turnstile, then log + store + notify
@@ -55,6 +57,7 @@ interface Lead {
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionCtx): Promise<Response> {
     const url = new URL(request.url);
+    if (isPrivatePreview(url.pathname)) return closedPreview(request, env.ENVIRONMENT === "production");
     if (url.pathname === "/api/pilot") {
       if (request.method !== "POST") return json({ ok: false, error: "Method not allowed." }, 405);
       return handlePilot(request, env, ctx);
