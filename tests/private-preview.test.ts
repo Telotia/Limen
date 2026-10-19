@@ -7,7 +7,7 @@ function environment() {
 }
 test('private preview HTML, aliases, encoded paths and old bundles never reach static assets', async () => {
   for (const host of ['dev.telotia.com', 'example.workers.dev']) {
-    for (const path of ['/preview/task-loop', '/preview/task-loop.html', '/preview/task-loop/', '/preview//task-loop?x=1', '/%70review/task-loop', '/preview%2Ftask-loop', '/%2570review/task-loop', '/_astro/TaskLoopPreview.astro_oldhash.js', '/_astro/%54askLoopPreview.astro_newhash.js']) {
+    for (const path of ['/preview/task-loop', '/preview/task-loop.html', '/preview/task-loop/', '/private-preview/revision.json', '/preview//task-loop?x=1', '/%70review/task-loop', '/preview%2Ftask-loop', '/%2570review/task-loop', '/_astro/TaskLoopPreview.astro_oldhash.js', '/_astro/%54askLoopPreview.astro_newhash.js']) {
       const e = environment();
       const response = await worker.fetch(new Request('https://' + host + path, { headers: { 'Cf-Access-Jwt-Assertion': 'forged', Cookie: 'CF_Authorization=forged' } }), e.env, ctx);
       expect(response.status).toBe(403); expect(e.reads()).toBe(0);
