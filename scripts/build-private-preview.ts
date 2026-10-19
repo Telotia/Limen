@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { isPrivatePreview } from '../worker/private-preview';
-import { applyOverlay, openOverlay } from './private-preview-overlay';
+import { applyOverlay, openOverlay, assembleOverlay } from './private-preview-overlay';
 
 async function snapshot(root: string) {
   const hashes = new Map<string, string>();
@@ -21,7 +21,7 @@ async function quiet(command: string[]) {
   const result = await Promise.all([child.exited, new Response(child.stdout).arrayBuffer(), new Response(child.stderr).arrayBuffer()]);
   if (result[0] !== 0) throw new Error('Private preview validation/build failed; reproduce locally. Source diagnostics suppressed.');
 }
-const encrypted = process.env.PREVIEW_PRIVATE_SOURCE_BUNDLE;
+const encrypted = assembleOverlay([process.env.PREVIEW_PRIVATE_SOURCE_BUNDLE || '', process.env.PREVIEW_PRIVATE_SOURCE_BUNDLE_2 || '', process.env.PREVIEW_PRIVATE_SOURCE_BUNDLE_3 || '']);
 if (!encrypted) {
   console.info('No private preview overlay configured; dev build is unchanged.');
 } else {

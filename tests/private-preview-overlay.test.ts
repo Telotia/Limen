@@ -2,7 +2,7 @@ import { expect, test } from 'bun:test';
 import { mkdtemp, mkdir, readFile, rm, symlink, unlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve, sep } from 'node:path';
-import { applyOverlay, openOverlay, previewFiles, sealOverlay, sourceHash, type Overlay } from '../scripts/private-preview-overlay';
+import { applyOverlay, openOverlay, assembleOverlay, previewFiles, sealOverlay, sourceHash, type Overlay } from '../scripts/private-preview-overlay';
 
 const secret = 'fixture-session-key-at-least-32-characters';
 const base = 'export const fixture = "public";\n';
@@ -43,4 +43,23 @@ test('overlay validates all original files before writing, supports CRLF and res
     if (!resolved.startsWith(resolve(tmpdir()) + sep + 'telotia-overlay-test-')) throw new Error('Unsafe fixture cleanup path');
     await rm(resolved, { recursive: true });
   }
+});
+
+test('multipart envelopes preserve authentication and reject missing, oversized and reordered parts', () => {
+  const data = fixture();
+  // Incompressible synthetic source makes the envelope cross one secret boundary.
+  const bytes = crypto.getRandomValues(new Uint8Array(42000));
+  const text = Buffer.from(bytes).toString('base64');
+  data.files[previewFiles[0]] = { base: sourceHash(base), hash: sourceHash(text), content: text };
+  const sealed = sealOverlay(data, secret);
+  expect(sealed.length).toBeGreaterThan(44000);
+  const a = sealed.slice(0, 44000), b = sealed.slice(44000, 88000), c = sealed.slice(88000) || '-';
+  expect(openOverlay(assembleOverlay([a,b,c]), secret)).toEqual(data);
+  expect(() => openOverlay(assembleOverlay([a,'-','-']), secret)).toThrow();
+  expect(() => openOverlay(assembleOverlay([b,a,c]), secret)).toThrow();
+  expect(() => assembleOverlay(['',b,c])).toThrow();
+  expect(() => assembleOverlay([a,'',b])).toThrow();
+  expect(() => assembleOverlay(['x'.repeat(44001),'',''])).toThrow();
+  expect(assembleOverlay(['','',''])).toBe('');
+  expect(assembleOverlay([sealOverlay(fixture(),secret),'-','-'])).toStartWith('v1.');
 });
