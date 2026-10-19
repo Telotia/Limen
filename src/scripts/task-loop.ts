@@ -1,5 +1,5 @@
 import { cinematicFrame, cinematicTask, playbackPosition, type Point } from './task-loop-cinematic';
-import { ease, loopState, loopSteps } from './task-loop-model';
+import { ease, loopState } from './task-loop-model';
 
 export function mountTaskLoop() {
   const section = document.querySelector<HTMLElement>('#task-story');
@@ -59,10 +59,13 @@ export function mountTaskLoop() {
     // Selection comes from a professional. The contact dot stays gray so the
     // task remains the only teal object; final confirmation belongs to A.
     if (story > .37 && story < .50) {
-      const q = project({ x: .72, y: .43 });
+      const q = project({ x: .83, y: .24 });
       const opacity = ease((story - .37) / .04) * (1 - ease((story - .46) / .04));
       ctx!.globalAlpha = opacity;
-      circle(q, mobile ? 8 : 13, '#617075', '#FFFFFF', 1.5);
+      circle(q, mobile ? 12 : 18, '#617075', '#FFFFFF', 1.5);
+      const actorX = Math.max(62, Math.min(width - 62, q.x)), actorY = q.y + (mobile ? 25 : 32);
+      box(actorX - (mobile ? 50 : 61), actorY - 9, mobile ? 100 : 122, 18, '#FFFFFF', '#FFFFFF', 3);
+      text('Remote pharmacist', actorX, actorY, muted, mobile ? 9 : 11);
       ctx!.globalAlpha = 1;
     }
     if (!reduced.matches && story > .12 && story < 5 / 7) {
@@ -120,7 +123,7 @@ export function mountTaskLoop() {
     frame = 0;
     if (document.hidden || !visible) { last = 0; return; }
     if (playing) {
-      if (last) progress = Math.min(1, progress + Math.min(80, time - last) / 30000);
+      if (last) progress = Math.min(1, progress + Math.min(80, time - last) / 24000);
       last = time;
       if (progress === 1) playing = false;
     }
