@@ -1,6 +1,7 @@
 ---
 import ComingSoon from '../ComingSoon.astro';
 import CoordinationMotion from '../resource/CoordinationMotion.astro';
+import IntroBrand from '../resource/IntroBrand.astro';
 import { words } from '../../data/resource-company';
 interface Props { isProd?: boolean; }
 const { isProd = false } = Astro.props;
@@ -14,15 +15,17 @@ const sections = ['home', 'about', 'approach'] as const;
   <meta name="robots" content="noindex,nofollow" /><meta name="description" content={isProd ? 'Purposeful innovation, starting with pharmacy.' : copy.description} />
   <meta name="theme-color" content="#FFFFFF" /><title>Telotia — {copy.headline.replace('\n', ' ')}</title>
   {!isProd && <link rel="preload" href="/assets/resource-intro/Inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />}
-  <link rel="icon" href="data:," />
+  <link rel="icon" type="image/svg+xml" href={isProd ? "data:," : "/assets/resource-intro/brand/telotia-mark.svg"} />
 </head>
 <body>
 {isProd ? <ComingSoon /> : (<>
   <a class="skip" href="#main" data-copy="skip">{copy.skip}</a>
-  <header class="site-header wrap">
-    <a class="brand" href="#home" aria-label="Telotia"><img src="/assets/resource-intro/telotia-wordmark-temporary.png" alt="Telotia" width="210" height="68" /></a>
+  <header class="site-header" data-intro-header>
+    <div class="header-inner wrap">
+    <a class="brand" href="#home" aria-label="Telotia"><IntroBrand /></a>
     <nav aria-label={copy.nav} data-nav>{sections.map(key => <a href={`#${key}`} data-section-link={key} aria-current={key === 'home' ? 'location' : undefined} data-copy={`${key}Nav`}>{copy[`${key}Nav`]}</a>)}</nav>
     <div class="language" role="group" aria-label={copy.language} data-language><button type="button" data-lang="en" aria-pressed="true" aria-label="English">EN</button><span aria-hidden="true">/</span><button type="button" data-lang="fr" aria-pressed="false" aria-label="Français">FR</button></div>
+    </div>
   </header>
   <main id="main" class="wrap">
     <section id="home" class="hero" aria-labelledby="hero-title">
@@ -76,7 +79,11 @@ const sections = ['home', 'about', 'approach'] as const;
   </script>
   <script>
     import { mountIntroMotion } from '../../scripts/intro-motion';
-    if (document.documentElement.dataset.page === 'pharmacy-intro') mountIntroMotion();
+    import { mountIntroBrand } from '../../scripts/intro-brand';
+    if (document.documentElement.dataset.page === 'pharmacy-intro') {
+      mountIntroMotion();
+      mountIntroBrand();
+    }
   </script>
 </>)}
 </body></html>
@@ -91,9 +98,10 @@ const sections = ['home', 'about', 'approach'] as const;
 :global(html[data-page='pharmacy-intro'] :focus-visible) { outline: 2px solid var(--teal); outline-offset: 5px; }
 :global(html[data-page='pharmacy-intro'] ::selection) { background: #EAF4F2; }
 .wrap { width: min(1200px, calc(100% - 96px)); margin-inline: auto; }
-.site-header { display: flex; align-items: center; gap: 32px; padding-block: 56px 24px; }
-.brand { display: block; margin-left: -20px; flex: none; }
-.brand img { display: block; width: 210px; height: 68px; object-fit: cover; }
+.site-header { position: sticky; top: 0; z-index: 40; width: 100%; background: #FFFFFF; border-bottom: 1px solid transparent; }
+.site-header[data-scrolled] { border-bottom-color: var(--border); }
+.header-inner { display: grid; grid-template-columns: 198px 1fr auto; align-items: center; gap: 32px; min-height: 96px; }
+.brand { display: flex; align-items: center; width: 198px; min-height: 64px; text-decoration: none; }
 nav { display: flex; margin-left: auto; gap: 32px; align-items: center; }
 nav a { position: relative; display: flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 500; text-decoration: none; }
 nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 5px; height: 1px; background: var(--teal); transform: scaleX(0); transform-origin: left; transition: transform 240ms ease; }
@@ -125,11 +133,11 @@ h2 { font-size: 28px; line-height: 1.3; letter-spacing: -.02em; margin-bottom: 2
 .statement { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; border-top: 1px solid var(--border); padding-block: 48px 80px; }
 .contact-details { border-top: 1px solid var(--border); padding-block: 48px 80px; }
 .email { display: inline-flex; align-items: center; gap: 40px; padding-bottom: 8px; font-size: clamp(26px, 4vw, 48px); letter-spacing: -.025em; text-decoration: none; border-bottom: 1px solid var(--border); } .contact-details .location { margin: 32px 0 0; font-size: 14px; }
-.skip { position: absolute; top: -80px; left: 20px; padding: 12px; background: #FFFFFF; z-index: 5; } .skip:focus { top: 16px; }
+.skip { position: fixed; top: -80px; left: 20px; padding: 12px; background: #FFFFFF; z-index: 60; } .skip:focus { top: 16px; }
 main { flex: 1; }
-@media (max-width: 1100px) { .wrap { width: calc(100% - 64px); } nav { gap: 24px; } .site-header { gap: 20px; } .hero-grid { grid-template-columns: minmax(0, 1fr) 220px; gap: 32px; } .hero { padding-block: 80px; } h1 { font-size: clamp(74px, 10vw, 110px); } .lead { font-size: 23px; } .aside-note { font-size: 16px; padding-left: 20px; } }
+@media (max-width: 1100px) { .wrap { width: calc(100% - 64px); } nav { gap: 24px; } .header-inner { gap: 20px; } .hero-grid { grid-template-columns: minmax(0, 1fr) 220px; gap: 32px; } .hero { padding-block: 80px; } h1 { font-size: clamp(74px, 10vw, 110px); } .lead { font-size: 23px; } .aside-note { font-size: 16px; padding-left: 20px; } }
 @media (max-width: 767px) {
-  .wrap { width: calc(100% - 40px); } .site-header { flex-wrap: wrap; gap: 8px; padding-block: 16px; } .brand { margin-left: -16px; } .brand img { width: 190px; height: 62px; } .language { margin-left: auto; } nav { order: 3; width: 100%; margin: 0; gap: 26px; } nav a { font-size: 13px; }
+  .wrap { width: calc(100% - 40px); } .header-inner { grid-template-columns: 1fr auto; gap: 0 16px; padding-block: 8px; min-height: 112px; } .brand { width: 168px; min-height: 52px; } .language { grid-column: 2; grid-row: 1; margin-left: auto; } nav { grid-column: 1 / -1; grid-row: 2; width: 100%; margin: 0; gap: 26px; } nav a { font-size: 13px; }
   .hero { padding-block: 56px; } .eyebrow { margin-bottom: 28px; font-size: 11px; } .hero-grid { grid-template-columns: 1fr; gap: 40px; } h1 { font-size: clamp(56px, 15vw, 104px); line-height: 1.04; margin-bottom: 28px; } .lead { font-size: 20px; } .hero-actions { gap: 24px; } .button { font-size: 14px; padding-inline: 20px; gap: 16px; }
   .hero-aside { display: grid; grid-template-columns: 160px 1fr; gap: 24px; align-items: center; } .aside-note { margin: 0; padding-left: 16px; font-size: 14px; } .next-page { font-size: 22px; gap: 20px; padding-block: 24px; } .index { width: 24px; } .site-footer { flex-direction: column; gap: 12px; }
   .inner-hero { padding-block: 56px 40px; } .inner-hero h1 { font-size: clamp(44px, 11vw, 70px); } .inner-lead { font-size: 20px; } .detail-grid, .statement { grid-template-columns: 1fr; gap: 32px; padding-block: 40px 56px; } h2 { font-size: 26px; } .detail-grid p, .statement p, .contact-details p { font-size: 16px; } .contact-details { padding-block: 40px 64px; }
@@ -145,9 +153,9 @@ main { flex: 1; }
 .statement p:last-child { margin-bottom: 0; }
 @media (max-width: 767px) { .site-footer { gap: 24px; } }
 
-:global(html[data-page='pharmacy-intro']) { scroll-behavior: smooth; scroll-padding-top: 32px; }
+:global(html[data-page='pharmacy-intro']) { scroll-behavior: smooth; scroll-padding-top: 112px; }
 :global(html[data-page='pharmacy-intro']) { scrollbar-color: #617075 #FFFFFF; }
-.hero { min-height: calc(100svh - 172px); }
+.hero { min-height: calc(100svh - 96px); }
 :global(.hero-line-mask) { display: block; overflow: clip; padding-bottom: .12em; margin-bottom: -.12em; }
 :global(.hero-line) { display: block; }
 .about-section { display: grid; grid-template-columns: 1fr 1.25fr; gap: 96px; padding-block: 96px 120px; border-top: 1px solid var(--border); scroll-margin-top: 32px; }
@@ -174,6 +182,7 @@ main { flex: 1; }
   .reading-sticky { position: sticky; top: 20svh; }
 }
 @media (max-width: 767px) {
+  :global(html[data-page='pharmacy-intro']) { scroll-padding-top: 128px; }
   .hero { min-height: auto; padding-bottom: 80px; }
   .about-section { grid-template-columns: 1fr; gap: 28px; padding-block: 56px 64px; }
   .about-section h2 { font-size: 36px; max-width: 360px; margin: 0; }
