@@ -6,38 +6,39 @@ const ease = (value: number) => {
   return t * t * t * (t * (t * 6 - 15) + 10);
 };
 
-// Matched outline samples preserve the distinctive stem while filling its neck.
-// Both endpoints use the approved exact Bézier paths, not a raster crossfade.
+// Both the curved crossbar and stem morph to the approved solid compact mark.
+// Exact native paths at either end avoid accumulating outline approximation.
+function morph(source: string, target: string, start: number[][], end: number[][], amount: number) {
+  if (amount <= 0) return source;
+  if (amount >= 1) return target;
+  const points = start.map((point, i) => [
+    point[0] + (end[i][0] - point[0]) * amount,
+    point[1] + (end[i][1] - point[1]) * amount,
+  ]);
+  let path = `M${points[0][0]} ${points[0][1]}`;
+  for (let i = 0; i < points.length; i++) {
+    const a = points[(i + points.length - 1) % points.length];
+    const b = points[i];
+    const c = points[(i + 1) % points.length];
+    const d = points[(i + 2) % points.length];
+    path += `C${b[0] + (c[0] - a[0]) / 6} ${b[1] + (c[1] - a[1]) / 6} ${c[0] - (d[0] - b[0]) / 6} ${c[1] - (d[1] - b[1]) / 6} ${c[0]} ${c[1]}`;
+  }
+  return path + 'Z';
+}
+
 export function introBrandState(progress: number) {
   const p = clamp(progress);
-  const u = ease(p);
+  const amount = ease((p - .025) / .95);
   const move = ease((p - .02) / .98);
-  let stem = geometry.sourceStem;
-  if (p >= 1) stem = geometry.targetStem;
-  else if (p > 0) {
-    const points = geometry.start.map((point, i) => [
-      point[0] + (geometry.end[i][0] - point[0]) * u,
-      point[1] + (geometry.end[i][1] - point[1]) * u,
-    ]);
-    stem = `M${points[0][0]} ${points[0][1]}`;
-    for (let i = 0; i < points.length; i++) {
-      const a = points[(i + points.length - 1) % points.length];
-      const b = points[i];
-      const c = points[(i + 1) % points.length];
-      const d = points[(i + 2) % points.length];
-      stem += `C${b[0] + (c[0] - a[0]) / 6} ${b[1] + (c[1] - a[1]) / 6} ${c[0] - (d[0] - b[0]) / 6} ${c[1] - (d[1] - b[1]) / 6} ${c[0]} ${c[1]}`;
-    }
-    stem += 'Z';
-  }
   const b1 = 3 * (1 - move) ** 2 * move;
   const b2 = 3 * (1 - move) * move ** 2;
   const b3 = move ** 3;
   return {
     progress: p,
-    stem,
-    bar: `translate(577.1912994385 0) scale(${1 - .1 * u} 1) translate(-577.1912994385 0)`,
-    dot: `translate(${-105 * b1 - 575 * b2 - 643.422 * b3} ${-62 * b1 - 112 * b2 - 79.88272727272727 * b3})`,
-    suffix: `translate(${-65 * u} 0)`,
+    stem: morph(geometry.sourceStem, geometry.targetStem, geometry.stemStart, geometry.stemEnd, amount),
+    bar: morph(geometry.sourceBar, geometry.targetBar, geometry.barStart, geometry.barEnd, amount),
+    dot: `translate(${-105 * b1 - 585 * b2 - 659.33543847625 * b3} ${-62 * b1 - 112 * b2 - 82.48596164702 * b3})`,
+    suffix: `translate(${-55 * ease(p)} 0)`,
     opacity: 1 - ease(p / .7),
   };
 }
@@ -60,7 +61,7 @@ export function mountIntroBrand() {
   function paint() {
     const state = introBrandState(current);
     stem!.setAttribute('d', state.stem);
-    bar!.setAttribute('transform', state.bar);
+    bar!.setAttribute('d', state.bar);
     dot!.setAttribute('transform', state.dot);
     suffix!.setAttribute('transform', state.suffix);
     suffix!.setAttribute('opacity', String(state.opacity));
