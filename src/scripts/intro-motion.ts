@@ -33,6 +33,9 @@ export function mountIntroMotion() {
     // transforms do not feed back into the next frame when scrolling in reverse.
     const aboutTop = about.getBoundingClientRect().top;
     const panelTops = audience.map(panel => panel.offsetTop - window.scrollY);
+    // The final symbol must finish even when the footer leaves less scroll travel.
+    const finalSymbolTravel = Math.max(1, Math.min(height * .8,
+      document.documentElement.scrollHeight - audience[audience.length - 1].offsetTop));
     const travel = Math.max(1, Math.min(bounds.height - height * .38, height * .7));
     const progress = Math.max(0, Math.min(1, (height * .9 - bounds.top) / travel));
     const enter = clamp((height * .9 - bounds.top) / (height * .65));
@@ -48,8 +51,10 @@ export function mountIntroMotion() {
     });
     audience.forEach((panel, index) => {
       const arrival = smooth((height - panelTops[index]) / (height * .8));
+      const symbolArrival = index === audience.length - 1
+        ? smooth((height - panelTops[index]) / finalSymbolTravel) : arrival;
       panel.style.transform = reduced.matches || desktop.matches ? '' : `translateY(${(1 - arrival) * 32}px)`;
-      symbols[index].style.transform = reduced.matches ? '' : `rotate(${(1 - arrival) * (index ? -45 : 18)}deg) scale(${.72 + arrival * .28})`;
+      symbols[index].style.transform = reduced.matches ? '' : `rotate(${(1 - symbolArrival) * (index ? -45 : 18)}deg) scale(${.72 + symbolArrival * .28})`;
     });
     words.forEach((word, index) => {
       const amount = reduced.matches ? 1 : Math.max(0, Math.min(1, progress * words.length - index));
