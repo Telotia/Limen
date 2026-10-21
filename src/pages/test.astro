@@ -1,0 +1,5 @@
+---
+import ResourceTest from '../components/pages/ResourceTest.astro';
+const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
+---
+<ResourceTest isProd={isProd} />
