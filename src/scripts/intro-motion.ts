@@ -29,11 +29,10 @@ export function mountIntroMotion() {
     if (document.hidden) return;
     const height = window.innerHeight;
     const bounds = stage!.getBoundingClientRect();
-    // Read all geometry before changing styles. offsetTop stays stable while
-    // sticky panels scale, so reversing the scroll follows exactly the same path.
+    // Read all geometry before changing styles. Use layout positions so arrival
+    // transforms do not feed back into the next frame when scrolling in reverse.
     const aboutTop = about.getBoundingClientRect().top;
     const panelTops = audience.map(panel => panel.offsetTop - window.scrollY);
-    const panelHeight = audience[0].offsetHeight;
     const travel = Math.max(1, Math.min(bounds.height - height * .38, height * .7));
     const progress = Math.max(0, Math.min(1, (height * .9 - bounds.top) / travel));
     const enter = clamp((height * .9 - bounds.top) / (height * .65));
@@ -49,11 +48,7 @@ export function mountIntroMotion() {
     });
     audience.forEach((panel, index) => {
       const arrival = smooth((height - panelTops[index]) / (height * .8));
-      const cover = index === 0 && desktop.matches
-        ? smooth((height * .14 + panelHeight - panelTops[1]) / Math.max(1, panelHeight - height * .04)) : 0;
-      panel.style.transform = reduced.matches ? '' : desktop.matches
-        ? `scale(${1 - cover * .04})`
-        : `translateY(${(1 - arrival) * 32}px)`;
+      panel.style.transform = reduced.matches || desktop.matches ? '' : `translateY(${(1 - arrival) * 32}px)`;
       symbols[index].style.transform = reduced.matches ? '' : `rotate(${(1 - arrival) * (index ? -45 : 18)}deg) scale(${.72 + arrival * .28})`;
     });
     words.forEach((word, index) => {
