@@ -1,12 +1,12 @@
 import type { CurvePoint } from './lorenz-curve';
 
-export const THREAD_POINTS = 480;
-export const THREAD_CYCLE = 16000;
+export const THREAD_POINTS = 720;
+export const THREAD_CYCLE = 19000;
 export type ThreadShapes = { bridge: CurvePoint[]; orbit: CurvePoint[]; star: CurvePoint[]; handshake: CurvePoint[] };
 const clamp = (v: number) => Math.max(0, Math.min(1, v));
 const ease = (v: number) => { const t = clamp(v); return t * t * t * (t * (t * 6 - 15) + 10); };
 
-// Exactly three revolutions of a Lorenz orbit, including a change of wing.
+// Two complete passes through both Lorenz wings, with two sparse loops per wing.
 // This is a finite pen stroke, rather than a dense, fully revealed attractor.
 export function shortOrbit(count = THREAD_POINTS): CurvePoint[] {
   type V = [number, number, number];
@@ -22,16 +22,27 @@ export function shortOrbit(count = THREAD_POINTS): CurvePoint[] {
   const valleys: number[] = [];
   for (let i = 1; i < raw.length - 1; i++)
     if (raw[i - 1][2] > raw[i][2] && raw[i + 1][2] > raw[i][2]) valleys.push(i);
-  let stroke: V[] | undefined;
-  for (let i = 0; i + 3 < valleys.length; i++) {
-    const candidate = raw.slice(valleys[i], valleys[i + 3] + 1);
-    if (candidate.some(p => p[0] < -5) && candidate.some(p => p[0] > 5)) { stroke = candidate; break; }
+  let stroke: V[] | undefined, bestGap = Infinity;
+  for (let i = 0; i + 4 < valleys.length; i++) {
+    const candidate = raw.slice(valleys[i], valleys[i + 4] + 1);
+    const wingVisits = Array.from({ length: 4 }, (_, turn) => {
+      const segment = raw.slice(valleys[i + turn], valleys[i + turn + 1]);
+      return segment.reduce((peak, p) => p[2] > peak[2] ? p : peak)[0];
+    });
+    if (wingVisits.filter(x => x < 0).length !== 2) continue;
+    const first = candidate[0], last = candidate.at(-1)!;
+    const gap = Math.hypot(first[0] - last[0], first[1] - last[1], first[2] - last[2]);
+    if (gap < bestGap) { stroke = candidate; bestGap = gap; }
   }
-  if (!stroke) throw new Error('Three-turn motion orbit unavailable');
+  if (!stroke) throw new Error('Balanced two-wing motion orbit unavailable');
   const projected = stroke.map(([x, y, z]) => {
     const u = 1.25 * x + .2 * y, v = (28 - z) * .8;
     return { x: u * Math.cos(-.18) - v * Math.sin(-.18), y: u * Math.sin(-.18) + v * Math.cos(-.18) };
   });
+  // Select a near-returning two-wing orbit and gently remove its tiny residual
+  // gap. The pen finishes exactly where it began, with no dangling half-lobe.
+  const delta = { x: projected[0].x - projected.at(-1)!.x, y: projected[0].y - projected.at(-1)!.y };
+  projected.forEach((p, i) => { const t = ease(i / (projected.length - 1)); p.x += delta.x * t; p.y += delta.y * t; });
   const xs = projected.map(p => p.x), ys = projected.map(p => p.y);
   const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
   const scale = .78 / Math.max(maxX - minX, maxY - minY), cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
@@ -47,62 +58,84 @@ export function shortOrbit(count = THREAD_POINTS): CurvePoint[] {
   });
 }
 
-export function threadFrame(time: number, shapes: ThreadShapes, buffer?: CurvePoint[]) {
+export type InkPoint = CurvePoint & { join?: number };
+
+// Match the same closed star outline to both neighbours without rotating the
+// visible symbol. Only the traversal's start point and direction change.
+export function alignStar(star: CurvePoint[], orbit: CurvePoint[], hand: CurvePoint[]) {
+  const period = star.length - 1;
+  let bestShift = 0, bestDirection = 1, bestCost = Infinity;
+  for (const direction of [1, -1]) for (let shift = 0; shift < period; shift++) {
+    let cost = 0;
+    for (let i = 0; i < period; i += 4) {
+      const p = star[(shift + direction * i + period) % period];
+      cost += .55 * ((p.x - orbit[i].x) ** 2 + (p.y - orbit[i].y) ** 2)
+        + .45 * ((p.x - hand[i].x) ** 2 + (p.y - hand[i].y) ** 2);
+    }
+    if (cost < bestCost) { bestCost = cost; bestShift = shift; bestDirection = direction; }
+  }
+  return star.map((_, i) => ({ ...star[(bestShift + bestDirection * i + period) % period], move: i === 0 }));
+}
+
+export function threadFrame(time: number, shapes: ThreadShapes, buffer?: InkPoint[]) {
   const count = shapes.bridge.length, t = ((time % THREAD_CYCLE) + THREAD_CYCLE) % THREAD_CYCLE;
-  const points = buffer ?? Array.from({ length: count }, () => ({ x: 0, y: 0, move: false }));
-  let stage = 'bridge', visible = count, fill = 0, closed = false;
+  const points: InkPoint[] = buffer ?? Array.from({ length: count }, () => ({ x: 0, y: 0, move: false, join: 1 }));
+  let stage = 'bridge', visible = count, closed = false;
+  const setJoin = (i: number, join: number) => { points[i].join = join; points[i].move = join < .999999; };
   const blend = (from: CurvePoint[], to: CurvePoint[], amount: number) => {
     const a = ease(amount);
     for (let i = 0; i < count; i++) {
       points[i].x = from[i].x * (1 - a) + to[i].x * a;
       points[i].y = from[i].y * (1 - a) + to[i].y * a;
-      points[i].move = Boolean((a < .999 && from[i].move) || (a > .001 && to[i].move));
+      // A contour opens with a gradual pen lift, rather than switching moveTo
+      // flags in one frame and cutting holes into the star.
+      setJoin(i, (from[i].move ? 0 : 1) * (1 - a) + (to[i].move ? 0 : 1) * a);
     }
   };
   const thread = (i: number) => {
     const u = i / (count - 1);
     return { x: -.37 + .74 * u, y: .025 * Math.sin(u * Math.PI * 2) };
   };
-  if (t < 1500) blend(shapes.bridge, shapes.bridge, 0);
-  else if (t < 3500) {
-    stage = 'gather'; const amount = ease((t - 1500) / 2000), lift = Math.sin(Math.PI * amount);
+  if (t < 1400) blend(shapes.bridge, shapes.bridge, 0);
+  else if (t < 3300) {
+    stage = 'gather'; const amount = ease((t - 1400) / 1900), lift = Math.sin(Math.PI * amount);
     for (let i = 0; i < count; i++) {
       const target = thread(i), p = shapes.bridge[i], u = i / (count - 1);
       points[i].x = p.x * (1 - amount) + target.x * amount + .035 * Math.sin(u * Math.PI * 2) * lift;
       points[i].y = p.y * (1 - amount) + target.y * amount - .06 * Math.sin(u * Math.PI * 3) * lift;
-      points[i].move = Boolean(p.move && amount < .999);
+      setJoin(i, p.move ? amount : 1);
     }
-  } else if (t < 4400) {
-    stage = 'thread'; const amount = ease((t - 3500) / 900), seed = shapes.orbit[0];
+  } else if (t < 4000) {
+    stage = 'thread'; const amount = ease((t - 3300) / 700), seed = shapes.orbit[0];
     for (let i = 0; i < count; i++) {
       const p = thread(i);
       points[i].x = p.x * (1 - amount) + seed.x * amount;
       points[i].y = p.y * (1 - amount) + seed.y * amount - Math.sin(Math.PI * amount) * .045 * Math.sin(i / count * Math.PI);
-      points[i].move = false;
+      setJoin(i, 1);
     }
-  } else if (t < 7400) {
-    stage = 'orbit'; const amount = (t - 4400) / 3000;
-    visible = 1 + Math.floor(ease(amount) * (count - 1));
-    const flutter = .009 * Math.sin(Math.PI * amount);
+  } else if (t < 8300) {
+    const amount = clamp((t - 4000) / 3600);
+    stage = amount < 1 ? 'orbit' : 'orbit-hold';
+    // Fractional pen position prevents visible jumps between sampled vertices.
+    visible = 1 + ease(amount) * (count - 1);
+    const flutter = .007 * Math.sin(Math.PI * amount);
     for (let i = 0; i < count; i++) {
-      points[i].x = shapes.orbit[i].x + flutter * Math.sin(i / count * 8 + amount * 4);
-      points[i].y = shapes.orbit[i].y + flutter * Math.sin(i / count * 6 - amount * 4);
-      points[i].move = false;
+      const u = i / (count - 1);
+      points[i].x = shapes.orbit[i].x + flutter * Math.sin(u * Math.PI * 4 + amount * 4);
+      points[i].y = shapes.orbit[i].y + flutter * Math.sin(u * Math.PI * 6 - amount * 4);
+      setJoin(i, 1);
     }
-  } else if (t < 9400) {
-    stage = 'form-star'; const amount = (t - 7400) / 2000;
-    blend(shapes.orbit, shapes.star, amount);
-    fill = ease((amount - .7) / .3);
-    closed = amount > .999;
-  } else if (t < 10600) {
-    stage = 'star'; blend(shapes.star, shapes.star, 0); fill = 1; closed = true;
-  } else if (t < 12600) {
-    stage = 'handshake-morph'; const amount = (t - 10600) / 2000;
-    blend(shapes.star, shapes.handshake, amount); fill = 1 - ease(amount / .45);
-  } else if (t < 14100) {
+    closed = amount === 1;
+  } else if (t < 11200) {
+    stage = 'form-star'; blend(shapes.orbit, shapes.star, (t - 8300) / 2900); closed = true;
+  } else if (t < 12300) {
+    stage = 'star'; blend(shapes.star, shapes.star, 0); closed = true;
+  } else if (t < 15300) {
+    stage = 'handshake-morph'; blend(shapes.star, shapes.handshake, (t - 12300) / 3000);
+  } else if (t < 16600) {
     stage = 'handshake'; blend(shapes.handshake, shapes.handshake, 0);
   } else {
-    stage = 'bridge-morph'; blend(shapes.handshake, shapes.bridge, (t - 14100) / 1900);
+    stage = 'bridge-morph'; blend(shapes.handshake, shapes.bridge, (t - 16600) / 2400);
   }
-  return { points, visible, fill, closed, stage };
+  return { points, visible, closed, stage };
 }
