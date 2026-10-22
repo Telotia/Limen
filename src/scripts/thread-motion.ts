@@ -7,7 +7,7 @@ const clamp = (v: number) => Math.max(0, Math.min(1, v));
 const ease = (v: number) => { const t = clamp(v); return t * t * t * (t * (t * 6 - 15) + 10); };
 
 // Exactly three revolutions of a Lorenz orbit, including a change of wing.
-// This is a finite pen stroke, rather than the dense attractor used by /intro.
+// This is a finite pen stroke, rather than a dense, fully revealed attractor.
 export function shortOrbit(count = THREAD_POINTS): CurvePoint[] {
   type V = [number, number, number];
   const f = ([x, y, z]: V): V => [10 * (y - x), x * (28 - z) - y, x * y - 8 * z / 3];

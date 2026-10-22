@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { shortOrbit, threadFrame, THREAD_CYCLE, THREAD_POINTS, type ThreadShapes } from '../src/scripts/test-thread-motion';
+import { shortOrbit, threadFrame, THREAD_CYCLE, THREAD_POINTS, type ThreadShapes } from '../src/scripts/thread-motion';
 
 const contour = (radius: number, breaks = false) => Array.from({ length: THREAD_POINTS }, (_, i) => {
   const angle = i / (THREAD_POINTS - 1) * Math.PI * 2;
