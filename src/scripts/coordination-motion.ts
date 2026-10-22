@@ -1,5 +1,5 @@
 import type { CurvePoint } from './lorenz-curve';
-import { THREAD_POINTS, shortOrbit, threadFrame, type ThreadShapes } from './thread-motion';
+import { THREAD_POINTS, shortOrbit, alignStar, threadFrame, type ThreadShapes } from './thread-motion';
 const count = THREAD_POINTS;
 async function loadContour(name: string): Promise<CurvePoint[]> {
   const response = await fetch(`/assets/resource-intro/morph/${name}.svg`);
@@ -33,7 +33,8 @@ export async function mountCoordinationMotion(root: HTMLElement) {
   let shapes: ThreadShapes;
   try {
     const [handshake, bridge, star] = await Promise.all(['handshake', 'building-bridge', 'cross-star'].map(loadContour));
-    shapes = { handshake, bridge, star, orbit: shortOrbit() };
+    const orbit = shortOrbit();
+    shapes = { handshake, bridge, star: alignStar(star, orbit, handshake), orbit };
   } catch { return; }
   const points = Array.from({ length: count }, () => ({ x: 0, y: 0, move: false }));
   let frame = 0, elapsed = 0, last = 0, paused = false, visible = true;
@@ -48,18 +49,35 @@ export async function mountCoordinationMotion(root: HTMLElement) {
     const state = threadFrame(time, shapes, points), size = canvas.width;
     context!.clearRect(0, 0, size, size);
     context!.lineCap = 'round'; context!.lineJoin = 'round';
-    context!.strokeStyle = '#00545A'; context!.fillStyle = '#00545A';
+    context!.strokeStyle = '#00545A';
     context!.lineWidth = size / 264 * 1.2;
     context!.beginPath();
-    for (let i = 0; i < state.visible; i++) {
+    const fullPoints = Math.floor(state.visible);
+    for (let i = 0; i < fullPoints; i++) {
       const p = points[i], x = size * (.5 + p.x * .91), y = size * (.5 + p.y * .91);
       if (!i || p.move) context!.moveTo(x, y); else context!.lineTo(x, y);
     }
+    const fraction = state.visible - fullPoints;
+    if (fraction > 0 && fullPoints < points.length) {
+      const a = points[fullPoints - 1], b = points[fullPoints];
+      context!.lineTo(size * (.5 + (a.x + (b.x - a.x) * fraction) * .91), size * (.5 + (a.y + (b.y - a.y) * fraction) * .91));
+    }
     if (state.closed) context!.closePath();
-    if (state.fill > 0) { context!.globalAlpha = .88 * state.fill; context!.fill(); }
     context!.globalAlpha = .88; context!.stroke();
+    // Fade only the short connections between distinct SVG contours. Every
+    // outline keeps moving continuously; there are no filled polygons.
+    for (let i = 1; i < fullPoints; i++) {
+      const join = state.points[i].join ?? 1;
+      if (join <= 0 || join >= .999999) continue;
+      const a = points[i - 1], b = points[i];
+      context!.globalAlpha = .88 * join;
+      context!.beginPath();
+      context!.moveTo(size * (.5 + a.x * .91), size * (.5 + a.y * .91));
+      context!.lineTo(size * (.5 + b.x * .91), size * (.5 + b.y * .91));
+      context!.stroke();
+    }
     root.dataset.shape = state.stage;
-    root.dataset.phase = ['bridge', 'star', 'handshake'].includes(state.stage) ? 'hold' : 'morph';
+    root.dataset.phase = ['bridge', 'orbit-hold', 'star', 'handshake'].includes(state.stage) ? 'hold' : 'morph';
   }
   function tick(now: number) {
     if (last) elapsed += now - last;
