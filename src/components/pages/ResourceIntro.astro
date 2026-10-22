@@ -15,7 +15,11 @@ const sections = ['home', 'about', 'approach'] as const;
   <meta name="robots" content="noindex,nofollow" /><meta name="description" content={isProd ? 'Purposeful innovation, starting with pharmacy.' : copy.description} />
   <meta name="theme-color" content="#FFFFFF" /><title>Telotia — {copy.headline.replace('\n', ' ')}</title>
   {!isProd && <link rel="preload" href="/assets/resource-intro/Inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />}
-  <link rel="icon" type="image/svg+xml" href={isProd ? "data:," : "/assets/resource-intro/brand/telotia-mark.svg"} />
+  {isProd ? <link rel="icon" type="image/svg+xml" href="data:," /> : (<>
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/resource-intro/brand/intro-favicon-32.png" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/assets/resource-intro/brand/intro-app-icon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/resource-intro/brand/intro-apple-touch-icon.png" />
+  </>)}
 </head>
 <body>
 {isProd ? <ComingSoon /> : (<>
