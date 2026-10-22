@@ -6,14 +6,14 @@ import { words } from '../../data/resource-company';
 interface Props { isProd?: boolean; }
 const { isProd = false } = Astro.props;
 const copy = words.en;
-const sections = ['home', 'about', 'approach'] as const;
+const sections = ['home', 'products', 'about', 'approach'] as const;
 ---
 <!doctype html>
 <html lang="en-CA" data-page={isProd ? 'production-teaser' : 'pharmacy-intro'}>
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" /><meta name="description" content={isProd ? 'Purposeful innovation, starting with pharmacy.' : copy.description} />
-  <meta name="theme-color" content="#FFFFFF" /><title>Telotia — {copy.headline.replace('\n', ' ')}</title>
+  <meta name="theme-color" content="#F8F6F2" /><title>Telotia — {copy.headline.replace('\n', ' ')}</title>
   {!isProd && <link rel="preload" href="/assets/resource-intro/Inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />}
   {isProd ? <link rel="icon" type="image/svg+xml" href="data:," /> : (<>
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/resource-intro/brand/intro-favicon-32.png" />
@@ -43,6 +43,7 @@ const sections = ['home', 'about', 'approach'] as const;
         <aside class="hero-aside"><CoordinationMotion /><p class="aside-note" data-copy="context">{copy.context}</p></aside>
       </div>
     </section>
+    <section id="products" class="products-section" aria-labelledby="products-title"><div class="products-heading"><h2 id="products-title" data-copy="productsNav">Products</h2><div class="product-details"><span class="product-status" data-copy="productStatus">In development</span><h3 data-copy="productTitle">Coordination for pharmacy teams.</h3><p data-copy="productBody">Telotia is developing a product to help pharmacies and pharmacists coordinate professional resources.</p><p class="product-release-note" data-copy="productNote">Product details will be shared here as they become available.</p><a class="text-link product-contact" href="#contact"><span data-copy="secondary">Get in touch</span><img src="/assets/resource-intro/morph/arrow-right.svg" alt="" width="20" height="20"></a></div></div></section>
     <section id="about" class="about-section" aria-labelledby="about-title">
       <h2 id="about-title" data-copy="companyStatement">{copy.companyStatement}</h2>
       <div class="about-copy"><p class="inner-lead" data-copy="companyIntro">{copy.companyIntro}</p><p data-copy="companyBody">{copy.companyBody}</p></div>
@@ -223,4 +224,170 @@ main { flex: 1; }
   .audience-symbol { width: 112px; justify-self: end; }
 }
 @media (prefers-reduced-motion: reduce) { .audience-panel, .audience-symbol { transition: none; } }
+/* Shared visual direction for /intro and /test. */
+:global(html[data-page='pharmacy-intro']) {
+  --bg: #F8F6F2; --text: #262B31; --text-secondary: #4F5964;
+  --navy: #173350; --teal: #00757C; --border: #DAD7D0;
+  background: var(--bg); scrollbar-color: #4F5964 var(--bg);
+}
+:global(html[data-page='pharmacy-intro'] body) {
+  color: var(--text); background: var(--bg); font-feature-settings: 'ss02' 1;
+}
+:global(html[data-page='pharmacy-intro'] body::before) {
+  opacity: .17; filter: none;
+}
+:global(html[data-page='pharmacy-intro'] ::selection) { background: #DCE8E5; color: var(--text); }
+:global(html[data-page='pharmacy-intro'] :focus-visible) { outline: 2px solid var(--navy); outline-offset: 5px; }
+:global(html[data-page='pharmacy-intro'] .site-header) {
+  background-color: #F8F6F2; opacity: 1;
+  transition: background-color 220ms ease, border-color 220ms ease;
+}
+:global(html[data-page='pharmacy-intro'] .site-header[data-scrolled]) {
+  background-color: rgb(255 255 255 / .552);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+:global(html[data-page='pharmacy-intro'] .brand) ,
+:global(html[data-page='pharmacy-intro'] .intro-brand) { opacity: 1; }
+:global(html[data-page='pharmacy-intro'] nav a) { color: var(--navy); }
+:global(html[data-page='pharmacy-intro'] nav a[aria-current='location']) { color: var(--teal); }
+:global(html[data-page='pharmacy-intro'] nav a::after) { background: var(--teal); }
+:global(html[data-page='pharmacy-intro'] .language button) { color: var(--text-secondary); }
+:global(html[data-page='pharmacy-intro'] .language button[aria-pressed='true']) { color: var(--navy); }
+:global(html[data-page='pharmacy-intro'] .button) { background: #245366; color: #FFFFFF; }
+:global(html[data-page='pharmacy-intro'] .button:hover) { background: #262B31; }
+:global(html[data-page='pharmacy-intro'] .text-link) ,
+:global(html[data-page='pharmacy-intro'] .footer-contact a) { color: var(--navy) !important; }
+:global(html[data-page='pharmacy-intro'] .motion-toggle) { color: var(--navy); }
+:global(html[data-page='pharmacy-intro'] .motion-square canvas) ,
+:global(html[data-page='pharmacy-intro'] .motion-fallback) ,
+:global(html[data-page='pharmacy-intro'] .audience-symbol) { filter: brightness(1.46); }
+:global(html[data-page='pharmacy-intro'] .reading-motion .reading-word) { color: var(--text-secondary); }
+:global(html[data-page='pharmacy-intro'] .reading-motion .reading-word.is-read) { color: var(--teal); }
+:global(html[data-page='pharmacy-intro'] .audience-panel) { background: #FFFFFF; border-color: var(--border); }
+:global(html[data-page='pharmacy-intro'] .audience-panel:last-child) { background: #F2F0EA; }
+:global(html[data-page='pharmacy-intro'] .site-footer) { color: var(--text-secondary); }
+:global(html[data-page='pharmacy-intro'] .skip) { background: var(--bg); }
+@media(prefers-reduced-motion:reduce) {
+  :global(html[data-page='pharmacy-intro'] .site-header) { transition: none; }
+}
+@supports not (backdrop-filter:blur(6px)) {
+  :global(html[data-page='pharmacy-intro'] .site-header[data-scrolled]) { background-color: rgb(255 255 255 / .97); }
+}
+
+/* Future product catalogue: a quiet editorial section, with explicit availability. */
+:global(html[data-page='pharmacy-intro'] .products-section) {
+  padding-block: 96px 112px; border-top: 1px solid var(--border); scroll-margin-top: 120px;
+}
+:global(html[data-page='pharmacy-intro'] .products-heading) {
+  display: grid; grid-template-columns: 1fr 1.25fr; gap: 96px; align-items: start;
+}
+:global(html[data-page='pharmacy-intro'] .products-heading h2) {
+  font-size: clamp(36px, 4vw, 56px); line-height: 1.12; letter-spacing: -.035em; font-weight: 400; margin: 0;
+}
+:global(html[data-page='pharmacy-intro'] .product-status) {
+  display: inline-block; color: var(--teal); font-size: 14px; font-weight: 500; margin-bottom: 20px;
+}
+:global(html[data-page='pharmacy-intro'] .product-details h3) {
+  font-size: clamp(26px, 2.8vw, 36px); line-height: 1.2; letter-spacing: -.025em; font-weight: 400; margin: 0 0 24px;
+}
+:global(html[data-page='pharmacy-intro'] .product-details p) {
+  font-size: 18px; line-height: 1.6; max-width: 56ch; color: var(--text-secondary); margin: 0 0 20px;
+}
+:global(html[data-page='pharmacy-intro'] .product-details .product-release-note) { font-size: 15px; margin-bottom: 28px; }
+:global(html[data-page='pharmacy-intro'] .product-contact) { display: inline-flex; align-items: center; min-height: 44px; gap: 16px; }
+@media(max-width:767px) {
+  :global(html[data-page='pharmacy-intro'] .products-section) { padding-block: 56px 64px; scroll-margin-top: 136px; }
+  :global(html[data-page='pharmacy-intro'] .products-heading) { grid-template-columns: 1fr; gap: 32px; }
+  :global(html[data-page='pharmacy-intro'] .products-heading h2) { font-size: 36px; }
+  :global(html[data-page='pharmacy-intro'] .product-details p) { font-size: 16px; }
+}
+
+/* Shared responsive rhythm: bounded content, fluid type and touch-friendly navigation. */
+:global(html[data-page='pharmacy-intro']) {
+  --page-gutter: clamp(20px, 4vw, 48px);
+  --section-space: clamp(56px, 7vw, 96px);
+  --column-gap: clamp(32px, 6vw, 80px);
+  --header-height: 96px;
+  scroll-padding-top: calc(var(--header-height) + 24px);
+}
+:global(html[data-page='pharmacy-intro'] .wrap) { width: min(1200px, calc(100% - 2 * var(--page-gutter))); }
+:global(html[data-page='pharmacy-intro'] .header-inner) { min-height: var(--header-height); gap: 24px; }
+:global(html[data-page='pharmacy-intro'] nav) { gap: clamp(20px, 2.3vw, 32px); }
+:global(html[data-page='pharmacy-intro'] nav a) { min-height: 44px; min-width: 44px; justify-content: center; }
+:global(html[data-page='pharmacy-intro'] .language button) { min-width: 44px; min-height: 44px; }
+:global(html[data-page='pharmacy-intro'] .hero) { padding-block: var(--section-space); min-height: calc(100svh - var(--header-height)); }
+:global(html[data-page='pharmacy-intro'] .hero-grid) { grid-template-columns: minmax(0, 1fr) clamp(200px, 20vw, 264px); gap: var(--column-gap); }
+:global(html[data-page='pharmacy-intro'] .hero-copy) ,
+:global(html[data-page='pharmacy-intro'] .hero-aside) ,
+:global(html[data-page='pharmacy-intro'] .product-details) ,
+:global(html[data-page='pharmacy-intro'] .about-copy) ,
+:global(html[data-page='pharmacy-intro'] .audience-panel > div) { min-width: 0; }
+:global(html[data-page='pharmacy-intro'] h1) { font-size: clamp(48px, calc(22px + 8vw), 128px); letter-spacing: -.04em; line-height: 1.04; }
+:global(html[data-page='pharmacy-intro'] .lead) { font-size: clamp(20px, calc(16px + .8vw), 28px); line-height: 1.5; max-width: 46ch; }
+:global(html[data-page='pharmacy-intro'] .hero-actions) { gap: 16px 28px; }
+:global(html[data-page='pharmacy-intro'] .button) { font-size: 15px; }
+:global(html[data-page='pharmacy-intro'] .text-link) { font-size: 15px; }
+:global(html[data-page='pharmacy-intro'] .motion-toggle) { min-height: 44px; font-size: 12px; }
+:global(html[data-page='pharmacy-intro'] .products-section) ,
+:global(html[data-page='pharmacy-intro'] .about-section) { padding-block: var(--section-space); }
+:global(html[data-page='pharmacy-intro'] .products-heading) ,
+:global(html[data-page='pharmacy-intro'] .about-section) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: var(--column-gap); }
+:global(html[data-page='pharmacy-intro'] .products-heading h2) ,
+:global(html[data-page='pharmacy-intro'] .about-section h2) { font-size: clamp(34px, calc(24px + 2vw), 56px); }
+:global(html[data-page='pharmacy-intro'] .product-details h3) { font-size: clamp(26px, calc(20px + 1.2vw), 36px); }
+:global(html[data-page='pharmacy-intro'] .product-details p) ,
+:global(html[data-page='pharmacy-intro'] .about-copy > p:last-child) { font-size: clamp(16px, calc(14px + .3vw), 18px); line-height: 1.65; }
+:global(html[data-page='pharmacy-intro'] .product-details .product-release-note) { font-size: 15px; }
+:global(html[data-page='pharmacy-intro'] .inner-lead) { font-size: clamp(20px, calc(16px + .6vw), 24px); max-width: 62ch; }
+:global(html[data-page='pharmacy-intro'] .reading-title) { font-size: clamp(36px, calc(20px + 5vw), 88px); line-height: 1.12; }
+:global(html[data-page='pharmacy-intro'] .reading-stage) { padding-block: var(--section-space); }
+:global(html[data-page='pharmacy-intro'] .reading-sticky) { top: max(calc(var(--header-height) + 24px), 20svh); }
+:global(html[data-page='pharmacy-intro'] .audience-panel) { padding: clamp(24px, 4vw, 48px); gap: var(--column-gap); }
+:global(html[data-page='pharmacy-intro'] .audience-panel h3) { font-size: clamp(32px, calc(20px + 3vw), 60px); }
+:global(html[data-page='pharmacy-intro'] .audience-panel p) { font-size: clamp(18px, calc(15px + .6vw), 24px); max-width: 52ch; }
+:global(html[data-page='pharmacy-intro'] #home) ,
+:global(html[data-page='pharmacy-intro'] #products) ,
+:global(html[data-page='pharmacy-intro'] #about) ,
+:global(html[data-page='pharmacy-intro'] #approach) ,
+:global(html[data-page='pharmacy-intro'] #contact) { scroll-margin-top: 0; }
+
+@media(max-width:899.98px) {
+  :global(html[data-page='pharmacy-intro']) { --header-height: 120px; }
+  :global(html[data-page='pharmacy-intro'] .header-inner) { grid-template-columns: minmax(0, 1fr) auto; gap: 0 12px; padding-block: 8px; }
+  :global(html[data-page='pharmacy-intro'] .brand) { width: 168px; min-height: 52px; }
+  :global(html[data-page='pharmacy-intro'] .language) { grid-column: 2; grid-row: 1; margin-left: auto; }
+  :global(html[data-page='pharmacy-intro'] nav) { grid-column: 1 / -1; grid-row: 2; width: 100%; margin: 0; gap: clamp(12px, 3vw, 26px); }
+  :global(html[data-page='pharmacy-intro'] nav a) { font-size: 14px; }
+  :global(html[data-page='pharmacy-intro'] .hero) { min-height: auto; }
+  :global(html[data-page='pharmacy-intro'] .hero-grid) { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  :global(html[data-page='pharmacy-intro'] .hero-aside) { display: grid; grid-template-columns: clamp(112px, 27vw, 176px) minmax(0, 1fr); gap: clamp(16px, 4vw, 32px); align-items: center; max-width: 520px; }
+  :global(html[data-page='pharmacy-intro'] .aside-note) { margin: 0; font-size: clamp(14px, 2vw, 17px); padding-left: 16px; }
+  :global(html[data-page='pharmacy-intro'] .products-heading) ,
+  :global(html[data-page='pharmacy-intro'] .about-section) { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  :global(html[data-page='pharmacy-intro'] .about-section h2) { max-width: 15ch; }
+  :global(html[data-page='pharmacy-intro'] .reading-stage) { min-height: auto; }
+  :global(html[data-page='pharmacy-intro'] .reading-sticky) { position: static; }
+  :global(html[data-page='pharmacy-intro'] .scroll-chapters .audience-panel) { position: relative; top: auto; min-height: 0; margin-bottom: 24px; }
+  :global(html[data-page='pharmacy-intro'] .scroll-chapters .audience-panel:last-child) { top: auto; }
+  :global(html[data-page='pharmacy-intro'] .audience-panel) { grid-template-columns: minmax(0, 1fr) 112px; gap: 24px; }
+  :global(html[data-page='pharmacy-intro'] .audience-symbol) { width: 112px; }
+}
+@media(max-width:599px) {
+  :global(html[data-page='pharmacy-intro'] .audience-panel) { grid-template-columns: minmax(0, 1fr); }
+  :global(html[data-page='pharmacy-intro'] .audience-symbol) { justify-self: end; width: 96px; }
+  :global(html[data-page='pharmacy-intro'] .site-footer) { flex-direction: column; gap: 24px; }
+  :global(html[data-page='pharmacy-intro'] .footer-contact) { min-width: 0; }
+}
+@media(max-height:649px) and (min-width:600px) {
+  :global(html[data-page='pharmacy-intro'] .hero) { min-height: auto; }
+  :global(html[data-page='pharmacy-intro'] .reading-sticky) { position: static; }
+}
+
+@media(max-width:899.98px) {
+  :global(html[data-page='pharmacy-intro'] .brand) { width: clamp(144px, 43vw, 168px); }
+}
+@media(max-width:359.98px) {
+  :global(html[data-page='pharmacy-intro'] .reading-title) { font-size: 32px; }
+}
+
 </style>

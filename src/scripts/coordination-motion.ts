@@ -1,10 +1,6 @@
-import { lorenzCurve, type CurvePoint } from "./lorenz-curve";
-// Continuous source-library contours morph into a numerically integrated attractor.
-// The sequence is decorative; it does not depict a product workflow.
-const names = ["handshake", "building-bridge", "lorenz", "cross-star"] as const;
-const count = 4800,
-  duration = 6000,
-  hold = 3900;
+import type { CurvePoint } from './lorenz-curve';
+import { THREAD_POINTS, shortOrbit, threadFrame, type ThreadShapes } from './thread-motion';
+const count = THREAD_POINTS;
 async function loadContour(name: string): Promise<CurvePoint[]> {
   const response = await fetch(`/assets/resource-intro/morph/${name}.svg`);
   if (!response.ok) throw new Error(`Motion asset unavailable: ${name}`);
@@ -19,7 +15,7 @@ async function loadContour(name: string): Promise<CurvePoint[]> {
     total = lengths.reduce((a, b) => a + b, 0);
   let previous = -1;
   return Array.from({ length: count }, (_, index) => {
-    let position = ((index + 0.5) / count) * total,
+    let position = (index / (count - 1)) * total,
       pathIndex = 0;
     while (pathIndex < paths.length - 1 && position > lengths[pathIndex])
       position -= lengths[pathIndex++];
@@ -30,92 +26,40 @@ async function loadContour(name: string): Promise<CurvePoint[]> {
   });
 }
 export async function mountCoordinationMotion(root: HTMLElement) {
-  const canvas = root.querySelector<HTMLCanvasElement>("canvas")!,
-    context = canvas.getContext("2d");
-  const toggle = root.querySelector<HTMLButtonElement>("button")!;
+  const canvas = root.querySelector<HTMLCanvasElement>('canvas')!, context = canvas.getContext('2d');
+  const toggle = root.querySelector<HTMLButtonElement>('button')!;
   if (!context) return;
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-  let shapes: CurvePoint[][];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let shapes: ThreadShapes;
   try {
-    const [handshake, bridge, cross] = await Promise.all(
-      ["handshake", "building-bridge", "cross-star"].map(loadContour),
-    );
-    shapes = [handshake, bridge, lorenzCurve(count), cross];
-  } catch {
-    return;
-  }
-  // Reuse the interpolation buffer to avoid per-frame garbage collection.
+    const [handshake, bridge, star] = await Promise.all(['handshake', 'building-bridge', 'cross-star'].map(loadContour));
+    shapes = { handshake, bridge, star, orbit: shortOrbit() };
+  } catch { return; }
   const points = Array.from({ length: count }, () => ({ x: 0, y: 0, move: false }));
-  let frame = 0,
-    elapsed = 0,
-    last = 0,
-    paused = false,
-    visible = true;
-  let language = document.documentElement.lang.startsWith("fr") ? "fr" : "en";
+  let frame = 0, elapsed = 0, last = 0, paused = false, visible = true;
+  let language = document.documentElement.lang.startsWith('fr') ? 'fr' : 'en';
   function label() {
-    toggle.textContent =
-      language === "fr"
-        ? paused
-          ? "Reprendre l’animation"
-          : "Mettre en pause"
-        : paused
-          ? "Play animation"
-          : "Pause animation";
-    toggle.setAttribute("aria-pressed", String(paused));
-    toggle.hidden = reduced.matches;
+    toggle.textContent = language === 'fr'
+      ? paused ? 'Reprendre l’animation' : 'Mettre en pause'
+      : paused ? 'Play animation' : 'Pause animation';
+    toggle.setAttribute('aria-pressed', String(paused)); toggle.hidden = reduced.matches;
   }
   function draw(time: number) {
-    const segment = Math.floor(time / duration) % shapes.length;
-    const fraction = Math.max(
-      0,
-      ((time % duration) - hold) / (duration - hold),
-    );
-    // Quintic easing has zero velocity and acceleration at both ends.
-    const t =
-      fraction * fraction * fraction * (fraction * (fraction * 6 - 15) + 10);
-    const from = shapes[segment],
-      to = shapes[(segment + 1) % shapes.length],
-      size = canvas.width;
-    const chaos =
-      (segment === 2 ? 1 - t : 0) + ((segment + 1) % 4 === 2 ? t : 0);
-    for (let i = 0; i < count; i++) {
-      points[i].x = from[i].x + (to[i].x - from[i].x) * t;
-      points[i].y = from[i].y + (to[i].y - from[i].y) * t;
-      points[i].move = Boolean((t < 0.999 && from[i].move) || (t > 0.001 && to[i].move));
-    }
+    const state = threadFrame(time, shapes, points), size = canvas.width;
     context!.clearRect(0, 0, size, size);
-    context!.lineCap = "round";
-    context!.lineJoin = "round";
-    context!.strokeStyle = "#00545A";
-    context!.lineWidth = (size / 264) * (1.15 - 0.65 * chaos);
-    context!.globalAlpha = 0.88 - 0.46 * chaos;
+    context!.lineCap = 'round'; context!.lineJoin = 'round';
+    context!.strokeStyle = '#00545A'; context!.fillStyle = '#00545A';
+    context!.lineWidth = size / 264 * 1.2;
     context!.beginPath();
-    points.forEach((p, i) => {
-      const x = size * (0.5 + p.x * 0.91),
-        y = size * (0.5 + p.y * 0.91);
-      if (!i || p.move) context!.moveTo(x, y);
-      else context!.lineTo(x, y);
-    });
-    context!.stroke();
-    // A moving ink trace follows the actual orbit; no flicker or scattered dots.
-    if (chaos > 0.001) {
-      const head = Math.floor((time * 0.12) % count),
-        tail = 380;
-      context!.globalAlpha = 0.65 * chaos;
-      context!.lineWidth = (size / 264) * 0.85;
-      context!.beginPath();
-      for (let j = 0; j < tail; j++) {
-        const i = (head + j) % count,
-          p = points[i],
-          x = size * (0.5 + p.x * 0.91),
-          y = size * (0.5 + p.y * 0.91);
-        if (!j || i === 0 || p.move) context!.moveTo(x, y);
-        else context!.lineTo(x, y);
-      }
-      context!.stroke();
+    for (let i = 0; i < state.visible; i++) {
+      const p = points[i], x = size * (.5 + p.x * .91), y = size * (.5 + p.y * .91);
+      if (!i || p.move) context!.moveTo(x, y); else context!.lineTo(x, y);
     }
-    root.dataset.shape = names[segment];
-    root.dataset.phase = fraction > 0 ? "morph" : "hold";
+    if (state.closed) context!.closePath();
+    if (state.fill > 0) { context!.globalAlpha = .88 * state.fill; context!.fill(); }
+    context!.globalAlpha = .88; context!.stroke();
+    root.dataset.shape = state.stage;
+    root.dataset.phase = ['bridge', 'star', 'handshake'].includes(state.stage) ? 'hold' : 'morph';
   }
   function tick(now: number) {
     if (last) elapsed += now - last;
