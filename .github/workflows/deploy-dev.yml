@@ -29,7 +29,8 @@ jobs:
       # results by a header on every file
       - run: bun run build:prod
       - name: Keep dev.telotia.com out of search results
-        run: printf '/*\n  X-Robots-Tag: noindex\n' > dist/_headers
+        run: |
+          printf '/*\n  X-Robots-Tag: noindex\n' > dist/_headers
       - name: Deploy to limen-dev Worker
         run: bunx wrangler deploy --env=
         env:
