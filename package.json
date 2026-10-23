@@ -13,7 +13,7 @@
     "astro": "astro",
     "check": "astro check",
     "test": "bun test",
-    "smoke:dev": "bun scripts/smoke-url.ts https://dev.telotia.com \"Request a pilot\"",
+    "smoke:dev": "bun scripts/smoke-url.ts https://dev.telotia.com \"Pour que chaque heure de soins compte\"",
     "smoke:prod": "bun scripts/smoke-url.ts https://telotia.com \"Pour que chaque heure de soins compte\"",
     "hooks:install": "git config core.hooksPath .githooks",
     "commitlint": "commitlint --edit",
