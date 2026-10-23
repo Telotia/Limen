@@ -1,5 +1,6 @@
 ---
-import ComingSoon from '../components/ComingSoon.astro';
+// The dev site's pages. In production (telotia.com) they only exist to send old links home, as on main, whose
+// homepage, Research tab and privacy page are telotia.com's (main merged into dev, 23 Oct 2026).
 import Footer from '../components/Footer.astro';
 import Nav from '../components/Nav.astro';
 import SiteLayout from './SiteLayout.astro';
@@ -13,17 +14,28 @@ interface Props {
 const { title, description, isProd } = Astro.props;
 ---
 
-<SiteLayout title={title} description={description}>
-  {isProd ? (
-    <ComingSoon />
-  ) : (
+{isProd ? (
+  <html lang="en-CA">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Telotia</title>
+      <meta http-equiv="refresh" content="0; url=/" />
+      <meta name="robots" content="noindex" />
+      <link rel="canonical" href="https://telotia.com/" />
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    </head>
+    <body><p><a href="/">Telotia</a></p></body>
+  </html>
+) : (
+  <SiteLayout title={title} description={description}>
     <div class="site-shell">
       <Nav />
       <main><slot /></main>
       <Footer />
     </div>
-  )}
-</SiteLayout>
+  </SiteLayout>
+)}
 
 {!isProd && <script is:inline src="/telotia-particles.js?v=11" defer></script>}
 {!isProd && <script is:inline src="/home-init.js?v=30" defer></script>}

@@ -53,7 +53,10 @@ var s=document.getElementById('tlSpikeCanvas');if(s)T.verdictSphere(s,{dragTarge
   var cv=document.getElementById('tlFooterInk'); if(!cv) return;
   var footer=cv.closest('footer'); if(!footer) return;
   // high-res image buffer (sharp) decoupled from the coarse ripple grid
-  var IW=1500, IH=200; cv.width=IW; cv.height=IH;
+  // perf: trimmed from 1500x200 (this canvas had no cost cap at all, unlike
+  // the DPR-capped particle canvases in telotia-particles.js -- this is a
+  // straight resolution cut, same technique as the existing particle-count/fps trims)
+  var IW=1100, IH=147; cv.width=IW; cv.height=IH;
   var SW=560, SH=74;           // finer simulation lattice -> small, smooth ripples (no mosaic)
   var ctx=cv.getContext('2d');
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -87,7 +90,7 @@ var s=document.getElementById('tlSpikeCanvas');if(s)T.verdictSphere(s,{dragTarge
     var SCALE=2.2;               // displacement strength (sim units -> image px)
     function loop(){
       var x,y,yi,i;
-      frameMod=(frameMod+1)%2;   // step physics at half speed -> slow, calm ripple
+      frameMod=(frameMod+1)%3;   // step physics at 1/3 speed -> slow, calm ripple, less CPU
       if(frameMod===0){
         for(y=1;y<SH-1;y++){ yi=y*SW;
           for(x=1;x<SW-1;x++){ i=yi+x;

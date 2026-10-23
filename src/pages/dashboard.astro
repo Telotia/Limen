@@ -1,14 +1,19 @@
 ---
 import DevDashboard from '../components/DevDashboard.astro';
+// The TODO dashboard is for limen-dev only; in production this page sends visitors home.
+const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
 ---
 <html lang="en-CA">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Telotia — Development dashboard</title>
-    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?v=8" />
+    <title>{isProd ? 'Telotia' : 'Telotia — Development dashboard'}</title>
+    {isProd && <meta http-equiv="refresh" content="0; url=/" />}
+    {isProd && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   </head>
   <body>
-    <DevDashboard />
+    {isProd ? <p><a href="/">Telotia</a></p> : <DevDashboard />}
   </body>
 </html>
