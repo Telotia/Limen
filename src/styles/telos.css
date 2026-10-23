@@ -49,8 +49,13 @@ html[data-lang="en"] .telos [data-only="fr"] { display: none !important; }
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 var(--margin); background: var(--bg);
 }
-.telos .brand { display: block; width: 140px; }
-.telos .brand svg { display: block; width: 100%; height: auto; }
+/* The wordmark keeps its size while its box narrows to the T (the tau) once the page has scrolled (site.js). */
+.telos .brand { display: block; width: 140px; overflow: hidden; transition: width 320ms var(--ease); }
+.telos .brand svg { display: block; width: 140px; height: auto; }
+.telos .brand :is(.wm-rest, .wm-dot) { transition: opacity 200ms var(--ease); }
+.telos .bar.compact .brand { width: 29px; }
+.telos .bar.compact .brand :is(.wm-rest, .wm-dot) { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .telos .brand, .telos .brand :is(.wm-rest, .wm-dot) { transition: none; } }
 .telos .nav { display: flex; align-items: center; gap: 32px; font: 500 14px/20px var(--sans); }
 .telos .status { color: var(--text2); font-weight: 400; }
 .telos .nav .link { color: var(--text); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; }
@@ -78,7 +83,8 @@ html[data-lang="en"] .telos [data-only="fr"] { display: none !important; }
 
 @media (max-width: 767px) {
   .telos .bar { height: 72px; }
-  .telos .brand { width: 120px; }
+  .telos .brand, .telos .brand svg { width: 120px; }
+  .telos .bar.compact .brand { width: 25px; }
   .telos .nav { gap: 16px; }
 }
 @media (max-width: 639px) {
