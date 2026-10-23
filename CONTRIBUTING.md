@@ -29,6 +29,10 @@ This document is the standard. Read it once end-to-end before your first PR.
 > - Website work branches from `main` and comes back through a PR into `main`.
 > - `dev` is no longer released to production.
 > - The model below describes how the two branches worked before that. §4 and §7 show the current flow.
+>
+> **Since 23 October 2026, `dev` is a copy of `main` for testing.** dev.telotia.com deploys the production build (not
+> indexed), so a change can be tried there before it reaches telotia.com. The earlier `dev` (the multi-page site, the
+> intro and the daily resources) is archived as the branch and tag `archive/dev-2026-10-23`.
 
 Limen uses a two-branch [GitLab-Flow](https://about.gitlab.com/topics/version-control/what-is-gitlab-flow/)-style model:
 

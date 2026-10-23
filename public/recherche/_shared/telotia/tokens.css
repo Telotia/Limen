@@ -1,0 +1,224 @@
+/* Generated from tokens.json by scripts/telotia.ts. Don't edit by hand. */
+
+:root, [data-theme="light"] {
+  --bg: #ffffff;
+  --bg-soft: #f8faf9;
+  --surface: #ffffff;
+  --surface-subtle: #f1f5f4;
+  --border: #dee6e4;
+  --border-strong: #7a8784;
+  --text: #282d32;
+  --text-secondary: #617075;
+  --action: #282d32;
+  --on-action: #ffffff;
+  --teal: #00545a;
+  --teal-tint: #eaf4f2;
+  --on-teal: #ffffff;
+  --brand-graphite: #282d32;
+  --brand-teal: #00545a;
+  --brand-white: #ffffff;
+  --brand-black: #000000;
+  --logo-ink: var(--text);
+  --logo-dot: var(--brand-teal);
+  --success: #2e6b3e;
+  --success-tint: #e8f3ea;
+  --warning: #8a5300;
+  --warning-tint: #fbf1de;
+  --error: #b3261e;
+  --error-tint: #fceceb;
+  --on-error: #ffffff;
+  --focus-ring: var(--teal);
+  --link: var(--teal);
+  --chart-1: var(--teal);
+  --chart-2: var(--text-secondary);
+  --chart-3: #9c6a12;
+  --chart-band: var(--teal-tint);
+  --shadow-raise: 0 1px 2px rgba(40, 45, 50, 0.06), 0 6px 16px rgba(40, 45, 50, 0.06);
+  --shadow-overlay: 0 2px 6px rgba(40, 45, 50, 0.08), 0 20px 40px rgba(40, 45, 50, 0.12);
+}
+
+[data-theme="dark"] {
+  --bg: #151c1f;
+  --bg-soft: #192125;
+  --surface: #20292c;
+  --surface-subtle: #283236;
+  --border: #374246;
+  --border-strong: #77857f;
+  --text: #f7f9f8;
+  --text-secondary: #bcc6c5;
+  --action: #f7f9f8;
+  --on-action: #151c1f;
+  --teal: #5bbdb7;
+  --teal-tint: #17312f;
+  --on-teal: #0e1a1a;
+  --logo-ink: var(--text);
+  --logo-dot: var(--text);
+  --success: #7cc992;
+  --success-tint: #1a3222;
+  --warning: #e9b44c;
+  --warning-tint: #382a0c;
+  --error: #f28b82;
+  --error-tint: #3d1c1a;
+  --on-error: #1a0d0c;
+  --focus-ring: var(--teal);
+  --link: var(--teal);
+  --chart-1: var(--teal);
+  --chart-2: var(--text-secondary);
+  --chart-3: #e0a43c;
+  --chart-band: var(--teal-tint);
+  --shadow-raise: 0 1px 2px rgba(0, 0, 0, 0.40), 0 6px 16px rgba(0, 0, 0, 0.30);
+  --shadow-overlay: 0 2px 6px rgba(0, 0, 0, 0.50), 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --radius-none: 0px;
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-panel: 16px;
+  --radius-modal: 20px;
+  --radius-round: 999px;
+  --stroke-hairline: 1px;
+  --stroke-motif: 1.5px;
+  --stroke-focus: 2px;
+  --duration-feedback: 150ms;
+  --duration-standard: 240ms;
+  --duration-large: 400ms;
+  --duration-editorial: 900ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0.2, 0, 0, 1);
+  --container-max: 1200px;
+  --measure: 680px;
+  --page-margin-desktop: 48px;
+  --page-margin-tablet: 32px;
+  --page-margin-mobile: 20px;
+  --grid-gap: 24px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
+  --font-display: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.display-xl {
+  font-family: var(--font-display);
+  font-size: 72px;
+  line-height: 80px;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 64px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.h1 {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 34px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.body-lg {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 29px;
+  font-weight: 400;
+}
+
+.body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+.small {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 400;
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.overline {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.data {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("fonts/Outfit-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/Inter-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/Inter-latin-wght-italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}

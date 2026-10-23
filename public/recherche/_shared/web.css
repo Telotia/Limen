@@ -1,0 +1,44 @@
+/* telotia.com: an article from the hub, made public (web.py). The site's bar takes the CONFIDENTIAL band's place, and
+   one language shows at a time, chosen by the site's FR · EN switch. */
+html[data-lang="fr"] [data-only="en"],
+html[data-lang="en"] [data-only="fr"] { display: none !important; }
+
+.web-band { background: var(--bg); border-bottom: 1px solid var(--border); }
+/* as wide as the article, so the bar and the text start at the same edge; a smaller wordmark for a slim bar */
+.web-band .band-in { max-width: calc(1800px + 2 * var(--page-margin)); justify-content: space-between; gap: var(--space-4); }
+.web-band .band-wm { width: 92px; max-width: none; overflow: hidden; transition: width 320ms var(--ease-standard, ease); }
+.web-band .band-wm svg { display: block; width: 92px; max-width: none; height: auto; flex: none; }
+.web-band .band-wm :is(.wm-rest, .wm-dot) { transition: opacity 200ms ease; }
+/* once the page has moved, the wordmark draws back into its T, the tau, as on telotia.com's header (web.js) */
+.web-band.compact .band-wm { width: 19px; }
+.web-band.compact .band-wm :is(.wm-rest, .wm-dot) { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .web-band .band-wm, .web-band .band-wm :is(.wm-rest, .wm-dot) { transition: none; } }
+/* the bar already carries the wordmark and Research: the article's own top line would repeat them */
+.web .art-head .doc-top { display: none; }
+.web-band .band-link,
+.web-band .band-mail { font: 500 14px/20px var(--font-sans); color: var(--text); text-decoration: none; }
+.web-band .band-link:hover,
+.web-band .band-mail:hover { color: var(--teal); }
+.web-band .lang { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); font: 500 14px/20px var(--font-sans); }
+.web-band .lang button {
+  font: inherit; color: var(--text-secondary); background: none; border: 0; padding: 4px 2px; cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+.web-band .lang button[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--teal); }
+.web-band .lang button:focus-visible,
+.web-band a:focus-visible,
+button.art-lang:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+
+/* the meta line's link to the other language, now a switch */
+button.art-lang {
+  font: inherit; color: var(--link); background: none; border: 0; padding: 0; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+
+/* the footer: the site's lines instead of the internal stamp */
+.web .doc-foot .web-foot { color: var(--text-secondary); }
+.web .doc-foot .web-foot a { color: inherit; }
+@media (max-width: 767px) {
+  .web-band .band-mail { display: none; }
+  .web .doc-foot { flex-wrap: wrap; row-gap: var(--space-2); }
+}
