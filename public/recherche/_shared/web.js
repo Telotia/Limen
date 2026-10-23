@@ -21,6 +21,11 @@
       window.dispatchEvent(new Event("resize"));
     }
   }
+  // once the page has moved, the bar's wordmark draws back into its T (web.css), as telotia.com's header does
+  var band = document.querySelector(".web-band"), queued = false;
+  function compact() { queued = false; if (band) band.classList.toggle("compact", window.scrollY > 24); }
+  window.addEventListener("scroll", function () { if (!queued) { queued = true; window.requestAnimationFrame(compact); } }, { passive: true });
+  compact();
   document.addEventListener("click", function (e) {
     var b = e.target.closest ? e.target.closest("[data-set]") : null;
     if (!b) return;
