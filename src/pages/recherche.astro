@@ -1,0 +1,32 @@
+---
+// dev.telotia.com/recherche: a preview of the Research tab before it ships to telotia.com (Telotia/Limen#175, on main).
+// The articles themselves are static pages under public/recherche/, built by Panacea's web.py; this list reads
+// src/data/research.json, which web.py writes from the articles' own words. In the dev site's layout and language.
+import MarketingShell from '../layouts/MarketingShell.astro';
+import articles from '../data/research.json';
+const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
+---
+<MarketingShell isProd={isProd} title="Telotia | Research (preview)" description="Telotia's research in public health: what we are learning, article by article.">
+  <section style="position:relative;padding:96px 64px;background:transparent;border-top:1px solid var(--rulesoft)">
+    <div style="max-width:1180px;margin:0 auto">
+      <span style="font-family:var(--fmono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)">Research · preview</span>
+      <h2 style="font-size:42px;line-height:1.08;margin-top:12px;color:var(--t1);max-width:820px">What we are learning</h2>
+      <p style="font-size:18px;line-height:1.55;color:var(--t2);max-width:680px;margin-top:14px">A preview of telotia.com's Research tab. Each article opens in French, with an EN switch at the top of the page.</p>
+      <ol style="list-style:none;margin:44px 0 0;padding:0;display:grid;gap:20px">
+        {articles.map((a) => (
+          <li>
+            <a class="rcard" href={a.path} style="display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:32px;align-items:center;border:1px solid var(--rule);border-radius:14px;padding:22px;background:var(--surface-paper);text-decoration:none">
+              <img src={a.cover.en} alt="" width="2880" height="1508" loading="lazy" style="display:block;width:100%;height:auto;border-radius:10px" />
+              <span style="display:grid;gap:10px">
+                <span style="font-family:var(--fmono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{a.kicker.en}</span>
+                <span style="font-family:var(--fdisplay);font-size:28px;line-height:1.15;color:var(--t1)">{a.title.en}</span>
+                <span style="font-size:15px;line-height:1.6;color:var(--t2)">{a.dek.en}</span>
+                <span style="font-family:var(--fmono);font-size:12px;color:var(--t3)">{a.date.en} · {a.minutes} min read · FR / EN</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</MarketingShell>

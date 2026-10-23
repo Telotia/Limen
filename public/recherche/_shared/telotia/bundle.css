@@ -1,0 +1,98 @@
+/* Telotia shared styles. Every colour, size and curve comes from tokens.css. Prefix: tl- */
+
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+body { margin: 0; font-family: var(--font-sans); font-feature-settings: "cv11" 1; background: var(--bg); color: var(--text); }
+.tl-num { font-variant-numeric: tabular-nums; }
+.tl-secondary { color: var(--text-secondary); }
+.tl-balance { text-wrap: balance; }
+.tl-upper { text-transform: uppercase; }
+
+/* ---------- Wordmark (inline symbol + use) ---------- */
+.tl-wm { display: block; height: auto; overflow: visible; }
+.tl-wm-ink { fill: var(--wm-ink, var(--logo-ink)); }
+.tl-wm-dot { fill: var(--wm-dot, var(--logo-dot)); }
+.tl-wm--primary { --wm-ink: var(--brand-graphite); --wm-dot: var(--brand-teal); }
+.tl-wm--graphite { --wm-ink: var(--brand-graphite); --wm-dot: var(--brand-graphite); }
+.tl-wm--black { --wm-ink: var(--brand-black); --wm-dot: var(--brand-black); }
+.tl-wm--white { --wm-ink: var(--brand-white); --wm-dot: var(--brand-white); }
+
+/* ---------- Progression line ---------- */
+.tl-turn { fill: var(--text); }
+.tl-turn-stroke { fill: none; stroke: var(--text); stroke-linecap: butt; }
+.tl-frame { position: relative; padding: 0 0 var(--turn-h, 32px) var(--space-6); }
+.tl-frame-stem { position: absolute; left: 0; top: 0; bottom: var(--turn-h, 32px); width: var(--turn-w, 1.5px); background: var(--text); }
+.tl-frame > .tl-turn-piece { position: absolute; left: 0; bottom: 0; display: block; }
+.tl-rule { display: flex; align-items: flex-end; width: 100%; }
+.tl-rule-line { flex: 1; height: var(--turn-w, 1.5px); background: var(--text); }
+.tl-rule > .tl-turn-piece { overflow: visible; }
+.tl-rule > .tl-turn-piece { display: block; flex: none; }
+.tl-point { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+.tl-track { position: relative; height: 1px; background: var(--border); }
+.tl-track .tl-point { position: absolute; top: 50%; left: calc(var(--p) * 100%); transform: translate(-50%, -50%); }
+
+/* ---------- Buttons (shadcn variant names + accent) ---------- */
+.tl-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); height: 40px; padding: 0 var(--space-4); border-radius: var(--radius-control); border: 1px solid transparent; background: transparent; color: var(--text); font-family: var(--font-sans); font-feature-settings: "cv11" 1; font-size: 15px; font-weight: 500; line-height: 1; cursor: pointer; white-space: nowrap; text-decoration: none; transition: background-color var(--duration-feedback) var(--ease-standard), border-color var(--duration-feedback) var(--ease-standard), color var(--duration-feedback) var(--ease-standard); }
+.tl-btn:focus-visible { outline: var(--stroke-focus) solid var(--focus-ring); outline-offset: 2px; }
+.tl-btn[disabled] { opacity: .45; cursor: not-allowed; }
+.tl-btn--sm { height: 32px; padding: 0 var(--space-3); font-size: 14px; }
+.tl-btn--lg { height: 48px; padding: 0 var(--space-6); font-size: 16px; }
+.tl-btn--default { background: var(--action); color: var(--on-action); }
+.tl-btn--default:hover:not([disabled]) { background: var(--text-secondary); }
+.tl-btn--accent { background: var(--teal); color: var(--on-teal); }
+.tl-btn--secondary { background: var(--surface-subtle); }
+.tl-btn--secondary:hover:not([disabled]) { background: var(--border); }
+.tl-btn--outline { background: var(--surface); border-color: var(--border-strong); }
+.tl-btn--outline:hover:not([disabled]) { background: var(--surface-subtle); }
+.tl-btn--ghost:hover:not([disabled]) { background: var(--teal-tint); }
+.tl-btn--link { height: auto; padding: 0; color: var(--link); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.tl-btn--destructive { background: var(--error); color: var(--on-error); }
+.tl-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- Fields ---------- */
+.tl-field { display: grid; gap: var(--space-2); min-width: 0; }
+.tl-field label { font-size: 14px; line-height: 20px; font-weight: 500; }
+.tl-input { height: 40px; padding: 0 var(--space-3); border: 1px solid var(--border-strong); border-radius: var(--radius-control); background: var(--surface); color: var(--text); font: inherit; font-size: 15px; font-feature-settings: "cv11" 1; width: 100%; box-sizing: border-box; }
+.tl-input::placeholder { color: var(--text-secondary); }
+.tl-input:focus, .tl-input.is-focus { outline: var(--stroke-focus) solid var(--focus-ring); outline-offset: 2px; }
+.tl-input.is-error { border-color: var(--error); }
+.tl-help { font-size: 13px; line-height: 18px; color: var(--text-secondary); }
+.tl-help.is-error { color: var(--error); display: flex; gap: 6px; align-items: flex-start; }
+.tl-help svg { width: 14px; height: 14px; flex: none; margin-top: 2px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- Evidence labels ---------- */
+.tl-ev { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 var(--space-2); border-radius: var(--radius-control); border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 12px; line-height: 1; font-weight: 500; white-space: nowrap; }
+.tl-ev svg { width: 12px; height: 12px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.tl-ev--hypothesis { border-style: dashed; border-color: var(--border-strong); }
+.tl-ev--pending { background: var(--warning-tint); border-color: transparent; color: var(--warning); }
+.tl-ev--verified { background: var(--success-tint); border-color: transparent; color: var(--success); }
+.tl-ev--error { background: var(--error-tint); border-color: transparent; color: var(--error); }
+.tl-ev .tl-ev-who { font-weight: 400; color: inherit; opacity: .9; }
+
+/* ---------- Language switch ---------- */
+.tl-lang { display: inline-flex; padding: 2px; gap: 2px; border-radius: var(--radius-round); border: 1px solid var(--border); }
+.tl-lang button { height: 26px; padding: 0 10px; border: 0; border-radius: var(--radius-round); background: transparent; color: var(--text-secondary); font: 500 12px/1 var(--font-sans); cursor: pointer; }
+.tl-lang button[aria-pressed="true"] { background: var(--surface-subtle); color: var(--text); }
+.tl-lang button:focus-visible { outline: var(--stroke-focus) solid var(--focus-ring); outline-offset: 1px; }
+
+/* ---------- CONFIDENTIAL ---------- */
+.tl-conf-band { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: 6px var(--space-4); background: var(--surface-subtle); border-bottom: 1px solid var(--border); }
+.tl-conf-word { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--error); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+.tl-conf-word::before { content: ""; width: 7px; height: 7px; background: var(--error); }
+.tl-conf-note { font-size: 12px; color: var(--text-secondary); }
+.tl-conf-stamp { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border: 1px solid var(--error); border-radius: 4px; color: var(--error); font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+
+/* ---------- Chart text ---------- */
+.tl-chart text { font-family: var(--font-sans); font-feature-settings: "cv11" 1; }
+.tl-chart .ax { fill: var(--text-secondary); font-size: 11px; font-variant-numeric: tabular-nums; }
+.tl-chart .lab { fill: var(--text); font-size: 13px; font-weight: 500; }
+.tl-chart .val { fill: var(--text); font-size: 13px; font-variant-numeric: tabular-nums; }
+.tl-chart .grid { stroke: var(--border); stroke-width: 1; }
+.tl-chart .axis { stroke: var(--border-strong); stroke-width: 1; }
+.tl-chart .bar-2 { fill: var(--chart-2); }
+.tl-chart .bar-1 { fill: var(--chart-1); }
+.tl-chart .band { fill: var(--chart-band); }
+.tl-chart .whisker { stroke: var(--chart-1); stroke-width: 2; stroke-linecap: round; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-btn { transition: none; }
+}
