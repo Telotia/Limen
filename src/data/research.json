@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/recherche/dix-ans-de-pharmacie/",
+    "minutes": 16,
+    "title": {
+      "en": "Ten years of Québec pharmacy, as patients wrote it",
+      "fr": "Dix ans de pharmacie au Québec, racontés par les patients"
+    },
+    "dek": {
+      "fr": "De 2016 à 2026, les avis Google sur les pharmacies communautaires du Québec ont suivi ce que les patients vivaient au comptoir : la pandémie, les portes fermées, les tablettes vides et, de plus en plus, l’accueil et le service reçus. Ils en disent beaucoup moins sur ce qui a changé dans le travail même des pharmaciens : un rôle clinique grandissant.",
+      "en": "From 2016 to 2026, Google reviews of Québec’s community pharmacies followed what patients met at the counter: the pandemic, closed doors, empty shelves and, more and more, how staff treated them. They said far less about what changed in pharmacists’ own work, a growing clinical role."
+    },
+    "date": {
+      "en": "22 Oct 2026",
+      "fr": "22 oct. 2026"
+    },
+    "kicker": {
+      "fr": "Pharmacies communautaires du Québec",
+      "en": "Québec community pharmacies"
+    },
+    "cover": {
+      "fr": "/recherche/dix-ans-de-pharmacie/img/cover-fr.png",
+      "en": "/recherche/dix-ans-de-pharmacie/img/cover-en.png"
+    }
+  }
+]
