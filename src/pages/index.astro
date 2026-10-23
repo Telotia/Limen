@@ -1,20 +1,70 @@
 ---
-import Hero from '../components/home/Hero.astro';
-import HomePath from '../components/home/HomePath.astro';
-import PageInk from '../components/home/PageInk.astro';
-import MarketingShell from '../layouts/MarketingShell.astro';
+import TelosHome from '../components/TelosHome.astro';
+// dev.telotia.com renders the multi-page ink-wash site (site/index.html) --
+// perf-optimized (30fps cap, off-screen pause, DPR 1.5, trimmed particle
+// counts). Sibling pages: process, workspace, demo, research, consult (see
+// those .astro files -- same pattern).
+// prod (telotia.com) renders <TelosHome />: the scroll story, "coming soon"
+// and how to reach us, French by default.
+import designRaw from '../../site/index.html?raw';
 
-const isProd = (process.env.LIMEN_ENV ?? 'dev') === 'prod';
+const limenEnv = process.env.LIMEN_ENV ?? 'dev';
+const isProd = limenEnv === 'prod';
+
+const bodyMatch = designRaw.match(/<body[^>]*>([\s\S]*?)<\/body>/);
+const designHtml = bodyMatch ? bodyMatch[1] : '';
 ---
 
-<MarketingShell
-  isProd={isProd}
-  title={isProd ? 'Telotia | Arriving September 2026' : 'Telotia | Claim-to-evidence validation'}
-  description={isProd
-    ? 'Every claim, held to the evidence behind it. Arriving September 2026 in Montreal.'
-    : 'Evidence-grade claim review for Canadian health-equipment imports.'}
->
-  <PageInk />
-  <Hero />
-  <HomePath />
-</MarketingShell>
+<html lang={isProd ? 'fr-CA' : 'en-CA'} data-lang={isProd ? 'fr' : undefined}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {
+      isProd ? (
+        <Fragment>
+          <title>Telotia</title>
+          <meta name="title-fr" content="Telotia" />
+          <meta name="title-en" content="Telotia" />
+          <meta name="description" content="Telotia, recherche et développement en santé publique. Pour que chaque heure de soins compte." />
+          <link rel="preload" href="/fonts/Outfit.ttf" as="font" type="font/ttf" crossorigin />
+          <link rel="preload" href="/fonts/Inter-cv11.ttf" as="font" type="font/ttf" crossorigin />
+          {/* Before first paint: the saved language, and whether the animated story will run. */}
+          <script is:inline>
+            (function () {
+              var root = document.documentElement, lang = null;
+              try { lang = localStorage.getItem('telotia-lang'); } catch (e) {}
+              var forced = new URLSearchParams(location.search).get('lang');
+              if (forced === 'en' || forced === 'fr') lang = forced;
+              if (lang === 'en') { root.dataset.lang = 'en'; root.lang = 'en-CA'; }
+              if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+                root.classList.add('story-on');
+                if (matchMedia('(max-width: 759px)').matches) root.classList.add('story-tall');
+              }
+            })();
+          </script>
+        </Fragment>
+      ) : (
+        <title>Telotia — claim-to-evidence validation</title>
+      )
+    }
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  </head>
+  <body class={isProd ? 'telos' : undefined}>
+    {
+      isProd ? (
+        <TelosHome />
+      ) : (
+        // site/index.html's own <script src="telotia-particles.js?v=8"> /
+        // "footer-assets.js?v=8"> tags live inside its <body>, so they come
+        // along for free in designHtml -- no separate script injection needed
+        // (unlike the retired single-page design, whose scripts lived outside
+        // the extracted body region).
+        <Fragment set:html={designHtml} />
+      )
+    }
+  </body>
+</html>

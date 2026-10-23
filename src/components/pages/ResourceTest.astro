@@ -1,7 +1,0 @@
----
-// Compatibility entry point: both routes render the same maintained page.
-import ResourceIntro from './ResourceIntro.astro';
-interface Props { isProd?: boolean; }
-const { isProd = false } = Astro.props;
----
-<ResourceIntro isProd={isProd} />

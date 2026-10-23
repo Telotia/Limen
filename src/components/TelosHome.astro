@@ -1,0 +1,143 @@
+---
+// The telotia.com homepage (production): a scroll story that runs from a first link to a whole
+// system and ends on Telotia, then "coming soon" and how to reach us. French by default, EN switch.
+// The story has a wide layout and a tall one for phones (html.story-tall); reduced motion and
+// no JavaScript get the static version.
+// Behaviour lives in src/scripts/telos/. Styles are global but scoped under body.telos, because the
+// dev build of index.astro imports this component without rendering it.
+import '../styles/telos.css';
+import Header from './telos/Header.astro';
+import Footer from './telos/Footer.astro';
+---
+
+<a class="skip" href="#contact"><span data-only="fr" lang="fr">Passer l’animation</span><span data-only="en" lang="en">Skip the animation</span></a>
+
+<Header />
+
+<main>
+  <!-- The scroll story (motion allowed). Drawn on one canvas; the words are real text. -->
+  <section class="story" id="story" aria-hidden="true">
+    <div class="viewport" id="story-viewport">
+      <div class="frame" id="story-frame">
+        <canvas id="story-canvas"></canvas>
+        <div class="scene s1">
+          <h2 class="t"><span data-only="fr" lang="fr">Ici, le travail déborde.</span><span data-only="en" lang="en">Here, work piles up.</span></h2>
+        </div>
+        <div class="scene s2">
+          <h2 class="t"><span data-only="fr" lang="fr">Ailleurs, quelqu’un a le temps.</span><span data-only="en" lang="en">Elsewhere, someone has time.</span></h2>
+        </div>
+        <div class="scene s3">
+          <h2 class="t a"><span data-only="fr" lang="fr">D’abord, un lien.</span><span data-only="en" lang="en">First, one link.</span></h2>
+          <h2 class="t b"><span data-only="fr" lang="fr">Puis, tout un système.</span><span data-only="en" lang="en">Then, a whole system.</span></h2>
+        </div>
+        <div class="scene s5">
+          <p class="t"><span data-only="fr" lang="fr">Pour que chaque heure de soins compte.</span><span data-only="en" lang="en">Making every hour of care count.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The same story as plain text, for screen readers while the animated version is shown. -->
+  <section class="sr-only story-text">
+    <div data-only="fr" lang="fr">
+      <p>Ici, le travail déborde. Ailleurs, quelqu’un a le temps.</p>
+      <p>D’abord, un lien. Puis, tout un système.</p>
+      <p>Telotia. Pour que chaque heure de soins compte.</p>
+    </div>
+    <div data-only="en" lang="en">
+      <p>Here, work piles up. Elsewhere, someone has time.</p>
+      <p>First, one link. Then, a whole system.</p>
+      <p>Telotia. Making every hour of care count.</p>
+    </div>
+  </section>
+
+  <!-- The static version: reduced motion and no JavaScript. -->
+  <section class="static">
+    <ol class="static-lines">
+      <li><span data-only="fr" lang="fr">Ici, le travail déborde.</span><span data-only="en" lang="en">Here, work piles up.</span></li>
+      <li><span data-only="fr" lang="fr">Ailleurs, quelqu’un a le temps.</span><span data-only="en" lang="en">Elsewhere, someone has time.</span></li>
+      <li><span data-only="fr" lang="fr">D’abord, un lien.</span><span data-only="en" lang="en">First, one link.</span></li>
+      <li><span data-only="fr" lang="fr">Puis, tout un système.</span><span data-only="en" lang="en">Then, a whole system.</span></li>
+    </ol>
+    <div class="static-end">
+      <div class="static-mark" data-wordmark></div>
+      <p class="static-tag"><span data-only="fr" lang="fr">Pour que chaque heure de soins compte.</span><span data-only="en" lang="en">Making every hour of care count.</span></p>
+    </div>
+  </section>
+
+  <section class="soon" id="contact" aria-labelledby="soon-title">
+    <h2 id="soon-title"><span data-only="fr" lang="fr">Bientôt.</span><span data-only="en" lang="en">Coming soon.</span></h2>
+    <p><span data-only="fr" lang="fr">Telotia prépare son lancement.<br />Une question, une collaboration ? Écrivez-nous.</span><span data-only="en" lang="en">Telotia is preparing its launch.<br />A question, a collaboration? Write to us.</span></p>
+    <a class="mail" href="mailto:hello@telotia.com">hello@telotia.com</a>
+    <p class="first"><a href="/recherche/dix-ans-de-pharmacie/"><span data-only="fr" lang="fr">Lire notre premier article : Dix ans de pharmacie au Québec, racontés par les patients</span><span data-only="en" lang="en">Read our first article: Ten years of Québec pharmacy, as patients wrote it</span></a></p>
+  </section>
+</main>
+
+<Footer />
+
+<style is:global>
+  html.lenis, html.lenis body.telos { height: auto; }              /* the one Lenis rule this page needs */
+
+  /* The scroll story: a 1440 x 810 design frame, scaled to fit and pinned while it plays. */
+  .telos .story { display: none; position: relative; }
+  html.story-on .telos .story { display: block; }
+  .telos .viewport { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
+  .telos .frame { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; transform-origin: 0 0; opacity: 0; }
+  .telos .frame canvas { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; }
+  .telos .scene { position: absolute; }
+  .telos .scene h2 { margin: 0 0 0 -2px; font: 400 48px/58px var(--display); letter-spacing: -0.025em; color: var(--text); text-wrap: balance; }
+  .telos .s1 { left: 720px; top: 232px; width: 620px; }
+  .telos .s2 { left: 176px; top: 214px; width: 540px; }
+  .telos .s3 { left: 176px; top: 190px; width: 760px; }
+  .telos .s3 h2 { white-space: nowrap; }
+  .telos .s5 { left: 220px; top: 514px; width: 1000px; text-align: center; }
+  .telos .s5 p { margin: 0; font: 400 30px/40px var(--display); letter-spacing: -0.01em; color: var(--text2); }
+  html:not(.story-on) .telos .story-text { display: none; }
+
+  /* The tall layout for phones: a 390 x 720 frame, the words above or below the picture. */
+  html.story-tall .telos .frame, html.story-tall .telos .frame canvas { width: 390px; height: 720px; }
+  html.story-tall .telos .scene h2 { font-size: 30px; line-height: 36px; letter-spacing: -0.02em; }
+  html.story-tall .telos .s1 { left: 24px; top: 150px; width: 342px; }
+  html.story-tall .telos .s2 { left: 24px; top: 588px; width: 342px; }
+  html.story-tall .telos .s3 { left: 24px; top: 100px; width: 342px; }
+  html.story-tall .telos .s5 { left: 20px; top: 404px; width: 350px; }
+  html.story-tall .telos .s5 p { font-size: 20px; line-height: 27px; }
+
+  /* The static version. */
+  .telos .static { padding: 168px var(--margin) 112px; }
+  html.story-on .telos .static { display: none; }
+  .telos .static-lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 40px; }
+  .telos .static-lines li { font: 400 clamp(32px, 7vw, 48px)/1.2 var(--display); letter-spacing: -0.025em; text-wrap: balance; }
+  .telos .static-end { margin-top: 104px; }
+  .telos .static-mark { width: min(100%, 560px); }
+  .telos .static-mark svg { display: block; width: 100%; height: auto; }
+  .telos .static-tag { margin: 24px 0 0; font: 400 clamp(20px, 4.4vw, 28px)/1.35 var(--display); color: var(--text2); text-wrap: balance; }
+
+  /* Coming soon, and how to reach us. */
+  .telos .soon { padding: 128px var(--margin) 136px; border-top: 1px solid var(--border); scroll-margin-top: 96px; }
+  .telos .soon h2 { margin: 0; font: 400 clamp(44px, 7vw, 72px)/1.05 var(--display); letter-spacing: -0.03em; }
+  .telos .soon p { margin: 24px 0 0; max-width: 560px; font: 400 20px/31px var(--sans); color: var(--text2); }
+  .telos .soon .mail {
+    display: inline-block; margin-top: 40px; padding-bottom: 6px;
+    font: 400 clamp(26px, 4vw, 36px)/1.2 var(--display); letter-spacing: -0.015em;
+    color: var(--text); text-decoration: none; border-bottom: 1.5px solid var(--teal);
+    transition: color 150ms var(--ease);
+  }
+  .telos .soon .mail:hover { color: var(--teal); }
+  .telos .soon .first { margin-top: 48px; font: 400 18px/28px var(--sans); }
+
+  @media (max-width: 767px) {
+    .telos .static { padding-top: 136px; }
+    .telos .soon { padding: 96px var(--margin) 104px; scroll-margin-top: 72px; }
+  }
+</style>
+
+<script>
+  import { initSite } from '../scripts/telos/site.js';
+  import { initStory } from '../scripts/telos/story.js';
+
+  if (document.body.classList.contains('telos')) {
+    initSite();
+    initStory();
+  }
+</script>
