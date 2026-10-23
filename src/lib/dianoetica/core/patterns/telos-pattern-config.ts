@@ -38,7 +38,6 @@ interface ChaoticPathConfig {
 interface ChaoticIntroConfig {
   durationSeconds: number
   pathDistancePx: number
-  pathDistanceRadiusFactor: number
 }
 
 interface ParticleLifecycleConfig {
@@ -187,16 +186,8 @@ export const TELOS_PATTERN_CONFIG = {
     },
     maxParticles: 8,
     chaoticIntro: {
-      // Let the Lorenz path draw itself. The long distance gives both wings
-      // enough time to emerge without flashing a complete attractor on small
-      // screens. The lower travel speed also gives 30 Hz mobile displays
-      // enough temporal resolution to preserve the wet-ink curve.
-      durationSeconds: 7.2,
-      pathDistancePx: 4600,
-      // Scale the reveal to the actual panel. On a phone, a fixed 4,600 px
-      // journey crosses both Lorenz wings almost immediately and reads as a
-      // pre-drawn diagram rather than a trace arriving in time.
-      pathDistanceRadiusFactor: 12,
+      durationSeconds: 0.001, // effectively instant — skip the wind-up intro
+      pathDistancePx: 5000,
     },
     chaoticPath: {
       derivativeStepSeconds: 1 / 120,

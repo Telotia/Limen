@@ -1,0 +1,129 @@
+---
+// telotia.com/recherche: Telotia's research, newest first. Each article lives at /recherche/<path>/ in both languages,
+// built by Panacea's web.py, which also writes this list (src/data/research.json) from the articles' own words.
+// French by default, with the EN switch.
+import '../styles/telos.css';
+import Header from '../components/telos/Header.astro';
+import Footer from '../components/telos/Footer.astro';
+import articles from '../data/research.json';
+---
+
+<html lang="fr-CA" data-lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recherche · Telotia</title>
+    <meta name="title-fr" content="Recherche · Telotia" />
+    <meta name="title-en" content="Research · Telotia" />
+    <meta name="description" content="La recherche de Telotia en santé publique : ce que nous apprenons, article par article." />
+    <link rel="canonical" href="https://telotia.com/recherche" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Telotia" />
+    <meta property="og:url" content="https://telotia.com/recherche" />
+    <meta property="og:title" content="Recherche · Telotia" />
+    <meta property="og:description" content="La recherche de Telotia en santé publique : ce que nous apprenons, article par article." />
+    {articles[0] && <meta property="og:image" content={`https://telotia.com${articles[0].cover.fr}`} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/fonts/Outfit.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Inter-cv11.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    {/* Before first paint: the saved language. */}
+    <script is:inline>
+      (function () {
+        var root = document.documentElement, lang = null;
+        try { lang = localStorage.getItem('telotia-lang'); } catch (e) {}
+        var forced = new URLSearchParams(location.search).get('lang');
+        if (forced === 'en' || forced === 'fr') lang = forced;
+        if (lang === 'en') { root.dataset.lang = 'en'; root.lang = 'en-CA'; }
+      })();
+    </script>
+  </head>
+  <body class="telos">
+    <a class="skip" href="#articles"><span data-only="fr" lang="fr">Aller aux articles</span><span data-only="en" lang="en">Skip to the articles</span></a>
+    <Header current="research" />
+
+    <main class="research">
+      <header class="head">
+        <p class="eyebrow"><span data-only="fr" lang="fr">Recherche</span><span data-only="en" lang="en">Research</span></p>
+        <h1><span data-only="fr" lang="fr">Ce que nous apprenons</span><span data-only="en" lang="en">What we are learning</span></h1>
+        <p class="intro">
+          <span data-only="fr" lang="fr">Telotia est une jeune entreprise de recherche et développement en santé publique, à Montréal. Pour que chaque heure de soins compte, nous étudions comment les soins sont vécus et donnés. Nous publions ici ce que nous apprenons.</span>
+          <span data-only="en" lang="en">Telotia is an early-stage research and development company in public health, in Montréal. To make every hour of care count, we study how care is experienced and delivered. This is where we publish what we learn.</span>
+        </p>
+        <div class="rule" aria-hidden="true"></div>
+      </header>
+
+      <section id="articles" aria-labelledby="articles-title">
+        <h2 id="articles-title" class="label"><span data-only="fr" lang="fr">Articles</span><span data-only="en" lang="en">Articles</span></h2>
+        <ol class="cards">
+          {articles.map((a) => (
+            <li>
+              <a class="card" href={a.path}>
+                <span class="pic">
+                  <img data-only="fr" lang="fr" src={a.cover.fr} alt="" width="2880" height="1508" loading="lazy" decoding="async" />
+                  <img data-only="en" lang="en" src={a.cover.en} alt="" width="2880" height="1508" loading="lazy" decoding="async" />
+                </span>
+                <span class="txt">
+                  <span class="kicker"><span data-only="fr" lang="fr">{a.kicker.fr}</span><span data-only="en" lang="en">{a.kicker.en}</span></span>
+                  <span class="title"><span data-only="fr" lang="fr">{a.title.fr}</span><span data-only="en" lang="en">{a.title.en}</span></span>
+                  <span class="dek"><span data-only="fr" lang="fr">{a.dek.fr}</span><span data-only="en" lang="en">{a.dek.en}</span></span>
+                  <span class="when">
+                    <span data-only="fr" lang="fr">{a.date.fr} · {a.minutes} min de lecture</span>
+                    <span data-only="en" lang="en">{a.date.en} · {a.minutes} min read</span>
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    </main>
+
+    <Footer />
+
+    <style is:global>
+      .telos .research { padding: 168px var(--margin) 112px; }
+      .telos .research .head { max-width: 880px; margin-bottom: 72px; }
+      .telos .research .eyebrow { margin: 0 0 16px; font: 500 14px/20px var(--sans); color: var(--text2); }
+      .telos .research h1 { margin: 0 0 20px -2px; font: 400 48px/56px var(--display); letter-spacing: -0.025em; text-wrap: balance; }
+      .telos .research .intro { margin: 0; max-width: var(--measure); font: 400 20px/31px var(--sans); color: var(--text2); }
+      /* Telotia's line under the title: a drop, one turn, the run, the point. */
+      .telos .research .rule { position: relative; width: calc(100% - 16px); height: 24px; margin-top: 40px; border-left: 1.5px solid var(--text); border-bottom: 1.5px solid var(--text); border-bottom-left-radius: 16px; }
+      .telos .research .rule::after { content: ""; position: absolute; right: -16px; bottom: -4.75px; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+      .telos .research .label { margin: 0 0 24px; font: 500 14px/20px var(--sans); color: var(--text2); }
+      .telos .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 32px; }
+      .telos .card {
+        display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 40px; align-items: center;
+        padding: 24px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface);
+        color: var(--text); text-decoration: none; transition: border-color 150ms var(--ease);
+      }
+      .telos .card:hover { border-color: var(--border-strong); }
+      .telos .card .pic { display: block; overflow: hidden; border-radius: 10px; background: var(--subtle); }
+      .telos .card img { display: block; width: 100%; height: auto; }
+      .telos .card .txt { display: grid; gap: 12px; }
+      .telos .card .kicker { font: 500 14px/20px var(--sans); color: var(--text2); }
+      .telos .card .title { font: 400 32px/40px var(--display); letter-spacing: -0.02em; text-wrap: balance; }
+      .telos .card:hover .title { color: var(--teal); }
+      .telos .card .dek { font: 400 16px/26px var(--sans); color: var(--text2); }
+      .telos .card .when { font: 400 14px/20px var(--sans); color: var(--text2); font-variant-numeric: tabular-nums; }
+      @media (max-width: 1023px) {
+        .telos .research { padding-top: 136px; }
+        .telos .card { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+      }
+      @media (max-width: 767px) {
+        .telos .research h1 { font-size: 36px; line-height: 44px; }
+        .telos .research .intro { font-size: 18px; line-height: 28px; }
+        .telos .card { padding: 16px; }
+        .telos .card .title { font-size: 26px; line-height: 33px; }
+      }
+    </style>
+    <script>
+      import { initSite } from '../scripts/telos/site.js';
+      initSite();
+    </script>
+  </body>
+</html>

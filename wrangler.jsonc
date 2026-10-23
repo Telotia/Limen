@@ -7,12 +7,7 @@
   "main": "worker/index.ts",
   "assets": {
     "directory": "./dist",
-    "binding": "ASSETS",
-    "run_worker_first": true
-  },
-  "vars": {
-    "ENVIRONMENT": "development",
-    "PREVIEW_GITHUB_CLIENT_ID": "Iv23liI7fsfx9u9d3NRS"
+    "binding": "ASSETS"
   },
   // Pilot leads are always logged (see `wrangler tail`). To also store them
   // durably, create a namespace and uncomment the block below:
@@ -23,15 +18,7 @@
   "env": {
     "production": {
       "name": "limen",
-      "workers_dev": false,
-      "assets": {
-        "directory": "./dist",
-        "binding": "ASSETS",
-        "run_worker_first": false
-      },
-      "vars": {
-        "ENVIRONMENT": "production"
-      }
+      "workers_dev": false
       // Bindings are per-environment (not inherited). Once KV is enabled,
       // repeat "kv_namespaces" here with a separate prod namespace id.
     }

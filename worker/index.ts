@@ -1,10 +1,8 @@
-import { handlePreviewAuth, type PreviewAuthEnv } from './preview-auth';
-
 /**
  * Telotia site Worker.
  *
  * The Astro `dist/` build is served automatically by the `assets` binding, so
- * dev requests run through this script first to close private preview assets. The
+ * this script only runs for requests that don't match a static file. The one
  * dynamic route is the pilot-request intake:
  *
  *   POST /api/pilot  ->  verify Cloudflare Turnstile, then log + store + notify
@@ -23,14 +21,12 @@ interface ExecutionCtx {
   waitUntil(promise: Promise<unknown>): void;
 }
 
-interface Env extends PreviewAuthEnv {
+interface Env {
   /** Static assets (the Astro dist/ build). */
   ASSETS: AssetFetcher;
   /** Optional durable sink for leads. Enable via kv_namespaces in wrangler.jsonc. */
   PILOT_LEADS?: KVNamespace;
-  /** Deployment mode. Production fails closed when Turnstile is not configured. */
-  ENVIRONMENT?: "development" | "production";
-  /** Turnstile secret: `wrangler secret put TURNSTILE_SECRET [--env production]`. */
+  /** Turnstile secret: `wrangler secret put TURNSTILE_SECRET`. Falls back to the always-pass test secret. */
   TURNSTILE_SECRET?: string;
   /** Resend API key: `wrangler secret put RESEND_API_KEY`. Email notify is skipped when absent. */
   RESEND_API_KEY?: string;
@@ -41,7 +37,6 @@ interface Env extends PreviewAuthEnv {
 // Cloudflare's documented "always passes" test secret — lets the endpoint work
 // end-to-end before a real Turnstile widget + secret are provisioned.
 const TURNSTILE_TEST_SECRET = "1x0000000000000000000000000000000AA";
-const TURNSTILE_ACTION = "pilot_request";
 
 interface Lead {
   name: string;
@@ -57,8 +52,6 @@ interface Lead {
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionCtx): Promise<Response> {
     const url = new URL(request.url);
-    const preview = await handlePreviewAuth(request, env);
-    if (preview) return preview;
     if (url.pathname === "/api/pilot") {
       if (request.method !== "POST") return json({ ok: false, error: "Method not allowed." }, 405);
       return handlePilot(request, env, ctx);
@@ -92,23 +85,10 @@ async function handlePilot(request: Request, env: Env, ctx: ExecutionCtx): Promi
   }
   if (!token) return json({ ok: false, error: "Please complete the human-verification check." }, 400);
 
-  const isProduction = env.ENVIRONMENT === "production";
-  const secret = env.TURNSTILE_SECRET || (isProduction ? "" : TURNSTILE_TEST_SECRET);
-  if (!secret) {
-    console.error("turnstile-secret-missing", { environment: env.ENVIRONMENT || "unknown" });
-    return json({ ok: false, error: "Human verification is temporarily unavailable." }, 503);
-  }
-
+  const secret = env.TURNSTILE_SECRET || TURNSTILE_TEST_SECRET;
   const ip = request.headers.get("CF-Connecting-IP") || "";
   const verdict = await verifyTurnstile(token, secret, ip);
-  if (!verdict.success || (isProduction && verdict.action !== TURNSTILE_ACTION)) {
-    console.warn("turnstile-rejected", JSON.stringify({
-      action: verdict.action || "",
-      errors: verdict["error-codes"] || [],
-      hostname: verdict.hostname || "",
-    }));
-    return json({ ok: false, error: "Verification failed. Please try again." }, 400);
-  }
+  if (!verdict.success) return json({ ok: false, error: "Verification failed. Please try again." }, 400);
 
   const lead: Lead = {
     name,
@@ -143,8 +123,6 @@ async function handlePilot(request: Request, env: Env, ctx: ExecutionCtx): Promi
 interface TurnstileVerdict {
   success: boolean;
   hostname?: string;
-  action?: string;
-  "error-codes"?: string[];
 }
 
 async function verifyTurnstile(token: string, secret: string, ip: string): Promise<TurnstileVerdict> {

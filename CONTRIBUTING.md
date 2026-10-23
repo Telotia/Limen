@@ -25,6 +25,15 @@ This document is the standard. Read it once end-to-end before your first PR.
 
 ## 1. The branching model
 
+> **Since 12 October 2026, `main` is the base for telotia.com.** The production site (the scroll homepage and the privacy page) lives on `main`. It has diverged from `dev`, which keeps the earlier multi-page site and the daily resources and still deploys dev.telotia.com.
+> - Website work branches from `main` and comes back through a PR into `main`.
+> - `dev` is no longer released to production.
+> - The model below describes how the two branches worked before that. §4 and §7 show the current flow.
+>
+> **Since 23 October 2026, `dev` is a copy of `main` for testing.** dev.telotia.com deploys the production build (not
+> indexed), so a change can be tried there before it reaches telotia.com. The earlier `dev` (the multi-page site, the
+> intro and the daily resources) is archived as the branch and tag `archive/dev-2026-10-23`.
+
 Limen uses a two-branch [GitLab-Flow](https://about.gitlab.com/topics/version-control/what-is-gitlab-flow/)-style model:
 
 ```
@@ -116,8 +125,8 @@ If a hook ever needs bypassing (rare), use `--no-verify`. Don't make a habit of 
 ## 4. Working on a change
 
 ```sh
-# 1. Start from a fresh dev
-git checkout dev
+# 1. Start from a fresh base: main for telotia.com, dev for dev.telotia.com
+git checkout main
 git pull --ff-only
 
 # 2. Branch off
@@ -133,7 +142,7 @@ git commit -m "feat(pages): add hero section"
 # 5. Push your feature branch
 git push -u origin feature/your-change-here
 
-# 6. Open a PR into dev (see §5)
+# 6. Open a PR into the branch you started from (main for telotia.com; see §5 for dev)
 ```
 
 ### Test locally before opening a PR
@@ -174,6 +183,8 @@ After merge, `Deploy dev` pushes the debug dashboard to `dev.telotia.com` and sm
 
 ## 6. Releasing to production (`dev` → `main`)
 
+> Retired on 12 October 2026: `dev` is no longer released to production (see §1). telotia.com changes go straight into `main` through a PR, as in §7.
+
 When dev has accumulated enough merged work to be worth shipping (the team's call, no fixed cadence):
 
 ```sh
@@ -201,7 +212,9 @@ The draft release lives at `https://github.com/Telotia/Limen/releases`. You can 
 
 ---
 
-## 7. Hotfixes (skipping `dev`)
+## 7. Changes to telotia.com (PRs into `main`)
+
+This used to be the hotfix path. It is now how every telotia.com change ships. Step 4, syncing `main` back into `dev`, no longer applies.
 
 If production is broken and dev has WIP that can't ship yet:
 
@@ -257,23 +270,6 @@ All Worker deploys go to Cloudflare account `f39fc97d0e872ca3c6cad23b1a7561d6`. 
 Both are repo secrets at *Settings → Secrets and variables → Actions*.
 
 If you add or change Worker Custom Domains through Wrangler later, the token will also need zone-level `Workers Routes:Edit` for `telotia.com`. The current CI path avoids that by keeping custom domains dashboard-managed.
-
-### Pilot form human verification
-
-The pilot form uses Cloudflare Turnstile in the browser and validates every token again in `worker/index.ts`. Development and local previews use Cloudflare's documented test keys; production never falls back to them.
-
-One-time setup:
-
-1. Create a managed Turnstile widget in Cloudflare and allow `dev.telotia.com`, `telotia.com`, and `www.telotia.com` as appropriate.
-2. Add its public site key as the GitHub Actions variable `TURNSTILE_SITE_KEY`. An environment-scoped variable named the same can override it for production.
-3. Store the matching secret directly in each Worker environment:
-
-   ```powershell
-   bunx wrangler secret put TURNSTILE_SECRET
-   bunx wrangler secret put TURNSTILE_SECRET --env production
-   ```
-
-If the production site key is absent, the form remains disabled. If the production Worker secret is absent, `/api/pilot` returns `503` and does not accept the lead. Never put the secret key in a GitHub variable, Astro public environment variable, or browser code.
 
 ### Domain owner/contact information
 

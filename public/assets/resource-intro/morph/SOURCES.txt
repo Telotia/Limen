@@ -1,9 +1,0 @@
-Motion source icons (geometry unchanged; stroke set to Telotia teal):
-- handshake.svg: lucide-static 0.468.0 handshake, ISC, LUCIDE-LICENSE.txt
-- cross-star.svg: lucide-static 0.468.0 sparkle (four points), ISC
-- building-bridge.svg and arrow-right.svg: @tabler/icons 3.35.0, MIT, LICENSE.txt
-Downloaded from the official packages via jsDelivr.
-Lorenz shape: numerically integrated Lorenz equations, sigma=10, rho=28,
-beta=8/3. RK4 integration, arc-length resampling, continuous orbit rendering.
-Equation reference: https://matplotlib.org/stable/gallery/mplot3d/lorenz_attractor.html
-The browser morphs continuous contours, then follows the attractor with an ink trace.
